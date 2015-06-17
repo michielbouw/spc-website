@@ -85,7 +85,7 @@ angular.module('mainapp.match')
                             });
                         });
                     });
-                }, 0);
+                }, 100);
             }
         };
     })

@@ -2,7 +2,6 @@ angular.module('mainapp', [
     'ngRoute',
     'ngStorage',
     'ui.bootstrap',
-    'ngTable',
 
     'mainapp.api',
     'mainapp.club',

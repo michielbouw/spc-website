@@ -42,7 +42,7 @@ angular.module('mainapp.pageAdmin')
                             'min-height': window.innerHeight - 95
                         });
                     });
-                }, 0);
+                }, 100);
             }
         };
     })
@@ -63,7 +63,7 @@ angular.module('mainapp.pageAdmin')
                             'min-height': window.innerHeight - 95
                         });
                     });
-                }, 0);
+                }, 100);
             }
         };
     })
@@ -84,7 +84,7 @@ angular.module('mainapp.pageAdmin')
                             'min-height': window.innerHeight - 95
                         });
                     });
-                }, 0);
+                }, 100);
             }
         };
     })
@@ -105,7 +105,7 @@ angular.module('mainapp.pageAdmin')
                             'min-height': window.innerHeight - 95
                         });
                     });
-                }, 0);
+                }, 100);
             }
         };
     });

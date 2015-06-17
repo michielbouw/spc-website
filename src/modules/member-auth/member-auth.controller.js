@@ -23,8 +23,8 @@ angular.module('mainapp.memberAuth')
             }
 
             //Admin User Controller (login, logout)
-            self.logIn = function (username, password, remember) {
-                if (username !== undefined && password !== undefined) {
+            self.logIn = function () {
+                if (self.login.email !== undefined && self.login.password !== undefined) {
 
                     Api.Login.post({
                         email: self.login.email,
@@ -37,7 +37,7 @@ angular.module('mainapp.memberAuth')
                             AuthenticationService.isLogged = true;
                             $localStorage.token = res.token;
                             $localStorage.role = res.data.role;
-                            if (remember) {
+                            if (self.login.remember) {
                                 $localStorage.remember = true;
                                 //$localStorage.email = self.login.email;
                                 //$localStorage.password = self.login.password;

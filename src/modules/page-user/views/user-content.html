@@ -21,7 +21,7 @@
                     </li>-->
                 </ul>
                 <div class="item-title"><a href="/spelers/speler">Persoonlijke analyse</a></div>
-                <div class="item-title"><a href="/beheer/users">Gebruikersbeheer</a></div>
+                <div ng-if="currentUser.role == 'admin' || currentUser.role == 'club-beheer'" class="item-title"><a href="/beheer">Clubbeheer</a></div>
                 <div class="item-title"><a href="/logout">Uitloggen</a></div>
             </div>
         </div>

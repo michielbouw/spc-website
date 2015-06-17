@@ -15,6 +15,9 @@
   background-size: auto 90%;
   height: 90vh;
 
+  @media screen and (min-width:1600px) { background-size: auto 95%; }
+  @media screen and (max-width:1599px) { background-size: auto 90%; }
+  @media screen and (max-width:1199px) { background-size: auto 85%; }
   @media (max-width: 991px) { background-size: auto 80%; }
   @media (max-width: 767px) { background: $white; }
   @media (max-width: 480px) { background: $white; }

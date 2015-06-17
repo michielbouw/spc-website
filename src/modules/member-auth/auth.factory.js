@@ -65,7 +65,6 @@ angular.module('mainapp.memberAuth')
                     user.is_superadmin = $rootScope.currentUser.is_superadmin;
                 } else {
                     user.role = $localStorage.role;
-                    user.is_superadmin = $rootScope.currentUser.is_superadmin;
                 }
 
                 if (nextRoute.access.permission == "public") {

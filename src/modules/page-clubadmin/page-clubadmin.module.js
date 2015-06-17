@@ -3,7 +3,7 @@ angular.module('mainapp.pageClubadmin', [])
     {
         $routeProvider
             .when('/beheer', {
-                templateUrl: 	'page-user/views/user.html',
+                templateUrl: 	'page-clubadmin/views/clubadmin.html',
                 access: {
                     requiredLogin: true,
                     permission: 'club-beheer'

@@ -1,7 +1,6 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminUsersController', ['Api', '$scope', 'alertService', '$modal', '$routeParams', '$filter', '$timeout', 'ngTableParams', 'Upload',
-        '$rootScope',
-        function(Api, $scope, alertService, $modal, $routeParams, $filter, $timeout, ngTableParams, Upload, $rootScope) {
+    .controller('mainapp.pageAdmin.AdminUsersController', ['Api', '$scope', '$modal', '$routeParams', '$filter', '$timeout', '$rootScope',
+        function(Api, $scope, $modal, $routeParams, $filter, $timeout, $rootScope) {
 
         var self = this;
         self.datetime = new Date();

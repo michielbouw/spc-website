@@ -50,13 +50,13 @@ app.use(multipart({
 }));
 
 // Formage MongoDB admin panel =============================
-formage.init(app, express, require('./app/models'), {
-    title: 'MongoDB',
-    root: '/moadmin',
-    default_section: 'data tables',
-    username: 'beheerdb',
-    password: 'jemoeder'
-});
+//formage.init(app, express, require('./app/models'), {
+//    title: 'MongoDB',
+//    root: '/moadmin',
+//    default_section: 'data tables',
+//    username: 'beheerdb',
+//    password: 'jemoeder'
+//});
 
 // routes ==================================================
 app.use('/api', api_router);

@@ -5,9 +5,9 @@ angular.module('mainapp.club')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
-                        $('body').css('background-color', $rootScope.currentClub.colors[2].refcode);
-                        $('.intro-box').css('background-color', $rootScope.currentClub.colors[2].refcode);
-                        $('.home-intro').css('background-color', $rootScope.currentClub.colors[2].refcode);
+                        $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        $('.home-intro').css('background-color', $rootScope.currentClub.colors[0].refcode);
 
                         $('.content.content-page').css({
                             'min-height': window.innerHeight - 100

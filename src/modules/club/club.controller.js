@@ -12,60 +12,60 @@ angular.module('mainapp.club')
 
         self.clubStats = {};
         self.clubStats['2014-2015'] = [{
-            ronde: 1,
-            matchID: 11,
-            punten: 3,
-            goals: 2,
-            goalstegen: 1,
-            schotzekerheid: 43,
-            balbezit: 55,
-            passzekerheid: 54,
-            geel: 2,
-            rood: 0
+            "ronde": 1,
+            "matchID": 11,
+            "punten": 3,
+            "goals": 2,
+            "goalstegen": 1,
+            "schotzekerheid": 43,
+            "balbezit": 55,
+            "passzekerheid": 54,
+            "geel": 2,
+            "rood": 0
         }, {
-            ronde: 2,
-            matchID: 12,
-            punten: 0,
-            goals: 1,
-            goalstegen: 3,
-            schotzekerheid: 22,
-            balbezit: 34,
-            passzekerheid: 27,
-            geel: 3,
-            rood: 1
+            "ronde": 2,
+            "matchID": 12,
+            "punten": 0,
+            "goals": 1,
+            "goalstegen": 3,
+            "schotzekerheid": 22,
+            "balbezit": 34,
+            "passzekerheid": 27,
+            "geel": 3,
+            "rood": 1
         }, {
-            ronde: 3,
-            matchID: 13,
-            punten: 1,
-            goals: 0,
-            goalstegen: 0,
-            schotzekerheid: 13,
-            balbezit: 34,
-            passzekerheid: 21,
-            geel: 1,
-            rood: 0
+            "ronde": 3,
+            "matchID": 13,
+            "punten": 1,
+            "goals": 0,
+            "goalstegen": 0,
+            "schotzekerheid": 13,
+            "balbezit": 34,
+            "passzekerheid": 21,
+            "geel": 1,
+            "rood": 0
         }, {
-            ronde: 4,
-            matchID: 14,
-            punten: 3,
-            goals: 4,
-            goalstegen: 0,
-            schotzekerheid: 38,
-            balbezit: 51,
-            passzekerheid: 33,
-            geel: 0,
-            rood: 0
-        }, {
-            ronde: 5,
-            matchID: 15,
-            punten: 1,
-            goals: 1,
-            goalstegen: 1,
-            schotzekerheid: 13,
-            balbezit: 46,
-            passzekerheid: 29,
-            geel: 1,
-            rood: 0
+            "ronde": 4,
+            "matchID": 14,
+            "punten": 3,
+            "goals": 4,
+            "goalstegen": 0,
+            "schotzekerheid": 68,
+            "balbezit": 51,
+            "passzekerheid": 33,
+            "geel": 0,
+            "rood": 0
+        },  {
+            "ronde": 5,
+            "matchID": 15,
+            "punten": 1,
+            "goals": 1,
+            "goalstegen": 1,
+            "schotzekerheid": 13,
+            "balbezit": 46,
+            "passzekerheid": 29,
+            "geel": 1,
+            "rood": 0
         }];
 
         var statslength = self.clubStats[self.chosenseason].length;
@@ -82,32 +82,33 @@ angular.module('mainapp.club')
         };
 
         self.stats = {};
-        self.$watch('rounds', function() {
+        $scope.$watch('rounds', function() {
+            var i;
             if (self.roundsfilterfrom() !== self.roundsfilterto()) {
                 self.stats.puntenArr = [];
                 self.stats.puntenArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.puntenArr.push(self.clubStats[self.chosenseason][i].punten);
                 }
 
                 self.stats.goals = 0;
                 self.stats.goalsArr = [];
                 self.stats.goalsArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.goals += self.clubStats[self.chosenseason][i].goals;
                     self.stats.goalsArr.push(self.clubStats[self.chosenseason][i].goals);
                 }
                 self.stats.goalstegen = 0;
                 self.stats.goalstegenArr = [];
                 self.stats.goalstegenArr.push('data2');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.goalstegen += self.clubStats[self.chosenseason][i].goalstegen;
                     self.stats.goalstegenArr.push(self.clubStats[self.chosenseason][i].goalstegen);
                 }
                 self.stats.schotzekerheid = 0;
                 self.stats.schotzekerheidArr = [];
                 self.stats.schotzekerheidArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.schotzekerheid += self.clubStats[self.chosenseason][i].schotzekerheid;
                     self.stats.schotzekerheidArr.push(self.clubStats[self.chosenseason][i].schotzekerheid);
                 }
@@ -115,7 +116,7 @@ angular.module('mainapp.club')
                 self.stats.balbezit = 0;
                 self.stats.balbezitArr = [];
                 self.stats.balbezitArr.push('data3');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.balbezit += self.clubStats[self.chosenseason][i].balbezit;
                     self.stats.balbezitArr.push(self.clubStats[self.chosenseason][i].balbezit);
                 }
@@ -123,7 +124,7 @@ angular.module('mainapp.club')
                 self.stats.passzekerheid = 0;
                 self.stats.passzekerheidArr = [];
                 self.stats.passzekerheidArr.push('data2');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.passzekerheid += self.clubStats[self.chosenseason][i].passzekerheid;
                     self.stats.passzekerheidArr.push(self.clubStats[self.chosenseason][i].passzekerheid);
                 }
@@ -131,21 +132,21 @@ angular.module('mainapp.club')
                 self.stats.geel = 0;
                 self.stats.geelArr = [];
                 self.stats.geelArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.geel += self.clubStats[self.chosenseason][i].geel;
                     self.stats.geelArr.push(self.clubStats[self.chosenseason][i].geel);
                 }
                 self.stats.rood = 0;
                 self.stats.roodArr = [];
                 self.stats.roodArr.push('data2');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
                     self.stats.rood += self.clubStats[self.chosenseason][i].rood;
                     self.stats.roodArr.push(self.clubStats[self.chosenseason][i].rood);
                 }
 
                 self.stats.xAxis = [];
                 self.stats.xAxis.push('x');
-                for (var i = self.roundsfilterfrom(); i <= self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom(); i <= self.roundsfilterto(); i++) {
                     self.stats.xAxis.push(i);
                 }
 

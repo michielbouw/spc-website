@@ -3,9 +3,10 @@
         <div class="col-md-2 navbar-sub" ng-hide="match_index >= 0">
             <div class="item-title">Analyse</div>
             <ul id="nav-sub" class="nav nav-pills nav-stacked">
-                <li role="presentation" class="active"><a href="/analyse/wedstrijd" scroll-to="top"><i class="fa fa-soccer-ball-o"></i> Wedstrijd</a></li>
-                <li role="presentation"><a href="/analyse/spelers" scroll-to="top"><i class="fa fa-user"></i> Spelers</a></li>
-                <!--<li role="presentation"><a href="/analyse/training" scroll-to="top"><i class="fa fa-steam"></i> Training</a></li>-->
+                <li role="presentation" class="active"><a href="/wedstrijd" scroll-to="top"><i class="fa fa-soccer-ball-o"></i> Wedstrijd</a></li>
+                <li role="presentation"><a href="/spelers" scroll-to="top"><i class="fa fa-user"></i> Spelers</a></li>
+                <!--<li role="presentation"><a href="/extra" scroll-to="top"><i class="fa fa-plus"></i> Extra analyse</a></li>-->
+                <!--<li role="presentation"><a href="/training" scroll-to="top"><i class="fa fa-steam"></i> Training</a></li>-->
             </ul>
         </div>
 
@@ -117,7 +118,7 @@
                     <small><img src="images/referee.svg" height="16px"> {{ match.match_info.scheids }}</small><br>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="logo_clubs/JPG/{{ match.match_info.logo_thuis }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_thuis }}" class="logo">
                 </div>
                 <div class="col-xs-6 text-center">
                     <h3>{{ match.match_info.wedstrijd }}</h3>
@@ -127,12 +128,12 @@
                     </h4>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="logo_clubs/JPG/{{ match.match_info.logo_uit }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
             <div id="match-info-short" ng-show="match_index >= 0">
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="logo_clubs/JPG/{{ match.match_info.logo_thuis }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_thuis }}" class="logo">
                 </div>
                 <div class="col-xs-10 text-center">
                     <h4>{{ match.match_info.wedstrijd }}<br>
@@ -141,7 +142,7 @@
                     </h4>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="logo_clubs/JPG/{{ match.match_info.logo_uit }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
             <input type="checkbox" name="handler-navbar-sub-mobile" class="handler" id="handler-navbar-sub-mobile" onclick="null" />

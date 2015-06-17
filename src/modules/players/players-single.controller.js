@@ -12,63 +12,63 @@ angular.module('mainapp.players')
 
         self.spelerStats = {};
         self.spelerStats['2014-2015'] = [{
-            ronde: 1,
-            matchID: 11,
-            punten: 3,
-            goals: 2,
-            goalstegen: 1,
-            schotzekerheid: 43,
-            balbezit: 55,
-            passzekerheid: 54,
-            geel: 2,
-            rood: 0
+            "ronde": 1,
+            "matchID": 11,
+            "punten": 3,
+            "goals": 2,
+            "goalstegen": 1,
+            "schotzekerheid": 43,
+            "balbezit": 55,
+            "passzekerheid": 54,
+            "geel": 2,
+            "rood": 0
         }, {
-            ronde: 2,
-            matchID: 12,
-            punten: 0,
-            goals: 1,
-            goalstegen: 3,
-            schotzekerheid: 22,
-            balbezit: 34,
-            passzekerheid: 27,
-            geel: 3,
-            rood: 1
+            "ronde": 2,
+            "matchID": 12,
+            "punten": 0,
+            "goals": 1,
+            "goalstegen": 3,
+            "schotzekerheid": 22,
+            "balbezit": 34,
+            "passzekerheid": 27,
+            "geel": 3,
+            "rood": 1
         }, {
-            ronde: 3,
-            matchID: 13,
-            punten: 1,
-            goals: 0,
-            goalstegen: 0,
-            schotzekerheid: 13,
-            balbezit: 34,
-            passzekerheid: 21,
-            geel: 1,
-            rood: 0
+            "ronde": 3,
+            "matchID": 13,
+            "punten": 1,
+            "goals": 0,
+            "goalstegen": 0,
+            "schotzekerheid": 13,
+            "balbezit": 34,
+            "passzekerheid": 21,
+            "geel": 1,
+            "rood": 0
         }, {
-            ronde: 4,
-            matchID: 14,
-            punten: 3,
-            goals: 4,
-            goalstegen: 0,
-            schotzekerheid: 38,
-            balbezit: 51,
-            passzekerheid: 33,
-            geel: 0,
-            rood: 0
+            "ronde": 4,
+            "matchID": 14,
+            "punten": 3,
+            "goals": 4,
+            "goalstegen": 0,
+            "schotzekerheid": 68,
+            "balbezit": 51,
+            "passzekerheid": 33,
+            "geel": 0,
+            "rood": 0
         }, {
-            ronde: 5,
-            matchID: 15,
-            punten: 1,
-            goals: 1,
-            goalstegen: 1,
-            schotzekerheid: 13,
-            balbezit: 46,
-            passzekerheid: 29,
-            geel: 1,
-            rood: 0
+            "ronde": 5,
+            "matchID": 15,
+            "punten": 1,
+            "goals": 1,
+            "goalstegen": 1,
+            "schotzekerheid": 13,
+            "balbezit": 46,
+            "passzekerheid": 29,
+            "geel": 1,
+            "rood": 0
         }];
 
-        var statslength = self.items.stats[self.chosenseason].length;
+        var statslength = self.spelerStats[self.chosenseason].length;
         //$scope.rounds = [1];
         if ((Number(statslength) - 5) > 0) $scope.rounds = [Number(statslength) - 5];
         if ((Number(statslength) - 5) <= 0) $scope.rounds = [1];
@@ -82,70 +82,71 @@ angular.module('mainapp.players')
         };
 
         self.stats = {};
-        self.$watch('rounds', function() {
+        $scope.$watch('rounds', function() {
+            var i;
             if (self.roundsfilterfrom() !== self.roundsfilterto()) {
                 self.stats.puntenArr = [];
                 self.stats.puntenArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.puntenArr.push(self.items.stats[self.chosenseason][i].punten);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.puntenArr.push(self.spelerStats[self.chosenseason][i].punten);
                 }
 
                 self.stats.goals = 0;
                 self.stats.goalsArr = [];
                 self.stats.goalsArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.goals += self.items.stats[self.chosenseason][i].goals;
-                    self.stats.goalsArr.push(self.items.stats[self.chosenseason][i].goals);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.goals += self.spelerStats[self.chosenseason][i].goals;
+                    self.stats.goalsArr.push(self.spelerStats[self.chosenseason][i].goals);
                 }
                 self.stats.goalstegen = 0;
                 self.stats.goalstegenArr = [];
                 self.stats.goalstegenArr.push('data2');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.goalstegen += self.items.stats[self.chosenseason][i].goalstegen;
-                    self.stats.goalstegenArr.push(self.items.stats[self.chosenseason][i].goalstegen);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.goalstegen += self.spelerStats[self.chosenseason][i].goalstegen;
+                    self.stats.goalstegenArr.push(self.spelerStats[self.chosenseason][i].goalstegen);
                 }
                 self.stats.schotzekerheid = 0;
                 self.stats.schotzekerheidArr = [];
                 self.stats.schotzekerheidArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.schotzekerheid += self.items.stats[self.chosenseason][i].schotzekerheid;
-                    self.stats.schotzekerheidArr.push(self.items.stats[self.chosenseason][i].schotzekerheid);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.schotzekerheid += self.spelerStats[self.chosenseason][i].schotzekerheid;
+                    self.stats.schotzekerheidArr.push(self.spelerStats[self.chosenseason][i].schotzekerheid);
                 }
                 self.stats.schotzekerheid /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
                 self.stats.balbezit = 0;
                 self.stats.balbezitArr = [];
                 self.stats.balbezitArr.push('data3');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.balbezit += self.items.stats[self.chosenseason][i].balbezit;
-                    self.stats.balbezitArr.push(self.items.stats[self.chosenseason][i].balbezit);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.balbezit += self.spelerStats[self.chosenseason][i].balbezit;
+                    self.stats.balbezitArr.push(self.spelerStats[self.chosenseason][i].balbezit);
                 }
                 self.stats.balbezit /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
                 self.stats.passzekerheid = 0;
                 self.stats.passzekerheidArr = [];
                 self.stats.passzekerheidArr.push('data2');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.passzekerheid += self.items.stats[self.chosenseason][i].passzekerheid;
-                    self.stats.passzekerheidArr.push(self.items.stats[self.chosenseason][i].passzekerheid);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.passzekerheid += self.spelerStats[self.chosenseason][i].passzekerheid;
+                    self.stats.passzekerheidArr.push(self.spelerStats[self.chosenseason][i].passzekerheid);
                 }
                 self.stats.passzekerheid /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
                 self.stats.geel = 0;
                 self.stats.geelArr = [];
                 self.stats.geelArr.push('data1');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.geel += self.items.stats[self.chosenseason][i].geel;
-                    self.stats.geelArr.push(self.items.stats[self.chosenseason][i].geel);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.geel += self.spelerStats[self.chosenseason][i].geel;
+                    self.stats.geelArr.push(self.spelerStats[self.chosenseason][i].geel);
                 }
                 self.stats.rood = 0;
                 self.stats.roodArr = [];
                 self.stats.roodArr.push('data2');
-                for (var i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.rood += self.items.stats[self.chosenseason][i].rood;
-                    self.stats.roodArr.push(self.items.stats[self.chosenseason][i].rood);
+                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
+                    self.stats.rood += self.spelerStats[self.chosenseason][i].rood;
+                    self.stats.roodArr.push(self.spelerStats[self.chosenseason][i].rood);
                 }
 
                 self.stats.xAxis = [];
                 self.stats.xAxis.push('x');
-                for (var i = self.roundsfilterfrom(); i <= self.roundsfilterto(); i++) {
+                for (i = self.roundsfilterfrom(); i <= self.roundsfilterto(); i++) {
                     self.stats.xAxis.push(i);
                 }
 
@@ -157,42 +158,42 @@ angular.module('mainapp.players')
             } else {
                 self.stats.puntenArr = [];
                 self.stats.puntenArr.push('data1');
-                self.stats.puntenArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].punten);
+                self.stats.puntenArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].punten);
 
-                self.stats.goals = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].goals;
+                self.stats.goals = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].goals;
                 self.stats.goalsArr = [];
                 self.stats.goalsArr.push('data1');
-                self.stats.goalsArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].goals);
+                self.stats.goalsArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].goals);
 
-                self.stats.goalstegen = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].goalstegen;
+                self.stats.goalstegen = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].goalstegen;
                 self.stats.goalstegenArr = [];
                 self.stats.goalstegenArr.push('data2');
-                self.stats.goalstegenArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].goalstegen);
+                self.stats.goalstegenArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].goalstegen);
 
-                self.stats.schotzekerheid = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].schotzekerheid;
+                self.stats.schotzekerheid = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].schotzekerheid;
                 self.stats.schotzekerheidArr = [];
                 self.stats.schotzekerheidArr.push('data1');
-                self.stats.schotzekerheidArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].schotzekerheid);
+                self.stats.schotzekerheidArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].schotzekerheid);
 
-                self.stats.balbezit = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].balbezit;
+                self.stats.balbezit = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].balbezit;
                 self.stats.balbezitArr = [];
                 self.stats.balbezitArr.push('data3');
-                self.stats.balbezitArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].balbezit);
+                self.stats.balbezitArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].balbezit);
 
-                self.stats.passzekerheid = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].passzekerheid;
+                self.stats.passzekerheid = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].passzekerheid;
                 self.stats.passzekerheidArr = [];
                 self.stats.passzekerheidArr.push('data2');
-                self.stats.passzekerheidArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].passzekerheid);
+                self.stats.passzekerheidArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].passzekerheid);
 
-                self.stats.geel = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].geel;
+                self.stats.geel = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].geel;
                 self.stats.geelArr = [];
                 self.stats.geelArr.push('data1');
-                self.stats.geelArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].geel);
+                self.stats.geelArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].geel);
 
-                self.stats.rood = self.items.stats[self.chosenseason][self.roundsfilterfrom() - 1].rood;
+                self.stats.rood = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].rood;
                 self.stats.roodArr = [];
                 self.stats.roodArr.push('data2');
-                self.stats.roodArr.push(self.items.stats[self.chosenseason][self.roundsfilterfrom()-1].rood);
+                self.stats.roodArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].rood);
 
                 self.stats.xAxis = [];
                 self.stats.xAxis.push('x');

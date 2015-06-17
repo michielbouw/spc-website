@@ -116,10 +116,10 @@ gulp.task('build:resources', function()
     var text = gulp.src('node_modules/textAngular/src/*.css')
         .pipe(gulp.dest('build/styles/vendors/'));
 
-    var uploads = gulp.src('src/images/app/avatar.png')
+    var uploads = gulp.src('src/images/blank-avatar.png')
         .pipe(gulp.dest('media/data/'));
 
-    var uploads2 = gulp.src('src/images/app/avatar.png')
+    var uploads2 = gulp.src('src/images/blank-avatar.png')
         .pipe(gulp.dest('media/players/'));
 
     var images = gulp.src('src/images/**/*')
@@ -170,7 +170,7 @@ gulp.task('build:modules', ['build:jshint'], folders(path_modules, function(modu
 {
     var views = gulp.src(path.join(path_modules, module, '**/*.html'))
         .pipe(templates({
-            module: 'app',
+            module: 'mainapp',
             standalone: false,
             path: function(path, base){
                 return path.replace(base, module + '/');

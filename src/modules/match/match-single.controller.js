@@ -1,6 +1,6 @@
 angular.module('mainapp.match')
-    .controller('mainapp.match.MatchSingleController', ['$scope', 'Api', 'AuthenticationService', '$location', '$rootScope', '$timeout',
-        function($scope, Api, AuthenticationService, $location, $rootScope, $timeout)
+    .controller('mainapp.match.MatchSingleController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location', '$rootScope', '$timeout',
+        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $timeout)
     {
         var self = this;
 
@@ -21762,7 +21762,7 @@ angular.module('mainapp.match')
             items.matchID = data.wedstrijd_data.matchID[0];
             items.thuisTeamID = data.wedstrijd_data.thuisTeamID[0];
             items.uitTeamID = data.wedstrijd_data.uitTeamID[0];
-            items.seizoen = "2014-2015";
+            items.seizoen = "2014-2015 Play-offs";
             items.divisie = "Jupiler League";
 
             items.match_info = {};
@@ -21886,7 +21886,7 @@ angular.module('mainapp.match')
             angular.forEach(data.wedstrijd_data.overtredingen, function (value, key) {
                 var temp = {};
                 temp.V1 = String(value[items.thuisTeamID]);
-                temp.V2 = value['NA'];
+                temp.V2 = value.NA;
                 temp.V3 = String(value[items.uitTeamID]);
                 items.overtredingen.push(temp);
             });
@@ -21895,7 +21895,7 @@ angular.module('mainapp.match')
             angular.forEach(data.wedstrijd_data.spelhervattingen, function (value, key) {
                 var temp = {};
                 temp.V1 = value[items.thuisTeamID];
-                temp.V2 = value['NA'];
+                temp.V2 = value.NA;
                 temp.V3 = value[items.uitTeamID];
                 items.spelhervattingen.push(temp);
             });
@@ -21904,7 +21904,7 @@ angular.module('mainapp.match')
             angular.forEach(data.wedstrijd_data.passes, function (value, key) {
                 var temp = {};
                 temp.V1 = value[items.thuisTeamID];
-                temp.V2 = value['NA'];
+                temp.V2 = value.NA;
                 temp.V3 = value[items.uitTeamID];
                 items.passes.push(temp);
             });
@@ -21923,16 +21923,17 @@ angular.module('mainapp.match')
             });
 
             items.spelersthuisteam = [];
-            for (var k1 = 2; k1 < items.overzicht_lineup.length;) {
+            var k1;
+            for (k1 = 2; k1 < items.overzicht_lineup.length;) {
+                var value = {};
                 if (data.wedstrijd_data.overzicht_lineup[k1].V1 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 - 1].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1++;
                     } else {
@@ -21941,13 +21942,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 1].V1 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 1].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 1].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1 += 2;
                     } else {
@@ -21956,13 +21956,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 2].V1 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 1].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 2].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 2].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1 += 3;
                     } else {
@@ -21971,13 +21970,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 3].V1 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 2].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 3].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 3].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1 += 4;
                     } else {
@@ -21986,13 +21984,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 4].V1 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 3].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 4].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 4].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1 += 5;
                     } else {
@@ -22001,13 +21998,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 5].V1 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 4].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 5].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 5].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1 += 6;
                     } else {
@@ -22016,13 +22012,12 @@ angular.module('mainapp.match')
                 }
                 else {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 5].V2 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 6].V2).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 6].V1);
                         if ($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersthuisteam.push(value);
                         k1 += 7;
                     } else {
@@ -22032,16 +22027,16 @@ angular.module('mainapp.match')
             }
 
             items.spelersuitteam = [];
-            for (var k1 = 2; k1 < items.overzicht_lineup.length;) {
+            for (k1 = 2; k1 < items.overzicht_lineup.length;) {
+                var value = {};
                 if (data.wedstrijd_data.overzicht_lineup[k1].V3 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 - 1].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1++;
                     } else {
@@ -22050,13 +22045,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 1].V3 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 1].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 1].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1 += 2;
                     } else {
@@ -22065,13 +22059,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 2].V3 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 1].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 2].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 2].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1 += 3;
                     } else {
@@ -22080,13 +22073,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 3].V3 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 2].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 3].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 3].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1 += 4;
                     } else {
@@ -22095,13 +22087,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 4].V3 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 3].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 4].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 4].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1 += 5;
                     } else {
@@ -22110,13 +22101,12 @@ angular.module('mainapp.match')
                 }
                 else if (data.wedstrijd_data.overzicht_lineup[k1 + 5].V3 !== ' ') {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 4].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 5].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 5].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1 += 6;
                     } else {
@@ -22125,13 +22115,12 @@ angular.module('mainapp.match')
                 }
                 else {
                     if (data.wedstrijd_data.overzicht_lineup[k1 + 5].V4 !== 'BANK') {
-                        var value = {};
+                        value = {};
                         value.spelerNaam = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 6].V4).split(" (")[0];
                         value.rugnummer = angular.copy(data.wedstrijd_data.overzicht_lineup[k1 + 6].V3);
                         if ($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]) {
                             value.personID = angular.copy($filter('filter')(items.spelers_uitteam, {spelerNaam: value.spelerNaam})[0]).personID;
                         }
-                        ;
                         items.spelersuitteam.push(value);
                         k1 += 7;
                     } else {
@@ -22403,14 +22392,14 @@ angular.module('mainapp.match')
                 angular.forEach(items.duel_matrix_eerste_helft.thuis, function (value1, key1) {
                     if (Number(value1['1']) === value.personID) value1['1'] = angular.copy(value.spelerNaam);
                 });
-                var del = true;
+                del = true;
                 if (del && items.duel_matrix_eerste_helft.uit[0][value.personID] >= 0) del = false;
                 if (!del) items.duel_matrix_eerste_helft_uit_spelers_thuisteam.push(value);
 
                 angular.forEach(items.duel_matrix_tweede_helft.thuis, function (value1, key1) {
                     if (Number(value1['1']) === value.personID) value1['1'] = angular.copy(value.spelerNaam);
                 });
-                var del = true;
+                del = true;
                 if (del && items.duel_matrix_tweede_helft.uit[0][value.personID] >= 0) del = false;
                 if (!del) items.duel_matrix_tweede_helft_uit_spelers_thuisteam.push(value);
             });
@@ -22422,14 +22411,14 @@ angular.module('mainapp.match')
                     if (Number(value1['1']) === value.personID) value1['1'] = angular.copy(value.spelerNaam);
                 });
 
-                var del = true;
+                del = true;
                 if (del && items.duel_matrix_eerste_helft.thuis[0][value.personID] >= 0) del = false;
                 if (!del) items.duel_matrix_eerste_helft_thuis_spelers_uitteam.push(value);
                 angular.forEach(items.duel_matrix_eerste_helft.uit, function (value1, key1) {
                     if (Number(value1['1']) === value.personID) value1['1'] = angular.copy(value.spelerNaam);
                 });
 
-                var del = true;
+                del = true;
                 if (del && items.duel_matrix_tweede_helft.thuis[0][value.personID] >= 0) del = false;
                 if (!del) items.duel_matrix_tweede_helft_thuis_spelers_uitteam.push(value);
                 angular.forEach(items.duel_matrix_tweede_helft.uit, function (value1, key1) {
@@ -22465,49 +22454,49 @@ angular.module('mainapp.match')
             items.pass_matrix_helft2_uit_spelers = [];
             angular.forEach(data.wedstrijd_data.spelers_thuisteam, function (value, key) {
                 angular.forEach(items.pass_matrix_helft1.thuis.passMatrix, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                         items.pass_matrix_helft1_thuis_spelers.push(value);
                     }
                 });
                 angular.forEach(items.pass_matrix_helft2.thuis.passMatrix, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                         items.pass_matrix_helft2_thuis_spelers.push(value);
                     }
                 });
                 angular.forEach(items.pass_matrix_helft1.thuis.passMatrix2, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                     }
                 });
                 angular.forEach(items.pass_matrix_helft2.thuis.passMatrix2, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                     }
                 });
             });
             angular.forEach(data.wedstrijd_data.spelers_uitteam, function (value, key) {
                 angular.forEach(items.pass_matrix_helft1.uit.passMatrix, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                         items.pass_matrix_helft1_uit_spelers.push(value);
                     }
                 });
                 angular.forEach(items.pass_matrix_helft2.uit.passMatrix, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                         items.pass_matrix_helft2_uit_spelers.push(value);
                     }
                 });
                 angular.forEach(items.pass_matrix_helft1.uit.passMatrix2, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                     }
                 });
                 angular.forEach(items.pass_matrix_helft2.uit.passMatrix2, function (value1, key1) {
-                    if (Number(value1['_row']) === value.personID) {
-                        value1['_row'] = angular.copy(value.spelerNaam);
+                    if (Number(value1._row) === value.personID) {
+                        value1._row = angular.copy(value.spelerNaam);
                     }
                 });
             });
@@ -23073,23 +23062,23 @@ angular.module('mainapp.match')
             });
 
             if (items.match_info.thuis === 'Almere City FC') {
-                items.match_info.thuis_kort = 'Almere City'
+                items.match_info.thuis_kort = 'Almere City';
             }
             else if (items.match_info.thuis === 'Roda JC Kerkrade') {
-                items.match_info.thuis_kort = 'Roda JC'
+                items.match_info.thuis_kort = 'Roda JC';
             }
             else {
-                items.match_info.thuis_kort = angular.copy(items.match_info.thuis)
+                items.match_info.thuis_kort = angular.copy(items.match_info.thuis);
             }
 
             if (items.match_info.uit === 'Almere City FC') {
-                items.match_info.uit_kort = 'Almere City'
+                items.match_info.uit_kort = 'Almere City';
             }
             else if (items.match_info.uit === 'Roda JC Kerkrade') {
-                items.match_info.uit_kort = 'Roda JC'
+                items.match_info.uit_kort = 'Roda JC';
             }
             else {
-                items.match_info.uit_kort = angular.copy(items.match_info.uit)
+                items.match_info.uit_kort = angular.copy(items.match_info.uit);
             }
 
             $scope.matches.push(items);
@@ -23127,14 +23116,14 @@ angular.module('mainapp.match')
         var selectpositions_thuis = true;
         $scope.select_positions_uit = function () {
             if (!selectpositions_uit) {
-                if ($scope.position_field_interval == '00 - 15 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier1 }
-                else if ($scope.position_field_interval == '15 - 30 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier2 }
-                else if ($scope.position_field_interval == '30 - 45 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier3 }
-                else if ($scope.position_field_interval == '45 - 60 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier4 }
-                else if ($scope.position_field_interval == '60 - 75 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier5 }
-                else if ($scope.position_field_interval == '75 - 90 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier6 }
-                else if ($scope.position_field_interval == '1e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft1 }
-                else if ($scope.position_field_interval == '2e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft2 }
+                if ($scope.position_field_interval == '00 - 15 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier1; }
+                else if ($scope.position_field_interval == '15 - 30 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier2; }
+                else if ($scope.position_field_interval == '30 - 45 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier3; }
+                else if ($scope.position_field_interval == '45 - 60 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier4; }
+                else if ($scope.position_field_interval == '60 - 75 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier5; }
+                else if ($scope.position_field_interval == '75 - 90 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier6; }
+                else if ($scope.position_field_interval == '1e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft1; }
+                else if ($scope.position_field_interval == '2e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft2; }
 
                 if (!selectpositions_thuis) {
                     $scope.match.gemiddelde_posities = angular.copy($filter('filter')($scope.match.gemiddelde_posities, {teamNaam: $scope.match.match_info.uit_kort}));
@@ -23148,14 +23137,14 @@ angular.module('mainapp.match')
         };
         $scope.select_positions_thuis = function () {
             if (!selectpositions_thuis) {
-                if ($scope.position_field_interval == '00 - 15 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier1 }
-                else if ($scope.position_field_interval == '15 - 30 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier2 }
-                else if ($scope.position_field_interval == '30 - 45 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier3 }
-                else if ($scope.position_field_interval == '45 - 60 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier4 }
-                else if ($scope.position_field_interval == '60 - 75 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier5 }
-                else if ($scope.position_field_interval == '75 - 90 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier6 }
-                else if ($scope.position_field_interval == '1e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft1 }
-                else if ($scope.position_field_interval == '2e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft2 }
+                if ($scope.position_field_interval == '00 - 15 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier1; }
+                else if ($scope.position_field_interval == '15 - 30 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier2; }
+                else if ($scope.position_field_interval == '30 - 45 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier3; }
+                else if ($scope.position_field_interval == '45 - 60 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier4; }
+                else if ($scope.position_field_interval == '60 - 75 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier5; }
+                else if ($scope.position_field_interval == '75 - 90 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier6; }
+                else if ($scope.position_field_interval == '1e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft1; }
+                else if ($scope.position_field_interval == '2e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft2; }
 
                 if (!selectpositions_uit) {
                     $scope.match.gemiddelde_posities = angular.copy($filter('filter')($scope.match.gemiddelde_posities, {teamNaam: $scope.match.match_info.thuis_kort}));
@@ -23263,14 +23252,14 @@ angular.module('mainapp.match')
 
         $scope.position_field_interval = '1e helft';
         $scope.$watch('position_field_interval', function () {
-            if ($scope.position_field_interval == '00 - 15 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier1 }
-            else if ($scope.position_field_interval == '15 - 30 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier2 }
-            else if ($scope.position_field_interval == '30 - 45 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier3 }
-            else if ($scope.position_field_interval == '45 - 60 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier4 }
-            else if ($scope.position_field_interval == '60 - 75 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier5 }
-            else if ($scope.position_field_interval == '75 - 90 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier6 }
-            else if ($scope.position_field_interval == '1e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft1 }
-            else if ($scope.position_field_interval == '2e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft2 }
+            if ($scope.position_field_interval == '00 - 15 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier1; }
+            else if ($scope.position_field_interval == '15 - 30 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier2; }
+            else if ($scope.position_field_interval == '30 - 45 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier3; }
+            else if ($scope.position_field_interval == '45 - 60 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier4; }
+            else if ($scope.position_field_interval == '60 - 75 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier5; }
+            else if ($scope.position_field_interval == '75 - 90 min') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_kwartier6; }
+            else if ($scope.position_field_interval == '1e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft1; }
+            else if ($scope.position_field_interval == '2e helft') { $scope.match.gemiddelde_posities = $scope.match.gemiddelde_posities_helft2; }
 
             selectpositions_uit = true;
             selectpositions_thuis = true;

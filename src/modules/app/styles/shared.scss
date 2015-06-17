@@ -128,11 +128,11 @@ a:focus, a:hover {
 Standard layout
 ********************************************************/
 
-.wrapper {
+#wrapper {
   min-height: 100%;
   margin-bottom: -100px;
 }
-.wrapper:after {
+#wrapper:after {
   content: " ";
   display: block;
   height: 100px;
@@ -400,7 +400,7 @@ Standard layout
 }
 
 .content.content-page-main {
-  background-image: url('../images/voetbalnl.jpg');
+  background-image: url('../images/voetbal2.jpg');
   background-position: center center;
   background-size: cover;
   min-height: 40vh;
