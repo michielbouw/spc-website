@@ -1,0 +1,11 @@
+{
+  "name": "spc-website",
+  "description": "Soccer Performance Centre",
+  "version": "0.0.1",
+  "author": "Michiel Bouw <mpbouw94@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "main": "server.js",
+  "dependencies": {
+  }
+}

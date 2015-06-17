@@ -1,0 +1,50 @@
+<div class="container">
+    <br><br><br>
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-7">
+
+        <div class="jumbotron home-intro">
+            <h2>Inloggen</h2>
+            <h4>Club</h4>
+            <hr>
+            <p>Vul hier je email en wachtwoord in om je account aan te maken op de site. Je kunt alleen inloggen met je originele email en wachtwoord.</p>
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="data.login.email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Wachtwoord</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord" ng-model="data.login.password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword2" class="col-sm-2 control-label">Bevestig wachtwoord</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Bevestig wachtwoord" ng-model="data.login.password2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="name">Volledige naam</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="name" ng-model="data.login.first_name" placeholder="Voornaam">
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control" id="name" ng-model="data.login.middle_name" placeholder="vgsl">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="name" ng-model="data.login.last_name" placeholder="Achternaam">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" ng-click="data.signIn()">Versturen</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

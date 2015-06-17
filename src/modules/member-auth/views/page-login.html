@@ -1,0 +1,34 @@
+<div class="container">
+    <h1>Log in</h1>
+    <h3></h3>
+    <hr>
+    <p>Je kunt alleen inloggen met je originele email en wachtwoord. Als je je wachtwoord niet meer weet <a href="/passwordforget">klik hier</a>. Je kunt dan een nieuw wachtwoord krijgen.</p>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="email" ng-model="data.login.email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password">Wachtwoord</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" id="password" ng-model="data.login.password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="remember" ng-model="data.login.remember"> Blijf ingelogd
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-default" ng-click="data.logIn()">Log in</button>
+            </div>
+        </div>
+    </form>
+</div><!-- end container -->

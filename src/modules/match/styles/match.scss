@@ -1,0 +1,558 @@
+@import '../../app/styles/variables';
+
+.content-top {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  @include border-radius(1px);
+
+  #match-info-short {
+    display: none;
+
+    h4 {
+      margin: 4px;
+    }
+  }
+  .logo {
+    margin: 1px;
+    height: 58px;
+    width: auto;
+  }
+  .navbar-sub-mobile-toggle {
+    border-top: 1px solid $lightgrey;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+}
+
+.content {
+  .stat-table {
+    .stat-table-row {
+      text-transform: capitalize;
+    }
+    .stat-table-row:hover {
+      background-color: #F6F8F9;
+      color: #18385F;
+      font-weight: bold;
+    }
+    .stat-table-row:first-of-type,
+    .stat-table-row:first-of-type div,
+    .stat-table-row:first-of-type div span {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+  .wedstrijdverloop {
+    text-align: left;
+    float: left;
+    width: 91.66666667%;
+    margin-left: 4.17%;
+    height: 67px;
+
+    @media (max-width: 480px) { display: none; }
+
+    .actions {
+      float: left;
+      height: 25px;
+      margin-top: 10px;
+      width: 100%;
+      border-bottom: 1px solid $blue;
+
+      .action {
+        float: left;
+        width: auto;
+        position: absolute;
+        padding-left: -4px;
+        z-index: 10;
+
+        span i span.info {
+          display: none;
+          position: absolute;
+          top: calc(115% + 6px);
+          right: 0;
+          padding: 5px 10px;
+          min-width: 125px;
+          font-size: 12px;
+          color: $white;
+          background-color: $darkblue;
+          -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+          -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+          z-index: 9999;
+        }
+        span i span.info-wissel-in {
+          top: calc(115% + 12px);
+        }
+        span i span.info-wissel-uit {
+          top: 115%;
+        }
+        span i:hover > span.info {
+          display: block;
+        }
+      }
+    }
+    .time {
+      font-size: 12px;
+      color: $darkblue;
+      float: left;
+      height: 16px;
+      width: 100%;
+    }
+  }
+  .wedstrijdverloop-verlenging {
+    margin-left: 25%;
+    width: 50%;
+    height: 67px;
+  }
+
+  .duelmatrix table {
+    width: 91%;
+    td {
+      padding: 3px 6px;
+      width: 25px;
+      text-align: center;
+    }
+    td:first-child {
+      //width: 55px;
+      padding: 3px 6px;
+      text-align: left;
+    }
+    td.medium {
+      color: $white;
+      background-color: $darkblue;
+    }
+    td.high {
+      color: $white;
+      background-color: $jl;
+    }
+    td.border-right {
+      border-right: 1px solid $lightgrey;
+    }
+    td.border-left {
+      border-left: 1px solid $lightgrey;
+    }
+    th {
+      padding: 3px 6px;
+    }
+    th:last-child {
+      text-align: right;
+    }
+    thead tr {
+      th.rotate {
+        white-space: nowrap;
+        height: 100px;
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+        position: relative;
+        vertical-align: bottom;
+        padding: 0;
+        font-size: 12px;
+        line-height: 0.8;
+      }
+      th:last-child {
+        //overflow: hidden;
+      }
+      th.rotate > div {
+        position: relative;
+        top: 0px;
+        left: 48px;
+        height: 100%;
+        -ms-transform: skew(-45deg, 0deg);
+        -moz-transform: skew(-45deg, 0deg);
+        -webkit-transform: skew(-45deg, 0deg);
+        -o-transform: skew(-45deg, 0deg);
+        transform: skew(-45deg, 0deg);
+        border-left: 1px solid $lightgrey;
+        overflow: hidden;
+      }
+      th.rotate > div > span {
+        -ms-transform: skew(45deg, 0deg) rotate(315deg);
+        -moz-transform: skew(45deg, 0deg) rotate(315deg);
+        -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+        -o-transform: skew(45deg, 0deg) rotate(315deg);
+        transform: skew(45deg, 0deg) rotate(315deg);
+        position: absolute;
+        bottom: 53px;
+        left: -43px;
+        display: inline-block;
+        width: 134px; /* 110 / cos(45) - 30 cos (45) */
+        text-align: left;
+        white-space: nowrap; /* whether to display in one line or not */
+      }
+      td {
+        padding: 3px 6px;
+      }
+      td:first-child {
+        //width: 55px;
+        padding: 3px 6px;
+        text-align: left;
+      }
+    }
+  }
+  .passmatrix table {
+    width: 91%;
+    td {
+      padding: 3px 6px;
+      width: 25px;
+      text-align: center;
+    }
+    td:first-child {
+      //width: 55px;
+      padding: 3px 6px;
+      text-align: left;
+    }
+    td.fill {
+      background-color: $blue;
+    }
+    td.medium {
+      color: $white;
+      background-color: $darkblue;
+    }
+    td.high {
+      color: $white;
+      background-color: $jl;
+    }
+    td.border-right {
+      border-right: 1px solid $lightgrey;
+    }
+    td.border-left {
+      border-left: 1px solid $lightgrey;
+    }
+    th {
+      padding: 3px 6px;
+    }
+    th:last-child {
+      text-align: right;
+    }
+    thead tr {
+      th.rotate {
+        white-space: nowrap;
+        height: 100px;
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+        position: relative;
+        vertical-align: bottom;
+        padding: 0;
+        font-size: 12px;
+        line-height: 0.8;
+      }
+      th:last-child {
+        //overflow: hidden;
+      }
+      th.rotate > div {
+        position: relative;
+        top: 0px;
+        left: 48px;
+        height: 100%;
+        -ms-transform: skew(-45deg, 0deg);
+        -moz-transform: skew(-45deg, 0deg);
+        -webkit-transform: skew(-45deg, 0deg);
+        -o-transform: skew(-45deg, 0deg);
+        transform: skew(-45deg, 0deg);
+        border-left: 1px solid $lightgrey;
+        overflow: hidden;
+      }
+      th.rotate > div > span {
+        -ms-transform: skew(45deg, 0deg) rotate(315deg);
+        -moz-transform: skew(45deg, 0deg) rotate(315deg);
+        -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+        -o-transform: skew(45deg, 0deg) rotate(315deg);
+        transform: skew(45deg, 0deg) rotate(315deg);
+        position: absolute;
+        bottom: 53px;
+        left: -43px;
+        display: inline-block;
+        width: 134px; /* 110 / cos(45) - 30 cos (45) */
+        text-align: left;
+        white-space: nowrap; /* whether to display in one line or not */
+      }
+      td {
+        padding: 3px 6px;
+      }
+      td:first-child {
+        //width: 55px;
+        padding: 3px 6px;
+        text-align: left;
+      }
+    }
+  }
+
+  .lineup_field {
+    margin-bottom: 15px;
+
+    .lineup {
+      position: absolute;
+      padding: 4px;
+      font-size: 11px;
+      height: 26px;
+      width: 26px;
+      text-align: center;
+      color: $darkblue;
+      background-color: $white;
+      border: 1px solid $darkblue;
+      @include border-radius(30px);
+
+      .lineup_info {
+        text-align: left;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 5px 15px;
+        min-width: 150px;
+        font-size: 14px;
+        color: $black;
+        background-color: $backgroundlight;
+        -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+
+        img {
+          width: 60%;
+        }
+      }
+    }
+    .lineup:hover > .lineup_info {
+      display: block;
+    }
+  }
+
+  .positions_field {
+    p {
+      cursor: pointer;
+    }
+    .position {
+      position: absolute;
+      padding: 3px;
+      font-size: 10px;
+      height: 20px;
+      width: 20px;
+      text-align: center;
+      color: $white;
+      background-color: $darkblue;
+      @include border-radius(20px);
+
+      .position_info {
+        text-align: left;
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        padding: 5px 15px;
+        min-width: 150px;
+        font-size: 14px;
+        color: $black;
+        background-color: $backgroundlight;
+        -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+
+        img {
+          width: 60%;
+        }
+      }
+      .position_info_uit {
+        top: 100%;
+        bottom: initial;
+      }
+    }
+    .position.uit {
+      background-color: $blue;
+    }
+    .position:hover > .position_info {
+      display: block;
+    }
+  }
+
+  .passes_zone_field {
+    p {
+      cursor: pointer;
+    }
+    .pass_zone {
+      .pass_zone_item {
+        text-align: center;
+        position: absolute;
+        padding: 3px;
+        color: $darkblue;
+
+        h1 {
+          font-weight: bold;
+        }
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .overtredingen_field {
+    p {
+      cursor: pointer;
+    }
+    .position {
+      position: absolute;
+      padding: 3px;
+      font-size: 10px;
+      height: 20px;
+      width: 20px;
+      text-align: center;
+      color: $white;
+      background-color: $darkblue;
+      @include border-radius(20px);
+
+      .position_info {
+        text-align: left;
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        padding: 5px 15px;
+        min-width: 150px;
+        font-size: 14px;
+        color: $black;
+        background-color: $backgroundlight;
+        -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+
+        img {
+          width: 60%;
+        }
+      }
+      .position_info_uit {
+        top: 100%;
+        bottom: initial;
+      }
+    }
+    .position.uit {
+      background-color: $blue;
+    }
+    .position:hover > .position_info {
+      display: block;
+    }
+  }
+
+  .panel-group.speler_accordion {
+    margin-top: 15px;
+
+    .panel {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid $lightgrey;
+      -webkit-box-shadow: 0;
+      -moz-box-shadow: 0;
+      box-shadow: 0;
+      @include border-radius(0);
+
+      .panel-collapse {
+        .summary {
+          margin-bottom: 15px;
+          color: $darkblue;
+
+          h1 {
+            color: $darkblue;
+            small {
+              color: $darkblue;
+            }
+          }
+        }
+
+        .item_title {
+          color: $primary-color;
+          border-bottom: 1px solid $lightgrey;
+          border-top: 1px solid $lightgrey;
+          padding-top: 0px;
+          padding-bottom: 0px;
+          margin-top: 0;
+          margin-bottom: 5px;
+        }
+
+        .player-table {
+          margin-bottom: 10px;
+          background-color: none;
+
+          .player-table-row:hover {
+            background-color: #F6F8F9;
+            color: #18385F;
+            font-weight: bold;
+          }
+        }
+
+        .location_duels_field {
+          margin-top: 5px;
+          margin-bottom: 10px;
+
+          p {
+            cursor: pointer;
+          }
+          .position {
+            position: absolute;
+            padding: 3px;
+            font-size: 10px;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            color: $white;
+            background-color: $blue;
+            @include border-radius(20px);
+
+            .position_info {
+              text-align: left;
+              display: none;
+              position: absolute;
+              bottom: 100%;
+              left: 0;
+              padding: 5px 15px;
+              min-width: 150px;
+              font-size: 14px;
+              color: $black;
+              background-color: $backgroundlight;
+              -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+              -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+              box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+              z-index: 100;
+
+              img {
+                width: 60%;
+              }
+            }
+            .position_info_uit {
+              top: 100%;
+              bottom: initial;
+            }
+          }
+          .position.lost {
+            background-color: $jl;
+          }
+          .position:hover > .position_info {
+            display: block;
+          }
+        }
+      }
+    }
+    .panel+.panel {
+      margin-top: 0;
+    }
+  }
+}
+
+/********************************************************
+Responsive setup
+********************************************************/
+@media screen and (min-width:1600px) {
+}
+@media screen and (max-width:1599px) {
+}
+@media screen and (max-width:1199px) {
+}
+@media screen and (max-width:991px) {
+}
+@media screen and (max-width:767px) {
+}
+@media screen and (max-width:320px) {
+}

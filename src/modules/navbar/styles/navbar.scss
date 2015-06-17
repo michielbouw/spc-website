@@ -1,0 +1,53 @@
+@import '../../app/styles/variables';
+
+nav#navbar-main {
+  background-color: $white;
+
+  img {
+    display: inline-block;
+    height: 30px;
+    width: auto;
+
+    @media (max-width: 767px) {  }
+    @media (max-width: 480px) { display: none; }
+  }
+  .navbar-toggle {
+    @media (max-width: 767px) { margin-top: 16px; }
+    @media (max-width: 480px) {  }
+  }
+}
+.navbar-brand img {
+  display: inline-block !important;
+  height: 60px !important;
+  width: auto !important;
+}
+.navbar-brand span {
+  @media (max-width: 480px) { display: none; }
+}
+.navbar-brand,
+.navbar-nav li a {
+  line-height: 65px;
+  height: 65px;
+  padding-top: 0;
+}
+.navbar-nav .dropdown-menu li a {
+  line-height: 40px;
+  height: 40px;
+  padding-top: 0;
+}
+
+/********************************************************
+Responsive setup
+********************************************************/
+@media screen and (min-width:1600px) {
+}
+@media screen and (max-width:1599px) {
+}
+@media screen and (max-width:1199px) {
+}
+@media screen and (max-width:991px) {
+}
+@media screen and (max-width:767px) {
+}
+@media screen and (max-width:320px) {
+}

@@ -1,0 +1,139 @@
+<div class="page-top">
+    <div class="container">
+        <div class="col-md-2">
+            <div class="col-md-2 navbar-sub">
+                <div class="item-title"><a href="/beheer">Beheer</a> / Clubs</div>
+                <ul id="nav-sub" class="nav nav-pills nav-stacked">
+                    <li role="presentation">
+                        <a href="/beheer/clubs">
+                            <i class="fa fa-soccer-ball-o"></i> Clubs
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="/beheer/clubs/edit/add">
+                            <i class="fa fa-user-plus"></i> Club toevoegen
+                        </a>
+                    </li>
+                </ul>
+                <div class="item-title"><a href="/logout">Uitloggen</a></div>
+                <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="container">
+
+        <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
+
+            <div class="col-xs-12 content-page-title">
+                <h3>Clubnaam</h3>
+            </div>
+            <div class="col-xs-12">
+
+            </div>
+
+            <div class="col-xs-12">
+                <div class="col-lg-12">
+                    <img src="logo_clubs/JPG/FC Eindhoven.jpg" class="pull-left" style="width: 15%;">
+                    <h4>Club wijzigen/toevoegen</h4>
+                </div>
+                <div class="col-lg-12">
+                    <br>
+                </div>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Clubnaam</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" placeholder="Clubnaam">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Contact email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Contact email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputColor1" class="col-sm-2 control-label">Club kleur donker</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="inputColor1" placeholder="Club kleur donker">
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="inputColor1code" placeholder="Club kleur donker (code)">
+                        </div>
+                        <div class="col-sm-12" style="background-color: {{ items.colors[0].refcode }}">&nbsp;</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputColor2" class="col-sm-2 control-label">Club kleur licht</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="inputColor2" placeholder="Club kleur licht">
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="inputColor2code" placeholder="Club kleur licht (code)">
+                        </div>
+                        <div class="col-sm-12" style="background-color: {{ items.colors[1].refcode }}">&nbsp;</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPackage" class="col-sm-2 control-label">Type pakket</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="inputPackage">
+                                <option>Club</option>
+                                <option>League</option>
+                                <option>Extra</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4>Teams</h4>
+
+                    <p>1e elftal</p>
+                    <div class="form-group">
+                        <label for="inputTeam" class="col-sm-2 control-label">Team</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTeam" placeholder="Team">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-sm-2 control-label">Coach</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName2" placeholder="Coach">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputteamID" class="col-sm-2 control-label">Team ID (data)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputteamID" placeholder="Team ID">
+                        </div>
+                    </div>
+
+                    <!-- <p>Team naam</p>
+                    <div class="form-group">
+                        <label for="inputTeam" class="col-sm-2 control-label">Team</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTeam" placeholder="Team">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName2" class="col-sm-2 control-label">Coach</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName2" placeholder="Coach">
+                        </div>
+                    </div>-->
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Opslaan</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

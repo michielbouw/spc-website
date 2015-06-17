@@ -1,0 +1,424 @@
+@import 'variables';
+
+/*
+ * SPC Website
+ * Soccer Performance Centre
+ *
+ * Main Stylesheet for SPC Website
+ * Layout belongs to Soccer Performance Centre
+ * Sub stylesheets extend this stylesheet
+ *
+ * Author: Michiel Bouw
+ * Date created: 16-06-2015
+ */
+
+/********************************************************
+Initial style setup, detailed setup and responsive setup
+********************************************************/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: calc(100% - 65px);
+  color: $primary-color;
+  font-family: 'Open Sans', sans-serif;
+  background-color: $background;
+  background-image: url('../images/soccer-field.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+[data-toggle="tooltip"], [rel="tooltip"] {
+  cursor: pointer;
+}
+
+.caret-right {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-left: 4px dashed;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: $darkblue;
+  border-color: #2e6da4;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  color: #fff;
+  background-color: $darkblue;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: $backgroundlight;
+}
+
+a {
+  color: $darkblue;
+  text-decoration: none;
+}
+a:focus, a:hover {
+  color: $darkblue;
+  text-decoration: underline;
+}
+
+.section, section {
+  padding-top: 0px;
+  padding-bottom: 50px;
+}
+
+/*
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  @media screen and (min-width:1600px) { max-width: 1100px; }
+  @media screen and (min-width:1280px) and (max-width:1599px) { max-width: 960px; }
+  @media screen and (min-width:960px) and (max-width:1279px) { max-width: 860px; }
+  @media screen and (min-width:640px) and (max-width:959px) { max-width: 760px; }
+  @media screen and (min-width:321px) and (max-width:639px) { max-width: 640px; }
+  @media screen and (max-width:320px) { max-width: 320px; }
+}
+.container {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+.col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+.col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+.col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+*/
+
+/********************************************************
+Standard layout
+********************************************************/
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -100px;
+}
+.wrapper:after {
+  content: " ";
+  display: block;
+  height: 100px;
+}
+
+.navbar-sub {
+  padding: 0;
+  top: 75px;
+  position: fixed;
+  overflow-y: auto;
+
+  .item-title, .item-title a {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: $blue;
+    margin: 18px 0 4px 2px;
+  }
+  .nav-pills > li > a {
+    border-radius: 15px;
+    font-size: 13px;
+  }
+  .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 3px 10px;
+  }
+  .nav > li > a .caret {
+    display: none;
+  }
+  .nav-pills > li.active > a .caret {
+    display: inline-block;
+  }
+  .nav-pills > li.active > a .caret-right {
+    display: none;
+  }
+  .nav-pills > li.active > .nav.submenu {
+    display: block;
+  }
+  .submenu {
+    display: none;
+    margin-left: 15px;
+    margin-top: 2px;
+
+    li.active > a .caret {
+      display: inline-block;
+    }
+    li.active > a .caret-right {
+      display: none;
+    }
+    li.active > .nav.submenu {
+      display: block;
+    }
+    .submenu {
+      display: none;
+      margin-top: 2px;
+      margin-left: 20px;
+    }
+  }
+  .submenu.nav-pills > li.active > a {
+    color: $darkblue;
+    background-color: transparent;
+  }
+}
+
+.navbar-sub-mobile {
+  display: none;
+  opacity: 0;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  -webkit-transition:opacity 0s .5s;
+  -moz-transition:opacity 0s .5s;
+
+  .nav-pills > li > a {
+    border-radius: 15px;
+    font-size: 13px;
+  }
+  .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 3px 10px;
+  }
+  .nav > li > a .caret {
+    display: none;
+  }
+  .nav-pills > li.active > a .caret {
+    display: inline-block;
+  }
+  .nav-pills > li.active > a .caret-right {
+    display: none;
+  }
+  .nav-pills > li.active > .nav.submenu {
+    display: block;
+  }
+  .submenu {
+    display: none;
+    margin-left: 15px;
+    margin-top: 2px;
+
+    li > a {
+      border-radius: 15px;
+      font-size: 10px;
+    }
+  }
+  .submenu.nav-pills > li.active > a {
+    color: $darkblue;
+    background-color: transparent;
+  }
+}
+/* MENU BUTTON MOBILE SUBMENU */
+.content-top .handler{display:none !important;}
+.content-top .handler#handler-navbar-sub-mobile:checked ~ .navbar-sub-mobile{display: inline-block; opacity:1; -webkit-transition:opacity 0s 0s; -moz-transition:opacity 0s 0s}
+
+.intro-box {
+  background-color: $background;
+  color: $primary-color;
+  background-image: url('../images/soccer-field.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  min-height: 60vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  span.first {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: 20px;
+    opacity: 0.5;
+    -ms-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    -moz-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    -webkit-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    -o-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    transform: skew(-43.5deg, 0deg) rotate(315deg);
+  }
+  span.second {
+    content: '';
+    position: absolute;
+    left: 30px;
+    bottom: 100%;
+    width: 100%;
+    height: 20px;
+    opacity: 0.5;
+    -ms-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    -moz-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    -webkit-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    -o-transform: skew(-43.5deg, 0deg) rotate(315deg);
+    transform: skew(-43.5deg, 0deg) rotate(315deg);
+  }
+}
+
+.page-top {
+  padding-top: 10px;
+  margin-top: 65px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.page-content {
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.content {
+  padding: 0;
+  margin-bottom: 40px;
+  background-color: $white;
+  border: 1px solid $lightgrey;
+  height: auto;
+  @include border-radius(1px);
+
+  .content-title {
+    background-color: $backgroundlight;
+    border-bottom: 1px solid $lightgrey;
+    border-top: 1px solid $lightgrey;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+
+    h4 {
+      margin-top: -5px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $blue;
+    }
+  }
+  .content-title-top {
+    background-color: $backgroundlight;
+    border-bottom: 1px solid $lightgrey;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+
+    h4 {
+      margin-top: -5px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $blue;
+    }
+  }
+  .content-title-bottom {
+    background-color: $backgroundlight;
+    border-top: 1px solid $lightgrey;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+
+    a {
+      margin-top: 0px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $blue;
+    }
+  }
+}
+
+.content.content-page {
+  min-height: 60vh;
+  padding-bottom: 15px;
+
+  .content-page-title {
+    color: $primary-color;
+    background-color: $backgroundlight;
+    border-bottom: 1px solid #ddd;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  .image-title {
+    color: $white;
+    padding-left: 40px;
+    padding-top: 15vh;
+  }
+  .image-text {
+    color: $primary-color;
+    border-top: 1px solid #ddd;
+    background-color: $white;
+    margin: 20vh 0 0 0;
+    padding: 15px;
+    -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.content.content-page-full {
+  margin-top: 75px;
+}
+
+.content.content-page-main {
+  background-image: url('../images/voetbalnl.jpg');
+  background-position: center center;
+  background-size: cover;
+  min-height: 40vh;
+  padding-bottom: 0;
+}
+
+/********************************************************
+Responsive setup
+********************************************************/
+@media screen and (min-width:1600px) {
+}
+@media screen and (max-width:1599px) {
+}
+@media screen and (max-width:1199px) {
+}
+@media screen and (max-width:991px) {
+}
+@media screen and (max-width:767px) {
+}
+@media screen and (max-width:320px) {
+}

@@ -1,0 +1,149 @@
+@import '../../app/styles/variables';
+
+.header-image{
+  background: $white url('../images/SPC_logo_300dpi.jpg') no-repeat fixed 95% top;
+  background-size: auto 90%;
+  height: 10vh;
+
+  @media (max-width: 991px) { background-size: auto 80%; }
+  @media (max-width: 767px) { background: $white; }
+  @media (max-width: 480px) { background: $white; }
+}
+
+.header-block {
+  background: $white url('../images/SPC_logo_300dpi.jpg') no-repeat fixed 95% top;
+  background-size: auto 90%;
+  height: 90vh;
+
+  @media (max-width: 991px) { background-size: auto 80%; }
+  @media (max-width: 767px) { background: $white; }
+  @media (max-width: 480px) { background: $white; }
+
+  .home-intro {
+    background: transparent;
+    color: $black;
+    padding: 0;
+    //background: $blue;
+    //color: $white;
+    //-webkit-box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    //-moz-box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    //box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 767px) { background: $white; color: $black; }
+    @media (max-width: 480px) { background: $white; color: $black; }
+
+    #showxsmall {
+      display: none;
+      @media (max-width: 991px) { display: none; }
+      @media (max-width: 767px) { display: none; }
+      @media (max-width: 480px) { display: block; }
+    }
+    #showsmall {
+      display: none;
+      @media (max-width: 991px) { display: none; }
+      @media (max-width: 767px) { display: block; }
+      @media (max-width: 480px) { display: none; }
+    }
+    #showmedium {
+      display: none;
+      @media (max-width: 991px) { display: block; }
+      @media (max-width: 767px) { display: none; }
+      @media (max-width: 480px) { display: none; }
+    }
+    #showlarge {
+      display: block;
+      @media (max-width: 991px) { display: none; }
+      @media (max-width: 767px) { display: none; }
+      @media (max-width: 480px) { display: none; }
+    }
+  }
+
+  a.btn.btn-lg {
+    margin: 10px 0;
+  }
+}
+
+.block-jl {
+  background: $black;
+  height: 100vh;
+  width: 100%;
+
+  .home-intro {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 65px;
+    background: $jl;
+    color: $white;
+    background-image: url('../images/soccer-field.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+    -webkit-box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  .item {
+    background-color: $white;
+    border: 1px solid $lightgrey;
+    margin: 0 0 20px 0;
+
+    .image {
+      margin-left: -30px;
+    }
+    .pull-right.image {
+      margin-left: 0;
+      margin-right: -30px;
+    }
+  }
+}
+
+.block-over {
+  background: $background;
+  height: 100vh;
+  width: 100%;
+
+  .home-intro {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 65px;
+    background: $darkblue;
+    color: $white;
+    background-image: url('../images/soccer-field.png');
+    background-position: right center;
+    background-repeat: no-repeat;
+    -webkit-box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .item {
+    background-color: $white;
+    border: 1px solid $lightgrey;
+    margin: 0 0 20px 0;
+
+    .image {
+      margin-left: -30px;
+    }
+    .pull-right.image {
+      margin-left: 0;
+      margin-right: -30px;
+    }
+  }
+}
+
+/********************************************************
+Responsive setup
+********************************************************/
+@media screen and (min-width:1600px) {
+}
+@media screen and (max-width:1599px) {
+}
+@media screen and (max-width:1199px) {
+}
+@media screen and (max-width:991px) {
+}
+@media screen and (max-width:767px) {
+}
+@media screen and (max-width:320px) {
+}

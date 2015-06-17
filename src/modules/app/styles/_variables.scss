@@ -1,0 +1,44 @@
+$font-stack: 'Open Sans', Helvetica, Verdana, sans-serif;
+$primary-color: #000;
+$white: #FFFFFF;
+$black: #000000;
+$background: #E7EAF1;
+$backgroundlight: #F6F8F9;
+$grey: #979797;
+$lightgrey: #dddddd;
+$red: #d44527;
+$green: #77c126;
+$darkblue: #18385F;
+$blue: #4F81BC;
+$jl: #D22238;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin backgroundimages {
+  -ms-background-clip: border-box;
+  -o-background-clip: border-box;
+  -webkit-background-clip: border-box;
+  -moz-background-clip: border-box;
+  background-clip: border-box;
+  background-origin: padding-box;
+  background-position: center center;
+  background-repeat: no-repeat !important;
+  -o-background-size: cover !important;
+  -ms-background-size: cover !important;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  background-size: cover !important;
+}
+
+@mixin imagesharpening {
+  filter: brightness(0.9) contrast(1.1) saturate(0.9);
+  -webkit-filter: brightness(0.9) contrast(1.1) saturate(0.9);
+  -moz-filter: brightness(0.9) contrast(1.1) saturate(0.9);
+  -o-filter: brightness(0.9) contrast(1.1) saturate(0.9);
+  -ms-filter: brightness(0.9) contrast(1.1) saturate(0.9);
+}
