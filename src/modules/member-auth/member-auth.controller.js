@@ -75,7 +75,7 @@ angular.module('mainapp.memberAuth')
 
                     if (self.login.password === self.login.password2) {
                         Api.Signin.post({
-                            username: self.login.username,
+                            email: self.login.email,
                             password: self.login.password,
                             first_name: self.login.first_name,
                             middle_name: self.login.middle_name,

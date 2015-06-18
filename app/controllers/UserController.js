@@ -107,10 +107,15 @@ module.exports = UserController = {
 
     query: function(req, res)
     {
-        User.find(function (err, data) {
-            if (err) res.send(err);
-            res.json(data);
-        });
+        //User.find(function (err, data) {
+        //    if (err) res.send(err);
+        //    res.json(data);
+        //});
+        if (req.query.fans == 'true') {
+            User.find().where({role: 'fan'}).sort({is_active: 1, last_name: 1}).exec(function(err, data) { if (err) res.send(err); res.json(data); });
+        } else {
+            User.find().where('role').ne('fan').sort({is_active: 1, last_name: 1}).exec(function(err, data) { if (err) res.send(err); res.json(data); });
+        }
     },
 
     get: function(req, res)

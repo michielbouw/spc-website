@@ -1,12 +1,12 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminUsersController', ['Api', '$scope', '$modal', '$filter',
+    .controller('mainapp.pageAdmin.AdminFansController', ['Api', '$scope', '$modal', '$filter',
         function(Api, $scope, $modal, $filter) {
 
         var self = this;
         self.datetime = new Date();
 
         Api.Users.query({
-            fans: false
+            fans: true
         }, function(res) {
             self.users = res;
         });

@@ -5,6 +5,7 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
 //var NewsController = require('../controllers/NewsController');
+var PagesController = require('../controllers/PagesController');
 var UploadController = require('../controllers/UploadController');
 var UserController = require('../controllers/UserController');
 
@@ -20,7 +21,13 @@ router.use(function(req, res, next) {
 //router.put('/news/:_slug',          UserController.ensureAuthorized, NewsController.put);
 //router.delete('/news/:_slug',       UserController.ensureAuthorized, NewsController.delete);
 
-router.post('/uploads/:slug',       multipartMiddleware, UploadController.uploadFile);
+router.get('/pages',                PagesController.query);
+router.get('/pages/:_id',           PagesController.get);
+router.post('/pages',               UserController.ensureAuthorized, PagesController.post);
+router.put('/pages/:_id',           UserController.ensureAuthorized, PagesController.put);
+router.delete('/pages/:_id',        UserController.ensureAuthorized, PagesController.delete);
+
+router.post('/media/:slug',         multipartMiddleware, UploadController.uploadFile);
 
 router.post('/login',               UserController.login);
 router.post('/signin',              UserController.signin);

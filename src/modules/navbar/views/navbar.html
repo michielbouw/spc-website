@@ -20,7 +20,9 @@
                     <li><a href="/jupiler">Jupiler League</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login">Inloggen</a></li>
+                    <li ng-hide="isLogged()"><a href="/login">Inloggen</a></li>
+                    <li ng-if="currentUser.role == 'admin'"><a href="/admin">Admin</a></li>
+                    <li ng-show="isLogged()" ng-controller="mainapp.memberAuth.AuthController as data"><a ng-click="data.logOut()">Uitloggen</a></li>
                 </ul>
             </div>
         </div>

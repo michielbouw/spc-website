@@ -42,6 +42,32 @@ UploadController.prototype.uploadFile = function(req, res) {
                 res.send(renamedFile);
             });
         });
+    } else if (req.params.slug == 'pages') { // so if extra other files
+        // set where the file should actually exist
+        var target_path = './media/pages/' + renamedFile;
+
+        // move the file from the temporary location to the intended location
+        //fs.rename(tmp_path, target_path, function (err) {
+        //    if (err) throw err;
+        //    // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        //    fs.unlink(tmp_path, function () {
+        //        if (err) throw err;
+        //        res.send(renamedFile);
+        //    });
+        //});
+        // resize (width max 800px) and move the file from the temporary location to the intended location
+        im.resize({
+            srcPath: tmp_path,
+            dstPath: target_path,
+            width:   800
+        }, function (err, stdout, stderr) {
+            if (err) throw err;
+            // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+            fs.unlink(tmp_path, function () {
+                if (err) throw err;
+                res.send(renamedFile);
+            });
+        });
     } else if (req.params.slug == 'extra') { // so if extra other files
         // set where the file should actually exist
         var target_path = './media/' + req.params.slug + renamedFile;

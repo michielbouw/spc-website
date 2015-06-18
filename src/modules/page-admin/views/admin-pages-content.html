@@ -1,0 +1,218 @@
+<div class="page-top">
+    <div class="container">
+        <div class="col-md-2">
+            <div class="col-md-2 navbar-sub">
+                <div class="item-title"><a href="/admin">Admin</a> / Pagina's</div>
+                <ul id="nav-sub" class="nav nav-pills nav-stacked">
+                    <li role="presentation" class="active">
+                        <a href="/admin/pages">
+                            <i class="fa fa-list"></i> Pagina's
+                        </a>
+                    </li>
+                </ul>
+                <div class="item-title"><a href="/admin">Terug naar Admin</a></div>
+                <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="container">
+
+        <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
+
+            <div class="col-xs-12 content-page-title">
+                <h3>Pagina's
+                <button ng-if="data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesSave()">Opslaan</button>
+                <button ng-if="!data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesCreate()">Pagina's aanmaken</button>
+                </h3>
+            </div>
+            <div class="col-xs-12">
+                <p>Hier kan de inhoud van de openbare pagina's worden aangepast. Dit zijn voor nu de Home pagina, Over SPC pagina en de Jupiler samenwerking pagina.</p>
+                <p><small>Laatst bijgewerkt op: {{ data.pages.date_edited | date:'d MMM yyyy HH:mm' }}, door: {{ data.pages.editor }}</small></p>
+                <div ng-if="errorAddFeatured" class="alert alert-danger" role="alert">{{ errorAddFeatured }}</div>
+            </div>
+            <div class="col-xs-12" ng-if="data.pages && data.pages.home">
+                <hr>
+                <div class="col-lg-12">
+                    <h4><a href="/">Home pagina</a></h4>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputTitleHm" class="col-sm-2 control-label">Titel</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitleHm" placeholder="Titel" ng-model="data.pages.home.title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescrHm" class="col-sm-2 control-label">Beschrijving</label>
+                        <div class="col-sm-10">
+                            <textarea rows="2" class="form-control" id="inputDescrHm" placeholder="Beschrijving" ng-model="data.pages.home.description"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="col-xs-6 col-sm-2"><p><strong>Buttons met link</strong></p></div>
+                <div class="col-xs-12 col-sm-12 col-md-4" ng-repeat="button in data.pages.home.buttons">
+                    <br>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputTitleButton" class="col-sm-4 control-label">Titel</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputTitleButton" placeholder="Titel" ng-model="button.title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputIcon" class="col-sm-4 control-label">Icon (voorbeeld: <i class="fa fa-{{ button.icon }}"></i>) </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputIcon" placeholder="Titel" ng-model="button.icon">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLink" class="col-sm-4 control-label">Link</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputLink" placeholder="Titel" ng-model="button.link">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-xs btn-danger" ng-click="data.itemDel('home', 'buttons', $index)" title="verwijder"><i class="fa fa-close"></i> verwijder button</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center" ng-click="data.itemAdd('home', 'buttons')">
+                    <h3><i class="fa fa-plus"></i></h3>
+                </div>
+            </div>
+            <div class="col-xs-12" ng-if="data.pages && data.pages.over">
+                <hr>
+                <div class="col-lg-12">
+                    <h4><a href="/over">Over SPC pagina</a></h4>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputTitleOv" class="col-sm-2 control-label">Titel</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitleOv" placeholder="Titel" ng-model="data.pages.over.title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescrOv" class="col-sm-2 control-label">Ondertitel</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDescrOv" placeholder="Ondertitel" ng-model="data.pages.over.subtitle">
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="col-xs-6 col-sm-2"><p><strong>Text blokken</strong></p></div>
+                <div class="col-xs-12" ng-repeat="block in data.pages.over.blocks">
+                    <br>
+                    <div class="col-xs-12"><p>Blok {{ $index+1 }}</p></div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputTitleBlock1" class="col-sm-2 control-label">Titel</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputTitleBlock1" placeholder="Titel" ng-model="block.title">
+                            </div>
+                        </div>
+                    </form>
+                    <text-angular ng-model="block.content"></text-angular>
+                    <br>
+                    <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFeatured('over', 'blocks', $index, $files)" ngf-accept="'image/*'" ngf-max-size="1048576">Foto toevoegen (max. 1MB)</div>
+                    <p><small>Huidige foto: {{ block.photo }}, ook hieronder klein weergegeven.</small><br>
+                        <img src="{{ block.photo }}" style="width:25%; float: left;"></p>
+                    <form class="form-horizontal col-sm-9" ng-show="block.photo">
+                        <div class="form-group">
+                            <label for="inputAlign1" class="col-sm-6 control-label">Foto uitlijnen (links/rechts)</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="inputAlign1" ng-model="block.photo_align">
+                                    <option>links</option>
+                                    <option>rechts</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWidth1" class="col-sm-6 control-label">Foto breedte (schaal 1-12, dus 1/12 breedte tot 12/12 breedte van het blok)</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="inputWidth1" ng-model="block.photo_width">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-xs btn-danger" ng-click="data.itemDel('over', 'blocks', $index)" title="verwijder"><i class="fa fa-close"></i> verwijder blok</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center" ng-click="data.itemAdd('over', 'blocks')">
+                    <h3><i class="fa fa-plus"></i></h3>
+                </div>
+            </div>
+            <div class="col-xs-12" ng-if="data.pages && data.pages.jupiler">
+                <hr>
+                <div class="col-lg-12">
+                    <h4><a href="/jupiler">Jupiler pagina</a></h4>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputTitleJL" class="col-sm-2 control-label">Titel</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitleJL" placeholder="Titel" ng-model="data.pages.jupiler.title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescrJL" class="col-sm-2 control-label">Ondertitel</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDescrJL" placeholder="Ondertitel" ng-model="data.pages.jupiler.subtitle">
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="col-xs-6 col-sm-2"><p><strong>Text blokken</strong></p></div>
+                <div class="col-xs-12" ng-repeat="block in data.pages.jupiler.blocks">
+                    <br>
+                    <div class="col-xs-12"><p>Blok {{ $index+1 }}</p></div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputTitleBlock2" class="col-sm-2 control-label">Titel</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputTitleBlock2" placeholder="Titel" ng-model="block.title">
+                            </div>
+                        </div>
+                    </form>
+                    <text-angular ng-model="block.content"></text-angular>
+                    <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFeatured('jupiler', 'blocks', $index, $files)" ngf-accept="'image/*'" ngf-max-size="1048576">Foto toevoegen (max. 1MB)</div>
+                    <p><small>Huidige foto: {{ block.photo }}, ook hieronder klein weergegeven.</small><br>
+                        <img src="{{ block.photo }}" style="width:25%; float: left;"></p>
+                    <form class="form-horizontal col-sm-9" ng-show="block.photo">
+                        <div class="form-group">
+                            <label for="inputAlign2" class="col-sm-6 control-label">Foto uitlijnen (links/rechts)</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="inputAlign2" ng-model="block.photo_align">
+                                    <option>links</option>
+                                    <option>rechts</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWidth2" class="col-sm-6 control-label">Foto breedte (schaal 1-12, dus 1/12 breedte tot 12/12 breedte van het blok)</label>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="inputWidth2" ng-model="block.photo_width">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-xs btn-danger" ng-click="data.itemDel('jupiler', 'blocks', $index)" title="verwijder"><i class="fa fa-close"></i> verwijder blok</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center" ng-click="data.itemAdd('jupiler', 'blocks')">
+                    <h3><i class="fa fa-plus"></i></h3>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

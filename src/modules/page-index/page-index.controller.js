@@ -1,7 +1,10 @@
-//angular.module('mainapp.pageIndex')
-//    .controller('mainapp.pageIndex.IndexController', ['Api', 'AuthenticationService', '$location', '$rootScope', '$timeout',
-//        function(Api, AuthenticationService, $location, $rootScope, $timeout)
-//    {
-//        var self = this;
-//
-//    }]);
+angular.module('mainapp.pageIndex')
+    .controller('mainapp.pageIndex.IndexController', ['Api',
+        function(Api)
+    {
+        var self = this;
+
+        Api.Pages.query(function(res) {
+            self.pages = res[0];
+        });
+    }]);

@@ -2,20 +2,20 @@
     <div class="container">
         <div class="col-md-2">
             <div class="col-md-2 navbar-sub">
-                <div class="item-title"><a href="/beheer">Beheer</a> / Gebruikers</div>
+                <div class="item-title"><a href="/admin">Admin</a> / Gebruikers</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
                     <li role="presentation">
-                        <a href="/beheer/users">
+                        <a href="/admin/users">
                             <i class="fa fa-user"></i> Gebruikers
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a href="/beheer/users/edit/add">
+                    <li role="presentation" ng-class="{ active: !data.user._id }">
+                        <a href="/admin/users/edit/add">
                             <i class="fa fa-user-plus"></i> Gebruiker toevoegen
                         </a>
                     </li>
                 </ul>
-                <div class="item-title"><a href="/logout">Uitloggen</a></div>
+                <div class="item-title"><a href="/admin/users">Terug naar Gebruikers</a></div>
                 <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
             </div>
         </div>
@@ -28,107 +28,144 @@
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
             <div class="col-xs-12 content-page-title">
-                <h3>Gebruikersbeheer</h3>
+                <h3>Gebruiker <span ng-show="data.user._id">wijzigen</span><span ng-show="!data.user._id">toevoegen</span>
+                    <button ng-show="data.user._id" class="btn btn-sm btn-danger pull-right" ng-click="data.openModalDel('sm')">Verwijder</button>
+                    <button ng-show="data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userEdit()">Opslaan</button>
+                    <button ng-show="!data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userAdd()">Toevoegen bevestigen</button>
+                </h3>
             </div>
             <div class="col-xs-12">
-
+                <p ng-show="data.user._id">Hier kunnen gebruiker gegevens worden gewijzigd. De gebruiker kan tot één club behoren, maar tot meerdere teams.
+                    Een gebruiker kan enkel één type recht hebben op de site. Als de gebruiker een speler is dan ook de SpelerID invullen zoals die bekend is in de data.</p>
+                <p ng-show="!data.user._id">Hier kunnen gerbuikers toegevoegd worden. U dient zelf de gebruiker een tijdelijk wachtwoord te geven. Daarna kan/MOET deze gebruiker zijn
+                wachtwoord wijzigen. Nadat u de gebruiker heeft toegevoegd, door op de button 'Toevoegen bevestigen' te klikken, wordt u doorgestuurd naar de pagina waar
+                u meer gegevens van deze gebruiker kunt invullen zoals de bijbehorende club. De gebruiker is standaard gemerkt als niet actief totdat hij/zij via de link, die hij/zij
+                per mail krijgt, zijn/haar account heeft geactiveerd.</p>
+                <div ng-if="errorAddUser" class="alert alert-danger" role="alert">{{ errorAddUser }}</div>
             </div>
 
             <div class="col-xs-12">
-                <div class="col-lg-12">
-                    <h4>Gebruiker wijzigen/toevoegen</h4>
-                </div>
-
-                <div class="col-lg-12">
-                    <br>
-                </div>
-
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Voornaam</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Voornaam">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName2" class="col-sm-2 control-label">Tussenvgsl</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName2">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName3" class="col-sm-2 control-label">Achternaam</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName3" placeholder="Achternaam">
-                        </div>
-                    </div>
+                <form class="form-horizontal" ng-if="!data.user._id">
                     <div class="form-group">
                         <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="data.user.email">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Wachtwoord</label>
+                        <label for="inputPassword" class="col-sm-2 control-label">Wachtwoord</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Wachtwoord">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord" ng-model="data.login.password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword2" class="col-sm-2 control-label">Bevestig wachtwoord</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword2" placeholder="Bevestig wachtwoord" ng-model="data.login.password2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Volledige naam</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="name" ng-model="data.user.first_name" placeholder="Voornaam">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="name" ng-model="data.user.middle_name" placeholder="vgsl">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="name" ng-model="data.user.last_name" placeholder="Achternaam">
+                        </div>
+                    </div>
+                </form>
+
+                <form class="form-horizontal" ng-if="data.user._id">
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail1" placeholder="Email" ng-model="data.user.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="name">Volledige naam</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="name" ng-model="data.user.first_name" placeholder="Voornaam">
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" id="name" ng-model="data.user.middle_name" placeholder="vgsl">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="name" ng-model="data.user.last_name" placeholder="Achternaam">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputClub" class="col-sm-2 control-label">Club</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="inputClub">
+                            <select class="form-control" id="inputClub" ng-model="data.user.club">
                                 <option>FC Eindhoven</option>
                                 <option>FC Oss</option>
-
-                                <option>Soccer Performance Centre (Beheer)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-repeat="team in data.user.teams">
+                        <label for="inputTeam" class="col-sm-2 control-label">Team</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="inputTeam" ng-model="team.team">
+                                <option>1e-elftal</option>
+                                <option>jeugd-elftal</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputTeam" class="col-sm-2 control-label">Team</label>
+                        <label for="inputTeam2" class="col-sm-2 control-label">Team</label>
                         <div class="col-sm-10">
-                            <select multiple class="form-control" id="inputTeam">
-                                <option>1e elftal</option>
-                                <option>Jeugd elftal</option>
-                                <option>enz.</option>
+                            <select class="form-control" id="inputTeam2" ng-model="data.user.teams[data.user.teams.length].team">
+                                <option>1e-elftal</option>
+                                <option>jeugd-elftal</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputRole" class="col-sm-2 control-label">Rechten (toegang)</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="inputRole">
-                                <option>Technische staff</option>
-                                <option>Externe staff</option>
-                                <option>Speler</option>
-                                <option>Fan</option>
-                                <option>Admin</option>
+                            <select class="form-control" id="inputRole" ng-model="data.user.role">
+                                <option>club-beheer</option>
+                                <option>technische-staff</option>
+                                <option>externe-staff</option>
+                                <option>speler</option>
+                                <option>fan</option>
+                                <option>admin</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-if="data.user.role == 'speler'">
                         <label for="inputpersonID" class="col-sm-2 control-label">Speler ID (data)</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputpersonID" placeholder="Speler ID">
+                            <input type="text" class="form-control" id="inputpersonID" placeholder="Speler ID" ng-model="data.user.speler_id">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-2">
+                        <label for="inputSuper" class="col-sm-2 control-label">Superadmin</label>
+                        <div class="col-sm-10">
                             <div class="checkbox">
-                                <label><input type="checkbox"> superadmin</label>
+                                <label><input type="checkbox" id="inputSuper" ng-model="data.user.is_superuser"> (LET OP!)</label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Opslaan</button>
-                        </div>
-                    </div>
                 </form>
-
             </div>
 
+            <script type="text/ng-template" id="modalDel.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Waarschuwing!</h3>
+                </div>
+                <div class="modal-body">
+                    U staat op het punt deze user permanent te verwijderen. Weet u zeker dat u dit item wilt verwijderen?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" ng-click="ok()">Verwijder</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Annuleer</button>
+                </div>
+            </script>
         </div>
 
     </div>

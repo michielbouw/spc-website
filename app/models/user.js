@@ -8,10 +8,22 @@ module.exports = mongoose.model('User', {
 
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true},
-    first_name: { type: String, default: null },
-    middle_name: { type: String, default: null },
-    last_name: { type: String, default: null },
+    first_name: { type: String },
+    middle_name: { type: String },
+    last_name: { type: String },
     photo: { type: String },
+
+    fan_club: { type: String },
+    fan_club_slug: { type: String, lowercase: true, trim: true},
+
+    club: { type: String },
+    club_slug:  {type : String, lowercase: true, trim: true},
+    teams: [{
+        team: { type: String},
+        team_slug:  {type : String, lowercase: true, trim: true}
+    }],
+    speler_id: { type: Number },
+
     role: { type: String, default: "fan", lowercase: true },
     is_superadmin: { type: Boolean, default: false },
     token: { type: String },

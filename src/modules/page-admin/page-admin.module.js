@@ -30,8 +30,22 @@ angular.module('mainapp.pageAdmin', ['textAngular', 'ngFileUpload'])
                     permission: 'admin'
                 }
             })
-            .when('/admin/users/edit', {
+            .when('/admin/users/edit/:_id', {
                 templateUrl: 'page-admin/views/admin-users-edit.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'admin'
+                }
+            })
+            .when('/admin/fans', {
+                templateUrl: 'page-admin/views/admin-fans.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'admin'
+                }
+            })
+            .when('/admin/pages', {
+                templateUrl: 'page-admin/views/admin-pages.html',
                 access: {
                     requiredLogin: true,
                     permission: 'admin'

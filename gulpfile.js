@@ -122,10 +122,13 @@ gulp.task('build:resources', function()
     var uploads2 = gulp.src('src/images/blank-avatar.png')
         .pipe(gulp.dest('media/players/'));
 
+    var uploads3 = gulp.src('src/images/blank-avatar.png')
+        .pipe(gulp.dest('media/pages/'));
+
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, fonts, text, uploads, uploads2, images);
+    return es.concat(views, errors, fonts, text, uploads, uploads2, uploads3, images);
 });
 
 gulp.task('build:styles', function()
