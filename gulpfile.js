@@ -125,10 +125,13 @@ gulp.task('build:resources', function()
     var uploads3 = gulp.src('src/images/blank-avatar.png')
         .pipe(gulp.dest('media/pages/'));
 
+    var uploads4 = gulp.src('src/images/blank-avatar.png')
+        .pipe(gulp.dest('media/extra/'));
+
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, fonts, text, uploads, uploads2, uploads3, images);
+    return es.concat(views, errors, fonts, text, uploads, uploads2, uploads3, uploads4, images);
 });
 
 gulp.task('build:styles', function()

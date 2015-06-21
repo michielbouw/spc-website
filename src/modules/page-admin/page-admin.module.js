@@ -50,5 +50,12 @@ angular.module('mainapp.pageAdmin', ['textAngular', 'ngFileUpload'])
                     requiredLogin: true,
                     permission: 'admin'
                 }
+            })
+            .when('/admin/uploads', {
+                templateUrl: 'page-admin/views/admin-uploads.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'admin'
+                }
             });
     });

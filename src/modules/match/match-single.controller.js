@@ -23104,6 +23104,13 @@ angular.module('mainapp.match')
             $scope.match.locatie_overtredingen_filter = angular.copy($scope.match.locatie_overtredingen);
         };
 
+        //temp
+        $scope.match_index = 16435;
+        $scope.match = $scope.matches[0];
+        $scope.match.gemiddelde_posities = angular.copy($scope.match.gemiddelde_posities_helft1);
+        $scope.match.locatie_doelpogingen_filter = angular.copy($scope.match.locatie_doelpogingen);
+        $scope.match.locatie_overtredingen_filter = angular.copy($scope.match.locatie_overtredingen);
+
         $scope.splitTime = function(string) {
             if ( !isNaN( Number(string.split("'")[0]) ) ) {
                 return Number(string.split("'")[0]);

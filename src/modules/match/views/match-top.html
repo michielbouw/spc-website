@@ -18,10 +18,10 @@
                 <h4>Wedstrijd rapport</h4>
             </div>
             <div class="col-xs-12 text-center"><h4>Seizoen kiezen</h4></div>
-            <div id="season-select" class="col-lg-12">
+            <div id="season-select" class="col-xs-12">
                 <br>
-                <select ng-model="season_index" class="form-control input-sm"
-                        ng-change="seasonInitFunc(season_index)">
+                <select ng-model="data.season_index" class="form-control input-sm"
+                        ng-change="data.seasonInitFunc()">
                     <option>2014-2015 Play-offs</option>
                     <option>2014-2015</option>
                     <option>2013-2014 Play-offs</option>
@@ -29,14 +29,18 @@
                 </select>
                 <br>
             </div>
-            <div class="col-xs-12 text-center" ng-show="season_index && !match_index"><h4>Wedstrijd kiezen</h4></div>
-            <div id="match-select" class="col-lg-12" ng-show="season_index">
+            <div class="col-xs-12 text-center" ng-show="data.season_index"><h4>Wedstrijd kiezen</h4></div>
+            <div id="match-select" class="col-xs-12" ng-show="data.season_index">
                 <br>
-                <select ng-model="match_index" class="form-control input-sm"
-                        ng-change="matchInitFunc(match_index)"
-                        ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in season_matches">
+                <select ng-model="data.match_index" class="form-control input-sm"
+                        ng-change="data.matchInitFunc()"
+                        ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in data.season_matches">
                 </select>
                 <br>
+            </div>
+            <div class="col-xs-12 text-center" ng-show="data.match_index">
+                <button class="btn btn-xs btn-info"><a ng-href="/wedstrijd/matchID">Ga naar deze wedstrijd</a></button>
+                <br><br>
             </div>
         </div>
     </div>
