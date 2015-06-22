@@ -5,6 +5,9 @@
   margin-bottom: 0;
   @include border-radius(1px);
 
+  #match-info {
+    padding-top: 15px;
+  }
   #match-info-short {
     display: none;
 
@@ -368,6 +371,13 @@
     }
   }
 
+  .ball_contact_field:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: "\21ea";
+  }
+
   .passes_zone_field {
     p {
       cursor: pointer;
@@ -387,6 +397,12 @@
         }
       }
     }
+  }
+  .passes_zone_field:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: "\21ea";
   }
 
   .overtredingen_field {
@@ -483,6 +499,19 @@
           }
         }
 
+        .heatmap_balactie_field:before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          content: "\21ea";
+        }
+        .heatmap_passes_field:before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          content: "\21ea";
+        }
+
         .location_duels_field {
           margin-top: 5px;
           margin-bottom: 10px;
@@ -532,6 +561,37 @@
           .position:hover > .position_info {
             display: block;
           }
+          .line {
+            position: absolute;
+            transform-origin: 0 0;
+            height: 1px; /* Line width of 1 */
+            background: #000; /* Black fill */
+          }
+          .line_out {
+            position: absolute;
+            transform-origin: 0 0;
+            height: 1px; /* Line width of 1 */
+            background: #000; /* Black fill */
+          }
+        }
+        .location_duels_field#location_duels_half_size:before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          content: "\21ea";
+        }
+        .location_duels_field#location_duels_size:before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          content: "\21ea";
+        }
+        .location_duels_field_180#location_duels_size:before {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          content: "\21ea";
+          transform: rotate(180deg);
         }
       }
     }

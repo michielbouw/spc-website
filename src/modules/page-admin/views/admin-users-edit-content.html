@@ -1,6 +1,6 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2">
+        <div class="col-md-2 hidden-xs hidden-sm">
             <div class="col-md-2 navbar-sub">
                 <div class="item-title"><a href="/admin">Admin</a> / Gebruikers</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
@@ -33,6 +33,7 @@
                     <button ng-show="data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userEdit()">Opslaan</button>
                     <button ng-show="!data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userAdd()">Toevoegen bevestigen</button>
                 </h3>
+                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / <a href="/admin/users">Gebruikers</a> / Gebruiker</h4>
             </div>
             <div class="col-xs-12">
                 <p ng-show="data.user._id">Hier kunnen gebruiker gegevens worden gewijzigd. De gebruiker kan tot één club behoren, maar tot meerdere teams.

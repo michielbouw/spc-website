@@ -44,6 +44,20 @@ angular.module('mainapp.pageAdmin', ['textAngular', 'ngFileUpload'])
                     permission: 'admin'
                 }
             })
+            .when('/admin/matches', {
+                templateUrl: 'page-admin/views/admin-matches.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'admin'
+                }
+            })
+            .when('/admin/matches/edit/:_id', {
+                templateUrl: 'page-admin/views/admin-matches-edit.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'admin'
+                }
+            })
             .when('/admin/pages', {
                 templateUrl: 'page-admin/views/admin-pages.html',
                 access: {
@@ -51,8 +65,8 @@ angular.module('mainapp.pageAdmin', ['textAngular', 'ngFileUpload'])
                     permission: 'admin'
                 }
             })
-            .when('/admin/uploads', {
-                templateUrl: 'page-admin/views/admin-uploads.html',
+            .when('/admin/import', {
+                templateUrl: 'page-admin/views/admin-import.html',
                 access: {
                     requiredLogin: true,
                     permission: 'admin'

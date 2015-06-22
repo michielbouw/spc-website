@@ -22698,10 +22698,10 @@ angular.module('mainapp.match')
                     temp.locatie_uittrappen = [];
                     angular.forEach(value.locaties_uittrappen, function (value, key1) {
                         var temp1 = {};
-                        temp1.zend_lengte = angular.copy(value.zend_lengte);
-                        temp1.zend_breedte = angular.copy(value.zend_breedte);
-                        temp1.ontvang_lengte = angular.copy(value.ontvang_lengte);
-                        temp1.ontvang_breedte = angular.copy(value.ontvang_breedte);
+                        temp1.zend_length = angular.copy(value.zend_lengte);
+                        temp1.zend_width = angular.copy(value.zend_breedte);
+                        temp1.ontvang_length = angular.copy(value.ontvang_lengte[0]);
+                        temp1.ontvang_width = angular.copy(value.ontvang_breedte[0]);
                         angular.forEach(items.spelersthuisteam, function (value1, key1) {
                             if (value1.personID == value.teamgenoot) {
                                 temp1.teamgenoot = angular.copy(value1.spelerNaam);
@@ -22894,10 +22894,10 @@ angular.module('mainapp.match')
                     temp.locatie_uittrappen = [];
                     angular.forEach(value.locaties_uittrappen, function (value, key1) {
                         var temp1 = {};
-                        temp1.zend_lengte = angular.copy(value.zend_lengte);
-                        temp1.zend_breedte = angular.copy(value.zend_breedte);
-                        temp1.ontvang_lengte = angular.copy(value.ontvang_lengte);
-                        temp1.ontvang_breedte = angular.copy(value.ontvang_breedte);
+                        temp1.zend_length = angular.copy(value.zend_lengte);
+                        temp1.zend_width = angular.copy(value.zend_breedte);
+                        temp1.ontvang_length = angular.copy(value.ontvang_lengte[0]);
+                        temp1.ontvang_width = angular.copy(value.ontvang_breedte[0]);
                         angular.forEach(items.spelersthuisteam, function (value1, key1) {
                             if (value1.personID == value.teamgenoot) {
                                 temp1.teamgenoot = angular.copy(value1.spelerNaam);
@@ -23086,6 +23086,13 @@ angular.module('mainapp.match')
 
       //--------------------------------------------------------------------------------------------------------------
 
+        $scope.createLineTransform = function (x1,y1,x2,y2) {
+            var angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+            return 'rotate(' + angle + 'deg)';
+        };
+        $scope.createLineLength = function (x1,y1,x2,y2) {
+            return Math.sqrt(Math.abs(x1 - x2) * Math.abs(x1 - x2) + Math.abs(y1 - y2) * Math.abs(y1 - y2));
+        };
 
         $scope.orderSpelers = 'personID';
         $scope.orderSpelersNaam = 'spelerNaam';

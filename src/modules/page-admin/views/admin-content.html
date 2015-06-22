@@ -1,6 +1,6 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2">
+        <div class="col-md-2 hidden-xs hidden-sm">
             <div class="col-md-2 navbar-sub">
                 <div class="item-title">Admin</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked" role="tablist">
@@ -15,11 +15,12 @@
                         </a>
                     </li>-->
                 </ul>
-                <div class="item-title"><a href="/admin/clubs">Clubsbeheer</a></div>
-                <div class="item-title"><a href="/admin/users">Gebruikersbeheer</a></div>
-                <div class="item-title"><a href="/admin/fans">Fansbeheer</a></div>
-                <div class="item-title"><a href="/admin/uploads">Uploadsbeheer</a></div>
-                <div class="item-title"><a href="/admin/pages">Paginabeheer</a></div>
+                <div class="item-title"><a href="/admin/clubs">Clubs</a></div>
+                <div class="item-title"><a href="/admin/users">Gebruikers</a></div>
+                <div class="item-title"><a href="/admin/fans">Fans</a></div>
+                <div class="item-title"><a href="/admin/matches">Wedstrijden</a></div>
+                <div class="item-title"><a href="/admin/import">Importeer data</a></div>
+                <div class="item-title"><a href="/admin/pages">Pagina's</a></div>
                 <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
             </div>
         </div>
@@ -32,7 +33,19 @@
         <div class="col-md-10 col-md-offset-2 content content-page tab-content">
 
             <div class="col-lg-12 content-page-title">
-                <h3>Admin <!--<button class="btn btn-primary btn-sm pull-right">Gegevens wijzigen</button>--></h3>
+                <h3>Admin</h3>
+            </div>
+            <div class="col-xs-12 hidden-md hidden-lg">
+                <div class="btn-group btn-group-xs" role="tablist">
+                    <button type="button" class="btn btn-primary" href="#status" aria-controls="status" role="tab" data-toggle="tab" scroll-to="top">Status</button>
+                    <!--<button type="button" class="btn btn-primary" href="#errors" aria-controls="errors" role="tab" data-toggle="tab" scroll-to="top">Error log</button>-->
+                    <button type="button" class="btn btn-primary" href="/admin/clubs">Clubs</button>
+                    <button type="button" class="btn btn-primary" href="/admin/users">Gebruikers</button>
+                    <button type="button" class="btn btn-primary" href="/admin/fans">Fans</button>
+                    <button type="button" class="btn btn-primary" href="/admin/matches">Wedstrijden</button>
+                    <button type="button" class="btn btn-primary" href="/admin/import">Importeer data</button>
+                    <button type="button" class="btn btn-primary" href="/admin/pages">Pagina's</button>
+                </div>
             </div>
             <div class="col-lg-12">
                 <div class="col-md-2 text-center">

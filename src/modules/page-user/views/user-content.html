@@ -1,6 +1,6 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2">
+        <div class="col-md-2 hidden-xs hidden-sm">
             <div class="col-md-2 navbar-sub">
                 <div class="item-title">Gebruiker</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked" role="tablist">
@@ -9,18 +9,18 @@
                             <i class="fa fa-user"></i> Gebruiker
                         </a>
                     </li>
-                    <li role="presentation">
+                    <!--<li role="presentation">
                         <a href="#speler" aria-controls="speler" role="tab" data-toggle="tab" scroll-to="top">
                             <i class="fa fa-soccer-ball-o"></i> Speler gegevens
                         </a>
-                    </li>
+                    </li>-->
                     <!--<li role="presentation">
                         <a href="#medisch" aria-controls="medisch" role="tab" data-toggle="tab" scroll-to="top">
                             <i class="fa fa-heartbeat"></i> Medisch
                         </a>
                     </li>-->
                 </ul>
-                <div class="item-title"><a href="/spelers/speler">Persoonlijke analyse</a></div>
+                <div class="item-title"><a href="/spelers/spelerID">Persoonlijke analyse</a></div>
                 <div ng-if="currentUser.role == 'admin' || currentUser.role == 'club-beheer'" class="item-title"><a href="/beheer">Clubbeheer</a></div>
                 <div class="item-title"><a href="/logout">Uitloggen</a></div>
             </div>
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="speler">
+            <!--<div class="col-lg-12 tab-pane fade" role="tabpanel" id="speler">
                 <div class="col-lg-12">
                     <h4><i class="fa fa-soccer-ball-o"></i> Speler gegevens</h4>
                 </div>
@@ -132,7 +132,7 @@
                 <div class="col-md-8">
                     16
                 </div>
-            </div>
+            </div>-->
 
             <!--<div class="col-lg-12 tab-pane fade" role="tabpanel" id="medisch">
                 <div class="col-lg-12">

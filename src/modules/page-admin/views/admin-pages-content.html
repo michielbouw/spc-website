@@ -1,6 +1,6 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2">
+        <div class="col-md-2 hidden-xs hidden-sm">
             <div class="col-md-2 navbar-sub">
                 <div class="item-title"><a href="/admin">Admin</a> / Pagina's</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
@@ -27,6 +27,7 @@
                 <button ng-if="data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesSave()">Opslaan</button>
                 <button ng-if="!data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesCreate()">Pagina's aanmaken</button>
                 </h3>
+                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Pagina's</h4>
             </div>
             <div class="col-xs-12">
                 <p>Hier kan de inhoud van de openbare pagina's worden aangepast. Dit zijn voor nu de Home pagina, Over SPC pagina en de Jupiler samenwerking pagina.</p>

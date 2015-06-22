@@ -9,6 +9,13 @@ angular.module('mainapp.pageAdmin')
             self.pages = res[0];
         });
 
+        var editor_name;
+        if ($rootScope.currentUser.middle_name) {
+            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
+        } else {
+            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
+        }
+
         $rootScope.errorAddFeatured = '';
         self.uploadFeatured = function (page, item, i, files) {
             $rootScope.errorAddFeatured = '';
@@ -43,7 +50,7 @@ angular.module('mainapp.pageAdmin')
                 home: _t.home,
                 over: _t.over,
                 jupiler: _t.jupiler,
-                editor: $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name,
+                editor: editor_name,
                 date_edited: self.datetime
             }, function() {
                 $location.path('/admin');
@@ -57,7 +64,7 @@ angular.module('mainapp.pageAdmin')
                 home: {},
                 over: {},
                 jupiler: {},
-                editor: $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name,
+                editor: editor_name,
                 date_edited: self.datetime
             }, function() {
                 Api.Pages.query(function(res) {

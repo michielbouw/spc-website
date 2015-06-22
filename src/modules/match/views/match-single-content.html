@@ -1406,20 +1406,20 @@
         </div>
         <div class="col-xs-12">
             <div class="col-xs-12"><strong>{{ match.match_info.thuis }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
-            <div class="col-xs-6">
+            <div class="col-xs-6 ball_contact_field">
                 1e helft<br>
                 <img src="data/{{ match.matchID }}/team_{{ match.thuisTeamID }}_helft1_heatmap.png" style="width: 100%;" />
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-6 ball_contact_field">
                 2e helft<br>
                 <img src="data/{{ match.matchID }}/team_{{ match.thuisTeamID }}_helft2_heatmap.png" style="width: 100%;" />
             </div>
             <div class="col-xs-12"><strong>{{ match.match_info.uit }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
-            <div class="col-xs-6">
+            <div class="col-xs-6 ball_contact_field">
                 1e helft<br>
                 <img src="data/{{ match.matchID }}/team_{{ match.uitTeamID }}_helft1_heatmap.png" style="width: 100%;" />
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-6 ball_contact_field">
                 2e helft<br>
                 <img src="data/{{ match.matchID }}/team_{{ match.uitTeamID }}_helft2_heatmap.png" style="width: 100%;" />
             </div>
@@ -1453,7 +1453,7 @@
                         <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld_groen.svg" style="width: 100%;" />
+                <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Middellange passes<br>
@@ -1477,7 +1477,7 @@
                         <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld_groen.svg" style="width: 100%;" />
+                <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Lange passes<br>
@@ -1501,10 +1501,10 @@
                         <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld_groen.svg" style="width: 100%;" />
+                <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
 
-            <div class="col-xs-12"><br><strong>{{ match.match_info.uit }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
+            <div class="col-xs-12"><br><strong>{{ match.match_info.uit }}</strong> <small>speelrichting van onder naar boven</small></div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Korte passes<br>
                 <div ng-repeat="row in match.passes_per_zone.uit.kort" class="pass_zone">
@@ -1527,7 +1527,7 @@
                         <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld_groen.svg" style="width: 100%;" />
+                <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Middellange passes<br>
@@ -1551,7 +1551,7 @@
                         <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld_groen.svg" style="width: 100%;" />
+                <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Lange passes<br>
@@ -1575,7 +1575,7 @@
                         <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld_groen.svg" style="width: 100%;" />
+                <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
         </div>
 
@@ -2319,10 +2319,10 @@
             </div>
             <div class="col-xs-12 col-md-3 col-lg-3 positions_field">
                 <p ng-click="select_overtredingen_thuis();" style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ match.match_info.thuis }}
+                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ match.match_info.thuis }} <i class="fa fa-long-arrow-up"></i>
                 </p>
                 <p ng-click="select_overtredingen_uit();" style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ match.match_info.uit }}
+                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ match.match_info.uit }} <i class="fa fa-long-arrow-down"></i>
                 </p>
             </div>
             <br>
@@ -2417,11 +2417,11 @@
                     </div>
 
                     <div class="col-xs-12 item_title">Heatmap balacties <small>per helft, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>1e helft</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft1_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>2e helft</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft2_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
@@ -2468,11 +2468,11 @@
                     </div>
 
                     <div class="col-xs-12 item_title">Heatmap passes <small>hele wedstrijd, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass naar</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_naar.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass ontvangen van</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_ontvangen_van.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
@@ -2679,11 +2679,12 @@
                         <br>
                     </div>
 
-                    <div class="col-xs-12 item_title" ng-if="speler.type == 'keeper'">Locatie reddingen <small>speelrichting van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
+                    <div class="col-xs-12 item_title" ng-if="speler.type == 'keeper'">Locatie reddingen <small>speelrichting van boven naar onder</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12" ng-if="speler.type == 'keeper' && speler.locatie_reddingen.length <= 0">Geen reddingen<br>&nbsp;</div>
                     <div class="col-xs-12" ng-if="speler.type == 'keeper' && speler.locatie_reddingen.length > 0">
-                        <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_size">
+                        <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field location_duels_field_180" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_reddingen">
+                                <div class="line" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
                                 <span ng-if="position.actie == ' ' || position.actie == 'NA'" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
@@ -2737,7 +2738,8 @@
                     <div class="col-xs-12" ng-if="speler.type == 'keeper' && speler.locatie_uittrappen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_uittrappen">
-                                <span ng-if="position.teamgenoot && position.teamgenoot !== ' '" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
+                                <div class="line_out" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
+                                <span ng-if="position.teamgenoot && position.teamgenoot !== ' '" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Geslaagd<br>
@@ -2745,7 +2747,7 @@
                                         </h4>
                                     </div>
                                 </span>
-                                <span ng-if="!position.teamgenoot || position.teamgenoot == ' '" class="position lost" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
+                                <span ng-if="!position.teamgenoot || position.teamgenoot == ' '" class="position lost" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Niet geslaagd
@@ -2851,11 +2853,11 @@
                     </div>
 
                     <div class="col-xs-12 item_title">Heatmap balacties <small>per helft, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>1e helft</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft1_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>2e helft</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft2_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
@@ -2902,11 +2904,11 @@
                     </div>
 
                     <div class="col-xs-12 item_title">Heatmap passes <small>hele wedstrijd, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass naar</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_naar.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
-                    <div class="col-xs-12 col-sm-6 text-center">
+                    <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass ontvangen van</i><br>
                         <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_ontvangen_van.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
@@ -3116,8 +3118,9 @@
                     <div class="col-xs-12 item_title" ng-if="speler.type == 'keeper'">Locatie reddingen <small>speelrichting van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12" ng-if="speler.type == 'keeper' && speler.locatie_reddingen.length <= 0">Geen reddingen<br>&nbsp;</div>
                     <div class="col-xs-12" ng-if="speler.type == 'keeper' && speler.locatie_reddingen.length > 0">
-                        <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_size">
+                        <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field location_duels_field_180" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_reddingen">
+                                <div class="line" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
                                 <span ng-if="position.actie == ' ' || position.actie == 'NA'" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
@@ -3171,7 +3174,8 @@
                     <div class="col-xs-12" ng-if="speler.type == 'keeper' && speler.locatie_uittrappen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_uittrappen">
-                                <span ng-if="position.teamgenoot && position.teamgenoot !== ' '" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
+                                <div class="line_out" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
+                                <span ng-if="position.teamgenoot && position.teamgenoot !== ' '" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Geslaagd<br>
@@ -3179,7 +3183,7 @@
                                         </h4>
                                     </div>
                                 </span>
-                                <span ng-if="!position.teamgenoot || position.teamgenoot == ' '" class="position lost" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_lengte }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
+                                <span ng-if="!position.teamgenoot || position.teamgenoot == ' '" class="position lost" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Niet geslaagd

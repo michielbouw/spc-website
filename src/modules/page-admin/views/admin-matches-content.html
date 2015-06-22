@@ -2,16 +2,16 @@
     <div class="container">
         <div class="col-md-2 hidden-xs hidden-sm">
             <div class="col-md-2 navbar-sub">
-                <div class="item-title"><a href="/admin">Admin</a> / Gebruikers</div>
+                <div class="item-title"><a href="/admin">Admin</a> / Wedstrijden</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
                     <li role="presentation" class="active">
-                        <a href="/admin/users">
-                            <i class="fa fa-user"></i> Gebruikers
+                        <a href="/admin/matches">
+                            <i class="fa fa-user"></i> Wedstrijden
                         </a>
                     </li>
                     <li role="presentation">
-                        <a href="/admin/users/edit/add">
-                            <i class="fa fa-user-plus"></i> Gebruiker toevoegen
+                        <a href="/admin/matches/edit/add">
+                            <i class="fa fa-user-plus"></i> Wedstrijd toevoegen
                         </a>
                     </li>
                 </ul>
@@ -28,45 +28,50 @@
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
             <div class="col-xs-12 content-page-title">
-                <h3>Gebruikersbeheer</h3>
-                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Gebruikers</h4>
+                <h3>Wedstrijden</h3>
+                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Wedstrijden</h4>
             </div>
             <div class="col-xs-12 hidden-md hidden-lg">
                 <div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-primary" href="/admin/users/edit/add">Gebruiker toevoegen</button>
+                    <button type="button" class="btn btn-primary" href="/admin/matches/edit/add">Wedstrijd toevoegen</button>
                 </div>
+            </div>
+            <div class="col-xs-12">
+                <p>Dit is een lijst met alle wedstrijden waarvan data beschikbaar is. Bij het toevoegen van de data van een wedstrijd wordt hier automatisch een nieuwe wedstrijd
+                aangemaakt. Als er geen algemene data van een wedstrijd is en er wel extra data bestaat dan kan hier een nieuwe wedstrijd worden
+                toegevoegd, deze wedstrijd heeft dan geen matchID.</p>
             </div>
 
             <div class="col-xs-12">
                 <div class="col-xs-12">
-                    <h4>Gebruikerslijst</h4>
+                    <h4>Lijst</h4>
                 </div>
                 <div class="col-xs-12">
                     <div class="col-xs-6 col-sm-3">
-                        <strong>Naam</strong><input class="form-control" ng-model="search.$" placeholder="zoeken">
+                        <strong>Seizoen</strong><input class="form-control" ng-model="search.seizoen" placeholder="zoeken">
                     </div>
                     <div class="col-xs-6 col-sm-3">
-                        <strong>Club</strong><input class="form-control" ng-model="search.club" placeholder="zoeken">
+                        <strong>Wedstrijd</strong><input class="form-control" ng-model="search.$" placeholder="zoeken">
                     </div>
                     <div class="hidden-xs col-sm-3">
-                        <strong>Rechten</strong><input class="form-control" ng-model="search.role" placeholder="zoeken">
+                        <strong>Datum</strong><input class="form-control" ng-model="search.match_info.datum" placeholder="zoeken">
                     </div>
                     <div class="hidden-xs col-sm-3">
                         <br>
                     </div>
                 </div>
-                <div class="col-xs-12" ng-repeat="user in data.users | filter:search:strict">
+                <div class="col-xs-12" ng-repeat="match in data.matches | filter:search:strict">
                     <div class="col-xs-6 col-sm-3">
-                        <a ng-href="/admin/users/edit/{{ user._id }}">{{ user.first_name }} {{ user.middle_name }} {{ user.last_name }}</a>
+                        {{ match.seizoen }}
                     </div>
                     <div class="col-xs-6 col-sm-3">
-                        {{ user.club }}
+                        <a ng-href="/admin/matches/edit/{{ match._id }}">{{ match.match_info.wedstrijd }}</a>
                     </div>
                     <div class="hidden-xs col-sm-3">
-                        {{ user.role }}
+                        {{ match.match_info.datum }}
                     </div>
                     <div class="hidden-xs col-md-3">
-                        <a type="button" class="btn btn-primary btn-xs" ng-href="/admin/users/edit/{{ user._id }}">wijzig</a> <button class="btn btn-danger btn-xs" ng-click="data.openModalDel('sm', $index)">verwijder</button>
+                        <a type="button" class="btn btn-primary btn-xs" ng-href="/admin/matches/edit/{{ match._id }}">wijzig</a> <button class="btn btn-danger btn-xs" ng-click="data.openModalDel('sm', $index)">verwijder</button>
                     </div>
                 </div>
             </div>
@@ -76,7 +81,7 @@
                     <h3 class="modal-title">Waarschuwing!</h3>
                 </div>
                 <div class="modal-body">
-                    U staat op het punt deze user permanent te verwijderen. Weet u zeker dat u dit item wilt verwijderen?
+                    U staat op het punt deze gegevens van deze wedstrijd permanent te verwijderen. Weet u zeker dat u dit item wilt verwijderen?
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-info" ng-click="ok()">Verwijder</button>

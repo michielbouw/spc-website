@@ -5,6 +5,7 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
 //var NewsController = require('../controllers/NewsController');
+var MatchesController = require('../controllers/MatchesController');
 var PagesController = require('../controllers/PagesController');
 var UploadController = require('../controllers/UploadController');
 var UserController = require('../controllers/UserController');
@@ -20,6 +21,14 @@ router.use(function(req, res, next) {
 //router.post('/news',                UserController.ensureAuthorized, NewsController.post);
 //router.put('/news/:_slug',          UserController.ensureAuthorized, NewsController.put);
 //router.delete('/news/:_slug',       UserController.ensureAuthorized, NewsController.delete);
+
+router.get('/matches',              MatchesController.query);
+router.get('/matches/:_id',         MatchesController.get);
+router.get('/matches/:_id',         MatchesController.toeschouwers_get);
+router.put('/matches/:_id',         MatchesController.toeschouwers_put);
+router.post('/matches',             UserController.ensureAuthorized, MatchesController.post);
+router.put('/matches/:_id',         UserController.ensureAuthorized, MatchesController.put);
+router.delete('/matches/:_id',      UserController.ensureAuthorized, MatchesController.delete);
 
 router.get('/pages',                PagesController.query);
 router.get('/pages/:_id',           PagesController.get);

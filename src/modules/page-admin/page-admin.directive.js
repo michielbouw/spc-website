@@ -130,6 +130,48 @@ angular.module('mainapp.pageAdmin')
             }
         };
     })
+    .directive('adminmatchescontent', function ($timeout) {
+        return {
+            templateUrl: 'page-admin/views/admin-matches-content.html',
+            link: function(scope, element, attrs) {
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.navbar-sub').css({
+                            'height': window.innerHeight - 75 - 100
+                        });
+                        $('.navbar-sub').each(function () {
+                            $(this).css('width', $(this).parents('.container').find('.col-md-2').width());
+                        });
+                        $('body').css('background-color', '#E7EAF1');
+                        $('.content.content-page').css({
+                            'min-height': window.innerHeight - 95
+                        });
+                    });
+                }, 100);
+            }
+        };
+    })
+    .directive('adminmatcheseditcontent', function ($timeout) {
+        return {
+            templateUrl: 'page-admin/views/admin-matches-edit-content.html',
+            link: function(scope, element, attrs) {
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.navbar-sub').css({
+                            'height': window.innerHeight - 75 - 100
+                        });
+                        $('.navbar-sub').each(function () {
+                            $(this).css('width', $(this).parents('.container').find('.col-md-2').width());
+                        });
+                        $('body').css('background-color', '#E7EAF1');
+                        $('.content.content-page').css({
+                            'min-height': window.innerHeight - 95
+                        });
+                    });
+                }, 100);
+            }
+        };
+    })
     .directive('adminpagescontent', function ($timeout) {
         return {
             templateUrl: 'page-admin/views/admin-pages-content.html',
@@ -151,9 +193,9 @@ angular.module('mainapp.pageAdmin')
             }
         };
     })
-    .directive('adminuploadscontent', function ($timeout) {
+    .directive('adminimportcontent', function ($timeout) {
         return {
-            templateUrl: 'page-admin/views/admin-uploads-content.html',
+            templateUrl: 'page-admin/views/admin-import-content.html',
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {

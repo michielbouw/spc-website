@@ -1,17 +1,23 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminClubsEditController', ['Api', '$scope', '$modal', '$routeParams', '$filter', '$timeout', '$rootScope',
-        function(Api, $scope, $modal, $routeParams, $filter, $timeout, $rootScope) {
+    .controller('mainapp.pageAdmin.AdminMatchesController', ['Api', '$scope', '$modal',
+        function(Api, $scope, $modal) {
 
         var self = this;
         self.datetime = new Date();
 
-        var editor_name;
-        if ($rootScope.currentUser.middle_name) {
-            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
-        } else {
-            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
-        }
+        Api.Matches.query(function(res) {
+            self.matches = res;
+        });
 
+        self.matchDel = function (i) {
+            var _t = self.matches[i];
+            Api.Match.delete({
+                _id: _t._id
+            }, function() {
+                self.matches.splice(i, 1);
+            }, function() {
+            });
+        };
 
         self.openModalDel = function (size, i) {
             var modalInstance = $modal.open({
@@ -25,7 +31,7 @@ angular.module('mainapp.pageAdmin')
                 }
             });
             modalInstance.result.then(function (i) {
-                self.itemDel(i);
+                self.matchDel(i);
             }, function () {
                 //
             });

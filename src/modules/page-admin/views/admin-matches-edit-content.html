@@ -1,0 +1,252 @@
+<div class="page-top">
+    <div class="container">
+        <div class="col-md-2 hidden-xs hidden-sm">
+            <div class="col-md-2 navbar-sub">
+                <div class="item-title"><a href="/admin">Admin</a> / Wedstrijden</div>
+                <ul id="nav-sub" class="nav nav-pills nav-stacked">
+                    <li role="presentation">
+                        <a href="/admin/matches">
+                            <i class="fa fa-user"></i> Wedstrijden
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{ active: !data.match._id }">
+                        <a href="/admin/matches/edit/add">
+                            <i class="fa fa-user-plus"></i> Wedstrijd toevoegen
+                        </a>
+                    </li>
+                </ul>
+                <div class="item-title"><a href="/admin/matches">Terug naar Wedstrijden</a></div>
+                <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="container">
+
+        <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
+
+            <div class="col-xs-12 content-page-title">
+                <h3>Wedstrijd <span ng-show="data.match._id">wijzigen</span><span ng-show="!data.match._id">toevoegen</span>
+                    <button ng-show="data.match._id" class="btn btn-sm btn-danger pull-right" ng-click="data.openModalDel('sm')">Verwijder</button>
+                    <button ng-show="data.match._id" class="btn btn-sm btn-info pull-right" ng-click="data.matchEdit()">Opslaan</button>
+                    <button ng-show="!data.match._id" class="btn btn-sm btn-info pull-right" ng-click="data.matchAdd()">Toevoegen bevestigen</button>
+                </h3>
+                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / <a href="/admin/matches">Wedstrijden</a> / Wedstrijd</h4>
+            </div>
+            <div class="col-xs-12">
+                <p>Hier kunnen algemene gegevens van een wedstrijd toegevoegd of gewijzigd worden. Ook kunnen hier extra
+                    analyses bestanden worden upgeload. Na het uploaden van een bestand worden wijzigingen automatisch opgeslagen,
+                    wijzigingen die daarna nog uitgevoerd worden moeten worden bevestigd, door op de opslaan button te klikken.</p>
+                <p ng-show="!data.match._id">Bij het toevoegen van de data van een wedstrijd wordt hier automatisch een nieuwe wedstrijd
+                aangemaakt. Als er geen algemene data van een wedstrijd is en er wel extra data bestaat dan kan hier een nieuwe wedstrijd worden
+                toegevoegd, deze wedstrijd heeft dan geen matchID.</p>
+                <p><small>Laatst bijgewerkt op: {{ data.match.date_edited | date:'d MMM yyyy HH:mm' }}, door: {{ data.match.editor }}</small></p>
+                <div ng-if="errorAddMatch" class="alert alert-danger" role="alert">{{ errorAddMatch }}</div>
+            </div>
+
+            <div class="col-xs-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputMatchID" class="col-sm-2 control-label">MatchID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputMatchID" placeholder="MatchID" ng-model="data.match.matchID" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputThuisTeamID" class="col-sm-2 control-label">Thuisteam ID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputThuisTeamID" placeholder="ThuisTeamID" ng-model="data.match.thuisTeamID">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUitTeamID" class="col-sm-2 control-label">Uitteam ID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUitTeamID" placeholder="UitTeamID" ng-model="data.match.uitTeamID">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSeizoen" class="col-sm-2 control-label">Seizoen *</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="inputSeizoen" ng-model="data.match.seizoen">
+                                <option>2015-2016 Play-offs</option>
+                                <option>2015-2016</option>
+                                <option>2014-2015 Play-offs</option>
+                                <option>2014-2015</option>
+                                <option>2013-2014 Play-offs</option>
+                                <option>2013-2014</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDivisie" class="col-sm-2 control-label">Divisie</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="inputDivisie" ng-model="data.match.divisie">
+                                <option>Jupiler League</option>
+                                <option>Eredivisie</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputWedstrijd" class="col-sm-2 control-label">Wedstrijd</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputWedstrijd" placeholder="Wedstrijd" ng-model="data.match.match_info.wedstrijd" disabled>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+                        <img ng-src="/images/logo_clubs/{{ data.match.match_info.logo_thuis }}" class="pull-left" style="width: 10%;">
+                        <img ng-src="/images/logo_clubs/{{ data.match.match_info.logo_uit }}" class="pull-right" style="width: 10%;">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputThuisTeam" class="col-sm-2 control-label">Thuis team *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputThuisTeam" placeholder="Thuis" ng-model="data.match.match_info.thuis">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUitTeam" class="col-sm-2 control-label">Uit team *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUitTeam" placeholder="Uit" ng-model="data.match.match_info.uit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCoachThuis" class="col-sm-2 control-label">Coach thuis</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCoachThuis" placeholder="Coach thuis" ng-model="data.match.match_info.coach_thuis">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCoachUit" class="col-sm-2 control-label">Coach uit</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCoachUit" placeholder="Coach uit" ng-model="data.match.match_info.coach_uit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputScheids" class="col-sm-2 control-label">Scheidsrechter</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputScheids" placeholder="Scheidsrechter" ng-model="data.match.match_info.scheids">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEindstand" class="col-sm-2 control-label">Eindstand</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEindstand" placeholder="Eindstand" ng-model="data.match.match_info.eindstand">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRuststand" class="col-sm-2 control-label">Ruststand</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputRuststand" placeholder="Ruststand" ng-model="data.match.match_info.ruststand">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSpeeldag" class="col-sm-2 control-label">Speeldag</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="inputSpeeldag" ng-model="data.match.match_info.speeldag">
+                                <option>maandag</option>
+                                <option>dinsdag</option>
+                                <option>woensdag</option>
+                                <option>donderdag</option>
+                                <option>vrijdag</option>
+                                <option>zaterdag</option>
+                                <option>zondag</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDatum" class="col-sm-2 control-label">Datum (dd-mm-jjjj) *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDatum" placeholder="Datum (dd-mm-jjjj)" ng-model="data.match.match_info.datum">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTijd" class="col-sm-2 control-label">Tijd (uu:mm)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTijd" placeholder="Tijd (uu:mm)" ng-model="data.match.match_info.tijd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRonde" class="col-sm-2 control-label">Speelronde *</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputRonde" ng-model="data.match.match_info.ronde">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStadion" class="col-sm-2 control-label">Stadion</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputStadion" placeholder="Stadion" ng-model="data.match.match_info.stadion">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputToeschouwers" class="col-sm-2 control-label">Toeschouwers aantal</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputToeschouwers" ng-model="data.match.match_info.toeschouwers">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <hr>
+                        <h4>Extra uploads toevoegen</h4>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputTitle" class="col-sm-2 control-label">Titel</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputTitle" placeholder="Titel" ng-model="data.temp.title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescr" class="col-sm-2 control-label">Beschrijving</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="2" class="form-control" id="inputDescr" placeholder="Beschrijving" ng-model="data.temp.description"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFile($files)" ngf-max-size="10485760">Bestand toevoegen (max. 10MB)</div>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-12">
+                        <hr>
+                        <p>Huidige uploads</p>
+                        <div ng-if="errorAddUpload" class="alert alert-danger" role="alert">{{ errorAddUpload }}</div>
+                    </div>
+                    <div class="col-xs-12" ng-repeat="upload in data.match.extra_uploads">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputTitle1" class="col-sm-2 control-label">Titel</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputTitle1" placeholder="Titel" ng-model="upload.title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescr1" class="col-sm-2 control-label">Beschrijving</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="2" class="form-control" id="inputDescr1" placeholder="Beschrijving" ng-model="upload.description"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFile($files, $index)" ngf-max-size="10485760">Bestand wijzigen (max. 10MB)</div>
+                        <p>file preview link: <a ng-href="{{ upload.file }}" target="_blank">{{ upload.file }}</a></p>
+                        <div class="col-xs-12 text-center">
+                            <button class="btn btn-xs btn-danger" ng-click="data.uploadDel($index)" title="verwijder"><i class="fa fa-close"></i> verwijder file</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <script type="text/ng-template" id="modalDel.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Waarschuwing!</h3>
+                </div>
+                <div class="modal-body">
+                    U staat op het punt deze user permanent te verwijderen. Weet u zeker dat u dit item wilt verwijderen?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" ng-click="ok()">Verwijder</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Annuleer</button>
+                </div>
+            </script>
+        </div>
+
+    </div>
+</div>

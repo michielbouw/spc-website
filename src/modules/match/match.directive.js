@@ -110,6 +110,7 @@ angular.module('mainapp.match')
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
                                 scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
                                 scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
                             }, 200);
                         });
@@ -122,6 +123,7 @@ angular.module('mainapp.match')
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
                                 scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
                                 scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
                             }, 200);
                         });

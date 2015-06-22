@@ -1,0 +1,51 @@
+<div class="page-top">
+    <div class="container">
+        <div class="col-md-2 hidden-xs hidden-sm">
+            <div class="col-md-2 navbar-sub">
+                <div class="item-title"><a href="/admin">Admin</a> / Importeer data</div>
+                <ul id="nav-sub" class="nav nav-pills nav-stacked">
+                    <li role="presentation" class="active">
+                        <a href="/admin/import">
+                            <i class="fa fa-list"></i> Importeer data
+                        </a>
+                    </li>
+                </ul>
+                <div class="item-title"><a href="/admin">Terug naar Admin</a></div>
+                <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="container">
+
+        <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
+
+            <div class="col-xs-12 content-page-title">
+                <h3>Importeer data</h3>
+                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Importeer data</h4>
+            </div>
+            <div class="col-xs-12">
+                <p>Om data files te importeren voor een wedstrijd vul hier het matchID in en upload alle bijbehorende files
+                    in een keer via de upload button.</p>
+                <div ng-if="errorImport" class="alert alert-danger" role="alert">{{ errorImport }}</div>
+            </div>
+
+            <div class="col-xs-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputMatchID" class="col-sm-2 control-label">MatchID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputMatchID" placeholder="MatchID" ng-model="data.temp.matchID">
+                        </div>
+                    </div>
+                </form>
+                <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFiles($files)" ngf-multiple="true" ngf-max-size="104857600">Bestanden toevoegen (max. 100MB)</div>
+                <p></p>
+            </div>
+
+        </div>
+
+    </div>
+</div>

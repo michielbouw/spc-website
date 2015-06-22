@@ -5,6 +5,8 @@ angular.module('mainapp.api')
             //News:           $resource('/api/news',              {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
             //NewsItem:       $resource('/api/news/:_slug',       {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
 
+            Matches:        $resource('/api/matches',           {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            Match:          $resource('/api/matches/:_id',      {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
             Pages:          $resource('/api/pages',             {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
             Page:           $resource('/api/pages/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
             Login:          $resource('/api/login',             {},                     { 'post': {method:'POST'} }),
