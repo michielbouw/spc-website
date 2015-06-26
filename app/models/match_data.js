@@ -124,55 +124,112 @@ module.exports = mongoose.model('MatchData', {
     }],
 
     gemiddelde_posities_helft1: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_helft2: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_kwartier1: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_kwartier2: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_kwartier3: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_kwartier4: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_kwartier5: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     gemiddelde_posities_kwartier6: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String },
+        rugnummer: { type: Number },
+        lengte: { type: Number },
+        breedte: { type: Number },
+        teamNaam: { type: String }
     }],
     duel_matrix_hele_wedstrijd: [{
+        thuis: [{
+            1: { type: String },
+            
+            TOTAAL: { type: Number },
+            _row: { type: String }
+        }],
+        uit: [{
+            1: { type: String },
 
+            TOTAAL: { type: Number },
+            _row: { type: String }
+        }]
     }],
     duel_matrix_hele_wedstrijd_thuis_spelers_uitteam: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     duel_matrix_hele_wedstrijd_uit_spelers_thuisteam: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     duel_matrix_eerste_helft: [{
 
     }],
     duel_matrix_eerste_helft_thuis_spelers_uitteam: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     duel_matrix_eerste_helft_uit_spelers_thuisteam: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     duel_matrix_tweede_helft: [{
 
     }],
     duel_matrix_tweede_helft_thuis_spelers_uitteam: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     duel_matrix_tweede_helft_uit_spelers_thuisteam: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     passes_per_zone: [{
 
