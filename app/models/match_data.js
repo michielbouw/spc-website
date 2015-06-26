@@ -190,7 +190,7 @@ module.exports = mongoose.model('MatchData', {
     duel_matrix_hele_wedstrijd: [{
         thuis: [{
             1: { type: String },
-            
+
             TOTAAL: { type: Number },
             _row: { type: String }
         }],
@@ -231,29 +231,110 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
-    passes_per_zone: [{
-
-    }],
-    locaties_doelpogingen: [{
-
-    }],
+    passes_per_zone: {
+        thuis: {
+            kort: [{
+                zend_zone: { type: Number },
+                TOTAAL: { type: Number },
+                geslaagd: { type: Number },
+                perc: { type: String }
+            }],
+            middellang: [{
+                zend_zone: { type: Number },
+                TOTAAL: { type: Number },
+                geslaagd: { type: Number },
+                perc: { type: String }
+            }],
+            lang: [{
+                zend_zone: { type: Number },
+                TOTAAL: { type: Number },
+                geslaagd: { type: Number },
+                perc: { type: String }
+            }]
+        },
+        uit: {
+            kort: [{
+                zend_zone: { type: Number },
+                TOTAAL: { type: Number },
+                geslaagd: { type: Number },
+                perc: { type: String }
+            }],
+            middellang: [{
+                zend_zone: { type: Number },
+                TOTAAL: { type: Number },
+                geslaagd: { type: Number },
+                perc: { type: String }
+            }],
+            lang: [{
+                zend_zone: { type: Number },
+                TOTAAL: { type: Number },
+                geslaagd: { type: Number },
+                perc: { type: String }
+            }]
+        }
+    },
+    locaties_doelpogingen: {
+        thuisTeam: [{
+            teamID: { type: Number },
+            personID: { type: Number },
+            spelerNaam: { type: String },
+            rugnummer: { type: Number },
+            locationInFieldLength: { type: Number },
+            locationInFieldWidth: { type: Number },
+            lichaamsdeel: { type: String },
+            minuut_tot_string: { type: String },
+            type: { type: String }
+        }],
+        uitTeam: [{
+            teamID: { type: Number },
+            personID: { type: Number },
+            spelerNaam: { type: String },
+            rugnummer: { type: Number },
+            locationInFieldLength: { type: Number },
+            locationInFieldWidth: { type: Number },
+            lichaamsdeel: { type: String },
+            minuut_tot_string: { type: String },
+            type: { type: String }
+        }]
+    },
     pass_matrix_helft1: [{
+        thuis: {
+            passMatrix: [{
 
+                TOTAAL: {type: Number},
+                _row: {type: String}
+            }],
+            passMatrix2: [{
+
+                TOTAAL: {type: Number},
+                _row: {type: String}
+            }]
+        },
+        uit: [{
+            1: { type: String },
+
+            TOTAAL: { type: Number },
+            _row: { type: String }
+        }]
     }],
     pass_matrix_helft1_thuis_spelers: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     pass_matrix_helft1_uit_spelers: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     pass_matrix_helft2: [{
 
     }],
     pass_matrix_helft2_thuis_spelers: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     pass_matrix_helft2_uit_spelers: [{
-
+        personID: { type: Number },
+        spelerNaam: { type: String }
     }],
     penalty_visualisatie: [{
 
