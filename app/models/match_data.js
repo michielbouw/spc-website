@@ -191,11 +191,13 @@ module.exports = mongoose.model('MatchData', {
         thuis: [{
             1: { type: String },
 
+
             TOTAAL: { type: Number },
             _row: { type: String }
         }],
         uit: [{
             1: { type: String },
+            
 
             TOTAAL: { type: Number },
             _row: { type: String }
@@ -211,6 +213,7 @@ module.exports = mongoose.model('MatchData', {
     }],
     duel_matrix_eerste_helft: [{
 
+
     }],
     duel_matrix_eerste_helft_thuis_spelers_uitteam: [{
         personID: { type: Number },
@@ -221,6 +224,7 @@ module.exports = mongoose.model('MatchData', {
         spelerNaam: { type: String }
     }],
     duel_matrix_tweede_helft: [{
+
 
     }],
     duel_matrix_tweede_helft_thuis_spelers_uitteam: [{
@@ -301,20 +305,50 @@ module.exports = mongoose.model('MatchData', {
         thuis: {
             passMatrix: [{
 
-                TOTAAL: {type: Number},
-                _row: {type: String}
+
+                TOTAAL: { type: Number },
+                _row: { type: String }
             }],
             passMatrix2: [{
-
-                TOTAAL: {type: Number},
-                _row: {type: String}
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
             }]
         },
         uit: [{
-            1: { type: String },
+            passMatrix: [{
 
-            TOTAAL: { type: Number },
-            _row: { type: String }
+
+                TOTAAL: { type: Number },
+                _row: { type: String }
+            }],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
         }]
     }],
     pass_matrix_helft1_thuis_spelers: [{
@@ -326,7 +360,54 @@ module.exports = mongoose.model('MatchData', {
         spelerNaam: { type: String }
     }],
     pass_matrix_helft2: [{
+        thuis: {
+            passMatrix: [{
 
+
+                TOTAAL: { type: Number },
+                _row: { type: String }
+            }],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: [{
+            passMatrix: [{
+
+
+                TOTAAL: { type: Number },
+                _row: { type: String }
+            }],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }]
     }],
     pass_matrix_helft2_thuis_spelers: [{
         personID: { type: Number },
@@ -337,29 +418,72 @@ module.exports = mongoose.model('MatchData', {
         spelerNaam: { type: String }
     }],
     penalty_visualisatie: [{
-
+        schutter: { type: String },
+        schutter_personID: { type: Number },
+        keeper: { type: String },
+        keeper_personID: { type: Number },
+        laag: { type: Number },
+        hoog: { type: Number },
+        links: { type: Number },
+        midden: { type: Number },
+        rechts: { type: Number },
+        linkerpaal: { type: Number },
+        lat: { type: Number },
+        rechterpaal: { type: Number },
+        gestopt: { type: Number },
+        naastover: { type: Number },
+        gescoord: { type: Number },
+        minuut: { type: String }
     }],
     overzicht_overtredingen_per_speler: {
         thuis: [{
-
+            personID: { type: Number },
+            spelerNaam: { type: String },
+            gemaakt: { type: Number },
+            ondergaan: { type: Number },
+            buitenspel: { type: Number }
         }],
         uit: [{
-
+            personID: { type: Number },
+            spelerNaam: { type: String },
+            gemaakt: { type: Number },
+            ondergaan: { type: Number },
+            buitenspel: { type: Number }
         }]
     },
     locatie_overtredingen: {
-        thuisTeam: [],
-        uitTeam: []
+        thuisTeam: [{
+            teamID: { type: Number },
+            personID: { type: Number },
+            spelerNaam: { type: String },
+            rugnummer: { type: Number },
+            locationInFieldLength: { type: Number },
+            locationInFieldWidth: { type: Number },
+            minuut: { type: String }
+        }],
+        uitTeam: [{
+            teamID: { type: Number },
+            personID: { type: Number },
+            spelerNaam: { type: String },
+            rugnummer: { type: Number },
+            locationInFieldLength: { type: Number },
+            locationInFieldWidth: { type: Number },
+            minuut: { type: String }
+        }]
     },
 
     player_stats_full_thuis: [{
         personID: { type: Number },
         type: { type: String }
 
+
+
     }],
     player_stats_full_uit: [{
         personID: { type: Number },
         type: { type: String }
+
+
 
     }],
 

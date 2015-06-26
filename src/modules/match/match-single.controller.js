@@ -759,21 +759,21 @@ angular.module('mainapp.match')
             angular.forEach(items.penalty_visualisatie, function (value, key) {
                 angular.forEach(items.spelersthuisteam, function (value1, key1) {
                     if (value1.personID == value.schutter) {
-                        value.personID = angular.copy(value.schutter);
+                        value.schutter_personID = angular.copy(value.schutter);
                         value.schutter = angular.copy(value1.spelerNaam);
                     }
                     if (value1.personID == value.keeper) {
-                        value.personID = angular.copy(value.keeper);
+                        value.keeper_personID = angular.copy(value.keeper);
                         value.keeper = angular.copy(value1.spelerNaam);
                     }
                 });
                 angular.forEach(items.spelersuitteam, function (value1, key1) {
                     if (value1.personID == value.schutter) {
-                        value.personID = angular.copy(value.schutter);
+                        value.schutter_personID = angular.copy(value.schutter);
                         value.schutter = angular.copy(value1.spelerNaam);
                     }
                     if (value1.personID == value.keeper) {
-                        value.personID = angular.copy(value.keeper);
+                        value.keeper_personID = angular.copy(value.keeper);
                         value.keeper = angular.copy(value1.spelerNaam);
                     }
                 });
