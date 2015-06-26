@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 // define our model
 // module.exports allows us to pass this to other files when it is called
 
-module.exports = mongoose.model('Pages', {
+module.exports = mongoose.model('Page', {
     home : {
         title : {type : String},
         description : {type : String},

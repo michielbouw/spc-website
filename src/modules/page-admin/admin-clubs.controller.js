@@ -5,7 +5,19 @@ angular.module('mainapp.pageAdmin')
         var self = this;
         self.datetime = new Date();
 
+        Api.Clubs.query(function(res) {
+            self.clubs = res;
+        });
 
+        self.itemDel = function (i) {
+            var _t = self.clubs[i];
+            Api.Club.delete({
+                _slug: _t._slug
+            }, function() {
+                self.clubs.splice(i, 1);
+            }, function() {
+            });
+        };
 
         self.openModalDel = function (size, i) {
             var modalInstance = $modal.open({

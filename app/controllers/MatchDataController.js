@@ -1,20 +1,17 @@
 var mongoose    = require('mongoose');
 var ObjectId    = mongoose.Schema.Types.ObjectId;
-var Pages        = require('../models/pages');
+var MatchData   = require('../models/match_data');
 
-module.exports = PagesController = {
+module.exports = MatchDataController = {
 
     query : function(req, res)
     {
-        Pages.find(function (err, data) {
-            if (err) res.send(err);
-            res.json(data);
-        });
+        MatchData.find().sort({datum: -1}).exec(function(err, data) { if (err) res.send(err); res.json(data); });
     },
 
     get: function(req, res)
     {
-        Pages.findOne({_id: req.params._id}, function(err, data){
+        MatchData.findOne({_id: req.params._id}, function(err, data){
             if (err) res.send(err);
             //if (!data) res.sendStatus(404);
             res.json(data);
@@ -23,7 +20,7 @@ module.exports = PagesController = {
 
     post: function(req, res)
     {
-        Pages.create(req.body, function(err, data) {
+        MatchData.create(req.body, function(err, data) {
             if (err) res.send(err);
             res.json(data);
         });
@@ -31,7 +28,7 @@ module.exports = PagesController = {
 
     put: function(req, res)
     {
-        Pages.update({
+        MatchData.update({
             _id: req.params._id
         }, req.body, function(err, data) {
             if (err) res.send(err);
@@ -41,7 +38,7 @@ module.exports = PagesController = {
 
     delete: function(req, res)
     {
-        Pages.remove({
+        MatchData.remove({
             _id: req.params._id
         }, function(err, data) {
             if (err) res.send(err);

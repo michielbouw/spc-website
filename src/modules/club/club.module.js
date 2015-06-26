@@ -9,7 +9,7 @@ angular.module('mainapp.club', [])
                     permission: 'speler'
                 }
             })
-            .when('/club/currentclub/currentteam', {
+            .when('/club/:team_slug', {
                 templateUrl: 	'club/views/club.html',
                 access: {
                     requiredLogin: true,

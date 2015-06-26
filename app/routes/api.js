@@ -5,8 +5,11 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
 //var NewsController = require('../controllers/NewsController');
+var ClubController = require('../controllers/ClubController');
+var MatchDataController = require('../controllers/MatchDataController');
 var MatchesController = require('../controllers/MatchesController');
-var PagesController = require('../controllers/PagesController');
+var PageController = require('../controllers/PageController');
+var TeamDataController = require('../controllers/TeamDataController');
 var UploadController = require('../controllers/UploadController');
 var UserController = require('../controllers/UserController');
 
@@ -22,21 +25,40 @@ router.use(function(req, res, next) {
 //router.put('/news/:_slug',          UserController.ensureAuthorized, NewsController.put);
 //router.delete('/news/:_slug',       UserController.ensureAuthorized, NewsController.delete);
 
-router.get('/matches',              MatchesController.query);
-router.get('/matches/:_id',         MatchesController.get);
+router.get('/clubs',                UserController.ensureAuthorized, ClubController.query);
+router.get('/clubs/:_slug',         UserController.ensureAuthorized, ClubController.get);
+router.post('/clubs',               UserController.ensureAuthorized, ClubController.post);
+router.put('/clubs/:_slug',         UserController.ensureAuthorized, ClubController.put);
+router.delete('/clubs/:_slug',      UserController.ensureAuthorized, ClubController.delete);
+
+router.get('/matches',              UserController.ensureAuthorized, MatchesController.query);
+router.get('/matches/:_id',         UserController.ensureAuthorized, MatchesController.query_team);
+router.get('/matches/:_id',         UserController.ensureAuthorized, MatchesController.get);
 router.get('/matches/:_id',         MatchesController.toeschouwers_get);
 router.put('/matches/:_id',         MatchesController.toeschouwers_put);
 router.post('/matches',             UserController.ensureAuthorized, MatchesController.post);
 router.put('/matches/:_id',         UserController.ensureAuthorized, MatchesController.put);
 router.delete('/matches/:_id',      UserController.ensureAuthorized, MatchesController.delete);
 
-router.get('/pages',                PagesController.query);
-router.get('/pages/:_id',           PagesController.get);
-router.post('/pages',               UserController.ensureAuthorized, PagesController.post);
-router.put('/pages/:_id',           UserController.ensureAuthorized, PagesController.put);
-router.delete('/pages/:_id',        UserController.ensureAuthorized, PagesController.delete);
+router.get('/teamdata',             UserController.ensureAuthorized, TeamDataController.query);
+router.get('/teamdata/:_slug',      UserController.ensureAuthorized, TeamDataController.get);
+router.post('/teamdata',            UserController.ensureAuthorized, TeamDataController.post);
+router.put('/teamdata/:_slug',      UserController.ensureAuthorized, TeamDataController.put);
+router.delete('/teamdata/:_slug',   UserController.ensureAuthorized, TeamDataController.delete);
 
-router.post('/media/:slug',         multipartMiddleware, UploadController.uploadFile);
+router.get('/matchdata',            UserController.ensureAuthorized, MatchDataController.query);
+router.get('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.get);
+router.post('/matchdata',           UserController.ensureAuthorized, MatchDataController.post);
+router.put('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.put);
+router.delete('/matchdata/:_id',    UserController.ensureAuthorized, MatchDataController.delete);
+
+router.get('/pages',                PageController.query);
+router.get('/pages/:_id',           PageController.get);
+router.post('/pages',               UserController.ensureAuthorized, PageController.post);
+router.put('/pages/:_id',           UserController.ensureAuthorized, PageController.put);
+router.delete('/pages/:_id',        UserController.ensureAuthorized, PageController.delete);
+
+router.post('/media/:slug',         UserController.ensureAuthorized, multipartMiddleware, UploadController.uploadFile);
 
 router.post('/login',               UserController.login);
 router.post('/signin',              UserController.signin);

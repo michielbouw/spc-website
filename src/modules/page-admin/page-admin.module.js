@@ -16,7 +16,7 @@ angular.module('mainapp.pageAdmin', ['textAngular', 'ngFileUpload'])
                     permission: 'admin'
                 }
             })
-            .when('/admin/clubs/edit', {
+            .when('/admin/clubs/edit/:_slug', {
                 templateUrl: 'page-admin/views/admin-clubs-edit.html',
                 access: {
                     requiredLogin: true,

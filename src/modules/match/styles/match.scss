@@ -465,6 +465,21 @@
       box-shadow: 0;
       @include border-radius(0);
 
+      .panel-heading {
+        h4.panel-title {
+          a {
+            vertical-align: -webkit-baseline-middle;
+            vertical-align: sub;
+          }
+        }
+        img {
+          float: left;
+          height: 30px;
+          width: auto;
+          margin-right: 10px;
+        }
+      }
+
       .panel-collapse {
         .summary {
           margin-bottom: 15px;

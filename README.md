@@ -79,11 +79,11 @@ Steps:
         dokku plugins-install
         ```
 
-5. Create database. (on server) In below code, `app_name` can be anything. It should be used when configure the database.
+5. Create database. (on server) In below code, `app_name` can be anything. Choose root_domain here when you want to deploy to root domain. It should be used when configure the database.
 
         ```shell
         dokku mongodb:start
-        dokku mongodb:create <app_name>
+        dokku mongodb:create <app_name OR root_domain>
         ```
 
 6. Add dokku remote to your source code (from your development machine).
@@ -100,10 +100,10 @@ To be able to push applications to the server it needs your public SSH key in /h
 
         ```
 
-Push the app and let dokku build the container. This can take a while.
+Push the app and let dokku build the container. Choose root_domain here when you want to deploy to root domain. This can take a while.
 
         ```shell
-        git remote add dokku <ssh host>:<app_name>
+        git remote add dokku <ssh host>:<app_name OR root_domain>
         git push dokku master
         ```
 

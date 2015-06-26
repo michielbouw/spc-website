@@ -9,7 +9,7 @@
                             <i class="fa fa-soccer-ball-o"></i> Clubs
                         </a>
                     </li>
-                    <li role="presentation">
+                    <li role="presentation" ng-class="{ active: !data.club._id }">
                         <a href="/admin/clubs/edit/add">
                             <i class="fa fa-user-plus"></i> Club toevoegen
                         </a>
@@ -28,59 +28,65 @@
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
             <div class="col-xs-12 content-page-title">
-                <h3>Clubnaam</h3>
+                <h3><span ng-show="data.club._id">Club wijzigen</span><span ng-show="!data.club._id">Club toevoegen</span>
+                    <button ng-show="data.club._id" class="btn btn-sm btn-danger pull-right" ng-click="data.openModalDel('sm')">Verwijder</button>
+                    <button ng-show="data.club._id" class="btn btn-sm btn-info pull-right" ng-click="data.clubEdit()">Opslaan</button>
+                    <button ng-show="!data.club._id" class="btn btn-sm btn-info pull-right" ng-click="data.clubAdd()">Toevoegen bevestigen</button></h3>
                 <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / <a href="/admin/clubs">Clubs</a> / Club</h4>
             </div>
-            <div class="col-xs-12">
-
+            <div class="col-lg-12">
+                <img ng-src="images/logo_clubs/{{ data.club.logo }}" class="pull-left" style="width: 15%;">
+                <h4>{{ data.club.name }}</h4>
+                <hr>
+            </div>
+            <div class="col-lg-12">
+                <div ng-if="errorAddClub" class="alert alert-danger" role="alert">{{ errorAddClub }}</div>
             </div>
 
             <div class="col-xs-12">
-                <div class="col-lg-12">
-                    <img src="logo_clubs/JPG/FC Eindhoven.jpg" class="pull-left" style="width: 15%;">
-                    <h4>Club wijzigen/toevoegen</h4>
-                </div>
-                <div class="col-lg-12">
-                    <br>
-                </div>
-
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Clubnaam</label>
+                        <label for="inputName" class="col-sm-2 control-label">Clubnaam *</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Clubnaam">
+                            <input type="text" class="form-control" id="inputName" placeholder="Clubnaam" ng-model="data.club.name">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="data.club._id">
+                        <label for="inputSlug" class="col-sm-2 control-label">Slug</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control input-sm" id="inputSlug" placeholder="Slug (naam zoals hij wordt gebruikt in de links in de adresbalk, deze is zonder hoofdletters en spaties en is uniek voor iedere club)" ng-model="data.club._slug">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail" class="col-sm-2 control-label">Contact email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Contact email">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Contact email" ng-model="data.club.email">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputColor1" class="col-sm-2 control-label">Club kleur donker</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="inputColor1" placeholder="Club kleur donker">
+                            <input type="text" class="form-control" id="inputColor1" placeholder="Club kleur donker" ng-model="data.club.colors[0].color">
                         </div>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="inputColor1code" placeholder="Club kleur donker (code)">
+                            <input type="text" class="form-control" id="inputColor1code" placeholder="Club kleur donker (code)" ng-model="data.club.colors[0].refcode">
                         </div>
-                        <div class="col-sm-12" style="background-color: {{ items.colors[0].refcode }}">&nbsp;</div>
+                        <div class="col-sm-12" style="background-color: {{ data.club.colors[0].refcode }}">&nbsp;</div>
                     </div>
                     <div class="form-group">
                         <label for="inputColor2" class="col-sm-2 control-label">Club kleur licht</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="inputColor2" placeholder="Club kleur licht">
+                            <input type="text" class="form-control" id="inputColor2" placeholder="Club kleur licht" ng-model="data.club.colors[1].color">
                         </div>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="inputColor2code" placeholder="Club kleur licht (code)">
+                            <input type="text" class="form-control" id="inputColor2code" placeholder="Club kleur licht (code)" ng-model="data.club.colors[1].refcode">
                         </div>
-                        <div class="col-sm-12" style="background-color: {{ items.colors[1].refcode }}">&nbsp;</div>
+                        <div class="col-sm-12" style="background-color: {{ data.club.colors[1].refcode }}">&nbsp;</div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPackage" class="col-sm-2 control-label">Type pakket</label>
+                        <label for="inputPackage" class="col-sm-2 control-label">Type pakket *</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="inputPackage">
+                            <select class="form-control" id="inputPackage" ng-model="data.club.spc_package">
                                 <option>Club</option>
                                 <option>League</option>
                                 <option>Extra</option>
@@ -89,50 +95,75 @@
                     </div>
                     <hr>
                     <h4>Teams</h4>
-
-                    <p>1e elftal</p>
-                    <div class="form-group">
-                        <label for="inputTeam" class="col-sm-2 control-label">Team</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTeam" placeholder="Team">
+                    <div ng-repeat="team in data.club.teams">
+                        <p>{{ team.team_name }} <a ng-click="data.teamDel($index)"><i class="fa fa-close"></i></a></p>
+                        <div class="form-group">
+                            <label for="inputTeam" class="col-sm-2 control-label">Teamnaam *</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputTeam" placeholder="Team" ng-model="team.team_name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDiv" class="col-sm-2 control-label">Divisie</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputDiv" placeholder="Divisie" ng-model="team.divisie">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName2" class="col-sm-2 control-label">Coach</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName2" placeholder="Coach" ng-model="team.coach">
+                            </div>
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <hr>
+                            <h4>TeamID</h4>
+                        </div>
+                        <div ng-repeat="teamID in team.teamID">
+                            <div class="form-group">
+                                <label for="inputteamID" class="col-sm-2 control-label">Team ID (data) <p ng-click="data.teamIDDel($parent.$index, $index)"><i class="fa fa-close"></i></p></label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inputteamID" placeholder="Team ID" ng-model="teamID.ID">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputseason" class="col-sm-2 control-label">Seizoen team ID</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="inputseason" ng-model="teamID.season">
+                                        <option>2015-2016 Play-offs</option>
+                                        <option>2015-2016</option>
+                                        <option>2014-2015 Play-offs</option>
+                                        <option>2014-2015</option>
+                                        <option>2013-2014 Play-offs</option>
+                                        <option>2013-2014</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-2 text-center" ng-click="data.teamIDAdd($index)">
+                            <h4><i class="fa fa-plus"></i></h4>
+                            <hr>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputName2" class="col-sm-2 control-label">Coach</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName2" placeholder="Coach">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputteamID" class="col-sm-2 control-label">Team ID (data)</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputteamID" placeholder="Team ID">
-                        </div>
-                    </div>
-
-                    <!-- <p>Team naam</p>
-                    <div class="form-group">
-                        <label for="inputTeam" class="col-sm-2 control-label">Team</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTeam" placeholder="Team">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName2" class="col-sm-2 control-label">Coach</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName2" placeholder="Coach">
-                        </div>
-                    </div>-->
-
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Opslaan</button>
-                        </div>
+                    <div class="col-xs-12 text-center" ng-click="data.teamAdd()">
+                        <h3><i class="fa fa-plus"></i></h3>
                     </div>
                 </form>
-
             </div>
+
+            <script type="text/ng-template" id="modalDel.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Waarschuwing!</h3>
+                </div>
+                <div class="modal-body">
+                    U staat op het punt deze club permanent te verwijderen. Weet u zeker dat u dit item wilt verwijderen?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" ng-click="ok()">Verwijder</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Annuleer</button>
+                </div>
+            </script>
 
         </div>
 

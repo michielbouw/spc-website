@@ -27,12 +27,15 @@
                 <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Importeer data</h4>
             </div>
             <div class="col-xs-12">
-                <p>Om data files te importeren voor een wedstrijd vul hier het matchID in en upload alle bijbehorende files
-                    in een keer via de upload button.</p>
                 <div ng-if="errorImport" class="alert alert-danger" role="alert">{{ errorImport }}</div>
+                <hr>
             </div>
 
             <div class="col-xs-12">
+                <h4>Importeer match data</h4>
+                <p>Om data files te importeren voor een wedstrijd vul hier het matchID in en upload alle bijbehorende files
+                    in een keer via de upload button.</p>
+                <br>
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label for="inputMatchID" class="col-sm-2 control-label">MatchID</label>
@@ -41,8 +44,20 @@
                         </div>
                     </div>
                 </form>
-                <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFiles($files)" ngf-multiple="true" ngf-max-size="104857600">Bestanden toevoegen (max. 100MB)</div>
+                <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadMatch($files)" ngf-multiple="true" ngf-max-size="104857600">Bestanden toevoegen (max. 100MB)</div>
                 <p></p>
+            </div>
+
+            <div class="col-xs-12">
+                <hr>
+                <h4>Importeer speler afbeeldingen</h4>
+                <p>Om speler afbeeldingen te importeren upload alle bijbehorende files in een keer via de upload button.
+                    Zorg ervoor dat de foto's een formaat '.jpg' hebben en als file naam enkel de ID van de speler, zoals die
+                    in de data staat</p>
+                <br>
+                <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadPlayers($files)" ngf-multiple="true" ngf-max-size="104857600">Bestanden toevoegen (max. 100MB)</div>
+                <p></p>
+                <hr>
             </div>
 
         </div>

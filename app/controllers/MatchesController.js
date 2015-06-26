@@ -6,7 +6,12 @@ module.exports = MatchesController = {
 
     query : function(req, res)
     {
-        Matches.find().sort({seizoen: -1, datum: -1}).exec(function(err, data) { if (err) res.send(err); res.json(data); });
+        Matches.find().sort({ seizoen: -1, datum: -1 }).exec(function(err, data) { if (err) res.send(err); res.json(data); });
+    },
+
+    query_team : function(req, res)
+    {
+        Matches.find().or([{ thuisTeamSlug: req.params._id }, { uitTeamSlug: req.params._id }]).exec(function(err, data) { if (err) res.send(err); res.json(data); });
     },
 
     get: function(req, res)
