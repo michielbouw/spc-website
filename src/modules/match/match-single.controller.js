@@ -595,6 +595,8 @@ angular.module('mainapp.match')
             items.team_stats.uit.matchID = angular.copy(items.matchID);
             items.team_stats.thuis.ronde = angular.copy(items.match_info.ronde);
             items.team_stats.uit.ronde = angular.copy(items.match_info.ronde);
+            items.team_stats.thuis.wedstrijd = angular.copy(items.match_info.wedstrijd);
+            items.team_stats.uit.wedstrijd = angular.copy(items.match_info.wedstrijd);
             items.team_stats.thuis.doelpunten_voor = items.match_info.eindstand.split(" - ", 1)[0];
             items.team_stats.thuis.doelpunten_tegen = items.match_info.eindstand.split(" - ", 2)[1];
             items.team_stats.uit.doelpunten_voor = items.match_info.eindstand.split(" - ", 2)[1];
@@ -952,7 +954,18 @@ angular.module('mainapp.match')
                     temp.doelpunten_tegen = items.match_info.eindstand.split(" - ", 1)[0];
                     temp.pass_lengte = String((Number(value.pass_soorten_helft1[temp.personID][0].gem_len.split("m")[0]) + Number(value.pass_soorten_helft2[temp.personID][0].gem_len.split("m")[0]) / 2).toFixed(1)) + 'm.';
 
-                    temp.locatie_reddingen = value.locaties_reddingen;
+                    temp.locatie_reddingen = [];
+                    angular.forEach(value.locaties_reddingen, function (value, key1) {
+                        var temp1 = {};
+                        temp1.zend_length = angular.copy(value.zend_length);
+                        temp1.zend_width = angular.copy(value.zend_width);
+                        temp1.ontvang_length = angular.copy(value.ontvang_length);
+                        temp1.ontvang_width = angular.copy(value.ontvang_width);
+                        temp1.actie = angular.copy(value.actie);
+
+                        temp.locatie_reddingen.push(temp1);
+                    });
+
                     temp.locatie_uittrappen = [];
                     angular.forEach(value.locaties_uittrappen, function (value, key1) {
                         var temp1 = {};
@@ -962,11 +975,13 @@ angular.module('mainapp.match')
                         temp1.ontvang_width = angular.copy(value.ontvang_breedte[0]);
                         angular.forEach(items.spelersthuisteam, function (value1, key1) {
                             if (value1.personID == value.teamgenoot) {
+                                temp1.teamgenootID = angular.copy(value1.personID);
                                 temp1.teamgenoot = angular.copy(value1.spelerNaam);
                             }
                         });
                         angular.forEach(items.spelersuitteam, function (value1, key1) {
                             if (value1.personID == value.teamgenoot) {
+                                temp1.teamgenootID = angular.copy(value1.personID);
                                 temp1.teamgenoot = angular.copy(value1.spelerNaam);
                             }
                         });
@@ -1029,9 +1044,38 @@ angular.module('mainapp.match')
                     temp.dode_spel_momenten.vrije_trappen_direct = angular.copy(value.dode_spel_momenten[3][0][0]);
                     temp.dode_spel_momenten.vrije_trappen_indirect = angular.copy(value.dode_spel_momenten[4][0][0]);
 
-                    temp.locatie_voorzetten = value.locatie_voorzetten[temp.personID];
-                    temp.locatie_aanvallende_duels = value.locaties_aanvallende_duels[temp.personID];
-                    temp.locatie_doelpogingen = value.locaties_doelpogingen[temp.personID];
+                    temp.locatie_voorzetten = [];
+                    angular.forEach(value.locatie_voorzetten[temp.personID], function (value, key1) {
+                        var temp1 = {};
+                        temp1.zend_lengte = angular.copy(value.zend_lengte);
+                        temp1.zend_breedte = angular.copy(value.zend_breedte);
+                        temp1.doelpoging_na_3 = angular.copy(value.doelpoging_na_3);
+
+                        temp.locatie_voorzetten.push(temp1);
+                    });
+
+                    temp.locatie_aanvallende_duels = [];
+                    angular.forEach(value.locaties_aanvallende_duels[temp.personID], function (value, key1) {
+                        var temp1 = {};
+                        temp1.locationInFieldLength = angular.copy(value.locationInFieldLength);
+                        temp1.locationInFieldWidth = angular.copy(value.locationInFieldWidth);
+                        temp1.gewonnen = angular.copy(value.gewonnen);
+                        temp1.duel_type = angular.copy(value.duel_type);
+
+                        temp.locatie_aanvallende_duels.push(temp1);
+                    });
+
+                    temp.locatie_doelpogingen = [];
+                    angular.forEach(value.locaties_doelpogingen[temp.personID], function (value, key1) {
+                        var temp1 = {};
+                        temp1.locationInFieldLength = angular.copy(value.locationInFieldLength);
+                        temp1.locationInFieldWidth = angular.copy(value.locationInFieldWidth);
+                        temp1.lichaamsdeel = angular.copy(value.lichaamsdeel);
+                        temp1.minuut_tot_string = angular.copy(value.minuut_tot_string);
+                        temp1.type = angular.copy(value.type);
+
+                        temp.locatie_doelpogingen.push(temp1);
+                    });
                 }
 
                 temp.algemene_stats = {};
@@ -1080,11 +1124,13 @@ angular.module('mainapp.match')
                     temp1.van = value['Passes gekregen van'];
                     angular.forEach(items.spelersthuisteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
                     angular.forEach(items.spelersuitteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
@@ -1101,11 +1147,13 @@ angular.module('mainapp.match')
                     temp1.van = value['Passes gekregen van'];
                     angular.forEach(items.spelersthuisteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
                     angular.forEach(items.spelersuitteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
@@ -1118,7 +1166,16 @@ angular.module('mainapp.match')
                 temp.pass_soorten_helft1 = value.pass_soorten_helft1[temp.personID][0];
                 temp.pass_soorten_helft2 = value.pass_soorten_helft2[temp.personID][0];
 
-                temp.locatie_verdedigende_duels = value.locaties_verdedigende_duels[temp.personID];
+                temp.locatie_verdedigende_duels = [];
+                angular.forEach(value.locaties_verdedigende_duels[temp.personID], function (value, key1) {
+                    var temp1 = {};
+                    temp1.locationInFieldLength = angular.copy(value.locationInFieldLength);
+                    temp1.locationInFieldWidth = angular.copy(value.locationInFieldWidth);
+                    temp1.gewonnen = angular.copy(value.gewonnen);
+                    temp1.duel_type = angular.copy(value.duel_type);
+
+                    temp.locatie_verdedigende_duels.push(temp1);
+                });
 
                 items.player_stats_full_thuis.push(temp);
             });
@@ -1148,7 +1205,18 @@ angular.module('mainapp.match')
                     temp.doelpunten_tegen = items.match_info.eindstand.split(" - ", 1)[0];
                     temp.pass_lengte = String((Number(value.pass_soorten_helft1[temp.personID][0].gem_len.split("m")[0]) + Number(value.pass_soorten_helft2[temp.personID][0].gem_len.split("m")[0]) / 2).toFixed(1)) + 'm.';
 
-                    temp.locatie_reddingen = value.locaties_reddingen;
+                    temp.locatie_reddingen = [];
+                    angular.forEach(value.locaties_reddingen, function (value, key1) {
+                        var temp1 = {};
+                        temp1.zend_length = angular.copy(value.zend_length);
+                        temp1.zend_width = angular.copy(value.zend_width);
+                        temp1.ontvang_length = angular.copy(value.ontvang_length);
+                        temp1.ontvang_width = angular.copy(value.ontvang_width);
+                        temp1.actie = angular.copy(value.actie);
+
+                        temp.locatie_reddingen.push(temp1);
+                    });
+
                     temp.locatie_uittrappen = [];
                     angular.forEach(value.locaties_uittrappen, function (value, key1) {
                         var temp1 = {};
@@ -1158,11 +1226,13 @@ angular.module('mainapp.match')
                         temp1.ontvang_width = angular.copy(value.ontvang_breedte[0]);
                         angular.forEach(items.spelersthuisteam, function (value1, key1) {
                             if (value1.personID == value.teamgenoot) {
+                                temp1.teamgenootID = angular.copy(value1.personID);
                                 temp1.teamgenoot = angular.copy(value1.spelerNaam);
                             }
                         });
                         angular.forEach(items.spelersuitteam, function (value1, key1) {
                             if (value1.personID == value.teamgenoot) {
+                                temp1.teamgenootID = angular.copy(value1.personID);
                                 temp1.teamgenoot = angular.copy(value1.spelerNaam);
                             }
                         });
@@ -1225,9 +1295,38 @@ angular.module('mainapp.match')
                     temp.dode_spel_momenten.vrije_trappen_direct = angular.copy(value.dode_spel_momenten[3][0][0]);
                     temp.dode_spel_momenten.vrije_trappen_indirect = angular.copy(value.dode_spel_momenten[4][0][0]);
 
-                    temp.locatie_voorzetten = value.locatie_voorzetten[temp.personID];
-                    temp.locatie_aanvallende_duels = value.locaties_aanvallende_duels[temp.personID];
-                    temp.locatie_doelpogingen = value.locaties_doelpogingen[temp.personID];
+                    temp.locatie_voorzetten = [];
+                    angular.forEach(value.locatie_voorzetten[temp.personID], function (value, key1) {
+                        var temp1 = {};
+                        temp1.zend_lengte = angular.copy(value.zend_lengte);
+                        temp1.zend_breedte = angular.copy(value.zend_breedte);
+                        temp1.doelpoging_na_3 = angular.copy(value.doelpoging_na_3);
+
+                        temp.locatie_voorzetten.push(temp1);
+                    });
+
+                    temp.locatie_aanvallende_duels = [];
+                    angular.forEach(value.locaties_aanvallende_duels[temp.personID], function (value, key1) {
+                        var temp1 = {};
+                        temp1.locationInFieldLength = angular.copy(value.locationInFieldLength);
+                        temp1.locationInFieldWidth = angular.copy(value.locationInFieldWidth);
+                        temp1.gewonnen = angular.copy(value.gewonnen);
+                        temp1.duel_type = angular.copy(value.duel_type);
+
+                        temp.locatie_aanvallende_duels.push(temp1);
+                    });
+
+                    temp.locatie_doelpogingen = [];
+                    angular.forEach(value.locaties_doelpogingen[temp.personID], function (value, key1) {
+                        var temp1 = {};
+                        temp1.locationInFieldLength = angular.copy(value.locationInFieldLength);
+                        temp1.locationInFieldWidth = angular.copy(value.locationInFieldWidth);
+                        temp1.lichaamsdeel = angular.copy(value.lichaamsdeel);
+                        temp1.minuut_tot_string = angular.copy(value.minuut_tot_string);
+                        temp1.type = angular.copy(value.type);
+
+                        temp.locatie_doelpogingen.push(temp1);
+                    });
                 }
 
                 temp.algemene_stats = {};
@@ -1276,11 +1375,13 @@ angular.module('mainapp.match')
                     temp1.van = value['Passes gekregen van'];
                     angular.forEach(items.spelersthuisteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
                     angular.forEach(items.spelersuitteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
@@ -1297,11 +1398,13 @@ angular.module('mainapp.match')
                     temp1.van = value['Passes gekregen van'];
                     angular.forEach(items.spelersthuisteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
                     angular.forEach(items.spelersuitteam, function (value1, key1) {
                         if (value1.personID == value._row) {
+                            temp1.personID = angular.copy(value1.personID);
                             temp1._row = angular.copy(value1.spelerNaam);
                         }
                     });
@@ -1314,7 +1417,16 @@ angular.module('mainapp.match')
                 temp.pass_soorten_helft1 = value.pass_soorten_helft1[temp.personID][0];
                 temp.pass_soorten_helft2 = value.pass_soorten_helft2[temp.personID][0];
 
-                temp.locatie_verdedigende_duels = value.locaties_verdedigende_duels[temp.personID];
+                temp.locatie_verdedigende_duels = [];
+                angular.forEach(value.locaties_verdedigende_duels[temp.personID], function (value, key1) {
+                    var temp1 = {};
+                    temp1.locationInFieldLength = angular.copy(value.locationInFieldLength);
+                    temp1.locationInFieldWidth = angular.copy(value.locationInFieldWidth);
+                    temp1.gewonnen = angular.copy(value.gewonnen);
+                    temp1.duel_type = angular.copy(value.duel_type);
+
+                    temp.locatie_verdedigende_duels.push(temp1);
+                });
 
                 items.player_stats_full_uit.push(temp);
             });

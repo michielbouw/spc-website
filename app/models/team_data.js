@@ -11,24 +11,76 @@ module.exports = mongoose.model('TeamData', {
     club_name: { type: String },
     club_slug: { type: String, lowercase: true, trim: true },
 
+    // team data selected items
     team_data: [{
         season: { type: String },
         matches: [{
-            round: { type: Number },
-            matchID: { type: Number }
+            wedstrijd: { type: String },
 
+            // input data force/change to number type
+            ronde: { type: Number },
+            matchID: { type: Number },
+            doelpunten_voor: { type: Number },
+            doelpunten_tegen: { type: Number },
+            punten: { type: Number },
+            balbezit: { type: Number },
+            tot_passes: { type: Number },
+            geslaagde_passes: { type: Number },
+            lengte_passes: { type: Number},
+            doelpogingen: { type: Number },
+            gewonnen_duels: { type: Number },
+            geel: { type: Number },
+            rood: { type: Number }
         }]
     }],
+
+    // player data selected items
     player_data: [{
         playerID: { type: Number },
         spelerNaam: { type: String },
         spelerType: { type: String },
+        spelerRugnummer: { type: Number },
         matches: [{
             season: { type: String },
             match: [{
-                round: { type: Number },
-                matchID: { type: Number }
+                wedstrijd: { type: String },
+                eindstand: { type: String },
+                datum: { type: String },
 
+                // input data force/change to number type
+                ronde: { type: Number },
+                matchID: { type: Number },
+
+                // fieldplayer and keeper
+                minuten: { type: Number },
+                pass_percentage: { type: Number },
+                pass_lengte: { type: Number },
+                geel: { type: Number },
+                rood: { type: Number },
+
+                // only fieldplayer
+                doelpunten: { type: Number },
+                aantal_passes: { type: Number },
+                geslaagde_passes: { type: Number },
+                voorzetten: { type: Number },
+                doelpogingen: { type: Number },
+                doelpogingen_opdoel: { type: Number },
+                aanvallende_duels: { type: Number },
+                verdedigende_duels: { type: Number },
+                gewonnen_duels: { type: Number },
+                intercepties: { type: Number },
+                overtredingen: { type: Number },
+
+                // only keeper
+                reddingen: { type: Number },
+                geslaagde_reddingen: { type: Number },
+                korte_passes: { type: Number },
+                middellange_passes: { type: Number },
+                lange_passes: { type: Number },
+                succesvolle_uittrappen: { type: Number },
+                gevangen_ballen: { type: Number },
+                weggestompte_ballen: { type: Number },
+                doelpunten_tegen: { type: Number }
             }]
         }]
     }],
