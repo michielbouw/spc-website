@@ -33,12 +33,12 @@ router.delete('/clubs/:_slug',      UserController.ensureAuthorized, ClubControl
 
 router.get('/matches',              UserController.ensureAuthorized, MatchesController.query);
 router.get('/matches/:_id',         UserController.ensureAuthorized, MatchesController.query_team);
-router.get('/matches/:_id',         UserController.ensureAuthorized, MatchesController.get);
-router.get('/matches/:_id',         MatchesController.toeschouwers_get);
-router.put('/matches/:_id',         MatchesController.toeschouwers_put);
+router.get('/match/:_id',           UserController.ensureAuthorized, MatchesController.get);
+router.get('/toeschouwers/:_id',    MatchesController.toeschouwers_get);
+router.put('/toeschouwers/:_id',    MatchesController.toeschouwers_put);
 router.post('/matches',             UserController.ensureAuthorized, MatchesController.post);
-router.put('/matches/:_id',         UserController.ensureAuthorized, MatchesController.put);
-router.delete('/matches/:_id',      UserController.ensureAuthorized, MatchesController.delete);
+router.put('/match/:_id',           UserController.ensureAuthorized, MatchesController.put);
+router.delete('/match/:_id',        UserController.ensureAuthorized, MatchesController.delete);
 
 router.get('/teamdata',             UserController.ensureAuthorized, TeamDataController.query);
 router.get('/teamdata/:_slug',      UserController.ensureAuthorized, TeamDataController.get);
@@ -48,6 +48,7 @@ router.delete('/teamdata/:_slug',   UserController.ensureAuthorized, TeamDataCon
 
 router.get('/matchdata',            UserController.ensureAuthorized, MatchDataController.query);
 router.get('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.get);
+router.get('/matchdataID/:_id',     UserController.ensureAuthorized, MatchDataController.get_byID);
 router.post('/matchdata',           UserController.ensureAuthorized, MatchDataController.post);
 router.put('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.put);
 router.delete('/matchdata/:_id',    UserController.ensureAuthorized, MatchDataController.delete);

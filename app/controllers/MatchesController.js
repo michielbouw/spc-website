@@ -16,7 +16,7 @@ module.exports = MatchesController = {
 
     get: function(req, res)
     {
-        Matches.findOne({_id: req.params._id}, function(err, data){
+        Matches.findOne({matchID: req.params._id}, function(err, data){
             if (err) res.send(err);
             //if (!data) res.sendStatus(404);
             res.json(data);

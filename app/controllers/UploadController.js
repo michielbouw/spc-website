@@ -96,35 +96,39 @@ UploadController.prototype.uploadFile = function(req, res) {
             });
         });
     } else { // so else if data image files for match, uses matchID as req.params.slug
+        fileExtension = '.' + file.name.split('.').pop();
         // rename the file with original name (slug must be matchID)
         renamedFile = req.params.slug + '_' + file.name;
 
 		// set where the file should actually exist
 		target_path = './media/data/' + renamedFile;
-		
-        // move the file from the temporary location to the intended location
-        fs.rename(tmp_path, target_path, function (err) {
-            if (err) throw err;
-            // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-            fs.unlink(tmp_path, function () {
-                if (err) throw err;
-                res.send(renamedFile);
-            });
-        });
 
-        // resize (width max 600px) and move the file from the temporary location to the intended location
-        //im.resize({
-        //    srcPath: tmp_path,
-        //    dstPath: target_path,
-        //    width:   600
-        //}, function (err, stdout, stderr) {
-        //    if (err) throw err;
-        //    // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-        //    fs.unlink(tmp_path, function () {
-        //        if (err) throw err;
-        //        res.send(renamedFile);
-        //    });
-        //});
+        // if image (fileExtension == '.jpg' || fileExtension == '.png'):
+        if (fileExtension == '.jpg' || fileExtension == '.png') {
+            // resize (width max 600px) and move the file from the temporary location to the intended location
+            im.resize({
+                srcPath: tmp_path,
+                dstPath: target_path,
+                width: 600
+            }, function (err, stdout, stderr) {
+                if (err) throw err;
+                // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+                fs.unlink(tmp_path, function () {
+                    if (err) throw err;
+                    res.send(renamedFile);
+                });
+            });
+        } else {
+            // move the file from the temporary location to the intended location
+            fs.rename(tmp_path, target_path, function (err) {
+                if (err) throw err;
+                // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+                fs.unlink(tmp_path, function () {
+                    if (err) throw err;
+                    res.send(renamedFile);
+                });
+            });
+        }
     }
 
     console.log('file ' + file.name + ' uploaded. (' + file.type + ')');

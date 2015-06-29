@@ -30,7 +30,6 @@ angular.module('mainapp.pageAdmin')
             Api.Match.put({
                 _id: _t._id
             }, {
-                matchID: _t.matchID,
                 thuisTeamID: _t.thuisTeamID,
                 thuisTeamSlug: _t.match_info.thuis.trim().toLowerCase().replace(/\s+/g, ''),
                 uitTeamID: _t.uitTeamID,
@@ -51,6 +50,7 @@ angular.module('mainapp.pageAdmin')
         self.matchAdd = function() {
             $rootScope.errorAddMatch = '';
             var _t = self.match;
+            _t.matchID = Math.random().toString(36).substring(7) + new Date().getTime();
             _t.match_info.logo_thuis = _t.match_info.thuis + '.jpg';
             _t.match_info.logo_uit = _t.match_info.uit + '.jpg';
 

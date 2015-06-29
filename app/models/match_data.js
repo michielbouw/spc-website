@@ -9,7 +9,7 @@ module.exports = mongoose.model('MatchData', {
     thuisTeamID: { type: Number },
     uitTeamID: { type: Number },
     divisie: { type: String },
-    season: { type: String },
+    seizoen: { type: String },
     ronde: { type: Number },
     datum: { type: String, required: true },
     wedstrijd: { type: String },

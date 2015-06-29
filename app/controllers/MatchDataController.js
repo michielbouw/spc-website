@@ -18,6 +18,15 @@ module.exports = MatchDataController = {
         });
     },
 
+    get_byID: function(req, res)
+    {
+        MatchData.findOne({matchID: req.params._id}, function(err, data){
+            if (err) res.send(err);
+            //if (!data) res.sendStatus(404);
+            res.json(data);
+        });
+    },
+
     post: function(req, res)
     {
         MatchData.create(req.body, function(err, data) {

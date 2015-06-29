@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 // module.exports allows us to pass this to other files when it is called
 
 module.exports = mongoose.model('Matches', {
-    matchID: {type : Number},
+    matchID: {type: Number, required: true, unique: true},
     thuisTeamID: {type : Number},
     thuisTeamSlug: {type : String, lowercase: true, trim: true},
     uitTeamID: {type : Number},
