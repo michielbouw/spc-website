@@ -18,10 +18,10 @@
             <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1 lineup_field" id="lineup_size">
                 <div>
                     <span style="color: #ffffff; position: absolute; margin-top: -moz-calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
-                        {{ match.match_info.thuis}}
+                        {{ data.matchshort.match_info.thuis}}
                     </span>
                 </div>
-                <div ng-repeat="lineup in match.opstelling.thuis">
+                <div ng-repeat="lineup in data.match.opstelling.thuis">
                     <span ng-if="lineup.positieID == 1" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
@@ -276,15 +276,15 @@
                     </span>
                 </div>
                 <img src="images/veld_opstelling_klein.png" style="width: 100%;" />
-                <div class="text-center"><small>{{ match.opstelling.thuis_formatie }}</small></div>
+                <div class="text-center"><small>{{ data.match.opstelling.thuis_formatie }}</small></div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 lineup_field" id="lineup_size">
                 <div>
                     <span style="color: #ffffff; position: absolute; margin-top: -moz-calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
-                        {{ match.match_info.uit}}
+                        {{ data.matchshort.match_info.uit}}
                     </span>
                 </div>
-                <div ng-repeat="lineup in match.opstelling.uit">
+                <div ng-repeat="lineup in data.match.opstelling.uit">
                     <span ng-if="lineup.positieID == 1" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
@@ -539,11 +539,11 @@
                     </span>
                 </div>
                 <img src="images/veld_opstelling_klein.png" style="width: 100%;" />
-                <div class="text-center"><small>{{ match.opstelling.uit_formatie }}</small></div>
+                <div class="text-center"><small>{{ data.match.opstelling.uit_formatie }}</small></div>
             </div>
         </div>
         <div class="stat-table opstelling">
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_lineup">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_lineup">
                 <div class="col-md-5 text-right">
                     <span ng-if="row.V2 == 'INGEVALLEN' || row.V2 == 'BANK'"><strong>{{ row.V2 }}</strong></span>
                     <span ng-if="row.V2 !== 'INGEVALLEN' && row.V2 !== 'BANK'" ng-bind-html="row.V2 | html_trusted"></span>
@@ -574,10 +574,10 @@
             </div>
             <div class="col-xs-12 stat-table-row text-center">
                 <div class="col-md-5 text-right">
-                    {{ match.match_info.coachthuis }}
+                    {{ data.matchshort.match_info.coachthuis }}
                 </div>
                 <div class="col-md-5 col-md-offset-2 text-left">
-                    {{ match.match_info.coachuit }}
+                    {{ data.matchshort.match_info.coachuit }}
                 </div>
             </div>
         </div>
@@ -586,10 +586,10 @@
             <h3>Wedstrijdverloop</h3>
             <h4>Overzicht van de gebeurtenissen</h4>
             <div class="col-xs-11 wedstrijdverloop">
-                <div class="actions" style="width: {{ 100 + (match.match_info.blessure_tijd.sec_2ehelft / 60 | number:0) * 1.052 }}%;">
-                    <div ng-repeat="row in match.overzicht_wedstrijd.overzicht_eerste_helft">
+                <div class="actions" style="width: {{ 100 + (data.matchshort.match_info.blessure_tijd.sec_2ehelft / 60 | number:0) * 1.052 }}%;">
+                    <div ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft">
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V2 !== ' ' || !row.V2)"
-                             style="margin-left: {{ (splitTime(row.V3) | number:0 ) * 1.052 }}%;">
+                             style="margin-left: {{ (data.splitTime(row.V3) | number:0 ) * 1.052 }}%;">
                             <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V1 }}</span></i></span>
@@ -599,7 +599,7 @@
                             <span ng-if="row.V2 == 'ingevallen'" style="font-size: 10px;"><i class="fa fa-arrow-up" style="color: #82CA9D; -ms-transform: translate(0,-6px); -webkit-transform: translate(0,-6px); transform: translate(0,-6px);"><span class="info info-wissel-in">Ingevallen: {{ row.V1 }}</span></i></span>
                         </div>
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V4 !== ' ' || !row.V4)"
-                             style="margin-left: {{ (splitTime(row.V3) | number:0 ) * 1.052 }}%;">
+                             style="margin-left: {{ (data.splitTime(row.V3) | number:0 ) * 1.052 }}%;">
                             <span ng-if="row.V4 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V5 }}</span></i></span>
@@ -609,9 +609,9 @@
                             <span ng-if="row.V4 == 'ingevallen'" style="font-size: 10px;"><i class="fa fa-arrow-up" style="color: #82CA9D; -ms-transform: translate(0,-6px); -webkit-transform: translate(0,-6px); transform: translate(0,-6px);"><span class="info info-wissel-in">Ingevallen: {{ row.V5 }}</span></i></span>
                         </div>
                     </div>
-                    <div ng-repeat="row in match.overzicht_wedstrijd.overzicht_tweede_helft">
+                    <div ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft">
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V2 !== ' ' || !row.V2)"
-                             style="margin-left: {{ (splitTime(row.V3) | number:0 ) * 1.052 }}%;">
+                             style="margin-left: {{ (data.splitTime(row.V3) | number:0 ) * 1.052 }}%;">
                             <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V1 }}</span></i></span>
@@ -621,7 +621,7 @@
                             <span ng-if="row.V2 == 'ingevallen'" style="font-size: 10px;"><i class="fa fa-arrow-up" style="color: #82CA9D; -ms-transform: translate(0,-6px); -webkit-transform: translate(0,-6px); transform: translate(0,-6px);"><span class="info info-wissel-in">Ingevallen: {{ row.V1 }}</span></i></span>
                         </div>
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V4 !== ' ' || !row.V4)"
-                             style="margin-left: {{ (splitTime(row.V3) | number:0 ) * 1.052 }}%;">
+                             style="margin-left: {{ (data.splitTime(row.V3) | number:0 ) * 1.052 }}%;">
                             <span ng-if="row.V4 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V5 }}</span></i></span>
@@ -642,15 +642,15 @@
                     <div class="col-xs-1 text-right no-padding">90'</div>
                 </div>
                 <div class="time">
-                    <div class="col-xs-6 col-xs-offset-3 text-center no-padding">+ {{ match.match_info.blessure_tijd.sec_1ehelft / 60 | number:0 }}'</div>
-                    <div class="col-xs-3 text-right no-padding">+ {{ match.match_info.blessure_tijd.sec_2ehelft / 60 | number:0 }}'</div>
+                    <div class="col-xs-6 col-xs-offset-3 text-center no-padding">+ {{ data.matchshort.match_info.blessure_tijd.sec_1ehelft / 60 | number:0 }}'</div>
+                    <div class="col-xs-3 text-right no-padding">+ {{ data.matchshort.match_info.blessure_tijd.sec_2ehelft / 60 | number:0 }}'</div>
                 </div>
             </div>
-            <div class="wedstrijdverloop wedstrijdverloop-verlenging" ng-if="match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging || match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
+            <div class="wedstrijdverloop wedstrijdverloop-verlenging" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging || match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
                 <div class="actions">
-                    <div ng-repeat="row in match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
+                    <div ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V2 !== ' ' || !row.V2)"
-                             style="margin-left: {{ ((splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
+                             style="margin-left: {{ ((data.splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
                             <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V1 }}</span></i></span>
@@ -660,7 +660,7 @@
                             <span ng-if="row.V2 == 'ingevallen'" style="font-size: 10px;"><i class="fa fa-arrow-up" style="color: #82CA9D; -ms-transform: translate(0,-6px); -webkit-transform: translate(0,-6px); transform: translate(0,-6px);"><span class="info info-wissel-in">Ingevallen: {{ row.V1 }}</span></i></span>
                         </div>
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V4 !== ' ' || !row.V4)"
-                             style="margin-left: {{ ((splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
+                             style="margin-left: {{ ((data.splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
                             <span ng-if="row.V4 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V5 }}</span></i></span>
@@ -670,9 +670,9 @@
                             <span ng-if="row.V4 == 'ingevallen'" style="font-size: 10px;"><i class="fa fa-arrow-up" style="color: #82CA9D; -ms-transform: translate(0,-6px); -webkit-transform: translate(0,-6px); transform: translate(0,-6px);"><span class="info info-wissel-in">Ingevallen: {{ row.V5 }}</span></i></span>
                         </div>
                     </div>
-                    <div ng-repeat="row in match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
+                    <div ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V2 !== ' ' || !row.V2)"
-                             style="margin-left: {{ ((splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
+                             style="margin-left: {{ ((data.splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
                             <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V1 }}</span></i></span>
                             <span ng-if="row.V2 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V1 }}</span></i></span>
@@ -682,7 +682,7 @@
                             <span ng-if="row.V2 == 'ingevallen'" style="font-size: 10px;"><i class="fa fa-arrow-up" style="color: #82CA9D; -ms-transform: translate(0,-6px); -webkit-transform: translate(0,-6px); transform: translate(0,-6px);"><span class="info info-wissel-in">Ingevallen: {{ row.V1 }}</span></i></span>
                         </div>
                         <div class="action" ng-if="(row.V3 && row.V3 !== ' ') && (row.V4 !== ' ' || !row.V4)"
-                             style="margin-left: {{ ((splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
+                             style="margin-left: {{ ((data.splitTime(row.V3) | number:0 ) - 90) * 1.578 }}%;">
                             <span ng-if="row.V4 == 'goal'"><i class="fa fa-soccer-ball-o"><span class="info">Goal: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"><span class="info">Penalty gescoord: {{ row.V5 }}</span></i></span>
                             <span ng-if="row.V4 == 'own goal'"><i class="fa fa-soccer-ball-o"><span class="info">Eigen doelpunt: {{ row.V5 }}</span></i></span>
@@ -703,14 +703,14 @@
         <br class="clear">
         <div class="stat-table wedstrijd">
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">{{ match.match_info.thuis }}</div>
+                <div class="col-md-4 text-right">{{ data.matchshort.match_info.thuis }}</div>
                 <div class="col-md-4"><span>&nbsp;</span></div>
-                <div class="col-md-4">{{ match.match_info.uit }}</div>
+                <div class="col-md-4">{{ data.matchshort.match_info.uit }}</div>
             </div>
             <div class="col-xs-12 stat-table-row text-center">
                 <h4>1e helft</h4>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_wedstrijd.overzicht_eerste_helft">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
@@ -751,7 +751,7 @@
             <div class="col-xs-12 stat-table-row text-center">
                 <h4>2e helft</h4>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_wedstrijd.overzicht_tweede_helft">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
@@ -789,11 +789,11 @@
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row text-center" ng-if="match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
+            <div class="col-xs-12 stat-table-row text-center" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
                 <h4>1e helft verlenging</h4>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-if="match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging"
-                 ng-repeat="row in match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
+            <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging"
+                 ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
@@ -829,11 +829,11 @@
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row text-center" ng-if="match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
+            <div class="col-xs-12 stat-table-row text-center" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
                 <h4>2e helft verlenging</h4>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-if="match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging"
-                 ng-repeat="row in match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
+            <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging"
+                 ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
@@ -874,8 +874,8 @@
             </div>
             <div class="col-xs-12 stat-table-row text-center">
                 <h4>Blessuretijd<br>
-                    <small>1e helft: {{ match.match_info.blessure_tijd.blessuretijd_1ehelft }}</small><br>
-                    <small>2e helft: {{ match.match_info.blessure_tijd.blessuretijd_2ehelft }}</small>
+                    <small>1e helft: {{ data.matchshort.match_info.blessure_tijd.blessuretijd_1ehelft }}</small><br>
+                    <small>2e helft: {{ data.matchshort.match_info.blessure_tijd.blessuretijd_2ehelft }}</small>
                 </h4>
             </div>
         </div>
@@ -885,7 +885,7 @@
             <h4>Algemene cijfers over de wedstrijd</h4>
         </div>
         <div class="stat-table statistieken">
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_wedstrijdstatistieken">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_wedstrijdstatistieken">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
@@ -901,34 +901,34 @@
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.hele_wedstrijd[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.hele_wedstrijd[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.hele_wedstrijd[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">Balbezit</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.hele_wedstrijd[match.uitTeamID] }}%
+                    {{ data.match.balbezit.hele_wedstrijd[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.hele_wedstrijd[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.helft_1[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.helft_1[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.helft_1[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">Balbezit 1e Helft</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.helft_1[match.uitTeamID] }}%
+                    {{ data.match.balbezit.helft_1[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.helft_1[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.helft_2[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.helft_2[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.helft_2[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">Balbezit 2e Helft</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.helft_2[match.uitTeamID] }}%
+                    {{ data.match.balbezit.helft_2[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.helft_2[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
@@ -940,106 +940,106 @@
         </div>
         <div class="stat-table balbezit">
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">{{ match.match_info.thuis }}</div>
+                <div class="col-md-4 text-right">{{ data.matchshort.match_info.thuis }}</div>
                 <div class="col-md-4 text-center">&nbsp;</div>
-                <div class="col-md-4">{{ match.match_info.uit }}</div>
+                <div class="col-md-4">{{ data.matchshort.match_info.uit }}</div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.hele_wedstrijd[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.hele_wedstrijd[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.hele_wedstrijd[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">Hele Wedstrijd</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.hele_wedstrijd[match.uitTeamID] }}%
+                    {{ data.match.balbezit.hele_wedstrijd[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.hele_wedstrijd[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.helft_1[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.helft_1[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.helft_1[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">1e Helft</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.helft_1[match.uitTeamID] }}%
+                    {{ data.match.balbezit.helft_1[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.helft_1[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.helft_2[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.helft_2[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.helft_2[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">2e Helft</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.helft_2[match.uitTeamID] }}%
+                    {{ data.match.balbezit.helft_2[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.helft_2[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.kwartier_1[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.kwartier_1[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_1[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">1e Kwartier</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.kwartier_1[match.uitTeamID] }}%
+                    {{ data.match.balbezit.kwartier_1[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_1[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.kwartier_2[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.kwartier_2[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_2[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">2e Kwartier</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.kwartier_2[match.uitTeamID] }}%
+                    {{ data.match.balbezit.kwartier_2[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_2[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.kwartier_3[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.kwartier_3[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_3[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">3e Kwartier</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.kwartier_3[match.uitTeamID] }}%
+                    {{ data.match.balbezit.kwartier_3[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_3[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.kwartier_4[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.kwartier_4[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_4[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">4e Kwartier</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.kwartier_4[match.uitTeamID] }}%
+                    {{ data.match.balbezit.kwartier_4[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_4[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.kwartier_5[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.kwartier_5[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_5[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">5e Kwartier</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.kwartier_5[match.uitTeamID] }}%
+                    {{ data.match.balbezit.kwartier_5[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_5[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    {{ match.balbezit.kwartier_6[match.thuisTeamID] }}%
+                    {{ data.match.balbezit.kwartier_6[match.thuisTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_6[match.thuisTeamID] == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-4 text-center">6e Kwartier</div>
                 <div class="col-md-4">
-                    {{ match.balbezit.kwartier_6[match.uitTeamID] }}%
+                    {{ data.match.balbezit.kwartier_6[match.uitTeamID] }}%
                     <span ng-show="match.balbezit.kwartier_6[match.uitTeamID] == ' '">&nbsp;</span>
                 </div>
             </div>
@@ -1050,7 +1050,7 @@
             <h4>Schoten, penalties en directe vrije trappen</h4>
         </div>
         <div class="stat-table doelpogingen">
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_doelpogingen">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_doelpogingen">
                 <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
                     {{ row.V1 }}
                 </div>
@@ -1082,16 +1082,16 @@
         <div class="stat-table dueloverzicht">
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    <strong>{{ match.match_info.thuis }}</strong>
+                    <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
                 <div class="col-md-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
                 <div class="col-md-4">
-                    <strong>{{ match.match_info.uit }}</strong>
+                    <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.duel_overzicht">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.duel_overzicht">
                 <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
                     {{ row.V1 }}
                 </div>
@@ -1120,16 +1120,16 @@
         <div class="stat-table overtredingen">
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    <strong>{{ match.match_info.thuis }}</strong>
+                    <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
                 <div class="col-md-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
                 <div class="col-md-4">
-                    <strong>{{ match.match_info.uit }}</strong>
+                    <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overtredingen">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overtredingen">
                 <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
                     {{ row.V1 }}
                 </div>
@@ -1158,16 +1158,16 @@
         <div class="stat-table spelhervattingen">
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    <strong>{{ match.match_info.thuis }}</strong>
+                    <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
                 <div class="col-md-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
                 <div class="col-md-4">
-                    <strong>{{ match.match_info.uit }}</strong>
+                    <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.spelhervattingen">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.spelhervattingen">
                 <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
                     {{ row.V1 }}
                 </div>
@@ -1199,16 +1199,16 @@
         <div class="stat-table overtredingen">
             <div class="col-xs-12 stat-table-row">
                 <div class="col-md-4 text-right">
-                    <strong>{{ match.match_info.thuis }}</strong>
+                    <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
                 <div class="col-md-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
                 <div class="col-md-4">
-                    <strong>{{ match.match_info.uit }}</strong>
+                    <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.passes">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.passes">
                 <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
                     {{ row.V1 }}
                 </div>
@@ -1255,27 +1255,27 @@
             <h4>Kies een tijdinterval</h4>
             <div class="col-xs-12 text-center">
                 <div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '00 - 15 min'">00 - 15 min</button>
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '15 - 30 min'">15 - 30 min</button>
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '30 - 45 min'">30 - 45 min</button>
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '45 - 60 min'">45 - 60 min</button>
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '60 - 75 min'">60 - 75 min</button>
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '75 - 90 min'">75 - 90 min</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '00 - 15 min'">00 - 15 min</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '15 - 30 min'">15 - 30 min</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '30 - 45 min'">30 - 45 min</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '45 - 60 min'">45 - 60 min</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '60 - 75 min'">60 - 75 min</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '75 - 90 min'">75 - 90 min</button>
                 </div>
             </div>
             <div class="col-xs-12 text-center">
                 <div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '1e helft'">1e helft</button>
-                    <button type="button" class="btn btn-primary" ng-click="position_field_interval = '2e helft'">2e helft</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '1e helft'">1e helft</button>
+                    <button type="button" class="btn btn-primary" ng-click="data.position_field_interval = '2e helft'">2e helft</button>
                 </div>
             </div>
         </div>
         <div class="col-xs-12">
-            <small>Interval: {{ position_field_interval }}</small>
+            <small>Interval: {{ data.position_field_interval }}</small>
             <br>
             <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 positions_field" id="positions_size">
-                <div ng-repeat="position in match.gemiddelde_posities">
-                    <span class="position thuis" ng-if="position.teamNaam == match.match_info.thuis_kort" style="margin-top: -moz-calc({{ position_field_height }}px - ({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc({{ position_field_height }}px - ({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc({{ position.breedte }}% - ({{ position.breedte }})*0.42px); margin-left: calc({{ position.breedte }}% - ({{ position.breedte }})*0.42px);">
+                <div ng-repeat="position in data.match.gemiddelde_posities">
+                    <span class="position thuis" ng-if="position.teamNaam == matchshort.match_info.thuis_kort" style="margin-top: -moz-calc({{ position_field_height }}px - ({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc({{ position_field_height }}px - ({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc({{ position.breedte }}% - ({{ position.breedte }})*0.42px); margin-left: calc({{ position.breedte }}% - ({{ position.breedte }})*0.42px);">
                         {{ position.rugnummer }}
                         <div class="position_info">
                             <h4>{{ position.spelerNaam }} <br><small>rugnr: {{ position.rugnummer }}</small></h4>
@@ -1283,7 +1283,7 @@
                             <p><small>{{ position.teamNaam }}</small></p>
                         </div>
                     </span>
-                    <span class="position uit" ng-if="position.teamNaam == match.match_info.uit_kort" style="margin-top: -moz-calc(({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc(({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc(100% - {{ position.breedte }}% - (100 - {{ position.breedte }})*0.42px); margin-left: calc(100% - {{ position.breedte }}% - (100 - {{ position.breedte }})*0.42px);">
+                    <span class="position uit" ng-if="position.teamNaam == matchshort.match_info.uit_kort" style="margin-top: -moz-calc(({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc(({{ position.lengte }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc(100% - {{ position.breedte }}% - (100 - {{ position.breedte }})*0.42px); margin-left: calc(100% - {{ position.breedte }}% - (100 - {{ position.breedte }})*0.42px);">
                         {{ position.rugnummer }}
                         <div class="position_info position_info_uit">
                             <h4>{{ position.spelerNaam }} <br><small>rugnr: {{ position.rugnummer }}</small></h4>
@@ -1295,11 +1295,11 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-12 col-md-3 col-lg-3 positions_field">
-                <p ng-click="select_positions_uit();" style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position uit" style="position: relative">14</span> speler {{ match.match_info.uit }}
+                <p ng-click="data.select_positions_uit();" style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ position_field_height }}px - 10px);">
+                    <span class="position uit" style="position: relative">14</span> speler {{ data.matchshort.match_info.uit }}
                 </p>
-                <p ng-click="select_positions_thuis();" style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position" style="position: relative">14</span> speler {{ match.match_info.thuis }}
+                <p ng-click="data.select_positions_thuis();" style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ position_field_height }}px - 10px);">
+                    <span class="position" style="position: relative">14</span> speler {{ data.matchshort.match_info.thuis }}
                 </p>
             </div>
             <br>
@@ -1311,7 +1311,7 @@
         </div>
         <div class="col-xs-12">
             <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 positions_field" id="positions_size">
-                <div ng-repeat="position in match.locatie_doelpogingen_filter.thuisTeam">
+                <div ng-repeat="position in data.match.locatie_doelpogingen_filter.thuisTeam">
                     <span ng-if="position.type == 'Doelpunt'" class="position" style="margin-top: -moz-calc({{ position_field_height }}px - ({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc({{ position_field_height }}px - ({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #008000;">
                         <div class="position_info position_info_uit">
                             <h4>{{ position.spelerNaam }} <br><small>rugnr: {{ position.rugnummer }}</small></h4>
@@ -1346,7 +1346,7 @@
                         </div>
                     </span>
                 </div>
-                <div ng-repeat="position in match.locatie_doelpogingen_filter.uitTeam">
+                <div ng-repeat="position in data.match.locatie_doelpogingen_filter.uitTeam">
                     <span ng-if="position.type == 'Doelpunt'" class="position uit" style="margin-top: -moz-calc(({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc(({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc(100% - {{ position.locationInFieldWidth }}% - (100 - {{ position.locationInFieldWidth }})*0.42px); margin-left: calc(100% - {{ position.locationInFieldWidth }}% - (100 - {{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #008000;">
                         <div class="position_info">
                             <h4>{{ position.spelerNaam }} <br><small>rugnr: {{ position.rugnummer }}</small></h4>
@@ -1384,16 +1384,16 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-12 col-md-3 col-lg-3 positions_field">
-                <p ng-click="select_pogingen_thuis();" style="position: absolute; margin-top: -moz-calc((44 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((44 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ match.match_info.thuis }}
+                <p ng-click="data.select_pogingen_thuis();" style="position: absolute; margin-top: -moz-calc((44 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((44 / 100)* {{ position_field_height }}px - 10px);">
+                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ data.matchshort.match_info.thuis }}
                 </p>
-                <p ng-click="select_pogingen_uit();" style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ match.match_info.uit }}
+                <p ng-click="data.select_pogingen_uit();" style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ position_field_height }}px - 10px);">
+                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ data.matchshort.match_info.uit }}
                 </p>
-                <p ng-click="select_pogingen_doel();" style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ position_field_height }}px - 10px);">
+                <p ng-click="data.select_pogingen_doel();" style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ position_field_height }}px - 10px);">
                     <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #008000;"></span> doelpunt
                 </p>
-                <p ng-click="select_pogingen_target();" style="position: absolute; margin-top: -moz-calc((56 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((56 / 100)* {{ position_field_height }}px - 10px);">
+                <p ng-click="data.select_pogingen_target();" style="position: absolute; margin-top: -moz-calc((56 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((56 / 100)* {{ position_field_height }}px - 10px);">
                     <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #ff0000;"></span> on target
                 </p>
             </div>
@@ -1405,23 +1405,23 @@
             <h4>De locatie van balcontact per team (donkerder is meer balcontact)</h4>
         </div>
         <div class="col-xs-12">
-            <div class="col-xs-12"><strong>{{ match.match_info.thuis }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
+            <div class="col-xs-12"><strong>{{ data.matchshort.match_info.thuis }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
             <div class="col-xs-6 ball_contact_field">
                 1e helft<br>
-                <img src="data/{{ match.matchID }}/team_{{ match.thuisTeamID }}_helft1_heatmap.png" style="width: 100%;" />
+                <img src="data/{{ data.match.matchID }}/team_{{ data.match.thuisTeamID }}_helft1_heatmap.png" style="width: 100%;" />
             </div>
             <div class="col-xs-6 ball_contact_field">
                 2e helft<br>
-                <img src="data/{{ match.matchID }}/team_{{ match.thuisTeamID }}_helft2_heatmap.png" style="width: 100%;" />
+                <img src="data/{{ data.match.matchID }}/team_{{ data.match.thuisTeamID }}_helft2_heatmap.png" style="width: 100%;" />
             </div>
-            <div class="col-xs-12"><strong>{{ match.match_info.uit }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
+            <div class="col-xs-12"><strong>{{ data.matchshort.match_info.uit }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
             <div class="col-xs-6 ball_contact_field">
                 1e helft<br>
-                <img src="data/{{ match.matchID }}/team_{{ match.uitTeamID }}_helft1_heatmap.png" style="width: 100%;" />
+                <img src="data/{{ data.match.matchID }}/team_{{ data.match.uitTeamID }}_helft1_heatmap.png" style="width: 100%;" />
             </div>
             <div class="col-xs-6 ball_contact_field">
                 2e helft<br>
-                <img src="data/{{ match.matchID }}/team_{{ match.uitTeamID }}_helft2_heatmap.png" style="width: 100%;" />
+                <img src="data/{{ data.match.matchID }}/team_{{ data.match.uitTeamID }}_helft2_heatmap.png" style="width: 100%;" />
             </div>
         </div>
 
@@ -1430,10 +1430,10 @@
             <h4>Totaal aantal gespeelde passes met succes percentage per zone</h4>
         </div>
         <div class="col-xs-12">
-            <div class="col-xs-12"><strong>{{ match.match_info.thuis }}</strong> <small>speelrichting van onder naar boven</small></div>
+            <div class="col-xs-12"><strong>{{ data.matchshort.match_info.thuis }}</strong> <small>speelrichting van onder naar boven</small></div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Korte passes<br>
-                <div ng-repeat="row in match.passes_per_zone.thuis.kort" class="pass_zone">
+                <div ng-repeat="row in data.match.passes_per_zone.thuis.kort" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == '1'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1457,7 +1457,7 @@
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Middellange passes<br>
-                <div ng-repeat="row in match.passes_per_zone.thuis.middellang" class="pass_zone">
+                <div ng-repeat="row in data.match.passes_per_zone.thuis.middellang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1481,7 +1481,7 @@
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Lange passes<br>
-                <div ng-repeat="row in match.passes_per_zone.thuis.lang" class="pass_zone">
+                <div ng-repeat="row in data.match.passes_per_zone.thuis.lang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1504,10 +1504,10 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
 
-            <div class="col-xs-12"><br><strong>{{ match.match_info.uit }}</strong> <small>speelrichting van onder naar boven</small></div>
+            <div class="col-xs-12"><br><strong>{{ data.matchshort.match_info.uit }}</strong> <small>speelrichting van onder naar boven</small></div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Korte passes<br>
-                <div ng-repeat="row in match.passes_per_zone.uit.kort" class="pass_zone">
+                <div ng-repeat="row in data.match.passes_per_zone.uit.kort" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1531,7 +1531,7 @@
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Middellange passes<br>
-                <div ng-repeat="row in match.passes_per_zone.uit.middellang" class="pass_zone">
+                <div ng-repeat="row in data.match.passes_per_zone.uit.middellang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1555,7 +1555,7 @@
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
                 Lange passes<br>
-                <div ng-repeat="row in match.passes_per_zone.uit.lang" class="pass_zone">
+                <div ng-repeat="row in data.match.passes_per_zone.uit.lang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1584,30 +1584,30 @@
             <h4>Wie passt naar wie?</h4>
             <div class="col-xs-12 text-center">
                 <div class="btn-group btn-group-xs" id="choosehalfpass" role="group" role="tablist">
-                    <button type="button" class="btn btn-primary" href="#passfirsthome" aria-controls="passfirsthome" role="tab" data-toggle="tab">1e helft {{ match.match_info.thuis }}</button>
-                    <button type="button" class="btn btn-primary" href="#passsecondhome" aria-controls="passsecondhome" role="tab" data-toggle="tab">2e helft {{ match.match_info.thuis }}</button>
-                    <button type="button" class="btn btn-primary" href="#passfirstaway" aria-controls="passfirstaway" role="tab" data-toggle="tab">1e helft {{ match.match_info.uit }}</button>
-                    <button type="button" class="btn btn-primary" href="#passsecondaway" aria-controls="passsecondaway" role="tab" data-toggle="tab">2e helft {{ match.match_info.uit }}</button>
+                    <button type="button" class="btn btn-primary" href="#passfirsthome" aria-controls="passfirsthome" role="tab" data-toggle="tab">1e helft {{ data.matchshort.match_info.thuis }}</button>
+                    <button type="button" class="btn btn-primary" href="#passsecondhome" aria-controls="passsecondhome" role="tab" data-toggle="tab">2e helft {{ data.matchshort.match_info.thuis }}</button>
+                    <button type="button" class="btn btn-primary" href="#passfirstaway" aria-controls="passfirstaway" role="tab" data-toggle="tab">1e helft {{ data.matchshort.match_info.uit }}</button>
+                    <button type="button" class="btn btn-primary" href="#passsecondaway" aria-controls="passsecondaway" role="tab" data-toggle="tab">2e helft {{ data.matchshort.match_info.uit }}</button>
                 </div>
             </div>
         </div>
         <div class="tab-content">
         <div class="tab-pane fade in active" role="tabpanel" id="passfirsthome">
-            <div class="col-xs-12"><h4>Passes - Eerste Helft - {{ match.match_info.thuis }}</h4></div>
+            <div class="col-xs-12"><h4>Passes - Eerste Helft - {{ data.matchshort.match_info.thuis }}</h4></div>
             <div class="passmatrix">
                 <div class="col-xs-12 table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>van <i class="fa fa-angle-down"></i> <span class="pull-right">naar <i class="fa fa-angle-right"></i></span></th>
-                            <th class="rotate" ng-repeat="speler in match.pass_matrix_helft1_thuis_spelers | orderBy:orderSpelers">
+                            <th class="rotate" ng-repeat="speler in data.match.pass_matrix_helft1_thuis_spelers | orderBy:orderSpelers">
                                 <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                             </th>
                             <th class="rotate"><div><span>Totaal</span></div></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft1.thuis.passMatrix">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft1.thuis.passMatrix">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1616,7 +1616,7 @@
                                     <strong>Totaal</strong>
                                 </span>
                             </td>
-                            <td ng-repeat="speler in match.pass_matrix_helft1_thuis_spelers | orderBy:orderSpelers"
+                            <td ng-repeat="speler in data.match.pass_matrix_helft1_thuis_spelers | orderBy:orderSpelers"
                                 ng-class="{ 'fill': row['_row'] == speler.spelerNaam , 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                 <span ng-if="!row[speler.personID] || row[speler.personID] == '0' || row[speler.personID] == 0 || row[speler.personID] == ' '">
                                     <span ng-if="row['_row'] !== speler.spelerNaam">0</span>
@@ -1656,7 +1656,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft1.thuis.passMatrix2">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft1.thuis.passMatrix2">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1685,21 +1685,21 @@
             </div>
         </div>
         <div class="tab-pane fade" role="tabpanel" id="passfirstaway">
-            <div class="col-xs-12"><h4>Passes - Eerste Helft - {{ match.match_info.uit }}</h4></div>
+            <div class="col-xs-12"><h4>Passes - Eerste Helft - {{ data.matchshort.match_info.uit }}</h4></div>
             <div class="passmatrix">
                 <div class="col-xs-12 table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>van <i class="fa fa-angle-down"></i> <span class="pull-right">naar <i class="fa fa-angle-right"></i></span></th>
-                            <th class="rotate" ng-repeat="speler in match.pass_matrix_helft1_uit_spelers | orderBy:orderSpelers">
+                            <th class="rotate" ng-repeat="speler in data.match.pass_matrix_helft1_uit_spelers | orderBy:orderSpelers">
                                 <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                             </th>
                             <th class="rotate"><div><span>Totaal</span></div></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft1.uit.passMatrix">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft1.uit.passMatrix">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1708,7 +1708,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                             </td>
-                            <td ng-repeat="speler in match.pass_matrix_helft1_uit_spelers | orderBy:orderSpelers"
+                            <td ng-repeat="speler in data.match.pass_matrix_helft1_uit_spelers | orderBy:orderSpelers"
                                 ng-class="{ 'fill': row['_row'] == speler.spelerNaam , 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                 <span ng-if="!row[speler.personID] || row[speler.personID] == '0' || row[speler.personID] == 0 || row[speler.personID] == ' '">
                                     <span ng-if="row['_row'] !== speler.spelerNaam">0</span>
@@ -1748,7 +1748,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft1.uit.passMatrix2">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft1.uit.passMatrix2">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1777,21 +1777,21 @@
             </div>
         </div>
         <div class="tab-pane fade" role="tabpanel" id="passsecondhome">
-            <div class="col-xs-12"><h4>Passes - Tweede Helft - {{ match.match_info.thuis }}</h4></div>
+            <div class="col-xs-12"><h4>Passes - Tweede Helft - {{ data.matchshort.match_info.thuis }}</h4></div>
             <div class="passmatrix">
                 <div class="col-xs-12 table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>van <i class="fa fa-angle-down"></i> <span class="pull-right">naar <i class="fa fa-angle-right"></i></span></th>
-                            <th class="rotate" ng-repeat="speler in match.pass_matrix_helft2_thuis_spelers | orderBy:orderSpelers">
+                            <th class="rotate" ng-repeat="speler in data.match.pass_matrix_helft2_thuis_spelers | orderBy:orderSpelers">
                                 <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                             </th>
                             <th class="rotate"><div><span>Totaal</span></div></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft2.thuis.passMatrix">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft2.thuis.passMatrix">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1800,7 +1800,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                             </td>
-                            <td ng-repeat="speler in match.pass_matrix_helft2_thuis_spelers | orderBy:orderSpelers"
+                            <td ng-repeat="speler in data.match.pass_matrix_helft2_thuis_spelers | orderBy:orderSpelers"
                                 ng-class="{ 'fill': row['_row'] == speler.spelerNaam , 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                 <span ng-if="!row[speler.personID] || row[speler.personID] == '0' || row[speler.personID] == 0 || row[speler.personID] == ' '">
                                     <span ng-if="row['_row'] !== speler.spelerNaam">0</span>
@@ -1840,7 +1840,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft2.thuis.passMatrix2">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft2.thuis.passMatrix2">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1869,21 +1869,21 @@
             </div>
         </div>
         <div class="tab-pane fade" role="tabpanel" id="passsecondaway">
-            <div class="col-xs-12"><h4>Passes - Tweede Helft - {{ match.match_info.uit }}</h4></div>
+            <div class="col-xs-12"><h4>Passes - Tweede Helft - {{ data.matchshort.match_info.uit }}</h4></div>
             <div class="passmatrix">
                 <div class="col-xs-12 table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>van <i class="fa fa-angle-down"></i> <span class="pull-right">naar <i class="fa fa-angle-right"></i></span></th>
-                            <th class="rotate" ng-repeat="speler in match.pass_matrix_helft2_uit_spelers | orderBy:orderSpelers">
+                            <th class="rotate" ng-repeat="speler in data.match.pass_matrix_helft2_uit_spelers | orderBy:orderSpelers">
                                 <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                             </th>
                             <th class="rotate"><div><span>Totaal</span></div></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft2.uit.passMatrix">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft2.uit.passMatrix">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1892,7 +1892,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                             </td>
-                            <td ng-repeat="speler in match.pass_matrix_helft2_uit_spelers | orderBy:orderSpelers"
+                            <td ng-repeat="speler in data.match.pass_matrix_helft2_uit_spelers | orderBy:orderSpelers"
                                 ng-class="{ 'fill': row['_row'] == speler.spelerNaam , 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                 <span ng-if="!row[speler.personID] || row[speler.personID] == '0' || row[speler.personID] == 0 || row[speler.personID] == ' '">
                                     <span ng-if="row['_row'] !== speler.spelerNaam">0</span>
@@ -1932,7 +1932,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in match.pass_matrix_helft2.uit.passMatrix2">
+                        <tr ng-repeat="row in data.match.pass_matrix_helft2.uit.passMatrix2">
                             <td>
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
@@ -1981,14 +1981,14 @@
                             <thead>
                             <tr>
                                 <th>1e helft<br><br>thuis <i class="fa fa-angle-down"></i> <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist"><button type="button" class="btn btn-default" href="#duelfirstaway" aria-controls="duelfirstaway" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i></button></div> <span class="pull-right">uit <i class="fa fa-angle-right"></i></span></th>
-                                <th class="rotate" ng-repeat="speler in match.duel_matrix_eerste_helft_thuis_spelers_uitteam | orderBy:orderSpelers">
+                                <th class="rotate" ng-repeat="speler in data.match.duel_matrix_eerste_helft_thuis_spelers_uitteam | orderBy:orderSpelers">
                                     <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                                 </th>
                                 <th class="rotate"><div><span>Totaal</span></div></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in match.duel_matrix_eerste_helft.thuis">
+                            <tr ng-repeat="row in data.match.duel_matrix_eerste_helft.thuis">
                                 <td>
                                     <small ng-if="row['1']">
                                         {{ row['1'] }}
@@ -1997,7 +1997,7 @@
                                             <strong>Totaal</strong>
                                         </span>
                                 </td>
-                                <td ng-repeat="speler in match.duel_matrix_eerste_helft_thuis_spelers_uitteam | orderBy:orderSpelers"
+                                <td ng-repeat="speler in data.match.duel_matrix_eerste_helft_thuis_spelers_uitteam | orderBy:orderSpelers"
                                     ng-class="{ 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                     {{ row[speler.personID] }}
                                 </td>
@@ -2015,14 +2015,14 @@
                             <thead>
                             <tr>
                                 <th>1e helft<br><br>uit <i class="fa fa-angle-down"></i> <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist"><button type="button" class="btn btn-default" href="#duelfirsthome" aria-controls="duelfirsthome" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i></button></div> <span class="pull-right">thuis <i class="fa fa-angle-right"></i></span></th>
-                                <th class="rotate" ng-repeat="speler in match.duel_matrix_eerste_helft_uit_spelers_thuisteam | orderBy:orderSpelers">
+                                <th class="rotate" ng-repeat="speler in data.match.duel_matrix_eerste_helft_uit_spelers_thuisteam | orderBy:orderSpelers">
                                     <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                                 </th>
                                 <th class="rotate"><div><span>Totaal</span></div></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in match.duel_matrix_eerste_helft.uit">
+                            <tr ng-repeat="row in data.match.duel_matrix_eerste_helft.uit">
                                 <td>
                                     <small ng-if="row['1']">
                                         {{ row['1'] }}
@@ -2031,7 +2031,7 @@
                                             <strong>Totaal</strong>
                                         </span>
                                 </td>
-                                <td ng-repeat="speler in match.duel_matrix_eerste_helft_uit_spelers_thuisteam | orderBy:orderSpelers"
+                                <td ng-repeat="speler in data.match.duel_matrix_eerste_helft_uit_spelers_thuisteam | orderBy:orderSpelers"
                                     ng-class="{ 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                     {{ row[speler.personID] }}
                                 </td>
@@ -2050,14 +2050,14 @@
                             <thead>
                             <tr>
                                 <th>2e helft<br><br>thuis <i class="fa fa-angle-down"></i> <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist"><button type="button" class="btn btn-default" href="#duelsecondaway" aria-controls="duelsecondaway" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i></button></div> <span class="pull-right">uit <i class="fa fa-angle-right"></i></span></th>
-                                <th class="rotate" ng-repeat="speler in match.duel_matrix_tweede_helft_thuis_spelers_uitteam | orderBy:orderSpelers">
+                                <th class="rotate" ng-repeat="speler in data.match.duel_matrix_tweede_helft_thuis_spelers_uitteam | orderBy:orderSpelers">
                                     <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                                 </th>
                                 <th class="rotate"><div><span>Totaal</span></div></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in match.duel_matrix_tweede_helft.thuis">
+                            <tr ng-repeat="row in data.match.duel_matrix_tweede_helft.thuis">
                                 <td>
                                     <small ng-if="row['1']">
                                         {{ row['1'] }}
@@ -2066,7 +2066,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                                 </td>
-                                <td ng-repeat="speler in match.duel_matrix_tweede_helft_thuis_spelers_uitteam | orderBy:orderSpelers"
+                                <td ng-repeat="speler in data.match.duel_matrix_tweede_helft_thuis_spelers_uitteam | orderBy:orderSpelers"
                                     ng-class="{ 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                     {{ row[speler.personID] }}
                                 </td>
@@ -2084,14 +2084,14 @@
                             <thead>
                             <tr>
                                 <th>2e helft<br><br>uit <i class="fa fa-angle-down"></i> <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist"><button type="button" class="btn btn-default" href="#duelsecondhome" aria-controls="duelsecondhome" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i></button></div> <span class="pull-right">thuis <i class="fa fa-angle-right"></i></span></th>
-                                <th class="rotate" ng-repeat="speler in match.duel_matrix_tweede_helft_uit_spelers_thuisteam | orderBy:orderSpelers">
+                                <th class="rotate" ng-repeat="speler in data.match.duel_matrix_tweede_helft_uit_spelers_thuisteam | orderBy:orderSpelers">
                                     <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                                 </th>
                                 <th class="rotate"><div><span>Totaal</span></div></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in match.duel_matrix_tweede_helft.uit">
+                            <tr ng-repeat="row in data.match.duel_matrix_tweede_helft.uit">
                                 <td>
                                     <small ng-if="row['1']">
                                         {{ row['1'] }}
@@ -2100,7 +2100,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                                 </td>
-                                <td ng-repeat="speler in match.duel_matrix_tweede_helft_uit_spelers_thuisteam | orderBy:orderSpelers"
+                                <td ng-repeat="speler in data.match.duel_matrix_tweede_helft_uit_spelers_thuisteam | orderBy:orderSpelers"
                                     ng-class="{ 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                     {{ row[speler.personID] }}
                                 </td>
@@ -2119,14 +2119,14 @@
                             <thead>
                             <tr>
                                 <th>Hele wedstrijd<br><br>thuis <i class="fa fa-angle-down"></i> <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist"><button type="button" class="btn btn-default" href="#duelfullaway" aria-controls="duelfullaway" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i></button></div> <span class="pull-right">uit <i class="fa fa-angle-right"></i></span></th>
-                                <th class="rotate" ng-repeat="speler in match.duel_matrix_hele_wedstrijd_thuis_spelers_uitteam | orderBy:orderSpelers">
+                                <th class="rotate" ng-repeat="speler in data.match.duel_matrix_hele_wedstrijd_thuis_spelers_uitteam | orderBy:orderSpelers">
                                     <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                                 </th>
                                 <th class="rotate"><div><span>Totaal</span></div></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in match.duel_matrix_hele_wedstrijd.thuis">
+                            <tr ng-repeat="row in data.match.duel_matrix_hele_wedstrijd.thuis">
                                 <td>
                                     <small ng-if="row['1']">
                                         {{ row['1'] }}
@@ -2135,7 +2135,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                                 </td>
-                                <td ng-repeat="speler in match.duel_matrix_hele_wedstrijd_thuis_spelers_uitteam | orderBy:orderSpelers"
+                                <td ng-repeat="speler in data.match.duel_matrix_hele_wedstrijd_thuis_spelers_uitteam | orderBy:orderSpelers"
                                     ng-class="{ 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                     {{ row[speler.personID] }}
                                 </td>
@@ -2153,14 +2153,14 @@
                             <thead>
                             <tr>
                                 <th>Hele wedstrijd<br><br>uit <i class="fa fa-angle-down"></i> <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist"><button type="button" class="btn btn-default" href="#duelfullhome" aria-controls="duelfullhome" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i></button></div> <span class="pull-right">thuis <i class="fa fa-angle-right"></i></span></th>
-                                <th class="rotate" ng-repeat="speler in match.duel_matrix_hele_wedstrijd_uit_spelers_thuisteam | orderBy:orderSpelers">
+                                <th class="rotate" ng-repeat="speler in data.match.duel_matrix_hele_wedstrijd_uit_spelers_thuisteam | orderBy:orderSpelers">
                                     <div><span><small style="font-weight: normal;">{{ speler.spelerNaam }}</small></span></div>
                                 </th>
                                 <th class="rotate"><div><span>Totaal</span></div></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in match.duel_matrix_hele_wedstrijd.uit">
+                            <tr ng-repeat="row in data.match.duel_matrix_hele_wedstrijd.uit">
                                 <td>
                                     <small ng-if="row['1']">
                                         {{ row['1'] }}
@@ -2169,7 +2169,7 @@
                                         <strong>Totaal</strong>
                                     </span>
                                 </td>
-                                <td ng-repeat="speler in match.duel_matrix_hele_wedstrijd_uit_spelers_thuisteam | orderBy:orderSpelers"
+                                <td ng-repeat="speler in data.match.duel_matrix_hele_wedstrijd_uit_spelers_thuisteam | orderBy:orderSpelers"
                                     ng-class="{ 'medium': row[speler.personID] >= 5 && row['_row'] !== 'TOTAAL', 'high': row[speler.personID] >= 9 && row['_row'] !== 'TOTAAL' }">
                                     {{ row[speler.personID] }}
                                 </td>
@@ -2188,9 +2188,9 @@
         </div>
         <div ng-if="!match.penalty_visualisatie || match.penalty_visualisatie.length <= 0 || match.penalty_visualisatie[0] == -999"
              class="stat-table penalty_visualisatie"><div class="col-xs-12">Geen penalties gemaakt</div></div>
-        <div ng-if="match.penalty_visualisatie.length > 0 && match.penalty_visualisatie[0] !== -999"
+        <div ng-if="data.match.penalty_visualisatie.length > 0 && match.penalty_visualisatie[0] !== -999"
              class="stat-table penalty_visualisatie">
-            <div class="col-xs-8 col-xs-offset-2 col-lg-6 col-lg-offset-3" ng-repeat="penalty in match.penalty_visualisatie"
+            <div class="col-xs-8 col-xs-offset-2 col-lg-6 col-lg-offset-3" ng-repeat="penalty in data.match.penalty_visualisatie"
                     style="margin-top: 15px; margin-bottom: 15px;">
                 <img src="images/penalty.png" class="img-responsive">
                 <span ng-if="penalty.linkerpaal" style="position: absolute; top: 0; left: 0; width: 4%; height: 60%; background: red; opacity: 0.5;"></span>
@@ -2248,7 +2248,7 @@
         <div class="stat-table overtredingen_speler">
             <div class="col-xs-12 stat-table-row">
                 <div class="col-xs-12">
-                    <strong>{{ match.match_info.thuis }}</strong>
+                    <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
@@ -2258,7 +2258,7 @@
                 <div class="col-xs-2"><strong>Ondergaan</strong></div>
                 <div class="col-xs-2"><strong>Buitenspel</strong></div>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_overtredingen_per_speler.thuis">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_overtredingen_per_speler.thuis">
                 <div class="col-xs-2">&nbsp;</div>
                 <div class="col-xs-3">{{ row.spelerNaam }}</div>
                 <div class="col-xs-2">{{ row.gemaakt }}</div>
@@ -2268,7 +2268,7 @@
 
             <div class="col-xs-12 stat-table-row">
                 <div class="col-xs-12">
-                    <strong>{{ match.match_info.uit }}</strong>
+                    <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
@@ -2278,7 +2278,7 @@
                 <div class="col-xs-2"><strong>Ondergaan</strong></div>
                 <div class="col-xs-2"><strong>Buitenspel</strong></div>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-repeat="row in match.overzicht_overtredingen_per_speler.uit">
+            <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_overtredingen_per_speler.uit">
                 <div class="col-xs-2">&nbsp;</div>
                 <div class="col-xs-3">{{ row.spelerNaam }}</div>
                 <div class="col-xs-2">{{ row.gemaakt }}</div>
@@ -2293,7 +2293,7 @@
         </div>
         <div class="col-xs-12">
             <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 overtredingen_field" id="overtredingen_size">
-                <div ng-repeat="position in match.locatie_overtredingen_filter.thuisTeam">
+                <div ng-repeat="position in data.match.locatie_overtredingen_filter.thuisTeam">
                     <span class="position" style="margin-top: -moz-calc({{ position_field_height }}px - ({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc({{ position_field_height }}px - ({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px;">
                         <div class="position_info position_info_uit">
                             <h4>{{ position.spelerNaam }} <br><small>rugnr: {{ position.rugnummer }}</small></h4>
@@ -2304,7 +2304,7 @@
                         </div>
                     </span>
                 </div>
-                <div ng-repeat="position in match.locatie_overtredingen_filter.uitTeam">
+                <div ng-repeat="position in data.match.locatie_overtredingen_filter.uitTeam">
                     <span class="position uit" style="margin-top: -moz-calc(({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-top: calc(({{ position.locationInFieldLength }} / 100)*{{ position_field_height }}px - 10px); margin-left: -moz-calc(100% - {{ position.locationInFieldWidth }}% - (100 - {{ position.locationInFieldWidth }})*0.42px); margin-left: calc(100% - {{ position.locationInFieldWidth }}% - (100 - {{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px;">
                         <div class="position_info">
                             <h4>{{ position.spelerNaam }} <br><small>rugnr: {{ position.rugnummer }}</small></h4>
@@ -2318,11 +2318,11 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-12 col-md-3 col-lg-3 positions_field">
-                <p ng-click="select_overtredingen_thuis();" style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ match.match_info.thuis }} <i class="fa fa-long-arrow-up"></i>
+                <p ng-click="data.select_overtredingen_thuis();" style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ position_field_height }}px - 10px);">
+                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ data.matchshort.match_info.thuis }} <i class="fa fa-long-arrow-up"></i>
                 </p>
-                <p ng-click="select_overtredingen_uit();" style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ match.match_info.uit }} <i class="fa fa-long-arrow-down"></i>
+                <p ng-click="data.select_overtredingen_uit();" style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ position_field_height }}px - 10px);">
+                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> overtreding {{ data.matchshort.match_info.uit }} <i class="fa fa-long-arrow-down"></i>
                 </p>
             </div>
             <br>
@@ -2337,7 +2337,7 @@
     <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="players">
 
         <div id="thuis" class="col-lg-12 content-title-top text-center">
-            <h3>Spelers {{ match.match_info.thuis }}</h3>
+            <h3>Spelers {{ data.matchshort.match_info.thuis }}</h3>
             <h4>Klik op de gewenste speler</h4>
         </div>
         <div class="col-xs-12">
@@ -2345,13 +2345,545 @@
             het blokje met de naam. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
             in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam te klikken.</small>
         </div>
+        <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1 lineup_field" id="lineup_size">
+                <div>
+                    <span style="color: #ffffff; position: absolute; margin-top: -moz-calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
+                        {{ data.matchshort.match_info.thuis}}
+                    </span>
+                </div>
+                <div ng-repeat="lineup in data.match.opstelling.thuis">
+                    <span ng-if="lineup.positieID == 1" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 2" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 3" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 4" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.52px); margin-left: calc(35% - (35)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 5" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 6" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.52px); margin-left: calc(65% - (65)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 7" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(85% - (85)*0.52px); margin-left: calc(85% - (85)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 8" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 9" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 10" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 11" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 12" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 13" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 14" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(40% - (40)*0.52px); margin-left: calc(40% - (40)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 15" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 16" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(60% - (60)*0.52px); margin-left: calc(60% - (60)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 17" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 18" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 19" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.52px); margin-left: calc(35% - (35)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 20" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 21" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.52px); margin-left: calc(65% - (65)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 22" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 23" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 24" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 25" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 26" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 27" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 28" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                </div>
+                <img src="images/veld_opstelling_klein.png" style="width: 100%;" />
+                <div class="text-center"><small>{{ data.match.opstelling.thuis_formatie }}</small></div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 lineup_field" id="lineup_size">
+                <div>
+                    <span style="color: #ffffff; position: absolute; margin-top: -moz-calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (90 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
+                        {{ data.matchshort.match_info.uit}}
+                    </span>
+                </div>
+                <div ng-repeat="lineup in data.match.opstelling.uit">
+                    <span ng-if="lineup.positieID == 1" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 2" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 3" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 4" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.52px); margin-left: calc(35% - (35)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 5" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 6" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.52px); margin-left: calc(65% - (65)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 7" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(85% - (85)*0.52px); margin-left: calc(85% - (85)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 8" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 9" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 10" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 11" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 12" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 13" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 14" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(40% - (40)*0.52px); margin-left: calc(40% - (40)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 15" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 16" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(60% - (60)*0.52px); margin-left: calc(60% - (60)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 17" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 18" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 19" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.52px); margin-left: calc(35% - (35)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 20" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 21" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.52px); margin-left: calc(65% - (65)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 22" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 23" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 24" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 25" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 26" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 27" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                    <span ng-if="lineup.positieID == 28" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.52px);">
+                        {{ lineup.shirtNummer }}
+                        <div class="lineup_info">
+                            <h4>{{ lineup.spelerNaam }}<br>
+                                <small>{{ lineup.positieNaam }}</small>
+                            </h4>
+                            <img ng-src="media/players/{{ lineup.personID }}.jpg" on-error-src="images/blank-avatar.png">
+                        </div>
+                    </span>
+                </div>
+                <img src="images/veld_opstelling_klein.png" style="width: 100%;" />
+                <div class="text-center"><small>{{ data.match.opstelling.uit_formatie }}</small></div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div ng-repeat="speler in data.match.player_stats_full_thuis" ng-if="$index > 11">{{ speler.spelerNaam }} - {{ speler.rugnummer }}</div>
+        </div>
+
         <div class="panel-group col-xs-12 no-padding speler_accordion" id="speler_accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel col-xs-12" ng-repeat="speler in match.player_stats_full_thuis | orderBy:orderSpelersNaamType">
+            <div class="panel col-xs-12" ng-repeat="speler in data.match.player_stats_full_thuis | orderBy:orderSpelersNaamType">
                 <div ng-if="$index == 0" class="panel-heading" role="tab" id="heading{{ speler.personID }}">
                     <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#speler_accordion" data-target="#collapse{{ speler.personID }}"
                            aria-expanded="true" aria-controls="collapse{{ speler.personID }}">
-                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <small>{{ speler.type }}</small> <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
+                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
                         </a>
                     </h4>
                 </div>
@@ -2359,7 +2891,7 @@
                     <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#speler_accordion" data-target="#collapse{{ speler.personID }}"
                            aria-expanded="false" aria-controls="collapse{{ speler.personID }}">
-                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <small>{{ speler.type }}</small> <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
+                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
                         </a>
                     </h4>
                 </div>
@@ -2419,11 +2951,11 @@
                     <div class="col-xs-12 item_title">Heatmap balacties <small>per helft, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>1e helft</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft1_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_helft1_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>2e helft</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft2_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_helft2_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
 
                     <div class="col-xs-12 item_title" ng-if="speler.type == 'veldspeler'">Aanvallende acties <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -2470,11 +3002,11 @@
                     <div class="col-xs-12 item_title">Heatmap passes <small>hele wedstrijd, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass naar</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_naar.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_pass_naar.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass ontvangen van</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_ontvangen_van.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_pass_ontvangen_van.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
 
                     <div class="col-xs-12 item_title">Passes 1e helft <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -2773,7 +3305,7 @@
         </div>
 
         <div id="uit" class="col-xs-12 content-title text-center">
-            <h3>Spelers {{ match.match_info.uit }}</h3>
+            <h3>Spelers {{ data.matchshort.match_info.uit }}</h3>
             <h4>Klik op de gewenste speler</h4>
         </div>
         <div class="col-xs-12">
@@ -2782,12 +3314,12 @@
             in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam te klikken.</small>
         </div>
         <div class="panel-group col-xs-12 no-padding speler_accordion" id="speler_accordion2" role="tablist" aria-multiselectable="true">
-            <div class="panel col-xs-12" ng-repeat="speler in match.player_stats_full_uit | orderBy:orderSpelersNaamType">
+            <div class="panel col-xs-12" ng-repeat="speler in data.match.player_stats_full_uit | orderBy:orderSpelersNaamType">
                 <div ng-if="$index == 0" class="panel-heading" role="tab" id="heading{{ speler.personID }}">
                     <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#speler_accordion2" data-target="#collapse{{ speler.personID }}"
                            aria-expanded="true" aria-controls="collapse{{ speler.personID }}">
-                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <small>{{ speler.type }}</small> <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
+                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
                         </a>
                     </h4>
                 </div>
@@ -2795,7 +3327,7 @@
                     <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#speler_accordion2" data-target="#collapse{{ speler.personID }}"
                            aria-expanded="false" aria-controls="collapse{{ speler.personID }}">
-                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <small>{{ speler.type }}</small> <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
+                            <img ng-src="media/players/{{ speler.personID }}.jpg" on-error-src="images/blank-avatar.png"> {{ speler.spelerNaam }} <span class="pull-right" tooltip-placement="left" tooltip="rugnummer">{{ speler.rugnummer }}</span>
                         </a>
                     </h4>
                 </div>
@@ -2855,11 +3387,11 @@
                     <div class="col-xs-12 item_title">Heatmap balacties <small>per helft, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>1e helft</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft1_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_helft1_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_balactie_field">
                         <i>2e helft</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_helft2_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_helft2_heatmap.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
 
                     <div class="col-xs-12 item_title" ng-if="speler.type == 'veldspeler'">Aanvallende acties <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -2906,11 +3438,11 @@
                     <div class="col-xs-12 item_title">Heatmap passes <small>hele wedstrijd, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass naar</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_naar.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_pass_naar.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
                     <div class="col-xs-12 col-sm-6 text-center heatmap_passes_field">
                         <i>Pass ontvangen van</i><br>
-                        <img ng-src="data/{{ match.matchID }}/speler_{{ speler.personID }}_pass_ontvangen_van.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
+                        <img ng-src="data/{{ data.match.matchID }}/speler_{{ speler.personID }}_pass_ontvangen_van.png" on-error-src="images/empty_data_field.png" style="width: 100%;">
                     </div>
 
                     <div class="col-xs-12 item_title">Passes 1e helft <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -3216,16 +3748,16 @@
             <div class="col-xs-12 col-md-6">
                 Speler 1:
                 <select ng-model="player_index1" class="form-control input-sm"
-                        ng-change="player1InitFunc(player_index1)"
-                        ng-options="player.personID as player.spelerNaam for player in match.player_stats_thuis | orderBy:orderSpelersNaam">
+                        ng-change="data.player1InitFunc(player_index1)"
+                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_thuis | orderBy:orderSpelersNaam">
                     <option value="">-- kies speler --</option>
                 </select>
             </div>
             <div class="col-xs-12 col-md-6">
                 Spelers 2:
                 <select ng-model="player_index2" class="form-control input-sm"
-                        ng-change="player2InitFunc(player_index2)"
-                        ng-options="player.personID as player.spelerNaam for player in match.player_stats_thuis | orderBy:orderSpelersNaam">
+                        ng-change="data.player2InitFunc(player_index2)"
+                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_thuis | orderBy:orderSpelersNaam">
                     <option value="">-- kies speler --</option>
                 </select>
                 <br>
@@ -3235,39 +3767,39 @@
         <div class="col-xs-12 col-md-6" ng-show="player_index1">
             <hr>
             <div class="col-xs-12">
-                <h2>{{ speler1.spelerNaam }}</h2>
+                <h2>{{ data.speler1.spelerNaam }}</h2>
             </div>
-            <div ng-if="speler1.type == 'veldspeler'">
-                <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ speler1.minuten }}</div>
-                <div class="col-xs-8">Doelpunten</div><div class="col-xs-4">{{ speler1.doelpunten }}</div>
-                <div class="col-xs-8">Doelpogingen</div><div class="col-xs-4">{{ speler1.doelpogingen }}</div>
-                <div class="col-xs-8">Op doel</div><div class="col-xs-4">{{ speler1.doelpogingen_opdoel }}%</div>
-                <div class="col-xs-8">Voorzetten</div><div class="col-xs-4">{{ speler1.voorzetten }}</div>
-                <div class="col-xs-8">Aantal passes</div><div class="col-xs-4">{{ speler1.aantal_passes }}</div>
-                <div class="col-xs-8">Geslaagde passes</div><div class="col-xs-4">{{ speler1.pass_percentage }}%</div>
-                <div class="col-xs-8">Gem. pass lengte</div><div class="col-xs-4">{{ speler1.pass_lengte }}</div>
-                <div class="col-xs-8">Gewonnen duels</div><div class="col-xs-4">{{ speler1.gewonnen_duels }}%</div>
-                <div class="col-xs-8">Verdedigende duels</div><div class="col-xs-4">{{ speler1.verdedigende_duels }}</div>
-                <div class="col-xs-8">Aanvallende duels</div><div class="col-xs-4">{{ speler1.aanvallende_duels }}</div>
-                <div class="col-xs-8">Intercepties</div><div class="col-xs-4">{{ speler1.intercepties }}</div>
-                <div class="col-xs-8">Overtredingen</div><div class="col-xs-4">{{ speler1.overtredingen }}</div>
-                <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ speler1.geel }}</div>
-                <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ speler1.rood }}</div>
+            <div ng-if="data.speler1.type == 'veldspeler'">
+                <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler1.minuten }}</div>
+                <div class="col-xs-8">Doelpunten</div><div class="col-xs-4">{{ data.speler1.doelpunten }}</div>
+                <div class="col-xs-8">Doelpogingen</div><div class="col-xs-4">{{ data.speler1.doelpogingen }}</div>
+                <div class="col-xs-8">Op doel</div><div class="col-xs-4">{{ data.speler1.doelpogingen_opdoel }}%</div>
+                <div class="col-xs-8">Voorzetten</div><div class="col-xs-4">{{ data.speler1.voorzetten }}</div>
+                <div class="col-xs-8">Aantal passes</div><div class="col-xs-4">{{ data.speler1.aantal_passes }}</div>
+                <div class="col-xs-8">Geslaagde passes</div><div class="col-xs-4">{{ data.speler1.pass_percentage }}%</div>
+                <div class="col-xs-8">Gem. pass lengte</div><div class="col-xs-4">{{ data.speler1.pass_lengte }}</div>
+                <div class="col-xs-8">Gewonnen duels</div><div class="col-xs-4">{{ data.speler1.gewonnen_duels }}%</div>
+                <div class="col-xs-8">Verdedigende duels</div><div class="col-xs-4">{{ data.speler1.verdedigende_duels }}</div>
+                <div class="col-xs-8">Aanvallende duels</div><div class="col-xs-4">{{ data.speler1.aanvallende_duels }}</div>
+                <div class="col-xs-8">Intercepties</div><div class="col-xs-4">{{ data.speler1.intercepties }}</div>
+                <div class="col-xs-8">Overtredingen</div><div class="col-xs-4">{{ data.speler1.overtredingen }}</div>
+                <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ data.speler1.geel }}</div>
+                <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ data.speler1.rood }}</div>
             </div>
-            <div ng-if="speler1.type == 'keeper'">
-                <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ speler1.minuten }}</div>
-                <div class="col-xs-8">Reddingen</div><div class="col-xs-4">{{ speler1.reddingen }}</div>
-                <div class="col-xs-8">Geslaagde reddingen</div><div class="col-xs-4">{{ speler1.geslaagde_reddingen }}%</div>
-                <div class="col-xs-8">Geslaagde uittrappen</div><div class="col-xs-4">{{ speler1.succesvolle_uittrappen }}%</div>
-                <div class="col-xs-8">Korte passes</div><div class="col-xs-4">{{ speler1.korte_passes }}</div>
-                <div class="col-xs-8">Middellange passes</div><div class="col-xs-4">{{ speler1.middellange_passes }}</div>
-                <div class="col-xs-8">Lange passes</div><div class="col-xs-4">{{ speler1.lange_passes }}</div>
-                <div class="col-xs-8">Gelaagde passes</div><div class="col-xs-4">{{ speler1.pass_percentage }}%</div>
-                <div class="col-xs-8">Gem. pass lengte</div><div class="col-xs-4">{{ speler1.pass_lengte }}</div>
-                <div class="col-xs-8">Gevangen ballen</div><div class="col-xs-4">{{ speler1.gevangen_ballen }}</div>
-                <div class="col-xs-8">Weggestompte ballen</div><div class="col-xs-4">{{ speler1.weggestompte_ballen }}</div>
-                <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ speler1.geel }}</div>
-                <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ speler1.rood }}</div>
+            <div ng-if="data.speler1.type == 'keeper'">
+                <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler1.minuten }}</div>
+                <div class="col-xs-8">Reddingen</div><div class="col-xs-4">{{ data.speler1.reddingen }}</div>
+                <div class="col-xs-8">Geslaagde reddingen</div><div class="col-xs-4">{{ data.speler1.geslaagde_reddingen }}%</div>
+                <div class="col-xs-8">Geslaagde uittrappen</div><div class="col-xs-4">{{ data.speler1.succesvolle_uittrappen }}%</div>
+                <div class="col-xs-8">Korte passes</div><div class="col-xs-4">{{ data.speler1.korte_passes }}</div>
+                <div class="col-xs-8">Middellange passes</div><div class="col-xs-4">{{ data.speler1.middellange_passes }}</div>
+                <div class="col-xs-8">Lange passes</div><div class="col-xs-4">{{ data.speler1.lange_passes }}</div>
+                <div class="col-xs-8">Gelaagde passes</div><div class="col-xs-4">{{ data.speler1.pass_percentage }}%</div>
+                <div class="col-xs-8">Gem. pass lengte</div><div class="col-xs-4">{{ data.speler1.pass_lengte }}</div>
+                <div class="col-xs-8">Gevangen ballen</div><div class="col-xs-4">{{ data.speler1.gevangen_ballen }}</div>
+                <div class="col-xs-8">Weggestompte ballen</div><div class="col-xs-4">{{ data.speler1.weggestompte_ballen }}</div>
+                <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ data.speler1.geel }}</div>
+                <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ data.speler1.rood }}</div>
             </div>
             <br>
         </div>
@@ -3275,39 +3807,39 @@
         <div class="col-xs-12 col-md-6" ng-show="player_index2">
             <hr>
             <div class="col-xs-12 text-right">
-                <h2>{{ speler2.spelerNaam }}</h2>
+                <h2>{{ data.speler2.spelerNaam }}</h2>
             </div>
             <div class="text-right" ng-if="speler2.type == 'veldspeler'">
-                <div class="col-xs-4">{{ speler2.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
-                <div class="col-xs-4">{{ speler2.doelpunten }}</div><div class="col-xs-8">Doelpunten</div>
-                <div class="col-xs-4">{{ speler2.doelpogingen }}</div><div class="col-xs-8">Doelpogingen</div>
-                <div class="col-xs-4">{{ speler2.doelpogingen_opdoel }}%</div><div class="col-xs-8">Op doel</div>
-                <div class="col-xs-4">{{ speler2.voorzetten }}</div><div class="col-xs-8">Voorzetten</div>
-                <div class="col-xs-4">{{ speler2.aantal_passes }}</div><div class="col-xs-8">Aantal passes</div>
-                <div class="col-xs-4">{{ speler2.pass_percentage }}%</div><div class="col-xs-8">Geslaagde passes</div>
-                <div class="col-xs-4">{{ speler2.pass_lengte }}</div><div class="col-xs-8">Gem. pass lengte</div>
-                <div class="col-xs-4">{{ speler2.gewonnen_duels }}%</div><div class="col-xs-8">Gewonnen duels</div>
-                <div class="col-xs-4">{{ speler2.verdedigende_duels }}</div><div class="col-xs-8">Verdedigende duels</div>
-                <div class="col-xs-4">{{ speler2.aanvallende_duels }}</div><div class="col-xs-8">Aanvallende duels</div>
-                <div class="col-xs-4">{{ speler2.intercepties }}</div><div class="col-xs-8">Intercepties</div>
-                <div class="col-xs-4">{{ speler2.overtredingen }}</div><div class="col-xs-8">Overtredingen</div>
-                <div class="col-xs-4">{{ speler2.geel }}</div><div class="col-xs-8">Gele kaarten</div>
-                <div class="col-xs-4">{{ speler2.rood }}</div><div class="col-xs-8">Rode kaarten</div>
+                <div class="col-xs-4">{{ data.speler2.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
+                <div class="col-xs-4">{{ data.speler2.doelpunten }}</div><div class="col-xs-8">Doelpunten</div>
+                <div class="col-xs-4">{{ data.speler2.doelpogingen }}</div><div class="col-xs-8">Doelpogingen</div>
+                <div class="col-xs-4">{{ data.speler2.doelpogingen_opdoel }}%</div><div class="col-xs-8">Op doel</div>
+                <div class="col-xs-4">{{ data.speler2.voorzetten }}</div><div class="col-xs-8">Voorzetten</div>
+                <div class="col-xs-4">{{ data.speler2.aantal_passes }}</div><div class="col-xs-8">Aantal passes</div>
+                <div class="col-xs-4">{{ data.speler2.pass_percentage }}%</div><div class="col-xs-8">Geslaagde passes</div>
+                <div class="col-xs-4">{{ data.speler2.pass_lengte }}</div><div class="col-xs-8">Gem. pass lengte</div>
+                <div class="col-xs-4">{{ data.speler2.gewonnen_duels }}%</div><div class="col-xs-8">Gewonnen duels</div>
+                <div class="col-xs-4">{{ data.speler2.verdedigende_duels }}</div><div class="col-xs-8">Verdedigende duels</div>
+                <div class="col-xs-4">{{ data.speler2.aanvallende_duels }}</div><div class="col-xs-8">Aanvallende duels</div>
+                <div class="col-xs-4">{{ data.speler2.intercepties }}</div><div class="col-xs-8">Intercepties</div>
+                <div class="col-xs-4">{{ data.speler2.overtredingen }}</div><div class="col-xs-8">Overtredingen</div>
+                <div class="col-xs-4">{{ data.speler2.geel }}</div><div class="col-xs-8">Gele kaarten</div>
+                <div class="col-xs-4">{{ data.speler2.rood }}</div><div class="col-xs-8">Rode kaarten</div>
             </div>
-            <div class="text-right" ng-if="speler2.type == 'keeper'">
-                <div class="col-xs-4">{{ speler2.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
-                <div class="col-xs-4">{{ speler2.reddingen }}</div><div class="col-xs-8">Reddingen</div>
-                <div class="col-xs-4">{{ speler2.geslaagde_reddingen }}%</div><div class="col-xs-8">Geslaagde reddingen</div>
-                <div class="col-xs-4">{{ speler2.succesvolle_uittrappen }}%</div><div class="col-xs-8">Geslaagde uittrappen</div>
-                <div class="col-xs-4">{{ speler2.korte_passes }}</div><div class="col-xs-8">Korte passes</div>
-                <div class="col-xs-4">{{ speler2.middellange_passes }}</div><div class="col-xs-8">Middellange passes</div>
-                <div class="col-xs-4">{{ speler2.lange_passes }}</div><div class="col-xs-8">Lange passes</div>
-                <div class="col-xs-4">{{ speler2.pass_percentage }}%</div><div class="col-xs-8">Gelaagde passes</div>
-                <div class="col-xs-4">{{ speler2.pass_lengte }}</div><div class="col-xs-8">Gem. pass lengte</div>
-                <div class="col-xs-4">{{ speler2.gevangen_ballen }}</div><div class="col-xs-8">Gevangen ballen</div>
-                <div class="col-xs-4">{{ speler2.weggestompte_ballen }}</div><div class="col-xs-8">Weggestompte ballen</div>
-                <div class="col-xs-4">{{ speler2.geel }}</div><div class="col-xs-8">Gele kaarten</div>
-                <div class="col-xs-4">{{ speler2.rood }}</div><div class="col-xs-8">Rode kaarten</div>
+            <div class="text-right" ng-if="data.speler2.type == 'keeper'">
+                <div class="col-xs-4">{{ data.speler2.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
+                <div class="col-xs-4">{{ data.speler2.reddingen }}</div><div class="col-xs-8">Reddingen</div>
+                <div class="col-xs-4">{{ data.speler2.geslaagde_reddingen }}%</div><div class="col-xs-8">Geslaagde reddingen</div>
+                <div class="col-xs-4">{{ data.speler2.succesvolle_uittrappen }}%</div><div class="col-xs-8">Geslaagde uittrappen</div>
+                <div class="col-xs-4">{{ data.speler2.korte_passes }}</div><div class="col-xs-8">Korte passes</div>
+                <div class="col-xs-4">{{ data.speler2.middellange_passes }}</div><div class="col-xs-8">Middellange passes</div>
+                <div class="col-xs-4">{{ data.speler2.lange_passes }}</div><div class="col-xs-8">Lange passes</div>
+                <div class="col-xs-4">{{ data.speler2.pass_percentage }}%</div><div class="col-xs-8">Gelaagde passes</div>
+                <div class="col-xs-4">{{ data.speler2.pass_lengte }}</div><div class="col-xs-8">Gem. pass lengte</div>
+                <div class="col-xs-4">{{ data.speler2.gevangen_ballen }}</div><div class="col-xs-8">Gevangen ballen</div>
+                <div class="col-xs-4">{{ data.speler2.weggestompte_ballen }}</div><div class="col-xs-8">Weggestompte ballen</div>
+                <div class="col-xs-4">{{ data.speler2.geel }}</div><div class="col-xs-8">Gele kaarten</div>
+                <div class="col-xs-4">{{ data.speler2.rood }}</div><div class="col-xs-8">Rode kaarten</div>
             </div>
             <br>
         </div>
@@ -3348,20 +3880,15 @@
                 Zo kan later teruggelezen worden waar het goed of juist fout ging.
                 Deze notities komen ook achteraan het PDF document te staan als deze gedownload wordt.</small>
             <select ng-model="playerlog_index1" class="form-control input-sm"
-                    ng-change="playerlog1InitFunc(playerlog_index1)"
-                    ng-options="player.personID as player.spelerNaam for player in match.player_stats_thuis | orderBy:orderSpelersNaam">
+                    ng-change="data.playerlog1InitFunc(playerlog_index1)"
+                    ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_thuis | orderBy:orderSpelersNaam">
                 <option value="">-- kies speler --</option>
             </select>
-            <!--<select ng-model="playerlog_index2" class="form-control input-sm"
-                    ng-change="playerlog2InitFunc(playerlog_index2)"
-                    ng-options="player.personID as player.spelerNaam for player in match.player_stats_uit | orderBy:orderSpelersNaam">
-                <option value="">&#45;&#45; kies speler &#45;&#45;</option>
-            </select>-->
             <hr>
         </div>
         <div class="col-xs-12" ng-show="playerlog_index1 || playerlog_index2">
             <hr>
-            <h4>{{ spelerlog.spelerNaam }} <small>{{ spelerlog.type }}</small></h4>
+            <h4>{{ data.spelerlogspelernaam }}</h4>
             <p>Opmerking plaatsen</p>
             <textarea class="form-control" rows="2"></textarea>
             <br>

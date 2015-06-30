@@ -1,16 +1,16 @@
 <div class="container">
     <div class="col-md-2 hidden-xs hidden-sm">
-        <div class="col-md-2 navbar-sub" ng-hide="match_index >= 0">
+        <!--<div class="col-md-2 navbar-sub" ng-hide>
             <div class="item-title">Analyse</div>
             <ul id="nav-sub" class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a href="/wedstrijd" scroll-to="top"><i class="fa fa-soccer-ball-o"></i> Wedstrijd</a></li>
                 <li role="presentation"><a href="/spelers" scroll-to="top"><i class="fa fa-user"></i> Spelers</a></li>
-                <!--<li role="presentation"><a href="/extra" scroll-to="top"><i class="fa fa-plus"></i> Extra analyse</a></li>-->
-                <!--<li role="presentation"><a href="/training" scroll-to="top"><i class="fa fa-steam"></i> Training</a></li>-->
+                &lt;!&ndash;<li role="presentation"><a href="/extra" scroll-to="top"><i class="fa fa-plus"></i> Extra analyse</a></li>&ndash;&gt;
+                &lt;!&ndash;<li role="presentation"><a href="/training" scroll-to="top"><i class="fa fa-steam"></i> Training</a></li>&ndash;&gt;
             </ul>
-        </div>
+        </div>-->
 
-        <div class="col-md-2 navbar-sub" ng-show="match_index >= 0">
+        <div class="col-md-2 navbar-sub">
             <div class="item-title"><a href="/analyse">Analyse</a> / Wedstrijd</div>
             <ul id="nav-sub" class="nav nav-pills nav-stacked" role="tablist">
                 <li role="presentation" class="active">
@@ -52,7 +52,7 @@
                     <ul class="nav nav-pills nav-stacked submenu">
                         <li>
                             <a href="" scroll-to="thuis">
-                                <!--<span class="caret-right"></span><span class="caret"></span>--> {{ match.match_info.thuis }}
+                                <!--<span class="caret-right"></span><span class="caret"></span>--> {{ matchshort.match_info.thuis }}
                             </a>
                             <!--<ul class="nav nav-pills nav-stacked submenu">
                                 <li ng-repeat="speler in match.spelersthuisteam">
@@ -60,7 +60,7 @@
                                 </li>
                             </ul>-->
                         </li>
-                        <li><a href="" scroll-to="uit"> {{ match.match_info.uit }}</a></li>
+                        <li><a href="" scroll-to="uit"> {{ matchshort.match_info.uit }}</a></li>
                         <li><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
                     </ul>
                 </li>
@@ -85,11 +85,11 @@
 
     <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 content content-top">
         <div class="col-xs-12">
-            <div class="col-xs-12" ng-hide="match_index >= 0">
+            <!--<div class="col-xs-12" ng-hide="match_index >= 0">
                 <h2>Soccer performance</h2>
                 <h4>Wedstrijd rapport</h4>
-            </div>
-            <div class="col-xs-12 text-center" ng-hide="match_index >= 0"><h4>Seizoen kiezen</h4></div>
+            </div>-->
+            <!--<div class="col-xs-12 text-center" ng-hide="match_index >= 0"><h4>Seizoen kiezen</h4></div>
             <div id="season-select" class="col-lg-12" ng-hide="match_index >= 0">
                 <br>
                 <select ng-model="season_index" class="form-control input-sm"
@@ -109,51 +109,51 @@
                         ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in season_matches">
                 </select>
                 <br>
-            </div>
-            <div id="match-info" ng-show="match_index >= 0">
+            </div>-->
+            <div id="match-info">
                 <div class="col-xs-2 text-left">
-                    <p style="text-transform: capitalize;">{{ match.match_info.speeldag }}<br>
-                        {{ match.match_info.datum }} {{ match.match_info.tijd }}<br>
-                    <small>(ronde {{ match.match_info.ronde }})</small><p>
-                    <small><img src="images/referee.svg" height="16px"> {{ match.match_info.scheids }}</small><br>
+                    <p style="text-transform: capitalize;">{{ matchshort.match_info.speeldag }}<br>
+                        {{ matchshort.match_info.datum }} {{ matchshort.match_info.tijd }}<br>
+                    <small>(ronde {{ matchshort.match_info.ronde }})</small><p>
+                    <small><img src="images/referee.svg" height="16px"> {{ matchshort.match_info.scheids }}</small><br>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_thuis }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_thuis }}" class="logo">
                 </div>
                 <div class="col-xs-6 text-center">
-                    <h3>{{ match.match_info.wedstrijd }}</h3>
+                    <h3>{{ matchshort.match_info.wedstrijd }}</h3>
                     <h4>
-                        {{ match.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand">({{ match.match_info.ruststand }})</small>
+                        {{ matchshort.match_info.eindstand }}<br>
+                        <small tooltip-placement="right" tooltip="ruststand">({{ matchshort.match_info.ruststand }})</small>
                     </h4>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_uit }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
-            <div id="match-info-short" ng-show="match_index >= 0">
+            <div id="match-info-short">
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_thuis }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_thuis }}" class="logo">
                 </div>
                 <div class="col-xs-10 text-center">
-                    <h4>{{ match.match_info.wedstrijd }}<br>
-                        {{ match.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand">({{ match.match_info.ruststand }})</small>
+                    <h4>{{ matchshort.match_info.wedstrijd }}<br>
+                        {{ matchshort.match_info.eindstand }}<br>
+                        <small tooltip-placement="right" tooltip="ruststand">({{ matchshort.match_info.ruststand }})</small>
                     </h4>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ match.match_info.logo_uit }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
             <input type="checkbox" name="handler-navbar-sub-mobile" class="handler" id="handler-navbar-sub-mobile" onclick="null" />
-            <div class="col-xs-12 no-padding navbar-sub-mobile-toggle hidden-md hidden-lg" ng-show="match_index >= 0">
+            <div class="col-xs-12 no-padding navbar-sub-mobile-toggle hidden-md hidden-lg">
                 <div class="col-xs-12">
                     <label for="handler-navbar-sub-mobile" id="navbar-sub-mobile" href="#">
                         <span id="navbar-sub-mobile-toggle" title="menu"><i class="fa fa-bars"></i> navigatie</span>
                     </label>
                 </div>
             </div>
-            <div class="col-xs-12 hidden-md hidden-lg no-padding navbar-sub-mobile" ng-show="match_index >= 0">
+            <div class="col-xs-12 hidden-md hidden-lg no-padding navbar-sub-mobile">
                 <ul id="nav-sub-mobile" class="nav nav-pills" role="tablist">
                     <li role="presentation" class="active">
                         <a href="#home" aria-controls="home" role="tab" data-toggle="tab" scroll-to="top">
@@ -192,8 +192,8 @@
                             <span class="caret-right"></span><span class="caret"></span> Spelers
                         </a>
                         <ul class="nav nav-pills submenu">
-                            <li><a href="" scroll-to="thuis" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">{{ match.match_info.thuis }}</a></li>
-                            <li><a href="" scroll-to="uit" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);"> {{ match.match_info.uit }}</a></li>
+                            <li><a href="" scroll-to="thuis" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">{{ matchshort.match_info.thuis }}</a></li>
+                            <li><a href="" scroll-to="uit" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);"> {{ matchshort.match_info.uit }}</a></li>
                             <li><a href="" scroll-to="vergelijk" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Vergelijken</a></li>
                         </ul>
                     </li>

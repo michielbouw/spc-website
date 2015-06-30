@@ -19,6 +19,8 @@ angular.module('mainapp.memberAuth')
                 // temp
                 $rootScope.currentClub = {};
                 $rootScope.currentClub.name = "FC Eindhoven";
+                $rootScope.currentClub.slug = "fceindhoven";
+                $rootScope.currentClub.teamslug = "fceindhoven_1eelftal";
                 $rootScope.currentClub.colors = [{ "color": "blauw", "refcode": "#24528e"}, { "color": "wit", "refcode": "#ffffff"}];
             }
 

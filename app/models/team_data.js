@@ -30,7 +30,13 @@ module.exports = mongoose.model('TeamData', {
             doelpogingen: { type: Number },
             gewonnen_duels: { type: Number },
             geel: { type: Number },
-            rood: { type: Number }
+            rood: { type: Number },
+
+            // team match log
+            match_log: [{
+                author: { type: String },
+                text: { type: String }
+            }]
         }]
     }],
 
@@ -80,7 +86,19 @@ module.exports = mongoose.model('TeamData', {
                 succesvolle_uittrappen: { type: Number },
                 gevangen_ballen: { type: Number },
                 weggestompte_ballen: { type: Number },
-                doelpunten_tegen: { type: Number }
+                doelpunten_tegen: { type: Number },
+
+                // match scores review coach
+                scores: {
+                    score_from_coach: { type: Number },
+                    emi: { type: Number },
+                    emh: { type: Number }
+                },
+                // log
+                player_log: [{
+                    author: { type: String },
+                    text: { type: String }
+                }]
             }]
         }]
     }],

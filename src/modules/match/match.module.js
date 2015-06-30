@@ -9,7 +9,7 @@ angular.module('mainapp.match', [])
                     permission: 'speler'
                 }
             })
-            .when('/wedstrijd/matchID', {
+            .when('/wedstrijd/:_id', {
                 templateUrl: 	'match/views/match-single.html',
                 access: {
                     requiredLogin: true,

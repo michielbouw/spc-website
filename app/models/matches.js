@@ -24,6 +24,8 @@ module.exports = mongoose.model('Matches', {
         coach_uit: {type : String},
         thuis: {type : String},
         uit: {type : String},
+        thuis_kort: {type : String},
+        uit_kort: {type : String},
         logo_thuis: {type : String},
         logo_uit: {type : String},
         scheids: {type : String},

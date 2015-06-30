@@ -9,7 +9,7 @@ module.exports = mongoose.model('Club', {
 
     name: { type: String, required: true },
     email: { type: String },
-    spc_package: { type: String },
+    spc_package: { type: String, default: 'club' },
     logo: { type : String },
     colors: [{
         color: { type: String },
