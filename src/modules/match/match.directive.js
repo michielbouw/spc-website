@@ -106,6 +106,7 @@ angular.module('mainapp.match')
                             $(this).tab('show');
                             $timeout(function() {
                                 scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
+                                scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
                                 scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
@@ -119,6 +120,7 @@ angular.module('mainapp.match')
                             $(this).tab('show');
                             $timeout(function() {
                                 scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
+                                scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
                                 scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();

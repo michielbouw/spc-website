@@ -1,33 +1,34 @@
 angular.module('mainapp.match')
-    .controller('mainapp.match.MatchSingleController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location', '$rootScope', '$timeout',
-        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $timeout)
+    .controller('mainapp.match.MatchSingleController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location', '$rootScope', '$routeParams',
+        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $routeParams)
     {
         var self = this;
 
         self.matchshort = {};
         self.match = {};
         Api.Match.get({
-            _id: req.params._id
+            _id: $routeParams._id
         }, function (res) {
             self.matchshort = res;
         });
         Api.MatchDataID.get({
-            _id: req.params._id
+            _id: $routeParams._id
         }, function (res) {
             self.match = res;
+            self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
+            self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+            self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
-            Api.TeamData.get({
+            Api.TeamDataItem.get({
                 _slug: $rootScope.currentClub.teamslug
             }, function (res) {
-                var temp = $filter('filter')(res.team_data, {season: self.match.seizoen}, true)[0];
-                self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
-                self.playerdata = res.player_data;
+                if ($filter('filter')(res.team_data, {season: self.match.seizoen}, true)) {
+                    var temp = $filter('filter')(res.team_data, {season: self.match.seizoen}, true)[0];
+                    self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
+                    self.playerdata = res.player_data;
+                }
             });
         });
-
-        self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
-        self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-        self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
         self.splitTime = function(string) {
             if ( !isNaN( Number(string.split("'")[0]) ) ) {
@@ -169,22 +170,22 @@ angular.module('mainapp.match')
             }
         };
 
-        self.pos = 15;
-        self.time = 15;
-        self.$watch('time', function () {
-            self.pos = self.time;
-        });
+        //self.pos = 15;
+        //self.time = 15;
+        //self.$watch('time', function () {
+        //    self.pos = self.time;
+        //});
 
-        self.position_field_interval = '1e helft';
-        self.$watch('position_field_interval', function () {
-            if (self.position_field_interval == '00 - 15 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier1; }
-            else if (self.position_field_interval == '15 - 30 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier2; }
-            else if (self.position_field_interval == '30 - 45 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier3; }
-            else if (self.position_field_interval == '45 - 60 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier4; }
-            else if (self.position_field_interval == '60 - 75 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier5; }
-            else if (self.position_field_interval == '75 - 90 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier6; }
-            else if (self.position_field_interval == '1e helft') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_helft1; }
-            else if (self.position_field_interval == '2e helft') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_helft2; }
+        $scope.position_field_interval = '1e helft';
+        $scope.$watch('position_field_interval', function () {
+            if ($scope.position_field_interval == '00 - 15 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier1; }
+            else if ($scope.position_field_interval == '15 - 30 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier2; }
+            else if ($scope.position_field_interval == '30 - 45 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier3; }
+            else if ($scope.position_field_interval == '45 - 60 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier4; }
+            else if ($scope.position_field_interval == '60 - 75 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier5; }
+            else if ($scope.position_field_interval == '75 - 90 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier6; }
+            else if ($scope.position_field_interval == '1e helft') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_helft1; }
+            else if ($scope.position_field_interval == '2e helft') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_helft2; }
 
             selectpositions_uit = true;
             selectpositions_thuis = true;

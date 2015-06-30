@@ -52,15 +52,15 @@
                     <ul class="nav nav-pills nav-stacked submenu">
                         <li>
                             <a href="" scroll-to="thuis">
-                                <!--<span class="caret-right"></span><span class="caret"></span>--> {{ matchshort.match_info.thuis }}
+                                <!--<span class="caret-right"></span><span class="caret"></span>--> {{ data.matchshort.match_info.thuis }}
                             </a>
                             <!--<ul class="nav nav-pills nav-stacked submenu">
-                                <li ng-repeat="speler in match.spelersthuisteam">
+                                <li ng-repeat="speler in data.match.spelersthuisteam">
                                     <a href="">{{ speler.spelerNaam }}</a>
                                 </li>
                             </ul>-->
                         </li>
-                        <li><a href="" scroll-to="uit"> {{ matchshort.match_info.uit }}</a></li>
+                        <li><a href="" scroll-to="uit"> {{ data.matchshort.match_info.uit }}</a></li>
                         <li><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
                     </ul>
                 </li>
@@ -112,37 +112,37 @@
             </div>-->
             <div id="match-info">
                 <div class="col-xs-2 text-left">
-                    <p style="text-transform: capitalize;">{{ matchshort.match_info.speeldag }}<br>
-                        {{ matchshort.match_info.datum }} {{ matchshort.match_info.tijd }}<br>
-                    <small>(ronde {{ matchshort.match_info.ronde }})</small><p>
-                    <small><img src="images/referee.svg" height="16px"> {{ matchshort.match_info.scheids }}</small><br>
+                    <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }}<br>
+                        {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
+                    <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
+                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_thuis }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
                 </div>
                 <div class="col-xs-6 text-center">
-                    <h3>{{ matchshort.match_info.wedstrijd }}</h3>
+                    <h3>{{ data.matchshort.match_info.wedstrijd }}</h3>
                     <h4>
-                        {{ matchshort.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand">({{ matchshort.match_info.ruststand }})</small>
+                        {{ data.matchshort.match_info.eindstand }}<br>
+                        <small tooltip-placement="right" tooltip="ruststand">({{ data.matchshort.match_info.ruststand }})</small>
                     </h4>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_uit }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
             <div id="match-info-short">
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_thuis }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
                 </div>
                 <div class="col-xs-10 text-center">
-                    <h4>{{ matchshort.match_info.wedstrijd }}<br>
-                        {{ matchshort.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand">({{ matchshort.match_info.ruststand }})</small>
+                    <h4>{{ data.matchshort.match_info.wedstrijd }}<br>
+                        {{ data.matchshort.match_info.eindstand }}<br>
+                        <small tooltip-placement="right" tooltip="ruststand">({{ data.matchshort.match_info.ruststand }})</small>
                     </h4>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ matchshort.match_info.logo_uit }}" class="logo">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
             <input type="checkbox" name="handler-navbar-sub-mobile" class="handler" id="handler-navbar-sub-mobile" onclick="null" />
@@ -192,8 +192,8 @@
                             <span class="caret-right"></span><span class="caret"></span> Spelers
                         </a>
                         <ul class="nav nav-pills submenu">
-                            <li><a href="" scroll-to="thuis" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">{{ matchshort.match_info.thuis }}</a></li>
-                            <li><a href="" scroll-to="uit" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);"> {{ matchshort.match_info.uit }}</a></li>
+                            <li><a href="" scroll-to="thuis" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">{{ data.matchshort.match_info.thuis }}</a></li>
+                            <li><a href="" scroll-to="uit" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);"> {{ data.matchshort.match_info.uit }}</a></li>
                             <li><a href="" scroll-to="vergelijk" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Vergelijken</a></li>
                         </ul>
                     </li>

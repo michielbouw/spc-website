@@ -31,7 +31,7 @@ angular.module('mainapp.pageAdmin')
             var _t = self.club;
 
             angular.forEach(_t.teams, function(value, key) {
-                value.team_slug = angular.copy(value.team_name.trim().toLowerCase().replace(/\s+/g, ''));
+                value.team_slug = angular.copy(self.club._slug + '_' + value.team_name.trim().toLowerCase().replace(/\s+/g, ''));
             });
 
             Api.Club.put({

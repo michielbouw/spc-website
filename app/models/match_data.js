@@ -54,7 +54,7 @@ module.exports = mongoose.model('MatchData', {
         }],
         uit_formatie: { type: String }
     },
-    overzicht_linup: [{
+    overzicht_lineup: [{
         V1: { type: String },
         V2: { type: String },
         V3: { type: String },
@@ -89,15 +89,28 @@ module.exports = mongoose.model('MatchData', {
         V3: { type: String }
     }],
     balbezit: {
-        hele_wedstrijd: { type: Number },
-        helft_1: { type: Number },
-        helft_2: { type: Number },
-        kwartier_1: { type: Number },
-        kwartier_2: { type: Number },
-        kwartier_3: { type: Number },
-        kwartier_4: { type: Number },
-        kwartier_5: { type: Number },
-        kwartier_6: { type: Number }
+        thuis: {
+            hele_wedstrijd: {type: Number},
+            helft_1: {type: Number},
+            helft_2: {type: Number},
+            kwartier_1: {type: Number},
+            kwartier_2: {type: Number},
+            kwartier_3: {type: Number},
+            kwartier_4: {type: Number},
+            kwartier_5: {type: Number},
+            kwartier_6: {type: Number}
+        },
+        uit: {
+            hele_wedstrijd: {type: Number},
+            helft_1: {type: Number},
+            helft_2: {type: Number},
+            kwartier_1: {type: Number},
+            kwartier_2: {type: Number},
+            kwartier_3: {type: Number},
+            kwartier_4: {type: Number},
+            kwartier_5: {type: Number},
+            kwartier_6: {type: Number}
+        }
     },
     overzicht_doelpogingen: [{
         V1: { type: String },
@@ -198,10 +211,10 @@ module.exports = mongoose.model('MatchData', {
     //
     // solution is a mixed schema type, just an empty array [{}]
 
-    duel_matrix_hele_wedstrijd: [{
+    duel_matrix_hele_wedstrijd: {
         thuis: [{}],
         uit: [{}]
-    }],
+    },
     duel_matrix_hele_wedstrijd_thuis_spelers_uitteam: [{
         personID: { type: Number },
         spelerNaam: { type: String }
@@ -210,10 +223,10 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
-    duel_matrix_eerste_helft: [{
+    duel_matrix_eerste_helft: {
         thuis: [{}],
         uit: [{}]
-    }],
+    },
     duel_matrix_eerste_helft_thuis_spelers_uitteam: [{
         personID: { type: Number },
         spelerNaam: { type: String }
@@ -222,10 +235,10 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
-    duel_matrix_tweede_helft: [{
+    duel_matrix_tweede_helft: {
         thuis: [{}],
         uit: [{}]
-    }],
+    },
     duel_matrix_tweede_helft_thuis_spelers_uitteam: [{
         personID: { type: Number },
         spelerNaam: { type: String }
@@ -276,7 +289,7 @@ module.exports = mongoose.model('MatchData', {
             }]
         }
     },
-    locaties_doelpogingen: {
+    locatie_doelpogingen: {
         thuisTeam: [{
             teamID: { type: Number },
             personID: { type: Number },
@@ -308,7 +321,7 @@ module.exports = mongoose.model('MatchData', {
     //
     // solution is a mixed schema type, just an empty array [{}]
 
-    pass_matrix_helft1: [{
+    pass_matrix_helft1: {
         thuis: {
             passMatrix: [{}],
             passMatrix2: [{
@@ -328,7 +341,7 @@ module.exports = mongoose.model('MatchData', {
                 _row: { type: String }
             }]
         },
-        uit: [{
+        uit: {
             passMatrix: [{}],
             passMatrix2: [{
                 kort: { type: Number },
@@ -346,8 +359,8 @@ module.exports = mongoose.model('MatchData', {
                 gem_len: { type: String },
                 _row: { type: String }
             }]
-        }]
-    }],
+        }
+    },
     pass_matrix_helft1_thuis_spelers: [{
         personID: { type: Number },
         spelerNaam: { type: String }
@@ -356,7 +369,7 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
-    pass_matrix_helft2: [{
+    pass_matrix_helft2: {
         thuis: {
             passMatrix: [{}],
             passMatrix2: [{
@@ -376,7 +389,7 @@ module.exports = mongoose.model('MatchData', {
                 _row: { type: String }
             }]
         },
-        uit: [{
+        uit: {
             passMatrix: [{}],
             passMatrix2: [{
                 kort: { type: Number },
@@ -394,8 +407,8 @@ module.exports = mongoose.model('MatchData', {
                 gem_len: { type: String },
                 _row: { type: String }
             }]
-        }]
-    }],
+        }
+    },
     pass_matrix_helft2_thuis_spelers: [{
         personID: { type: Number },
         spelerNaam: { type: String }

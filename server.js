@@ -24,9 +24,9 @@ var port        = process.env.PORT || 8000;
 mongoose.connect(db.url);
 
 // request body parsing middleware should be above methodOverride
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 //app.use(morgan("dev")); // for debugging
 
