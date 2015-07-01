@@ -1,4 +1,5 @@
 var fs = require('fs');
+var fsextra = require ('fs.extra');
 var im = require('imagemagick');
 
 UploadController = function() {};
@@ -53,13 +54,17 @@ UploadController.prototype.uploadFile = function(req, res) {
         target_path = './media/extra/' + renamedFile;
 
         // move the file from the temporary location to the intended location
-        fs.rename(tmp_path, target_path, function (err) {
-            if (err) throw err;
-            // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-            fs.unlink(tmp_path, function () {
-                if (err) throw err;
-                res.send(renamedFile);
-            });
+        //fs.rename(tmp_path, target_path, function (err) {
+        //    if (err) throw err;
+        //    // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        //    fs.unlink(tmp_path, function () {
+        //        if (err) throw err;
+        //        res.send(renamedFile);
+        //    });
+        //});
+        fsextra.move (tmp_path, target_path, function (err) {
+            if (err) { throw err; }
+            res.send(renamedFile);
         });
     } else if (req.params.slug == 'players') {
         //fileExtension = '.' + file.name.split('.').pop();
@@ -120,13 +125,17 @@ UploadController.prototype.uploadFile = function(req, res) {
             });
         } else {
             // move the file from the temporary location to the intended location
-            fs.rename(tmp_path, target_path, function (err) {
-                if (err) throw err;
-                // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-                fs.unlink(tmp_path, function () {
-                    if (err) throw err;
-                    res.send(renamedFile);
-                });
+            //fs.rename(tmp_path, target_path, function (err) {
+            //    if (err) throw err;
+            //    // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+            //    fs.unlink(tmp_path, function () {
+            //        if (err) throw err;
+            //        res.send(renamedFile);
+            //    });
+            //});
+            fsextra.move (tmp_path, target_path, function (err) {
+                if (err) { throw err; }
+                res.send(renamedFile);
             });
         }
     }

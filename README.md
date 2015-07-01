@@ -125,6 +125,8 @@ Tip: when debugging it can be useful to start a shell inside the docker containe
         dokku docker-options:add <app name> "-v /home/<app name>/media/players:/app/media/players"
         dokku docker-options:add <app name> "-v /home/<app name>/media/pages:/app/media/pages"
         dokku docker-options:add <app name> "-v /home/<app name>/media/extra:/app/media/extra"
+
+        dokku deploy <app name>
         ```
 
 8. Some usefull commands:
