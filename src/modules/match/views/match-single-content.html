@@ -2154,9 +2154,9 @@
             <h3>Penalty visualisatie</h3>
             <h4>Gemaakte penalties</h4>
         </div>
-        <div ng-if="!match.penalty_visualisatie || match.penalty_visualisatie.length <= 0 || match.penalty_visualisatie[0] == -999"
+        <div ng-if="!data.match.penalty_visualisatie || data.match.penalty_visualisatie.length <= 0 || data.match.penalty_visualisatie[0] == -999"
              class="stat-table penalty_visualisatie"><div class="col-xs-12">Geen penalties gemaakt</div></div>
-        <div ng-if="data.match.penalty_visualisatie.length > 0 && match.penalty_visualisatie[0] !== -999"
+        <div ng-if="data.match.penalty_visualisatie.length > 0 && data.match.penalty_visualisatie[0] !== -999"
              class="stat-table penalty_visualisatie">
             <div class="col-xs-8 col-xs-offset-2 col-lg-6 col-lg-offset-3" ng-repeat="penalty in data.match.penalty_visualisatie"
                     style="margin-top: 15px; margin-bottom: 15px;">

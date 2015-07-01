@@ -71,7 +71,10 @@ angular.module('mainapp.pageAdmin')
             var data;
             $http({
                 method: 'GET',
-                url: '/media/data/' + file_path
+                url: '/media/data/' + file_path,
+                header: {
+                    'Content-Type' : 'application/json;charset=UTF-8'
+                }
             })
                 .success(function (data, status, headers, config) {
                     var data = data;
@@ -113,8 +116,13 @@ angular.module('mainapp.pageAdmin')
                         match_short.uitTeamSlug = match_short.match_info.uit.trim().toLowerCase().replace(/\s+/g, '');
 
                         // here we need an if statement for the correct season chosing
-                        items.seizoen = "2014-2015";
-                        match_short.seizoen = "2014-2015";
+                        if (items.matchID >= 16000) {
+                            items.seizoen = "2014-2015 Play-offs";
+                            match_short.seizoen = "2014-2015 Play-offs";
+                        } else if (items.matchID > 7200 && items.matchID < 16000) {
+                            items.seizoen = "2014-2015";
+                            match_short.seizoen = "2014-2015";
+                        }
 
                         // for now this is correct later maybe need a if statement to choose correct division
                         items.divisie = "Jupiler League";

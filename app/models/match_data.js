@@ -417,24 +417,7 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
-    penalty_visualisatie: [{
-        schutter: { type: String },
-        schutter_personID: { type: Number },
-        keeper: { type: String },
-        keeper_personID: { type: Number },
-        laag: { type: Number },
-        hoog: { type: Number },
-        links: { type: Number },
-        midden: { type: Number },
-        rechts: { type: Number },
-        linkerpaal: { type: Number },
-        lat: { type: Number },
-        rechterpaal: { type: Number },
-        gestopt: { type: Number },
-        naastover: { type: Number },
-        gescoord: { type: Number },
-        minuut: { type: String }
-    }],
+    penalty_visualisatie: [{}],
     overzicht_overtredingen_per_speler: {
         thuis: [{
             personID: { type: Number },

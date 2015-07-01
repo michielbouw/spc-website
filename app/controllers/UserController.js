@@ -1,5 +1,6 @@
 var mongoose    = require('mongoose');
 var jwt         = require('jsonwebtoken');
+var bcrypt      = require('bcrypt');
 var User        = require('../models/user');
 
 module.exports = UserController = {
@@ -11,7 +12,7 @@ module.exports = UserController = {
         if (email == '' || password == '') {
             return res.send(401);
         }
-        User.findOne({email: email, password: password}, function(err, user) {
+        User.findOne({email: email}, function(err, user) {
             if (err) {
                 res.json({
                     type: false,
@@ -19,17 +20,38 @@ module.exports = UserController = {
                 });
             } else {
                 if (user) {
-                    user.last_login = req.body.datetime;
-                    user.save();
-                    res.json({
-                        type: true,
-                        data: user,
-                        token: user.token
-                    });
+                    if (user.is_active) {
+                        bcrypt.compare(password, user.password, function (err1, res1) {
+                            if (err1) {
+                                res.json({
+                                    type: false,
+                                    data: "An error occured"
+                                });
+                            } else if (res1) {
+                                user.last_login = req.body.datetime;
+                                user.save();
+                                res.json({
+                                    type: true,
+                                    data: user,
+                                    token: user.token
+                                });
+                            } else {
+                                res.json({
+                                    type: false,
+                                    data: "Incorrect password"
+                                });
+                            }
+                        });
+                    } else {
+                        res.json({
+                            type: false,
+                            data: "Account not activated"
+                        });
+                    }
                 } else {
                     res.json({
                         type: false,
-                        data: "Incorrect email/password"
+                        data: "Incorrect email"
                     });
                 }
             }
@@ -37,7 +59,7 @@ module.exports = UserController = {
     },
 
     signin: function(req, res) {
-        User.findOne({email: req.body.email, password: req.body.password}, function (err, user) {
+        User.findOne({email: req.body.email}, function (err, user) {
             if (err) {
                 res.json({
                     type: false,
@@ -52,21 +74,34 @@ module.exports = UserController = {
                 } else {
                     var userModel = new User();
                     userModel.email = req.body.email;
-                    userModel.password = req.body.password;
                     userModel.first_name = req.body.first_name;
                     userModel.middle_name = req.body.middle_name;
                     userModel.last_name = req.body.last_name;
                     userModel.last_login = req.body.datetime;
-                    userModel.save(function (err, user) {
-                        user.token = jwt.sign(user, 'shhhhh');
-                        user.save(function (err, user1) {
-                            res.json({
-                                type: true,
-                                data: user1,
-                                token: user1.token
-                            });
+
+                    bcrypt.genSalt(10, function(err, salt) {
+                        bcrypt.hash(req.body.password, salt, function(err, hash) {
+                            userModel.password = hash;
+
+                            userModel.save(function (err, user) {
+                                if (user) {
+                                    user.token = jwt.sign(user, 'spc-extra-veilig-voetbalperformancecentre', {algorithm: 'HS256'});
+                                    user.save(function (err, user1) {
+                                        res.json({
+                                            type: true,
+                                            data: user1,
+                                            token: user1.token
+                                        });
+                                    });
+                                } else {
+                                    res.json({
+                                        type: false,
+                                        data: "User cannot be created"
+                                    });
+                                }
+                            })
                         });
-                    })
+                    });
                 }
             }
         });
