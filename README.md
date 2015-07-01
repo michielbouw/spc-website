@@ -103,8 +103,8 @@ To be able to push applications to the server it needs your public SSH key in /h
 Push the app and let dokku build the container. Choose root_domain here when you want to deploy to root domain. This can take a while.
 
         ```shell
-        git remote add dokku <ssh host>:<app_name OR root_domain>
-        git push dokku master
+        git remote add spcweb dokku@<ssh host>:<app_name OR root_domain>
+        git push spcweb master
         ```
 
 Tip: when debugging it can be useful to start a shell inside the docker container:

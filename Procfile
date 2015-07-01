@@ -1,1 +1,1 @@
-web: gulp server:start
+web: gulp server:start &
