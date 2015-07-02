@@ -120,11 +120,11 @@ Tip: when debugging it can be useful to start a shell inside the docker containe
 7. Add options for upload folder, to not overwrite it when deploying again. (on server)
 
         ```shell
-        dokku docker-options:add <app name> "-v /home/<app name>/media:/app/media"
-        dokku docker-options:add <app name> "-v /home/<app name>/media/data:/app/media/data"
-        dokku docker-options:add <app name> "-v /home/<app name>/media/players:/app/media/players"
-        dokku docker-options:add <app name> "-v /home/<app name>/media/pages:/app/media/pages"
-        dokku docker-options:add <app name> "-v /home/<app name>/media/extra:/app/media/extra"
+        dokku docker-options:add <app name> deploy "-v /home/<app name>/media:/app/media"
+        dokku docker-options:add <app name> deploy "-v /home/<app name>/media/data:/app/media/data"
+        dokku docker-options:add <app name> deploy "-v /home/<app name>/media/players:/app/media/players"
+        dokku docker-options:add <app name> deploy "-v /home/<app name>/media/pages:/app/media/pages"
+        dokku docker-options:add <app name> deploy "-v /home/<app name>/media/extra:/app/media/extra"
 
         dokku deploy <app name>
         ```

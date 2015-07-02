@@ -1051,7 +1051,7 @@ angular.module('mainapp.pageAdmin')
                             angular.forEach(items.spelersthuisteam, function (value1, key1) {
                                 if (value1.personID == value.speler[0]) {
                                     temp.spelerNaam = angular.copy(value1.spelerNaam);
-                                    temp.rugnummer = Number(angular.copy(value1.rugnummer));
+                                    temp.spelerRugnummer = Number(angular.copy(value1.rugnummer));
                                 }
                             });
                             if (temp.type == 'keeper') {
@@ -1297,7 +1297,7 @@ angular.module('mainapp.pageAdmin')
                             angular.forEach(items.spelersuitteam, function (value1, key1) {
                                 if (value1.personID == value.speler[0]) {
                                     temp.spelerNaam = angular.copy(value1.spelerNaam);
-                                    temp.rugnummer = angular.copy(value1.rugnummer);
+                                    temp.spelerRugnummer = angular.copy(value1.rugnummer);
                                 }
                             });
                             if (temp.type == 'keeper') {

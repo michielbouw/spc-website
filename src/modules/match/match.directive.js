@@ -97,9 +97,11 @@ angular.module('mainapp.match')
                     angular.element(document).ready(function () {
                         $('body').css('background-color', '#E7EAF1');
 
-                        scope.lineup_field_height = $('.content.content-top').find('.col-xs-12').width() / 12 * 6 * 0.78 - 25;
-                        //scope.lineup_field_height = $('.content#home').find('.col-xs-12.col-sm-6.col-md-5.col-lg-5').width() * 0.78;
-                        //scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
+                        scope.lineup_field_height = $('.content.content-top').find('.col-xs-12').width() / 12 * 5 * 0.78 - 25;
+
+                        $timeout(function() {
+                            scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
+                        }, 200);
 
                         $('#nav-sub a[role="tab"]').click(function (e) {
                             e.preventDefault();

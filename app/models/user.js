@@ -28,5 +28,12 @@ module.exports = mongoose.model('User', {
     is_superadmin: { type: Boolean, default: false },
     token: { type: String },
 
-    last_login : {type : Date, required: true}
+    last_login: { type: Date, required: true },
+    number_of_logins: { type: Number, default: 0 },
+
+    visits: [{
+        page_url: { type: String },
+        count: { type: Number, default: 0 },
+        last_visit: { type: Date, default: Date.now }
+    }]
 });

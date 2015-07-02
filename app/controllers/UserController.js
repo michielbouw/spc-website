@@ -29,6 +29,7 @@ module.exports = UserController = {
                                 });
                             } else if (res1) {
                                 user.last_login = req.body.datetime;
+                                user.number_of_logins += 1;
                                 user.save();
                                 res.json({
                                     type: true,
