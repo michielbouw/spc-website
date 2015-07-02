@@ -1054,7 +1054,7 @@ angular.module('mainapp.pageAdmin')
                                     temp.spelerRugnummer = Number(angular.copy(value1.rugnummer));
                                 }
                             });
-                            if (temp.type == 'keeper') {
+                            if (temp.spelerType == 'keeper') {
                                 temp.minuten = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Minuten'}, true)[0][temp.personID]);
                                 temp.reddingen = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Reddingen'}, true)[0][temp.personID]);
                                 temp.geslaagde_reddingen = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Geslaagde reddingen'}, true)[0][temp.personID].split("%")[0]);
@@ -1300,7 +1300,7 @@ angular.module('mainapp.pageAdmin')
                                     temp.spelerRugnummer = angular.copy(value1.rugnummer);
                                 }
                             });
-                            if (temp.type == 'keeper') {
+                            if (temp.spelerType == 'keeper') {
                                 temp.minuten = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Minuten'}, true)[0][temp.personID]);
                                 temp.reddingen = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Reddingen'}, true)[0][temp.personID]);
                                 temp.geslaagde_reddingen = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Geslaagde reddingen'}, true)[0][temp.personID].split("%")[0]);
