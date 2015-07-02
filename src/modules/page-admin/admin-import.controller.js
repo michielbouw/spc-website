@@ -1046,7 +1046,7 @@ angular.module('mainapp.pageAdmin')
                         items.player_stats_full_uit = [];
                         angular.forEach(data.thuisSpelers_data, function (value, key) {
                             var temp = {};
-                            temp.type = angular.copy(value.stat_matrix.type[0]);
+                            temp.spelerType = angular.copy(value.stat_matrix.type[0]);
                             temp.personID = angular.copy(value.speler[0]);
                             angular.forEach(items.spelersthuisteam, function (value1, key1) {
                                 if (value1.personID == value.speler[0]) {
@@ -1292,7 +1292,7 @@ angular.module('mainapp.pageAdmin')
                         });
                         angular.forEach(data.uitSpelers_data, function (value, key) {
                             var temp = {};
-                            temp.type = angular.copy(value.stat_matrix.type[0]);
+                            temp.spelerType = angular.copy(value.stat_matrix.type[0]);
                             temp.personID = angular.copy(value.speler[0]);
                             angular.forEach(items.spelersuitteam, function (value1, key1) {
                                 if (value1.personID == value.speler[0]) {

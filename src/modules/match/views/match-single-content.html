@@ -1296,10 +1296,10 @@
             </div>
             <div class="col-xs-12 col-md-3 col-lg-3 positions_field">
                 <p ng-click="data.select_positions_uit();" style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position uit" style="position: relative">14</span> speler {{ data.matchshort.match_info.uit }}
+                    <span class="position uit" style="position: relative">14</span> speler {{ data.matchshort.match_info.uit }} <i class="fa fa-long-arrow-up"></i>
                 </p>
                 <p ng-click="data.select_positions_thuis();" style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position" style="position: relative">14</span> speler {{ data.matchshort.match_info.thuis }}
+                    <span class="position" style="position: relative">14</span> speler {{ data.matchshort.match_info.thuis }} <i class="fa fa-long-arrow-down"></i>
                 </p>
             </div>
             <br>
@@ -1385,10 +1385,10 @@
             </div>
             <div class="col-xs-12 col-md-3 col-lg-3 positions_field">
                 <p ng-click="data.select_pogingen_thuis();" style="position: absolute; margin-top: -moz-calc((44 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((44 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ data.matchshort.match_info.thuis }}
+                    <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ data.matchshort.match_info.thuis }} <i class="fa fa-long-arrow-up"></i>
                 </p>
                 <p ng-click="data.select_pogingen_uit();" style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ position_field_height }}px - 10px);">
-                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ data.matchshort.match_info.uit }}
+                    <span class="position uit" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> poging {{ data.matchshort.match_info.uit }} <i class="fa fa-long-arrow-down"></i>
                 </p>
                 <p ng-click="data.select_pogingen_doel();" style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ position_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ position_field_height }}px - 10px);">
                     <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #008000;"></span> doelpunt
@@ -2625,7 +2625,7 @@
                 </div>
                 <div id="collapse{{ speler.personID }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ speler.personID }}">
 
-                    <div class="col-xs-12 summary text-center" ng-if="speler.type == 'veldspeler'">
+                    <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'veldspeler'">
                         <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
                         <div class="col-md-3"><h1>{{ speler.doelpunten }}</h1>Doelpunten</div>
                         <div class="col-md-3"><h1>{{ speler.aantal_passes }}</h1>Passes</div>
@@ -2639,7 +2639,7 @@
                         <div class="col-md-3"><h1>{{ speler.geel }}</h1>Gele kaarten</div>
                         <div class="col-md-3"><h1>{{ speler.rood }}</h1>Rode kaarten</div>
                     </div>
-                    <div class="col-xs-12 summary text-center" ng-if="speler.type == 'keeper'">
+                    <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'keeper'">
                         <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
                         <div class="col-md-3"><h1>{{ speler.reddingen }}</h1>Reddingen</div>
                         <div class="col-md-3"><h1>{{ speler.geslaagde_reddingen }}<small>%</small></h1>Geslaagde reddingen</div>
@@ -3352,7 +3352,7 @@
                 </div>
                 <div id="collapse{{ speler.personID }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ speler.personID }}">
 
-                    <div class="col-xs-12 summary text-center" ng-if="speler.type == 'veldspeler'">
+                    <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'veldspeler'">
                         <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
                         <div class="col-md-3"><h1>{{ speler.doelpunten }}</h1>Doelpunten</div>
                         <div class="col-md-3"><h1>{{ speler.aantal_passes }}</h1>Passes</div>
@@ -3366,7 +3366,7 @@
                         <div class="col-md-3"><h1>{{ speler.geel }}</h1>Gele kaarten</div>
                         <div class="col-md-3"><h1>{{ speler.rood }}</h1>Rode kaarten</div>
                     </div>
-                    <div class="col-xs-12 summary text-center" ng-if="speler.type == 'keeper'">
+                    <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'keeper'">
                         <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
                         <div class="col-md-3"><h1>{{ speler.reddingen }}</h1>Reddingen</div>
                         <div class="col-md-3"><h1>{{ speler.geslaagde_reddingen }}<small>%</small></h1>Geslaagde reddingen</div>
@@ -3767,7 +3767,7 @@
                 Speler 1:
                 <select ng-model="player_index1" class="form-control input-sm"
                         ng-change="data.player1InitFunc(player_index1)"
-                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_thuis | orderBy:orderSpelersNaam">
+                        ng-options="player.personID as player.spelerNaam for player in data.player_stats_full_thuis | orderBy:orderSpelersNaam">
                     <option value="">-- kies speler --</option>
                 </select>
             </div>
@@ -3775,7 +3775,7 @@
                 Spelers 2:
                 <select ng-model="player_index2" class="form-control input-sm"
                         ng-change="data.player2InitFunc(player_index2)"
-                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_thuis | orderBy:orderSpelersNaam">
+                        ng-options="player.personID as player.spelerNaam for player in data.player_stats_full_thuis | orderBy:orderSpelersNaam">
                     <option value="">-- kies speler --</option>
                 </select>
                 <br>
@@ -3787,7 +3787,7 @@
             <div class="col-xs-12">
                 <h2>{{ data.speler1.spelerNaam }}</h2>
             </div>
-            <div ng-if="data.speler1.type == 'veldspeler'">
+            <div ng-if="data.speler1.spelerType == 'veldspeler'">
                 <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler1.minuten }}</div>
                 <div class="col-xs-8">Doelpunten</div><div class="col-xs-4">{{ data.speler1.doelpunten }}</div>
                 <div class="col-xs-8">Doelpogingen</div><div class="col-xs-4">{{ data.speler1.doelpogingen }}</div>
@@ -3804,7 +3804,7 @@
                 <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ data.speler1.geel }}</div>
                 <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ data.speler1.rood }}</div>
             </div>
-            <div ng-if="data.speler1.type == 'keeper'">
+            <div ng-if="data.speler1.spelerType == 'keeper'">
                 <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler1.minuten }}</div>
                 <div class="col-xs-8">Reddingen</div><div class="col-xs-4">{{ data.speler1.reddingen }}</div>
                 <div class="col-xs-8">Geslaagde reddingen</div><div class="col-xs-4">{{ data.speler1.geslaagde_reddingen }}%</div>
