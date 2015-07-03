@@ -81,6 +81,8 @@
                         {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
                     <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
                     <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br>
+                    <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br>
+                    <small ng-if="data.matchshort.match_info.stadion"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.stadion }}</small>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
                     <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">

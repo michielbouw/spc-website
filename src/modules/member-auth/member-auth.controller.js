@@ -41,8 +41,6 @@ angular.module('mainapp.memberAuth')
                             $localStorage.role = res.data.role;
                             if (self.login.remember) {
                                 $localStorage.remember = true;
-                                //$localStorage.email = self.login.email;
-                                //$localStorage.password = self.login.password;
                             }
 
                             if (AuthenticationService.isLogged) {
@@ -104,8 +102,6 @@ angular.module('mainapp.memberAuth')
                     delete $localStorage.token;
                     delete $localStorage.role;
                     delete $localStorage.remember;
-                    //delete $localStorage.email;
-                    //delete $localStorage.password;
                     $localStorage.$reset();
                     $location.path("/");
                 }

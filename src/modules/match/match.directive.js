@@ -149,6 +149,11 @@ angular.module('mainapp.match')
                                     scrollTop: $(offset).offset().top - 135
                                 }, 500);
                             }
+                            $timeout(function() {
+                                scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                            }, 600);
                         });
                         $('#speler_accordion2').on('shown.bs.collapse', function (e) {
                             var offset = $('.panel > .panel-collapse.in').prev('#speler_accordion2 .panel-heading');
@@ -157,6 +162,11 @@ angular.module('mainapp.match')
                                     scrollTop: $(offset).offset().top - 135
                                 }, 500);
                             }
+                            $timeout(function() {
+                                scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                            }, 600);
                         });
 
                     });
