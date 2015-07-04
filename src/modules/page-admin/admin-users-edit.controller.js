@@ -18,14 +18,14 @@ angular.module('mainapp.pageAdmin')
         self.userEdit = function() {
             var _t = self.user;
 
-            angular.forEach(_t.teams, function(value, key) {
-                value.team_slug = angular.copy(value.team.trim().toLowerCase().replace(/\s+/g, ''));
-            });
             if (_t.club) {
                 _t.club_slug = _t.club.trim().toLowerCase().replace(/\s+/g, '');
             } else {
                 _t.club_slug = '';
             }
+            angular.forEach(_t.teams, function(value, key) {
+                value.team_slug = _t.club_slug + '_' + angular.copy(value.team.trim().toLowerCase().replace(/\s+/g, ''));
+            });
 
             Api.User.put({
                 _id: _t._id

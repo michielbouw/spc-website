@@ -12,16 +12,21 @@ angular.module('mainapp.memberAuth')
             if (AuthenticationService.isLogged) {
                 Api.Me.get(function (res) {
                     $rootScope.currentUser = res.data;
+
+                    $rootScope.currentClub = {};
+                    $rootScope.currentClub.name = res.data.club;
+                    $rootScope.currentClub.slug = res.data.club_slug;
+                    $rootScope.currentClub.teams = res.data.teams;
+                    $rootScope.currentClub.colors = [];
+
+                    Api.Club.get({
+                        _slug: res.data.club_slug
+                    }, function(res) {
+                        $rootScope.currentClub.colors = res.colors;
+                    });
                 }, function () {
                     $rootScope.error = 'Failed to fetch details';
                 });
-
-                // temp
-                $rootScope.currentClub = {};
-                $rootScope.currentClub.name = "FC Eindhoven";
-                $rootScope.currentClub.slug = "fceindhoven";
-                $rootScope.currentClub.teamslug = "fceindhoven_1eelftal";
-                $rootScope.currentClub.colors = [{ "color": "blauw", "refcode": "#24528e"}, { "color": "wit", "refcode": "#ffffff"}];
             }
 
             //Admin User Controller (login, logout)
@@ -46,6 +51,18 @@ angular.module('mainapp.memberAuth')
                             if (AuthenticationService.isLogged) {
                                 Api.Me.get(function (res) {
                                     $rootScope.currentUser = res.data;
+
+                                    $rootScope.currentClub = {};
+                                    $rootScope.currentClub.name = res.data.club;
+                                    $rootScope.currentClub.slug = res.data.club_slug;
+                                    $rootScope.currentClub.teams = res.data.teams;
+                                    $rootScope.currentClub.colors = [];
+
+                                    Api.Club.get({
+                                        _slug: res.data.club_slug
+                                    }, function(res) {
+                                        $rootScope.currentClub.colors = res.colors;
+                                    });
 
                                     if (res.data.role == 'admin') {
                                         $location.path("/admin");

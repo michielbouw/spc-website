@@ -128,6 +128,8 @@ angular.module('mainapp.pageAdmin')
                         items.divisie = "Jupiler League";
                         match_short.divisie = "Jupiler League";
 
+                        items.thuisTeamSlug = match_short.match_info.thuis.trim().toLowerCase().replace(/\s+/g, '');
+                        items.uitTeamSlug = match_short.match_info.uit.trim().toLowerCase().replace(/\s+/g, '');
                         items.ronde = match_short.match_info.ronde;
                         items.datum = match_short.match_info.datum;
                         items.wedstrijd = match_short.match_info.wedstrijd;
@@ -1594,6 +1596,8 @@ angular.module('mainapp.pageAdmin')
                                     teams.push(teamstemp);
 
                                     match_short.match_info.coach_thuis = '';
+                                    match_short.thuisTeamSlug = teamstemp.team_slug;
+                                    items.thuisTeamSlug = teamstemp.team_slug;
                                     team_slug = teamstemp.team_slug;
 
                                     Api.Clubs.post({
@@ -1633,6 +1637,8 @@ angular.module('mainapp.pageAdmin')
                                         }
                                         team_slug = teamstemp3.team_slug;
                                         match_short.match_info.coach_thuis = teamstemp3.coach;
+                                        match_short.thuisTeamSlug = teamstemp3.team_slug;
+                                        items.thuisTeamSlug = teamstemp3.team_slug;
                                     } else {
                                         // create team + teamID
                                         var teamstemp4 = {};
@@ -1648,6 +1654,8 @@ angular.module('mainapp.pageAdmin')
                                         clubdata.teams.push(teamstemp4);
 
                                         match_short.match_info.coach_thuis = '';
+                                        match_short.thuisTeamSlug = teamstemp4.team_slug;
+                                        items.thuisTeamSlug = teamstemp4.team_slug;
                                         team_slug = teamstemp4.team_slug;
 
                                         Api.Club.put({
@@ -2048,6 +2056,8 @@ angular.module('mainapp.pageAdmin')
                                     teams.push(teamstemp);
 
                                     match_short.match_info.coach_uit = '';
+                                    match_short.uitTeamSlug = teamstemp.team_slug;
+                                    items.uitTeamSlug = teamstemp.team_slug;
                                     team_slug_uit = teamstemp.team_slug;
 
                                     Api.Clubs.post({
@@ -2086,6 +2096,8 @@ angular.module('mainapp.pageAdmin')
                                         }
                                         team_slug_uit = teamstemp3.team_slug;
                                         match_short.match_info.coach_uit = teamstemp3.coach;
+                                        match_short.uitTeamSlug = teamstemp3.team_slug;
+                                        items.uitTeamSlug = teamstemp3.team_slug;
                                     } else {
                                         // create team + teamID
                                         var teamstemp4 = {};
@@ -2101,6 +2113,8 @@ angular.module('mainapp.pageAdmin')
                                         clubdata_uit.teams.push(teamstemp4);
 
                                         match_short.match_info.coach_uit = '';
+                                        match_short.uitTeamSlug = teamstemp4.team_slug;
+                                        items.uitTeamSlug = teamstemp4.team_slug;
                                         team_slug_uit = teamstemp4.team_slug;
 
                                         Api.Club.put({
@@ -2507,6 +2521,8 @@ angular.module('mainapp.pageAdmin')
                             _id: match_data.matchID
                         }, function (res) {
                             var matchdata = res;
+
+                            match_data = angular.copy(items);
 
                             if (!matchdata.matchID) {
                                 Api.MatchData.post(match_data, function () {

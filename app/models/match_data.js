@@ -7,7 +7,9 @@ var mongoose = require('mongoose');
 module.exports = mongoose.model('MatchData', {
     matchID: { type: Number, required: true, unique: true },
     thuisTeamID: { type: Number },
-    uitTeamID: { type: Number },
+    thuisTeamSlug: {type : String, lowercase: true, trim: true},
+    uitTeamID: {type : Number},
+    uitTeamSlug: {type : String, lowercase: true, trim: true},
     divisie: { type: String },
     seizoen: { type: String },
     ronde: { type: Number },

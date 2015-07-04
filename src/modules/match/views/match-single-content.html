@@ -2728,53 +2728,53 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse{{ speler.personID }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ speler.personID }}">
+                <div id="collapse{{ speler.personID }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ speler.personID }}"
+                     ng-class="{ in: $index == 0 }">
 
                     <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'veldspeler'">
-                        <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
-                        <div class="col-md-3"><h1>{{ speler.doelpunten }}</h1>Doelpunten</div>
-                        <div class="col-md-3"><h1>{{ speler.aantal_passes }}</h1>Passes</div>
-                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<small>%</small></h1>Geslaagde passes</div>
-                        <div class="col-md-3"><h1>{{ speler.doelpogingen }}</h1>Doelpogingen</div>
-                        <div class="col-md-3"><h1>{{ speler.doelpogingen_opdoel }}<small>%</small></h1>Op doel</div>
-                        <div class="col-md-3"><h1>{{ speler.voorzetten }}</h1>Voorzetten</div>
-                        <div class="col-md-3"><h1>{{ speler.gewonnen_duels }}<small>%</small></h1>Gewonnen duels</div>
-                        <div class="col-md-3"><h1>{{ speler.intercepties }}</h1>Intercepties</div>
-                        <div class="col-md-3"><h1>{{ speler.overtredingen }}</h1>Overtredingen</div>
-                        <div class="col-md-3"><h1>{{ speler.geel }}</h1>Gele kaarten</div>
-                        <div class="col-md-3"><h1>{{ speler.rood }}</h1>Rode kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.minuten }}<span ng-if="speler.minuten == null">0</span></h1>Minuten</div>
+                        <div class="col-md-3"><h1>{{ speler.doelpunten }}<span ng-if="speler.doelpunten == null">0</span></h1>Doelpunten</div>
+                        <div class="col-md-3"><h1>{{ speler.aantal_passes }}<span ng-if="speler.aantal_passes == null">0</span></h1>Passes</div>
+                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<span ng-if="speler.pass_percentage == null">0</span><small>%</small></h1>Geslaagde passes</div>
+                        <div class="col-md-3"><h1>{{ speler.doelpogingen }}<span ng-if="speler.doelpogingen == null">0</span></h1>Doelpogingen</div>
+                        <div class="col-md-3"><h1>{{ speler.doelpogingen_opdoel }}<span ng-if="speler.doelpogingen_opdoel == null">0</span><small>%</small></h1>Op doel</div>
+                        <div class="col-md-3"><h1>{{ speler.voorzetten }}<span ng-if="speler.voorzetten == null">0</span></h1>Voorzetten</div>
+                        <div class="col-md-3"><h1>{{ speler.gewonnen_duels }}<span ng-if="speler.gewonnen_duels == null">0</span><small>%</small></h1>Gewonnen duels</div>
+                        <div class="col-md-3"><h1>{{ speler.intercepties }}<span ng-if="speler.intercepties == null">0</span></h1>Intercepties</div>
+                        <div class="col-md-3"><h1>{{ speler.overtredingen }}<span ng-if="speler.overtredingen == null">0</span></h1>Overtredingen</div>
+                        <div class="col-md-3"><h1>{{ speler.geel }}<span ng-if="speler.geel == null">0</span></h1>Gele kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.rood }}<span ng-if="speler.rood == null">0</span></h1>Rode kaarten</div>
                     </div>
                     <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'keeper'">
-                        <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
-                        <div class="col-md-3"><h1>{{ speler.reddingen }}</h1>Reddingen</div>
-                        <div class="col-md-3"><h1>{{ speler.geslaagde_reddingen }}<small>%</small></h1>Geslaagde reddingen</div>
-                        <div class="col-md-3"><h1>{{ speler.succesvolle_uittrappen }}<small>%</small></h1>Geslaagde uittrappen</div>
-                        <div class="col-md-3"><h1>{{ speler.korte_passes }}</h1>Korte passes</div>
-                        <div class="col-md-3"><h1>{{ speler.middellange_passes }}</h1>Middellange passes</div>
-                        <div class="col-md-3"><h1>{{ speler.lange_passes }}</h1>Lange passes</div>
-                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<small>%</small></h1>Geslaagde passes</div>
-                        <div class="col-md-3"><h1>{{ speler.gevangen_ballen }}</h1>Gevangen ballen</div>
-                        <div class="col-md-3"><h1>{{ speler.weggestompte_ballen }}</h1>Weggestompte ballen</div>
-                        <div class="col-md-3"><h1>{{ speler.geel }}</h1>Gele kaarten</div>
-                        <div class="col-md-3"><h1>{{ speler.rood }}</h1>Rode kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.minuten }}<span ng-if="speler.minuten == null">0</span></h1>Minuten</div>
+                        <div class="col-md-3"><h1>{{ speler.reddingen }}<span ng-if="speler.reddingen == null">0</span></h1>Reddingen</div>
+                        <div class="col-md-3"><h1>{{ speler.geslaagde_reddingen }}<span ng-if="speler.geslaagde_reddingen == null">0</span><small>%</small></h1>Geslaagde reddingen</div>
+                        <div class="col-md-3"><h1>{{ speler.succesvolle_uittrappen }}<span ng-if="speler.succesvolle_uittrappen == null">0</span><small>%</small></h1>Geslaagde uittrappen</div>
+                        <div class="col-md-3"><h1>{{ speler.korte_passes }}<span ng-if="speler.korte_passes == null">0</span></h1>Korte passes</div>
+                        <div class="col-md-3"><h1>{{ speler.middellange_passes }}<span ng-if="speler.middellange_passes == null">0</span></h1>Middellange passes</div>
+                        <div class="col-md-3"><h1>{{ speler.lange_passes }}<span ng-if="speler.lange_passes == null">0</span></h1>Lange passes</div>
+                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<span ng-if="speler.pass_percentage == null">0</span><small>%</small></h1>Geslaagde passes</div>
+                        <div class="col-md-3"><h1>{{ speler.gevangen_ballen }}<span ng-if="speler.gevangen_ballen == null">0</span></h1>Gevangen ballen</div>
+                        <div class="col-md-3"><h1>{{ speler.weggestompte_ballen }}<span ng-if="speler.weggestompte_ballen == null">0</span></h1>Weggestompte ballen</div>
+                        <div class="col-md-3"><h1>{{ speler.geel }}<span ng-if="speler.geel == null">0</span></h1>Gele kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.rood }}<span ng-if="speler.rood == null">0</span></h1>Rode kaarten</div>
                     </div>
 
                     <div class="col-xs-12 item_title">Algemene statistieken <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12 no-padding player-table">
-                        <div class="player-table-row"><div class="col-xs-6">Doelpunten</div><div class="col-xs-6">{{ speler.doelpunten }}<span ng-show="!speler.algemene_stats.doelpunten || speler.algemene_stats.doelpunten == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Eigen doelpunten</div><div class="col-xs-6">{{ speler.eigen_doelpunten }}<span ng-show="!speler.algemene_stats.eigen_doelpunten || speler.algemene_stats.eigen_doelpunten == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aantal acties</div><div class="col-xs-6">{{ speler.aantal_acties }}<span ng-show="!speler.algemene_stats.aantal_acties || speler.algemene_stats.aantal_acties == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels }}<span ng-show="!speler.algemene_stats.aantal_aanvallende_duels || speler.algemene_stats.aantal_aanvallende_duels == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels_gewonnen }}<span ng-show="!speler.algemene_stats.aantal_aanvallende_duels_gewonnen || speler.algemene_stats.aantal_aanvallende_duels_gewonnen == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels }}<span ng-show="!speler.algemene_stats.aantal_verdedigende_duels || speler.algemene_stats.aantal_verdedigende_duels == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels_gewonnen }}<span ng-show="!speler.algemene_stats.aantal_verdedigende_duels_gewonnen || speler.algemene_stats.aantal_verdedigende_duels_gewonnen == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Assists</div><div class="col-xs-6">{{ speler.assists }}<span ng-show="!speler.algemene_stats.assists || speler.algemene_stats.assists == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Penalties gescoord</div><div class="col-xs-6">{{ speler.penalties_gescoord }}<span ng-show="!speler.algemene_stats.penalties_gescoord || speler.algemene_stats.penalties_gescoord == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Penalties gemist</div><div class="col-xs-6">{{ speler.penalties_gemist }}<span ng-show="!speler.algemene_stats.penalties_gemist || speler.algemene_stats.penalties_gemist == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aantal buitenspel</div><div class="col-xs-6">{{ speler.aantal_buitenspel }}<span ng-show="!speler.algemene_stats.aantal_buitenspel || speler.algemene_stats.aantal_buitenspel == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Overtredingen tegen</div><div class="col-xs-6">{{ speler.overtredingen_tegen }}<span ng-show="!speler.algemene_stats.overtredingen_tegen || speler.algemene_stats.overtredingen_tegen == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Overtredingen mee</div><div class="col-xs-6">{{ speler.overtredingen_mee }}<span ng-show="!speler.algemene_stats.overtredingen_mee || speler.algemene_stats.overtredingen_mee == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Tweede geel</div><div class="col-xs-6">{{ speler.tweede_geel }}<span ng-show="!speler.algemene_stats.tweede_geel || speler.algemene_stats.tweede_geel == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Eigen doelpunten</div><div class="col-xs-6">{{ speler.eigen_doelpunten }}<span ng-show="!speler.eigen_doelpunten || speler.eigen_doelpunten == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aantal acties</div><div class="col-xs-6">{{ speler.aantal_acties }}<span ng-show="!speler.aantal_acties || speler .aantal_acties == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels }}<span ng-show="!speler.aantal_aanvallende_duels || speler.aantal_aanvallende_duels == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels_gewonnen }}<span ng-show="!speler.aantal_aanvallende_duels_gewonnen || speler.aantal_aanvallende_duels_gewonnen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels }}<span ng-show="!speler.aantal_verdedigende_duels || speler.aantal_verdedigende_duels == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels_gewonnen }}<span ng-show="!speler.aantal_verdedigende_duels_gewonnen || speler.aantal_verdedigende_duels_gewonnen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Assists</div><div class="col-xs-6">{{ speler.assists }}<span ng-show="!speler.assists || speler.assists == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Penalties gescoord</div><div class="col-xs-6">{{ speler.penalties_gescoord }}<span ng-show="!speler.penalties_gescoord || speler.penalties_gescoord == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Penalties gemist</div><div class="col-xs-6">{{ speler.penalties_gemist }}<span ng-show="!speler.penalties_gemist || speler.penalties_gemist == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aantal buitenspel</div><div class="col-xs-6">{{ speler.aantal_buitenspel }}<span ng-show="!speler.aantal_buitenspel || speler.aantal_buitenspel == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Overtredingen tegen</div><div class="col-xs-6">{{ speler.overtredingen_tegen }}<span ng-show="!speler.overtredingen_tegen || speler.overtredingen_tegen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Overtredingen mee</div><div class="col-xs-6">{{ speler.overtredingen_mee }}<span ng-show="!speler.overtredingen_mee || speler.overtredingen_mee == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Tweede geel</div><div class="col-xs-6">{{ speler.tweede_geel }}<span ng-show="!speler.tweede_geel || speler.tweede_geel == ' '">&nbsp;</span></div></div>
                     </div>
 
                     <div class="col-xs-12 item_title">Heatmap balacties <small>per helft, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -3045,7 +3045,7 @@
                     <div class="col-xs-12" ng-if="speler.spelerType == 'keeper' && speler.locatie_reddingen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field location_duels_field_180" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_reddingen">
-                                <div class="line" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
+                                <div class="line" style="transform: {{ data.createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ data.createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
                                 <span ng-if="position.actie == ' ' || position.actie == 'NA'" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
@@ -3099,7 +3099,7 @@
                     <div class="col-xs-12" ng-if="speler.spelerType == 'keeper' && speler.locatie_uittrappen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_uittrappen">
-                                <div class="line_out" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
+                                <div class="line_out" style="transform: {{ data.createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ data.createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
                                 <span ng-if="position.teamgenoot && position.teamgenoot !== ' '" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
@@ -3452,53 +3452,53 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse{{ speler.personID }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ speler.personID }}">
+                <div id="collapse{{ speler.personID }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ speler.personID }}"
+                        ng-class="{ in: $index == 0 }">
 
                     <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'veldspeler'">
-                        <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
-                        <div class="col-md-3"><h1>{{ speler.doelpunten }}</h1>Doelpunten</div>
-                        <div class="col-md-3"><h1>{{ speler.aantal_passes }}</h1>Passes</div>
-                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<small>%</small></h1>Geslaagde passes</div>
-                        <div class="col-md-3"><h1>{{ speler.doelpogingen }}</h1>Doelpogingen</div>
-                        <div class="col-md-3"><h1>{{ speler.doelpogingen_opdoel }}<small>%</small></h1>Op doel</div>
-                        <div class="col-md-3"><h1>{{ speler.voorzetten }}</h1>Voorzetten</div>
-                        <div class="col-md-3"><h1>{{ speler.gewonnen_duels }}<small>%</small></h1>Gewonnen duels</div>
-                        <div class="col-md-3"><h1>{{ speler.intercepties }}</h1>Intercepties</div>
-                        <div class="col-md-3"><h1>{{ speler.overtredingen }}</h1>Overtredingen</div>
-                        <div class="col-md-3"><h1>{{ speler.geel }}</h1>Gele kaarten</div>
-                        <div class="col-md-3"><h1>{{ speler.rood }}</h1>Rode kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.minuten }}<span ng-if="speler.minuten == null">0</span></h1>Minuten</div>
+                        <div class="col-md-3"><h1>{{ speler.doelpunten }}<span ng-if="speler.doelpunten == null">0</span></h1>Doelpunten</div>
+                        <div class="col-md-3"><h1>{{ speler.aantal_passes }}<span ng-if="speler.aantal_passes == null">0</span></h1>Passes</div>
+                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<span ng-if="speler.pass_percentage == null">0</span><small>%</small></h1>Geslaagde passes</div>
+                        <div class="col-md-3"><h1>{{ speler.doelpogingen }}<span ng-if="speler.doelpogingen == null">0</span></h1>Doelpogingen</div>
+                        <div class="col-md-3"><h1>{{ speler.doelpogingen_opdoel }}<span ng-if="speler.doelpogingen_opdoel == null">0</span><small>%</small></h1>Op doel</div>
+                        <div class="col-md-3"><h1>{{ speler.voorzetten }}<span ng-if="speler.voorzetten == null">0</span></h1>Voorzetten</div>
+                        <div class="col-md-3"><h1>{{ speler.gewonnen_duels }}<span ng-if="speler.gewonnen_duels == null">0</span><small>%</small></h1>Gewonnen duels</div>
+                        <div class="col-md-3"><h1>{{ speler.intercepties }}<span ng-if="speler.intercepties == null">0</span></h1>Intercepties</div>
+                        <div class="col-md-3"><h1>{{ speler.overtredingen }}<span ng-if="speler.overtredingen == null">0</span></h1>Overtredingen</div>
+                        <div class="col-md-3"><h1>{{ speler.geel }}<span ng-if="speler.geel == null">0</span></h1>Gele kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.rood }}<span ng-if="speler.rood == null">0</span></h1>Rode kaarten</div>
                     </div>
                     <div class="col-xs-12 summary text-center" ng-if="speler.spelerType == 'keeper'">
-                        <div class="col-md-3"><h1>{{ speler.minuten }}</h1>Minuten</div>
-                        <div class="col-md-3"><h1>{{ speler.reddingen }}</h1>Reddingen</div>
-                        <div class="col-md-3"><h1>{{ speler.geslaagde_reddingen }}<small>%</small></h1>Geslaagde reddingen</div>
-                        <div class="col-md-3"><h1>{{ speler.succesvolle_uittrappen }}<small>%</small></h1>Geslaagde uittrappen</div>
-                        <div class="col-md-3"><h1>{{ speler.korte_passes }}</h1>Korte passes</div>
-                        <div class="col-md-3"><h1>{{ speler.middellange_passes }}</h1>Middellange passes</div>
-                        <div class="col-md-3"><h1>{{ speler.lange_passes }}</h1>Lange passes</div>
-                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<small>%</small></h1>Geslaagde passes</div>
-                        <div class="col-md-3"><h1>{{ speler.gevangen_ballen }}</h1>Gevangen ballen</div>
-                        <div class="col-md-3"><h1>{{ speler.weggestompte_ballen }}</h1>Weggestompte ballen</div>
-                        <div class="col-md-3"><h1>{{ speler.geel }}</h1>Gele kaarten</div>
-                        <div class="col-md-3"><h1>{{ speler.rood }}</h1>Rode kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.minuten }}<span ng-if="speler.minuten == null">0</span></h1>Minuten</div>
+                        <div class="col-md-3"><h1>{{ speler.reddingen }}<span ng-if="speler.reddingen == null">0</span></h1>Reddingen</div>
+                        <div class="col-md-3"><h1>{{ speler.geslaagde_reddingen }}<span ng-if="speler.geslaagde_reddingen == null">0</span><small>%</small></h1>Geslaagde reddingen</div>
+                        <div class="col-md-3"><h1>{{ speler.succesvolle_uittrappen }}<span ng-if="speler.succesvolle_uittrappen == null">0</span><small>%</small></h1>Geslaagde uittrappen</div>
+                        <div class="col-md-3"><h1>{{ speler.korte_passes }}<span ng-if="speler.korte_passes == null">0</span></h1>Korte passes</div>
+                        <div class="col-md-3"><h1>{{ speler.middellange_passes }}<span ng-if="speler.middellange_passes == null">0</span></h1>Middellange passes</div>
+                        <div class="col-md-3"><h1>{{ speler.lange_passes }}<span ng-if="speler.lange_passes == null">0</span></h1>Lange passes</div>
+                        <div class="col-md-3"><h1>{{ speler.pass_percentage }}<span ng-if="speler.pass_percentage == null">0</span><small>%</small></h1>Geslaagde passes</div>
+                        <div class="col-md-3"><h1>{{ speler.gevangen_ballen }}<span ng-if="speler.gevangen_ballen == null">0</span></h1>Gevangen ballen</div>
+                        <div class="col-md-3"><h1>{{ speler.weggestompte_ballen }}<span ng-if="speler.weggestompte_ballen == null">0</span></h1>Weggestompte ballen</div>
+                        <div class="col-md-3"><h1>{{ speler.geel }}<span ng-if="speler.geel == null">0</span></h1>Gele kaarten</div>
+                        <div class="col-md-3"><h1>{{ speler.rood }}<span ng-if="speler.rood == null">0</span></h1>Rode kaarten</div>
                     </div>
 
                     <div class="col-xs-12 item_title">Algemene statistieken <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
                     <div class="col-xs-12 no-padding player-table">
-                        <div class="player-table-row"><div class="col-xs-6">Doelpunten</div><div class="col-xs-6">{{ speler.doelpunten }}<span ng-show="!speler.algemene_stats.doelpunten || speler.algemene_stats.doelpunten == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Eigen doelpunten</div><div class="col-xs-6">{{ speler.eigen_doelpunten }}<span ng-show="!speler.algemene_stats.eigen_doelpunten || speler.algemene_stats.eigen_doelpunten == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aantal acties</div><div class="col-xs-6">{{ speler.aantal_acties }}<span ng-show="!speler.algemene_stats.aantal_acties || speler.algemene_stats.aantal_acties == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels }}<span ng-show="!speler.algemene_stats.aantal_aanvallende_duels || speler.algemene_stats.aantal_aanvallende_duels == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels_gewonnen }}<span ng-show="!speler.algemene_stats.aantal_aanvallende_duels_gewonnen || speler.algemene_stats.aantal_aanvallende_duels_gewonnen == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels }}<span ng-show="!speler.algemene_stats.aantal_verdedigende_duels || speler.algemene_stats.aantal_verdedigende_duels == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels_gewonnen }}<span ng-show="!speler.algemene_stats.aantal_verdedigende_duels_gewonnen || speler.algemene_stats.aantal_verdedigende_duels_gewonnen == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Assists</div><div class="col-xs-6">{{ speler.assists }}<span ng-show="!speler.algemene_stats.assists || speler.algemene_stats.assists == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Penalties gescoord</div><div class="col-xs-6">{{ speler.penalties_gescoord }}<span ng-show="!speler.algemene_stats.penalties_gescoord || speler.algemene_stats.penalties_gescoord == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Penalties gemist</div><div class="col-xs-6">{{ speler.penalties_gemist }}<span ng-show="!speler.algemene_stats.penalties_gemist || speler.algemene_stats.penalties_gemist == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Aantal buitenspel</div><div class="col-xs-6">{{ speler.aantal_buitenspel }}<span ng-show="!speler.algemene_stats.aantal_buitenspel || speler.algemene_stats.aantal_buitenspel == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Overtredingen tegen</div><div class="col-xs-6">{{ speler.overtredingen_tegen }}<span ng-show="!speler.algemene_stats.overtredingen_tegen || speler.algemene_stats.overtredingen_tegen == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Overtredingen mee</div><div class="col-xs-6">{{ speler.overtredingen_mee }}<span ng-show="!speler.algemene_stats.overtredingen_mee || speler.algemene_stats.overtredingen_mee == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Tweede geel</div><div class="col-xs-6">{{ speler.tweede_geel }}<span ng-show="!speler.algemene_stats.tweede_geel || speler.algemene_stats.tweede_geel == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Eigen doelpunten</div><div class="col-xs-6">{{ speler.eigen_doelpunten }}<span ng-show="!speler.eigen_doelpunten || speler.eigen_doelpunten == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aantal acties</div><div class="col-xs-6">{{ speler.aantal_acties }}<span ng-show="!speler.aantal_acties || speler .aantal_acties == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels }}<span ng-show="!speler.aantal_aanvallende_duels || speler.aantal_aanvallende_duels == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aanvallende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_aanvallende_duels_gewonnen }}<span ng-show="!speler.aantal_aanvallende_duels_gewonnen || speler.aantal_aanvallende_duels_gewonnen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels }}<span ng-show="!speler.aantal_verdedigende_duels || speler.aantal_verdedigende_duels == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Verdedigende duels gewonnen</div><div class="col-xs-6">{{ speler.aantal_verdedigende_duels_gewonnen }}<span ng-show="!speler.aantal_verdedigende_duels_gewonnen || speler.aantal_verdedigende_duels_gewonnen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Assists</div><div class="col-xs-6">{{ speler.assists }}<span ng-show="!speler.assists || speler.assists == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Penalties gescoord</div><div class="col-xs-6">{{ speler.penalties_gescoord }}<span ng-show="!speler.penalties_gescoord || speler.penalties_gescoord == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Penalties gemist</div><div class="col-xs-6">{{ speler.penalties_gemist }}<span ng-show="!speler.penalties_gemist || speler.penalties_gemist == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Aantal buitenspel</div><div class="col-xs-6">{{ speler.aantal_buitenspel }}<span ng-show="!speler.aantal_buitenspel || speler.aantal_buitenspel == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Overtredingen tegen</div><div class="col-xs-6">{{ speler.overtredingen_tegen }}<span ng-show="!speler.overtredingen_tegen || speler.overtredingen_tegen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Overtredingen mee</div><div class="col-xs-6">{{ speler.overtredingen_mee }}<span ng-show="!speler.overtredingen_mee || speler.overtredingen_mee == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Tweede geel</div><div class="col-xs-6">{{ speler.tweede_geel }}<span ng-show="!speler.tweede_geel || speler.tweede_geel == ' '">&nbsp;</span></div></div>
                     </div>
 
                     <div class="col-xs-12 item_title">Heatmap balacties <small>per helft, speelrichting beide helften van onder naar boven</small> <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -3769,7 +3769,7 @@
                     <div class="col-xs-12" ng-if="speler.spelerType == 'keeper' && speler.locatie_reddingen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field location_duels_field_180" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_reddingen">
-                                <div class="line" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
+                                <div class="line" style="transform: {{ data.createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ data.createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
                                 <span ng-if="position.actie == ' ' || position.actie == 'NA'" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
@@ -3823,7 +3823,7 @@
                     <div class="col-xs-12" ng-if="speler.spelerType == 'keeper' && speler.locatie_uittrappen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_size">
                             <div ng-repeat="position in speler.locatie_uittrappen">
-                                <div class="line_out" style="transform: {{ createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
+                                <div class="line_out" style="transform: {{ data.createLineTransform( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}; width: {{ data.createLineLength( (position.zend_width / 100) * location_duels_field_width - (position.zend_width) * 0.42, location_duels_field_height - (position.zend_length / 100) * (location_duels_field_height) - 10, (position.ontvang_width / 100) * location_duels_field_width - (position.ontvang_width) * 0.42, location_duels_field_height - (position.ontvang_length / 100) * (location_duels_field_height) - 10 ) }}px; margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.zend_length }} / 100)*{{ location_duels_field_height }}px - 6px); margin-left: -moz-calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px); margin-left: calc({{ position.zend_width }}% - ({{ position.zend_width }})*0.42px + 5px);"></div>
                                 <span ng-if="position.teamgenoot && position.teamgenoot !== ' '" class="position" style="margin-top: -moz-calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-top: calc({{ location_duels_field_height }}px - ({{ position.ontvang_length }} / 100)*{{ location_duels_field_height }}px - 10px); margin-left: -moz-calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); margin-left: calc({{ position.ontvang_width }}% - ({{ position.ontvang_width }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
@@ -3861,12 +3861,13 @@
             <h3>Spelers vergelijken</h3>
             <h4>Kies twee spelers uit</h4>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12" ng-if="currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin'">
+            <div class="col-xs-12">{{ data.matchshort.match_info.thuis }}</div>
             <div class="col-xs-12 col-md-6">
                 Speler 1:
                 <select ng-model="player_index1" class="form-control input-sm"
                         ng-change="data.player1InitFunc(player_index1)"
-                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_thuis | orderBy:orderSpelersNaam">
+                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_thuis | orderBy:data.orderSpelersNaam">
                     <option value="">-- kies speler --</option>
                 </select>
             </div>
@@ -3874,17 +3875,16 @@
                 Spelers 2:
                 <select ng-model="player_index2" class="form-control input-sm"
                         ng-change="data.player2InitFunc(player_index2)"
-                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_thuis | orderBy:orderSpelersNaam">
+                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_thuis | orderBy:data.orderSpelersNaam">
                     <option value="">-- kies speler --</option>
                 </select>
                 <br>
             </div>
         </div>
-
-        <div class="col-xs-12 col-md-6" ng-show="player_index1">
-            <hr>
+        <div class="col-xs-12 col-md-6" ng-if="currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin'">
+            <br>
             <div class="col-xs-12">
-                <h2>{{ data.speler1.spelerNaam }}</h2>
+                <h4>{{ data.speler1.spelerNaam }}</h4>
             </div>
             <div ng-if="data.speler1.spelerType == 'veldspeler'">
                 <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler1.minuten }}</div>
@@ -3920,13 +3920,12 @@
             </div>
             <br>
         </div>
-
-        <div class="col-xs-12 col-md-6" ng-show="player_index2">
-            <hr>
+        <div class="col-xs-12 col-md-6" ng-if="currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin'">
+            <br>
             <div class="col-xs-12 text-right">
-                <h2>{{ data.speler2.spelerNaam }}</h2>
+                <h4>{{ data.speler2.spelerNaam }}</h4>
             </div>
-            <div class="text-right" ng-if="speler2.type == 'veldspeler'">
+            <div class="text-right" ng-if="data.speler2.spelerType == 'veldspeler'">
                 <div class="col-xs-4">{{ data.speler2.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
                 <div class="col-xs-4">{{ data.speler2.doelpunten }}</div><div class="col-xs-8">Doelpunten</div>
                 <div class="col-xs-4">{{ data.speler2.doelpogingen }}</div><div class="col-xs-8">Doelpogingen</div>
@@ -3943,7 +3942,7 @@
                 <div class="col-xs-4">{{ data.speler2.geel }}</div><div class="col-xs-8">Gele kaarten</div>
                 <div class="col-xs-4">{{ data.speler2.rood }}</div><div class="col-xs-8">Rode kaarten</div>
             </div>
-            <div class="text-right" ng-if="data.speler2.type == 'keeper'">
+            <div class="text-right" ng-if="data.speler2.spelerType == 'keeper'">
                 <div class="col-xs-4">{{ data.speler2.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
                 <div class="col-xs-4">{{ data.speler2.reddingen }}</div><div class="col-xs-8">Reddingen</div>
                 <div class="col-xs-4">{{ data.speler2.geslaagde_reddingen }}%</div><div class="col-xs-8">Geslaagde reddingen</div>
@@ -3960,6 +3959,105 @@
             </div>
             <br>
         </div>
+        <div class="col-xs-12" ng-if="currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
+            <hr>
+            <div class="col-xs-12">{{ data.matchshort.match_info.uit }}</div>
+            <div class="col-xs-12 col-md-6">
+                Speler 1:
+                <select ng-model="player_index3" class="form-control input-sm"
+                        ng-change="data.player3InitFunc(player_index3)"
+                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_uit | orderBy:data.orderSpelersNaam">
+                    <option value="">-- kies speler --</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                Spelers 2:
+                <select ng-model="player_index4" class="form-control input-sm"
+                        ng-change="data.player4InitFunc(player_index4)"
+                        ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_uit | orderBy:data.orderSpelersNaam">
+                    <option value="">-- kies speler --</option>
+                </select>
+                <br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6" ng-if="currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
+            <br>
+            <div class="col-xs-12">
+                <h4>{{ data.speler3.spelerNaam }}</h4>
+            </div>
+            <div ng-if="data.speler3.spelerType == 'veldspeler'">
+                <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler3.minuten }}</div>
+                <div class="col-xs-8">Doelpunten</div><div class="col-xs-4">{{ data.speler3.doelpunten }}</div>
+                <div class="col-xs-8">Doelpogingen</div><div class="col-xs-4">{{ data.speler3.doelpogingen }}</div>
+                <div class="col-xs-8">Op doel</div><div class="col-xs-4">{{ data.speler3.doelpogingen_opdoel }}%</div>
+                <div class="col-xs-8">Voorzetten</div><div class="col-xs-4">{{ data.speler3.voorzetten }}</div>
+                <div class="col-xs-8">Aantal passes</div><div class="col-xs-4">{{ data.speler3.aantal_passes }}</div>
+                <div class="col-xs-8">Geslaagde passes</div><div class="col-xs-4">{{ data.speler3.pass_percentage }}%</div>
+                <div class="col-xs-8">Gem. pass lengte</div><div class="col-xs-4">{{ data.speler3.pass_lengte }}</div>
+                <div class="col-xs-8">Gewonnen duels</div><div class="col-xs-4">{{ data.speler3.gewonnen_duels }}%</div>
+                <div class="col-xs-8">Verdedigende duels</div><div class="col-xs-4">{{ data.speler3.verdedigende_duels }}</div>
+                <div class="col-xs-8">Aanvallende duels</div><div class="col-xs-4">{{ data.speler3.aanvallende_duels }}</div>
+                <div class="col-xs-8">Intercepties</div><div class="col-xs-4">{{ data.speler3.intercepties }}</div>
+                <div class="col-xs-8">Overtredingen</div><div class="col-xs-4">{{ data.speler3.overtredingen }}</div>
+                <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ data.speler3.geel }}</div>
+                <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ data.speler3.rood }}</div>
+            </div>
+            <div ng-if="data.speler3.spelerType == 'keeper'">
+                <div class="col-xs-8">Minuten gespeeld</div><div class="col-xs-4">{{ data.speler3.minuten }}</div>
+                <div class="col-xs-8">Reddingen</div><div class="col-xs-4">{{ data.speler3.reddingen }}</div>
+                <div class="col-xs-8">Geslaagde reddingen</div><div class="col-xs-4">{{ data.speler3.geslaagde_reddingen }}%</div>
+                <div class="col-xs-8">Geslaagde uittrappen</div><div class="col-xs-4">{{ data.speler3.succesvolle_uittrappen }}%</div>
+                <div class="col-xs-8">Korte passes</div><div class="col-xs-4">{{ data.speler3.korte_passes }}</div>
+                <div class="col-xs-8">Middellange passes</div><div class="col-xs-4">{{ data.speler3.middellange_passes }}</div>
+                <div class="col-xs-8">Lange passes</div><div class="col-xs-4">{{ data.speler3.lange_passes }}</div>
+                <div class="col-xs-8">Gelaagde passes</div><div class="col-xs-4">{{ data.speler3.pass_percentage }}%</div>
+                <div class="col-xs-8">Gem. pass lengte</div><div class="col-xs-4">{{ data.speler3.pass_lengte }}</div>
+                <div class="col-xs-8">Gevangen ballen</div><div class="col-xs-4">{{ data.speler3.gevangen_ballen }}</div>
+                <div class="col-xs-8">Weggestompte ballen</div><div class="col-xs-4">{{ data.speler3.weggestompte_ballen }}</div>
+                <div class="col-xs-8">Gele kaarten</div><div class="col-xs-4">{{ data.speler3.geel }}</div>
+                <div class="col-xs-8">Rode kaarten</div><div class="col-xs-4">{{ data.speler3.rood }}</div>
+            </div>
+            <br>
+        </div>
+        <div class="col-xs-12 col-md-6" ng-if="currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
+            <br>
+            <div class="col-xs-12 text-right">
+                <h4>{{ data.speler4.spelerNaam }}</h4>
+            </div>
+            <div class="text-right" ng-if="data.speler4.spelerType == 'veldspeler'">
+                <div class="col-xs-4">{{ data.speler4.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
+                <div class="col-xs-4">{{ data.speler4.doelpunten }}</div><div class="col-xs-8">Doelpunten</div>
+                <div class="col-xs-4">{{ data.speler4.doelpogingen }}</div><div class="col-xs-8">Doelpogingen</div>
+                <div class="col-xs-4">{{ data.speler4.doelpogingen_opdoel }}%</div><div class="col-xs-8">Op doel</div>
+                <div class="col-xs-4">{{ data.speler4.voorzetten }}</div><div class="col-xs-8">Voorzetten</div>
+                <div class="col-xs-4">{{ data.speler4.aantal_passes }}</div><div class="col-xs-8">Aantal passes</div>
+                <div class="col-xs-4">{{ data.speler4.pass_percentage }}%</div><div class="col-xs-8">Geslaagde passes</div>
+                <div class="col-xs-4">{{ data.speler4.pass_lengte }}</div><div class="col-xs-8">Gem. pass lengte</div>
+                <div class="col-xs-4">{{ data.speler4.gewonnen_duels }}%</div><div class="col-xs-8">Gewonnen duels</div>
+                <div class="col-xs-4">{{ data.speler4.verdedigende_duels }}</div><div class="col-xs-8">Verdedigende duels</div>
+                <div class="col-xs-4">{{ data.speler4.aanvallende_duels }}</div><div class="col-xs-8">Aanvallende duels</div>
+                <div class="col-xs-4">{{ data.speler4.intercepties }}</div><div class="col-xs-8">Intercepties</div>
+                <div class="col-xs-4">{{ data.speler4.overtredingen }}</div><div class="col-xs-8">Overtredingen</div>
+                <div class="col-xs-4">{{ data.speler4.geel }}</div><div class="col-xs-8">Gele kaarten</div>
+                <div class="col-xs-4">{{ data.speler4.rood }}</div><div class="col-xs-8">Rode kaarten</div>
+            </div>
+            <div class="text-right" ng-if="data.speler4.spelerType == 'keeper'">
+                <div class="col-xs-4">{{ data.speler4.minuten }}</div><div class="col-xs-8">Minuten gespeeld</div>
+                <div class="col-xs-4">{{ data.speler4.reddingen }}</div><div class="col-xs-8">Reddingen</div>
+                <div class="col-xs-4">{{ data.speler4.geslaagde_reddingen }}%</div><div class="col-xs-8">Geslaagde reddingen</div>
+                <div class="col-xs-4">{{ data.speler4.succesvolle_uittrappen }}%</div><div class="col-xs-8">Geslaagde uittrappen</div>
+                <div class="col-xs-4">{{ data.speler4.korte_passes }}</div><div class="col-xs-8">Korte passes</div>
+                <div class="col-xs-4">{{ data.speler4.middellange_passes }}</div><div class="col-xs-8">Middellange passes</div>
+                <div class="col-xs-4">{{ data.speler4.lange_passes }}</div><div class="col-xs-8">Lange passes</div>
+                <div class="col-xs-4">{{ data.speler4.pass_percentage }}%</div><div class="col-xs-8">Gelaagde passes</div>
+                <div class="col-xs-4">{{ data.speler4.pass_lengte }}</div><div class="col-xs-8">Gem. pass lengte</div>
+                <div class="col-xs-4">{{ data.speler4.gevangen_ballen }}</div><div class="col-xs-8">Gevangen ballen</div>
+                <div class="col-xs-4">{{ data.speler4.weggestompte_ballen }}</div><div class="col-xs-8">Weggestompte ballen</div>
+                <div class="col-xs-4">{{ data.speler4.geel }}</div><div class="col-xs-8">Gele kaarten</div>
+                <div class="col-xs-4">{{ data.speler4.rood }}</div><div class="col-xs-8">Rode kaarten</div>
+            </div>
+            <br>
+        </div>
 
         <div class="col-xs-12 content-title-bottom text-center">
             <a href="" scroll-to="top">Terug naar boven <i class="fa fa-arrow-up"></i></a>
@@ -3969,7 +4067,34 @@
     </div>
     <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments">
 
-        <div id="logwedstrijd" class="col-xs-12 content-title-top text-center">
+        <div id="scorespeler" class="col-xs-12 content-title-top text-center">
+            <h3>Score spelers</h3>
+            <h4>Cijfer voor de speler bij deze wedstrijd</h4>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group" ng-repeat="speler in data.spelerscores | orderBy:data.orderSpelersNaam">
+                <label for="inputEmail" class="col-xs-8 col-md-4 control-label">{{ speler.spelerNaam }}</label>
+                <div class="col-xs-4 col-md-2">
+                    <input type="number" class="form-control" id="inputEmail" placeholder="Email" ng-model="speler.scores.score_from_coach">
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="col-xs-12" ng-show="playerlog_index1">
+            <hr>
+            <h4>{{ data.spelerlogspelernaam }}</h4>
+            <p>Opmerking plaatsen</p>
+            <textarea class="form-control" rows="2"></textarea>
+            <br>
+            <button type="button" class="btn btn-primary">Plaats</button>
+            <hr>
+            <h4>Reeds geplaatste opmerkingen</h4>
+            <p>
+                ...
+            </p>
+        </div>
+
+        <div id="logwedstrijd" class="col-xs-12 content-title text-center">
             <h3>Logboek wedstrijd</h3>
             <h4>Alle mogelijke notities kunnen hier geplaatst worden</h4>
         </div>
@@ -3983,6 +4108,9 @@
             <button type="button" class="btn btn-primary">Plaats</button>
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
+            <p ng-repeat="log in data.teamdata.match_log">
+                {{ log.author }} - {{ log.text }}
+            </p>
             <p>
                 ...
             </p>
@@ -3998,12 +4126,12 @@
                 Deze notities komen ook achteraan het PDF document te staan als deze gedownload wordt.</small>
             <select ng-model="playerlog_index1" class="form-control input-sm"
                     ng-change="data.playerlog1InitFunc(playerlog_index1)"
-                    ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_thuis | orderBy:orderSpelersNaam">
+                    ng-options="player.playerID as player.spelerNaam for player in data.playerdata | orderBy:data.orderSpelersNaam">
                 <option value="">-- kies speler --</option>
             </select>
             <hr>
         </div>
-        <div class="col-xs-12" ng-show="playerlog_index1 || playerlog_index2">
+        <div class="col-xs-12" ng-show="playerlog_index1">
             <hr>
             <h4>{{ data.spelerlogspelernaam }}</h4>
             <p>Opmerking plaatsen</p>

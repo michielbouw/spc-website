@@ -59,6 +59,7 @@
                         <span class="caret-right"></span><span class="caret"></span> Logboek
                     </a>
                     <ul class="nav nav-pills nav-stacked submenu">
+                        <li><a href="" scroll-to="scorespeler"><i class="fa fa-sort-numeric-desc"></i> Score spelers</a></li>
                         <li><a href="" scroll-to="logwedstrijd"><i class="fa fa-pencil"></i> Wedstrijd</a></li>
                         <li><a href="" scroll-to="logspeler"><i class="fa fa-weixin"></i> Spelers</a></li>
                     </ul>
@@ -80,8 +81,8 @@
                     <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }}<br>
                         {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
                     <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
-                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br>
-                    <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br>
+                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br ng-if="data.matchshort.match_info.toeschouwers">
+                    <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br ng-if="data.matchshort.match_info.stadion">
                     <small ng-if="data.matchshort.match_info.stadion"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.stadion }}</small>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
@@ -169,6 +170,7 @@
                             <span class="caret-right"></span><span class="caret"></span> Logboek
                         </a>
                         <ul class="nav nav-pills submenu">
+                            <li><a href="" scroll-to="scorespeler" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Score spelers</a></li>
                             <li><a href="" scroll-to="logwedstrijd" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Wedstrijd</a></li>
                             <li><a href="" scroll-to="logspeler" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Spelers</a></li>
                         </ul>
