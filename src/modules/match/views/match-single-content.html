@@ -1300,7 +1300,7 @@
             </div>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPosities">
-            <p>Uitleg...</p>
+            <p>Klik de naam van het team om enkel deze weer te geven op het veld.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -1343,7 +1343,7 @@
             <h4>Verschillende doelpogingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoLocDoelpogingen" aria-expanded="false" aria-controls="collapseInfoLocDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoLocDoelpogingen">
-            <p>Uitleg...</p>
+            <p>Klik de naam van het team, of op het type, om enkel deze weer te geven op het veld.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -1637,7 +1637,7 @@
             </div>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPassMatrix">
-            <p>Uitleg... Blauw ingekleud = 5 tot 8, rood ingekleurd = 9 of meer</p>
+            <p>Uitleg... <br>Blauw ingekleurd = 5 tot 8, rood ingekleurd = 9 of meer</p>
             <br>
         </div>
         <div class="tab-content">
@@ -1707,19 +1707,28 @@
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
                                 </small>
-                                    <span ng-if="row['_row'] == 'TOTAAL'">
-                                        <strong>Totaal/Gem.</strong>
-                                    </span>
+                                <span ng-if="row['_row'] == 'TOTAAL'">
+                                    <strong>Totaal/Gem.</strong>
+                                </span>
                             </td>
-                            <td>{{ row['kort'] }}</td>
-                            <td class="border-right">{{ row['kort_perc'] }}</td>
-                            <td>{{ row['lang'] }}</td>
-                            <td class="border-right">{{ row['lang_perc'] }}</td>
-                            <td>{{ row['middellang'] }}</td>
-                            <td class="border-right">{{ row['middellang_perc'] }}</td>
-                            <td>{{ row['TOTAAL'] }}</td>
-                            <td class="border-right">{{ row['TOTAAL_perc'] }}</td>
-                            <td>{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['gem_len'] }}</strong></td>
                         </tr>
                         </tbody>
                     </table>
@@ -1792,19 +1801,28 @@
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
                                 </small>
-                                    <span ng-if="row['_row'] == 'TOTAAL'">
-                                        <strong>Totaal/Gem.</strong>
-                                    </span>
+                                <span ng-if="row['_row'] == 'TOTAAL'">
+                                    <strong>Totaal/Gem.</strong>
+                                </span>
                             </td>
-                            <td>{{ row['kort'] }}</td>
-                            <td class="border-right">{{ row['kort_perc'] }}</td>
-                            <td>{{ row['lang'] }}</td>
-                            <td class="border-right">{{ row['lang_perc'] }}</td>
-                            <td>{{ row['middellang'] }}</td>
-                            <td class="border-right">{{ row['middellang_perc'] }}</td>
-                            <td>{{ row['TOTAAL'] }}</td>
-                            <td class="border-right">{{ row['TOTAAL_perc'] }}</td>
-                            <td>{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['gem_len'] }}</strong></td>
                         </tr>
                         </tbody>
                     </table>
@@ -1877,19 +1895,28 @@
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
                                 </small>
-                                    <span ng-if="row['_row'] == 'TOTAAL'">
-                                        <strong>Totaal/Gem.</strong>
-                                    </span>
+                                <span ng-if="row['_row'] == 'TOTAAL'">
+                                    <strong>Totaal/Gem.</strong>
+                                </span>
                             </td>
-                            <td>{{ row['kort'] }}</td>
-                            <td class="border-right">{{ row['kort_perc'] }}</td>
-                            <td>{{ row['lang'] }}</td>
-                            <td class="border-right">{{ row['lang_perc'] }}</td>
-                            <td>{{ row['middellang'] }}</td>
-                            <td class="border-right">{{ row['middellang_perc'] }}</td>
-                            <td>{{ row['TOTAAL'] }}</td>
-                            <td class="border-right">{{ row['TOTAAL_perc'] }}</td>
-                            <td>{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['gem_len'] }}</strong></td>
                         </tr>
                         </tbody>
                     </table>
@@ -1962,19 +1989,28 @@
                                 <small ng-if="row['_row'] !== 'TOTAAL'">
                                     {{ row['_row'] }}
                                 </small>
-                                    <span ng-if="row['_row'] == 'TOTAAL'">
-                                        <strong>Totaal/Gem.</strong>
-                                    </span>
+                                <span ng-if="row['_row'] == 'TOTAAL'">
+                                    <strong>Totaal/Gem.</strong>
+                                </span>
                             </td>
-                            <td>{{ row['kort'] }}</td>
-                            <td class="border-right">{{ row['kort_perc'] }}</td>
-                            <td>{{ row['lang'] }}</td>
-                            <td class="border-right">{{ row['lang_perc'] }}</td>
-                            <td>{{ row['middellang'] }}</td>
-                            <td class="border-right">{{ row['middellang_perc'] }}</td>
-                            <td>{{ row['TOTAAL'] }}</td>
-                            <td class="border-right">{{ row['TOTAAL_perc'] }}</td>
-                            <td>{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['kort_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['kort_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['lang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['lang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['middellang_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['middellang_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL'] }}</strong></td>
+                            <td class="border-right" ng-if="row['_row'] !== 'TOTAAL'">{{ row['TOTAAL_perc'] }}</td>
+                            <td class="border-right" ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['TOTAAL_perc'] }}</strong></td>
+                            <td ng-if="row['_row'] !== 'TOTAAL'">{{ row['gem_len'] }}</td>
+                            <td ng-if="row['_row'] == 'TOTAAL'"><strong>{{ row['gem_len'] }}</strong></td>
                         </tr>
                         </tbody>
                     </table>
@@ -1995,7 +2031,7 @@
             </div>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoDuelMatrix">
-            <p>Uitleg... Blauw ingekleud = 5 tot 8, rood ingekleurd = 9 of meer</p>
+            <p>Uitleg... <br>Blauw ingekleurd = 5 tot 8, rood ingekleurd = 9 of meer</p>
             <br>
         </div>
         <div class="tab-content">
@@ -2799,11 +2835,11 @@
                         <div class="player-table-row"><div class="col-xs-6">Schoten naast</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_naast }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_naast || speler.aanvallende_acties_helft1.schoten_naast == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_naast }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_naast || speler.aanvallende_acties_helft2.schoten_naast == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Schoten over</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_over }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_over || speler.aanvallende_acties_helft1.schoten_over == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_over }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_over || speler.aanvallende_acties_helft2.schoten_over == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Schoten geblokkeerd</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_geblokkeerd }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_geblokkeerd || speler.aanvallende_acties_helft1.schoten_geblokkeerd == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_geblokkeerd }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_geblokkeerd || speler.aanvallende_acties_helft2.schoten_geblokkeerd == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Schoten binnen de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_binnen_16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_binnen_16 || speler.aanvallende_acties_helft1.schoten_binnen_16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_binnen_16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_binnen_16 || speler.aanvallende_acties_helft2.schoten_binnen_16 == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Schoten buiten de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_buiten_16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_buiten_16 || speler.aanvallende_acties_helft1.schoten_buiten_16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_buiten_16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_buiten_16 || speler.aanvallende_acties_helft2.schoten_buiten_16 == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Schoten binnen de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_binnen16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_binnen16 || speler.aanvallende_acties_helft1.schoten_binnen16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_binnen16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_binnen16 || speler.aanvallende_acties_helft2.schoten_binnen16 == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Schoten buiten de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_buiten16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_buiten16 || speler.aanvallende_acties_helft1.schoten_buiten16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_buiten16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_buiten16 || speler.aanvallende_acties_helft2.schoten_buiten16 == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Sleutel acties</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.sleutel_acties }}<span ng-show="!speler.aanvallende_acties_helft1.sleutel_acties || speler.aanvallende_acties_helft1.sleutel_acties == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.sleutel_acties }}<span ng-show="!speler.aanvallende_acties_helft2.sleutel_acties || speler.aanvallende_acties_helft2.sleutel_acties == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Sleutel passes</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.sleutel_passes }}<span ng-show="!speler.aanvallende_acties_helft1.sleutel_passes || speler.aanvallende_acties_helft1.sleutel_passes == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.sleutel_passes }}<span ng-show="!speler.aanvallende_acties_helft2.sleutel_passes || speler.aanvallende_acties_helft2.sleutel_passes == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Kruisballen</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft1.kruisballen || speler.aanvallende_acties_helft1.kruisballen == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft2.kruisballen || speler.aanvallende_acties_helft2.kruisballen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Cross-passes</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft1.kruisballen || speler.aanvallende_acties_helft1.kruisballen == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft2.kruisballen || speler.aanvallende_acties_helft2.kruisballen == ' '">&nbsp;</span></div></div>
                     </div>
 
                     <div class="col-xs-12 item_title">Verdedigende acties <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -3523,11 +3559,11 @@
                         <div class="player-table-row"><div class="col-xs-6">Schoten naast</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_naast }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_naast || speler.aanvallende_acties_helft1.schoten_naast == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_naast }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_naast || speler.aanvallende_acties_helft2.schoten_naast == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Schoten over</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_over }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_over || speler.aanvallende_acties_helft1.schoten_over == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_over }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_over || speler.aanvallende_acties_helft2.schoten_over == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Schoten geblokkeerd</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_geblokkeerd }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_geblokkeerd || speler.aanvallende_acties_helft1.schoten_geblokkeerd == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_geblokkeerd }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_geblokkeerd || speler.aanvallende_acties_helft2.schoten_geblokkeerd == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Schoten binnen de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_binnen_16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_binnen_16 || speler.aanvallende_acties_helft1.schoten_binnen_16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_binnen_16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_binnen_16 || speler.aanvallende_acties_helft2.schoten_binnen_16 == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Schoten buiten de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_buiten_16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_buiten_16 || speler.aanvallende_acties_helft1.schoten_buiten_16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_buiten_16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_buiten_16 || speler.aanvallende_acties_helft2.schoten_buiten_16 == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Schoten binnen de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_binnen16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_binnen16 || speler.aanvallende_acties_helft1.schoten_binnen16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_binnen16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_binnen16 || speler.aanvallende_acties_helft2.schoten_binnen16 == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Schoten buiten de 16m</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.schoten_buiten16 }}<span ng-show="!speler.aanvallende_acties_helft1.schoten_buiten16 || speler.aanvallende_acties_helft1.schoten_buiten16 == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.schoten_buiten16 }}<span ng-show="!speler.aanvallende_acties_helft2.schoten_buiten16 || speler.aanvallende_acties_helft2.schoten_buiten16 == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Sleutel acties</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.sleutel_acties }}<span ng-show="!speler.aanvallende_acties_helft1.sleutel_acties || speler.aanvallende_acties_helft1.sleutel_acties == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.sleutel_acties }}<span ng-show="!speler.aanvallende_acties_helft2.sleutel_acties || speler.aanvallende_acties_helft2.sleutel_acties == ' '">&nbsp;</span></div></div>
                         <div class="player-table-row"><div class="col-xs-6">Sleutel passes</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.sleutel_passes }}<span ng-show="!speler.aanvallende_acties_helft1.sleutel_passes || speler.aanvallende_acties_helft1.sleutel_passes == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.sleutel_passes }}<span ng-show="!speler.aanvallende_acties_helft2.sleutel_passes || speler.aanvallende_acties_helft2.sleutel_passes == ' '">&nbsp;</span></div></div>
-                        <div class="player-table-row"><div class="col-xs-6">Kruisballen</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft1.kruisballen || speler.aanvallende_acties_helft1.kruisballen == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft2.kruisballen || speler.aanvallende_acties_helft2.kruisballen == ' '">&nbsp;</span></div></div>
+                        <div class="player-table-row"><div class="col-xs-6">Cross-passes</div><div class="col-xs-3">{{ speler.aanvallende_acties_helft1.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft1.kruisballen || speler.aanvallende_acties_helft1.kruisballen == ' '">&nbsp;</span></div><div class="col-xs-3">{{ speler.aanvallende_acties_helft2.kruisballen }}<span ng-show="!speler.aanvallende_acties_helft2.kruisballen || speler.aanvallende_acties_helft2.kruisballen == ' '">&nbsp;</span></div></div>
                     </div>
 
                     <div class="col-xs-12 item_title">Verdedigende acties <a class="pull-right" href="" scroll-to="heading{{ speler.personID }}">terug <i class="fa fa-arrow-up"></i></a></div>
@@ -4072,26 +4108,15 @@
             <h4>Cijfer voor de speler bij deze wedstrijd</h4>
         </div>
         <div class="col-xs-12">
-            <div class="form-group" ng-repeat="speler in data.spelerscores | orderBy:data.orderSpelersNaam">
+            <div ng-if="infoSaveLog" class="alert alert-info" role="alert">{{ infoSaveLog }}</div>
+            <div class="form-group" style="margin-bottom: 0;" ng-repeat="speler in data.spelerscores | orderBy:data.orderSpelersNaam">
                 <label for="inputEmail" class="col-xs-8 col-md-4 control-label">{{ speler.spelerNaam }}</label>
                 <div class="col-xs-4 col-md-2">
                     <input type="number" class="form-control" id="inputEmail" placeholder="Email" ng-model="speler.scores.score_from_coach">
                 </div>
             </div>
             <hr>
-        </div>
-        <div class="col-xs-12" ng-show="playerlog_index1">
-            <hr>
-            <h4>{{ data.spelerlogspelernaam }}</h4>
-            <p>Opmerking plaatsen</p>
-            <textarea class="form-control" rows="2"></textarea>
-            <br>
-            <button type="button" class="btn btn-primary">Plaats</button>
-            <hr>
-            <h4>Reeds geplaatste opmerkingen</h4>
-            <p>
-                ...
-            </p>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="data.savePlayerLog()">Opslaan</button>
         </div>
 
         <div id="logwedstrijd" class="col-xs-12 content-title text-center">
@@ -4105,7 +4130,7 @@
             <h4>Opmerking plaatsen</h4>
             <textarea class="form-control" rows="2"></textarea>
             <br>
-            <button type="button" class="btn btn-primary">Plaats</button>
+            <button type="button" class="btn btn-primary btn-sm">Plaats</button>
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
             <p ng-repeat="log in data.teamdata.match_log">
@@ -4137,7 +4162,7 @@
             <p>Opmerking plaatsen</p>
             <textarea class="form-control" rows="2"></textarea>
             <br>
-            <button type="button" class="btn btn-primary">Plaats</button>
+            <button type="button" class="btn btn-primary btn-sm">Plaats</button>
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
             <p>
