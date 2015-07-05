@@ -4101,7 +4101,7 @@
         <br class="clear">
 
     </div>
-    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments">
+    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments" ng-if="data.team_data || currentClub.name == data.matchshort.match_info.thuis || currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
 
         <div id="scorespeler" class="col-xs-12 content-title-top text-center">
             <h3>Score spelers</h3>

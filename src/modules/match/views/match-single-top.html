@@ -54,7 +54,7 @@
                         <li><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
                     </ul>
                 </li>
-                <li role="presentation">
+                <li role="presentation" ng-if="data.team_data || currentClub.name == data.matchshort.match_info.thuis || currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
                     <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab" scroll-to="top">
                         <span class="caret-right"></span><span class="caret"></span> Logboek
                     </a>
@@ -165,7 +165,7 @@
                             <li><a href="" scroll-to="vergelijk" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Vergelijken</a></li>
                         </ul>
                     </li>
-                    <li role="presentation">
+                    <li role="presentation" ng-if="data.team_data || currentClub.name == data.matchshort.match_info.thuis || currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
                         <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab" scroll-to="top">
                             <span class="caret-right"></span><span class="caret"></span> Logboek
                         </a>
