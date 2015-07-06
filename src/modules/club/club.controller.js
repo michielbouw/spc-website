@@ -9,8 +9,10 @@ angular.module('mainapp.club')
         self.season_matches = [];
         $scope.rounds = [1, 1];
 
-        if (!$routeParams.team_slug || $routeParams.team_slug === '') {
+        if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/club/' + $rootScope.currentClub.teams[0].team_slug);
+        } else if (!$rootScope.currentClub.teams[0].team_slug) {
+            $location.path('/club/fceindhoven_1eelftal');
         } else {
             Api.TeamDataItem.get({
                 _slug: $routeParams.team_slug
