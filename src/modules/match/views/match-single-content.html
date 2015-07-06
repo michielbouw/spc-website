@@ -1447,21 +1447,21 @@
         </div>
         <div class="col-xs-12">
             <div class="col-xs-12"><strong>{{ data.matchshort.match_info.thuis }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
-            <div class="col-xs-6 ball_contact_field">
-                1e helft<br>
+            <div class="col-xs-6 ball_contact_field text-center">
+                <em>1e helft</em><br>
                 <img src="media/data/{{ data.match.matchID }}_team_{{ data.match.thuisTeamID }}_helft1_heatmap.png" style="width: 100%;" />
             </div>
-            <div class="col-xs-6 ball_contact_field">
-                2e helft<br>
+            <div class="col-xs-6 ball_contact_field text-center">
+                <em>2e helft</em><br>
                 <img src="media/data/{{ data.match.matchID }}_team_{{ data.match.thuisTeamID }}_helft2_heatmap.png" style="width: 100%;" />
             </div>
             <div class="col-xs-12"><strong>{{ data.matchshort.match_info.uit }}</strong> <small>speelrichting beide helften van onder naar boven</small></div>
-            <div class="col-xs-6 ball_contact_field">
-                1e helft<br>
+            <div class="col-xs-6 ball_contact_field text-center">
+                <em>1e helft</em><br>
                 <img src="media/data/{{ data.match.matchID }}_team_{{ data.match.uitTeamID }}_helft1_heatmap.png" style="width: 100%;" />
             </div>
-            <div class="col-xs-6 ball_contact_field">
-                2e helft<br>
+            <div class="col-xs-6 ball_contact_field text-center">
+                <em>2e helft</em><br>
                 <img src="media/data/{{ data.match.matchID }}_team_{{ data.match.uitTeamID }}_helft2_heatmap.png" style="width: 100%;" />
             </div>
         </div>
@@ -1477,7 +1477,7 @@
         <div class="col-xs-12">
             <div class="col-xs-12"><strong>{{ data.matchshort.match_info.thuis }}</strong> <small>speelrichting van onder naar boven</small></div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
-                Korte passes<br>
+                <span class="text-center" style="width: 100%;float: left;"><em>Korte passes (<10m)</em></span><br>
                 <div ng-repeat="row in data.match.passes_per_zone.thuis.kort" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == '1'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1501,7 +1501,7 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
-                Middellange passes<br>
+                <span class="text-center" style="width: 100%;float: left;"><em>Middellange passes (10-25m)</em></span><br>
                 <div ng-repeat="row in data.match.passes_per_zone.thuis.middellang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1525,7 +1525,7 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
-                Lange passes<br>
+                <span class="text-center" style="width: 100%;float: left;"><em>Lange passes (>25m)</em></span><br>
                 <div ng-repeat="row in data.match.passes_per_zone.thuis.lang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1551,7 +1551,7 @@
 
             <div class="col-xs-12"><br><strong>{{ data.matchshort.match_info.uit }}</strong> <small>speelrichting van onder naar boven</small></div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
-                Korte passes<br>
+                <span class="text-center" style="width: 100%;float: left;"><em>Korte passes (<10m)</em></span><br>
                 <div ng-repeat="row in data.match.passes_per_zone.uit.kort" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1575,7 +1575,7 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
-                Middellange passes<br>
+                <span class="text-center" style="width: 100%;float: left;"><em>Middellange passes (10-25m)</em></span><br>
                 <div ng-repeat="row in data.match.passes_per_zone.uit.middellang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -1599,7 +1599,7 @@
                 <img src="images/background_speelveld.svg" style="width: 100%;" />
             </div>
             <div class="col-xs-4 passes_zone_field" id="passes_zone_size">
-                Lange passes<br>
+                <span class="text-center" style="width: 100%;float: left;"><em>Lange passes (>25m)</em></span><br>
                 <div ng-repeat="row in data.match.passes_per_zone.uit.lang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
@@ -2928,10 +2928,10 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Doelpoging na 3
+                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Leidt tot doelpoging
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Geen doelpoging na 3
+                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Leidt niet tot doelpoging
                             </p>
                         </div>
                         <br>
@@ -3652,10 +3652,10 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Doelpoging na 3
+                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Leidt tot doelpoging
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Geen doelpoging na 3
+                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Leidt niet tot doelpoging
                             </p>
                         </div>
                         <br>

@@ -1133,8 +1133,8 @@ angular.module('mainapp.pageAdmin')
                                 temp.aanvallende_acties_helft1.schoten_naast = angular.copy(value.aanvallende_acties_helft1[6][0][0]);
                                 temp.aanvallende_acties_helft1.schoten_over = angular.copy(value.aanvallende_acties_helft1[7][0][0]);
                                 temp.aanvallende_acties_helft1.schoten_geblokkeerd = angular.copy(value.aanvallende_acties_helft1[8][0][0]);
-                                temp.aanvallende_acties_helft1.schoten_binnen_16 = angular.copy(value.aanvallende_acties_helft1[9][0][0]);
-                                temp.aanvallende_acties_helft1.schoten_buiten_16 = angular.copy(value.aanvallende_acties_helft1[10][0][0]);
+                                temp.aanvallende_acties_helft1.schoten_binnen16 = angular.copy(value.aanvallende_acties_helft1[9][0][0]);
+                                temp.aanvallende_acties_helft1.schoten_buiten16 = angular.copy(value.aanvallende_acties_helft1[10][0][0]);
                                 temp.aanvallende_acties_helft1.sleutel_acties = angular.copy(value.aanvallende_acties_helft1[11][0][0]);
                                 temp.aanvallende_acties_helft1.sleutel_passes = angular.copy(value.aanvallende_acties_helft1[12][0][0]);
                                 temp.aanvallende_acties_helft1.kruisballen = angular.copy(value.aanvallende_acties_helft1[13][0][0]);
@@ -1395,8 +1395,8 @@ angular.module('mainapp.pageAdmin')
                                 temp.aanvallende_acties_helft2.schoten_naast = angular.copy(value.aanvallende_acties_helft2[6][0][0]);
                                 temp.aanvallende_acties_helft2.schoten_over = angular.copy(value.aanvallende_acties_helft2[7][0][0]);
                                 temp.aanvallende_acties_helft2.schoten_geblokkeerd = angular.copy(value.aanvallende_acties_helft2[8][0][0]);
-                                temp.aanvallende_acties_helft2.schoten_binnen_16 = angular.copy(value.aanvallende_acties_helft2[9][0][0]);
-                                temp.aanvallende_acties_helft2.schoten_buiten_16 = angular.copy(value.aanvallende_acties_helft2[10][0][0]);
+                                temp.aanvallende_acties_helft2.schoten_binnen16 = angular.copy(value.aanvallende_acties_helft2[9][0][0]);
+                                temp.aanvallende_acties_helft2.schoten_buiten16 = angular.copy(value.aanvallende_acties_helft2[10][0][0]);
                                 temp.aanvallende_acties_helft2.sleutel_acties = angular.copy(value.aanvallende_acties_helft2[11][0][0]);
                                 temp.aanvallende_acties_helft2.sleutel_passes = angular.copy(value.aanvallende_acties_helft2[12][0][0]);
                                 temp.aanvallende_acties_helft2.kruisballen = angular.copy(value.aanvallende_acties_helft2[13][0][0]);
