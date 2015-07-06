@@ -5,12 +5,12 @@ angular.module('mainapp.memberAuth')
         };
         return auth;
     })
-    .factory('TokenInterceptor', function ($q, $window, AuthenticationService, $localStorage, $location, $rootScope) {
+    .factory('TokenInterceptor', function ($q, $window, AuthenticationService, $sessionStorage, $localStorage, $location, $rootScope) {
         return {
             request: function (config) {
                 config.headers = config.headers || {};
-                if ($localStorage.token) {
-                    config.headers.Authorization = 'Bearer ' + $localStorage.token;
+                if ($sessionStorage.token) {
+                    config.headers.Authorization = 'Bearer ' + $sessionStorage.token;
                 }
                 return config;
             },
@@ -21,7 +21,7 @@ angular.module('mainapp.memberAuth')
 
             /* Set Authentication.isLogged to true if 200 received, when refreshing the page */
             response: function (response) {
-                if (response !== null && response.status == 200 && $localStorage.token && $localStorage.role && !AuthenticationService.isLogged) {
+                if (response !== null && response.status == 200 && $sessionStorage.token && $sessionStorage.role && !AuthenticationService.isLogged) {
                     AuthenticationService.isLogged = true;
 
                     $rootScope.isLogged = function() {
@@ -42,8 +42,11 @@ angular.module('mainapp.memberAuth')
 
             /* Revoke client authentication if 401 is received */
             responseError: function(rejection) {
-                if (rejection !== null && rejection.status === 401 && ($localStorage.token || $localStorage.role || AuthenticationService.isLogged)) {
+                if (rejection !== null && rejection.status === 401 && ($sessionStorage.token || $sessionStorage.role || AuthenticationService.isLogged)) {
+                    delete $sessionStorage.token;
                     delete $localStorage.token;
+                    delete $sessionStorage.role;
+                    delete $localStorage.role;
                     AuthenticationService.isLogged = false;
                     $rootScope.isLogged = false;
                     $location.path("/login");

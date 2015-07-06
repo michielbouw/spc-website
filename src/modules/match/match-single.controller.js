@@ -10,7 +10,46 @@ angular.module('mainapp.match')
         Api.Match.get({
             _id: $routeParams._id
         }, function (res) {
-            self.matchshort = res;
+            if ($rootScope.currentClub) {
+                if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
+                    self.matchshort = res;
+                } else if ($rootScope.currentClub.spc_package == 'club' && ($rootScope.currentClub.name == res.match_info.thuis || $rootScope.currentClub.name == res.match_info.uit)) {
+                    self.matchshort = res;
+                } else {
+                    $location.path('/wedstrijd');
+                }
+            } else {
+                if (AuthenticationService.isLogged) {
+                    Api.Me.get(function (res) {
+                        $rootScope.currentUser = res.data;
+
+                        $rootScope.currentClub = {};
+                        $rootScope.currentClub.name = res.data.club;
+                        $rootScope.currentClub.slug = res.data.club_slug;
+                        $rootScope.currentClub.teams = res.data.teams;
+                        $rootScope.currentClub.colors = [];
+
+                        if (res.data.role == 'admin') {
+                            self.matchshort = res;
+                        } else {
+                            Api.Club.get({
+                                _slug: res.data.club_slug
+                            }, function (res) {
+                                $rootScope.currentClub.colors = res.colors;
+                                $rootScope.currentClub.spc_package = res.spc_package;
+
+                                if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
+                                    self.matchshort = res;
+                                } else if ($rootScope.currentClub.spc_package == 'club' && ($rootScope.currentClub.name == res.match_info.thuis || $rootScope.currentClub.name == res.match_info.uit)) {
+                                    self.matchshort = res;
+                                } else {
+                                    $location.path('/wedstrijd');
+                                }
+                            });
+                        }
+                    });
+                }
+            }
         });
         Api.MatchDataID.get({
             _id: $routeParams._id
@@ -101,6 +140,7 @@ angular.module('mainapp.match')
                             _slug: res.data.club_slug
                         }, function (res) {
                             $rootScope.currentClub.colors = res.colors;
+                            $rootScope.currentClub.spc_package = res.spc_package;
                         });
 
                         var teams = $rootScope.currentClub.teams;

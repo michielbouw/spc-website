@@ -1,6 +1,6 @@
 angular.module('mainapp.memberAuth')
-    .controller('mainapp.memberAuth.AuthController', ['$rootScope', 'Api', '$location', '$localStorage', 'AuthenticationService',
-        function ($rootScope, Api, $location, $localStorage, AuthenticationService) {
+    .controller('mainapp.memberAuth.AuthController', ['$rootScope', 'Api', '$location', '$sessionStorage', '$localStorage', 'AuthenticationService',
+        function ($rootScope, Api, $location, $sessionStorage, $localStorage, AuthenticationService) {
             var self = this;
             self.datetime = new Date();
 
@@ -23,6 +23,7 @@ angular.module('mainapp.memberAuth')
                         _slug: res.data.club_slug
                     }, function(res) {
                         $rootScope.currentClub.colors = res.colors;
+                        $rootScope.currentClub.spc_package = res.spc_package;
                     });
                 }, function () {
                     $rootScope.error = 'Failed to fetch details';
@@ -42,10 +43,14 @@ angular.module('mainapp.memberAuth')
                             alert(res.data);
                         } else {
                             AuthenticationService.isLogged = true;
-                            $localStorage.token = res.token;
-                            $localStorage.role = res.data.role;
+                            $sessionStorage.token = res.token;
+                            $sessionStorage.role = res.data.role;
                             if (self.login.remember) {
+                                $sessionStorage.remember = true;
                                 $localStorage.remember = true;
+                                $localStorage.token = res.token;
+                                $localStorage.role = res.data.role;
+                                $localStorage.id = res.data._id;
                             }
 
                             if (AuthenticationService.isLogged) {
@@ -62,6 +67,7 @@ angular.module('mainapp.memberAuth')
                                         _slug: res.data.club_slug
                                     }, function(res) {
                                         $rootScope.currentClub.colors = res.colors;
+                                        $rootScope.currentClub.spc_package = res.spc_package;
                                     });
 
                                     if (res.data.role == 'admin') {
@@ -74,11 +80,6 @@ angular.module('mainapp.memberAuth')
                                 }, function () {
                                     $rootScope.error = 'Failed to fetch details';
                                 });
-
-                                // temp
-                                $rootScope.currentClub = {};
-                                $rootScope.currentClub.name = "FC Eindhoven";
-                                $rootScope.currentClub.colors = [{ "color": "blauw", "refcode": "#24528e"}, { "color": "wit", "refcode": "#ffffff"}];
                             }
                         }
                     }, function(status, data) {
@@ -116,9 +117,9 @@ angular.module('mainapp.memberAuth')
                 if (AuthenticationService.isLogged) {
                     AuthenticationService.isLogged = false;
                     $rootScope.isLogged = false;
-                    delete $localStorage.token;
-                    delete $localStorage.role;
-                    delete $localStorage.remember;
+                    delete $sessionStorage.remember;
+                    delete $sessionStorage.token;
+                    delete $sessionStorage.role;
                     $localStorage.$reset();
                     $location.path("/");
                 }

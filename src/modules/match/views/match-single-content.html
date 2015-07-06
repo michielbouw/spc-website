@@ -4101,7 +4101,7 @@
         <br class="clear">
 
     </div>
-    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments" ng-if="data.team_data || currentClub.name == data.matchshort.match_info.thuis || currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin'">
+    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments" ng-if="(data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
 
         <div id="scorespeler" class="col-xs-12 content-title-top text-center">
             <h3>Score spelers</h3>
@@ -4127,17 +4127,15 @@
             <small>Opmerkingen of notities over deze wedstrijd kunnen hier geplaatst worden.
                 Zo kan later teruggelezen worden waar het goed of juist fout ging.
                 Deze notities komen ook achteraan het PDF document te staan als deze gedownload wordt.</small>
-            <h4>Opmerking plaatsen</h4>
+            <!--<h4>Opmerking plaatsen</h4>
             <textarea class="form-control" rows="2"></textarea>
             <br>
-            <button type="button" class="btn btn-primary btn-sm">Plaats</button>
+            <button type="button" class="btn btn-primary btn-sm">Plaats</button>-->
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
+            <p ng-if="data.teamdata.match_log.length > 0">Geen opmerkingen geplaatst..</p>
             <p ng-repeat="log in data.teamdata.match_log">
                 {{ log.author }} - {{ log.text }}
-            </p>
-            <p>
-                ...
             </p>
         </div>
 
@@ -4159,14 +4157,15 @@
         <div class="col-xs-12" ng-show="playerlog_index1">
             <hr>
             <h4>{{ data.spelerlogspelernaam }}</h4>
-            <p>Opmerking plaatsen</p>
+            <!--<p>Opmerking plaatsen</p>
             <textarea class="form-control" rows="2"></textarea>
             <br>
-            <button type="button" class="btn btn-primary btn-sm">Plaats</button>
+            <button type="button" class="btn btn-primary btn-sm">Plaats</button>-->
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
-            <p>
-                ...
+            <p ng-if="data.spelerlog.length > 0">Geen opmerkingen geplaatst..</p>
+            <p ng-repeat="log in data.spelerlog">
+                {{ log.author }} - {{ log.text }}
             </p>
         </div>
 

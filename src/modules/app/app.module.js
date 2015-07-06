@@ -33,28 +33,36 @@ angular.module('mainapp', [
     .run(['$anchorScroll', function($anchorScroll) {
         $anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
     }])
-    .run(function($location, $localStorage, Api, AuthenticationService, $rootScope) {
+    .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService) {
+        //Set credentials if remember in localstorage
+        if ($localStorage.token && $localStorage.remember && $localStorage.role) {
+            AuthenticationService.isLogged = true;
+            $sessionStorage.token = $localStorage.token;
+            $sessionStorage.role = $localStorage.role;
+            $sessionStorage.remember = true;
 
-        //Set credentials if present in localstorage
-    //  if ($localStorage.token && $localStorage.remember && $localStorage.role) {
-    //        var username = $localStorage.username;
-    //        var password = $localStorage.password;
-    //        Api.Login.post({
-    //            username: username,
-    //            password: password
-    //        }, function (res) {
-    //            if (res.type === false) {
-    //                alert(res.data);
-    //            } else {
-    //                AuthenticationService.isLogged = true;
-    //                $localStorage.token = res.data.token;
-    //                $localStorage.username = username;
-    //                $localStorage.password = password;
-    //                $location.path("/club");
-    //            }
-    //        }, function(status, data) {
-    //            console.log(status);
-    //            console.log(data);
-    //        });
-    //    }
+            if ($localStorage.remember && $localStorage.id && $location.url() == "/") {
+                Api.User.get({
+                    _id: $localStorage.id
+                }, function (res) {
+                    Api.User.put({
+                        _id: $localStorage.id
+                    }, {
+                        last_login: new Date(),
+                        number_of_logins: Number(res.number_of_logins + 1)
+                    }, function (res) {
+                    });
+                });
+            }
+
+            if ($localStorage.remember && $location.url() == "/") {
+                if ($localStorage.role == 'admin') {
+                    $location.path("/admin");
+                } else if ($localStorage.role == 'speler') {
+                    $location.path("/speler");
+                } else {
+                    $location.path("/club");
+                }
+            }
+        }
     });

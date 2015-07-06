@@ -11,6 +11,10 @@ angular.module('mainapp.match')
                 Api.Matches.query(function (res) {
                     self.matches = res;
                 });
+            } else if ($rootScope.currentClub.spc_package == 'league' || $rootScope.currentClub.spc_package == 'extra') {
+                Api.Matches.query(function (res) {
+                    self.matches = res;
+                });
             } else {
                 var teams = $rootScope.currentClub.teams;
                 var teamslug = '';
@@ -41,9 +45,14 @@ angular.module('mainapp.match')
                         _slug: res.data.club_slug
                     }, function (res) {
                         $rootScope.currentClub.colors = res.colors;
+                        $rootScope.currentClub.spc_package = res.spc_package;
                     });
 
                     if ($rootScope.currentUser.role == 'admin') {
+                        Api.Matches.query(function (res) {
+                            self.matches = res;
+                        });
+                    } else if ($rootScope.currentClub.spc_package == 'league' || $rootScope.currentClub.spc_package == 'extra') {
                         Api.Matches.query(function (res) {
                             self.matches = res;
                         });
