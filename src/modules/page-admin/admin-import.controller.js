@@ -1072,6 +1072,8 @@ angular.module('mainapp.pageAdmin')
                                 temp.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
                                 temp.pass_lengte = Number((Number(value.pass_soorten_helft1[temp.personID][0].gem_len.split("m")[0]) + Number(value.pass_soorten_helft2[temp.personID][0].gem_len.split("m")[0]) / 2).toFixed(1));
 
+                                temp.doelpunten = Number(angular.copy(value.algemene_stats[1][0][0]));
+
                                 temp.locatie_reddingen = [];
                                 angular.forEach(value.locaties_reddingen, function (value, key1) {
                                     var temp1 = {};
@@ -1317,6 +1319,8 @@ angular.module('mainapp.pageAdmin')
                                 temp.rood = Number($filter('filter')(value.stat_matrix.speler_mat, {_row: 'Rode kaart'}, true)[0][temp.personID]);
                                 temp.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
                                 temp.pass_lengte = Number((Number(value.pass_soorten_helft1[temp.personID][0].gem_len.split("m")[0]) + Number(value.pass_soorten_helft2[temp.personID][0].gem_len.split("m")[0]) / 2).toFixed(1));
+
+                                temp.doelpunten = Number(angular.copy(value.algemene_stats[1][0][0]));
 
                                 temp.locatie_reddingen = [];
                                 angular.forEach(value.locaties_reddingen, function (value, key1) {
