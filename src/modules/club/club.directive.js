@@ -5,9 +5,11 @@ angular.module('mainapp.club')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
-                        $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                        $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                        $('.home-intro').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        $timeout(function() {
+                            $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                            $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                            $('.home-intro').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        }, 400);
 
                         $('.content.content-page').css({
                             'min-height': window.innerHeight - 100
@@ -18,6 +20,10 @@ angular.module('mainapp.club')
                             $(this).tab('show');
                             jQuery(window).trigger('resize');
                             $(window).trigger('resize');
+                        });
+                        $('.stat-blocks a').on('shown.bs.tab', function() {
+                            $(window).trigger('resize');
+                            jQuery(window).trigger('resize');
                         });
                     });
                 }, 100);

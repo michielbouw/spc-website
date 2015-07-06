@@ -4105,14 +4105,14 @@
 
         <div id="scorespeler" class="col-xs-12 content-title-top text-center">
             <h3>Score spelers</h3>
-            <h4>Cijfer voor de speler bij deze wedstrijd</h4>
+            <h4>Cijfer voor de speler bij deze wedstrijd (0-10)</h4>
         </div>
         <div class="col-xs-12">
             <div ng-if="infoSaveLog" class="alert alert-info" role="alert">{{ infoSaveLog }}</div>
             <div class="form-group" style="margin-bottom: 0;" ng-repeat="speler in data.spelerscores | orderBy:data.orderSpelersNaam">
-                <label for="inputEmail" class="col-xs-8 col-md-4 control-label">{{ speler.spelerNaam }}</label>
+                <label for="inputScore" class="col-xs-8 col-md-4 control-label">{{ speler.spelerNaam }}</label>
                 <div class="col-xs-4 col-md-2">
-                    <input type="number" class="form-control" id="inputEmail" placeholder="Email" ng-model="speler.scores.score_from_coach">
+                    <input type="number" class="form-control" id="inputScore" ng-model="speler.scores.score_from_coach" min="0" max="10">
                 </div>
             </div>
             <hr>
