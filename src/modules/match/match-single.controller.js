@@ -11,7 +11,9 @@ angular.module('mainapp.match')
             _id: $routeParams._id
         }, function (res) {
             if ($rootScope.currentClub) {
-                if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
+                if ($rootScope.currentUser.role == 'admin') {
+                    self.matchshort = res;
+                } else if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
                     self.matchshort = res;
                 } else if ($rootScope.currentClub.spc_package == 'club' && ($rootScope.currentClub.name == res.match_info.thuis || $rootScope.currentClub.name == res.match_info.uit)) {
                     self.matchshort = res;
@@ -38,7 +40,9 @@ angular.module('mainapp.match')
                                 $rootScope.currentClub.colors = res.colors;
                                 $rootScope.currentClub.spc_package = res.spc_package;
 
-                                if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
+                                if ($rootScope.currentUser.role == 'admin') {
+                                    self.matchshort = res;
+                                } else if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
                                     self.matchshort = res;
                                 } else if ($rootScope.currentClub.spc_package == 'club' && ($rootScope.currentClub.name == res.match_info.thuis || $rootScope.currentClub.name == res.match_info.uit)) {
                                     self.matchshort = res;
