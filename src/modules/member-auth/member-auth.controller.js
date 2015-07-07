@@ -11,27 +11,26 @@ angular.module('mainapp.memberAuth')
 
             if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
                 Api.Me.get(function (res) {
-                    //$rootScope.currentUser = res.data;
                     $sessionStorage.currentUser = res.data;
 
-                    $sessionStorage.currentClub = {};
-                    $sessionStorage.currentClub.name = res.data.club;
-                    $sessionStorage.currentClub.slug = res.data.club_slug;
-                    $sessionStorage.currentClub.teams = res.data.teams;
-                    $sessionStorage.currentClub.colors = [];
-
-                    //$rootScope.currentClub = {};
-                    //$rootScope.currentClub.name = res.data.club;
-                    //$rootScope.currentClub.slug = res.data.club_slug;
-                    //$rootScope.currentClub.teams = res.data.teams;
-                    //$rootScope.currentClub.colors = [];
+                    var temp = {};
+                    temp.name = res.data.club;
+                    temp.slug = res.data.club_slug;
+                    temp.teams = res.data.teams;
+                    temp.colors = [];
+                    $sessionStorage.currentClub = temp;
 
                     Api.Club.get({
                         _slug: res.data.club_slug
                     }, function(res1) {
-                        $sessionStorage.currentClub.colors = res1.colors;
-                        $sessionStorage.currentClub.spc_package = res1.spc_package;
+                        temp.colors = res1.colors;
+                        temp.spc_package = res1.spc_package;
+                        $sessionStorage.currentClub = temp;
 
+                        $rootScope.currentUser = $sessionStorage.currentUser;
+                        $rootScope.currentClub = $sessionStorage.currentClub;
+                    }, function() {
+                        $sessionStorage.currentClub = temp;
                         $rootScope.currentUser = $sessionStorage.currentUser;
                         $rootScope.currentClub = $sessionStorage.currentClub;
                     });
@@ -68,27 +67,26 @@ angular.module('mainapp.memberAuth')
                             }
 
                             Api.Me.get(function (res1) {
-                                //$rootScope.currentUser = res.data;
                                 $sessionStorage.currentUser = res1.data;
 
-                                $sessionStorage.currentClub = {};
-                                $sessionStorage.currentClub.name = res1.data.club;
-                                $sessionStorage.currentClub.slug = res1.data.club_slug;
-                                $sessionStorage.currentClub.teams = res1.data.teams;
-                                $sessionStorage.currentClub.colors = [];
-
-                                //$rootScope.currentClub = {};
-                                //$rootScope.currentClub.name = res.data.club;
-                                //$rootScope.currentClub.slug = res.data.club_slug;
-                                //$rootScope.currentClub.teams = res.data.teams;
-                                //$rootScope.currentClub.colors = [];
+                                var temp = {};
+                                temp.name = res1.data.club;
+                                temp.slug = res1.data.club_slug;
+                                temp.teams = res1.data.teams;
+                                temp.colors = [];
+                                $sessionStorage.currentClub = temp;
 
                                 Api.Club.get({
                                     _slug: res1.data.club_slug
                                 }, function(res2) {
-                                    $sessionStorage.currentClub.colors = res2.colors;
-                                    $sessionStorage.currentClub.spc_package = res2.spc_package;
+                                    temp.colors = res2.colors;
+                                    temp.spc_package = res2.spc_package;
+                                    $sessionStorage.currentClub = temp;
 
+                                    $rootScope.currentUser = $sessionStorage.currentUser;
+                                    $rootScope.currentClub = $sessionStorage.currentClub;
+                                }, function() {
+                                    $sessionStorage.currentClub = temp;
                                     $rootScope.currentUser = $sessionStorage.currentUser;
                                     $rootScope.currentClub = $sessionStorage.currentClub;
                                 });
