@@ -33,7 +33,7 @@ angular.module('mainapp.match')
                         });
 
                         jQuery(document).ready(function() {
-                            var sOffset = $(".content-top").offset().top;
+                            var sOffset = $(".content-top.content-top-match").offset().top;
                             $(window).scroll(function () {
                                 var scrollYpos = $(document).scrollTop();
                                 if (scrollYpos > sOffset) {

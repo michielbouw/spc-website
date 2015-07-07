@@ -4109,7 +4109,7 @@
         <br class="clear">
 
     </div>
-    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments" ng-if="(data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
+    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments" ng-if="(currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
 
         <div id="scorespeler" class="col-xs-12 content-title-top text-center">
             <h3>Score spelers</h3>
@@ -4141,7 +4141,7 @@
             <button type="button" class="btn btn-primary btn-sm">Plaats</button>-->
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
-            <p ng-if="data.teamdata.match_log.length > 0">Geen opmerkingen geplaatst..</p>
+            <p ng-if="data.teamdata.match_log.length <= 0">Geen opmerkingen geplaatst..</p>
             <p ng-repeat="log in data.teamdata.match_log">
                 {{ log.author }} - {{ log.text }}
             </p>
@@ -4171,7 +4171,7 @@
             <button type="button" class="btn btn-primary btn-sm">Plaats</button>-->
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
-            <p ng-if="data.spelerlog.length > 0">Geen opmerkingen geplaatst..</p>
+            <p ng-if="data.spelerlog.length <= 0">Geen opmerkingen geplaatst..</p>
             <p ng-repeat="log in data.spelerlog">
                 {{ log.author }} - {{ log.text }}
             </p>
