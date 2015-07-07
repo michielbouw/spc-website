@@ -151,7 +151,7 @@ angular.module('mainapp.match')
             if ($sessionStorage.currentClub) {
                 teams = $sessionStorage.currentClub.teams;
                 teamslug = '';
-                if ((teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug)) {
+                if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                     teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                     if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -182,7 +182,7 @@ angular.module('mainapp.match')
                             }
                         });
                     }
-                } else if ((teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug)) {
+                } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                     teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                     if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -244,7 +244,7 @@ angular.module('mainapp.match')
 
                         teams = res1.data.teams;
                         teamslug = '';
-                        if ((teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug)) {
+                        if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -275,7 +275,7 @@ angular.module('mainapp.match')
                                     }
                                 });
                             }
-                        } else if ((teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug)) {
+                        } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -315,7 +315,7 @@ angular.module('mainapp.match')
 
                     teams = $sessionStorage.currentClub.teams;
                     teamslug = '';
-                    if ((teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug)) {
+                    if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                         teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                         if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -346,7 +346,7 @@ angular.module('mainapp.match')
                                 }
                             });
                         }
-                    } else if ((teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug)) {
+                    } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                         teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                         if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
