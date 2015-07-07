@@ -51,23 +51,24 @@ angular.module('mainapp', [
                         last_login: new Date(),
                         number_of_logins: Number(res.number_of_logins + 1)
                     }, function (res1) {
-                        $sessionStorage.currentUser = res1.data;
+                    });
 
-                        $sessionStorage.currentClub = {};
-                        $sessionStorage.currentClub.name = res1.data.club;
-                        $sessionStorage.currentClub.slug = res1.data.club_slug;
-                        $sessionStorage.currentClub.teams = res1.data.teams;
-                        $sessionStorage.currentClub.colors = [];
+                    $sessionStorage.currentUser = res.data;
 
-                        Api.Club.get({
-                            _slug: res1.data.club_slug
-                        }, function(res2) {
-                            $sessionStorage.currentClub.colors = res2.colors;
-                            $sessionStorage.currentClub.spc_package = res2.spc_package;
+                    $sessionStorage.currentClub = {};
+                    $sessionStorage.currentClub.name = res.data.club;
+                    $sessionStorage.currentClub.slug = res.data.club_slug;
+                    $sessionStorage.currentClub.teams = res.data.teams;
+                    $sessionStorage.currentClub.colors = [];
 
-                            $rootScope.currentUser = $sessionStorage.currentUser;
-                            $rootScope.currentClub = $sessionStorage.currentClub;
-                        });
+                    Api.Club.get({
+                        _slug: res.data.club_slug
+                    }, function(res2) {
+                        $sessionStorage.currentClub.colors = res2.colors;
+                        $sessionStorage.currentClub.spc_package = res2.spc_package;
+
+                        $rootScope.currentUser = $sessionStorage.currentUser;
+                        $rootScope.currentClub = $sessionStorage.currentClub;
                     });
                 });
             }
