@@ -18,7 +18,7 @@ module.exports = MatchDataController = {
         });
     },
 
-    get_byID: function(req, res)
+    get_byid: function(req, res)
     {
         MatchData.findOne({matchID: req.params._id}, function(err, data){
             if (err) res.send(err);

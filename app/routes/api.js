@@ -48,7 +48,7 @@ router.delete('/teamdata/:_slug',   UserController.ensureAuthorized, TeamDataCon
 
 router.get('/matchdata',            UserController.ensureAuthorized, MatchDataController.query);
 router.get('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.get);
-router.get('/matchdataID/:_id',     UserController.ensureAuthorized, MatchDataController.get_byID);
+router.get('/matchdataid/:_id',     UserController.ensureAuthorized, MatchDataController.get_byid);
 router.post('/matchdata',           UserController.ensureAuthorized, MatchDataController.post);
 router.put('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.put);
 router.delete('/matchdata/:_id',    UserController.ensureAuthorized, MatchDataController.delete);

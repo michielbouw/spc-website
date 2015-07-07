@@ -47,6 +47,10 @@ angular.module('mainapp.memberAuth')
                     delete $localStorage.token;
                     delete $sessionStorage.role;
                     delete $localStorage.role;
+                    delete $localStorage.is_superadmin;
+                    delete $localStorage.id;
+                    $localStorage.$reset();
+                    $sessionStorage.$reset();
                     AuthenticationService.isLogged = false;
                     $rootScope.isLogged = false;
                     $location.path("/login");
@@ -55,7 +59,7 @@ angular.module('mainapp.memberAuth')
             }
         };
     })
-    .run(function($rootScope, $location, AuthenticationService, $localStorage, Api) {
+    .run(function($rootScope, $location, AuthenticationService, $sessionStorage, $localStorage, Api) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
             if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged && nextRoute != "/login") {
                 $location.path("/login");
@@ -63,11 +67,19 @@ angular.module('mainapp.memberAuth')
             else if (nextRoute.access.requiredLogin && AuthenticationService.isLogged && nextRoute != "/login") {
                 // check user permissions by checking url permission and user role to make sure user has correct authority
                 var user = {};
-                if (!$localStorage.role) {
-                    user.role = $rootScope.currentUser.role;
-                    user.is_superadmin = $rootScope.currentUser.is_superadmin;
-                } else {
+                if ($sessionStorage.role) {
+                    user.role = $sessionStorage.role;
+                    if ($localStorage.is_superadmin) {
+                        user.is_superadmin = $localStorage.is_superadmin;
+                    }
+                } else if ($localStorage.role) {
                     user.role = $localStorage.role;
+                    user.is_superadmin = $localStorage.is_superadmin;
+                } else {
+                    user.role = $rootScope.currentUser.role;
+                    if ($localStorage.is_superadmin) {
+                        user.is_superadmin = $localStorage.is_superadmin;
+                    }
                 }
 
                 if (nextRoute.access.permission == "public") {

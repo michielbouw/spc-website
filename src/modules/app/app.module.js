@@ -33,7 +33,7 @@ angular.module('mainapp', [
     .run(['$anchorScroll', function($anchorScroll) {
         $anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
     }])
-    .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService) {
+    .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService, $rootScope) {
         //Set credentials if remember in localstorage
         if ($localStorage.token && $localStorage.remember && $localStorage.role) {
             AuthenticationService.isLogged = true;
@@ -50,7 +50,24 @@ angular.module('mainapp', [
                     }, {
                         last_login: new Date(),
                         number_of_logins: Number(res.number_of_logins + 1)
-                    }, function (res) {
+                    }, function (res1) {
+                        $sessionStorage.currentUser = res1.data;
+
+                        $sessionStorage.currentClub = {};
+                        $sessionStorage.currentClub.name = res1.data.club;
+                        $sessionStorage.currentClub.slug = res1.data.club_slug;
+                        $sessionStorage.currentClub.teams = res1.data.teams;
+                        $sessionStorage.currentClub.colors = [];
+
+                        Api.Club.get({
+                            _slug: res1.data.club_slug
+                        }, function(res2) {
+                            $sessionStorage.currentClub.colors = res2.colors;
+                            $sessionStorage.currentClub.spc_package = res2.spc_package;
+
+                            $rootScope.currentUser = $sessionStorage.currentUser;
+                            $rootScope.currentClub = $sessionStorage.currentClub;
+                        });
                     });
                 });
             }

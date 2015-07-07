@@ -110,7 +110,7 @@ module.exports = UserController = {
 
     me: function(req, res)
     {
-        User.findOne({token: req.token}, function(err, user) {
+        User.findOne({token: req.token}, 'email first_name middle_name last_name photo fan_club fan_club_slug club club_slug teams speler_id role', function(err, user) {
             if (err) {
                 res.json({
                     type: false,
@@ -158,7 +158,7 @@ module.exports = UserController = {
     {
         User.findOne({
             _id: req.params._id
-        }, function(err, data){
+        }, 'email first_name middle_name last_name photo fan_club fan_club_slug club club_slug teams speler_id role last_login number_of_logins', function(err, data){
             if (err) res.send(err);
             //if (!data) res.sendStatus(404);
             res.json(data);

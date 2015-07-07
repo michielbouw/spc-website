@@ -1,10 +1,12 @@
 angular.module('mainapp.match')
     .controller('mainapp.match.MatchController', ['Api', '$location', '$filter', '$rootScope', 'AuthenticationService',
-        function(Api, $location, $filter, $rootScope, AuthenticationService)
+        '$sessionStorage',
+        function(Api, $location, $filter, $rootScope, AuthenticationService, $sessionStorage)
     {
         var self = this;
 
         self.matches = [];
+        delete $sessionStorage.matchshort;
 
         if ($rootScope.currentUser) {
             if ($rootScope.currentUser.role == 'admin') {
@@ -83,5 +85,7 @@ angular.module('mainapp.match')
         self.matchInitFunc = function () {
             self.match = {};
             self.match = $filter('filter')(self.season_matches, {matchID: self.match_index}, true)[0];
+
+            $sessionStorage.matchshort = angular.copy(self.match);
         };
     }]);

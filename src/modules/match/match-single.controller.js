@@ -1,60 +1,142 @@
 angular.module('mainapp.match')
-    .controller('mainapp.match.MatchSingleController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location', '$rootScope', '$routeParams',
-        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $routeParams)
+    .controller('mainapp.match.MatchSingleController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location',
+        '$rootScope', '$routeParams', '$sessionStorage',
+        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $routeParams, $sessionStorage)
     {
         var self = this;
         self.datetime = new Date();
 
         self.matchshort = {};
         self.match = {};
-        Api.Match.get({
-            _id: $routeParams._id
-        }, function (res) {
-            if ($rootScope.currentClub) {
-                if ($rootScope.currentUser.role == 'admin') {
-                    self.matchshort = res;
-                } else if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
-                    self.matchshort = res;
-                } else if ($rootScope.currentClub.spc_package == 'club' && ($rootScope.currentClub.name == res.match_info.thuis || $rootScope.currentClub.name == res.match_info.uit)) {
-                    self.matchshort = res;
+
+        self.loading = true;
+
+        if ($sessionStorage.matchshort && $sessionStorage.matchshort.matchID == $routeParams._id) {
+            if ($sessionStorage.currentClub) {
+                if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {
+                    self.matchshort = $sessionStorage.matchshort;
+                } else if ($sessionStorage.currentClub.spc_package == 'club' && ($sessionStorage.currentClub.name == $sessionStorage.matchshort.match_info.thuis || $sessionStorage.currentClub.name == $sessionStorage.matchshort.match_info.uit)) {
+                    self.matchshort = $sessionStorage.matchshort;
                 } else {
-                    $location.path('/wedstrijd');
+                    $location.path('/404');
                 }
             } else {
-                if (AuthenticationService.isLogged) {
-                    Api.Me.get(function (res) {
-                        $rootScope.currentUser = res.data;
+                if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
+                    Api.Me.get(function (res1) {
+                        $sessionStorage.currentUser = res1.data;
 
-                        $rootScope.currentClub = {};
-                        $rootScope.currentClub.name = res.data.club;
-                        $rootScope.currentClub.slug = res.data.club_slug;
-                        $rootScope.currentClub.teams = res.data.teams;
-                        $rootScope.currentClub.colors = [];
+                        $sessionStorage.currentClub = {};
+                        $sessionStorage.currentClub.name = res1.data.club;
+                        $sessionStorage.currentClub.slug = res1.data.club_slug;
+                        $sessionStorage.currentClub.teams = res1.data.teams;
+                        $sessionStorage.currentClub.colors = [];
 
-                        if (res.data.role == 'admin') {
+                        if (res1.data.role == 'admin') {
                             self.matchshort = res;
                         } else {
                             Api.Club.get({
-                                _slug: res.data.club_slug
-                            }, function (res) {
-                                $rootScope.currentClub.colors = res.colors;
-                                $rootScope.currentClub.spc_package = res.spc_package;
+                                _slug: res1.data.club_slug
+                            }, function (res2) {
+                                $sessionStorage.currentClub.colors = res2.colors;
+                                $sessionStorage.currentClub.spc_package = res2.spc_package;
 
-                                if ($rootScope.currentUser.role == 'admin') {
-                                    self.matchshort = res;
-                                } else if ($rootScope.currentClub.spc_package == 'extra' || $rootScope.currentClub.spc_package == 'league') {
-                                    self.matchshort = res;
-                                } else if ($rootScope.currentClub.spc_package == 'club' && ($rootScope.currentClub.name == res.match_info.thuis || $rootScope.currentClub.name == res.match_info.uit)) {
-                                    self.matchshort = res;
+                                if (res2.spc_package == 'extra' || res2.spc_package == 'league') {
+                                    self.matchshort = $sessionStorage.matchshort;
+                                } else if (res2.spc_package == 'club' && ($sessionStorage.currentClub.name == $sessionStorage.matchshort.match_info.thuis || $sessionStorage.currentClub.name == $sessionStorage.matchshort.match_info.uit)) {
+                                    self.matchshort = $sessionStorage.matchshort;
                                 } else {
-                                    $location.path('/wedstrijd');
+                                    $location.path('/404');
                                 }
+
+                                $rootScope.currentUser = $sessionStorage.currentUser;
+                                $rootScope.currentClub = $sessionStorage.currentClub;
                             });
                         }
                     });
+                } else if (AuthenticationService.isLogged && $sessionStorage.currentUser && $sessionStorage.currentClub) {
+                    $rootScope.currentUser = $sessionStorage.currentUser;
+                    $rootScope.currentClub = $sessionStorage.currentClub;
+
+                    if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {
+                        self.matchshort = $sessionStorage.matchshort;
+                    } else if ($sessionStorage.currentClub.spc_package == 'club' && ($sessionStorage.currentClub.name == $sessionStorage.matchshort.match_info.thuis || $sessionStorage.currentClub.name == $sessionStorage.matchshort.match_info.uit)) {
+                        self.matchshort = $sessionStorage.matchshort;
+                    } else {
+                        $location.path('/404');
+                    }
+                } else {
+                    $location.path('/login');
                 }
             }
-        });
+        } else {
+            Api.Match.get({
+                _id: $routeParams._id
+            }, function (res) {
+                if ($sessionStorage.currentClub) {
+                    if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {
+                        self.matchshort = res;
+                    } else if ($sessionStorage.currentClub.spc_package == 'club' && ($sessionStorage.currentClub.name == res.match_info.thuis || $sessionStorage.currentClub.name == res.match_info.uit)) {
+                        self.matchshort = res;
+                    } else {
+                        $location.path('/404');
+                    }
+                } else {
+                    if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
+                        Api.Me.get(function (res1) {
+                            //$rootScope.currentUser = res1.data;
+                            $sessionStorage.currentUser = res1.data;
+
+                            $sessionStorage.currentClub = {};
+                            $sessionStorage.currentClub.name = res1.data.club;
+                            $sessionStorage.currentClub.slug = res1.data.club_slug;
+                            $sessionStorage.currentClub.teams = res1.data.teams;
+                            $sessionStorage.currentClub.colors = [];
+
+                            //$rootScope.currentClub = {};
+                            //$rootScope.currentClub.name = res1.data.club;
+                            //$rootScope.currentClub.slug = res1.data.club_slug;
+                            //$rootScope.currentClub.teams = res1.data.teams;
+                            //$rootScope.currentClub.colors = [];
+
+                            if (res1.data.role == 'admin') {
+                                self.matchshort = res;
+                            } else {
+                                Api.Club.get({
+                                    _slug: res1.data.club_slug
+                                }, function (res2) {
+                                    $sessionStorage.currentClub.colors = res2.colors;
+                                    $sessionStorage.currentClub.spc_package = res2.spc_package;
+
+                                    if (res2.spc_package == 'extra' || res2.spc_package == 'league') {
+                                        self.matchshort = res;
+                                    } else if (res2.spc_package == 'club' && ($sessionStorage.currentClub.name == res.match_info.thuis || $sessionStorage.currentClub.name == res.match_info.uit)) {
+                                        self.matchshort = res;
+                                    } else {
+                                        $location.path('/404');
+                                    }
+
+                                    $rootScope.currentUser = $sessionStorage.currentUser;
+                                    $rootScope.currentClub = $sessionStorage.currentClub;
+                                });
+                            }
+                        });
+                    } else if (AuthenticationService.isLogged && $sessionStorage.currentUser && $sessionStorage.currentClub) {
+                        $rootScope.currentUser = $sessionStorage.currentUser;
+                        $rootScope.currentClub = $sessionStorage.currentClub;
+
+                        if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {
+                            self.matchshort = res;
+                        } else if ($sessionStorage.currentClub.spc_package == 'club' && ($sessionStorage.currentClub.name == res.match_info.thuis || $sessionStorage.currentClub.name == res.match_info.uit)) {
+                            self.matchshort = res;
+                        } else {
+                            $location.path('/404');
+                        }
+                    } else {
+                        $location.path('/login');
+                    }
+                }
+            });
+        }
         Api.MatchDataID.get({
             _id: $routeParams._id
         }, function (res) {
@@ -63,21 +145,24 @@ angular.module('mainapp.match')
             self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
             self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
-            if ($rootScope.currentClub) {
-                var teams = $rootScope.currentClub.teams;
-                var teamslug = '';
+            var teams;
+            var teamslug;
+
+            if ($sessionStorage.currentClub) {
+                teams = $sessionStorage.currentClub.teams;
+                teamslug = '';
                 if ($filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)) {
                     teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                     if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
                         Api.TeamDataItem.get({
                             _slug: teamslug
-                        }, function (res) {
-                            self.team_data = res;
-                            if ($filter('filter')(res.team_data, {season: self.match.seizoen}, true)) {
-                                var temp = $filter('filter')(res.team_data, {season: self.match.seizoen}, true)[0];
+                        }, function (res1) {
+                            self.team_data = res1;
+                            if ($filter('filter')(res1.team_data, {season: self.match.seizoen}, true)) {
+                                var temp = $filter('filter')(res1.team_data, {season: self.match.seizoen}, true)[0];
                                 self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
-                                self.playerdata = res.player_data;
+                                self.playerdata = res1.player_data;
 
                                 self.spelerscores = [];
                                 angular.forEach(self.playerdata, function (value, key) {
@@ -103,12 +188,12 @@ angular.module('mainapp.match')
                     if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
                         Api.TeamDataItem.get({
                             _slug: teamslug
-                        }, function (res) {
-                            self.team_data = res;
-                            if ($filter('filter')(res.team_data, {season: self.match.seizoen}, true)) {
-                                var temp = $filter('filter')(res.team_data, {season: self.match.seizoen}, true)[0];
+                        }, function (res1) {
+                            self.team_data = res1;
+                            if ($filter('filter')(res1.team_data, {season: self.match.seizoen}, true)) {
+                                var temp = $filter('filter')(res1.team_data, {season: self.match.seizoen}, true)[0];
                                 self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
-                                self.playerdata = res.player_data;
+                                self.playerdata = res1.player_data;
 
                                 self.spelerscores = [];
                                 angular.forEach(self.playerdata, function (value, key) {
@@ -130,37 +215,47 @@ angular.module('mainapp.match')
                     }
                 }
             } else {
-                if (AuthenticationService.isLogged) {
-                    Api.Me.get(function (res) {
-                        $rootScope.currentUser = res.data;
+                if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
+                    Api.Me.get(function (res1) {
+                        //$rootScope.currentUser = res1.data;
+                        $sessionStorage.currentUser = res1.data;
 
-                        $rootScope.currentClub = {};
-                        $rootScope.currentClub.name = res.data.club;
-                        $rootScope.currentClub.slug = res.data.club_slug;
-                        $rootScope.currentClub.teams = res.data.teams;
-                        $rootScope.currentClub.colors = [];
+                        $sessionStorage.currentClub = {};
+                        $sessionStorage.currentClub.name = res1.data.club;
+                        $sessionStorage.currentClub.slug = res1.data.club_slug;
+                        $sessionStorage.currentClub.teams = res1.data.teams;
+                        $sessionStorage.currentClub.colors = [];
+
+                        //$rootScope.currentClub = {};
+                        //$rootScope.currentClub.name = res1.data.club;
+                        //$rootScope.currentClub.slug = res1.data.club_slug;
+                        //$rootScope.currentClub.teams = res1.data.teams;
+                        //$rootScope.currentClub.colors = [];
 
                         Api.Club.get({
                             _slug: res.data.club_slug
-                        }, function (res) {
-                            $rootScope.currentClub.colors = res.colors;
-                            $rootScope.currentClub.spc_package = res.spc_package;
+                        }, function(res2) {
+                            $sessionStorage.currentClub.colors = res2.colors;
+                            $sessionStorage.currentClub.spc_package = res2.spc_package;
+
+                            $rootScope.currentUser = $sessionStorage.currentUser;
+                            $rootScope.currentClub = $sessionStorage.currentClub;
                         });
 
-                        var teams = res.data.teams;
-                        var teamslug = '';
+                        teams = res1.data.teams;
+                        teamslug = '';
                         if ($filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
                                 Api.TeamDataItem.get({
                                     _slug: teamslug
-                                }, function (res) {
-                                    self.team_data = res;
-                                    if ($filter('filter')(res.team_data, {season: self.match.seizoen}, true)) {
-                                        var temp = $filter('filter')(res.team_data, {season: self.match.seizoen}, true)[0];
+                                }, function (res3) {
+                                    self.team_data = res3;
+                                    if ($filter('filter')(res3.team_data, {season: self.match.seizoen}, true)) {
+                                        var temp = $filter('filter')(res3.team_data, {season: self.match.seizoen}, true)[0];
                                         self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
-                                        self.playerdata = res.player_data;
+                                        self.playerdata = res3.player_data;
 
                                         self.spelerscores = [];
                                         angular.forEach(self.playerdata, function (value, key) {
@@ -186,12 +281,12 @@ angular.module('mainapp.match')
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
                                 Api.TeamDataItem.get({
                                     _slug: teamslug
-                                }, function (res) {
-                                    self.team_data = res;
-                                    if ($filter('filter')(res.team_data, {season: self.match.seizoen}, true)) {
-                                        var temp = $filter('filter')(res.team_data, {season: self.match.seizoen}, true)[0];
+                                }, function (res3) {
+                                    self.team_data = res3;
+                                    if ($filter('filter')(res3.team_data, {season: self.match.seizoen}, true)) {
+                                        var temp = $filter('filter')(res3.team_data, {season: self.match.seizoen}, true)[0];
                                         self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
-                                        self.playerdata = res.player_data;
+                                        self.playerdata = res3.player_data;
 
                                         self.spelerscores = [];
                                         angular.forEach(self.playerdata, function (value, key) {
@@ -214,8 +309,78 @@ angular.module('mainapp.match')
                         }
                     }, function () {
                     });
+                } else if (AuthenticationService.isLogged && $sessionStorage.currentUser && $sessionStorage.currentClub) {
+                    $rootScope.currentUser = $sessionStorage.currentUser;
+                    $rootScope.currentClub = $sessionStorage.currentClub;
+
+                    teams = $sessionStorage.currentClub.teams;
+                    teamslug = '';
+                    if ($filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)) {
+                        teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
+
+                        if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
+                            Api.TeamDataItem.get({
+                                _slug: teamslug
+                            }, function (res3) {
+                                self.team_data = res3;
+                                if ($filter('filter')(res3.team_data, {season: self.match.seizoen}, true)) {
+                                    var temp = $filter('filter')(res3.team_data, {season: self.match.seizoen}, true)[0];
+                                    self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
+                                    self.playerdata = res3.player_data;
+
+                                    self.spelerscores = [];
+                                    angular.forEach(self.playerdata, function (value, key) {
+                                        var temp = {};
+                                        temp.spelerNaam = value.spelerNaam;
+                                        temp.playerID = value.playerID;
+                                        var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
+                                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                        if (player.scores) {
+                                            temp.scores = player.scores;
+                                        } else {
+                                            temp.scores = {};
+                                            temp.scores.score_from_coach = 0;
+                                        }
+                                        self.spelerscores.push(temp);
+                                    });
+                                }
+                            });
+                        }
+                    } else if ($filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)) {
+                        teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
+
+                        if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
+                            Api.TeamDataItem.get({
+                                _slug: teamslug
+                            }, function (res3) {
+                                self.team_data = res3;
+                                if ($filter('filter')(res3.team_data, {season: self.match.seizoen}, true)) {
+                                    var temp = $filter('filter')(res3.team_data, {season: self.match.seizoen}, true)[0];
+                                    self.teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
+                                    self.playerdata = res3.player_data;
+
+                                    self.spelerscores = [];
+                                    angular.forEach(self.playerdata, function (value, key) {
+                                        var temp = {};
+                                        temp.spelerNaam = value.spelerNaam;
+                                        temp.playerID = value.playerID;
+                                        var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
+                                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                        if (player.scores) {
+                                            temp.scores = player.scores;
+                                        } else {
+                                            temp.scores = {};
+                                            temp.scores.score_from_coach = 0;
+                                        }
+                                        self.spelerscores.push(temp);
+                                    });
+                                }
+                            });
+                        }
+                    }
                 }
             }
+            self.loading = false;
         });
 
         self.splitTime = function(string) {

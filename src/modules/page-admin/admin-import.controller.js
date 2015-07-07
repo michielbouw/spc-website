@@ -69,6 +69,12 @@ angular.module('mainapp.pageAdmin')
         // function for processing the match data file (.json) and push it to the correct model in the database
         self.processMatchDataFile = function (file_path) {
             var data;
+
+            var ended1;
+            var ended2;
+            var ended3;
+            var ended4;
+
             $http({
                 method: 'GET',
                 url: '/media/data/' + file_path,
@@ -1566,11 +1572,6 @@ angular.module('mainapp.pageAdmin')
                         match_data = angular.copy(items);
                     }
 
-                    var ended1;
-                    var ended2;
-                    var ended3;
-                    var ended4;
-
                     if (data && match_data && match_short && team_data && player_data) {
                         $rootScope.errorImport = '';
 
@@ -2203,7 +2204,7 @@ angular.module('mainapp.pageAdmin')
                                         });
 
                                         Api.TeamData.post(teamdata_uit, function () {
-                                            ended1 = true;
+                                            ended2 = true;
                                         }, function () {
                                             $rootScope.errorImport = 'Oeps er ging iets mis, teamdata niet geimporteerd';
                                         });
@@ -2484,7 +2485,7 @@ angular.module('mainapp.pageAdmin')
                                             player_data: teamdata_uit.player_data,
                                             date_edited: self.datetime
                                         }, function () {
-                                            ended1 = true;
+                                            ended2 = true;
                                         }, function () {
                                             $rootScope.errorImport = 'Oeps er ging iets mis, teamdata niet geimporteerd';
                                         });

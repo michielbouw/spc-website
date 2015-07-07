@@ -9,25 +9,38 @@ angular.module('mainapp.memberAuth')
                 return (AuthenticationService.isLogged);
             };
 
-            if (AuthenticationService.isLogged) {
+            if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
                 Api.Me.get(function (res) {
-                    $rootScope.currentUser = res.data;
+                    //$rootScope.currentUser = res.data;
+                    $sessionStorage.currentUser = res.data;
 
-                    $rootScope.currentClub = {};
-                    $rootScope.currentClub.name = res.data.club;
-                    $rootScope.currentClub.slug = res.data.club_slug;
-                    $rootScope.currentClub.teams = res.data.teams;
-                    $rootScope.currentClub.colors = [];
+                    $sessionStorage.currentClub = {};
+                    $sessionStorage.currentClub.name = res.data.club;
+                    $sessionStorage.currentClub.slug = res.data.club_slug;
+                    $sessionStorage.currentClub.teams = res.data.teams;
+                    $sessionStorage.currentClub.colors = [];
+
+                    //$rootScope.currentClub = {};
+                    //$rootScope.currentClub.name = res.data.club;
+                    //$rootScope.currentClub.slug = res.data.club_slug;
+                    //$rootScope.currentClub.teams = res.data.teams;
+                    //$rootScope.currentClub.colors = [];
 
                     Api.Club.get({
                         _slug: res.data.club_slug
-                    }, function(res) {
-                        $rootScope.currentClub.colors = res.colors;
-                        $rootScope.currentClub.spc_package = res.spc_package;
+                    }, function(res1) {
+                        $sessionStorage.currentClub.colors = res1.colors;
+                        $sessionStorage.currentClub.spc_package = res1.spc_package;
+
+                        $rootScope.currentUser = $sessionStorage.currentUser;
+                        $rootScope.currentClub = $sessionStorage.currentClub;
                     });
                 }, function () {
                     $rootScope.error = 'Failed to fetch details';
                 });
+            } else {
+                $rootScope.currentUser = $sessionStorage.currentUser;
+                $rootScope.currentClub = $sessionStorage.currentClub;
             }
 
             //Admin User Controller (login, logout)
@@ -50,37 +63,46 @@ angular.module('mainapp.memberAuth')
                                 $localStorage.remember = true;
                                 $localStorage.token = res.token;
                                 $localStorage.role = res.data.role;
+                                $localStorage.is_superadmin = res.data.is_superadmin;
                                 $localStorage.id = res.data._id;
                             }
 
-                            if (AuthenticationService.isLogged) {
-                                Api.Me.get(function (res) {
-                                    $rootScope.currentUser = res.data;
+                            Api.Me.get(function (res1) {
+                                //$rootScope.currentUser = res.data;
+                                $sessionStorage.currentUser = res1.data;
 
-                                    $rootScope.currentClub = {};
-                                    $rootScope.currentClub.name = res.data.club;
-                                    $rootScope.currentClub.slug = res.data.club_slug;
-                                    $rootScope.currentClub.teams = res.data.teams;
-                                    $rootScope.currentClub.colors = [];
+                                $sessionStorage.currentClub = {};
+                                $sessionStorage.currentClub.name = res1.data.club;
+                                $sessionStorage.currentClub.slug = res1.data.club_slug;
+                                $sessionStorage.currentClub.teams = res1.data.teams;
+                                $sessionStorage.currentClub.colors = [];
 
-                                    Api.Club.get({
-                                        _slug: res.data.club_slug
-                                    }, function(res) {
-                                        $rootScope.currentClub.colors = res.colors;
-                                        $rootScope.currentClub.spc_package = res.spc_package;
-                                    });
+                                //$rootScope.currentClub = {};
+                                //$rootScope.currentClub.name = res.data.club;
+                                //$rootScope.currentClub.slug = res.data.club_slug;
+                                //$rootScope.currentClub.teams = res.data.teams;
+                                //$rootScope.currentClub.colors = [];
 
-                                    if (res.data.role == 'admin') {
-                                        $location.path("/admin");
-                                    } else if (res.data.role == 'speler') {
-                                        $location.path("/speler");
-                                    } else {
-                                        $location.path("/club");
-                                    }
-                                }, function () {
-                                    $rootScope.error = 'Failed to fetch details';
+                                Api.Club.get({
+                                    _slug: res1.data.club_slug
+                                }, function(res2) {
+                                    $sessionStorage.currentClub.colors = res2.colors;
+                                    $sessionStorage.currentClub.spc_package = res2.spc_package;
+
+                                    $rootScope.currentUser = $sessionStorage.currentUser;
+                                    $rootScope.currentClub = $sessionStorage.currentClub;
                                 });
-                            }
+
+                                if (res.data.role == 'admin') {
+                                    $location.path("/admin");
+                                } else if (res.data.role == 'speler') {
+                                    $location.path("/speler");
+                                } else {
+                                    $location.path("/club");
+                                }
+                            }, function () {
+                                $rootScope.error = 'Failed to fetch details';
+                            });
                         }
                     }, function(status, data) {
                         console.log(status);
@@ -121,6 +143,7 @@ angular.module('mainapp.memberAuth')
                     delete $sessionStorage.token;
                     delete $sessionStorage.role;
                     $localStorage.$reset();
+                    $sessionStorage.$reset();
                     $location.path("/");
                 }
             };
