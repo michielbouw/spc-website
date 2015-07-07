@@ -13,24 +13,21 @@ angular.module('mainapp.memberAuth')
                 Api.Me.get(function (res) {
                     $sessionStorage.currentUser = res.data;
 
-                    var temp = {};
-                    temp.name = res.data.club;
-                    temp.slug = res.data.club_slug;
-                    temp.teams = res.data.teams;
-                    temp.colors = [];
-                    $sessionStorage.currentClub = temp;
+                    $sessionStorage.currentClub = {};
+                    $sessionStorage.currentClub.name = res.data.club;
+                    $sessionStorage.currentClub.slug = res.data.club_slug;
+                    $sessionStorage.currentClub.teams = res.data.teams;
+                    $sessionStorage.currentClub.colors = [];
 
                     Api.Club.get({
                         _slug: res.data.club_slug
                     }, function(res1) {
-                        temp.colors = res1.colors;
-                        temp.spc_package = res1.spc_package;
-                        $sessionStorage.currentClub = temp;
+                        $sessionStorage.currentClub.colors = res1.colors;
+                        $sessionStorage.currentClub.spc_package = res1.spc_package;
 
                         $rootScope.currentUser = $sessionStorage.currentUser;
                         $rootScope.currentClub = $sessionStorage.currentClub;
                     }, function() {
-                        $sessionStorage.currentClub = temp;
                         $rootScope.currentUser = $sessionStorage.currentUser;
                         $rootScope.currentClub = $sessionStorage.currentClub;
                     });
@@ -69,24 +66,21 @@ angular.module('mainapp.memberAuth')
                             Api.Me.get(function (res1) {
                                 $sessionStorage.currentUser = res1.data;
 
-                                var temp = {};
-                                temp.name = res1.data.club;
-                                temp.slug = res1.data.club_slug;
-                                temp.teams = res1.data.teams;
-                                temp.colors = [];
-                                $sessionStorage.currentClub = temp;
+                                $sessionStorage.currentClub = {};
+                                $sessionStorage.currentClub.name = res.data.club;
+                                $sessionStorage.currentClub.slug = res.data.club_slug;
+                                $sessionStorage.currentClub.teams = res.data.teams;
+                                $sessionStorage.currentClub.colors = [];
 
                                 Api.Club.get({
                                     _slug: res1.data.club_slug
                                 }, function(res2) {
-                                    temp.colors = res2.colors;
-                                    temp.spc_package = res2.spc_package;
-                                    $sessionStorage.currentClub = temp;
+                                    $sessionStorage.currentClub.colors = res1.colors;
+                                    $sessionStorage.currentClub.spc_package = res1.spc_package;
 
                                     $rootScope.currentUser = $sessionStorage.currentUser;
                                     $rootScope.currentClub = $sessionStorage.currentClub;
                                 }, function() {
-                                    $sessionStorage.currentClub = temp;
                                     $rootScope.currentUser = $sessionStorage.currentUser;
                                     $rootScope.currentClub = $sessionStorage.currentClub;
                                 });
