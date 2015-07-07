@@ -147,7 +147,7 @@ angular.module('mainapp.match')
                             $rootScope.currentClub.spc_package = res.spc_package;
                         });
 
-                        var teams = $rootScope.currentClub.teams;
+                        var teams = res.data.teams;
                         var teamslug = '';
                         if ($filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
