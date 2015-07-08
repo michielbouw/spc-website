@@ -122,13 +122,28 @@ angular.module('mainapp.pageAdmin')
                         match_short.uitTeamSlug = match_short.match_info.uit.trim().toLowerCase().replace(/\s+/g, '');
 
                         // here we need an if statement for the correct season chosing
-                        if (items.matchID >= 16000) {
-                            items.seizoen = "2014-2015 Play-offs";
-                            match_short.seizoen = "2014-2015 Play-offs";
-                        } else if (items.matchID > 7200 && items.matchID < 16000) {
+                        if (items.matchID >= 1203 && items.matchID <= 1582) {
+                            items.seizoen = "2013-2014";
+                            match_short.seizoen = "2013-2014";
+                        } else if ((items.matchID >= 6495 && items.matchID <= 6502) || (items.matchID >= 6507 && items.matchID <= 6510) || (items.matchID >= 6515 && items.matchID <= 6518)) {
+                            items.seizoen = "2013-2014 Play-offs";
+                            match_short.seizoen = "2013-2014 Play-offs";
+                        } else if (items.matchID >= 7288 && items.matchID <= 7667) {
                             items.seizoen = "2014-2015";
                             match_short.seizoen = "2014-2015";
+                        } else if ((items.matchID >= 16377 && items.matchID <= 16380) || (items.matchID >= 16429 && items.matchID <= 16436) || (items.matchID >= 16451 && items.matchID <= 16454)) {
+                            items.seizoen = "2014-2015 Play-offs";
+                            match_short.seizoen = "2014-2015 Play-offs";
+                        } else {
+                            items.seizoen = "2015-2016";
+                            match_short.seizoen = "2015-2016";
                         }
+
+                        //seizoen 1314: 1203 - 1582
+                        //seizoen 1314 PO: 6495-6502, 6507-6510, 6515-6518.
+                        //seizoen 1415: 7288-7667
+                        //seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
+                        //Alle intervallen zijn inclusief de linker- en rechterwaarde.
 
                         // for now this is correct later maybe need a if statement to choose correct division
                         items.divisie = "Jupiler League";
