@@ -66,6 +66,7 @@
                         {{ club.teams.length }}
                     </div>
                     <div class="hidden-xs col-md-3">
+                        <a class="btn btn-default btn-xs" ng-href="/club/{{ club.teams[0].team_slug }}">Team stats</a> <a class="btn btn-default btn-xs" ng-href="/spelers/{{ club.teams[0].team_slug }}">Speler stats</a>
                         <a type="button" class="btn btn-primary btn-xs" ng-href="/admin/clubs/edit/{{ club._slug }}">wijzig</a> <button class="btn btn-danger btn-xs" ng-click="data.openModalDel('sm', $index)">verwijder</button>
                     </div>
                 </div>
