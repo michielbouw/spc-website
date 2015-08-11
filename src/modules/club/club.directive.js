@@ -30,7 +30,7 @@ angular.module('mainapp.club')
             }
         };
     })
-    .directive('statssliderclub', function () {
+    .directive('statssliderclub', function ($timeout) {
         return {
             restrict: "E",
             scope: {
@@ -39,19 +39,21 @@ angular.module('mainapp.club')
             replace: true,
             template: "<div class=\"slider-control\">\n<div class=\"slider\">\n</div>\n</div>",
             link: function (scope, element, attrs) {
-                $('.slider-control .slider').slider({
-                    range: true,
-                    min: 1,
-                    max: 38,
-                    step: 1,
-                    values: scope.model,
-                    slide: function( event, ui ) {
-                        event.stopPropagation();
-                        scope.$apply(function() {
-                            scope.model = ui.values;
-                        });
-                    }
-                });
+                $timeout(function () {
+                    $('.slider-control .slider').slider({
+                        range: true,
+                        min: 1,
+                        max: 38,
+                        step: 1,
+                        values: scope.model,
+                        slide: function( event, ui ) {
+                            event.stopPropagation();
+                            scope.$apply(function() {
+                                scope.model = ui.values;
+                            });
+                        }
+                    });
+                }, 200);
             }
         };
     });

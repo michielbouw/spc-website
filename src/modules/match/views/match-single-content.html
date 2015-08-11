@@ -21,6 +21,12 @@
             <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Opstelling</h3>
             <h4>Overzicht spelers met rugnummers <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOpstelling" aria-expanded="false" aria-controls="collapseInfoOpstelling"><i class="fa fa-info"></i></button></span></h4>
         </div>
+
+        <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
+            <h3><i class="fa fa-spinner fa-pulse"></i></h3>
+            <h4>Loading</h4>
+        </div>
+
         <div class="col-xs-12 text-center collapse" id="collapseInfoOpstelling">
             <p>Uitleg...</p>
             <br>
@@ -711,6 +717,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
+            <h3><i class="fa fa-spinner fa-pulse"></i></h3>
+            <h4>Loading</h4>
+        </div>
+
         <div class="col-xs-12 text-center collapse" id="collapseInfoWedstrijd">
             <p>Uitleg...</p>
             <br>

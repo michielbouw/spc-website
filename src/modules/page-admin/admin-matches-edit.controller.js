@@ -75,9 +75,14 @@ angular.module('mainapp.pageAdmin')
 
         self.matchDel = function () {
             Api.Match.delete({
-                _id: self.user._id
+                _id: self.match._id
             }, function() {
-                $location.path('/admin/matches');
+                Api.MatchDataID.delete({
+                    _id: self.match.matchID
+                }, function() {
+                    $location.path('/admin/matches');
+                }, function() {
+                });
             }, function() {
             });
         };

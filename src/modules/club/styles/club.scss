@@ -24,6 +24,10 @@
       background-color: $darkblue;
       color: $backgroundlight;
     }
+    .stat-block-nohover:hover {
+      background-color: $backgroundlight;
+      color: $darkblue;
+    }
   }
   span.rounds {
     text-align: center;

@@ -121,6 +121,53 @@ angular.module('mainapp.pageAdmin')
                         match_short.uitTeamID = data.wedstrijd_data.uitTeamID[0];
                         match_short.uitTeamSlug = match_short.match_info.uit.trim().toLowerCase().replace(/\s+/g, '');
 
+                        items.thuisTeamSlug = match_short.match_info.thuis.trim().toLowerCase().replace(/\s+/g, '');
+                        items.uitTeamSlug = match_short.match_info.uit.trim().toLowerCase().replace(/\s+/g, '');
+                        items.ronde = match_short.match_info.ronde;
+                        items.datum = match_short.match_info.datum;
+                        items.wedstrijd = match_short.match_info.wedstrijd;
+                        items.eindstand = match_short.match_info.eindstand;
+
+                        team_data = {};
+                        team_data.thuis = {};
+                        team_data.uit = {};
+                        team_data.thuis.matchID = Number(angular.copy(items.matchID));
+                        team_data.uit.matchID = Number(angular.copy(items.matchID));
+                        team_data.thuis.ronde = Number(angular.copy(match_short.match_info.ronde));
+                        team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
+                        team_data.thuis.wedstrijd = angular.copy(match_short.match_info.wedstrijd);
+                        team_data.uit.wedstrijd = angular.copy(match_short.match_info.wedstrijd);
+                        team_data.thuis.doelpunten_voor = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
+                        team_data.thuis.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 2)[1]);
+                        team_data.uit.doelpunten_voor = Number(match_short.match_info.eindstand.split(" - ", 2)[1]);
+                        team_data.uit.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
+                        if (match_short.match_info.eindstand.split(" - ", 1)[0] > match_short.match_info.eindstand.split(" - ", 2)[1]) {
+                            team_data.thuis.punten = 3;
+                            team_data.uit.punten = 0;
+                        } else if (match_short.match_info.eindstand.split(" - ", 1)[0] < match_short.match_info.eindstand.split(" - ", 2)[1]) {
+                            team_data.thuis.punten = 0;
+                            team_data.uit.punten = 3;
+                        } else if (match_short.match_info.eindstand.split(" - ", 1)[0] == match_short.match_info.eindstand.split(" - ", 2)[1]) {
+                            team_data.thuis.punten = 1;
+                            team_data.uit.punten = 1;
+                        }
+                        team_data.thuis.balbezit = Number($filter('filter')(data.team_matrix, {_row: 'Balbezit'}, true)[0][items.thuisTeamID].split("%", 1)[0]);
+                        team_data.uit.balbezit = Number($filter('filter')(data.team_matrix, {_row: 'Balbezit'}, true)[0][items.uitTeamID].split("%", 1)[0]);
+                        team_data.thuis.tot_passes = Number($filter('filter')(data.team_matrix, {_row: 'Tot. aantal passes'}, true)[0][items.thuisTeamID]);
+                        team_data.uit.tot_passes = Number($filter('filter')(data.team_matrix, {_row: 'Tot. aantal passes'}, true)[0][items.uitTeamID]);
+                        team_data.thuis.geslaagde_passes = Number($filter('filter')(data.team_matrix, {_row: 'Geslaagde passes'}, true)[0][items.thuisTeamID].split("%", 1)[0]);
+                        team_data.uit.geslaagde_passes = Number($filter('filter')(data.team_matrix, {_row: 'Geslaagde passes'}, true)[0][items.uitTeamID].split("%", 1)[0]);
+                        team_data.thuis.lengte_passes = Number($filter('filter')(data.team_matrix, {_row: 'Gem. lengte passes'}, true)[0][items.thuisTeamID].split(" m.", 1)[0]);
+                        team_data.uit.lengte_passes = Number($filter('filter')(data.team_matrix, {_row: 'Gem. lengte passes'}, true)[0][items.uitTeamID].split(" m.", 1)[0]);
+                        team_data.thuis.doelpogingen = Number($filter('filter')(data.team_matrix, {_row: 'Doelpogingen'}, true)[0][items.thuisTeamID]);
+                        team_data.uit.doelpogingen = Number($filter('filter')(data.team_matrix, {_row: 'Doelpogingen'}, true)[0][items.uitTeamID]);
+                        team_data.thuis.gewonnen_duels = Number($filter('filter')(data.team_matrix, {_row: 'Gewonnen duels'}, true)[0][items.thuisTeamID].split("%", 1)[0]);
+                        team_data.uit.gewonnen_duels = Number($filter('filter')(data.team_matrix, {_row: 'Gewonnen duels'}, true)[0][items.uitTeamID].split("%", 1)[0]);
+                        team_data.thuis.geel = Number($filter('filter')(data.team_matrix, {_row: 'Gele kaarten'}, true)[0][items.thuisTeamID]);
+                        team_data.uit.geel = Number($filter('filter')(data.team_matrix, {_row: 'Gele kaarten'}, true)[0][items.uitTeamID]);
+                        team_data.thuis.rood = Number($filter('filter')(data.team_matrix, {_row: 'Rode kaarten'}, true)[0][items.thuisTeamID]);
+                        team_data.uit.rood = Number($filter('filter')(data.team_matrix, {_row: 'Rode kaarten'}, true)[0][items.uitTeamID]);
+
                         // here we need an if statement for the correct season chosing
                         if (items.matchID >= 1203 && items.matchID <= 1582) {
                             items.seizoen = "2013-2014";
@@ -128,12 +175,38 @@ angular.module('mainapp.pageAdmin')
                         } else if ((items.matchID >= 6495 && items.matchID <= 6502) || (items.matchID >= 6507 && items.matchID <= 6510) || (items.matchID >= 6515 && items.matchID <= 6518)) {
                             items.seizoen = "2013-2014 Play-offs";
                             match_short.seizoen = "2013-2014 Play-offs";
+
+                            if (items.matchID >= 6507 && items.matchID <= 6510) {
+                                match_short.match_info.ronde = Number(match_short.match_info.ronde) + 2;
+                                items.ronde = match_short.match_info.ronde;
+                                team_data.thuis.ronde = Number(angular.copy(match_short.match_info.ronde));
+                                team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
+                            }
+                            if (items.matchID >= 6515 && items.matchID <= 6518) {
+                                match_short.match_info.ronde = Number(match_short.match_info.ronde) + 4;
+                                items.ronde = match_short.match_info.ronde;
+                                team_data.thuis.ronde = Number(angular.copy(match_short.match_info.ronde));
+                                team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
+                            }
                         } else if (items.matchID >= 7288 && items.matchID <= 7667) {
                             items.seizoen = "2014-2015";
                             match_short.seizoen = "2014-2015";
                         } else if ((items.matchID >= 16377 && items.matchID <= 16380) || (items.matchID >= 16429 && items.matchID <= 16436) || (items.matchID >= 16451 && items.matchID <= 16454)) {
                             items.seizoen = "2014-2015 Play-offs";
                             match_short.seizoen = "2014-2015 Play-offs";
+
+                            if (items.matchID >= 16429 && items.matchID <= 16436) {
+                                match_short.match_info.ronde = Number(match_short.match_info.ronde) + 2;
+                                items.ronde = match_short.match_info.ronde;
+                                team_data.thuis.ronde = Number(angular.copy(match_short.match_info.ronde));
+                                team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
+                            }
+                            if (items.matchID >= 16451 && items.matchID <= 16454) {
+                                match_short.match_info.ronde = Number(match_short.match_info.ronde) + 4;
+                                items.ronde = match_short.match_info.ronde;
+                                team_data.thuis.ronde = Number(angular.copy(match_short.match_info.ronde));
+                                team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
+                            }
                         } else {
                             items.seizoen = "2015-2016";
                             match_short.seizoen = "2015-2016";
@@ -148,13 +221,6 @@ angular.module('mainapp.pageAdmin')
                         // for now this is correct later maybe need a if statement to choose correct division
                         items.divisie = "Jupiler League";
                         match_short.divisie = "Jupiler League";
-
-                        items.thuisTeamSlug = match_short.match_info.thuis.trim().toLowerCase().replace(/\s+/g, '');
-                        items.uitTeamSlug = match_short.match_info.uit.trim().toLowerCase().replace(/\s+/g, '');
-                        items.ronde = match_short.match_info.ronde;
-                        items.datum = match_short.match_info.datum;
-                        items.wedstrijd = match_short.match_info.wedstrijd;
-                        items.eindstand = match_short.match_info.eindstand;
 
                         items.overzicht_lineup = data.wedstrijd_data.overzicht_lineup;
 
@@ -726,46 +792,6 @@ angular.module('mainapp.pageAdmin')
                             });
                         });
 
-                        team_data = {};
-                        team_data.thuis = {};
-                        team_data.uit = {};
-                        team_data.thuis.matchID = Number(angular.copy(items.matchID));
-                        team_data.uit.matchID = Number(angular.copy(items.matchID));
-                        team_data.thuis.ronde = Number(angular.copy(match_short.match_info.ronde));
-                        team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
-                        team_data.thuis.wedstrijd = angular.copy(match_short.match_info.wedstrijd);
-                        team_data.uit.wedstrijd = angular.copy(match_short.match_info.wedstrijd);
-                        team_data.thuis.doelpunten_voor = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
-                        team_data.thuis.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 2)[1]);
-                        team_data.uit.doelpunten_voor = Number(match_short.match_info.eindstand.split(" - ", 2)[1]);
-                        team_data.uit.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
-                        if (match_short.match_info.eindstand.split(" - ", 1)[0] > match_short.match_info.eindstand.split(" - ", 2)[1]) {
-                            team_data.thuis.punten = 3;
-                            team_data.uit.punten = 0;
-                        } else if (match_short.match_info.eindstand.split(" - ", 1)[0] < match_short.match_info.eindstand.split(" - ", 2)[1]) {
-                            team_data.thuis.punten = 0;
-                            team_data.uit.punten = 3;
-                        } else if (match_short.match_info.eindstand.split(" - ", 1)[0] == match_short.match_info.eindstand.split(" - ", 2)[1]) {
-                            team_data.thuis.punten = 1;
-                            team_data.uit.punten = 1;
-                        }
-                        team_data.thuis.balbezit = Number($filter('filter')(data.team_matrix, {_row: 'Balbezit'}, true)[0][items.thuisTeamID].split("%", 1)[0]);
-                        team_data.uit.balbezit = Number($filter('filter')(data.team_matrix, {_row: 'Balbezit'}, true)[0][items.uitTeamID].split("%", 1)[0]);
-                        team_data.thuis.tot_passes = Number($filter('filter')(data.team_matrix, {_row: 'Tot. aantal passes'}, true)[0][items.thuisTeamID]);
-                        team_data.uit.tot_passes = Number($filter('filter')(data.team_matrix, {_row: 'Tot. aantal passes'}, true)[0][items.uitTeamID]);
-                        team_data.thuis.geslaagde_passes = Number($filter('filter')(data.team_matrix, {_row: 'Geslaagde passes'}, true)[0][items.thuisTeamID].split("%", 1)[0]);
-                        team_data.uit.geslaagde_passes = Number($filter('filter')(data.team_matrix, {_row: 'Geslaagde passes'}, true)[0][items.uitTeamID].split("%", 1)[0]);
-                        team_data.thuis.lengte_passes = Number($filter('filter')(data.team_matrix, {_row: 'Gem. lengte passes'}, true)[0][items.thuisTeamID].split(" m.", 1)[0]);
-                        team_data.uit.lengte_passes = Number($filter('filter')(data.team_matrix, {_row: 'Gem. lengte passes'}, true)[0][items.uitTeamID].split(" m.", 1)[0]);
-                        team_data.thuis.doelpogingen = Number($filter('filter')(data.team_matrix, {_row: 'Doelpogingen'}, true)[0][items.thuisTeamID]);
-                        team_data.uit.doelpogingen = Number($filter('filter')(data.team_matrix, {_row: 'Doelpogingen'}, true)[0][items.uitTeamID]);
-                        team_data.thuis.gewonnen_duels = Number($filter('filter')(data.team_matrix, {_row: 'Gewonnen duels'}, true)[0][items.thuisTeamID].split("%", 1)[0]);
-                        team_data.uit.gewonnen_duels = Number($filter('filter')(data.team_matrix, {_row: 'Gewonnen duels'}, true)[0][items.uitTeamID].split("%", 1)[0]);
-                        team_data.thuis.geel = Number($filter('filter')(data.team_matrix, {_row: 'Gele kaarten'}, true)[0][items.thuisTeamID]);
-                        team_data.uit.geel = Number($filter('filter')(data.team_matrix, {_row: 'Gele kaarten'}, true)[0][items.uitTeamID]);
-                        team_data.thuis.rood = Number($filter('filter')(data.team_matrix, {_row: 'Rode kaarten'}, true)[0][items.thuisTeamID]);
-                        team_data.uit.rood = Number($filter('filter')(data.team_matrix, {_row: 'Rode kaarten'}, true)[0][items.uitTeamID]);
-
                         items.duel_matrix_hele_wedstrijd = data.team_data.duel_matrix_hele_wedstrijd;
                         items.duel_matrix_hele_wedstrijd_thuis_spelers_uitteam = [];
                         items.duel_matrix_hele_wedstrijd_uit_spelers_thuisteam = [];
@@ -968,7 +994,7 @@ angular.module('mainapp.pageAdmin')
                             temp.match = angular.copy(match_short.match_info.wedstrijd);
                             temp.result = angular.copy(match_short.match_info.eindstand);
                             temp.date = angular.copy(match_short.match_info.datum);
-                            temp.ronde = Number(angular.copy(match_short.match_info.ronde));
+                            temp.ronde = Number(match_short.match_info.ronde);
                             temp.teamID = angular.copy(items.thuisTeamID);
                             temp.type = angular.copy(value.stat_matrix.type[0]);
                             temp.personID = angular.copy(value.speler[0]);
@@ -1019,7 +1045,7 @@ angular.module('mainapp.pageAdmin')
                             temp.match = angular.copy(match_short.match_info.wedstrijd);
                             temp.result = angular.copy(match_short.match_info.eindstand);
                             temp.date = angular.copy(match_short.match_info.datum);
-                            temp.ronde = Number(angular.copy(match_short.match_info.ronde));
+                            temp.ronde = Number(match_short.match_info.ronde);
                             temp.teamID = angular.copy(items.thuisTeamID);
                             temp.type = angular.copy(value.stat_matrix.type[0]);
                             temp.personID = angular.copy(value.speler[0]);
@@ -1763,30 +1789,34 @@ angular.module('mainapp.pageAdmin')
                                         Api.TeamData.post(teamdata, function () {
                                             ended1 = true;
                                         }, function () {
-                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata niet geimporteerd';
+                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata thuis (POST) niet geimporteerd';
                                         });
                                     } else {
                                         // check season and round, and change or add teamdata
                                         if (teamdata.team_data) {
-                                            if ($filter('filter')(teamdata.team_data, {season: match_short.seizoen}, true)) {
+
+                                            // Working properly for now if statement
+                                            if ($filter('filter')(teamdata.team_data, {season: match_short.seizoen}, true)[0]) {
                                                 angular.forEach(teamdata.team_data, function (value, key) {
                                                     if (value.season == match_short.seizoen) {
                                                         // check if round exists
-                                                        if ($filter('filter')(value.matches, {ronde: team_data.thuis.ronde}, true)) {
+                                                        if ($filter('filter')(value.matches, {ronde: team_data.thuis.ronde}, true)[0]) {
                                                             angular.forEach(value.matches, function (value1, key1) {
-                                                                value1.wedstrijd = team_data.thuis.wedstrijd;
-                                                                value1.matchID = team_data.thuis.matchID;
-                                                                value1.doelpunten_voor = team_data.thuis.doelpunten_voor;
-                                                                value1.doelpunten_tegen = team_data.thuis.doelpunten_tegen;
-                                                                value1.punten = team_data.thuis.punten;
-                                                                value1.balbezit = team_data.thuis.balbezit;
-                                                                value1.tot_passes = team_data.thuis.tot_passes;
-                                                                value1.geslaagde_passes = team_data.thuis.geslaagde_passes;
-                                                                value1.lengte_passes = team_data.thuis.lengte_passes;
-                                                                value1.doelpogingen = team_data.thuis.doelpogingen;
-                                                                value1.gewonnen_duels = team_data.thuis.gewonnen_duels;
-                                                                value1.geel = team_data.thuis.geel;
-                                                                value1.rood = team_data.thuis.rood;
+                                                                if (value1.ronde == team_data.thuis.ronde) {
+                                                                    value1.wedstrijd = team_data.thuis.wedstrijd;
+                                                                    value1.matchID = team_data.thuis.matchID;
+                                                                    value1.doelpunten_voor = team_data.thuis.doelpunten_voor;
+                                                                    value1.doelpunten_tegen = team_data.thuis.doelpunten_tegen;
+                                                                    value1.punten = team_data.thuis.punten;
+                                                                    value1.balbezit = team_data.thuis.balbezit;
+                                                                    value1.tot_passes = team_data.thuis.tot_passes;
+                                                                    value1.geslaagde_passes = team_data.thuis.geslaagde_passes;
+                                                                    value1.lengte_passes = team_data.thuis.lengte_passes;
+                                                                    value1.doelpogingen = team_data.thuis.doelpogingen;
+                                                                    value1.gewonnen_duels = team_data.thuis.gewonnen_duels;
+                                                                    value1.geel = team_data.thuis.geel;
+                                                                    value1.rood = team_data.thuis.rood;
+                                                                }
                                                             });
                                                         } else {
                                                             value.matches.push(team_data.thuis);
@@ -1812,89 +1842,182 @@ angular.module('mainapp.pageAdmin')
                                         // check player and change or create, check season and round, and change or add playerdata
                                         if (teamdata.player_data) {
                                             angular.forEach(player_data.player_stats_thuis, function (value, key) {
-                                                angular.forEach(player_data, function (value1, key1) {
-                                                    if (value.personID == value1.playerID && value.type == value1.spelerType) {
-                                                        value1.spelerNaam = value.spelerNaam;
-                                                        value1.spelerRugnummer = value.rugnummer;
+                                                if (!($filter('filter')(teamdata.player_data, {playerID: value.personID})[0])) {
+                                                    var temp = {};
+                                                    temp.playerID = value.personID;
+                                                    temp.spelerNaam = value.spelerNaam;
+                                                    temp.spelerType = value.type;
+                                                    temp.spelerRugnummer = value.rugnummer;
+                                                    temp.matches = [];
 
-                                                        if (value1.matches) {
-                                                            if ($filter('filter')(value1.matches, {season: match_short.seizoen}, true)) {
-                                                                angular.forEach(value1.matches, function (value2, key2) {
-                                                                    if (value2.season == match_short.seizoen) {
-                                                                        // check if round exists
-                                                                        if ($filter('filter')(value2.match, {ronde: value.ronde}, true)) {
-                                                                            angular.forEach(value2.match, function (value3, key3) {
-                                                                                if (value3.ronde == value.ronde) {
-                                                                                    value3.wedstrijd = value.match;
-                                                                                    value3.eindstand = value.result;
-                                                                                    value3.datum = value.date;
-                                                                                    value3.ronde = value.ronde;
-                                                                                    value3.matchID = value.matchID;
-                                                                                    value3.minuten = value.minuten;
-                                                                                    value3.pass_percentage = value.pass_percentage;
-                                                                                    value3.pass_lengte = value.pass_lengte;
-                                                                                    value3.geel = value.geel;
-                                                                                    value3.rood = value.rood;
-                                                                                    value3.doelpunten = value.doelpunten;
-                                                                                    value3.aantal_passes = value.aantal_passes;
-                                                                                    value3.geslaagde_passes = value.geslaagde_passes;
-                                                                                    value3.voorzetten = value.voorzetten;
-                                                                                    value3.doelpogingen = value.doelpogingen;
-                                                                                    value3.doelpogingen_opdoel = value.doelpogingen_opdoel;
-                                                                                    value3.aanvallende_duels = value.aanvallende_duels;
-                                                                                    value3.verdedigende_duels = value.verdedigende_duels;
-                                                                                    value3.gewonnen_duels = value.gewonnen_duels;
-                                                                                    value3.intercepties = value.intercepties;
-                                                                                    value3.overtredingen = value.overtredingen;
-                                                                                    value3.reddingen = value.reddingen;
-                                                                                    value3.geslaagde_reddingen = value.geslaagde_reddingen;
-                                                                                    value3.korte_passes = value.korte_passes;
-                                                                                    value3.middellange_passes = value.middellange_passes;
-                                                                                    value3.lange_passes = value.lange_passes;
-                                                                                    value3.succesvolle_uittrappen = value.succesvolle_uittrappen;
-                                                                                    value3.gevangen_ballen = value.gevangen_ballen;
-                                                                                    value3.weggestompte_ballen = value.weggestompte_ballen;
-                                                                                    value3.doelpunten_tegen = value.doelpunten_tegen;
-                                                                                }
-                                                                            });
-                                                                        } else {
-                                                                            var temp2 = {};
-                                                                            temp2.wedstrijd = value.match;
-                                                                            temp2.eindstand = value.result;
-                                                                            temp2.datum = value.date;
-                                                                            temp2.ronde = value.ronde;
-                                                                            temp2.matchID = value.matchID;
-                                                                            temp2.minuten = value.minuten;
-                                                                            temp2.pass_percentage = value.pass_percentage;
-                                                                            temp2.pass_lengte = value.pass_lengte;
-                                                                            temp2.geel = value.geel;
-                                                                            temp2.rood = value.rood;
-                                                                            temp2.doelpunten = value.doelpunten;
-                                                                            temp2.aantal_passes = value.aantal_passes;
-                                                                            temp2.geslaagde_passes = value.geslaagde_passes;
-                                                                            temp2.voorzetten = value.voorzetten;
-                                                                            temp2.doelpogingen = value.doelpogingen;
-                                                                            temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
-                                                                            temp2.aanvallende_duels = value.aanvallende_duels;
-                                                                            temp2.verdedigende_duels = value.verdedigende_duels;
-                                                                            temp2.gewonnen_duels = value.gewonnen_duels;
-                                                                            temp2.intercepties = value.intercepties;
-                                                                            temp2.overtredingen = value.overtredingen;
-                                                                            temp2.reddingen = value.reddingen;
-                                                                            temp2.geslaagde_reddingen = value.geslaagde_reddingen;
-                                                                            temp2.korte_passes = value.korte_passes;
-                                                                            temp2.middellange_passes = value.middellange_passes;
-                                                                            temp2.lange_passes = value.lange_passes;
-                                                                            temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
-                                                                            temp2.gevangen_ballen = value.gevangen_ballen;
-                                                                            temp2.weggestompte_ballen = value.weggestompte_ballen;
-                                                                            temp2.doelpunten_tegen = value.doelpunten_tegen;
+                                                    var temp1 = {};
+                                                    temp1.season = match_short.seizoen;
+                                                    temp1.match = [];
 
-                                                                            value2.match.push(temp2);
+                                                    var temp2 = {};
+                                                    temp2.wedstrijd = value.match;
+                                                    temp2.eindstand = value.result;
+                                                    temp2.datum = value.date;
+                                                    temp2.ronde = value.ronde;
+                                                    temp2.matchID = value.matchID;
+                                                    temp2.minuten = value.minuten;
+                                                    temp2.pass_percentage = value.pass_percentage;
+                                                    temp2.pass_lengte = value.pass_lengte;
+                                                    temp2.geel = value.geel;
+                                                    temp2.rood = value.rood;
+                                                    temp2.doelpunten = value.doelpunten;
+                                                    temp2.aantal_passes = value.aantal_passes;
+                                                    temp2.geslaagde_passes = value.geslaagde_passes;
+                                                    temp2.voorzetten = value.voorzetten;
+                                                    temp2.doelpogingen = value.doelpogingen;
+                                                    temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                    temp2.aanvallende_duels = value.aanvallende_duels;
+                                                    temp2.verdedigende_duels = value.verdedigende_duels;
+                                                    temp2.gewonnen_duels = value.gewonnen_duels;
+                                                    temp2.intercepties = value.intercepties;
+                                                    temp2.overtredingen = value.overtredingen;
+                                                    temp2.reddingen = value.reddingen;
+                                                    temp2.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                    temp2.korte_passes = value.korte_passes;
+                                                    temp2.middellange_passes = value.middellange_passes;
+                                                    temp2.lange_passes = value.lange_passes;
+                                                    temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                    temp2.gevangen_ballen = value.gevangen_ballen;
+                                                    temp2.weggestompte_ballen = value.weggestompte_ballen;
+                                                    temp2.doelpunten_tegen = value.doelpunten_tegen;
+
+                                                    temp1.match.push(temp2);
+
+                                                    temp.matches.push(temp1);
+
+                                                    teamdata.player_data.push(temp);
+                                                } else {
+                                                    angular.forEach(teamdata.player_data, function (value1, key1) {
+                                                        if (value.personID == value1.playerID && value.type == value1.spelerType) {
+                                                            value1.spelerNaam = value.spelerNaam;
+                                                            value1.spelerRugnummer = value.rugnummer;
+
+                                                            if (value1.matches) {
+                                                                if ($filter('filter')(value1.matches, {season: match_short.seizoen}, true)[0]) {
+                                                                    angular.forEach(value1.matches, function (value2, key2) {
+                                                                        if (value2.season == match_short.seizoen) {
+                                                                            // check if round exists
+                                                                            if ($filter('filter')(value2.match, {ronde: value.ronde}, true)[0]) {
+                                                                                angular.forEach(value2.match, function (value3, key3) {
+                                                                                    if (value3.ronde == value.ronde) {
+                                                                                        value3.wedstrijd = value.match;
+                                                                                        value3.eindstand = value.result;
+                                                                                        value3.datum = value.date;
+                                                                                        value3.ronde = value.ronde;
+                                                                                        value3.matchID = value.matchID;
+                                                                                        value3.minuten = value.minuten;
+                                                                                        value3.pass_percentage = value.pass_percentage;
+                                                                                        value3.pass_lengte = value.pass_lengte;
+                                                                                        value3.geel = value.geel;
+                                                                                        value3.rood = value.rood;
+                                                                                        value3.doelpunten = value.doelpunten;
+                                                                                        value3.aantal_passes = value.aantal_passes;
+                                                                                        value3.geslaagde_passes = value.geslaagde_passes;
+                                                                                        value3.voorzetten = value.voorzetten;
+                                                                                        value3.doelpogingen = value.doelpogingen;
+                                                                                        value3.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                                                        value3.aanvallende_duels = value.aanvallende_duels;
+                                                                                        value3.verdedigende_duels = value.verdedigende_duels;
+                                                                                        value3.gewonnen_duels = value.gewonnen_duels;
+                                                                                        value3.intercepties = value.intercepties;
+                                                                                        value3.overtredingen = value.overtredingen;
+                                                                                        value3.reddingen = value.reddingen;
+                                                                                        value3.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                                                        value3.korte_passes = value.korte_passes;
+                                                                                        value3.middellange_passes = value.middellange_passes;
+                                                                                        value3.lange_passes = value.lange_passes;
+                                                                                        value3.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                                                        value3.gevangen_ballen = value.gevangen_ballen;
+                                                                                        value3.weggestompte_ballen = value.weggestompte_ballen;
+                                                                                        value3.doelpunten_tegen = value.doelpunten_tegen;
+                                                                                    }
+                                                                                });
+                                                                            } else {
+                                                                                var temp2 = {};
+                                                                                temp2.wedstrijd = value.match;
+                                                                                temp2.eindstand = value.result;
+                                                                                temp2.datum = value.date;
+                                                                                temp2.ronde = value.ronde;
+                                                                                temp2.matchID = value.matchID;
+                                                                                temp2.minuten = value.minuten;
+                                                                                temp2.pass_percentage = value.pass_percentage;
+                                                                                temp2.pass_lengte = value.pass_lengte;
+                                                                                temp2.geel = value.geel;
+                                                                                temp2.rood = value.rood;
+                                                                                temp2.doelpunten = value.doelpunten;
+                                                                                temp2.aantal_passes = value.aantal_passes;
+                                                                                temp2.geslaagde_passes = value.geslaagde_passes;
+                                                                                temp2.voorzetten = value.voorzetten;
+                                                                                temp2.doelpogingen = value.doelpogingen;
+                                                                                temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                                                temp2.aanvallende_duels = value.aanvallende_duels;
+                                                                                temp2.verdedigende_duels = value.verdedigende_duels;
+                                                                                temp2.gewonnen_duels = value.gewonnen_duels;
+                                                                                temp2.intercepties = value.intercepties;
+                                                                                temp2.overtredingen = value.overtredingen;
+                                                                                temp2.reddingen = value.reddingen;
+                                                                                temp2.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                                                temp2.korte_passes = value.korte_passes;
+                                                                                temp2.middellange_passes = value.middellange_passes;
+                                                                                temp2.lange_passes = value.lange_passes;
+                                                                                temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                                                temp2.gevangen_ballen = value.gevangen_ballen;
+                                                                                temp2.weggestompte_ballen = value.weggestompte_ballen;
+                                                                                temp2.doelpunten_tegen = value.doelpunten_tegen;
+
+                                                                                value2.match.push(temp2);
+                                                                            }
                                                                         }
-                                                                    }
-                                                                });
+                                                                    });
+                                                                } else {
+                                                                    var temp1 = {};
+                                                                    temp1.season = match_short.seizoen;
+                                                                    temp1.match = [];
+
+                                                                    var temp2 = {};
+                                                                    temp2.wedstrijd = value.match;
+                                                                    temp2.eindstand = value.result;
+                                                                    temp2.datum = value.date;
+                                                                    temp2.ronde = value.ronde;
+                                                                    temp2.matchID = value.matchID;
+                                                                    temp2.minuten = value.minuten;
+                                                                    temp2.pass_percentage = value.pass_percentage;
+                                                                    temp2.pass_lengte = value.pass_lengte;
+                                                                    temp2.geel = value.geel;
+                                                                    temp2.rood = value.rood;
+                                                                    temp2.doelpunten = value.doelpunten;
+                                                                    temp2.aantal_passes = value.aantal_passes;
+                                                                    temp2.geslaagde_passes = value.geslaagde_passes;
+                                                                    temp2.voorzetten = value.voorzetten;
+                                                                    temp2.doelpogingen = value.doelpogingen;
+                                                                    temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                                    temp2.aanvallende_duels = value.aanvallende_duels;
+                                                                    temp2.verdedigende_duels = value.verdedigende_duels;
+                                                                    temp2.gewonnen_duels = value.gewonnen_duels;
+                                                                    temp2.intercepties = value.intercepties;
+                                                                    temp2.overtredingen = value.overtredingen;
+                                                                    temp2.reddingen = value.reddingen;
+                                                                    temp2.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                                    temp2.korte_passes = value.korte_passes;
+                                                                    temp2.middellange_passes = value.middellange_passes;
+                                                                    temp2.lange_passes = value.lange_passes;
+                                                                    temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                                    temp2.gevangen_ballen = value.gevangen_ballen;
+                                                                    temp2.weggestompte_ballen = value.weggestompte_ballen;
+                                                                    temp2.doelpunten_tegen = value.doelpunten_tegen;
+
+                                                                    temp1.match.push(temp2);
+
+                                                                    value1.matches.push(temp1);
+                                                                }
                                                             } else {
+                                                                value1.matches = [];
+
                                                                 var temp1 = {};
                                                                 temp1.season = match_short.seizoen;
                                                                 temp1.match = [];
@@ -1935,51 +2058,9 @@ angular.module('mainapp.pageAdmin')
 
                                                                 value1.matches.push(temp1);
                                                             }
-                                                        } else {
-                                                            value1.matches = [];
-
-                                                            var temp1 = {};
-                                                            temp1.season = match_short.seizoen;
-                                                            temp1.match = [];
-
-                                                            var temp2 = {};
-                                                            temp2.wedstrijd = value.match;
-                                                            temp2.eindstand = value.result;
-                                                            temp2.datum = value.date;
-                                                            temp2.ronde = value.ronde;
-                                                            temp2.matchID = value.matchID;
-                                                            temp2.minuten = value.minuten;
-                                                            temp2.pass_percentage = value.pass_percentage;
-                                                            temp2.pass_lengte = value.pass_lengte;
-                                                            temp2.geel = value.geel;
-                                                            temp2.rood = value.rood;
-                                                            temp2.doelpunten = value.doelpunten;
-                                                            temp2.aantal_passes = value.aantal_passes;
-                                                            temp2.geslaagde_passes = value.geslaagde_passes;
-                                                            temp2.voorzetten = value.voorzetten;
-                                                            temp2.doelpogingen = value.doelpogingen;
-                                                            temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
-                                                            temp2.aanvallende_duels = value.aanvallende_duels;
-                                                            temp2.verdedigende_duels = value.verdedigende_duels;
-                                                            temp2.gewonnen_duels = value.gewonnen_duels;
-                                                            temp2.intercepties = value.intercepties;
-                                                            temp2.overtredingen = value.overtredingen;
-                                                            temp2.reddingen = value.reddingen;
-                                                            temp2.geslaagde_reddingen = value.geslaagde_reddingen;
-                                                            temp2.korte_passes = value.korte_passes;
-                                                            temp2.middellange_passes = value.middellange_passes;
-                                                            temp2.lange_passes = value.lange_passes;
-                                                            temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
-                                                            temp2.gevangen_ballen = value.gevangen_ballen;
-                                                            temp2.weggestompte_ballen = value.weggestompte_ballen;
-                                                            temp2.doelpunten_tegen = value.doelpunten_tegen;
-
-                                                            temp1.match.push(temp2);
-
-                                                            value1.matches.push(temp1);
                                                         }
-                                                    }
-                                                });
+                                                    });
+                                                }
                                             });
                                         } else {
                                             teamdata.player_data = [];
@@ -2044,7 +2125,7 @@ angular.module('mainapp.pageAdmin')
                                         }, function () {
                                             ended1 = true;
                                         }, function () {
-                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata niet geimporteerd';
+                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata thuis (PUT) niet geimporteerd';
                                         });
                                     }
                                 });
@@ -2221,30 +2302,33 @@ angular.module('mainapp.pageAdmin')
                                         Api.TeamData.post(teamdata_uit, function () {
                                             ended2 = true;
                                         }, function () {
-                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata niet geimporteerd';
+                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata uit (POST) niet geimporteerd';
                                         });
                                     } else {
                                         // check season and round, and change or add teamdata_uit
                                         if (teamdata_uit.team_data) {
-                                            if ($filter('filter')(teamdata_uit.team_data, {season: match_short.seizoen}, true)) {
+                                            // Working properly for now if statement
+                                            if ($filter('filter')(teamdata_uit.team_data, {season: match_short.seizoen}, true)[0]) {
                                                 angular.forEach(teamdata_uit.team_data, function (value, key) {
                                                     if (value.season == match_short.seizoen) {
                                                         // check if round exists
-                                                        if ($filter('filter')(value.matches, {ronde: team_data.uit.ronde}, true)) {
+                                                        if ($filter('filter')(value.matches, {ronde: team_data.uit.ronde}, true)[0]) {
                                                             angular.forEach(value.matches, function (value1, key1) {
-                                                                value1.wedstrijd = team_data.uit.wedstrijd;
-                                                                value1.matchID = team_data.uit.matchID;
-                                                                value1.doelpunten_voor = team_data.uit.doelpunten_voor;
-                                                                value1.doelpunten_tegen = team_data.uit.doelpunten_tegen;
-                                                                value1.punten = team_data.uit.punten;
-                                                                value1.balbezit = team_data.uit.balbezit;
-                                                                value1.tot_passes = team_data.uit.tot_passes;
-                                                                value1.geslaagde_passes = team_data.uit.geslaagde_passes;
-                                                                value1.lengte_passes = team_data.uit.lengte_passes;
-                                                                value1.doelpogingen = team_data.uit.doelpogingen;
-                                                                value1.gewonnen_duels = team_data.uit.gewonnen_duels;
-                                                                value1.geel = team_data.uit.geel;
-                                                                value1.rood = team_data.uit.rood;
+                                                                if (value1.ronde == team_data.uit.ronde) {
+                                                                    value1.wedstrijd = team_data.uit.wedstrijd;
+                                                                    value1.matchID = team_data.uit.matchID;
+                                                                    value1.doelpunten_voor = team_data.uit.doelpunten_voor;
+                                                                    value1.doelpunten_tegen = team_data.uit.doelpunten_tegen;
+                                                                    value1.punten = team_data.uit.punten;
+                                                                    value1.balbezit = team_data.uit.balbezit;
+                                                                    value1.tot_passes = team_data.uit.tot_passes;
+                                                                    value1.geslaagde_passes = team_data.uit.geslaagde_passes;
+                                                                    value1.lengte_passes = team_data.uit.lengte_passes;
+                                                                    value1.doelpogingen = team_data.uit.doelpogingen;
+                                                                    value1.gewonnen_duels = team_data.uit.gewonnen_duels;
+                                                                    value1.geel = team_data.uit.geel;
+                                                                    value1.rood = team_data.uit.rood;
+                                                                }
                                                             });
                                                         } else {
                                                             value.matches.push(team_data.uit);
@@ -2270,89 +2354,182 @@ angular.module('mainapp.pageAdmin')
                                         // check player and change or create, check season and round, and change or add playerdata
                                         if (teamdata_uit.player_data) {
                                             angular.forEach(player_data.player_stats_uit, function (value, key) {
-                                                angular.forEach(player_data, function (value1, key1) {
-                                                    if (value.personID == value1.playerID && value.type == value1.spelerType) {
-                                                        value1.spelerNaam = value.spelerNaam;
-                                                        value1.spelerRugnummer = value.rugnummer;
+                                                if (!($filter('filter')(teamdata_uit.player_data, {playerID: value.personID})[0])) {
+                                                    var temp = {};
+                                                    temp.playerID = value.personID;
+                                                    temp.spelerNaam = value.spelerNaam;
+                                                    temp.spelerType = value.type;
+                                                    temp.spelerRugnummer = value.rugnummer;
+                                                    temp.matches = [];
 
-                                                        if (value1.matches) {
-                                                            if ($filter('filter')(value1.matches, {season: match_short.seizoen}, true)) {
-                                                                angular.forEach(value1.matches, function (value2, key2) {
-                                                                    if (value2.season == match_short.seizoen) {
-                                                                        // check if round exists
-                                                                        if ($filter('filter')(value2.match, {ronde: value.ronde}, true)) {
-                                                                            angular.forEach(value2.match, function (value3, key3) {
-                                                                                if (value3.ronde == value.ronde) {
-                                                                                    value3.wedstrijd = value.match;
-                                                                                    value3.eindstand = value.result;
-                                                                                    value3.datum = value.date;
-                                                                                    value3.ronde = value.ronde;
-                                                                                    value3.matchID = value.matchID;
-                                                                                    value3.minuten = value.minuten;
-                                                                                    value3.pass_percentage = value.pass_percentage;
-                                                                                    value3.pass_lengte = value.pass_lengte;
-                                                                                    value3.geel = value.geel;
-                                                                                    value3.rood = value.rood;
-                                                                                    value3.doelpunten = value.doelpunten;
-                                                                                    value3.aantal_passes = value.aantal_passes;
-                                                                                    value3.geslaagde_passes = value.geslaagde_passes;
-                                                                                    value3.voorzetten = value.voorzetten;
-                                                                                    value3.doelpogingen = value.doelpogingen;
-                                                                                    value3.doelpogingen_opdoel = value.doelpogingen_opdoel;
-                                                                                    value3.aanvallende_duels = value.aanvallende_duels;
-                                                                                    value3.verdedigende_duels = value.verdedigende_duels;
-                                                                                    value3.gewonnen_duels = value.gewonnen_duels;
-                                                                                    value3.intercepties = value.intercepties;
-                                                                                    value3.overtredingen = value.overtredingen;
-                                                                                    value3.reddingen = value.reddingen;
-                                                                                    value3.geslaagde_reddingen = value.geslaagde_reddingen;
-                                                                                    value3.korte_passes = value.korte_passes;
-                                                                                    value3.middellange_passes = value.middellange_passes;
-                                                                                    value3.lange_passes = value.lange_passes;
-                                                                                    value3.succesvolle_uittrappen = value.succesvolle_uittrappen;
-                                                                                    value3.gevangen_ballen = value.gevangen_ballen;
-                                                                                    value3.weggestompte_ballen = value.weggestompte_ballen;
-                                                                                    value3.doelpunten_tegen = value.doelpunten_tegen;
-                                                                                }
-                                                                            });
-                                                                        } else {
-                                                                            var temp2 = {};
-                                                                            temp2.wedstrijd = value.match;
-                                                                            temp2.eindstand = value.result;
-                                                                            temp2.datum = value.date;
-                                                                            temp2.ronde = value.ronde;
-                                                                            temp2.matchID = value.matchID;
-                                                                            temp2.minuten = value.minuten;
-                                                                            temp2.pass_percentage = value.pass_percentage;
-                                                                            temp2.pass_lengte = value.pass_lengte;
-                                                                            temp2.geel = value.geel;
-                                                                            temp2.rood = value.rood;
-                                                                            temp2.doelpunten = value.doelpunten;
-                                                                            temp2.aantal_passes = value.aantal_passes;
-                                                                            temp2.geslaagde_passes = value.geslaagde_passes;
-                                                                            temp2.voorzetten = value.voorzetten;
-                                                                            temp2.doelpogingen = value.doelpogingen;
-                                                                            temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
-                                                                            temp2.aanvallende_duels = value.aanvallende_duels;
-                                                                            temp2.verdedigende_duels = value.verdedigende_duels;
-                                                                            temp2.gewonnen_duels = value.gewonnen_duels;
-                                                                            temp2.intercepties = value.intercepties;
-                                                                            temp2.overtredingen = value.overtredingen;
-                                                                            temp2.reddingen = value.reddingen;
-                                                                            temp2.geslaagde_reddingen = value.geslaagde_reddingen;
-                                                                            temp2.korte_passes = value.korte_passes;
-                                                                            temp2.middellange_passes = value.middellange_passes;
-                                                                            temp2.lange_passes = value.lange_passes;
-                                                                            temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
-                                                                            temp2.gevangen_ballen = value.gevangen_ballen;
-                                                                            temp2.weggestompte_ballen = value.weggestompte_ballen;
-                                                                            temp2.doelpunten_tegen = value.doelpunten_tegen;
+                                                    var temp1 = {};
+                                                    temp1.season = match_short.seizoen;
+                                                    temp1.match = [];
 
-                                                                            value2.match.push(temp2);
+                                                    var temp2 = {};
+                                                    temp2.wedstrijd = value.match;
+                                                    temp2.eindstand = value.result;
+                                                    temp2.datum = value.date;
+                                                    temp2.ronde = value.ronde;
+                                                    temp2.matchID = value.matchID;
+                                                    temp2.minuten = value.minuten;
+                                                    temp2.pass_percentage = value.pass_percentage;
+                                                    temp2.pass_lengte = value.pass_lengte;
+                                                    temp2.geel = value.geel;
+                                                    temp2.rood = value.rood;
+                                                    temp2.doelpunten = value.doelpunten;
+                                                    temp2.aantal_passes = value.aantal_passes;
+                                                    temp2.geslaagde_passes = value.geslaagde_passes;
+                                                    temp2.voorzetten = value.voorzetten;
+                                                    temp2.doelpogingen = value.doelpogingen;
+                                                    temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                    temp2.aanvallende_duels = value.aanvallende_duels;
+                                                    temp2.verdedigende_duels = value.verdedigende_duels;
+                                                    temp2.gewonnen_duels = value.gewonnen_duels;
+                                                    temp2.intercepties = value.intercepties;
+                                                    temp2.overtredingen = value.overtredingen;
+                                                    temp2.reddingen = value.reddingen;
+                                                    temp2.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                    temp2.korte_passes = value.korte_passes;
+                                                    temp2.middellange_passes = value.middellange_passes;
+                                                    temp2.lange_passes = value.lange_passes;
+                                                    temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                    temp2.gevangen_ballen = value.gevangen_ballen;
+                                                    temp2.weggestompte_ballen = value.weggestompte_ballen;
+                                                    temp2.doelpunten_tegen = value.doelpunten_tegen;
+
+                                                    temp1.match.push(temp2);
+
+                                                    temp.matches.push(temp1);
+
+                                                    teamdata_uit.player_data.push(temp);
+                                                } else {
+                                                    angular.forEach(teamdata_uit.player_data, function (value1, key1) {
+                                                        if (value.personID == value1.playerID && value.type == value1.spelerType) {
+                                                            value1.spelerNaam = value.spelerNaam;
+                                                            value1.spelerRugnummer = value.rugnummer;
+
+                                                            if (value1.matches) {
+                                                                if ($filter('filter')(value1.matches, {season: match_short.seizoen}, true)[0]) {
+                                                                    angular.forEach(value1.matches, function (value2, key2) {
+                                                                        if (value2.season == match_short.seizoen) {
+                                                                            // check if round exists
+                                                                            if ($filter('filter')(value2.match, {ronde: value.ronde}, true)[0]) {
+                                                                                angular.forEach(value2.match, function (value3, key3) {
+                                                                                    if (value3.ronde == value.ronde) {
+                                                                                        value3.wedstrijd = value.match;
+                                                                                        value3.eindstand = value.result;
+                                                                                        value3.datum = value.date;
+                                                                                        value3.ronde = value.ronde;
+                                                                                        value3.matchID = value.matchID;
+                                                                                        value3.minuten = value.minuten;
+                                                                                        value3.pass_percentage = value.pass_percentage;
+                                                                                        value3.pass_lengte = value.pass_lengte;
+                                                                                        value3.geel = value.geel;
+                                                                                        value3.rood = value.rood;
+                                                                                        value3.doelpunten = value.doelpunten;
+                                                                                        value3.aantal_passes = value.aantal_passes;
+                                                                                        value3.geslaagde_passes = value.geslaagde_passes;
+                                                                                        value3.voorzetten = value.voorzetten;
+                                                                                        value3.doelpogingen = value.doelpogingen;
+                                                                                        value3.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                                                        value3.aanvallende_duels = value.aanvallende_duels;
+                                                                                        value3.verdedigende_duels = value.verdedigende_duels;
+                                                                                        value3.gewonnen_duels = value.gewonnen_duels;
+                                                                                        value3.intercepties = value.intercepties;
+                                                                                        value3.overtredingen = value.overtredingen;
+                                                                                        value3.reddingen = value.reddingen;
+                                                                                        value3.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                                                        value3.korte_passes = value.korte_passes;
+                                                                                        value3.middellange_passes = value.middellange_passes;
+                                                                                        value3.lange_passes = value.lange_passes;
+                                                                                        value3.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                                                        value3.gevangen_ballen = value.gevangen_ballen;
+                                                                                        value3.weggestompte_ballen = value.weggestompte_ballen;
+                                                                                        value3.doelpunten_tegen = value.doelpunten_tegen;
+                                                                                    }
+                                                                                });
+                                                                            } else {
+                                                                                var temp2 = {};
+                                                                                temp2.wedstrijd = value.match;
+                                                                                temp2.eindstand = value.result;
+                                                                                temp2.datum = value.date;
+                                                                                temp2.ronde = value.ronde;
+                                                                                temp2.matchID = value.matchID;
+                                                                                temp2.minuten = value.minuten;
+                                                                                temp2.pass_percentage = value.pass_percentage;
+                                                                                temp2.pass_lengte = value.pass_lengte;
+                                                                                temp2.geel = value.geel;
+                                                                                temp2.rood = value.rood;
+                                                                                temp2.doelpunten = value.doelpunten;
+                                                                                temp2.aantal_passes = value.aantal_passes;
+                                                                                temp2.geslaagde_passes = value.geslaagde_passes;
+                                                                                temp2.voorzetten = value.voorzetten;
+                                                                                temp2.doelpogingen = value.doelpogingen;
+                                                                                temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                                                temp2.aanvallende_duels = value.aanvallende_duels;
+                                                                                temp2.verdedigende_duels = value.verdedigende_duels;
+                                                                                temp2.gewonnen_duels = value.gewonnen_duels;
+                                                                                temp2.intercepties = value.intercepties;
+                                                                                temp2.overtredingen = value.overtredingen;
+                                                                                temp2.reddingen = value.reddingen;
+                                                                                temp2.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                                                temp2.korte_passes = value.korte_passes;
+                                                                                temp2.middellange_passes = value.middellange_passes;
+                                                                                temp2.lange_passes = value.lange_passes;
+                                                                                temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                                                temp2.gevangen_ballen = value.gevangen_ballen;
+                                                                                temp2.weggestompte_ballen = value.weggestompte_ballen;
+                                                                                temp2.doelpunten_tegen = value.doelpunten_tegen;
+
+                                                                                value2.match.push(temp2);
+                                                                            }
                                                                         }
-                                                                    }
-                                                                });
+                                                                    });
+                                                                } else {
+                                                                    var temp1 = {};
+                                                                    temp1.season = match_short.seizoen;
+                                                                    temp1.match = [];
+
+                                                                    var temp2 = {};
+                                                                    temp2.wedstrijd = value.match;
+                                                                    temp2.eindstand = value.result;
+                                                                    temp2.datum = value.date;
+                                                                    temp2.ronde = value.ronde;
+                                                                    temp2.matchID = value.matchID;
+                                                                    temp2.minuten = value.minuten;
+                                                                    temp2.pass_percentage = value.pass_percentage;
+                                                                    temp2.pass_lengte = value.pass_lengte;
+                                                                    temp2.geel = value.geel;
+                                                                    temp2.rood = value.rood;
+                                                                    temp2.doelpunten = value.doelpunten;
+                                                                    temp2.aantal_passes = value.aantal_passes;
+                                                                    temp2.geslaagde_passes = value.geslaagde_passes;
+                                                                    temp2.voorzetten = value.voorzetten;
+                                                                    temp2.doelpogingen = value.doelpogingen;
+                                                                    temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
+                                                                    temp2.aanvallende_duels = value.aanvallende_duels;
+                                                                    temp2.verdedigende_duels = value.verdedigende_duels;
+                                                                    temp2.gewonnen_duels = value.gewonnen_duels;
+                                                                    temp2.intercepties = value.intercepties;
+                                                                    temp2.overtredingen = value.overtredingen;
+                                                                    temp2.reddingen = value.reddingen;
+                                                                    temp2.geslaagde_reddingen = value.geslaagde_reddingen;
+                                                                    temp2.korte_passes = value.korte_passes;
+                                                                    temp2.middellange_passes = value.middellange_passes;
+                                                                    temp2.lange_passes = value.lange_passes;
+                                                                    temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
+                                                                    temp2.gevangen_ballen = value.gevangen_ballen;
+                                                                    temp2.weggestompte_ballen = value.weggestompte_ballen;
+                                                                    temp2.doelpunten_tegen = value.doelpunten_tegen;
+
+                                                                    temp1.match.push(temp2);
+
+                                                                    value1.matches.push(temp1);
+                                                                }
                                                             } else {
+                                                                value1.matches = [];
+
                                                                 var temp1 = {};
                                                                 temp1.season = match_short.seizoen;
                                                                 temp1.match = [];
@@ -2393,51 +2570,9 @@ angular.module('mainapp.pageAdmin')
 
                                                                 value1.matches.push(temp1);
                                                             }
-                                                        } else {
-                                                            value1.matches = [];
-
-                                                            var temp1 = {};
-                                                            temp1.season = match_short.seizoen;
-                                                            temp1.match = [];
-
-                                                            var temp2 = {};
-                                                            temp2.wedstrijd = value.match;
-                                                            temp2.eindstand = value.result;
-                                                            temp2.datum = value.date;
-                                                            temp2.ronde = value.ronde;
-                                                            temp2.matchID = value.matchID;
-                                                            temp2.minuten = value.minuten;
-                                                            temp2.pass_percentage = value.pass_percentage;
-                                                            temp2.pass_lengte = value.pass_lengte;
-                                                            temp2.geel = value.geel;
-                                                            temp2.rood = value.rood;
-                                                            temp2.doelpunten = value.doelpunten;
-                                                            temp2.aantal_passes = value.aantal_passes;
-                                                            temp2.geslaagde_passes = value.geslaagde_passes;
-                                                            temp2.voorzetten = value.voorzetten;
-                                                            temp2.doelpogingen = value.doelpogingen;
-                                                            temp2.doelpogingen_opdoel = value.doelpogingen_opdoel;
-                                                            temp2.aanvallende_duels = value.aanvallende_duels;
-                                                            temp2.verdedigende_duels = value.verdedigende_duels;
-                                                            temp2.gewonnen_duels = value.gewonnen_duels;
-                                                            temp2.intercepties = value.intercepties;
-                                                            temp2.overtredingen = value.overtredingen;
-                                                            temp2.reddingen = value.reddingen;
-                                                            temp2.geslaagde_reddingen = value.geslaagde_reddingen;
-                                                            temp2.korte_passes = value.korte_passes;
-                                                            temp2.middellange_passes = value.middellange_passes;
-                                                            temp2.lange_passes = value.lange_passes;
-                                                            temp2.succesvolle_uittrappen = value.succesvolle_uittrappen;
-                                                            temp2.gevangen_ballen = value.gevangen_ballen;
-                                                            temp2.weggestompte_ballen = value.weggestompte_ballen;
-                                                            temp2.doelpunten_tegen = value.doelpunten_tegen;
-
-                                                            temp1.match.push(temp2);
-
-                                                            value1.matches.push(temp1);
                                                         }
-                                                    }
-                                                });
+                                                    });
+                                                }
                                             });
                                         } else {
                                             teamdata_uit.player_data = [];
@@ -2502,7 +2637,7 @@ angular.module('mainapp.pageAdmin')
                                         }, function () {
                                             ended2 = true;
                                         }, function () {
-                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata niet geimporteerd';
+                                            $rootScope.errorImport = 'Oeps er ging iets mis, teamdata uit (PUT) niet geimporteerd';
                                         });
                                     }
                                 });

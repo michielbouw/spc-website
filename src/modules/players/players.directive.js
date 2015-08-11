@@ -23,9 +23,11 @@ angular.module('mainapp.players')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
-                        $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                        $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                        $('.home-intro').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        $timeout(function() {
+                            $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                            $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                            $('.home-intro').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        }, 400);
 
                         $('.content.content-page').css({
                             'min-height': window.innerHeight - 100
@@ -37,12 +39,16 @@ angular.module('mainapp.players')
                             jQuery(window).trigger('resize');
                             $(window).trigger('resize');
                         });
+                        $('.stat-blocks a').on('shown.bs.tab', function() {
+                            $(window).trigger('resize');
+                            jQuery(window).trigger('resize');
+                        });
                     });
                 }, 100);
             }
         };
     })
-    .directive('statssliderplayer', function () {
+    .directive('statssliderplayer', function ($timeout) {
         return {
             restrict: "E",
             scope: {
@@ -51,19 +57,21 @@ angular.module('mainapp.players')
             replace: true,
             template: "<div class=\"slider-control\">\n<div class=\"slider\">\n</div>\n</div>",
             link: function (scope, element, attrs) {
-                $('.slider-control .slider').slider({
-                    range: true,
-                    min: 1,
-                    max: 38,
-                    step: 1,
-                    values: scope.model,
-                    slide: function( event, ui ) {
-                        event.stopPropagation();
-                        scope.$apply(function() {
-                            scope.model = ui.values;
-                        });
-                    }
-                });
+                $timeout(function () {
+                    $('.slider-control .slider').slider({
+                        range: true,
+                        min: 1,
+                        max: 38,
+                        step: 1,
+                        values: scope.model,
+                        slide: function( event, ui ) {
+                            event.stopPropagation();
+                            scope.$apply(function() {
+                                scope.model = ui.values;
+                            });
+                        }
+                    });
+                }, 200);
             }
         };
     });

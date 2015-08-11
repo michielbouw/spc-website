@@ -20,34 +20,18 @@
         <div class="col-md-10 col-md-offset-2 content">
 
             <div class="col-xs-12 content-title-top text-center">
-                <h3>Wedstrijd</h3>
+                <h3>Spelers <small>{{ data.club_name }} <small>{{ data.team_name }}</small></small></h3>
                 <h4 class="hidden-md hidden-lg"><a href="/analyse">Analyse</a> / Spelers</h4>
             </div>
             <div class="col-xs-12 text-center">
                 <p>Uitleg...</p>
+                <p>Kies een speler uit om naar de statistieken pagina van deze speler te gaan.</p>
                 <hr>
             </div>
             <div class="col-xs-12 text-center">
-                <p>Kies speler</p>
-                <br>
-                Tom Muyters 1<br>
-                Timothy Durwael 2<br>
-                Norichio Nieveld 3<br>
-                Maxime Gunst 5<br>
-                Jens Van Son 6<br>
-                <a href="/spelers/spelerID">Roald Van Hout 7</a><br>
-                Fries Deschilder 14<br>
-                Diego Karg 15<br>
-                Branco Van Den Boomen 17<br>
-                Sebastiaan De Wilde 22<br>
-                Joey Sleegers 26<br>
-                Jason Bourdouxhe 8<br>
-                Torino Hunte 11<br>
-                Chiel Kramer 12<br>
-                Miguel Angelo Perez Lopes 19<br>
-                Tibeau Swinnen 21<br>
-                Lima 23<br>
-                Thomas Horsten 25
+                <p ng-repeat="speler in data.player_data"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+                    {{ speler.spelerNaam }} {{ speler.spelerRugnummer }}
+                </a></p>
             </div>
 
             <div class="col-xs-12 content-title-bottom text-center">

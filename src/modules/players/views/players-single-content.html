@@ -3,7 +3,7 @@
     <div class="col-lg-12 content content-page content-page-full">
 
         <div class="col-xs-12 content-page-title">
-            <h3>Speler overzicht <small>Roald Van Hout <small>{{ currentClub.name }}</small></small></h3>
+            <h3>Speler overzicht <small>{{ data.player_stats.spelerNaam }} <small>{{ data.club_name }} {{ data.team_name }}</small></small></h3>
             <h4 class="hidden-md hidden-lg"><a href="/analyse">Analyse</a> / <a href="/spelers">Spelers</a> / Speler</h4>
         </div>
 
@@ -11,153 +11,201 @@
             <div class="col-xs-12 col-sm-12 col-md-2 no-padding">Seizoen:</div>
             <div class="col-xs-12 col-sm-12 col-md-8 no-padding">
                 <select ng-model="data.season_index" class="form-control input-sm"
-                        ng-change="data.seasonInitFunc()">
-                    <option>2014-2015 Play-offs</option>
-                    <option>2014-2015</option>
-                    <option>2013-2014 Play-offs</option>
-                    <option>2013-2014</option>
+                        ng-change="data.seasonInitFunc()"
+                        ng-options="player.season as player.season for player in data.player_stats.matches">
                 </select>
             </div>
         </div>
         <div class="col-xs-12">
             <div class="col-xs-12 col-sm-12 col-md-2 no-padding">Filter op ronde: <span class="rounds">{{ data.roundsfilterfrom() }} - {{ data.roundsfilterto() }}</span></div>
             <div class="col-xs-12 col-sm-12 col-md-10 stat-blocks-filter">
-                <statssliderplayer model="rounds"></statssliderplayer>
+                <statssliderclub model="rounds"></statssliderclub>
 
-                <a class="round" ng-repeat="ronde in data.spelerStats[data.chosenseason]" ng-href="/wedstrijd/{{ ronde.matchID }}"
+                <a class="round" ng-repeat="ronde in data.season_matches" ng-href="/wedstrijd/{{ ronde.matchID }}" ng-if="ronde.matchID"
                    ng-class="{ 'winterstop-before': (data.season_index == '2015-2016' && ronde.ronde == 19) || (data.season_index == '2014-2015' && ronde.ronde == 19) || (data.season_index == '2013-2014' && ronde.ronde == 18), 'winterstop-after': (data.season_index == '2015-2016' && ronde.ronde == 20) || (data.season_index == '2014-2015' && ronde.ronde == 20) || (data.season_index == '2013-2014' && ronde.ronde == 19) }">
                     {{ ronde.ronde }}<span class="match" ng-href="/wedstrijd/{{ ronde.matchID }}">naar wedstrijd</span>
                 </a>
-
-                <!--<span class="round">1<a href="/analyse/wedstrijd/1">naar wedstrijd</a></span><span class="round">2<a href="/analyse/wedstrijd/2">naar wedstrijd</a></span><span class="round">3</span><span class="round">4</span><span class="round">5</span><span class="round">6</span>
-                <span class="round">7</span><span class="round">8</span><span class="round">9</span><span class="round">10</span><span class="round">11</span><span class="round">12</span>
-                <span class="round">13</span><span class="round">14</span><span class="round">15</span><span class="round">16</span><span class="round">17</span><span class="round">18</span>
-                <span class="round winterstop-before">19</span><span class="round winterstop-after">20</span><span class="round">21</span><span class="round">22</span><span class="round">23</span><span class="round">24</span>
-                <span class="round">25</span><span class="round">26</span><span class="round">27</span><span class="round">28</span><span class="round">29</span><span class="round">30</span>
-                <span class="round">31</span><span class="round">32</span><span class="round">33</span><span class="round">34</span><span class="round">35</span><span class="round">36</span>
-                <span class="round">37</span><span class="round">38<a href="/analyse/wedstrijd/38">naar wedstrijd</a></span>-->
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-6 stat-blocks" role="tablist">
+        <div ng-if="data.player_stats.spelerType !== 'keeper'" class="col-xs-12 col-md-6 stat-blocks" role="tablist">
             <div class="col-xs-12"><h4>Speler statistieken <small>klik op een blok voor een grafiek</small></h4></div>
             <a href="">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Wedstrijden gespeeld<br><span>38</span></div>
-            </a>
-            <a href="#passes" aria-controls="passes" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. pass lengte<br><span>10m</span></div>
-            </a>
-            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Pass zekerheid<br><span>{{ data.stats.passzekerheid | number:0 }}%</span></div>
-            </a>
-            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Schot zekerheid<br><span>{{ data.stats.schotzekerheid | number:0 }}%</span></div>
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block stat-block-nohover">Wedstrijden gespeeld<br><span>{{ data.matches_played }}</span></div>
             </a>
             <a href="#goals" aria-controls="goals" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Doelpunten gescoord<br><span>8</span></div>
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Doelpunten<br><span>{{ data.stats.doelpunten }}</span></div>
+            </a>
+            <a href="#goals" aria-controls="goals" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># doelpogingen<br><span>{{ data.stats.doelpogingen }}</span></div>
+            </a>
+            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. doelpogingen op doel<br><span>{{ data.stats.doelpogingen_opdoel | number:0 }}%</span></div>
+            </a>
+            <a href="#passes" aria-controls="passes" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># passes<br><span>{{ data.stats.aantal_passes }}</span></div>
+            </a>
+            <a href="#passes" aria-controls="passes" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. pass lengte<br><span>{{ data.stats.pass_lengte | number:0 }}m</span></div>
+            </a>
+            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. pass zekerheid<br><span>{{ data.stats.passzekerheid | number:0 }}%</span></div>
+            </a>
+            <!-- samenvoegen verd, aanv -->
+            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># verdedigende / aanvallende duels<br><span>{{ data.stats.verdedigende_duels }}/{{ data.stats.aanvallende_duels }}</span></div>
+            </a>
+            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># intercepties<br><span>{{ data.stats.intercepties }}</span></div>
+            </a>
+            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># overtredingen<br><span>{{ data.stats.overtredingen }}</span></div>
+            </a>
+            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. gewonnen duels<br><span>{{ data.stats.gewonnen_duels | number:0 }}%</span></div>
             </a>
             <a href="#geel" aria-controls="geel" role="tab" data-toggle="tab">
                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Tot. gele/rode kaarten<br><span>{{ data.stats.geel }}/{{ data.stats.rood }}</span></div>
             </a>
-            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. # verdedigende acties<br><span>25</span></div>
-            </a>
-            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. # aanvallende acties<br><span>3</span></div>
-            </a>
         </div>
         <!-- ng-if: player is keeper -->
-        <!--<div class="col-xs-12 col-md-6 stat-blocks" role="tablist">
+        <div ng-if="data.player_stats.spelerType == 'keeper'" class="col-xs-12 col-md-6 stat-blocks" role="tablist">
             <div class="col-xs-12"><h4>Keeper statistieken <small>klik op een blok voor een grafiek</small></h4></div>
             <a href="">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Wedstrijden gespeeld<br><span>38</span></div>
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block stat-block-nohover">Wedstrijden gespeeld<br><span>{{ data.matches_played }}</span></div>
             </a>
-            <a href="#cleansheets" aria-controls="cleansheets" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># clean sheets<br><span>8</span></div>
+            <a href="">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block stat-block-nohover"># clean sheets <small>(seizoen)</small><br><span>{{ data.clean_sheets }}</span></div>
             </a>
-            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># reddingen/min<br><span>25</span></div>
+            <a href="#reddingen" aria-controls="reddingen" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># doelpunten tegen / reddingen<br><span>{{ data.stats.doelpunten_tegen }}/{{ data.stats.reddingen }}</span></div>
             </a>
-            <a href="#actions" aria-controls="actions" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># doelpunten tegen<br><span>3</span></div>
+            <a href="#reddingen" aria-controls="reddingen" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># gevangen / weggestompte ballen<br><span>{{ data.stats.gevangen_ballen }}/{{ data.stats.weggestompte_ballen }}</span></div>
             </a>
-            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Vang (claim/ catch) %<br><span>{{ data.stats.passzekerheid | number:0 }}%</span></div>
+            <a href="#percentages2" aria-controls="percentages2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. geslaagde reddingen<br><span>{{ data.stats.geslaagde_reddingen | number:0 }}%</span></div>
             </a>
-            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Stomp (punch) %<br><span>{{ data.stats.schotzekerheid | number:0 }}%</span></div>
+            <a href="#passes2" aria-controls="passes2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># Korte passes (<10m)<br><span>{{ data.stats.korte_passes }}</span></div>
             </a>
-            <a href="#percentages" aria-controls="percentages" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Succesvolle lange passes %<br><span>45%</span></div>
+            <a href="#passes2" aria-controls="passes2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># Middellange passes (10-25m)<br><span>{{ data.stats.middellange_passes }}</span></div>
             </a>
-            <a href="#passes" aria-controls="passes" role="tab" data-toggle="tab">
-                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. pass lengte<br><span>10m</span></div>
+            <a href="#passes2" aria-controls="passes2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block"># Lange passes (>25m)<br><span>{{ data.stats.lange_passes }}</span></div>
             </a>
-        </div>-->
+            <a href="#passes2" aria-controls="passes2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. pass lengte<br><span>{{ data.stats.pass_lengte | number:0 }}m</span></div>
+            </a>
+            <a href="#percentages2" aria-controls="percentages2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. pass zekerheid<br><span>{{ data.stats.passzekerheid | number:0 }}%</span></div>
+            </a>
+            <a href="#percentages2" aria-controls="percentages2" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Gem. succesvolle uittrappen<br><span>{{ data.stats.succesvolle_uittrappen | number:0 }}%</span></div>
+            </a>
+            <a href="#geel" aria-controls="geel" role="tab" data-toggle="tab">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 stat-block">Tot. gele/rode kaarten<br><span>{{ data.stats.geel }}/{{ data.stats.rood }}</span></div>
+            </a>
+        </div>
         <!-- END keeper -->
 
         <div class="col-xs-12 col-md-6 tab-content">
 
-            <div class="col-lg-12 tab-pane fade in active" role="tabpanel" id="percentages" ng-init="data.showGraph1()">
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="percentages" ng-init="data.showGraph1()">
                 <h4>Percentages per wedstrijd</h4>
                 <div id="chart-percentages"></div>
             </div>
 
-            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="passes" ng-init="data.showGraph2()">
-                <h4>Pass lengte per wedstrijd</h4>
-                <div id="chart-passes"></div>
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="percentages2" ng-init="data.showGraph2()">
+                <h4>Percentages per wedstrijd</h4>
+                <div id="chart-percentages2"></div>
             </div>
 
-            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="goals" ng-init="data.showGraph3()">
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="goals" ng-init="data.showGraph3()"
+                    ng-class="{ 'in active': data.player_stats.spelerType !== 'keeper'}">
                 <h4>Doelpunten per wedstrijd</h4>
                 <div id="chart-goals"></div>
             </div>
 
-            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="geel" ng-init="data.showGraph4()">
-                <h4>Gele/rode kaarten per wedstrijd</h4>
-                <div id="chart-geel"></div>
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="reddingen" ng-init="data.showGraph4()"
+                 ng-class="{ 'in active': data.player_stats.spelerType == 'keeper'}">
+                <h4>Reddingen per wedstrijd</h4>
+                <div id="chart-reddingen"></div>
             </div>
 
-            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="actions" ng-init="data.showGraph5()">
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="passes" ng-init="data.showGraph5()">
+                <h4>Passes per wedstrijd</h4>
+                <div id="chart-passes"></div>
+            </div>
+
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="passes2" ng-init="data.showGraph6()">
+                <h4>Passes per wedstrijd</h4>
+                <div id="chart-passes2"></div>
+            </div>
+
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="actions" ng-init="data.showGraph7()">
                 <h4>Acties per wedstrijd</h4>
                 <div id="chart-actions"></div>
+            </div>
+
+            <div class="col-lg-12 tab-pane fade" role="tabpanel" id="geel" ng-init="data.showGraph8()">
+                <h4>Gele/rode kaarten per wedstrijd</h4>
+                <div id="chart-geel"></div>
             </div>
 
             <br class="clear">
         </div>
         <div class="col-xs-12">
-            <div class="col-xs-12"><h4>Laatste wedstrijden <small>klik op de wedstrijd om direct naar het wedstrijdrapport te gaan</small></h4></div>
-            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>25-05-2015</strong></div><div class="col-xs-5 col-md-4"><a href="/">FC Eindhoven - FC Volendam</a></div><div class="col-xs-2 col-md-2"><small>1 - 1</small></div></div>
-            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>22-05-2015</strong></div><div class="col-xs-5 col-md-4"><a href="/">FC Volendam - FC Eindhoven</a></div><div class="col-xs-2 col-md-2"><small>2 - 1</small></div></div>
-            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>08-05-2015</strong></div><div class="col-xs-5 col-md-4"><a href="/">FC Eindhoven - MVV Maastricht</a></div><div class="col-xs-2 col-md-2"><small>5 - 1</small></div></div>
-            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>01-05-2015</strong></div><div class="col-xs-5 col-md-4"><a href="/">Jong FC Twente - FC Eindhoven</a></div><div class="col-xs-2 col-md-2"><small>0 - 1</small></div></div>
-            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>25-04-2015</strong></div><div class="col-xs-5 col-md-4"><a href="/">FC Eindhoven - FC Oss</a></div><div class="col-xs-2 col-md-2"><small>2 - 1</small></div></div>
+            <div class="col-xs-12"><h4>Laatste wedstrijden dit seizoen <small>klik op de wedstrijd om direct naar het wedstrijdrapport te gaan</small></h4></div>
+            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>{{ data.season_matches[data.season_matches.length - 1].datum }}</strong></div><div class="col-xs-5 col-md-4"><a ng-href="/wedstrijd/{{ data.season_matches[data.season_matches.length - 1].matchID }}">{{ data.season_matches[data.season_matches.length - 1].wedstrijd }}</a></div><div class="col-xs-2 col-md-2">{{ data.season_matches[data.season_matches.length - 1].eindstand }}</div></div>
+            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>{{ data.season_matches[data.season_matches.length - 2].datum }}</strong></div><div class="col-xs-5 col-md-4"><a ng-href="/wedstrijd/{{ data.season_matches[data.season_matches.length - 2].matchID }}">{{ data.season_matches[data.season_matches.length - 2].wedstrijd }}</a></div><div class="col-xs-2 col-md-2">{{ data.season_matches[data.season_matches.length - 2].eindstand }}</div></div>
+            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>{{ data.season_matches[data.season_matches.length - 3].datum }}</strong></div><div class="col-xs-5 col-md-4"><a ng-href="/wedstrijd/{{ data.season_matches[data.season_matches.length - 3].matchID }}">{{ data.season_matches[data.season_matches.length - 3].wedstrijd }}</a></div><div class="col-xs-2 col-md-2">{{ data.season_matches[data.season_matches.length - 3].eindstand }}</div></div>
+            <div class="col-xs-12"><div class="col-xs-5 col-md-2"><strong>{{ data.season_matches[data.season_matches.length - 4].datum }}</strong></div><div class="col-xs-5 col-md-4"><a ng-href="/wedstrijd/{{ data.season_matches[data.season_matches.length - 4].matchID }}">{{ data.season_matches[data.season_matches.length - 4].wedstrijd }}</a></div><div class="col-xs-2 col-md-2">{{ data.season_matches[data.season_matches.length - 4].eindstand }}</div></div>
         </div>
 
         <div class="col-xs-12 content-title text-center">
-            <h3>Logboek speler</h3>
+            <h3>Logboek speler per wedstrijd</h3>
             <h4>Alle mogelijke notities kunnen hier geplaatst worden</h4>
         </div>
         <div class="col-xs-12">
-            <h4>Wedstrijd ronde {{ data.roundsfilterto() }} <small>FC Eindhoven - FC Volendam (1 - 1)</small></h4>
+            <p>Kies wedstrijd van dit seizoen:</p>
+            <select ng-model="data.match_index" class="form-control input-sm"
+                    ng-change="data.matchInitFunc()"
+                    ng-options="match.matchID as match.wedstrijd group by match.datum for match in data.season_matches">
+            </select>
+        </div>
+        <div class="col-xs-12" ng-if="data.match">
+            <h4>Wedstrijd ronde {{ data.match.ronde }} <small>{{ data.match.wedstrijd }} ({{ data.match.eindstand }})</small></h4>
             <hr>
-            <h4>Persoonlijke reflectie deze wedstrijd</h4>
-            <span ng-show="data.spelerlog.emi">8</span><div ng-hide="data.spelerlog.emi" class="col-xs-12 col-sm-6 col-md-6 form-group"><label for="emi" class="control-label">EMI <small>(1-10)</small></label><select class="form-control input-sm" id="emi"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
-            <br>
-            <span ng-show="data.spelerlog.emh">7</span><div ng-hide="data.spelerlog.emh" class="col-xs-12 col-sm-6 col-md-6 form-group"><label for="emh" class="control-label">EMH <small>(1-10)</small></label><select class="form-control input-sm" id="emh"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
-            <button type="button" class="btn btn-primary btn-sm">Opslaan</button>
+            <p>Persoonlijke reflectie deze wedstrijd</p>
+            <div class="col-xs-12 col-sm-6 col-md-4 form-group" style="margin-bottom: 0;">
+                <label for="inputScore" class="col-xs-8 col-md-6 control-label">EMI (0-10)</label>
+                <div class="col-xs-4 col-md-6">
+                    <input type="number" class="form-control" id="inputScore" ng-model="data.match.scores.emi" min="0" max="10">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 form-group" style="margin-bottom: 0;">
+                <label for="inputScore2" class="col-xs-8 col-md-6 control-label">EMH (0-10)</label>
+                <div class="col-xs-4 col-md-6">
+                    <input type="number" class="form-control" id="inputScore2" ng-model="data.match.scores.emh" min="0" max="10">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="data.savePlayerLog()">Opslaan</button>
             <hr>
+            <h4>Opmerkingen</h4>
             <small>Opmerkingen of notities over deze wedstrijd kunnen hier geplaatst worden.
                 Zo kan later teruggelezen worden waar het goed of juist fout ging.
             </small>
-            <h4>Opmerking plaatsen</h4>
+            <!--<h4>Opmerking plaatsen</h4>
             <textarea class="form-control" rows="2"></textarea>
             <br>
-            <button type="button" class="btn btn-primary btn-sm">Plaats</button>
+            <button type="button" class="btn btn-primary btn-sm">Plaats</button>-->
             <hr>
             <h4>Reeds geplaatste opmerkingen</h4>
-            <p>
-                ...
+            <p ng-if="data.match.player_log.length <= 0">Geen opmerkingen geplaatst..</p>
+            <p ng-repeat="log in data.match.player_log">
+                {{ log.author }} - {{ log.text }}
             </p>
         </div>
 

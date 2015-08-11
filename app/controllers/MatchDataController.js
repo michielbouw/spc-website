@@ -53,5 +53,15 @@ module.exports = MatchDataController = {
             if (err) res.send(err);
             res.json(data);
         });
+    },
+
+    delete_byid: function(req, res)
+    {
+        MatchData.remove({
+            matchID: req.params._id
+        }, function(err, data) {
+            if (err) res.send(err);
+            res.json(data);
+        });
     }
 };

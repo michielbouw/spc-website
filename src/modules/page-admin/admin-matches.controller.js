@@ -9,12 +9,20 @@ angular.module('mainapp.pageAdmin')
             self.matches = res;
         });
 
+        self.orderMatches = 'match_info.datum';
+
         self.matchDel = function (i) {
             var _t = self.matches[i];
             Api.Match.delete({
                 _id: _t._id
             }, function() {
                 self.matches.splice(i, 1);
+
+                Api.MatchDataID.delete({
+                    _id: _t.matchID
+                }, function() {
+                }, function() {
+                });
             }, function() {
             });
         };

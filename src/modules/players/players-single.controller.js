@@ -1,78 +1,173 @@
 angular.module('mainapp.players')
-    .controller('mainapp.players.PlayersSingleController', ['$scope', 'Api', 'AuthenticationService', '$location', '$rootScope', '$timeout',
-        function($scope, Api, AuthenticationService, $location, $rootScope, $timeout)
+    .controller('mainapp.players.PlayersSingleController', ['$scope', 'Api', '$filter', '$routeParams', '$rootScope', '$location', '$timeout', '$sessionStorage',
+        function($scope, Api, $filter, $routeParams, $rootScope, $location, $timeout, $sessionStorage)
     {
         var self = this;
 
-        self.season_index = "2014-2015";
-        self.chosenseason = "2014-2015";
+        self.orderMatches = 'ronde';
+        self.player_stats = {};
+        self.season_matches = [];
+        self.matches_played = 0;
+        $scope.rounds = [1, 1];
+
+        if ((!$routeParams.playerid || $routeParams.playerid === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
+            $location.path('/spelers/' + $rootScope.currentClub.teams[0].team_slug);
+        } else if ((!$routeParams.playerid || $routeParams.playerid === '') && (!$rootScope.currentClub || !$rootScope.currentClub.teams[0].team_slug)) {
+            $location.path('/404');
+        } else {
+            if ( ($rootScope.currentClub && $rootScope.currentClub.teams[0] && $rootScope.currentClub.teams[0].team_slug !== $routeParams.team_slug) && ($rootScope.currentClub && $rootScope.currentClub.teams[1] && $rootScope.currentClub.teams[1].team_slug !== $routeParams.team_slug) && $sessionStorage.role !== 'admin' ) {
+                $location.path('/404');
+            }
+
+            Api.TeamDataItem.get({
+                _slug: $routeParams.team_slug
+            }, function (res) {
+                self.team_name = res.team_name;
+                self.club_name = res.club_name;
+                self.divisie = res.divisie;
+                self.playerID = Number($routeParams.playerid);
+
+                self.player_stats = $filter('filter')(res.player_data, {playerID: self.playerID}, true)[0];
+                self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
+                self.season_matches = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
+
+                if (self.player_stats.spelerType == 'keeper') {
+                    self.clean_sheets = 0;
+                    for (var c = self.season_matches.length - 1; c >= 0; c--) {
+                        if (self.season_matches[c].doelpunten_tegen === 0) {
+                            self.clean_sheets += 1;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+
+                self.matches_played = self.season_matches.length;
+                var statslength = self.season_matches.length;
+
+                // set match to last on rounds interval
+                self.match_index = self.season_matches[statslength - 1].matchID;
+                self.match = {};
+                self.match = $filter('filter')(self.season_matches, {matchID: self.match_index}, true)[0];
+
+                var temp0 = self.season_matches[0].ronde;
+                var temp1 = self.season_matches[statslength - 1].ronde;
+                if (temp0 !== 1) {
+                    for (var i = 1; i < temp0; i++) {
+                        var temp = {};
+                        temp.ronde = i;
+                        self.season_matches.push(temp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                }
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.slider-control .slider').slider({
+                            range: true,
+                            min: temp0,
+                            values: $scope.rounds
+                            //max: temp1
+                        });
+                    });
+                }, 400);
+                if (temp0 == temp1) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - temp0) <= 0) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - 5) <= 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [1];
+                        $scope.rounds.push(temp1);
+                    }
+                } else if ((temp1 - 5) > 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [temp1 - 5];
+                        $scope.rounds.push(temp1);
+                    }
+                } else {
+                    $scope.rounds = [1, 1];
+                }
+            }, function() {
+                $location.path('/404');
+            });
+        }
+
         self.seasonInitFunc = function () {
-            self.chosenseason = self.season_index;
+            $scope.rounds = [1, 1];
+            if (self.player_stats && self.season_index) {
+                self.season_matches = $filter('orderBy')(($filter('filter')(self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
+
+                if (self.player_stats.spelerType == 'keeper') {
+                    self.clean_sheets = 0;
+                    for (var c = self.season_matches.length - 1; c >= 0; c--) {
+                        if (self.season_matches[c].doelpunten_tegen === 0) {
+                            self.clean_sheets += 1;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+
+                self.matches_played = self.season_matches.length;
+                var statslength = self.season_matches.length;
+
+                // set match to last on rounds interval
+                self.match_index = self.season_matches[statslength - 1].matchID;
+                self.match = {};
+                self.match = $filter('filter')(self.season_matches, {matchID: self.match_index}, true)[0];
+
+                var temp0 = self.season_matches[0].ronde;
+                var temp1 = self.season_matches[statslength - 1].ronde;
+                if (temp0 !== 1) {
+                    for (var i = 1; i < temp0; i++) {
+                        var temp = {};
+                        temp.ronde = i;
+                        self.season_matches.push(temp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                }
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.slider-control .slider').slider({
+                            range: true,
+                            min: temp0,
+                            values: $scope.rounds
+                            //max: temp1
+                        });
+                    });
+                }, 400);
+                if (temp0 == temp1) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - temp0) <= 0) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - 5) <= 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [1];
+                        $scope.rounds.push(temp1);
+                    }
+                } else if ((temp1 - 5) > 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [temp1 - 5];
+                        $scope.rounds.push(temp1);
+                    }
+                } else {
+                    $scope.rounds = [1, 1];
+                }
+            }
         };
 
-        self.spelerStats = {};
-        self.spelerStats['2014-2015'] = [{
-            "ronde": 1,
-            "matchID": 11,
-            "punten": 3,
-            "goals": 2,
-            "goalstegen": 1,
-            "schotzekerheid": 43,
-            "balbezit": 55,
-            "passzekerheid": 54,
-            "geel": 2,
-            "rood": 0
-        }, {
-            "ronde": 2,
-            "matchID": 12,
-            "punten": 0,
-            "goals": 1,
-            "goalstegen": 3,
-            "schotzekerheid": 22,
-            "balbezit": 34,
-            "passzekerheid": 27,
-            "geel": 3,
-            "rood": 1
-        }, {
-            "ronde": 3,
-            "matchID": 13,
-            "punten": 1,
-            "goals": 0,
-            "goalstegen": 0,
-            "schotzekerheid": 13,
-            "balbezit": 34,
-            "passzekerheid": 21,
-            "geel": 1,
-            "rood": 0
-        }, {
-            "ronde": 4,
-            "matchID": 14,
-            "punten": 3,
-            "goals": 4,
-            "goalstegen": 0,
-            "schotzekerheid": 68,
-            "balbezit": 51,
-            "passzekerheid": 33,
-            "geel": 0,
-            "rood": 0
-        }, {
-            "ronde": 5,
-            "matchID": 15,
-            "punten": 1,
-            "goals": 1,
-            "goalstegen": 1,
-            "schotzekerheid": 13,
-            "balbezit": 46,
-            "passzekerheid": 29,
-            "geel": 1,
-            "rood": 0
-        }];
-
-        var statslength = self.spelerStats[self.chosenseason].length;
-        //$scope.rounds = [1];
-        if ((Number(statslength) - 5) > 0) $scope.rounds = [Number(statslength) - 5];
-        if ((Number(statslength) - 5) <= 0) $scope.rounds = [1];
-        $scope.rounds.push(Number(statslength));
+        self.matchInitFunc = function () {
+            self.match = {};
+            self.match = $filter('filter')(self.season_matches, {matchID: self.match_index}, true)[0];
+        };
 
         self.roundsfilterfrom = function () {
             return $scope.rounds[0];
@@ -83,344 +178,837 @@ angular.module('mainapp.players')
 
         self.stats = {};
         $scope.$watch('rounds', function() {
-            var i;
-            if (self.roundsfilterfrom() !== self.roundsfilterto()) {
-                self.stats.puntenArr = [];
-                self.stats.puntenArr.push('data1');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.puntenArr.push(self.spelerStats[self.chosenseason][i].punten);
+            $timeout(function () {
+                if (self.season_matches.length > 0) {
+                    var i;
+                    if (self.roundsfilterfrom() !== self.roundsfilterto()) {
+                        self.stats.passzekerheid = 0;
+                        self.stats.passzekerheidArr = [];
+                        self.stats.passzekerheidArr.push('data2');
+                        for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                            if (isNaN(self.season_matches[i].pass_percentage)) {
+                                self.stats.passzekerheidArr.push(0);
+                            } else {
+                                self.stats.passzekerheid += Number(self.season_matches[i].pass_percentage);
+                                self.stats.passzekerheidArr.push(Number(self.season_matches[i].pass_percentage));
+                            }
+                        }
+                        self.stats.passzekerheid /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+                        self.stats.geel = 0;
+                        self.stats.geelArr = [];
+                        self.stats.geelArr.push('data1');
+                        for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                            self.stats.geel += self.season_matches[i].geel;
+                            self.stats.geelArr.push(self.season_matches[i].geel);
+                        }
+                        self.stats.rood = 0;
+                        self.stats.roodArr = [];
+                        self.stats.roodArr.push('data2');
+                        for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                            self.stats.rood += self.season_matches[i].rood;
+                            self.stats.roodArr.push(self.season_matches[i].rood);
+                        }
+                        self.stats.xAxis = [];
+                        self.stats.xAxis.push('x');
+                        for (i = self.roundsfilterfrom(); i <= self.roundsfilterto(); i++) {
+                            self.stats.xAxis.push(i);
+                        }
+
+                        if (self.player_stats.spelerType == 'keeper') {
+                            self.stats.doelpunten_tegen = 0;
+                            self.stats.doelpunten_tegenArr = [];
+                            self.stats.doelpunten_tegenArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.doelpunten_tegen += self.season_matches[i].doelpunten_tegen;
+                                self.stats.doelpunten_tegenArr.push(self.season_matches[i].doelpunten_tegen);
+                            }
+                            self.stats.reddingen = 0;
+                            self.stats.reddingenArr = [];
+                            self.stats.reddingenArr.push('data2');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.reddingen += self.season_matches[i].reddingen;
+                                self.stats.reddingenArr.push(self.season_matches[i].reddingen);
+                            }
+                            self.stats.gevangen_ballen = 0;
+                            self.stats.gevangen_ballenArr = [];
+                            self.stats.gevangen_ballenArr.push('data3');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.gevangen_ballen += self.season_matches[i].gevangen_ballen;
+                                self.stats.gevangen_ballenArr.push(self.season_matches[i].gevangen_ballen);
+                            }
+                            self.stats.weggestompte_ballen = 0;
+                            self.stats.weggestompte_ballenArr = [];
+                            self.stats.weggestompte_ballenArr.push('data4');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.weggestompte_ballen += self.season_matches[i].weggestompte_ballen;
+                                self.stats.weggestompte_ballenArr.push(self.season_matches[i].weggestompte_ballen);
+                            }
+                            self.stats.geslaagde_reddingen = 0;
+                            self.stats.geslaagde_reddingenArr = [];
+                            self.stats.geslaagde_reddingenArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                if (isNaN(self.season_matches[i].geslaagde_reddingen)) {
+                                    self.stats.geslaagde_reddingenArr.push(0);
+                                } else {
+                                    self.stats.geslaagde_reddingen += Number(self.season_matches[i].geslaagde_reddingen);
+                                    self.stats.geslaagde_reddingenArr.push(Number(self.season_matches[i].geslaagde_reddingen));
+                                }
+                            }
+                            self.stats.geslaagde_reddingen /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+                            self.stats.korte_passes = 0;
+                            self.stats.korte_passesArr = [];
+                            self.stats.korte_passesArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.korte_passes += self.season_matches[i].korte_passes;
+                                self.stats.korte_passesArr.push(self.season_matches[i].korte_passes);
+                            }
+                            self.stats.middellange_passes = 0;
+                            self.stats.middellange_passesArr = [];
+                            self.stats.middellange_passesArr.push('data2');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.middellange_passes += self.season_matches[i].middellange_passes;
+                                self.stats.middellange_passesArr.push(self.season_matches[i].middellange_passes);
+                            }
+                            self.stats.lange_passes = 0;
+                            self.stats.lange_passesArr = [];
+                            self.stats.lange_passesArr.push('data3');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.lange_passes += self.season_matches[i].lange_passes;
+                                self.stats.lange_passesArr.push(self.season_matches[i].lange_passes);
+                            }
+                            self.stats.pass_lengte = 0;
+                            self.stats.pass_lengteArr = [];
+                            self.stats.pass_lengteArr.push('data4');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                if (isNaN(self.season_matches[i].pass_lengte)) {
+                                    self.stats.pass_lengteArr.push(0);
+                                } else {
+                                    self.stats.pass_lengte += Number(self.season_matches[i].pass_lengte);
+                                    self.stats.pass_lengteArr.push(Number(self.season_matches[i].pass_lengte));
+                                }
+                            }
+                            self.stats.pass_lengte /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+                            self.stats.succesvolle_uittrappen = 0;
+                            self.stats.succesvolle_uittrappenArr = [];
+                            self.stats.succesvolle_uittrappenArr.push('data3');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                if (isNaN(self.season_matches[i].succesvolle_uittrappen)) {
+                                    self.stats.succesvolle_uittrappenArr.push(0);
+                                } else {
+                                    self.stats.succesvolle_uittrappen += Number(self.season_matches[i].succesvolle_uittrappen);
+                                    self.stats.succesvolle_uittrappenArr.push(Number(self.season_matches[i].succesvolle_uittrappen));
+                                }
+                            }
+                            self.stats.succesvolle_uittrappen /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+
+                            self.showGraph2();
+                            self.showGraph4();
+                            self.showGraph6();
+                        } else {
+                            self.stats.doelpunten = 0;
+                            self.stats.doelpuntenArr = [];
+                            self.stats.doelpuntenArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.doelpunten += self.season_matches[i].doelpunten;
+                                self.stats.doelpuntenArr.push(self.season_matches[i].doelpunten);
+                            }
+                            self.stats.doelpogingen = 0;
+                            self.stats.doelpogingenArr = [];
+                            self.stats.doelpogingenArr.push('data2');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.doelpogingen += self.season_matches[i].doelpogingen;
+                                self.stats.doelpogingenArr.push(self.season_matches[i].doelpogingen);
+                            }
+                            self.stats.doelpogingen_opdoel = 0;
+                            self.stats.doelpogingen_opdoelArr = [];
+                            self.stats.doelpogingen_opdoelArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                if (isNaN(self.season_matches[i].doelpogingen_opdoel)) {
+                                    self.stats.doelpogingen_opdoelArr.push(0);
+                                } else {
+                                    self.stats.doelpogingen_opdoel += Number(self.season_matches[i].doelpogingen_opdoel);
+                                    self.stats.doelpogingen_opdoelArr.push(Number(self.season_matches[i].doelpogingen_opdoel));
+                                }
+                            }
+                            self.stats.doelpogingen_opdoel /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+                            self.stats.aantal_passes = 0;
+                            self.stats.aantal_passesArr = [];
+                            self.stats.aantal_passesArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.aantal_passes += self.season_matches[i].aantal_passes;
+                                self.stats.aantal_passesArr.push(self.season_matches[i].aantal_passes);
+                            }
+                            self.stats.pass_lengte = 0;
+                            self.stats.pass_lengteArr = [];
+                            self.stats.pass_lengteArr.push('data2');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                if (isNaN(self.season_matches[i].pass_lengte)) {
+                                    self.stats.pass_lengteArr.push(0);
+                                } else {
+                                    self.stats.pass_lengte += Number(self.season_matches[i].pass_lengte);
+                                    self.stats.pass_lengteArr.push(Number(self.season_matches[i].pass_lengte));
+                                }
+                            }
+                            self.stats.pass_lengte /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+                            self.stats.verdedigende_duels = 0;
+                            self.stats.verdedigende_duelsArr = [];
+                            self.stats.verdedigende_duelsArr.push('data1');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.verdedigende_duels += self.season_matches[i].verdedigende_duels;
+                                self.stats.verdedigende_duelsArr.push(self.season_matches[i].verdedigende_duels);
+                            }
+                            self.stats.aanvallende_duels = 0;
+                            self.stats.aanvallende_duelsArr = [];
+                            self.stats.aanvallende_duelsArr.push('data2');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.aanvallende_duels += self.season_matches[i].aanvallende_duels;
+                                self.stats.aanvallende_duelsArr.push(self.season_matches[i].aanvallende_duels);
+                            }
+                            self.stats.intercepties = 0;
+                            self.stats.interceptiesArr = [];
+                            self.stats.interceptiesArr.push('data3');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.intercepties += self.season_matches[i].intercepties;
+                                self.stats.interceptiesArr.push(self.season_matches[i].intercepties);
+                            }
+                            self.stats.overtredingen = 0;
+                            self.stats.overtredingenArr = [];
+                            self.stats.overtredingenArr.push('data4');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                self.stats.overtredingen += self.season_matches[i].overtredingen;
+                                self.stats.overtredingenArr.push(self.season_matches[i].overtredingen);
+                            }
+                            self.stats.gewonnen_duels = 0;
+                            self.stats.gewonnen_duelsArr = [];
+                            self.stats.gewonnen_duelsArr.push('data3');
+                            for (i = self.roundsfilterfrom() - 1; i < self.roundsfilterto(); i++) {
+                                if (isNaN(self.season_matches[i].gewonnen_duels)) {
+                                    self.stats.gewonnen_duelsArr.push(0);
+                                } else {
+                                    self.stats.gewonnen_duels += Number(self.season_matches[i].gewonnen_duels);
+                                    self.stats.gewonnen_duelsArr.push(Number(self.season_matches[i].gewonnen_duels));
+                                }
+                            }
+                            self.stats.gewonnen_duels /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
+
+                            self.showGraph1();
+                            self.showGraph3();
+                            self.showGraph5();
+                            self.showGraph7();
+                        }
+
+                        self.showGraph8();
+                    } else {
+                        self.stats.passzekerheidArr = [];
+                        self.stats.passzekerheidArr.push('data2');
+                        if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].pass_percentage)) {
+                            self.stats.passzekerheid = 0;
+                            self.stats.passzekerheidArr.push(0);
+                        } else {
+                            self.stats.passzekerheid = self.season_matches[self.roundsfilterfrom() - 1].pass_percentage;
+                            self.stats.passzekerheidArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].pass_percentage));
+                        }
+
+                        self.stats.geel = self.season_matches[self.roundsfilterfrom() - 1].geel;
+                        self.stats.geelArr = [];
+                        self.stats.geelArr.push('data1');
+                        self.stats.geelArr.push(self.season_matches[self.roundsfilterfrom() - 1].geel);
+
+                        self.stats.rood = self.season_matches[self.roundsfilterfrom() - 1].rood;
+                        self.stats.roodArr = [];
+                        self.stats.roodArr.push('data2');
+                        self.stats.roodArr.push(self.season_matches[self.roundsfilterfrom() - 1].rood);
+
+                        self.stats.xAxis = [];
+                        self.stats.xAxis.push('x');
+                        self.stats.xAxis.push(self.roundsfilterfrom());
+
+                        if (self.player_stats.spelerType == 'keeper') {
+                            self.stats.doelpunten_tegen = self.season_matches[self.roundsfilterfrom() - 1].doelpunten_tegen;
+                            self.stats.doelpunten_tegenArr = [];
+                            self.stats.doelpunten_tegenArr.push('data1');
+                            self.stats.doelpunten_tegenArr.push(self.season_matches[self.roundsfilterfrom() - 1].doelpunten_tegen);
+
+                            self.stats.reddingen = self.season_matches[self.roundsfilterfrom() - 1].reddingen;
+                            self.stats.reddingenArr = [];
+                            self.stats.reddingenArr.push('data2');
+                            self.stats.reddingenArr.push(self.season_matches[self.roundsfilterfrom() - 1].reddingen);
+
+                            self.stats.gevangen_ballen = self.season_matches[self.roundsfilterfrom() - 1].gevangen_ballen;
+                            self.stats.gevangen_ballenArr = [];
+                            self.stats.gevangen_ballenArr.push('data3');
+                            self.stats.gevangen_ballenArr.push(self.season_matches[self.roundsfilterfrom() - 1].gevangen_ballen);
+
+                            self.stats.weggestompte_ballen = self.season_matches[self.roundsfilterfrom() - 1].weggestompte_ballen;
+                            self.stats.weggestompte_ballenArr = [];
+                            self.stats.weggestompte_ballenArr.push('data4');
+                            self.stats.weggestompte_ballenArr.push(self.season_matches[self.roundsfilterfrom() - 1].weggestompte_ballen);
+
+                            self.stats.geslaagde_reddingenArr = [];
+                            self.stats.geslaagde_reddingenArr.push('data1');
+                            if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].geslaagde_reddingen)) {
+                                self.stats.geslaagde_reddingen = 0;
+                                self.stats.geslaagde_reddingenArr.push(0);
+                            } else {
+                                self.stats.geslaagde_reddingen = self.season_matches[self.roundsfilterfrom() - 1].geslaagde_reddingen;
+                                self.stats.geslaagde_reddingenArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].geslaagde_reddingen));
+                            }
+
+                            self.stats.korte_passes = self.season_matches[self.roundsfilterfrom() - 1].korte_passes;
+                            self.stats.korte_passesArr = [];
+                            self.stats.korte_passesArr.push('data1');
+                            self.stats.korte_passesArr.push(self.season_matches[self.roundsfilterfrom() - 1].korte_passes);
+
+                            self.stats.middellange_passes = self.season_matches[self.roundsfilterfrom() - 1].middellange_passes;
+                            self.stats.middellange_passesArr = [];
+                            self.stats.middellange_passesArr.push('data2');
+                            self.stats.middellange_passesArr.push(self.season_matches[self.roundsfilterfrom() - 1].middellange_passes);
+
+                            self.stats.lange_passes = self.season_matches[self.roundsfilterfrom() - 1].lange_passes;
+                            self.stats.lange_passesArr = [];
+                            self.stats.lange_passesArr.push('data3');
+                            self.stats.lange_passesArr.push(self.season_matches[self.roundsfilterfrom() - 1].lange_passes);
+
+                            self.stats.pass_lengteArr = [];
+                            self.stats.pass_lengteArr.push('data4');
+                            if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].pass_lengte)) {
+                                self.stats.pass_lengte = 0;
+                                self.stats.pass_lengteArr.push(0);
+                            } else {
+                                self.stats.pass_lengte = self.season_matches[self.roundsfilterfrom() - 1].pass_lengte;
+                                self.stats.pass_lengteArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].pass_lengte));
+                            }
+
+                            self.stats.succesvolle_uittrappenArr = [];
+                            self.stats.succesvolle_uittrappenArr.push('data3');
+                            if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].succesvolle_uittrappen)) {
+                                self.stats.succesvolle_uittrappen = 0;
+                                self.stats.succesvolle_uittrappenArr.push(0);
+                            } else {
+                                self.stats.succesvolle_uittrappen = self.season_matches[self.roundsfilterfrom() - 1].succesvolle_uittrappen;
+                                self.stats.succesvolle_uittrappenArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].succesvolle_uittrappen));
+                            }
+
+                            self.showGraph2();
+                            self.showGraph4();
+                            self.showGraph6();
+                        } else {
+                            self.stats.doelpunten = self.season_matches[self.roundsfilterfrom() - 1].doelpunten;
+                            self.stats.doelpuntenArr = [];
+                            self.stats.doelpuntenArr.push('data1');
+                            self.stats.doelpuntenArr.push(self.season_matches[self.roundsfilterfrom() - 1].doelpunten);
+
+                            self.stats.doelpogingen = self.season_matches[self.roundsfilterfrom() - 1].doelpogingen;
+                            self.stats.doelpogingenArr = [];
+                            self.stats.doelpogingenArr.push('data2');
+                            self.stats.doelpogingenArr.push(self.season_matches[self.roundsfilterfrom() - 1].doelpogingen);
+
+                            self.stats.doelpogingen_opdoelArr = [];
+                            self.stats.doelpogingen_opdoelArr.push('data1');
+                            if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].doelpogingen_opdoel)) {
+                                self.stats.doelpogingen_opdoel = 0;
+                                self.stats.doelpogingen_opdoelArr.push(0);
+                            } else {
+                                self.stats.doelpogingen_opdoel = Number(self.season_matches[self.roundsfilterfrom() - 1].doelpogingen_opdoel);
+                                self.stats.doelpogingen_opdoelArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].doelpogingen_opdoel));
+                            }
+
+                            self.stats.aantal_passes = self.season_matches[self.roundsfilterfrom() - 1].aantal_passes;
+                            self.stats.aantal_passesArr = [];
+                            self.stats.aantal_passesArr.push('data1');
+                            self.stats.aantal_passesArr.push(self.season_matches[self.roundsfilterfrom() - 1].aantal_passes);
+
+                            self.stats.pass_lengteArr = [];
+                            self.stats.pass_lengteArr.push('data2');
+                            if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].pass_lengte)) {
+                                self.stats.pass_lengte = 0;
+                                self.stats.pass_lengteArr.push(0);
+                            } else {
+                                self.stats.pass_lengte = self.season_matches[self.roundsfilterfrom() - 1].pass_lengte;
+                                self.stats.pass_lengteArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].pass_lengte));
+                            }
+
+                            self.stats.verdedigende_duels = self.season_matches[self.roundsfilterfrom() - 1].verdedigende_duels;
+                            self.stats.verdedigende_duelsArr = [];
+                            self.stats.verdedigende_duelsArr.push('data1');
+                            self.stats.verdedigende_duelsArr.push(self.season_matches[self.roundsfilterfrom() - 1].verdedigende_duels);
+
+                            self.stats.aanvallende_duels = self.season_matches[self.roundsfilterfrom() - 1].aanvallende_duels;
+                            self.stats.aanvallende_duelsArr = [];
+                            self.stats.aanvallende_duelsArr.push('data2');
+                            self.stats.aanvallende_duelsArr.push(self.season_matches[self.roundsfilterfrom() - 1].aanvallende_duels);
+
+                            self.stats.intercepties = self.season_matches[self.roundsfilterfrom() - 1].intercepties;
+                            self.stats.interceptiesArr = [];
+                            self.stats.interceptiesArr.push('data3');
+                            self.stats.interceptiesArr.push(self.season_matches[self.roundsfilterfrom() - 1].intercepties);
+
+                            self.stats.overtredingen = self.season_matches[self.roundsfilterfrom() - 1].overtredingen;
+                            self.stats.overtredingenArr = [];
+                            self.stats.overtredingenArr.push('data4');
+                            self.stats.overtredingenArr.push(self.season_matches[self.roundsfilterfrom() - 1].overtredingen);
+
+                            self.stats.gewonnen_duelsArr = [];
+                            self.stats.gewonnen_duelsArr.push('data3');
+                            if (isNaN(self.season_matches[self.roundsfilterfrom() - 1].gewonnen_duels)) {
+                                self.stats.gewonnen_duels = 0;
+                                self.stats.gewonnen_duelsArr.push(0);
+                            } else {
+                                self.stats.gewonnen_duels = self.season_matches[self.roundsfilterfrom() - 1].gewonnen_duels;
+                                self.stats.gewonnen_duelsArr.push(Number(self.season_matches[self.roundsfilterfrom() - 1].gewonnen_duels));
+                            }
+
+                            self.showGraph1();
+                            self.showGraph3();
+                            self.showGraph5();
+                            self.showGraph7();
+                        }
+
+                        self.showGraph8();
+                    }
                 }
-
-                self.stats.goals = 0;
-                self.stats.goalsArr = [];
-                self.stats.goalsArr.push('data1');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.goals += self.spelerStats[self.chosenseason][i].goals;
-                    self.stats.goalsArr.push(self.spelerStats[self.chosenseason][i].goals);
-                }
-                self.stats.goalstegen = 0;
-                self.stats.goalstegenArr = [];
-                self.stats.goalstegenArr.push('data2');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.goalstegen += self.spelerStats[self.chosenseason][i].goalstegen;
-                    self.stats.goalstegenArr.push(self.spelerStats[self.chosenseason][i].goalstegen);
-                }
-                self.stats.schotzekerheid = 0;
-                self.stats.schotzekerheidArr = [];
-                self.stats.schotzekerheidArr.push('data1');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.schotzekerheid += self.spelerStats[self.chosenseason][i].schotzekerheid;
-                    self.stats.schotzekerheidArr.push(self.spelerStats[self.chosenseason][i].schotzekerheid);
-                }
-                self.stats.schotzekerheid /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
-                self.stats.balbezit = 0;
-                self.stats.balbezitArr = [];
-                self.stats.balbezitArr.push('data3');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.balbezit += self.spelerStats[self.chosenseason][i].balbezit;
-                    self.stats.balbezitArr.push(self.spelerStats[self.chosenseason][i].balbezit);
-                }
-                self.stats.balbezit /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
-                self.stats.passzekerheid = 0;
-                self.stats.passzekerheidArr = [];
-                self.stats.passzekerheidArr.push('data2');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.passzekerheid += self.spelerStats[self.chosenseason][i].passzekerheid;
-                    self.stats.passzekerheidArr.push(self.spelerStats[self.chosenseason][i].passzekerheid);
-                }
-                self.stats.passzekerheid /= (self.roundsfilterto() - self.roundsfilterfrom() + 1);
-                self.stats.geel = 0;
-                self.stats.geelArr = [];
-                self.stats.geelArr.push('data1');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.geel += self.spelerStats[self.chosenseason][i].geel;
-                    self.stats.geelArr.push(self.spelerStats[self.chosenseason][i].geel);
-                }
-                self.stats.rood = 0;
-                self.stats.roodArr = [];
-                self.stats.roodArr.push('data2');
-                for (i = self.roundsfilterfrom()-1; i < self.roundsfilterto(); i++) {
-                    self.stats.rood += self.spelerStats[self.chosenseason][i].rood;
-                    self.stats.roodArr.push(self.spelerStats[self.chosenseason][i].rood);
-                }
-
-                self.stats.xAxis = [];
-                self.stats.xAxis.push('x');
-                for (i = self.roundsfilterfrom(); i <= self.roundsfilterto(); i++) {
-                    self.stats.xAxis.push(i);
-                }
-
-                self.showGraph1();
-                self.showGraph2();
-                self.showGraph3();
-                self.showGraph4();
-                self.showGraph5();
-            } else {
-                self.stats.puntenArr = [];
-                self.stats.puntenArr.push('data1');
-                self.stats.puntenArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].punten);
-
-                self.stats.goals = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].goals;
-                self.stats.goalsArr = [];
-                self.stats.goalsArr.push('data1');
-                self.stats.goalsArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].goals);
-
-                self.stats.goalstegen = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].goalstegen;
-                self.stats.goalstegenArr = [];
-                self.stats.goalstegenArr.push('data2');
-                self.stats.goalstegenArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].goalstegen);
-
-                self.stats.schotzekerheid = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].schotzekerheid;
-                self.stats.schotzekerheidArr = [];
-                self.stats.schotzekerheidArr.push('data1');
-                self.stats.schotzekerheidArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].schotzekerheid);
-
-                self.stats.balbezit = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].balbezit;
-                self.stats.balbezitArr = [];
-                self.stats.balbezitArr.push('data3');
-                self.stats.balbezitArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].balbezit);
-
-                self.stats.passzekerheid = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].passzekerheid;
-                self.stats.passzekerheidArr = [];
-                self.stats.passzekerheidArr.push('data2');
-                self.stats.passzekerheidArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].passzekerheid);
-
-                self.stats.geel = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].geel;
-                self.stats.geelArr = [];
-                self.stats.geelArr.push('data1');
-                self.stats.geelArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].geel);
-
-                self.stats.rood = self.spelerStats[self.chosenseason][self.roundsfilterfrom() - 1].rood;
-                self.stats.roodArr = [];
-                self.stats.roodArr.push('data2');
-                self.stats.roodArr.push(self.spelerStats[self.chosenseason][self.roundsfilterfrom()-1].rood);
-
-                self.stats.xAxis = [];
-                self.stats.xAxis.push('x');
-                self.stats.xAxis.push(self.roundsfilterfrom());
-
-                self.showGraph1();
-                self.showGraph2();
-                self.showGraph3();
-                self.showGraph4();
-                self.showGraph5();
-            }
+            }, 200);
         }, true);
 
         self.chartpercentages = null;
         self.showGraph1 = function() {
-            self.chartpercentages = c3.generate({
-                bindto: '#chart-percentages',
-                data: {
-                    xs: {
-                        'data1': 'x',
-                        'data2': 'x'
-                    },
-                    columns: [
-                        self.stats.xAxis,
-                        self.stats.passzekerheidArr,
-                        self.stats.schotzekerheidArr
-                    ],
-                    names: {
-                        data1: 'Pass zekerheid (%)',
-                        data2: 'Schot zekerheid (%)'
-                    },
-                    type: 'bar'
-                },
-                color: {
-                    pattern: ['#18385F', '#4F81BC', '#979797']
-                },
-                axis: {
-                    y: {
-                        label: {
-                            text: 'Percentage (%)',
-                            position: 'outer-middle'
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartpercentages = c3.generate({
+                        bindto: '#chart-percentages',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x',
+                                'data3': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.doelpogingen_opdoelArr,
+                                self.stats.passzekerheidArr,
+                                self.stats.gewonnen_duelsArr
+                            ],
+                            names: {
+                                data1: 'Doelpogingen op doel (%)',
+                                data2: 'Pass zekerheid (%)',
+                                data3: 'Gewonnen duels (%)'
+                            },
+                            type: 'bar'
                         },
-                        padding: {top: 0, bottom: 0},
-                        min: 0,
-                        max: 100,
-                        tick: {
-                            format: d3.format("d")
+                        color: {
+                            pattern: ['#18385F', '#4F81BC', '#979797']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Percentage (%)',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 0, bottom: 0},
+                                min: 0,
+                                max: 100,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    },
-                    x: {
-                        label: {
-                            text: 'Ronde',
-                            position: 'outer-center'
-                        }
-                    }
-                }
-            });
+                    });
+                }, 500);
+            }
         };
-        self.chartpasses = null;
+        self.chartpercentages2 = null;
         self.showGraph2 = function() {
-            self.chartpasses = c3.generate({
-                bindto: '#chart-passes',
-                data: {
-                    xs: {
-                        'data1': 'x'
-                    },
-                    columns: [
-                        self.stats.xAxis,
-                        self.stats.puntenArr
-                    ],
-                    axes: {
-                        data1: 'y'
-                    },
-                    names: {
-                        data1: 'Pass lengte'
-                    }
-                },
-                color: {
-                    pattern: ['#18385F', '#4F81BC']
-                },
-                axis: {
-                    y: {
-                        label: {
-                            text: 'Pass lengte (in m)',
-                            position: 'outer-middle'
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartpercentages2 = c3.generate({
+                        bindto: '#chart-percentages2',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x',
+                                'data3': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.geslaagde_reddingenArr,
+                                self.stats.passzekerheidArr,
+                                self.stats.succesvolle_uittrappenArr
+                            ],
+                            names: {
+                                data1: 'Geslaagde reddingen (%)',
+                                data2: 'Pass zekerheid (%)',
+                                data3: 'Succesvolle uittrappen (%)'
+                            },
+                            type: 'bar'
                         },
-                        padding: {top: 10, bottom: 0},
-                        min: 0,
-                        tick: {
-                            format: d3.format("d")
+                        color: {
+                            pattern: ['#18385F', '#4F81BC', '#979797']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Percentage (%)',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 0, bottom: 0},
+                                min: 0,
+                                max: 100,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    },
-                    x: {
-                        label: {
-                            text: 'Ronde',
-                            position: 'outer-center'
-                        }
-                    }
-                }
-            });
+                    });
+                }, 500);
+            }
         };
         self.chartgoals = null;
         self.showGraph3 = function() {
-            self.chartgoals = c3.generate({
-                bindto: '#chart-goals',
-                data: {
-                    xs: {
-                        'data1': 'x'
-                    },
-                    columns: [
-                        self.stats.xAxis,
-                        self.stats.goalsArr
-                    ],
-                    names: {
-                        data1: 'Goals'
-                    }
-                },
-                color: {
-                    pattern: ['#18385F', '#4F81BC']
-                },
-                axis: {
-                    y: {
-                        label: {
-                            text: 'Aantal goals',
-                            position: 'outer-middle'
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartgoals = c3.generate({
+                        bindto: '#chart-goals',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.doelpuntenArr,
+                                self.stats.doelpogingenArr
+                            ],
+                            names: {
+                                data1: 'Doelpunten',
+                                data2: 'Doelpogingen'
+                            }
                         },
-                        padding: {top: 10, bottom: 0},
-                        min: 0,
-                        tick: {
-                            format: d3.format("d"),
-                            values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+                        color: {
+                            pattern: ['#18385F', '#4F81BC', '#979797']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Aantal',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d"),
+                                    values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    },
-                    x: {
-                        label: {
-                            text: 'Ronde',
-                            position: 'outer-center'
-                        }
-                    }
-                }
-            });
+                    });
+                }, 500);
+            }
         };
-        self.chartgeel = null;
+        self.chartreddingen = null;
         self.showGraph4 = function() {
-            self.chartgeel = c3.generate({
-                bindto: '#chart-geel',
-                data: {
-                    xs: {
-                        'data1': 'x',
-                        'data2': 'x'
-                    },
-                    columns: [
-                        self.stats.xAxis,
-                        self.stats.geelArr,
-                        self.stats.roodArr
-                    ],
-                    names: {
-                        data1: 'Geel',
-                        data2: 'Rood'
-                    },
-                    type: 'bar'
-                },
-                color: {
-                    pattern: ['#ffcc00', '#ED1C24']
-                },
-                axis: {
-                    y: {
-                        label: {
-                            text: 'Hoeveelheid',
-                            position: 'outer-middle'
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartreddingen = c3.generate({
+                        bindto: '#chart-reddingen',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x',
+                                'data3': 'x',
+                                'data4': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.doelpunten_tegenArr,
+                                self.stats.reddingenArr,
+                                self.stats.gevangen_ballenArr,
+                                self.stats.weggestompte_ballenArr
+                            ],
+                            names: {
+                                data1: 'Doelpunten tegen',
+                                data2: 'Reddingen',
+                                data3: 'Gevangen ballen',
+                                data4: 'Weggestompte ballen'
+                            }
                         },
-                        padding: {top: 0, bottom: 0},
-                        min: 0,
-                        tick: {
-                            format: d3.format("d")
+                        color: {
+                            pattern: ['#18385F', '#4F81BC', '#979797', '#D22238']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Aantal',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d"),
+                                    values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    },
-                    x: {
-                        label: {
-                            text: 'Ronde',
-                            position: 'outer-center'
+                    });
+                }, 500);
+            }
+        };
+        self.chartpasses = null;
+        self.showGraph5 = function() {
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartpasses = c3.generate({
+                        bindto: '#chart-passes',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.aantal_passesArr,
+                                self.stats.pass_lengteArr
+                            ],
+                            axes: {
+                                data1: 'y',
+                                data2: 'y2'
+                            },
+                            names: {
+                                data1: 'Aantal passes',
+                                data2: 'Pass lengte'
+                            }
+                        },
+                        color: {
+                            pattern: ['#18385F', '#4F81BC']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Aantal passes',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            y2: {
+                                show: true,
+                                label: {
+                                    text: 'Pass lengte (in m)',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
+                }, 500);
+            }
+        };
+        self.chartpasses2 = null;
+        self.showGraph6 = function() {
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartpasses2 = c3.generate({
+                        bindto: '#chart-passes2',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x',
+                                'data3': 'x',
+                                'data4': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.korte_passesArr,
+                                self.stats.middellange_passesArr,
+                                self.stats.lange_passesArr,
+                                self.stats.pass_lengteArr
+                            ],
+                            axes: {
+                                data1: 'y',
+                                data2: 'y',
+                                data3: 'y',
+                                data4: 'y2'
+                            },
+                            names: {
+                                data1: 'Korte passes',
+                                data2: 'Middellange passes',
+                                data3: 'Lange passes',
+                                data4: 'Pass lengte'
+                            }
+                        },
+                        color: {
+                            pattern: ['#18385F', '#4F81BC', '#979797', '#D22238']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Aantal passes',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            y2: {
+                                show: true,
+                                label: {
+                                    text: 'Pass lengte (in m)',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
+                        }
+                    });
+                }, 500);
+            }
         };
         self.chartactions = null;
-        self.showGraph5 = function() {
-            self.chartactions = c3.generate({
-                bindto: '#chart-actions',
-                data: {
-                    xs: {
-                        'data1': 'x',
-                        'data2': 'x'
-                    },
-                    columns: [
-                        self.stats.xAxis,
-                        self.stats.geelArr,
-                        self.stats.roodArr
-                    ],
-                    names: {
-                        data1: 'Verdedigende acties',
-                        data2: 'Aanvallende acties'
-                    }
-                },
-                color: {
-                    pattern: ['#18385F', '#4F81BC']
-                },
-                axis: {
-                    y: {
-                        label: {
-                            text: 'Aantal acties',
-                            position: 'outer-middle'
+        self.showGraph7 = function() {
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartactions= c3.generate({
+                        bindto: '#chart-actions',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x',
+                                'data3': 'x',
+                                'data4': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.verdedigende_duelsArr,
+                                self.stats.aanvallende_duelsArr,
+                                self.stats.interceptiesArr,
+                                self.stats.overtredingenArr
+                            ],
+                            names: {
+                                data1: 'Verdedigende duels',
+                                data2: 'Aanvallende duels',
+                                data3: 'Intercepties',
+                                data4: 'Overtredingen'
+                            }
                         },
-                        padding: {top: 10, bottom: 0},
-                        min: 0,
-                        tick: {
-                            format: d3.format("d")
+                        color: {
+                            pattern: ['#18385F', '#4F81BC', '#979797', '#D22238']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Aantal',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 10, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    },
-                    x: {
-                        label: {
-                            text: 'Ronde',
-                            position: 'outer-center'
+                    });
+                }, 500);
+            }
+        };
+        self.chartgeel = null;
+        self.showGraph8 = function() {
+            if (self.season_matches.length > 0) {
+                $timeout(function () {
+                    self.chartgeel = c3.generate({
+                        bindto: '#chart-geel',
+                        data: {
+                            xs: {
+                                'data1': 'x',
+                                'data2': 'x'
+                            },
+                            columns: [
+                                self.stats.xAxis,
+                                self.stats.geelArr,
+                                self.stats.roodArr
+                            ],
+                            names: {
+                                data1: 'Geel',
+                                data2: 'Rood'
+                            },
+                            type: 'bar'
+                        },
+                        color: {
+                            pattern: ['#ffcc00', '#ED1C24']
+                        },
+                        axis: {
+                            y: {
+                                label: {
+                                    text: 'Aantal',
+                                    position: 'outer-middle'
+                                },
+                                padding: {top: 0, bottom: 0},
+                                min: 0,
+                                tick: {
+                                    format: d3.format("d")
+                                }
+                            },
+                            x: {
+                                label: {
+                                    text: 'Ronde',
+                                    position: 'outer-center'
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
+                }, 500);
+            }
         };
     }]);

@@ -52,6 +52,7 @@ router.get('/matchdataid/:_id',     UserController.ensureAuthorized, MatchDataCo
 router.post('/matchdata',           UserController.ensureAuthorized, MatchDataController.post);
 router.put('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.put);
 router.delete('/matchdata/:_id',    UserController.ensureAuthorized, MatchDataController.delete);
+router.delete('/matchdataid/:_id',  UserController.ensureAuthorized, MatchDataController.delete_byid);
 
 router.get('/pages',                PageController.query);
 router.get('/pages/:_id',           PageController.get);
