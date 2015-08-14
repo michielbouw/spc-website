@@ -5,7 +5,9 @@ angular.module('mainapp.navbar')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
-
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip();
+                        });
                     });
                 }, 0);
             }
@@ -17,7 +19,9 @@ angular.module('mainapp.navbar')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
-
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip();
+                        });
                     });
                 }, 0);
             }

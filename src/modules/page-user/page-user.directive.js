@@ -20,6 +20,13 @@ angular.module('mainapp.pageUser')
                             $(this).tab('show');
                         });
                         $('#nav-sub a[href="#profiel"]').tab('show');
+
+                        $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
+                            $('#wrapper .page-content .content.content-page').toggleClass('active');
+                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();
+                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').toggle();
+                            $('.page-top .col-md-2.sidebar-offcanvas').toggle();
+                        });
                     });
                 }, 100);
             }

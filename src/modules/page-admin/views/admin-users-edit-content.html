@@ -1,7 +1,7 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2 hidden-xs hidden-sm">
-            <div class="col-md-2 navbar-sub">
+        <div class="col-md-2 col-sm-5 col-xs-8 sidebar-offcanvas">
+            <div class="navbar-sub">
                 <div class="item-title"><a href="/admin">Admin</a> / Gebruikers</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
                     <li role="presentation">
@@ -22,18 +22,32 @@
     </div>
 </div>
 
+<div class="menu-left-button" tooltip-placement="right" tooltip="linker menu openen">
+    <button type="button" data-toggle="offcanvas">
+        <span class="sr-only">Toggle linker menu</span>
+        <i class="fa fa-chevron-right"></i>
+        <i class="fa fa-chevron-left"></i>
+        <br>
+        <i class="fa fa-bars"></i>
+    </button>
+</div>
+
 <div class="page-content">
     <div class="container">
 
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
             <div class="col-xs-12 content-page-title">
-                <h3>Gebruiker <span ng-show="data.user._id">wijzigen</span><span ng-show="!data.user._id">toevoegen</span>
+                <h3 class="hidden-sm hidden-xs">Gebruiker <span ng-show="data.user._id">wijzigen</span><span ng-show="!data.user._id">toevoegen</span>
                     <button ng-show="data.user._id" class="btn btn-sm btn-danger pull-right" ng-click="data.openModalDel('sm')">Verwijder</button>
                     <button ng-show="data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userEdit()">Opslaan</button>
                     <button ng-show="!data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userAdd()">Toevoegen bevestigen</button>
                 </h3>
-                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / <a href="/admin/users">Gebruikers</a> / Gebruiker</h4>
+                <h4 class="hidden-lg hidden-md">Gebruiker <span ng-show="data.user._id">wijzigen</span><span ng-show="!data.user._id">toevoegen</span>
+                    <button ng-show="data.user._id" class="btn btn-sm btn-danger pull-right" ng-click="data.openModalDel('sm')">Verwijder</button>
+                    <button ng-show="data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userEdit()">Opslaan</button>
+                    <button ng-show="!data.user._id" class="btn btn-sm btn-info pull-right" ng-click="data.userAdd()">Toevoegen bevestigen</button>
+                </h4>
             </div>
             <div class="col-xs-12">
                 <p ng-show="data.user._id">Hier kunnen gebruiker gegevens worden gewijzigd. De gebruiker kan tot één club behoren, maar tot meerdere teams.

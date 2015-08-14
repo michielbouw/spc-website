@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="col-md-2 hidden-xs hidden-sm">
-        <div class="col-md-2 navbar-sub">
+    <div class="col-md-2 col-sm-5 col-xs-8 sidebar-offcanvas">
+        <div class="navbar-sub">
             <div class="item-title"><a href="/analyse">Analyse</a> / <a href="/wedstrijd">Wedstrijd</a></div>
             <ul id="nav-sub" class="nav nav-pills nav-stacked" role="tablist">
                 <li role="presentation" class="active">
@@ -74,123 +74,58 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 content content-top content-top-match">
+    <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12 content content-top content-top-match">
         <div class="col-xs-12">
             <div id="match-info">
-                <div class="col-xs-2 text-left">
-                    <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }}<br>
-                        {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
-                    <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
+                <div class="row">
+                <div class="col-xs-1 no-padding text-center">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
+                </div>
+                <div class="col-xs-4">
+                    <h3>{{ data.matchshort.match_info.thuis }}</h3>
+                </div>
+                <div class="col-xs-2 text-center result">
+                    <h3>
+                        {{ data.matchshort.match_info.eindstand }}<br>
+                        <small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand }})</small>
+                    </h3>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <h3>{{ data.matchshort.match_info.uit }}</h3>
+                </div>
+                <div class="col-xs-1 no-padding text-center">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
+                </div>
+                </div>
+                <div class="row extra-info">
+                <div class="col-xs-12 text-left">
+                    <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
+                        <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
                     <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br ng-if="data.matchshort.match_info.toeschouwers">
                     <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br ng-if="data.matchshort.match_info.stadion">
                     <small ng-if="data.matchshort.match_info.stadion"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.stadion }}</small>
                 </div>
-                <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
-                </div>
-                <div class="col-xs-6 text-center">
-                    <h3>{{ data.matchshort.match_info.wedstrijd }}</h3>
-                    <h4>
-                        {{ data.matchshort.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand">({{ data.matchshort.match_info.ruststand }})</small>
-                    </h4>
-                </div>
-                <div class="col-xs-1 no-padding text-center">
-                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
                 </div>
             </div>
             <div id="match-info-short">
                 <div class="col-xs-1 no-padding text-center">
                     <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
                 </div>
-                <div class="col-xs-10 text-center">
-                    <h4>{{ data.matchshort.match_info.wedstrijd }}<br>
+                <div class="col-xs-4">
+                    <h3>{{ data.matchshort.match_info.thuis }}</h3>
+                </div>
+                <div class="col-xs-2 text-center result">
+                    <h3>
                         {{ data.matchshort.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand">({{ data.matchshort.match_info.ruststand }})</small>
-                    </h4>
+                        <small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand }})</small>
+                    </h3>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <h3>{{ data.matchshort.match_info.uit }}</h3>
                 </div>
                 <div class="col-xs-1 no-padding text-center">
                     <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
                 </div>
-            </div>
-            <input type="checkbox" name="handler-navbar-sub-mobile" class="handler" id="handler-navbar-sub-mobile" onclick="null" />
-            <div class="col-xs-12 no-padding navbar-sub-mobile-toggle hidden-md hidden-lg">
-                <div class="col-xs-12">
-                    <label for="handler-navbar-sub-mobile" id="navbar-sub-mobile" href="#">
-                        <span id="navbar-sub-mobile-toggle" title="menu"><i class="fa fa-bars"></i> navigatie</span>
-                    </label>
-                </div>
-            </div>
-            <div class="col-xs-12 hidden-md hidden-lg no-padding navbar-sub-mobile">
-                <ul id="nav-sub-mobile" class="nav nav-pills" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab" scroll-to="top">
-                            <span class="caret-right"></span><span class="caret"></span> Wedstrijd
-                        </a>
-                        <ul class="nav nav-pills submenu">
-                            <li><a href="" scroll-to="opstelling" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Opstelling</a></li>
-                            <li><a href="" scroll-to="wedstrijd" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Wedstrijd</a></li>
-                            <li><a href="" scroll-to="statistieken" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Overzicht</a></li>
-                            <!--<li><a href="" scroll-to="balbezit" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Balbezit</a></li>-->
-                            <li><a href="" scroll-to="doelpogingen" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Doelpogingen</a></li>
-                            <li><a href="" scroll-to="dueloverzicht" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Duels</a></li>
-                            <li><a href="" scroll-to="overtredingen" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Overtredingen</a></li>
-                            <li><a href="" scroll-to="spelhervattingen" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Spelhervattingen</a></li>
-                            <li><a href="" scroll-to="passoverzicht" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Passes</a></li>
-                        </ul>
-                    </li>
-                    <li role="presentation">
-                        <a href="#team" aria-controls="team" role="tab" data-toggle="tab" scroll-to="top">
-                            <span class="caret-right"></span><span class="caret"></span> Team
-                        </a>
-                        <ul class="nav nav-pills submenu">
-                            <li><a href="" scroll-to="veld" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Veld posities</a></li>
-                            <li><a href="" scroll-to="locatiedoelpogingen" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Doelpogingen</a></li>
-                            <li><a href="" scroll-to="locatiebalcontact" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Locatie balcontact</a></li>
-                            <li><a href="" scroll-to="passes_zone" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Passes per zone</a></li>
-                            <li><a href="" scroll-to="passmatrix" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Passmatrix</a></li>
-                            <li><a href="" scroll-to="duelmatrix" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Duelmatrix</a></li>
-                            <li><a href="" scroll-to="penalty_visualisatie" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Penalties</a></li>
-                            <li><a href="" scroll-to="overtredingen_speler" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Overtredingen</a></li>
-                            <li><a href="" scroll-to="overtredingen_locatie" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Locatie overtredingen</a></li>
-                        </ul>
-                    </li>
-                    <li role="presentation">
-                        <a href="#players" aria-controls="players" role="tab" data-toggle="tab" scroll-to="top">
-                            <span class="caret-right"></span><span class="caret"></span> Spelers
-                        </a>
-                        <ul class="nav nav-pills submenu">
-                            <li><a href="" scroll-to="thuis" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">{{ data.matchshort.match_info.thuis }}</a></li>
-                            <li><a href="" scroll-to="uit" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);"> {{ data.matchshort.match_info.uit }}</a></li>
-                            <li><a href="" scroll-to="vergelijk" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Vergelijken</a></li>
-                        </ul>
-                    </li>
-                    <li role="presentation" ng-if="(currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
-                        <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab" scroll-to="top">
-                            <span class="caret-right"></span><span class="caret"></span> Logboek
-                        </a>
-                        <ul class="nav nav-pills submenu">
-                            <li><a href="" scroll-to="scorespeler" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Score spelers</a></li>
-                            <li><a href="" scroll-to="logwedstrijd" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Wedstrijd</a></li>
-                            <li><a href="" scroll-to="logspeler" onclick="$('.handler#handler-navbar-sub-mobile').prop('checked', false);">Spelers</a></li>
-                        </ul>
-                    </li>
-                    <!--<li role="presentation">
-                        <a href="">
-                            <i class="fa fa-download"></i> Download PDF
-                        </a>
-                    </li>-->
-                    <li role="presentation">
-                        <a href="" scroll-to="top">
-                            <i class="fa fa-arrow-up"></i> Naar boven
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="/wedstrijd">
-                            Andere wedstrijd
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>

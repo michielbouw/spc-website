@@ -6,17 +6,40 @@
   @include border-radius(1px);
 
   #match-info {
-    padding-top: 15px;
+    padding-top: 0;
 
+    h3 {
+      margin: 16px;
+    }
     p {
       font-size: 85%;
+    }
+    .result {
+      background: $middleblue;
+
+      h3 {
+        margin: 4px;
+      }
+    }
+    .extra-info {
+      background-color: $white;
+      color: $black;
+      padding-top: 10px;
     }
   }
   #match-info-short {
     display: none;
 
-    h4 {
-      margin: 4px;
+    h3 {
+      margin: 16px;
+    }
+    .result {
+      background: $middleblue;
+      height: 60px;
+
+      h3 {
+        margin: 4px;
+      }
     }
   }
   .logo {
@@ -31,8 +54,13 @@
   }
 }
 .content-top-match {
+  color: $white;
+  background-color: $lightblue;
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
+}
+.page-content.page-content-match {
+  margin-top: 0;
 }
 
 .content {
@@ -301,8 +329,11 @@
       width: 26px;
       text-align: center;
       color: $darkblue;
-      background-color: $white;
-      border: 1px solid $darkblue;
+      //background-color: $white;
+      //border: 1px solid $darkblue;
+      background-image: url('/images/shirt3d.png');
+      background-position: center center;
+      background-size: cover;
       @include border-radius(30px);
 
       .lineup_info {
@@ -633,8 +664,48 @@ Responsive setup
 @media screen and (max-width:1199px) {
 }
 @media screen and (max-width:991px) {
+  /* collapsed sidebar styles */
+  .content.tab-pane {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+  .page-top {
+    .content.content-top {
+      left: 0%;
+    }
+    .content.content-top.active {
+      left: 41.6%;
+    }
+  }
+  .page-content {
+    .content.tab-pane {
+      left: 0%;
+    }
+    .content.tab-pane.menuopen {
+      left: 41.6%;
+    }
+  }
 }
 @media screen and (max-width:767px) {
+  /* collapsed sidebar styles */
+  .page-top {
+    .content.content-top {
+      left: 0%;
+    }
+    .content.content-top.active {
+      left: 66.66667%;
+    }
+  }
+  .page-content {
+    .content.tab-pane {
+      left: 0%;
+    }
+    .content.tab-pane.menuopen {
+      left: 66.66667%;
+    }
+  }
 }
 @media screen and (max-width:320px) {
 }

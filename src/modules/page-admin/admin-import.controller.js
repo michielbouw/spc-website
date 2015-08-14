@@ -264,7 +264,7 @@ angular.module('mainapp.pageAdmin')
                             items.overzicht_wedstrijd.overzicht_tweede_helft.push(temp);
                         });
                         items.overzicht_wedstrijd.overzicht_tweede_helft.splice(0, 1);
-                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging) {
+                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.length > 0) {
                             items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging = [];
                             angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging, function (value, key) {
                                 var temp = {};
@@ -277,7 +277,7 @@ angular.module('mainapp.pageAdmin')
                             });
                             items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.splice(0, 1);
                         }
-                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging) {
+                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.length > 0) {
                             items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging = [];
                             angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging, function (value, key) {
                                 var temp = {};
@@ -2697,9 +2697,14 @@ angular.module('mainapp.pageAdmin')
                         });
                     }
 
-                    if (ended1 && ended2 && ended3 && ended4) {
-                        $location.path('/admin');
-                    }
+                    //while (!ended1 || !ended2 || !ended3 || !ended4) {
+                    //    $rootScope.errorImport = 'Busy';
+                    //}
+                    //if (ended1 && ended2 && ended3 && ended4) {
+                    //    $rootScope.errorImport = '';
+                    //    $location.path('/admin');
+                    //}
+                    $location.path('/admin');
                 });
         };
     }]);

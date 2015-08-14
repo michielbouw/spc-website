@@ -1,30 +1,31 @@
 <div class="container tab-content">
 
-    <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade in active" role="tabpanel" id="home">
+    <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12 content tab-pane fade in active" role="tabpanel" id="home">
 
-        <div class="col-xs-12 content-title-top text-center" ng-hide="!data.loading">
-            <h3><i class="fa fa-spinner fa-pulse"></i></h3>
-            <h4>Loading</h4>
+        <div class="col-xs-12 content-title-top text-center" ng-hide="!data.loading" style="margin-bottom: 0;">
+            <h4><i class="fa fa-spinner fa-pulse"></i></h4>
+            <h4 class="small">Loading</h4>
         </div>
 
-        <div class="col-xs-12 content-title-top text-center">
-            <h3>Wedstrijd</h3>
+        <div class="col-xs-12 content-title-top">
+            <h4>Wedstrijd</h4>
+            <h4 class="small">Voor extra informatie per onderdeel klik op de <button style="font-size: 11px; padding: 0 6px; -webkit-border-radius: 24px; -moz-border-radius: 24px; -ms-border-radius: 24px; border-radius: 24px;" type="button" class="btn btn-primary btn-xs info"><i class="fa fa-info"></i></button> button bij het onderdeel.</h4>
         </div>
-        <div class="col-xs-12 text-center">
+        <!--<div class="col-xs-12">
             <p>Uitleg...<br>
             ...</p>
             <p>Voor extra informatie per onderdeel klik op de <button style="font-size: 11px; padding: 0 6px; -webkit-border-radius: 24px; -moz-border-radius: 24px; -ms-border-radius: 24px; border-radius: 24px;" type="button" class="btn btn-primary btn-xs info"><i class="fa fa-info"></i></button> button bij het onderdeel.</p>
             <br>
-        </div>
+        </div>-->
 
         <div id="opstelling" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Opstelling</h3>
-            <h4>Overzicht spelers met rugnummers <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOpstelling" aria-expanded="false" aria-controls="collapseInfoOpstelling"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Opstelling</h4>
+            <h4 class="small">Overzicht spelers met rugnummers <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOpstelling" aria-expanded="false" aria-controls="collapseInfoOpstelling"><i class="fa fa-info"></i></button></span></h4>
         </div>
 
         <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
-            <h3><i class="fa fa-spinner fa-pulse"></i></h3>
-            <h4>Loading</h4>
+            <h4><i class="fa fa-spinner fa-pulse"></i></h4>
+            <h4 class="small">Loading</h4>
         </div>
 
         <div class="col-xs-12 text-center collapse" id="collapseInfoOpstelling">
@@ -41,6 +42,7 @@
                 <div ng-repeat="lineup in data.match.opstelling.thuis">
                     <span ng-if="lineup.positieID == 1" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.52px);">
                         {{ lineup.shirtNummer }}
+                        <!--<small style="text-align: center; color: #fff; margin: 0 4px; position: absolute; top: -100%; left: -50%;">{{ lineup.spelerNaam }}</small>-->
                         <div class="lineup_info">
                             <h4>{{ lineup.spelerNaam }}<br>
                                 <small>{{ lineup.positieNaam }}</small>
@@ -600,8 +602,8 @@
         </div>
 
         <div id="wedstrijd" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Wedstrijdverloop</h3>
-            <h4>Overzicht van de gebeurtenissen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoWedstrijd" aria-expanded="false" aria-controls="collapseInfoWedstrijd"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Wedstrijdverloop</h4>
+            <h4 class="small">Overzicht van de gebeurtenissen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoWedstrijd" aria-expanded="false" aria-controls="collapseInfoWedstrijd"><i class="fa fa-info"></i></button></span></h4>
             <div class="col-xs-11 wedstrijdverloop">
                 <div class="actions" style="width: {{ 100 + (data.matchshort.match_info.blessure_tijd.sec_2ehelft / 60 | number:0) * 1.052 }}%;">
                     <div ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft">
@@ -719,8 +721,8 @@
         </div>
 
         <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
-            <h3><i class="fa fa-spinner fa-pulse"></i></h3>
-            <h4>Loading</h4>
+            <h4><i class="fa fa-spinner fa-pulse"></i></h4>
+            <h4 class="small">Loading</h4>
         </div>
 
         <div class="col-xs-12 text-center collapse" id="collapseInfoWedstrijd">
@@ -908,8 +910,8 @@
         </div>
 
         <div id="statistieken" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overzicht wedstrijdstatistieken</h3>
-            <h4>Algemene cijfers over de wedstrijd <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoStats" aria-expanded="false" aria-controls="collapseInfoStats"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overzicht wedstrijdstatistieken</h4>
+            <h4 class="small">Algemene cijfers over de wedstrijd <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoStats" aria-expanded="false" aria-controls="collapseInfoStats"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoStats">
             <p>Uitleg...</p>
@@ -966,8 +968,8 @@
         </div>
 
         <!--<div id="balbezit" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Balbezit</h3>
-            <h4>Per tijdvak <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoBalbezit" aria-expanded="false" aria-controls="collapseInfoBalbezit"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Balbezit</h4>
+            <h4 class="small">Per tijdvak <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoBalbezit" aria-expanded="false" aria-controls="collapseInfoBalbezit"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoBalbezit">
             <p>Uitleg...</p>
@@ -1081,8 +1083,8 @@
         </div>-->
 
         <div id="doelpogingen" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Doelpogingen</h3>
-            <h4>Schoten, penalties en directe vrije trappen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDoelpogingen" aria-expanded="false" aria-controls="collapseInfoDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Doelpogingen</h4>
+            <h4 class="small">Schoten, penalties en directe vrije trappen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDoelpogingen" aria-expanded="false" aria-controls="collapseInfoDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoDoelpogingen">
             <p>Uitleg...</p>
@@ -1115,8 +1117,8 @@
         </div>
 
         <div id="dueloverzicht" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Duels</h3>
-            <h4>Overzicht soorten duels en aantallen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDuels" aria-expanded="false" aria-controls="collapseInfoDuels"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Duels</h4>
+            <h4 class="small">Overzicht soorten duels en aantallen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDuels" aria-expanded="false" aria-controls="collapseInfoDuels"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoDuels">
             <p>Uitleg...</p>
@@ -1157,8 +1159,8 @@
         </div>
 
         <div id="overtredingen" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overtredingen</h3>
-            <h4>Overzicht soorten overtredingen en aantallen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingen" aria-expanded="false" aria-controls="collapseInfoOvertredingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overtredingen</h4>
+            <h4 class="small">Overzicht soorten overtredingen en aantallen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingen" aria-expanded="false" aria-controls="collapseInfoOvertredingen"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingen">
             <p>Uitleg...</p>
@@ -1188,8 +1190,8 @@
         </div>
 
         <div id="spelhervattingen" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Spelhervattingen</h3>
-            <h4>Vrije trappen, hoekschoppen en inworpen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoHervattingen" aria-expanded="false" aria-controls="collapseInfoHervattingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Spelhervattingen</h4>
+            <h4 class="small">Vrije trappen, hoekschoppen en inworpen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoHervattingen" aria-expanded="false" aria-controls="collapseInfoHervattingen"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoHervattingen">
             <p>Uitleg...</p>
@@ -1233,8 +1235,8 @@
         </div>
 
         <div id="passoverzicht" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Passes</h3>
-            <h4>Overzicht van de passes <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPasses" aria-expanded="false" aria-controls="collapseInfoPasses"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Passes</h4>
+            <h4 class="small">Overzicht van de passes <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPasses" aria-expanded="false" aria-controls="collapseInfoPasses"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPasses">
             <p>Uitleg...</p>
@@ -1288,17 +1290,18 @@
     </div>
     <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="team">
 
-        <div class="col-xs-12 content-title-top text-center">
-            <h3>Teamstatistieken</h3>
+        <div class="col-xs-12 content-title-top">
+            <h4>Teamstatistieken</h4>
+            <h4 class="small">Verschillende groepsstatistieken. Uitleg..</h4>
         </div>
-        <div class="col-xs-12 text-center">
+        <!--<div class="col-xs-12">
             <p>Verschillende groepsstatistieken. Uitleg...</p>
             <br>
-        </div>
+        </div>-->
 
         <div id="veld" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Veld posities (gemiddeld)</h3>
-            <h4>Kies een tijdinterval <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPosities" aria-expanded="false" aria-controls="collapseInfoPosities"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Veld posities (gemiddeld)</h4>
+            <h4 class="small">Kies een tijdinterval <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPosities" aria-expanded="false" aria-controls="collapseInfoPosities"><i class="fa fa-info"></i></button></span></h4>
             <div class="col-xs-12 text-center">
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-primary" ng-click="position_field_interval = '00 - 15 min'">00 - 15 min</button>
@@ -1356,8 +1359,8 @@
         </div>
 
         <div id="locatiedoelpogingen" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Locaties doelpogingen</h3>
-            <h4>Verschillende doelpogingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoLocDoelpogingen" aria-expanded="false" aria-controls="collapseInfoLocDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Locaties doelpogingen</h4>
+            <h4 class="small">Verschillende doelpogingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoLocDoelpogingen" aria-expanded="false" aria-controls="collapseInfoLocDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoLocDoelpogingen">
             <p>Klik de naam van het team, of op het type, om enkel deze weer te geven op het veld.</p>
@@ -1455,8 +1458,8 @@
         </div>
 
         <div id="locatiebalcontact" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Locatie balcontact</h3>
-            <h4>De locatie van balcontact per team (donkerder is meer balcontact) <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoBalcontact" aria-expanded="false" aria-controls="collapseInfoBalcontact"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Locatie balcontact</h4>
+            <h4 class="small">De locatie van balcontact per team (donkerder is meer balcontact) <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoBalcontact" aria-expanded="false" aria-controls="collapseInfoBalcontact"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoBalcontact">
             <p>Uitleg...</p>
@@ -1484,8 +1487,8 @@
         </div>
 
         <div id="passes_zone" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Passes per zone</h3>
-            <h4>Totaal aantal gespeelde passes met succes percentage per zone <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPassZone" aria-expanded="false" aria-controls="collapseInfoPassZone"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Passes per zone</h4>
+            <h4 class="small">Totaal aantal gespeelde passes met succes percentage per zone <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPassZone" aria-expanded="false" aria-controls="collapseInfoPassZone"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPassZone">
             <p>Uitleg...</p>
@@ -1642,8 +1645,8 @@
         </div>
 
         <div id="passmatrix" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Pass overzicht</h3>
-            <h4>Wie passt naar wie? <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPassMatrix" aria-expanded="false" aria-controls="collapseInfoPassMatrix"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Pass overzicht</h4>
+            <h4 class="small">Wie passt naar wie? <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPassMatrix" aria-expanded="false" aria-controls="collapseInfoPassMatrix"><i class="fa fa-info"></i></button></span></h4>
             <div class="col-xs-12 text-center">
                 <div class="btn-group btn-group-xs" id="choosehalfpass" role="group" role="tablist">
                     <button type="button" class="btn btn-primary" href="#passfirsthome" aria-controls="passfirsthome" role="tab" data-toggle="tab">1e helft {{ data.matchshort.match_info.thuis }}</button>
@@ -2037,8 +2040,8 @@
         </div>
 
         <div id="duelmatrix" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Duelmatrix</h3>
-            <h4>Wie duelleert met wie? <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDuelMatrix" aria-expanded="false" aria-controls="collapseInfoDuelMatrix"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Duelmatrix</h4>
+            <h4 class="small">Wie duelleert met wie? <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDuelMatrix" aria-expanded="false" aria-controls="collapseInfoDuelMatrix"><i class="fa fa-info"></i></button></span></h4>
             <div class="col-xs-12 text-center">
                 <div class="btn-group btn-group-xs" id="choosehalfduelmatrix" role="group" role="tablist">
                     <button type="button" class="btn btn-primary" href="#duelfirsthome" aria-controls="duelfirsthome" role="tab" data-toggle="tab">1e helft</button>
@@ -2297,8 +2300,8 @@
         </div>
 
         <div id="penalty_visualisatie" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Penalty visualisatie</h3>
-            <h4>Gemaakte penalties <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPenalties" aria-expanded="false" aria-controls="collapseInfoPenalties"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Penalty visualisatie</h4>
+            <h4 class="small">Gemaakte penalties <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPenalties" aria-expanded="false" aria-controls="collapseInfoPenalties"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPenalties">
             <p>Uitleg...</p>
@@ -2360,8 +2363,8 @@
         </div>
 
         <div id="overtredingen_speler" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overtredingen</h3>
-            <h4>Per speler <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingenSpeler" aria-expanded="false" aria-controls="collapseInfoOvertredingenSpeler"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overtredingen</h4>
+            <h4 class="small">Per speler <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingenSpeler" aria-expanded="false" aria-controls="collapseInfoOvertredingenSpeler"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingenSpeler">
             <p>Uitleg...</p>
@@ -2410,8 +2413,8 @@
         </div>
 
         <div id="overtredingen_locatie" class="col-xs-12 content-title text-center">
-            <h3><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Locatie overtredingen</h3>
-            <h4>Verschillende overtredingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingenLocatie" aria-expanded="false" aria-controls="collapseInfoOvertredingenLocatie"><i class="fa fa-info"></i></button></span></h4>
+            <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Locatie overtredingen</h4>
+            <h4 class="small">Verschillende overtredingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingenLocatie" aria-expanded="false" aria-controls="collapseInfoOvertredingenLocatie"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingenLocatie">
             <p>Uitleg...</p>
@@ -2462,15 +2465,17 @@
     </div>
     <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="players">
 
-        <div id="thuis" class="col-lg-12 content-title-top text-center">
-            <h3>Spelers {{ data.matchshort.match_info.thuis }}</h3>
-            <h4>Klik op de gewenste speler</h4>
+        <div id="thuis" class="col-lg-12 content-title-top">
+            <h4>Spelers {{ data.matchshort.match_info.thuis }}</h4>
+            <h4 class="small">Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
+                het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
+                in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</h4>
         </div>
-        <div class="col-xs-12">
+        <!--<div class="col-xs-12">
             <small>Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
-            het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
-            in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</small>
-        </div>
+                het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
+                in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</small>
+        </div>-->
         <div class="col-xs-12 col-sm-6">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 lineup_field" id="lineup_size">
                 <div>
@@ -3190,15 +3195,17 @@
             </div>
         </div>
 
-        <div id="uit" class="col-xs-12 content-title text-center">
-            <h3>Spelers {{ data.matchshort.match_info.uit }}</h3>
-            <h4>Klik op de gewenste speler</h4>
+        <div id="uit" class="col-xs-12 content-title-top">
+            <h4>Spelers {{ data.matchshort.match_info.uit }}</h4>
+            <h4 class="small">Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
+                het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
+                in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</h4>
         </div>
-        <div class="col-xs-12">
+        <!--<div class="col-xs-12">
             <small>Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
                 het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
                 in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</small>
-        </div>
+        </div>-->
         <div class="col-xs-12 col-sm-6">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 lineup_field" id="lineup_size">
                 <div>
@@ -3919,8 +3926,8 @@
         </div>
 
         <div id="vergelijk" class="col-xs-12 content-title text-center">
-            <h3>Spelers vergelijken</h3>
-            <h4>Kies twee spelers uit</h4>
+            <h4>Spelers vergelijken</h4>
+            <h4 class="small">Kies twee spelers uit</h4>
         </div>
         <div class="col-xs-12" ng-if="currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin'">
             <div class="col-xs-12">{{ data.matchshort.match_info.thuis }}</div>
@@ -4128,9 +4135,9 @@
     </div>
     <div class="col-xs-12 col-md-10 col-md-offset-2 content tab-pane fade" role="tabpanel" id="comments" ng-if="(currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
 
-        <div id="scorespeler" class="col-xs-12 content-title-top text-center">
-            <h3>Score spelers</h3>
-            <h4>Cijfer voor de speler bij deze wedstrijd (0-10)</h4>
+        <div id="scorespeler" class="col-xs-12 content-title-top">
+            <h4>Score spelers</h4>
+            <h4 class="small">Cijfer voor de speler bij deze wedstrijd (0-10)</h4>
         </div>
         <div class="col-xs-12">
             <div ng-if="infoSaveLog" class="alert alert-info" role="alert">{{ infoSaveLog }}</div>
@@ -4145,8 +4152,8 @@
         </div>
 
         <div id="logwedstrijd" class="col-xs-12 content-title text-center">
-            <h3>Logboek wedstrijd</h3>
-            <h4>Alle mogelijke notities kunnen hier geplaatst worden</h4>
+            <h4>Logboek wedstrijd</h4>
+            <h4 class="small">Alle mogelijke notities kunnen hier geplaatst worden</h4>
         </div>
         <div class="col-xs-12">
             <small>Opmerkingen of notities over deze wedstrijd kunnen hier geplaatst worden.
@@ -4165,8 +4172,8 @@
         </div>
 
         <div id="logspeler" class="col-xs-12 content-title text-center">
-            <h3>Logboek speler</h3>
-            <h4>Alle mogelijke notities kunnen hier geplaatst worden</h4>
+            <h4>Logboek speler</h4>
+            <h4 class="small">Alle mogelijke notities kunnen hier geplaatst worden</h4>
         </div>
         <div class="col-xs-12">
             <small>Opmerkingen of notities over deze wedstrijd kunnen hier geplaatst worden.

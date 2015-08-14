@@ -1,7 +1,7 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2 hidden-xs hidden-sm">
-            <div class="col-md-2 navbar-sub">
+        <div class="col-md-2 col-sm-5 col-xs-8 sidebar-offcanvas">
+            <div class="navbar-sub">
                 <div class="item-title"><a href="/admin">Admin</a> / Wedstrijden</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
                     <li role="presentation" class="active">
@@ -22,19 +22,24 @@
     </div>
 </div>
 
+<div class="menu-left-button" tooltip-placement="right" tooltip="linker menu openen">
+    <button type="button" data-toggle="offcanvas">
+        <span class="sr-only">Toggle linker menu</span>
+        <i class="fa fa-chevron-right"></i>
+        <i class="fa fa-chevron-left"></i>
+        <br>
+        <i class="fa fa-bars"></i>
+    </button>
+</div>
+
 <div class="page-content">
     <div class="container">
 
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
             <div class="col-xs-12 content-page-title">
-                <h3>Wedstrijden</h3>
-                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Wedstrijden</h4>
-            </div>
-            <div class="col-xs-12 hidden-md hidden-lg">
-                <div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-primary" href="/admin/matches/edit/add">Wedstrijd toevoegen</button>
-                </div>
+                <h3 class="hidden-sm hidden-xs">Wedstrijden</h3>
+                <h4 class="hidden-lg hidden-md">Wedstrijden</h4>
             </div>
             <div class="col-xs-12">
                 <p>Dit is een lijst met alle wedstrijden waarvan data beschikbaar is. Bij het toevoegen van de data van een wedstrijd wordt hier automatisch een nieuwe wedstrijd

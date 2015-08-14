@@ -2,23 +2,26 @@
     <div class="container">
         <div class="col-lg-12">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        tooltip-placement="left" tooltip="hoofdmenu openen">
+                    <span class="sr-only">Toggle menu</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <a ng-if="currentUser.role !== 'admin' && currentClub.name" class="navbar-brand" href="/club">
                     <img alt="{{ currentClub.name }}" ng-src="images/logo_clubs/{{ currentClub.name }}.jpg">
-                    <span>{{ currentClub.name }}</span>
+                    <span class="hidden-sm hidden-xs">{{ currentClub.name }}</span>
                 </a>
                 <a ng-if="currentUser.role !== 'admin' && !currentClub.name" class="navbar-brand" href="/">
                     <img src="images/SPC_logo_xs.png">
-                    <span>Soccer Performance Centre</span>
+                    <span class="hidden-sm hidden-xs">Soccer Performance Centre</span>
+                    <span class="hidden-lg hidden-md">SPC</span>
                 </a>
                 <a ng-if="currentUser.role == 'admin'" class="navbar-brand" href="/">
                     <img src="images/SPC_logo_xs.png">
-                    <span>Soccer Performance Centre</span>
+                    <span class="hidden-sm hidden-xs">Soccer Performance Centre</span>
+                    <span class="hidden-lg hidden-md">SPC</span>
                 </a>
             </div>
 

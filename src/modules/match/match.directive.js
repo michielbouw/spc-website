@@ -11,6 +11,13 @@ angular.module('mainapp.match')
                         $('.navbar-sub').each(function () {
                             $(this).css('width', $(this).parents('.container').find('.col-md-2').width());
                         });
+
+                        $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
+                            $('#wrapper .page-top .content.content-top').toggleClass('active');
+                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();
+                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').toggle();
+                            $('.col-md-2.sidebar-offcanvas').toggle();
+                        });
                     });
                 }, 0);
             }
@@ -32,6 +39,14 @@ angular.module('mainapp.match')
                             $('[data-toggle="tooltip"]').tooltip();
                         });
 
+                        $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
+                            $('#wrapper .page-top .content.content-top').toggleClass('active');
+                            $('#wrapper .page-content .content.tab-pane').toggleClass('menuopen');
+                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();
+                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').toggle();
+                            $('.page-top .col-md-2.sidebar-offcanvas').toggle();
+                        });
+
                         jQuery(document).ready(function() {
                             var sOffset = $(".content-top.content-top-match").offset().top;
                             $(window).scroll(function () {
@@ -40,13 +55,14 @@ angular.module('mainapp.match')
                                     $(".page-top").css({
                                         'position': 'fixed',
                                         'padding-top': '0px',
-                                        'background-color': '#ffffff',
-                                        'border-bottom': '1px solid #ddd',
+                                        //'background-color': '#ffffff',
+                                        'background-color': '#1d8acf',
+                                        //'border-bottom': '1px solid #ddd',
                                         '-webkit-box-shadow': '0px 2px 5px rgba(0,0,0,0.2)',
                                         '-moz-box-shadow': '0px 2px 5px rgba(0,0,0,0.2)',
                                         'box-shadow': '0px 2px 5px rgba(0,0,0,0.2)'
                                     });
-                                    $('.page-content').css('margin-top', 260);
+                                    $('.page-content.page-content-match').css('margin-top', 240);
                                     $(".content-top").css({
                                         'border': 'none'
                                     });
@@ -70,11 +86,11 @@ angular.module('mainapp.match')
                                         '-moz-box-shadow': 'none',
                                         'box-shadow': 'none'
                                     });
-                                    $(".page-content").css({
-                                        'margin-top': '10px'
+                                    $(".page-content.page-content-match").css({
+                                        'margin-top': '0'
                                     });
                                     $(".content-top").css({
-                                        'border': '1px solid #ddd',
+                                        //'border': '1px solid #ddd',
                                         'border-top': 'none'
                                     });
                                     $('.navbar-sub').css({
@@ -116,20 +132,14 @@ angular.module('mainapp.match')
                                 scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
                                 scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
                             }, 200);
-                        });
-                        $('#nav-sub-mobile a[role="tab"]').click(function (e) {
-                            e.preventDefault();
-                            $(this).tab('show');
-                            $timeout(function() {
-                                scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
-                                scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
-                                scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
-                                scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
-                                scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
-                                scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
-                                scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
-                                scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
-                            }, 200);
+
+                            if ($('#wrapper .page-top .content.content-top').hasClass('active')) {
+                                $('#wrapper .page-top .content.content-top').removeClass('active');
+                                $('#wrapper .page-content .content.tab-pane').removeClass('menuopen');
+                                $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').show();
+                                $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').hide();
+                                $('.page-top .col-md-2.sidebar-offcanvas').hide();
+                            }
                         });
 
                         $('.content#duelmatrix div#choosehalfduelmatrix button').click(function (e) {

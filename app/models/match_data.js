@@ -83,6 +83,20 @@ module.exports = mongoose.model('MatchData', {
             V3: { type: String },
             V4: { type: String },
             V5: { type: String }
+        }],
+        overzicht_eerste_helft_verlenging: [{
+            V1: { type: String },
+            V2: { type: String },
+            V3: { type: String },
+            V4: { type: String },
+            V5: { type: String }
+        }],
+        overzicht_tweede_helft_verlenging: [{
+            V1: { type: String },
+            V2: { type: String },
+            V3: { type: String },
+            V4: { type: String },
+            V5: { type: String }
         }]
     },
     overzicht_wedstrijdstatistieken: [{

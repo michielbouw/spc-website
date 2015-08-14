@@ -1,7 +1,7 @@
 <div class="page-top">
     <div class="container">
-        <div class="col-md-2 hidden-xs hidden-sm">
-            <div class="col-md-2 navbar-sub">
+        <div class="col-md-2 col-sm-5 col-xs-8 sidebar-offcanvas">
+            <div class="navbar-sub">
                 <div class="item-title"><a href="/admin">Admin</a> / Pagina's</div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
                     <li role="presentation" class="active">
@@ -17,17 +17,30 @@
     </div>
 </div>
 
+<div class="menu-left-button" tooltip-placement="right" tooltip="linker menu openen">
+    <button type="button" data-toggle="offcanvas">
+        <span class="sr-only">Toggle linker menu</span>
+        <i class="fa fa-chevron-right"></i>
+        <i class="fa fa-chevron-left"></i>
+        <br>
+        <i class="fa fa-bars"></i>
+    </button>
+</div>
+
 <div class="page-content">
     <div class="container">
 
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
             <div class="col-xs-12 content-page-title">
-                <h3>Pagina's
-                <button ng-if="data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesSave()">Opslaan</button>
-                <button ng-if="!data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesCreate()">Pagina's aanmaken</button>
+                <h3 class="hidden-sm hidden-xs">Pagina's
+                    <button ng-if="data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesSave()">Opslaan</button>
+                    <button ng-if="!data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesCreate()">Pagina's aanmaken</button>
                 </h3>
-                <h4 class="hidden-md hidden-lg"><a href="/admin">Admin</a> / Pagina's</h4>
+                <h4 class="hidden-lg hidden-md">Pagina's
+                    <button ng-if="data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesSave()">Opslaan</button>
+                    <button ng-if="!data.pages" class="btn btn-sm btn-info pull-right" ng-click="data.pagesCreate()">Pagina's aanmaken</button>
+                </h4>
             </div>
             <div class="col-xs-12">
                 <p>Hier kan de inhoud van de openbare pagina's worden aangepast. Dit zijn voor nu de Home pagina, Over SPC pagina en de Jupiler samenwerking pagina.</p>
