@@ -818,10 +818,10 @@
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row text-center" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
+            <div class="col-xs-12 stat-table-row text-center" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.length > 0">
                 <h4>1e helft verlenging</h4>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging"
+            <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.length > 0"
                  ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
@@ -858,10 +858,10 @@
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row text-center" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
+            <div class="col-xs-12 stat-table-row text-center" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.length > 0">
                 <h4>2e helft verlenging</h4>
             </div>
-            <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging"
+            <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.length > 0"
                  ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
                 <div class="col-md-4 text-right">
                     {{ row.V1 }}
