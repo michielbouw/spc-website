@@ -538,6 +538,8 @@ Responsive setup
 
   /* collapsed sidebar styles */
   .page-top {
+    padding-top: 0 !important;
+
     .sidebar-offcanvas {
       width: 64%;
       padding-left: 15px;
