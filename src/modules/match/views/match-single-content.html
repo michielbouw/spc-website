@@ -11,12 +11,6 @@
             <h4>Wedstrijd</h4>
             <h4 class="small">Voor extra informatie per onderdeel klik op de <button style="font-size: 11px; padding: 0 6px; -webkit-border-radius: 24px; -moz-border-radius: 24px; -ms-border-radius: 24px; border-radius: 24px;" type="button" class="btn btn-primary btn-xs info"><i class="fa fa-info"></i></button> button bij het onderdeel.</h4>
         </div>
-        <!--<div class="col-xs-12">
-            <p>Uitleg...<br>
-            ...</p>
-            <p>Voor extra informatie per onderdeel klik op de <button style="font-size: 11px; padding: 0 6px; -webkit-border-radius: 24px; -moz-border-radius: 24px; -ms-border-radius: 24px; border-radius: 24px;" type="button" class="btn btn-primary btn-xs info"><i class="fa fa-info"></i></button> button bij het onderdeel.</p>
-            <br>
-        </div>-->
 
         <div id="opstelling" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Opstelling</h4>
@@ -29,7 +23,7 @@
         </div>
 
         <div class="col-xs-12 text-center collapse" id="collapseInfoOpstelling">
-            <p>Uitleg...</p>
+            <p>Overzicht van de opstelling met naam en rugnummers erbij. Als je met de muis over het poppetje in de opstelling gaat zie je de naam en een foto (als deze beschikbaar is). Daar onder staat de lijst met spelers en wisselspelers en bankzitters.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -782,7 +776,7 @@
         </div>
 
         <div class="col-xs-12 text-center collapse" id="collapseInfoWedstrijd">
-            <p>Uitleg...</p>
+            <p>Een overzicht van alle gebeurtenissen tijdens de wedstrijd en tijdens evtentuele verlenging.</p>
             <br>
         </div>
         <br class="clear">
@@ -796,11 +790,11 @@
                 <h4>1e helft</h4>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft">
-                <div class="col-xs-4 text-right">
+                <div class="col-sm-4 hidden-xs text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 col-xs-12">
                     <div class="col-xs-4" style="font-size: 16px; margin-top: -2px;">
                         <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"></i></span>
                         <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"></i> p.</span>
@@ -828,7 +822,7 @@
                         <span ng-show="row.V4 == ' '">&nbsp;</span>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 hidden-xs">
                     {{ row.V5 }}
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
@@ -837,11 +831,11 @@
                 <h4>2e helft</h4>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft">
-                <div class="col-xs-4 text-right">
+                <div class="col-sm-4 hidden-xs text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 col-xs-12">
                     <div class="col-xs-4" style="font-size: 16px; margin-top: -2px;">
                         <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"></i></span>
                         <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"></i> p.</span>
@@ -869,7 +863,7 @@
                         <span ng-show="row.V4 == ' '">&nbsp;</span>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 hidden-xs">
                     {{ row.V5 }}
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
@@ -879,11 +873,11 @@
             </div>
             <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.length > 0"
                  ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_eerste_helft_verlenging">
-                <div class="col-xs-4 text-right">
+                <div class="col-sm-4 hidden-xs text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 col-xs-12">
                     <div class="col-xs-4" style="font-size: 16px; margin-top: -2px;">
                         <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"></i></span>
                         <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"></i> p.</span>
@@ -909,7 +903,7 @@
                         <span ng-show="row.V4 == ' '">&nbsp;</span>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 hidden-xs">
                     {{ row.V5 }}
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
@@ -919,11 +913,11 @@
             </div>
             <div class="col-xs-12 stat-table-row" ng-if="data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.length > 0"
                  ng-repeat="row in data.match.overzicht_wedstrijd.overzicht_tweede_helft_verlenging">
-                <div class="col-xs-4 text-right">
+                <div class="col-sm-4 hidden-xs text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 col-xs-12">
                     <div class="col-xs-4" style="font-size: 16px; margin-top: -2px;">
                         <span ng-if="row.V2 == 'goal'"><i class="fa fa-soccer-ball-o"></i></span>
                         <span ng-if="row.V2 == 'penalty_gescoord'"><i class="fa fa-soccer-ball-o"></i> p.</span>
@@ -949,7 +943,7 @@
                         <span ng-show="row.V4 == ' '">&nbsp;</span>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 hidden-xs">
                     {{ row.V5 }}
                     <span ng-show="row.V5 == ' '">&nbsp;</span>
                 </div>
@@ -967,56 +961,56 @@
 
         <div id="statistieken" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overzicht wedstrijdstatistieken</h4>
-            <h4 class="small">Algemene cijfers over de wedstrijd <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoStats" aria-expanded="false" aria-controls="collapseInfoStats"><i class="fa fa-info"></i></button></span></h4>
+            <h4 class="small">Algemene cijfers over de wedstrijd <!--<span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoStats" aria-expanded="false" aria-controls="collapseInfoStats"><i class="fa fa-info"></i></button></span>--></h4>
         </div>
-        <div class="col-xs-12 text-center collapse" id="collapseInfoStats">
-            <p>Uitleg...</p>
+        <!--<div class="col-xs-12 text-center collapse" id="collapseInfoStats">
+            <p>Algemene statistieken weergegeven in een tabel.</p>
             <br>
-        </div>
+        </div>-->
         <div class="stat-table statistieken">
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_wedstrijdstatistieken">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     {{ row.V1 }}
                     <span ng-show="row.V1 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-xs-4 text-center">
                     {{ row.V2 }}
                     <span ng-show="row.V2 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-4">
                     {{ row.V3 }}
                     <span ng-show="row.V3 == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     {{ data.match.balbezit.thuis.hele_wedstrijd }}%
                     <span ng-show="data.match.balbezit.thuis.hele_wedstrijd == ' '">&nbsp;</span>
                 </div>
-                <div class="col-md-4 text-center">Balbezit</div>
-                <div class="col-md-4">
+                <div class="col-xs-4 text-center">Balbezit</div>
+                <div class="col-xs-4">
                     {{ data.match.balbezit.uit.hele_wedstrijd }}%
                     <span ng-show="data.match.balbezit.uit.hele_wedstrijd == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     {{ data.match.balbezit.thuis.helft_1 }}%
                     <span ng-show="data.match.balbezit.thuis.helft_1 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-md-4 text-center">Balbezit 1e Helft</div>
-                <div class="col-md-4">
+                <div class="col-xs-4 text-center">Balbezit 1e Helft</div>
+                <div class="col-xs-4">
                     {{ data.match.balbezit.uit.helft_1 }}%
                     <span ng-show="data.match.balbezit.uit.helft_1 == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     {{ data.match.balbezit.thuis.helft_2 }}%
                     <span ng-show="data.match.balbezit.thuis.helft_2 == ' '">&nbsp;</span>
                 </div>
-                <div class="col-md-4 text-center">Balbezit 2e Helft</div>
-                <div class="col-md-4">
+                <div class="col-xs-4 text-center">Balbezit 2e Helft</div>
+                <div class="col-xs-4">
                     {{ data.match.balbezit.uit.helft_2 }}%
                     <span ng-show="data.match.balbezit.uit.helft_2 == ' '">&nbsp;</span>
                 </div>
@@ -1140,33 +1134,33 @@
 
         <div id="doelpogingen" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Doelpogingen</h4>
-            <h4 class="small">Schoten, penalties en directe vrije trappen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDoelpogingen" aria-expanded="false" aria-controls="collapseInfoDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4 class="small">Schoten, penalties en directe vrije trappen <!--<span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDoelpogingen" aria-expanded="false" aria-controls="collapseInfoDoelpogingen"><i class="fa fa-info"></i></button></span>--></h4>
         </div>
-        <div class="col-xs-12 text-center collapse" id="collapseInfoDoelpogingen">
+        <!--<div class="col-xs-12 text-center collapse" id="collapseInfoDoelpogingen">
             <p>Uitleg...</p>
             <br>
-        </div>
+        </div>-->
         <div class="stat-table doelpogingen">
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overzicht_doelpogingen">
-                <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
+                <div ng-if="row.V1 !== ' '" class="col-xs-4 text-right">
                     {{ row.V1 }}
                 </div>
-                <div ng-if="row.V1 == ' '" class="col-md-4 text-right" style="line-height: 6px;">
+                <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V2 !== ' ' && row.V2 !== 'DOELPOGINGEN' && row.V2 !== 'SCHOTEN' && row.V2 !== 'PENALTIES' && row.V2 !== 'DIRECT GENOMEN VRIJE TRAPPEN'" class="col-md-4 text-center">
+                <div ng-if="row.V2 !== ' ' && row.V2 !== 'DOELPOGINGEN' && row.V2 !== 'SCHOTEN' && row.V2 !== 'PENALTIES' && row.V2 !== 'DIRECT GENOMEN VRIJE TRAPPEN'" class="col-xs-4 text-center">
                     {{ row.V2 }}
                 </div>
-                <div ng-if="row.V2 == 'DOELPOGINGEN' || row.V2 == 'SCHOTEN' || row.V2 == 'PENALTIES' || row.V2 == 'DIRECT GENOMEN VRIJE TRAPPEN'" class="col-md-4 text-center">
+                <div ng-if="row.V2 == 'DOELPOGINGEN' || row.V2 == 'SCHOTEN' || row.V2 == 'PENALTIES' || row.V2 == 'DIRECT GENOMEN VRIJE TRAPPEN'" class="col-xs-4 text-center">
                     <strong>{{ row.V2 }}</strong>
                 </div>
-                <div ng-if="row.V2 == ' '" class="col-md-4 text-center" style="line-height: 6px;">
+                <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V3 !== ' '" class="col-md-4">
+                <div ng-if="row.V3 !== ' '" class="col-xs-4">
                     {{ row.V3 }}
                 </div>
-                <div ng-if="row.V3 == ' '" class="col-md-4" style="line-height: 6px;">
+                <div ng-if="row.V3 == ' '" class="col-xs-4" style="line-height: 6px;">
                     &nbsp;
                 </div>
             </div>
@@ -1174,41 +1168,41 @@
 
         <div id="dueloverzicht" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Duels</h4>
-            <h4 class="small">Overzicht soorten duels en aantallen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDuels" aria-expanded="false" aria-controls="collapseInfoDuels"><i class="fa fa-info"></i></button></span></h4>
+            <h4 class="small">Overzicht soorten duels en aantallen <!--<span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoDuels" aria-expanded="false" aria-controls="collapseInfoDuels"><i class="fa fa-info"></i></button></span>--></h4>
         </div>
-        <div class="col-xs-12 text-center collapse" id="collapseInfoDuels">
+        <!--<div class="col-xs-12 text-center collapse" id="collapseInfoDuels">
             <p>Uitleg...</p>
             <br>
-        </div>
+        </div>-->
         <div class="stat-table dueloverzicht">
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
-                <div class="col-md-4 text-center" style="line-height: 6px;">
+                <div class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-4">
                     <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.duel_overzicht">
-                <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
+                <div ng-if="row.V1 !== ' '" class="col-xs-4 text-right">
                     {{ row.V1 }}
                 </div>
-                <div ng-if="row.V1 == ' '" class="col-md-4 text-right" style="line-height: 6px;">
+                <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V2 !== ' '" class="col-md-4 text-center">
+                <div ng-if="row.V2 !== ' '" class="col-xs-4 text-center">
                     {{ row.V2 }}
                 </div>
-                <div ng-if="row.V2 == ' '" class="col-md-4 text-center" style="line-height: 6px;">
+                <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V3 !== ' '" class="col-md-4">
+                <div ng-if="row.V3 !== ' '" class="col-xs-4">
                     {{ row.V3 }}
                 </div>
-                <div ng-if="row.V3 == ' '" class="col-md-4" style="line-height: 6px;">
+                <div ng-if="row.V3 == ' '" class="col-xs-4" style="line-height: 6px;">
                     &nbsp;
                 </div>
             </div>
@@ -1216,75 +1210,75 @@
 
         <div id="overtredingen" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Overtredingen</h4>
-            <h4 class="small">Overzicht soorten overtredingen en aantallen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingen" aria-expanded="false" aria-controls="collapseInfoOvertredingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4 class="small">Overzicht soorten overtredingen en aantallen <!--<span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingen" aria-expanded="false" aria-controls="collapseInfoOvertredingen"><i class="fa fa-info"></i></button></span>--></h4>
         </div>
-        <div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingen">
+        <!--<div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingen">
             <p>Uitleg...</p>
             <br>
-        </div>
+        </div>-->
         <div class="stat-table overtredingen">
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right"><strong>{{ data.matchshort.match_info.thuis }}</strong></div>
-                <div class="col-md-4 text-center" style="line-height: 6px;">&nbsp;</div>
-                <div class="col-md-4"><strong>{{ data.matchshort.match_info.uit }}</strong></div>
+                <div class="col-xs-4 text-right"><strong>{{ data.matchshort.match_info.thuis }}</strong></div>
+                <div class="col-xs-4 text-center" style="line-height: 6px;">&nbsp;</div>
+                <div class="col-xs-4"><strong>{{ data.matchshort.match_info.uit }}</strong></div>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overtredingen" ng-if="row.V2 == 'overtredingen'">
-                <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">{{ row.V1 }}</div>
-                <div ng-if="row.V1 == ' '" class="col-md-4 text-right" style="line-height: 6px;">&nbsp;</div>
-                <div class="col-md-4 text-center"><strong>{{ row.V2 }}</strong></div>
-                <div ng-if="row.V3 !== ' '" class="col-md-4">{{ row.V3 }}</div>
-                <div ng-if="row.V3 == ' '" class="col-md-4" style="line-height: 6px;">&nbsp;</div>
+                <div ng-if="row.V1 !== ' '" class="col-xs-4 text-right">{{ row.V1 }}</div>
+                <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">&nbsp;</div>
+                <div class="col-xs-4 text-center"><strong>{{ row.V2 }}</strong></div>
+                <div ng-if="row.V3 !== ' '" class="col-xs-4">{{ row.V3 }}</div>
+                <div ng-if="row.V3 == ' '" class="col-xs-4" style="line-height: 6px;">&nbsp;</div>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.overtredingen" ng-if="row.V2 !== 'overtredingen'">
-                <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">{{ row.V1 }}</div>
-                <div ng-if="row.V1 == ' '" class="col-md-4 text-right" style="line-height: 6px;">&nbsp;</div>
-                <div ng-if="row.V2 !== ' '" class="col-md-4 text-center">{{ row.V2 }}</div>
-                <div ng-if="row.V2 == ' '" class="col-md-4 text-center" style="line-height: 6px;">&nbsp;</div>
-                <div ng-if="row.V3 !== ' '" class="col-md-4">{{ row.V3 }}</div>
-                <div ng-if="row.V3 == ' '" class="col-md-4" style="line-height: 6px;">&nbsp;</div>
+                <div ng-if="row.V1 !== ' '" class="col-xs-4 text-right">{{ row.V1 }}</div>
+                <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">&nbsp;</div>
+                <div ng-if="row.V2 !== ' '" class="col-xs-4 text-center">{{ row.V2 }}</div>
+                <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">&nbsp;</div>
+                <div ng-if="row.V3 !== ' '" class="col-xs-4">{{ row.V3 }}</div>
+                <div ng-if="row.V3 == ' '" class="col-xs-4" style="line-height: 6px;">&nbsp;</div>
             </div>
         </div>
 
         <div id="spelhervattingen" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Spelhervattingen</h4>
-            <h4 class="small">Vrije trappen, hoekschoppen en inworpen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoHervattingen" aria-expanded="false" aria-controls="collapseInfoHervattingen"><i class="fa fa-info"></i></button></span></h4>
+            <h4 class="small">Vrije trappen, hoekschoppen en inworpen <!--<span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoHervattingen" aria-expanded="false" aria-controls="collapseInfoHervattingen"><i class="fa fa-info"></i></button></span>--></h4>
         </div>
-        <div class="col-xs-12 text-center collapse" id="collapseInfoHervattingen">
+        <!--<div class="col-xs-12 text-center collapse" id="collapseInfoHervattingen">
             <p>Uitleg...</p>
             <br>
-        </div>
+        </div>-->
         <div class="stat-table spelhervattingen">
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
-                <div class="col-md-4 text-center" style="line-height: 6px;">
+                <div class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-4">
                     <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.spelhervattingen">
-                <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
+                <div ng-if="row.V1 !== ' '" class="col-xs-4 text-right">
                     {{ row.V1 }}
                 </div>
-                <div ng-if="row.V1 == ' '" class="col-md-4 text-right" style="line-height: 6px;">
+                <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V2 !== ' ' && row.V2 !== 'VRIJE TRAPPEN' && row.V2 !== 'HOEKSCHOPPEN' && row.V2 !== 'INWORPEN'" class="col-md-4 text-center">
+                <div ng-if="row.V2 !== ' ' && row.V2 !== 'VRIJE TRAPPEN' && row.V2 !== 'HOEKSCHOPPEN' && row.V2 !== 'INWORPEN'" class="col-xs-4 text-center">
                     {{ row.V2 }}
                 </div>
-                <div ng-if="row.V2 == 'VRIJE TRAPPEN' || row.V2 == 'HOEKSCHOPPEN' || row.V2 == 'INWORPEN'" class="col-md-4 text-center">
+                <div ng-if="row.V2 == 'VRIJE TRAPPEN' || row.V2 == 'HOEKSCHOPPEN' || row.V2 == 'INWORPEN'" class="col-xs-4 text-center">
                     <strong>{{ row.V2 }}</strong>
                 </div>
-                <div ng-if="row.V2 == ' '" class="col-md-4 text-center" style="line-height: 6px;">
+                <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V3 !== ' '" class="col-md-4">
+                <div ng-if="row.V3 !== ' '" class="col-xs-4">
                     {{ row.V3 }}
                 </div>
-                <div ng-if="row.V3 == ' '" class="col-md-4" style="line-height: 6px;">
+                <div ng-if="row.V3 == ' '" class="col-xs-4" style="line-height: 6px;">
                     &nbsp;
                 </div>
             </div>
@@ -1292,47 +1286,47 @@
 
         <div id="passoverzicht" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Passes</h4>
-            <h4 class="small">Overzicht van de passes <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPasses" aria-expanded="false" aria-controls="collapseInfoPasses"><i class="fa fa-info"></i></button></span></h4>
+            <h4 class="small">Overzicht verschillende soorten passes <!--<span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPasses" aria-expanded="false" aria-controls="collapseInfoPasses"><i class="fa fa-info"></i></button></span>--></h4>
         </div>
-        <div class="col-xs-12 text-center collapse" id="collapseInfoPasses">
+        <!--<div class="col-xs-12 text-center collapse" id="collapseInfoPasses">
             <p>Uitleg...</p>
             <br>
-        </div>
+        </div>-->
         <div class="stat-table overtredingen">
             <div class="col-xs-12 stat-table-row">
-                <div class="col-md-4 text-right">
+                <div class="col-xs-4 text-right">
                     <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
-                <div class="col-md-4 text-center" style="line-height: 6px;">
+                <div class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-4">
                     <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.passes">
-                <div ng-if="row.V1 !== ' '" class="col-md-4 text-right">
+                <div ng-if="row.V1 !== ' '" class="col-xs-4 text-right">
                     {{ row.V1 }}
                 </div>
-                <div ng-if="row.V1 == ' '" class="col-md-4 text-right" style="line-height: 6px;">
+                <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V2 !== ' ' && row.V2 !== 'PASSES' && row.V2 !== 'totaal'" class="col-md-4 text-center">
+                <div ng-if="row.V2 !== ' ' && row.V2 !== 'PASSES' && row.V2 !== 'totaal'" class="col-xs-4 text-center">
                     {{ row.V2 }}
                 </div>
-                <!--<div ng-if="row.V2 == 'PASSES'" class="col-md-4 text-center">
+                <!--<div ng-if="row.V2 == 'PASSES'" class="col-xs-4 text-center">
                     <strong>{{ row.V2 }}</strong>
                 </div>-->
-                <div ng-if="row.V2 == 'totaal'" class="col-md-4 text-center">
+                <div ng-if="row.V2 == 'totaal'" class="col-xs-4 text-center">
                     <strong>{{ row.V2 }}</strong>
                 </div>
-                <div ng-if="row.V2 == ' '" class="col-md-4 text-center" style="line-height: 6px;">
+                <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V3 !== ' '" class="col-md-4">
+                <div ng-if="row.V3 !== ' '" class="col-xs-4">
                     {{ row.V3 }}
                 </div>
-                <div ng-if="row.V3 == ' '" class="col-md-4" style="line-height: 6px;">
+                <div ng-if="row.V3 == ' '" class="col-xs-4" style="line-height: 6px;">
                     &nbsp;
                 </div>
             </div>
@@ -1350,10 +1344,6 @@
             <h4>Teamstatistieken</h4>
             <h4 class="small">Verschillende groepsstatistieken. Uitleg..</h4>
         </div>
-        <!--<div class="col-xs-12">
-            <p>Verschillende groepsstatistieken. Uitleg...</p>
-            <br>
-        </div>-->
 
         <div id="veld" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Veld posities (gemiddeld)</h4>
