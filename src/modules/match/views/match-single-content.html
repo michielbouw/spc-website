@@ -1342,7 +1342,7 @@
 
         <div class="col-xs-12 content-title-top">
             <h4>Teamstatistieken</h4>
-            <h4 class="small">Verschillende groepsstatistieken. Uitleg..</h4>
+            <h4 class="small">Verschillende groepsstatistieken. Van posities tot overtredingen en duels.</h4>
         </div>
 
         <div id="veld" class="col-xs-12 content-title text-center">
@@ -1366,7 +1366,9 @@
             </div>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPosities">
-            <p>Klik de naam van het team om enkel deze weer te geven op het veld.</p>
+            <p>Hier zijn de gemiddelde balbezit-posities weergegeven per speler per tijdsinterval.
+                Klik op het gewenste tijdsinterval om dit weer te geven. Klik de naam van het team om
+                enkel deze weer te geven op het veld.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -1409,7 +1411,7 @@
             <h4 class="small">Verschillende doelpogingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoLocDoelpogingen" aria-expanded="false" aria-controls="collapseInfoLocDoelpogingen"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoLocDoelpogingen">
-            <p>Klik de naam van het team, of op het type, om enkel deze weer te geven op het veld.</p>
+            <p>Doelpogingen zijn onderverdeeld in verschillende types. Klik de naam van het team, of op het type, om enkel deze weer te geven op het veld.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -1508,7 +1510,7 @@
             <h4 class="small">De locatie van balcontact per team (donkerder is meer balcontact) <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoBalcontact" aria-expanded="false" aria-controls="collapseInfoBalcontact"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoBalcontact">
-            <p>Uitleg...</p>
+            <p>Dit zijn heatmaps waarin weergegeven wordt waar een team de meeste balcontact heeft gehad, donkerder is meet balcontact.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -1537,7 +1539,11 @@
             <h4 class="small">Totaal aantal gespeelde passes met succes percentage per zone <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPassZone" aria-expanded="false" aria-controls="collapseInfoPassZone"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPassZone">
-            <p>Uitleg...</p>
+            <p>Bij deze visualisatie is het veld verdeeld in drie delen/zones, van onder naar boven.
+                Elke zone loopt dus over de volle breedte (=van zijlijn tot zijlijn) van het veld.
+                De drie zones worden soms wel aangeduid als verdedigende zone, neutrale zone, en aanvallende zone, of als own third, middle third, other third.
+                De getallen geven aan hoeveel passes er gespeeld zijn vanuit deze zone en wat het succespercentage van deze passes was.
+            </p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -1703,7 +1709,11 @@
             </div>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPassMatrix">
-            <p>Uitleg... <br>Blauw ingekleurd = 5 tot 8, rood ingekleurd = 9 of meer</p>
+            <p>De passmatrix bestaat uit de passes tussen de teamgenoten. In de rijen staan de spelers die de pass
+                geven en in de kolommen de teamgenoten naar wie werd gespeeld. In de tweede tabel (eronder) staat een
+                overzicht van de soorten passes per speler in lengte: kort (korter dan 10 meter), middellang (tussen de 10
+                en 25 meter), lang (langer dan 25 meter) en de percentages geslaagde passes.
+                <br>Blauw ingekleurd = 5 tot 8, rood ingekleurd = 9 of meer</p>
             <br>
         </div>
         <div class="tab-content">
@@ -2097,7 +2107,8 @@
             </div>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoDuelMatrix">
-            <p>Uitleg... <br>Blauw ingekleurd = 5 tot 8, rood ingekleurd = 9 of meer</p>
+            <p>De duelmatrix bevat de aantallen duels tussen verschillende spelers.
+                <br>Blauw ingekleurd = 5 tot 8, rood ingekleurd = 9 of meer</p>
             <br>
         </div>
         <div class="tab-content">
@@ -2350,7 +2361,10 @@
             <h4 class="small">Gemaakte penalties <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoPenalties" aria-expanded="false" aria-controls="collapseInfoPenalties"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoPenalties">
-            <p>Uitleg...</p>
+            <p>Van alle penalties is ruwweg bekend waar de bal is gekomen, of er is gescoord, wie de penalty-nemer was en wie de keeper.
+                De bal kan in het doel zijn gekomen (gestopt of gescoord), dit is onderverdeeld in: laag+links, laag+midden, laag+rechts, hoog:links,
+                hoog+midden, hoog+rechts. De bal kan op het ijzer gekomen zijn, dit is onderverdeeld in: lat, linkerpaal, rechterpaal.
+                Of de bal is naast of over geschoten, hiervan zijn verder geen details bekend.</p>
             <br>
         </div>
         <div ng-if="!data.match.penalty_visualisatie || data.match.penalty_visualisatie.length <= 0 || data.match.penalty_visualisatie[0] == -999"
@@ -2413,7 +2427,7 @@
             <h4 class="small">Per speler <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingenSpeler" aria-expanded="false" aria-controls="collapseInfoOvertredingenSpeler"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingenSpeler">
-            <p>Uitleg...</p>
+            <p>Overzicht van verschillende overtredingen die spelers hebben gemaakt of ondergaan.</p>
             <br>
         </div>
         <div class="stat-table overtredingen_speler">
@@ -2463,7 +2477,8 @@
             <h4 class="small">Verschillende overtredingen <span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOvertredingenLocatie" aria-expanded="false" aria-controls="collapseInfoOvertredingenLocatie"><i class="fa fa-info"></i></button></span></h4>
         </div>
         <div class="col-xs-12 text-center collapse" id="collapseInfoOvertredingenLocatie">
-            <p>Uitleg...</p>
+            <p>De locatie van de verschillende overtredingen met daarbij de spelerinformatie. Klik de naam van
+                het team om enkel deze weer te geven op het veld.</p>
             <br>
         </div>
         <div class="col-xs-12">
@@ -2517,11 +2532,6 @@
                 het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
                 in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</h4>
         </div>
-        <!--<div class="col-xs-12">
-            <small>Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
-                het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
-                in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</small>
-        </div>-->
         <div class="col-xs-12 col-sm-6">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 lineup_field" id="lineup_size">
                 <div>
@@ -3247,11 +3257,6 @@
                 het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
                 in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</h4>
         </div>
-        <!--<div class="col-xs-12">
-            <small>Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
-                het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
-                in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</small>
-        </div>-->
         <div class="col-xs-12 col-sm-6">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 lineup_field" id="lineup_size">
                 <div>
