@@ -15,12 +15,5 @@ angular.module('mainapp.pageIndex', [])
                     requiredLogin: false,
                     permission: 'public'
                 }
-            })
-            .when('/jupiler', {
-                templateUrl: 	'page-index/views/jl.html',
-                access: {
-                    requiredLogin: false,
-                    permission: 'public'
-                }
             });
     });

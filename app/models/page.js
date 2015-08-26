@@ -25,17 +25,6 @@ module.exports = mongoose.model('Page', {
             photo_width : {type : Number}
         }]
     },
-    jupiler : {
-        title : {type : String},
-        subtitle : {type : String},
-        blocks : [{
-            title : {type : String},
-            content : {type : String},
-            photo : {type : String},
-            photo_align : {type : String},
-            photo_width : {type : Number}
-        }]
-    },
     editor : {type : String},
     date_edited : {type : Date, default: Date.now, required: true}
 });

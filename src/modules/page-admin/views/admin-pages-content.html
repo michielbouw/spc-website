@@ -162,69 +162,6 @@
                     <h3><i class="fa fa-plus"></i></h3>
                 </div>
             </div>
-            <div class="col-xs-12" ng-if="data.pages && data.pages.jupiler">
-                <hr>
-                <div class="col-lg-12">
-                    <h4><a href="/jupiler">Jupiler pagina</a></h4>
-                </div>
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label for="inputTitleJL" class="col-sm-2 control-label">Titel</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitleJL" placeholder="Titel" ng-model="data.pages.jupiler.title">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputDescrJL" class="col-sm-2 control-label">Ondertitel</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputDescrJL" placeholder="Ondertitel" ng-model="data.pages.jupiler.subtitle">
-                        </div>
-                    </div>
-                </form>
-                <br>
-                <div class="col-xs-6 col-sm-2"><p><strong>Text blokken</strong></p></div>
-                <div class="col-xs-12" ng-repeat="block in data.pages.jupiler.blocks">
-                    <br>
-                    <div class="col-xs-12"><p>Blok {{ $index+1 }}</p></div>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="inputTitleBlock2" class="col-sm-2 control-label">Titel</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputTitleBlock2" placeholder="Titel" ng-model="block.title">
-                            </div>
-                        </div>
-                    </form>
-                    <text-angular ng-model="block.content"></text-angular>
-                    <div class="btn btn-sm btn-default" ngf-select ngf-change="data.uploadFeatured('jupiler', 'blocks', $index, $files)" ngf-accept="'image/*'" ngf-max-size="1048576">Foto toevoegen (max. 1MB)</div>
-                    <p><small>Huidige foto: {{ block.photo }}, ook hieronder klein weergegeven.</small><br>
-                        <img src="{{ block.photo }}" style="width:25%; float: left;"></p>
-                    <form class="form-horizontal col-sm-9" ng-show="block.photo">
-                        <div class="form-group">
-                            <label for="inputAlign2" class="col-sm-6 control-label">Foto uitlijnen (links/rechts)</label>
-                            <div class="col-sm-6">
-                                <select class="form-control" id="inputAlign2" ng-model="block.photo_align">
-                                    <option>links</option>
-                                    <option>rechts</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputWidth2" class="col-sm-6 control-label">Foto breedte (schaal 1-12, dus 1/12 breedte tot 12/12 breedte van het blok)</label>
-                            <div class="col-sm-6">
-                                <select class="form-control" id="inputWidth2" ng-model="block.photo_width">
-                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="col-xs-12 text-center">
-                        <button class="btn btn-xs btn-danger" ng-click="data.itemDel('jupiler', 'blocks', $index)" title="verwijder"><i class="fa fa-close"></i> verwijder blok</button>
-                    </div>
-                </div>
-                <div class="col-xs-12 text-center" ng-click="data.itemAdd('jupiler', 'blocks')">
-                    <h3><i class="fa fa-plus"></i></h3>
-                </div>
-            </div>
 
         </div>
 

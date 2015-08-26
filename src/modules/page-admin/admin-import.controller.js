@@ -234,6 +234,8 @@ angular.module('mainapp.pageAdmin')
                         items.overzicht_wedstrijd.overzicht = [];
                         items.overzicht_wedstrijd.overzicht_eerste_helft = [];
                         items.overzicht_wedstrijd.overzicht_tweede_helft = [];
+                        items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging = [];
+                        items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging = [];
                         angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht, function (value, key) {
                             var temp = {};
                             temp.V1 = value[' '];
@@ -264,31 +266,35 @@ angular.module('mainapp.pageAdmin')
                             items.overzicht_wedstrijd.overzicht_tweede_helft.push(temp);
                         });
                         items.overzicht_wedstrijd.overzicht_tweede_helft.splice(0, 1);
-                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.length > 0) {
-                            items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging = [];
-                            angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging, function (value, key) {
-                                var temp = {};
-                                temp.V1 = value[' '];
-                                temp.V2 = value[' .1'];
-                                temp.V3 = value[' .2'];
-                                temp.V4 = value[' .3'];
-                                temp.V5 = value[' .4'];
-                                items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.push(temp);
-                            });
-                            items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.splice(0, 1);
+                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging) {
+                            if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.length > 0) {
+                                items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging = [];
+                                angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht_eerste_helft_verlenging, function (value, key) {
+                                    var temp = {};
+                                    temp.V1 = value[' '];
+                                    temp.V2 = value[' .1'];
+                                    temp.V3 = value[' .2'];
+                                    temp.V4 = value[' .3'];
+                                    temp.V5 = value[' .4'];
+                                    items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.push(temp);
+                                });
+                                items.overzicht_wedstrijd.overzicht_eerste_helft_verlenging.splice(0, 1);
+                            }
                         }
-                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.length > 0) {
-                            items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging = [];
-                            angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging, function (value, key) {
-                                var temp = {};
-                                temp.V1 = value[' '];
-                                temp.V2 = value[' .1'];
-                                temp.V3 = value[' .2'];
-                                temp.V4 = value[' .3'];
-                                temp.V5 = value[' .4'];
-                                items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.push(temp);
-                            });
-                            items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.splice(0, 1);
+                        if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging) {
+                            if (data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.length > 0) {
+                                items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging = [];
+                                angular.forEach(data.wedstrijd_data.overzicht_wedstrijd.overzicht_tweede_helft_verlenging, function (value, key) {
+                                    var temp = {};
+                                    temp.V1 = value[' '];
+                                    temp.V2 = value[' .1'];
+                                    temp.V3 = value[' .2'];
+                                    temp.V4 = value[' .3'];
+                                    temp.V5 = value[' .4'];
+                                    items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.push(temp);
+                                });
+                                items.overzicht_wedstrijd.overzicht_tweede_helft_verlenging.splice(0, 1);
+                            }
                         }
 
                         items.overzicht_wedstrijdstatistieken = [];

@@ -28,19 +28,4 @@ angular.module('mainapp.pageIndex')
                 }, 0);
             }
         };
-    })
-    .directive('jlcontent', function ($timeout) {
-        return {
-            templateUrl: 'page-index/views/jl-content.html',
-            link: function(scope, element, attrs) {
-                $timeout(function () {
-                    angular.element(document).ready(function () {
-                        $('.block-jl').css({
-                            'min-height': window.innerHeight - 100,
-                            'height': 'auto'
-                        });
-                    });
-                }, 0);
-            }
-        };
     });
