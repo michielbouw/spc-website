@@ -13,6 +13,10 @@ angular.module('mainapp.pageAdmin')
             }, function(res) {
                 self.user = res;
             });
+
+            Api.Clubs.query(function(res) {
+                self.clubs = res;
+            });
         }
 
         self.userEdit = function() {
@@ -30,6 +34,7 @@ angular.module('mainapp.pageAdmin')
             Api.User.put({
                 _id: _t._id
             }, {
+                is_active: _t.is_active,
                 email: _t.email,
                 first_name: _t.first_name,
                 middle_name: _t.middle_name,

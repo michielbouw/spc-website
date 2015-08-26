@@ -95,6 +95,14 @@
 
                 <form class="form-horizontal" ng-if="data.user._id">
                     <div class="form-group">
+                        <label for="inputActive" class="col-sm-2 control-label">Actief</label>
+                        <div class="col-sm-10">
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="inputActive" ng-model="data.user.is_active"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputEmail1" class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="inputEmail1" placeholder="Email" ng-model="data.user.email">
@@ -114,28 +122,28 @@
                     </div>
                     <div class="form-group">
                         <label for="inputClub" class="col-sm-2 control-label">Club</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="inputClub" ng-model="data.user.club">
-                                <option>FC Eindhoven</option>
-                                <option>FC Oss</option>
+                        <div class="col-sm-10 nullable">
+                            <select class="form-control" id="inputClub" ng-model="data.user.club"
+                                    ng-options="club.name as club.name for club in data.clubs track by club.name">
+                                <option value="">-- kies club --</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group" ng-repeat="team in data.user.teams">
                         <label for="inputTeam" class="col-sm-2 control-label">Team</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="inputTeam" ng-model="team.team">
-                                <option>1e elftal</option>
-                                <option>jeugd elftal</option>
+                        <div class="col-sm-10 nullable">
+                            <select class="form-control" id="inputTeam" ng-model="team.team"
+                                    ng-options="team.team_name as team.team_name for team in (data.clubs | filter:{ name: data.user.club })[0].teams track by team.team_name">
+                                <option value="">-- kies team --</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputTeam2" class="col-sm-2 control-label">Team</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="inputTeam2" ng-model="data.user.teams[data.user.teams.length].team">
-                                <option>1e elftal</option>
-                                <option>jeugd elftal</option>
+                        <div class="col-sm-10 nullable">
+                            <select class="form-control" id="inputTeam2" ng-model="data.user.teams[data.user.teams.length].team"
+                                    ng-options="team.team_name as team.team_name for team in (data.clubs | filter:{ name: data.user.club })[0].teams track by team.team_name">
+                                <option value="">-- kies team --</option>
                             </select>
                         </div>
                     </div>

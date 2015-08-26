@@ -1636,7 +1636,7 @@ angular.module('mainapp.pageAdmin')
                                     // create team and teamID with the season
                                     var teams = [];
                                     var teamstemp = {};
-                                    teamstemp.team_name = '1e elftal';
+                                    teamstemp.team_name = '1';
                                     teamstemp.team_slug = club_slug + '_' + teamstemp.team_name.trim().toLowerCase().replace(/\s+/g, '');
                                     teamstemp.teamID = [];
                                     var teamstemp2 = {};
@@ -1694,7 +1694,7 @@ angular.module('mainapp.pageAdmin')
                                     } else {
                                         // create team + teamID
                                         var teamstemp4 = {};
-                                        teamstemp4.team_name = '1e elftal';
+                                        teamstemp4.team_name = '1';
                                         teamstemp4.team_slug = club_slug + '_' + teamstemp4.team_name.trim().toLowerCase().replace(/\s+/g, '');
                                         teamstemp4.teamID = [];
                                         var teamstemp5 = {};
@@ -1732,10 +1732,10 @@ angular.module('mainapp.pageAdmin')
                                         // create season and round and add teamdata
                                         teamdata = {};
                                         teamdata.team_slug = team_slug;
-                                        teamdata.team_name = '1e elftal';
+                                        teamdata.team_name = '1';
                                         teamdata.divisie = match_short.divisie;
                                         teamdata.club_name = match_short.match_info.thuis;
-                                        teamdata.club_slug = match_short.thuisTeamSlug;
+                                        teamdata.club_slug = club_slug;
                                         teamdata.team_data = [];
                                         var team_data_temp3 = {};
                                         team_data_temp3.season = match_short.seizoen;
@@ -2151,7 +2151,7 @@ angular.module('mainapp.pageAdmin')
                                     // create team and teamID with the season
                                     var teams = [];
                                     var teamstemp = {};
-                                    teamstemp.team_name = '1e elftal';
+                                    teamstemp.team_name = '1';
                                     teamstemp.team_slug = club_slug_uit + '_' + teamstemp.team_name.trim().toLowerCase().replace(/\s+/g, '');
                                     teamstemp.teamID = [];
                                     var teamstemp2 = {};
@@ -2208,7 +2208,7 @@ angular.module('mainapp.pageAdmin')
                                     } else {
                                         // create team + teamID
                                         var teamstemp4 = {};
-                                        teamstemp4.team_name = '1e elftal';
+                                        teamstemp4.team_name = '1';
                                         teamstemp4.team_slug = club_slug_uit + '_' + teamstemp4.team_name.trim().toLowerCase().replace(/\s+/g, '');
                                         teamstemp4.teamID = [];
                                         var teamstemp5 = {};
@@ -2245,10 +2245,10 @@ angular.module('mainapp.pageAdmin')
                                         // create season and round and add teamdata_uit
                                         teamdata_uit = {};
                                         teamdata_uit.team_slug = team_slug_uit;
-                                        teamdata_uit.team_name = '1e elftal';
+                                        teamdata_uit.team_name = '1';
                                         teamdata_uit.divisie = match_short.divisie;
                                         teamdata_uit.club_name = match_short.match_info.uit;
-                                        teamdata_uit.club_slug = match_short.uitTeamSlug;
+                                        teamdata_uit.club_slug = club_slug_uit;
                                         teamdata_uit.team_data = [];
                                         var team_data_temp3 = {};
                                         team_data_temp3.season = match_short.seizoen;
