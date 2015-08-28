@@ -79,11 +79,15 @@ angular.module('mainapp', [
             if ($localStorage.remember && $location.url() == "/") {
                 if ($localStorage.role == 'admin') {
                     $location.path("/admin");
+                } else if ($localStorage.role == 'club-beheer') {
+                    $location.path("/user");
                 } else if ($localStorage.role == 'speler') {
-                    $location.path("/speler");
+                    $location.path("/user");
                 } else {
                     $location.path("/club");
                 }
+            } else if ($location.url() == "/") {
+                $location.path("/user");
             }
         }
     });

@@ -569,6 +569,7 @@ angular.module('mainapp.match')
             var temp1 = $filter('filter')(temp.matches, {season: self.match.seizoen}, true)[0];
             var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
             self.spelerlog = player.player_log;
+            self.spelercijfers = player.scores;
         };
 
         $rootScope.infoSaveLog = '';
@@ -591,6 +592,81 @@ angular.module('mainapp.match')
                     date_edited: self.datetime
                 }, function (res) {
                     $rootScope.infoSaveLog = 'Opgeslagen';
+                });
+            }
+        };
+
+        self.matchlogtemp = '';
+        $rootScope.infoAddMatchLog = '';
+        self.addMatchLog = function () {
+            var editor_name;
+            if ($rootScope.currentUser.middle_name) {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
+            } else {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
+            }
+
+            $rootScope.infoAddMatchLog = '';
+            if ($filter('filter')(self.team_data.team_data, {season: self.match.seizoen}, true)) {
+                var logtemp = {};
+                logtemp.pub_date = new Date();
+                logtemp.author = editor_name;
+                logtemp.text = self.matchlogtemp;
+                self.teamdata.match_log.push(logtemp);
+
+                //var temp = $filter('filter')(self.team_data.team_data, {season: self.match.seizoen}, true)[0];
+                //var teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
+                //teamdata.match_log.push(logtemp);
+
+                //angular.forEach(self.team_data, function (value, key) {
+                //    if (value.season === self.match.seizoen) {
+                //        var teamdata = $filter('filter')(value.matches, {matchID: self.match.matchID}, true)[0];
+                //        teamdata.match_log.push(logtemp);
+                //    }
+                //});
+                Api.TeamDataItem.put({
+                    _slug: self.team_data._id
+                }, {
+                    team_data: self.team_data.team_data,
+                    date_edited: self.datetime
+                }, function (res) {
+                    $rootScope.infoAddMatchLog = 'Opgeslagen';
+                });
+            }
+        };
+
+        self.playerlogtemp = '';
+        $rootScope.infoAddPlayerLog = '';
+        self.addPlayerLog = function (i) {
+            var editor_name;
+            if ($rootScope.currentUser.middle_name) {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
+            } else {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
+            }
+
+            $rootScope.infoAddPlayerLog = '';
+            if ($filter('filter')(self.team_data.team_data, {season: self.match.seizoen}, true)) {
+                var logtemp = {};
+                logtemp.pub_date = new Date();
+                logtemp.author = editor_name;
+                logtemp.text = self.playerlogtemp;
+                self.spelerlog.push(logtemp);
+
+                angular.forEach(self.playerdata, function (value, key) {
+                    if (value.playerID == i) {
+                        var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
+                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                        player.spelerlog = self.spelerlog;
+                    }
+                });
+                Api.TeamDataItem.put({
+                    _slug: self.team_data._id
+                }, {
+                    player_data: self.playerdata,
+                    date_edited: self.datetime
+                }, function (res) {
+                    $rootScope.infoAddPlayerLog = 'Opgeslagen';
                 });
             }
         };

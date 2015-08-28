@@ -30,11 +30,15 @@ angular.module('mainapp.memberAuth')
                     if ($localStorage.remember && $location.url() == "/") {
                         if ($localStorage.role == 'admin') {
                             $location.path("/admin");
+                        } else if ($localStorage.role == 'club-beheer') {
+                            $location.path("/user");
                         } else if ($localStorage.role == 'speler') {
-                            $location.path("/speler");
+                            $location.path("/user");
                         } else {
                             $location.path("/club");
                         }
+                    } else if ($location.url() == "/") {
+                        $location.path("/user");
                     }
                 }
                 return response || $q.when(response);
@@ -90,11 +94,11 @@ angular.module('mainapp.memberAuth')
 
                 } else if (nextRoute.access.permission == "club-beheer" && user.role == "club-beheer") {
 
-                } else if (nextRoute.access.permission == "technische-staff" && user.role == "techn-staff") {
+                } else if (nextRoute.access.permission == "technische-staff" && user.role == "technische-staff") {
 
-                } else if (nextRoute.access.permission == "externe-staff" && (user.role == "techn-staff" || user.role == "externe-staff")) {
+                } else if (nextRoute.access.permission == "externe-staff" && (user.role == "technische-staff" || user.role == "externe-staff")) {
 
-                } else if (nextRoute.access.permission == "speler" && (user.role == "techn-staff" || user.role == "externe-staff" || user.role == "speler")) {
+                } else if (nextRoute.access.permission == "speler" && (user.role == "technische-staff" || user.role == "externe-staff" || user.role == "speler")) {
 
                 } else if (nextRoute.access.permission == "fan" && (user.role == "fan")) {
 

@@ -75,8 +75,8 @@ angular.module('mainapp.memberAuth')
                                 Api.Club.get({
                                     _slug: res1.data.club_slug
                                 }, function(res2) {
-                                    $sessionStorage.currentClub.colors = res1.colors;
-                                    $sessionStorage.currentClub.spc_package = res1.spc_package;
+                                    $sessionStorage.currentClub.colors = res2.colors;
+                                    $sessionStorage.currentClub.spc_package = res2.spc_package;
 
                                     $rootScope.currentUser = $sessionStorage.currentUser;
                                     $rootScope.currentClub = $sessionStorage.currentClub;
@@ -87,8 +87,10 @@ angular.module('mainapp.memberAuth')
 
                                 if (res.data.role == 'admin') {
                                     $location.path("/admin");
+                                } else if (res.data.role == 'club-beheer') {
+                                    $location.path("/user");
                                 } else if (res.data.role == 'speler') {
-                                    $location.path("/speler");
+                                    $location.path("/user");
                                 } else {
                                     $location.path("/club");
                                 }

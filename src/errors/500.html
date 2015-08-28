@@ -42,7 +42,8 @@
 
 <div id="wrapper" autoscroll>
 
-    <navbar></navbar>
+    <navbar ng-hide="isLogged()"></navbar>
+    <navbarclub ng-show="isLogged()"></navbarclub>
 
     <div class="container-fluid intro-box"></div>
 

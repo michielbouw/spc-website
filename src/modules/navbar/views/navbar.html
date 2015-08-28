@@ -23,6 +23,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-hide="isLogged()"><a href="/login">Inloggen</a></li>
                     <li ng-if="currentUser.role == 'admin'"><a href="/admin">Admin</a></li>
+                    <li ng-if="currentUser.role !== 'admin'"><a href="/club">Club</a></li>
+                    <li ng-if="currentUser.role !== 'admin' && currentUser.role == 'club-beheer'"><a href="/user">Beheer</a></li>
                     <li ng-show="isLogged()" ng-controller="mainapp.memberAuth.AuthController as data"><a ng-click="data.logOut()">Uitloggen</a></li>
                 </ul>
             </div>

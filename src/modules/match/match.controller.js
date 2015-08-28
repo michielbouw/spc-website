@@ -6,6 +6,7 @@ angular.module('mainapp.match')
         var self = this;
 
         self.matches = [];
+        var teamslug;
         delete $sessionStorage.matchshort;
 
         if ($rootScope.currentUser) {
@@ -18,13 +19,25 @@ angular.module('mainapp.match')
                     self.matches = res;
                 });
             } else {
-                var teams = $rootScope.currentClub.teams;
-                var teamslug = '';
-                if ($filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)) {
-                    teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0];
-                } else if ($filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)) {
-                    teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0];
-                }
+                teamslug = $rootScope.currentClub.teams[0].team_slug;
+
+                Api.MatchesTeam.query({
+                    _id: teamslug
+                }, function (res) {
+                    self.matches = res;
+                });
+            }
+        } else if ($sessionStorage.currentUser && $sessionStorage.currentClub) {
+            if ($sessionStorage.currentUser.role == 'admin') {
+                Api.Matches.query(function (res) {
+                    self.matches = res;
+                });
+            } else if ($sessionStorage.currentClub.spc_package == 'league' || $sessionStorage.currentClub.spc_package == 'extra') {
+                Api.Matches.query(function (res) {
+                    self.matches = res;
+                });
+            } else {
+                teamslug = $sessionStorage.currentClub.teams[0].team_slug;
 
                 Api.MatchesTeam.query({
                     _id: teamslug
@@ -45,32 +58,26 @@ angular.module('mainapp.match')
 
                     Api.Club.get({
                         _slug: res.data.club_slug
-                    }, function (res) {
-                        $rootScope.currentClub.colors = res.colors;
-                        $rootScope.currentClub.spc_package = res.spc_package;
+                    }, function (res1) {
+                        $rootScope.currentClub.colors = res1.colors;
+                        $rootScope.currentClub.spc_package = res1.spc_package;
                     });
 
                     if ($rootScope.currentUser.role == 'admin') {
-                        Api.Matches.query(function (res) {
-                            self.matches = res;
+                        Api.Matches.query(function (res2) {
+                            self.matches = res2;
                         });
                     } else if ($rootScope.currentClub.spc_package == 'league' || $rootScope.currentClub.spc_package == 'extra') {
-                        Api.Matches.query(function (res) {
-                            self.matches = res;
+                        Api.Matches.query(function (res2) {
+                            self.matches = res2;
                         });
                     } else {
-                        var teams = $rootScope.currentClub.teams;
-                        var teamslug = '';
-                        if ($filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)) {
-                            teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0];
-                        } else if ($filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)) {
-                            teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0];
-                        }
+                        teamslug = $rootScope.currentClub.teams[0].team_slug;
 
                         Api.MatchesTeam.query({
                             _id: teamslug
-                        }, function (res) {
-                            self.matches = res;
+                        }, function (res2) {
+                            self.matches = res2;
                         });
                     }
                 }, function () {

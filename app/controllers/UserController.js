@@ -110,7 +110,7 @@ module.exports = UserController = {
 
     me: function(req, res)
     {
-        User.findOne({token: req.token}, 'email first_name middle_name last_name photo fan_club fan_club_slug club club_slug teams speler_id role is_superadmin', function(err, user) {
+        User.findOne({token: req.token}, '_id email first_name middle_name last_name photo fan_club fan_club_slug club club_slug teams speler_id role is_superadmin', function(err, user) {
             if (err) {
                 res.json({
                     type: false,
@@ -135,7 +135,13 @@ module.exports = UserController = {
             var bearer = bearerHeader.split(" ");
             bearerToken = bearer[1];
             req.token = bearerToken;
-            next();
+            jwt.verify(req.token, 'spc-extra-veilig-voetbalperformancecentre', {algorithm: 'HS256'}, function(err, decoded) {
+                if (err) {
+                    return res.json({ success: false, message: 'Failed to authenticate token.' });
+                } else {
+                    next();
+                }
+            });
         } else {
             res.sendStatus(403);
         }
@@ -158,7 +164,7 @@ module.exports = UserController = {
     {
         User.findOne({
             _id: req.params._id
-        }, 'is_active email first_name middle_name last_name photo fan_club fan_club_slug club club_slug teams speler_id role is_superadmin last_login number_of_logins', function(err, data){
+        }, '_id is_active email first_name middle_name last_name photo fan_club fan_club_slug club club_slug teams speler_id role is_superadmin last_login number_of_logins', function(err, data){
             if (err) res.send(err);
             //if (!data) res.sendStatus(404);
             res.json(data);

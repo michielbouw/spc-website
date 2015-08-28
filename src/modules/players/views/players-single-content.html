@@ -166,8 +166,8 @@
         </div>
 
         <div class="col-xs-12 content-title text-center">
-            <h3>Logboek speler per wedstrijd</h3>
-            <h4>Alle mogelijke notities kunnen hier geplaatst worden</h4>
+            <h4>Logboek speler per wedstrijd</h4>
+            <h4 class="small">Alle mogelijke notities kunnen hier geplaatst worden</h4>
         </div>
         <div class="col-xs-12">
             <p>Kies wedstrijd van dit seizoen:</p>
@@ -180,6 +180,7 @@
             <h4>Wedstrijd ronde {{ data.match.ronde }} <small>{{ data.match.wedstrijd }} ({{ data.match.eindstand }})</small></h4>
             <hr>
             <p>Persoonlijke reflectie deze wedstrijd</p>
+            <div ng-if="infoSaveLog" class="alert alert-info" role="alert">{{ infoSaveLog }}</div>
             <div class="col-xs-12 col-sm-6 col-md-4 form-group" style="margin-bottom: 0;">
                 <label for="inputScore" class="col-xs-8 col-md-6 control-label">EMI (0-10)</label>
                 <div class="col-xs-4 col-md-6">
@@ -192,21 +193,21 @@
                     <input type="number" class="form-control" id="inputScore2" ng-model="data.match.scores.emh" min="0" max="10">
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-sm" ng-click="data.savePlayerLog()">Opslaan</button>
+            <button ng-hide="currentUser.role !== 'speler' && currentUser.role !== 'admin'" type="button" class="btn btn-primary btn-sm" ng-click="data.savePlayerLog()">Opslaan</button>
+        </div>
+        <div class="col-xs-12" ng-if="data.match">
             <hr>
             <h4>Opmerkingen</h4>
-            <small>Opmerkingen of notities over deze wedstrijd kunnen hier geplaatst worden.
+            <div ng-if="infoAddPlayerLog" class="alert alert-info" role="alert">{{ infoAddPlayerLog }}</div>
+            <small>Opmerkingen of notities over deze wedstrijd kunnen hier geplaatst worden door de speler zelf en de coaches.
                 Zo kan later teruggelezen worden waar het goed of juist fout ging.
             </small>
-            <!--<h4>Opmerking plaatsen</h4>
-            <textarea class="form-control" rows="2"></textarea>
-            <br>
-            <button type="button" class="btn btn-primary btn-sm">Plaats</button>-->
-            <hr>
-            <h4>Reeds geplaatste opmerkingen</h4>
+            <textarea class="form-control" ng-model="data.playerlogtemp" rows="2"></textarea>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="data.addPlayerLog()">Plaats</button>
+            <br><br>
             <p ng-if="data.match.player_log.length <= 0">Geen opmerkingen geplaatst..</p>
-            <p ng-repeat="log in data.match.player_log">
-                {{ log.author }} - {{ log.text }}
+            <p ng-repeat="log in data.match.player_log | orderBy:'-pub_date'">
+                {{ log.text }} <small class="pull-right" style="margin: 6px 0;">door {{ log.author }} op {{ log.pub_date | date:'d MMM yyyy HH:mm' }}</small>
             </p>
         </div>
 

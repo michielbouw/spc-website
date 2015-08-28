@@ -34,6 +34,7 @@ module.exports = mongoose.model('TeamData', {
 
             // team match log
             match_log: [{
+                pub_date: { type: Date, default: Date.now },
                 author: { type: String },
                 text: { type: String }
             }]
@@ -96,6 +97,7 @@ module.exports = mongoose.model('TeamData', {
                 },
                 // log
                 player_log: [{
+                    pub_date: { type: Date, default: Date.now },
                     author: { type: String },
                     text: { type: String }
                 }]

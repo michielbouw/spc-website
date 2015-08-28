@@ -22,12 +22,15 @@ angular.module('mainapp.players')
             Api.TeamDataItem.get({
                 _slug: $routeParams.team_slug
             }, function (res) {
+                self._id = res._id;
+                self.player_data = res.player_data;
+
                 self.team_name = res.team_name;
                 self.club_name = res.club_name;
                 self.divisie = res.divisie;
                 self.playerID = Number($routeParams.playerid);
 
-                self.player_stats = $filter('filter')(res.player_data, {playerID: self.playerID}, true)[0];
+                self.player_stats = $filter('filter')(self.player_data, {playerID: self.playerID}, true)[0];
                 self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
                 self.season_matches = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
 
@@ -167,6 +170,45 @@ angular.module('mainapp.players')
         self.matchInitFunc = function () {
             self.match = {};
             self.match = $filter('filter')(self.season_matches, {matchID: self.match_index}, true)[0];
+        };
+
+        $rootScope.infoSaveLog = '';
+        self.savePlayerLog = function () {
+            $rootScope.infoSaveLog = '';
+            Api.TeamDataItem.put({
+                _slug: self._id
+            }, {
+                player_data: self.player_data,
+                date_edited: self.datetime
+            }, function (res) {
+                $rootScope.infoSaveLog = 'Opgeslagen';
+            });
+        };
+        self.playerlogtemp = '';
+        $rootScope.infoAddPlayerLog = '';
+        self.addPlayerLog = function () {
+            var editor_name;
+            if ($rootScope.currentUser.middle_name) {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
+            } else {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
+            }
+
+            $rootScope.infoAddPlayerLog = '';
+            var logtemp = {};
+            logtemp.pub_date = new Date();
+            logtemp.author = editor_name;
+            logtemp.text = self.playerlogtemp;
+            self.match.player_log.push(logtemp);
+
+            Api.TeamDataItem.put({
+                _slug: self._id
+            }, {
+                player_data: self.player_data,
+                date_edited: self.datetime
+            }, function (res) {
+                $rootScope.infoAddPlayerLog = 'Opgeslagen';
+            });
         };
 
         self.roundsfilterfrom = function () {

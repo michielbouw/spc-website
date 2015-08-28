@@ -12,7 +12,7 @@ angular.module('mainapp.club')
         if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/club/' + $rootScope.currentClub.teams[0].team_slug);
         } else if ((!$routeParams.team_slug || $routeParams.team_slug === '') && (!$rootScope.currentClub || !$rootScope.currentClub.teams[0].team_slug)) {
-            $location.path('/club/fceindhoven_1eelftal');
+            $location.path('/club/fceindhoven_1');
         } else {
             if ( ($rootScope.currentClub && $rootScope.currentClub.teams[0] && $rootScope.currentClub.teams[0].team_slug !== $routeParams.team_slug) && ($rootScope.currentClub && $rootScope.currentClub.teams[1] && $rootScope.currentClub.teams[1].team_slug !== $routeParams.team_slug) && $sessionStorage.role !== 'admin' ) {
                 $location.path('/404');
