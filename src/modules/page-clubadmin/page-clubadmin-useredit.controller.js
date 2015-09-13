@@ -1,6 +1,7 @@
-angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminUsersEditController', ['Api', '$scope', '$modal', '$routeParams', '$location', '$rootScope',
-        function(Api, $scope, $modal, $routeParams, $location, $rootScope) {
+angular.module('mainapp.pageClubadmin')
+    .controller('mainapp.pageClubadmin.UsereditController', ['Api', '$rootScope', '$scope', '$modal', '$sessionStorage',
+        '$location', '$routeParams',
+        function(Api, $rootScope, $scope, $modal, $sessionStorage, $location, $routeParams) {
 
         var self = this;
         self.datetime = new Date();
@@ -10,8 +11,39 @@ angular.module('mainapp.pageAdmin')
         } else {
             Api.User.get({
                 _id: $routeParams._id
-            }, function(res) {
+            }, function (res) {
                 self.user = res;
+
+                if ($sessionStorage.currentUser && $sessionStorage.currentClub) {
+                    self.user.club = $sessionStorage.currentClub.name;
+                } else {
+                    if (AuthenticationService.isLogged) {
+                        Api.Me.get(function (res) {
+                            $rootScope.currentUser = res.data;
+
+                            $rootScope.currentClub = {};
+                            $rootScope.currentClub.name = res.data.club;
+                            $rootScope.currentClub.slug = res.data.club_slug;
+                            $rootScope.currentClub.teams = res.data.teams;
+                            $rootScope.currentClub.colors = [];
+
+                            Api.Club.get({
+                                _slug: res.data.club_slug
+                            }, function (res1) {
+                                $rootScope.currentClub.colors = res1.colors;
+                                $rootScope.currentClub.spc_package = res1.spc_package;
+
+                                $sessionStorage.currentUser = $rootScope.currentUser;
+                                $sessionStorage.currentClub = $rootScope.currentClub;
+                            });
+
+                            self.user.club = res.data.club;
+                        }, function () {
+                        });
+                    } else {
+                        $location.path('/login');
+                    }
+                }
             });
 
             Api.Clubs.query(function(res) {
@@ -43,10 +75,9 @@ angular.module('mainapp.pageAdmin')
                 club_slug: _t.club_slug,
                 teams: _t.teams,
                 speler_id: _t.speler_id,
-                role: _t.role,
-                is_superadmin: _t.is_superadmin
+                role: _t.role
             }, function() {
-                $location.path('/admin/users');
+                $location.path('/beheer');
             }, function() {
             });
         };
@@ -69,7 +100,7 @@ angular.module('mainapp.pageAdmin')
                         if (res.type === false) {
                             alert(res.data);
                         } else {
-                            $location.path("/admin/users/edit/" + res.data._id);
+                            $location.path("/beheer/useredit/" + res.data._id);
                         }
                     }, function () {
                         $rootScope.errorAddUser = 'Er ging iets mis, account niet aangemaakt';
@@ -86,7 +117,7 @@ angular.module('mainapp.pageAdmin')
             Api.User.delete({
                 _id: self.user._id
             }, function() {
-                $location.path('/admin/users');
+                $location.path('/beheer');
             }, function() {
             });
         };

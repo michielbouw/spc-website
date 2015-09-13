@@ -8,5 +8,12 @@ angular.module('mainapp.pageClubadmin', [])
                     requiredLogin: true,
                     permission: 'club-beheer'
                 }
+            })
+            .when('/beheer/useredit/:_id', {
+                templateUrl: 	'page-clubadmin/views/clubadmin-useredit.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'club-beheer'
+                }
             });
     });

@@ -1,5 +1,5 @@
 var fs = require('fs');
-var fsextra = require ('fs.extra');
+var fsextra = require ('fs-extra');
 var im = require('imagemagick');
 
 UploadController = function() {};
@@ -129,6 +129,43 @@ UploadController.prototype.uploadFile = function(req, res) {
                     fs.unlink(tmp_path, function () {
                         if (err) throw err;
                         res.send(renamedFile);
+                    });
+                });
+            }
+        } else if (fileExtension == '.json') {
+            if (fs.existsSync(target_path)) {
+                //fs.unlink(tmp_path, function (err) {
+                //    if (err) throw err;
+                //    res.send(renamedFile);
+                //});
+
+                // move the file from the temporary location to the intended location
+                // remove wrong encoding
+                fs.readFile(tmp_path, 'binary', function (err, data) {
+                    if (err) throw err;
+
+                    fs.writeFile(target_path, data, 'utf8', function (err) {
+                        if (err) throw err;
+
+                        fs.unlink(tmp_path, function () {
+                            if (err) throw err;
+                            res.send(renamedFile);
+                        });
+                    });
+                });
+            } else {
+                // move the file from the temporary location to the intended location
+                // remove wrong encoding
+                fs.readFile(tmp_path, 'binary', function (err, data) {
+                    if (err) throw err;
+
+                    fs.writeFile(target_path, data, 'utf8', function (err) {
+                        if (err) throw err;
+
+                        fs.unlink(tmp_path, function () {
+                            if (err) throw err;
+                            res.send(renamedFile);
+                        });
                     });
                 });
             }

@@ -35,13 +35,15 @@ angular.module('mainapp.pageUser')
             self.season_matches = [];
             self.orderMatches = 'ronde';
 
-            Api.TeamDataItem.get({
-                _slug: $sessionStorage.currentClub.teams[0].team_slug
-            }, function (res) {
-                self.playerID = $sessionStorage.currentUser.speler_id;
-                self.player_stats = $filter('filter')(res.player_data, {playerID: self.playerID}, true)[0];
-                self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
-                self.season_matches = $filter('orderBy')(($filter('filter')(self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
-            });
+            if ($sessionStorage.currentUser.speler_id) {
+                Api.TeamDataItem.get({
+                    _slug: $sessionStorage.currentClub.teams[0].team_slug
+                }, function (res) {
+                    self.playerID = $sessionStorage.currentUser.speler_id;
+                    self.player_stats = $filter('filter')(res.player_data, {playerID: self.playerID}, true)[0];
+                    self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
+                    self.season_matches = $filter('orderBy')(($filter('filter')(self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
+                });
+            }
         }
     }]);

@@ -2,27 +2,27 @@
     <div class="container">
         <div class="col-md-2 col-sm-5 col-xs-8 sidebar-offcanvas">
             <div class="navbar-sub">
-                <div class="item-title"><a href="/admin">Admin</a> / Gebruikers</div>
+                <div class="item-title"><a href="/beheer">Clubbeheer</a></div>
                 <ul id="nav-sub" class="nav nav-pills nav-stacked">
                     <li role="presentation">
-                        <a href="/admin/users">
+                        <a href="/beheer" aria-controls="users" role="tab" data-toggle="tab" scroll-to="top">
                             <i class="fa fa-user"></i> Gebruikers
                         </a>
                     </li>
                     <li role="presentation" ng-class="{ active: !data.user._id }">
-                        <a href="/admin/users/edit/add">
+                        <a href="/beheer/useredit/add">
                             <i class="fa fa-user-plus"></i> Gebruiker toevoegen
                         </a>
                     </li>
                 </ul>
-                <div class="item-title"><a href="/admin/users">Terug naar Gebruikers</a></div>
+                <div class="item-title"><a href="/user">Profiel</a></div>
                 <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="menu-left-button" tooltip-placement="right" tooltip="linker menu openen">
+<div class="menu-left-button">
     <button type="button" data-toggle="offcanvas">
         <span class="sr-only">Toggle linker menu</span>
         <i class="fa fa-chevron-right"></i>
@@ -35,7 +35,7 @@
 <div class="page-content">
     <div class="container">
 
-        <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
+        <div class="col-xs-12 col-md-10 col-md-offset-2 col-sm-12 col-xs-12 content content-page">
 
             <div class="col-xs-12 content-page-title">
                 <h3 class="hidden-sm hidden-xs">Gebruiker <span ng-show="data.user._id">wijzigen</span><span ng-show="!data.user._id">toevoegen</span>
@@ -53,9 +53,9 @@
                 <p ng-show="data.user._id">Hier kunnen gebruiker gegevens worden gewijzigd. De gebruiker kan tot één club behoren, maar tot meerdere teams.
                     Een gebruiker kan enkel één type recht hebben op de site. Als de gebruiker een speler is dan ook de SpelerID invullen zoals die bekend is in de data.</p>
                 <p ng-show="!data.user._id">Hier kunnen gerbuikers toegevoegd worden. U dient zelf de gebruiker een tijdelijk wachtwoord te geven. Daarna kan/MOET deze gebruiker zijn
-                wachtwoord wijzigen. Nadat u de gebruiker heeft toegevoegd, door op de button 'Toevoegen bevestigen' te klikken, wordt u doorgestuurd naar de pagina waar
-                u meer gegevens van deze gebruiker kunt invullen zoals de bijbehorende club. De gebruiker is standaard gemerkt als niet actief totdat hij/zij via de link, die hij/zij
-                per mail krijgt, zijn/haar account heeft geactiveerd.</p>
+                    wachtwoord wijzigen. Nadat u de gebruiker heeft toegevoegd, door op de button 'Toevoegen bevestigen' te klikken, wordt u doorgestuurd naar de pagina waar
+                    u meer gegevens van deze gebruiker kunt invullen zoals de bijbehorende club. De gebruiker is standaard gemerkt als niet actief totdat hij/zij via de link, die hij/zij
+                    per mail krijgt, zijn/haar account heeft geactiveerd.</p>
                 <div ng-if="errorAddUser" class="alert alert-danger" role="alert">{{ errorAddUser }}</div>
             </div>
 
@@ -120,15 +120,6 @@
                             <input type="text" class="form-control" id="name" ng-model="data.user.last_name" placeholder="Achternaam">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputClub" class="col-sm-2 control-label">Club</label>
-                        <div class="col-sm-10 nullable">
-                            <select class="form-control" id="inputClub" ng-model="data.user.club"
-                                    ng-options="club.name as club.name for club in data.clubs track by club.name">
-                                <option value="">-- kies club --</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group" ng-repeat="team in data.user.teams">
                         <label for="inputTeam" class="col-sm-2 control-label">Team</label>
                         <div class="col-sm-10 nullable">
@@ -155,25 +146,16 @@
                                 <option>technische-staff</option>
                                 <option>externe-staff</option>
                                 <option>speler</option>
-                                <option>fan</option>
-                                <option>admin</option>
+                                <option ng-if="currentUser.role == 'admin'">admin</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group" ng-if="data.user.role == 'speler'">
+                    <!--<div class="form-group" ng-if="data.user.role == 'speler'">
                         <label for="inputpersonID" class="col-sm-2 control-label">Speler ID (data)</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputpersonID" placeholder="Speler ID" ng-model="data.user.speler_id">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSuper" class="col-sm-2 control-label">Superadmin</label>
-                        <div class="col-sm-10">
-                            <div class="checkbox">
-                                <label><input type="checkbox" id="inputSuper" ng-model="data.user.is_superadmin"> (LET OP!)</label>
-                            </div>
-                        </div>
-                    </div>
+                    </div>-->
                 </form>
             </div>
 
@@ -189,6 +171,7 @@
                     <button class="btn btn-warning" ng-click="cancel()">Annuleer</button>
                 </div>
             </script>
+
         </div>
 
     </div>

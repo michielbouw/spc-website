@@ -61,6 +61,9 @@ angular.module('mainapp.match')
                     }, function (res1) {
                         $rootScope.currentClub.colors = res1.colors;
                         $rootScope.currentClub.spc_package = res1.spc_package;
+
+                        $sessionStorage.currentUser = $rootScope.currentUser;
+                        $sessionStorage.currentClub = $rootScope.currentClub;
                     });
 
                     if ($rootScope.currentUser.role == 'admin') {

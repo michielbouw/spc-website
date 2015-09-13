@@ -19,7 +19,7 @@ module.exports = mongoose.model('User', {
     club: { type: String },
     club_slug: {type : String, lowercase: true, trim: true},
     teams: [{
-        team: { type: String},
+        team_name: { type: String},
         team_slug: {type : String, lowercase: true, trim: true},
     }],
     speler_id: { type: Number },

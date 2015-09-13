@@ -32,7 +32,7 @@ angular.module('mainapp.match')
                         $sessionStorage.currentClub.colors = [];
 
                         if (res1.data.role == 'admin') {
-                            self.matchshort = res;
+                            self.matchshort = $sessionStorage.matchshort;
                         } else {
                             Api.Club.get({
                                 _slug: res1.data.club_slug
@@ -75,8 +75,10 @@ angular.module('mainapp.match')
                 if ($sessionStorage.currentClub) {
                     if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {
                         self.matchshort = res;
+                        $sessionStorage.matchshort = res;
                     } else if ($sessionStorage.currentClub.spc_package == 'club' && ($sessionStorage.currentClub.name == res.match_info.thuis || $sessionStorage.currentClub.name == res.match_info.uit)) {
                         self.matchshort = res;
+                        $sessionStorage.matchshort = res;
                     } else {
                         $location.path('/404');
                     }
@@ -100,6 +102,7 @@ angular.module('mainapp.match')
 
                             if (res1.data.role == 'admin') {
                                 self.matchshort = res;
+                                $sessionStorage.matchshort = res;
                             } else {
                                 Api.Club.get({
                                     _slug: res1.data.club_slug
@@ -109,8 +112,10 @@ angular.module('mainapp.match')
 
                                     if (res2.spc_package == 'extra' || res2.spc_package == 'league') {
                                         self.matchshort = res;
+                                        $sessionStorage.matchshort = res;
                                     } else if (res2.spc_package == 'club' && ($sessionStorage.currentClub.name == res.match_info.thuis || $sessionStorage.currentClub.name == res.match_info.uit)) {
                                         self.matchshort = res;
+                                        $sessionStorage.matchshort = res;
                                     } else {
                                         $location.path('/404');
                                     }
@@ -126,8 +131,10 @@ angular.module('mainapp.match')
 
                         if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {
                             self.matchshort = res;
+                            $sessionStorage.matchshort = res;
                         } else if ($sessionStorage.currentClub.spc_package == 'club' && ($sessionStorage.currentClub.name == res.match_info.thuis || $sessionStorage.currentClub.name == res.match_info.uit)) {
                             self.matchshort = res;
+                            $sessionStorage.matchshort = res;
                         } else {
                             $location.path('/404');
                         }

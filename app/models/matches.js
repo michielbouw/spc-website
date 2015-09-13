@@ -34,10 +34,10 @@ module.exports = mongoose.model('Matches', {
             sec_2ehelft: {type : Number},
             blessuretijd_1ehelft: {type : String},
             blessuretijd_2ehelft: {type : String}
-        },
-        stadion: {type : String},
-        toeschouwers: {type : Number}
+        }
     },
+    stadion: {type : String},
+    toeschouwers: {type : Number},
     extra_uploads: [{
         file: {type : String},
         title: {type : String},

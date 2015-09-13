@@ -1,8 +1,9 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminController', ['Api', '$filter', function(Api, $filter) {
+    .controller('mainapp.pageAdmin.AdminController', ['Api', '$filter', '$rootScope', function(Api, $filter, $rootScope) {
         var self = this;
 
         self.usergroups = [];
+        $rootScope.errorImport = '';
 
         Api.Users.query({
             fans: false

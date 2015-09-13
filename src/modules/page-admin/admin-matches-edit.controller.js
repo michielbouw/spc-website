@@ -37,6 +37,8 @@ angular.module('mainapp.pageAdmin')
                 seizoen: _t.seizoen,
                 divisie: _t.divisie,
                 match_info: _t.match_info,
+                stadion: _t.stadion,
+                toeschouwers: _t.toeschouwers,
                 extra_uploads: _t.extra_uploads,
                 editor: editor_name,
                 date_edited: self.datetime
@@ -63,6 +65,8 @@ angular.module('mainapp.pageAdmin')
                 seizoen: _t.seizoen,
                 divisie: _t.divisie,
                 match_info: _t.match_info,
+                stadion: _t.stadion,
+                toeschouwers: _t.toeschouwers,
                 extra_uploads: _t.extra_uploads,
                 editor: editor_name,
                 date_edited: self.datetime

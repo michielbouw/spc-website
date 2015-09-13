@@ -26,6 +26,7 @@ angular.module('mainapp.pageAdmin')
                         .success(function (res) {
                             console.log('file ' + res + ' uploaded.');
                             if (res.split('.').pop() == 'json') {
+                                $rootScope.errorImport = 'Bezig met verwerken';
                                 self.processMatchDataFile(res);
                             }
                         })
@@ -35,6 +36,7 @@ angular.module('mainapp.pageAdmin')
                         });
                         /* jshint ignore:end */
                 }
+                $rootScope.errorImport = '';
             }
         };
 
@@ -77,33 +79,25 @@ angular.module('mainapp.pageAdmin')
 
             $http({
                 method: 'GET',
-                url: '/media/data/' + file_path,
-                header: {
-                    'Content-Type' : 'application/json;charset=UTF-8'
-                }
+                url: '/media/data/' + file_path
             })
-                .success(function (data, status, headers, config) {
-                    var data = data;
+                .success(function (data1, status, headers, config) {
+                    data = data1;
+                    //var data2 = encodeURIComponent(data1);
+                    //console.log(data2);
+
                     var match_short;
                     var match_data;
                     var team_data;
                     var player_data;
 
                     if (data) {
+                        $rootScope.errorImport = 'Bezig met verwerken';
+
                         var items = {};
                         items.matchID = data.wedstrijd_data.matchID[0];
                         items.thuisTeamID = data.wedstrijd_data.thuisTeamID[0];
                         items.uitTeamID = data.wedstrijd_data.uitTeamID[0];
-
-                        //items.match_info = {};
-                        //items.match_info = data.wedstrijd_data.titel[0];
-                        //items.match_info.blessure_tijd = data.wedstrijd_data.blessure_tijd[0];
-                        //items.match_info.coachuit = "Voornaam Achter";
-                        //items.match_info.coachthuis = "Voor Achternaam";
-                        //items.match_info.logo_thuis = items.match_info.wedstrijd.split(" - ", 1)[0] + '.jpg';
-                        //items.match_info.logo_uit = items.match_info.wedstrijd.split(" - ", 2)[1] + '.jpg';
-                        //items.match_info.thuis = items.match_info.wedstrijd.split(" - ", 1)[0];
-                        //items.match_info.uit = items.match_info.wedstrijd.split(" - ", 2)[1];
 
                         match_short = {};
                         match_short.match_info = {};
@@ -212,11 +206,12 @@ angular.module('mainapp.pageAdmin')
                             match_short.seizoen = "2015-2016";
                         }
 
-                        //seizoen 1314: 1203 - 1582
-                        //seizoen 1314 PO: 6495-6502, 6507-6510, 6515-6518.
-                        //seizoen 1415: 7288-7667
-                        //seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
-                        //Alle intervallen zijn inclusief de linker- en rechterwaarde.
+                        // INFO:
+                        // seizoen 1314: 1203 - 1582
+                        // seizoen 1314 PO: 6495-6502, 6507-6510, 6515-6518.
+                        // seizoen 1415: 7288-7667
+                        // seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
+                        // Alle intervallen zijn inclusief de linker- en rechterwaarde.
 
                         // for now this is correct later maybe need a if statement to choose correct division
                         items.divisie = "Jupiler League";
@@ -2710,6 +2705,8 @@ angular.module('mainapp.pageAdmin')
                     //    $rootScope.errorImport = '';
                     //    $location.path('/admin');
                     //}
+                    $rootScope.errorImport = '';
+
                     $location.path('/admin');
                 });
         };
