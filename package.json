@@ -16,6 +16,7 @@
     "bootstrap-sass": "~3.3.4",
     "c3": "~0.4.10",
     "colors": "^1.0.3",
+    "compass-mixins": "~0.12.7",
     "compression": "1.2.1",
     "connect-flash": "0.1.1",
     "connect-livereload": "^0.5.2",

@@ -15,5 +15,12 @@ angular.module('mainapp.pageIndex', [])
                     requiredLogin: false,
                     permission: 'public'
                 }
+            })
+            .when('/disclaimer', {
+                templateUrl: 	'page-index/views/disclaimer.html',
+                access: {
+                    requiredLogin: false,
+                    permission: 'public'
+                }
             });
     });

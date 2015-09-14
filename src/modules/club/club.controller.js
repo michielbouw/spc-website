@@ -3,8 +3,134 @@ angular.module('mainapp.club')
         function($scope, Api, $filter, $routeParams, $rootScope, $location, $timeout, $sessionStorage)
     {
         var self = this;
-
         self.team_data = [];
+        self.orderMatches = 'ronde';
+        self.season_matches = [];
+        self.match = {};
+        self.stats = {};
+        self.vs = 'Gemiddeld team';
+
+        if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
+            $location.path('/club/' + $rootScope.currentClub.teams[0].team_slug);
+        } else if ((!$routeParams.team_slug || $routeParams.team_slug === '') && (!$rootScope.currentClub || !$rootScope.currentClub.teams[0].team_slug)) {
+            $location.path('/club/fceindhoven_1');
+        } else {
+            if ( ($rootScope.currentClub && $rootScope.currentClub.teams[0] && $rootScope.currentClub.teams[0].team_slug !== $routeParams.team_slug) && ($rootScope.currentClub && $rootScope.currentClub.teams[1] && $rootScope.currentClub.teams[1].team_slug !== $routeParams.team_slug) && $sessionStorage.role !== 'admin' ) {
+                $location.path('/404');
+            }
+
+            Api.TeamDataItem.get({
+                _slug: $routeParams.team_slug
+            }, function (res) {
+                self.team_name = res.team_name;
+                self.club_name = res.club_name;
+                self.divisie = res.divisie;
+                self.team_data = res.team_data;
+
+                self.season_index = res.team_data[res.team_data.length - 1].season;
+                self.season_matches = $filter('orderBy')(($filter('filter')(res.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+
+                var statslength = self.season_matches.length;
+                var temp0 = self.season_matches[0].ronde;
+                var temp1 = self.season_matches[statslength - 1].ronde;
+                if (temp0 !== 1) {
+                    for (var i = 1; i < temp0; i++) {
+                        var temp = {};
+                        temp.ronde = i;
+                        self.season_matches.push(temp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                }
+                $scope.round = temp1;
+
+                self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.slider-control .slider').slider({
+                            min: temp0,
+                            value: $scope.round
+                        });
+                        $('.content-club-select .round').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-range').width() );
+                    });
+                }, 400);
+            }, function() {
+                $location.path('/404');
+            });
+        }
+
+        self.seasonInitFunc = function () {
+            if (self.team_data && self.season_index) {
+                self.season_matches = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+
+                var statslength = self.season_matches.length;
+                var temp0 = self.season_matches[0].ronde;
+                var temp1 = self.season_matches[statslength - 1].ronde;
+                if (temp0 !== 1) {
+                    for (var i = 1; i < temp0; i++) {
+                        var temp = {};
+                        temp.ronde = i;
+                        self.season_matches.push(temp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                }
+                $scope.round = temp1;
+
+                self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.slider-control .slider').slider({
+                            min: temp0,
+                            value: $scope.round
+                        });
+                        $('.content-club-select .round').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-range').width() );
+                    });
+                }, 400);
+            }
+        };
+
+        self.roundfilter = function () {
+            return $scope.round;
+        };
+
+        $scope.$watch('round', function() {
+            $timeout(function () {
+                $('.content-club-select .round').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-range').width() );
+            }, 0);
+
+            self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+
+            $timeout(function () {
+                if (self.season_matches.length > 0) {
+                    self.stats.punten = self.season_matches[self.roundfilter() - 1].punten;
+
+                    self.stats.doelpogingen = self.season_matches[self.roundfilter() - 1].doelpogingen;
+
+                    self.stats.goals = self.season_matches[self.roundfilter() - 1].doelpunten_voor;
+
+                    self.stats.goalstegen = self.season_matches[self.roundfilter() - 1].doelpunten_tegen;
+
+                    self.stats.balbezit = self.season_matches[self.roundfilter() - 1].balbezit;
+
+                    self.stats.gewonnen_duels = self.season_matches[self.roundfilter() - 1].gewonnen_duels;
+
+                    self.stats.passzekerheid = self.season_matches[self.roundfilter() - 1].geslaagde_passes;
+
+                    self.stats.lengte_passes = self.season_matches[self.roundfilter() - 1].lengte_passes;
+
+                    self.stats.tot_passes = self.season_matches[self.roundfilter() - 1].tot_passes;
+
+                    self.stats.geel = self.season_matches[self.roundfilter() - 1].geel;
+
+                    self.stats.rood = self.season_matches[self.roundfilter() - 1].rood;
+                }
+            }, 200);
+        }, true);
+
+
+
+        /*self.team_data = [];
         self.orderMatches = 'ronde';
         self.season_matches = [];
         $scope.rounds = [1, 1];
@@ -584,5 +710,5 @@ angular.module('mainapp.club')
                     });
                 }, 500);
             }
-        };
+        };*/
     }]);
