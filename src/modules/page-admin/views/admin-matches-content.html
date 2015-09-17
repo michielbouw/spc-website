@@ -65,7 +65,7 @@
                         <br>
                     </div>
                 </div>
-                <div class="col-xs-12" ng-repeat="match in data.matches | orderBy:data.orderMatches:-1 | filter:search:strict">
+                <div class="col-xs-12" ng-repeat="match in data.matches | orderBy:data.orderMatches:true | filter:search:strict">
                     <div class="col-xs-6 col-sm-3">
                         {{ match.seizoen }}
                     </div>

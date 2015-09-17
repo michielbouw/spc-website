@@ -45,7 +45,7 @@
                 <br><h4>Kies VS speler</h4>
                 <select ng-model="data.vs" class="form-control input-md input-vs"
                         ng-change="data.vsInitFunc()">
-                    <option>.. kies speler ..</option>
+                    <!--<option>.. kies speler ..</option>-->
                     <option>Gemiddelde seizoen</option>
                     <option ng-if="data.player_stats.spelerType !== 'keeper'">Gemiddelde team ronde</option>
                     <option ng-if="data.player_stats.spelerType !== 'keeper'">Gemiddelde team seizoen</option>
@@ -272,7 +272,7 @@
                 <h4>Logboek per wedstrijd</h4>
             </div>
         </div>
-        <div class="col-xs-12 content-players" ng-if="data.match">
+        <div class="col-xs-12 content-players logboek" ng-if="data.match">
             Wedstrijd ronde {{ data.match.ronde }}: {{ data.match.wedstrijd }} ({{ data.match.eindstand }}) <small>(ronde wijzigen door bovenaan de balk naar juiste ronde te verschuiven)</small>
             <br>Alle mogelijke notities kunnen hier geplaatst worden
             <hr>
@@ -292,7 +292,7 @@
             </div>
             <button ng-hide="currentUser.role !== 'speler' && currentUser.role !== 'admin'" type="button" class="btn btn-primary btn-sm" ng-click="data.savePlayerLog()">Opslaan</button>
         </div>
-        <div class="col-xs-12 content-players" ng-if="data.match">
+        <div class="col-xs-12 content-players logboek" ng-if="data.match">
             <hr>
             <h4>Opmerkingen</h4>
             <div ng-if="infoAddPlayerLog" class="alert alert-info" role="alert">{{ infoAddPlayerLog }}</div>

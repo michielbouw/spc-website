@@ -42,6 +42,15 @@ angular.module('mainapp.club')
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                 }
+                for (var j = 0; j < statslength; j++) {
+                    if ((j+1) != self.season_matches[j].ronde) {
+                        var tempp = {};
+                        tempp.ronde = j+1;
+
+                        self.season_matches.push(tempp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                }
                 $scope.round = temp1;
 
                 self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
@@ -95,7 +104,6 @@ angular.module('mainapp.club')
         };
 
         self.vsInitFunc = function () {
-            var stats_vs_temp = [];
             var statslength;
             var count;
             var i;
@@ -103,7 +111,7 @@ angular.module('mainapp.club')
 
             if (self.vs == 'Gemiddeld team') {
                 if (self.team_data && self.season_index) {
-                    stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+                    var stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
                     statslength = stats_vs_temp.length;
                     count = 0;
@@ -120,18 +128,20 @@ angular.module('mainapp.club')
                     self.stats_vs.rood = 0;
 
                     for (i = 0; i < statslength; i++) {
-                        self.stats_vs.doelpogingen += stats_vs_temp[i].doelpogingen;
-                        self.stats_vs.goals += stats_vs_temp[i].doelpunten_voor;
-                        self.stats_vs.goalstegen += stats_vs_temp[i].doelpunten_tegen;
-                        self.stats_vs.balbezit += stats_vs_temp[i].balbezit;
-                        self.stats_vs.gewonnen_duels += stats_vs_temp[i].gewonnen_duels;
-                        self.stats_vs.passzekerheid += stats_vs_temp[i].geslaagde_passes;
-                        self.stats_vs.lengte_passes += stats_vs_temp[i].lengte_passes;
-                        self.stats_vs.tot_passes += stats_vs_temp[i].tot_passes;
-                        self.stats_vs.geel += stats_vs_temp[i].geel;
-                        self.stats_vs.rood += stats_vs_temp[i].rood;
+                        if (stats_vs_temp[i].wedstrijd) {
+                            self.stats_vs.doelpogingen += stats_vs_temp[i].doelpogingen;
+                            self.stats_vs.goals += stats_vs_temp[i].doelpunten_voor;
+                            self.stats_vs.goalstegen += stats_vs_temp[i].doelpunten_tegen;
+                            self.stats_vs.balbezit += stats_vs_temp[i].balbezit;
+                            self.stats_vs.gewonnen_duels += stats_vs_temp[i].gewonnen_duels;
+                            self.stats_vs.passzekerheid += stats_vs_temp[i].geslaagde_passes;
+                            self.stats_vs.lengte_passes += stats_vs_temp[i].lengte_passes;
+                            self.stats_vs.tot_passes += stats_vs_temp[i].tot_passes;
+                            self.stats_vs.geel += stats_vs_temp[i].geel;
+                            self.stats_vs.rood += stats_vs_temp[i].rood;
 
-                        count++;
+                            count++;
+                        }
                     }
 
                     self.stats_vs.doelpogingen /= count;
@@ -146,11 +156,33 @@ angular.module('mainapp.club')
                     self.stats_vs.rood /= count;
                 }
             } else if (self.vs == '1e helft seizoen team') {
+                // winterstop is na ronde:
+                // self.season_index == '2013-2014' -> ronde == 18
+                // self.season_index == '2014-2015' -> ronde == 19
+                // self.season_index == '2015-2016' -> ronde == 19
                 if (self.team_data && self.season_index) {
-                    stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+                    var stats_vs_temp1 = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
-                    statslength = stats_vs_temp.length;
+                    statslength = stats_vs_temp1.length;
+                    var temp0 = stats_vs_temp1[0].ronde;
+                    if (temp0 !== 1) {
+                        for (var j = 1; j < temp0; j++) {
+                            var temp1 = {};
+                            temp1.ronde = j;
+                            stats_vs_temp1.push(temp1);
+                        }
+                        stats_vs_temp1 = $filter('orderBy')(stats_vs_temp1, self.orderMatches);
+                    }
                     count = 0;
+
+                    var i_end = statslength;
+                    if (self.season_index == '2013-2014') {
+                        i_end = 18;
+                    } else if (self.season_index == '2014-2015') {
+                        i_end = 19;
+                    } else if (self.season_index == '2015-2016') {
+                        i_end = 19;
+                    }
 
                     self.stats_vs.doelpogingen = 0;
                     self.stats_vs.goals = 0;
@@ -163,19 +195,25 @@ angular.module('mainapp.club')
                     self.stats_vs.geel = 0;
                     self.stats_vs.rood = 0;
 
-                    for (i = 0; i < statslength; i++) {
-                        self.stats_vs.doelpogingen += stats_vs_temp[i].doelpogingen;
-                        self.stats_vs.goals += stats_vs_temp[i].doelpunten_voor;
-                        self.stats_vs.goalstegen += stats_vs_temp[i].doelpunten_tegen;
-                        self.stats_vs.balbezit += stats_vs_temp[i].balbezit;
-                        self.stats_vs.gewonnen_duels += stats_vs_temp[i].gewonnen_duels;
-                        self.stats_vs.passzekerheid += stats_vs_temp[i].geslaagde_passes;
-                        self.stats_vs.lengte_passes += stats_vs_temp[i].lengte_passes;
-                        self.stats_vs.tot_passes += stats_vs_temp[i].tot_passes;
-                        self.stats_vs.geel += stats_vs_temp[i].geel;
-                        self.stats_vs.rood += stats_vs_temp[i].rood;
+                    for (i = 0; i < i_end && i < statslength; i++) {
+                        if (stats_vs_temp1[i].wedstrijd) {
+                            if (stats_vs_temp1[i].ronde > i_end) {
+                                break;
+                            }
 
-                        count++;
+                            self.stats_vs.doelpogingen += stats_vs_temp1[i].doelpogingen;
+                            self.stats_vs.goals += stats_vs_temp1[i].doelpunten_voor;
+                            self.stats_vs.goalstegen += stats_vs_temp1[i].doelpunten_tegen;
+                            self.stats_vs.balbezit += stats_vs_temp1[i].balbezit;
+                            self.stats_vs.gewonnen_duels += stats_vs_temp1[i].gewonnen_duels;
+                            self.stats_vs.passzekerheid += stats_vs_temp1[i].geslaagde_passes;
+                            self.stats_vs.lengte_passes += stats_vs_temp1[i].lengte_passes;
+                            self.stats_vs.tot_passes += stats_vs_temp1[i].tot_passes;
+                            self.stats_vs.geel += stats_vs_temp1[i].geel;
+                            self.stats_vs.rood += stats_vs_temp1[i].rood;
+
+                            count++;
+                        }
                     }
 
                     self.stats_vs.doelpogingen /= count;
@@ -190,11 +228,33 @@ angular.module('mainapp.club')
                     self.stats_vs.rood /= count;
                 }
             } else if (self.vs == '2e helft seizoen team') {
+                // winterstop is na ronde:
+                // self.season_index == '2013-2014' -> ronde == 18
+                // self.season_index == '2014-2015' -> ronde == 19
+                // self.season_index == '2015-2016' -> ronde == 19
                 if (self.team_data && self.season_index) {
-                    stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+                    var stats_vs_temp2 = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
-                    statslength = stats_vs_temp.length;
+                    statslength = stats_vs_temp2.length;
+                    var temp00 = stats_vs_temp2[0].ronde;
+                    if (temp00 !== 1) {
+                        for (var k = 1; k < temp00; k++) {
+                            var temp2 = {};
+                            temp2.ronde = k;
+                            stats_vs_temp2.push(temp2);
+                        }
+                        stats_vs_temp2 = $filter('orderBy')(stats_vs_temp2, self.orderMatches);
+                    }
                     count = 0;
+
+                    var i_start = statslength;
+                    if (self.season_index == '2013-2014') {
+                        i_start = 18;
+                    } else if (self.season_index == '2014-2015') {
+                        i_start = 19;
+                    } else if (self.season_index == '2015-2016') {
+                        i_start = 19;
+                    }
 
                     self.stats_vs.doelpogingen = 0;
                     self.stats_vs.goals = 0;
@@ -207,19 +267,25 @@ angular.module('mainapp.club')
                     self.stats_vs.geel = 0;
                     self.stats_vs.rood = 0;
 
-                    for (i = 0; i < statslength; i++) {
-                        self.stats_vs.doelpogingen += stats_vs_temp[i].doelpogingen;
-                        self.stats_vs.goals += stats_vs_temp[i].doelpunten_voor;
-                        self.stats_vs.goalstegen += stats_vs_temp[i].doelpunten_tegen;
-                        self.stats_vs.balbezit += stats_vs_temp[i].balbezit;
-                        self.stats_vs.gewonnen_duels += stats_vs_temp[i].gewonnen_duels;
-                        self.stats_vs.passzekerheid += stats_vs_temp[i].geslaagde_passes;
-                        self.stats_vs.lengte_passes += stats_vs_temp[i].lengte_passes;
-                        self.stats_vs.tot_passes += stats_vs_temp[i].tot_passes;
-                        self.stats_vs.geel += stats_vs_temp[i].geel;
-                        self.stats_vs.rood += stats_vs_temp[i].rood;
+                    for (i = i_start; i < statslength; i++) {
+                        if (stats_vs_temp2[i].wedstrijd) {
+                            if (stats_vs_temp2[i].ronde <= i_start) {
+                                continue;
+                            }
 
-                        count++;
+                            self.stats_vs.doelpogingen += stats_vs_temp2[i].doelpogingen;
+                            self.stats_vs.goals += stats_vs_temp2[i].doelpunten_voor;
+                            self.stats_vs.goalstegen += stats_vs_temp2[i].doelpunten_tegen;
+                            self.stats_vs.balbezit += stats_vs_temp2[i].balbezit;
+                            self.stats_vs.gewonnen_duels += stats_vs_temp2[i].gewonnen_duels;
+                            self.stats_vs.passzekerheid += stats_vs_temp2[i].geslaagde_passes;
+                            self.stats_vs.lengte_passes += stats_vs_temp2[i].lengte_passes;
+                            self.stats_vs.tot_passes += stats_vs_temp2[i].tot_passes;
+                            self.stats_vs.geel += stats_vs_temp2[i].geel;
+                            self.stats_vs.rood += stats_vs_temp2[i].rood;
+
+                            count++;
+                        }
                     }
 
                     self.stats_vs.doelpogingen /= count;
@@ -235,9 +301,9 @@ angular.module('mainapp.club')
                 }
             } else {
                 if (self.team_data && self.season_index) {
-                    stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+                    var stats_vs_temp0 = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
-                    statslength = stats_vs_temp.length;
+                    statslength = stats_vs_temp0.length;
                     count = 0;
 
                     self.stats_vs.doelpogingen = 0;
@@ -252,18 +318,20 @@ angular.module('mainapp.club')
                     self.stats_vs.rood = 0;
 
                     for (i = 0; i < statslength; i++) {
-                        self.stats_vs.doelpogingen += stats_vs_temp[i].doelpogingen;
-                        self.stats_vs.goals += stats_vs_temp[i].doelpunten_voor;
-                        self.stats_vs.goalstegen += stats_vs_temp[i].doelpunten_tegen;
-                        self.stats_vs.balbezit += stats_vs_temp[i].balbezit;
-                        self.stats_vs.gewonnen_duels += stats_vs_temp[i].gewonnen_duels;
-                        self.stats_vs.passzekerheid += stats_vs_temp[i].geslaagde_passes;
-                        self.stats_vs.lengte_passes += stats_vs_temp[i].lengte_passes;
-                        self.stats_vs.tot_passes += stats_vs_temp[i].tot_passes;
-                        self.stats_vs.geel += stats_vs_temp[i].geel;
-                        self.stats_vs.rood += stats_vs_temp[i].rood;
+                        if (stats_vs_temp0[i].wedstrijd) {
+                            self.stats_vs.doelpogingen += stats_vs_temp0[i].doelpogingen;
+                            self.stats_vs.goals += stats_vs_temp0[i].doelpunten_voor;
+                            self.stats_vs.goalstegen += stats_vs_temp0[i].doelpunten_tegen;
+                            self.stats_vs.balbezit += stats_vs_temp0[i].balbezit;
+                            self.stats_vs.gewonnen_duels += stats_vs_temp0[i].gewonnen_duels;
+                            self.stats_vs.passzekerheid += stats_vs_temp0[i].geslaagde_passes;
+                            self.stats_vs.lengte_passes += stats_vs_temp0[i].lengte_passes;
+                            self.stats_vs.tot_passes += stats_vs_temp0[i].tot_passes;
+                            self.stats_vs.geel += stats_vs_temp0[i].geel;
+                            self.stats_vs.rood += stats_vs_temp0[i].rood;
 
-                        count++;
+                            count++;
+                        }
                     }
 
                     self.stats_vs.doelpogingen /= count;

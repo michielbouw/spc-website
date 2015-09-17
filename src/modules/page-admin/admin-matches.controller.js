@@ -9,7 +9,9 @@ angular.module('mainapp.pageAdmin')
             self.matches = res;
         });
 
-        self.orderMatches = 'match_info.datum';
+        self.orderMatches = function(match) {
+            return new Date( Date.parse( match.match_info.datum.split('-').reverse().join('-') ) );
+        };
 
         self.matchDel = function (i) {
             var _t = self.matches[i];
