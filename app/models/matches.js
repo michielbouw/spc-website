@@ -29,6 +29,8 @@ module.exports = mongoose.model('Matches', {
         logo_thuis: {type : String},
         logo_uit: {type : String},
         scheids: {type : String},
+        locatie: {type : String},
+        toeschouwers: {type : Number},
         blessure_tijd: {
             sec_1ehelft: {type : Number},
             sec_2ehelft: {type : Number},
@@ -36,8 +38,7 @@ module.exports = mongoose.model('Matches', {
             blessuretijd_2ehelft: {type : String}
         }
     },
-    stadion: {type : String},
-    toeschouwers: {type : Number},
+    opmerkingen: { type: String },
     extra_uploads: [{
         file: {type : String},
         title: {type : String},

@@ -433,6 +433,343 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
+    pass_matrix_kwartier1: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier1_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier1_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier2: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier2_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier2_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier3: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier3_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier3_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier3: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier3_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier3_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier4: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier4_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier4_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier5: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier5_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier5_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier6: {
+        thuis: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        },
+        uit: {
+            passMatrix: [{}],
+            passMatrix2: [{
+                kort: { type: Number },
+                kort_succes: { type: Number },
+                kort_perc: { type: String },
+                middellang: { type: Number },
+                middellang_succes: { type: Number },
+                middellang_perc: { type: String },
+                lang: { type: Number },
+                lang_succes: { type: Number },
+                lang_perc: { type: String },
+                TOTAAL: { type: Number },
+                TOTAAL_succes: { type: Number },
+                TOTAAL_perc: { type: String },
+                gem_len: { type: String },
+                _row: { type: String }
+            }]
+        }
+    },
+    pass_matrix_kwartier6_thuis_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+    pass_matrix_kwartier6_uit_spelers: [{
+        personID: { type: Number },
+        spelerNaam: { type: String }
+    }],
+
     penalty_visualisatie: [{}],
     overzicht_overtredingen_per_speler: {
         thuis: [{

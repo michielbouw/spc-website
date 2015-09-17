@@ -48,6 +48,8 @@ module.exports = mongoose.model('TeamData', {
         spelerNaam: { type: String },
         spelerType: { type: String },
         spelerRugnummer: { type: Number },
+        spelerPositie: { type: String },
+        spelerGeboortedatum: { type: String },
         matches: [{
             season: { type: String },
             match: [{

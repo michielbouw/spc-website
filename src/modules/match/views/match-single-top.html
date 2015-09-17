@@ -103,9 +103,9 @@
                 <div class="col-xs-12 text-left">
                     <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
                         <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
-                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br ng-if="data.matchshort.toeschouwers">
-                    <small ng-if="data.matchshort.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.toeschouwers }}</small><br ng-if="data.matchshort.stadion">
-                    <small ng-if="data.matchshort.stadion"><img src="images/stadium.png" height="16px"> {{ data.matchshort.stadion }}</small>
+                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br ng-if="data.matchshort.match_info.toeschouwers">
+                    <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br ng-if="data.matchshort.match_info.locatie">
+                    <small ng-if="data.matchshort.match_info.locatie"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.locatie }}</small>
                 </div>
                 </div>
             </div>
