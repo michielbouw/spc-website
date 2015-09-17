@@ -5,6 +5,7 @@ angular.module('mainapp.pageIndex')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
+                        $('body').css('background-color', '#E7EAF1');
                         $('.header-block').css({
                             'min-height': window.innerHeight*0.9,
                             'height': 'auto'
@@ -20,6 +21,7 @@ angular.module('mainapp.pageIndex')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
+                        $('body').css('background-color', '#E7EAF1');
                         $('.block-over').css({
                             'min-height': window.innerHeight - 100,
                             'height': 'auto'

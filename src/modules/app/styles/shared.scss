@@ -439,6 +439,7 @@ Standard layout
 
 .content.content-page-full {
   margin-top: 75px;
+  min-height: calc(100vh - 225px);
 }
 
 .content.content-page-main {

@@ -1,4 +1,4 @@
-angular.module('mainapp.players', [])
+angular.module('mainapp.players', ['tc.chartjs'])
     .config(function($routeProvider)
     {
         $routeProvider

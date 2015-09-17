@@ -1,7 +1,7 @@
 @import '../../app/styles/variables';
 
 .content.content-page {
-  .content-club-title {
+  .content-players-title {
     color: $middleblue;
     background-color: $white;
     padding-top: 0;
@@ -20,7 +20,7 @@
       text-transform: uppercase;
     }
   }
-  .content-club-name {
+  .content-players-name {
     color: $white;
     background-color: $lightblue;
     padding: 0;
@@ -31,6 +31,9 @@
       background-color: $middleblue;
     }
 
+    a {
+      color: $white;
+    }
     h2 {
       margin-top: 10px;
       margin-bottom: 15px;
@@ -49,7 +52,7 @@
       margin-right: 15px;
     }
     select.input-vs {
-      background-color: $lightblue;
+      background-color: transparent;
       border: none;
       color: $white;
       padding: 4px;
@@ -58,7 +61,7 @@
       border-radius: 0;
     }
   }
-  .content-club-select {
+  .content-players-select {
     background-color: $white;
     color: $primary-color;
     padding-bottom: 15px;
@@ -141,27 +144,100 @@
       border-top-left-radius: 4px;
     }
   }
-  .content-club {
+  .content-players-left {
     background-color: $white;
     color: $lightblue;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid $lightgrey;
+    border-right: 1px solid $middleblue;
 
+    .grey {
+      color: $grey !important;
+    }
     .orange {
       color: $orange !important;
     }
-
+    select.input-vs {
+      background-color: transparent;
+      border: none;
+      //color: $lightgrey;
+      color: $orange;
+      padding: 4px 0;
+      margin: 0 -8px;
+      font-size: 14px;
+      box-shadow: none;
+      border-radius: 0;
+      width: calc(100% + 16px);
+    }
+    a {
+      color: $lightblue;
+    }
     small {
       color: $lightblue;
     }
-    h1.large {
-      font-size: 50px;
+    img {
+      width: 100%;
     }
-    .medium {
+    span.rugnummer {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      color: $white;
       font-size: 32px;
     }
+    .player-vs {
+      margin: 15px 0;
+      border-top: 1px solid $middleblue;
+      border-bottom: 1px solid $middleblue;
+    }
+    .tag {
+      position: absolute;
+      right: 5%;
+      top: 1%;
+      padding: 2px 4px;
+      background-color: $middleblue;
+      color: $white;
+      font-size: 12px;
+      z-index: 10;
+    }
+  }
+  .content-players-left-overview {
+    border-right: none;
 
+    .spelernaam {
+      min-height: 57px;
+      vertical-align: baseline;
+    }
+    .tag {
+      position: absolute;
+      right: 5%;
+      top: 2%;
+      padding: 2px 4px;
+      background-color: $middleblue;
+      color: $white;
+      font-size: 12px;
+      z-index: 10;
+    }
+  }
+  .content-players {
+    background-color: $white;
+    color: $lightblue;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    .grey {
+      color: $grey !important;
+    }
+    .orange {
+      color: $orange !important;
+    }
+    a {
+      color: $lightblue;
+    }
+    small {
+      color: $lightblue;
+    }
     #arrow {
       background-color: $middleblue;
       display: inline-block;
@@ -182,7 +258,7 @@
       transform: rotate(45deg);
     }
     #arrow-vs {
-      background-color: $orange;
+      background-color: $grey;
       display: inline-block;
       width: 300px;
       height: 4px;
@@ -190,7 +266,7 @@
     }
     #arrow-vs:after {
       content: "";
-      background-color: $orange;
+      background-color: $grey;
       display: inline-block;
       width: 4px;
       height: 4px;
@@ -200,163 +276,29 @@
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
     }
-  }
-  .content-club-end {
-    background-color: $white;
-    color: $lightblue;
-    padding-top: 15px;
-    padding-bottom: 15px;
-
-    .orange {
-      color: $orange !important;
+    span.card {
+      font-size: 20px;
     }
+    .tc-chart-js-legend {
+      list-style-type: none;
+      padding-left: 0px;
 
-    a {
-      color: $lightblue;
-    }
-  }
-
-  /*.stat-blocks {
-    margin-top: 15px;
-
-    .stat-block {
-      text-align: center;
-      padding: 25px 15px;
-      background-color: $backgroundlight;
-      color: $darkblue;
-      min-height: 145px;
-
-      @media (max-width: 991px) { min-height: 125px; }
-      @media (max-width: 767px) { min-height: 100px; }
-      @media (max-width: 480px) { min-height: 125px; }
-
-      span {
-        font-size: 24px;
-        font-weight: bold;
-      }
-    }
-    .stat-block:hover {
-      background-color: $darkblue;
-      color: $backgroundlight;
-    }
-    .stat-block-nohover:hover {
-      background-color: $backgroundlight;
-      color: $darkblue;
-    }
-  }
-  span.rounds {
-    text-align: center;
-    display: block;
-    width: auto;
-    color: $darkblue;
-  }
-  .stat-blocks-filter {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 5px;
-    background-color: $backgroundlight;
-
-    a.round {
-      position: relative;
-      cursor: pointer;
-      float: left;
-      display: block;
-      text-align: center;
-      width: calc(1/38 * 100%);
-      background-color: $background;
-      color: $darkblue;
-
-      span.match {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        text-decoration: none;
-        padding: 4px;
-        font-size: 10px;
-        background-color: $darkblue;
-        color: $background;
-      }
-
-      @media (max-width: 767px) { display: none; }
-    }
-    span.winterstop-before {
-      border-right: 2px solid $blue;
-    }
-    span.winterstop-after {
-      border-left: 2px solid $blue;
-    }
-    a.round:hover {
-      background-color: $backgroundlight;
-
-      span.match {
+      li {
         display: block;
+        float: left;
+        clear: both;
+        padding: 10px;
+
+        span {
+          width: 18px;
+          height: 18px;
+          display: block;
+          float: left;
+          margin-right: 10px;
+        }
       }
     }
-
-    .slider-control {
-      height: 1em;
-      padding-top: .5em;
-      padding-right: 0.8em;
-      padding-left: 1em;
-    }
-    .slider {
-      height: 2px;
-      border: 1px solid $darkblue;
-    }
-    .ui-slider {
-      position: relative;
-      text-align: left;
-    }
-    .ui-slider-horizontal .ui-slider-range-min {
-      left: 0;
-    }
-    .ui-slider-horizontal .ui-slider-range {
-      top: 0;
-      height: 100%;
-    }
-    .ui-slider .ui-slider-range {
-      position: absolute;
-      z-index: 1;
-      font-size: .7em;
-      display: block;
-      border: 0;
-      background-position: 0 0;
-    }
-    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-      border: 1px solid black;
-      border-radius: 2px;
-      background: $white;
-    }
-    .ui-slider-horizontal .ui-slider-handle {
-      top: -.5em;
-      margin-left: -.6em;
-    }
-    .ui-slider .ui-slider-handle {
-      position: absolute;
-      z-index: 2;
-      width: 1em;
-      height: 1em;
-      cursor: pointer;
-      -ms-touch-action: none;
-      touch-action: none;
-      border: 1px solid $darkblue;
-      border-radius: 2px;
-      background: $white;
-    }
-    .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
-      border-bottom-right-radius: 4px;
-    }
-    .ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
-      border-bottom-left-radius: 4px;
-    }
-    .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
-      border-top-right-radius: 4px;
-    }
-    .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
-      border-top-left-radius: 4px;
-    }
-  }*/
+  }
 }
 
 /********************************************************

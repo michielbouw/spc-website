@@ -5,6 +5,7 @@ angular.module('mainapp.players')
         var self = this;
 
         self.player_data = [];
+        self.orderplayers = 'spelerNaam rugnummer';
 
         if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/spelers/' + $rootScope.currentClub.teams[0].team_slug);

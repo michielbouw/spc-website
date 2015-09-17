@@ -29,6 +29,8 @@ angular.module('mainapp.match')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
+                        $('body').css('background-color', '#E7EAF1');
+
                         $('.navbar-sub').css({
                             'height': window.innerHeight - 185
                         });

@@ -16,6 +16,7 @@ module.exports = mongoose.model('TeamData', {
         season: { type: String },
         matches: [{
             wedstrijd: { type: String },
+            datum: { type: String },
 
             // input data force/change to number type
             ronde: { type: Number },

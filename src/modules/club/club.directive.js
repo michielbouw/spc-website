@@ -8,11 +8,14 @@ angular.module('mainapp.club')
                         $timeout(function() {
                             $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
                             $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                            $('.home-intro').css('background-color', $rootScope.currentClub.colors[0].refcode);
                         }, 400);
 
                         $('.content.content-page').css({
                             'min-height': window.innerHeight - 100
+                        });
+
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip();
                         });
 
                         //$('.stat-blocks a').click(function (e) {

@@ -131,6 +131,8 @@ angular.module('mainapp.pageAdmin')
                         team_data.uit.ronde = Number(angular.copy(match_short.match_info.ronde));
                         team_data.thuis.wedstrijd = angular.copy(match_short.match_info.wedstrijd);
                         team_data.uit.wedstrijd = angular.copy(match_short.match_info.wedstrijd);
+                        team_data.thuis.datum = angular.copy(match_short.match_info.datum);
+                        team_data.uit.datum = angular.copy(match_short.match_info.datum);
                         team_data.thuis.doelpunten_voor = Number(match_short.match_info.eindstand.split(" - ", 1)[0]);
                         team_data.thuis.doelpunten_tegen = Number(match_short.match_info.eindstand.split(" - ", 2)[1]);
                         team_data.uit.doelpunten_voor = Number(match_short.match_info.eindstand.split(" - ", 2)[1]);
@@ -1805,6 +1807,7 @@ angular.module('mainapp.pageAdmin')
                                                             angular.forEach(value.matches, function (value1, key1) {
                                                                 if (value1.ronde == team_data.thuis.ronde) {
                                                                     value1.wedstrijd = team_data.thuis.wedstrijd;
+                                                                    value1.datum = team_data.thuis.datum;
                                                                     value1.matchID = team_data.thuis.matchID;
                                                                     value1.doelpunten_voor = team_data.thuis.doelpunten_voor;
                                                                     value1.doelpunten_tegen = team_data.thuis.doelpunten_tegen;
@@ -2317,6 +2320,7 @@ angular.module('mainapp.pageAdmin')
                                                             angular.forEach(value.matches, function (value1, key1) {
                                                                 if (value1.ronde == team_data.uit.ronde) {
                                                                     value1.wedstrijd = team_data.uit.wedstrijd;
+                                                                    value1.datum = team_data.uit.datum;
                                                                     value1.matchID = team_data.uit.matchID;
                                                                     value1.doelpunten_voor = team_data.uit.doelpunten_voor;
                                                                     value1.doelpunten_tegen = team_data.uit.doelpunten_tegen;
