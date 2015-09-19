@@ -37,6 +37,14 @@ angular.module('mainapp.players')
                 self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
                 self.season_matches = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
 
+                Api.SpelersID.query({
+                    _id: self.playerID
+                },function(res1) {
+                    if (res1[0].spelerPhoto && !self.player_stats.spelerPhoto) {
+                        self.player_stats.spelerPhoto = res1[0].spelerPhoto;
+                    }
+                });
+
                 if (self.player_stats.spelerType == 'keeper') {
                     self.clean_sheets = 0;
                     for (var c = self.season_matches.length - 1; c >= 0; c--) {

@@ -10,6 +10,7 @@ module.exports = mongoose.model('TeamData', {
     divisie: { type: String },
     club_name: { type: String },
     club_slug: { type: String, lowercase: true, trim: true },
+    club_id: { type: Number },
 
     // team data selected items
     team_data: [{
@@ -50,6 +51,7 @@ module.exports = mongoose.model('TeamData', {
         spelerRugnummer: { type: Number },
         spelerPositie: { type: String },
         spelerGeboortedatum: { type: String },
+        spelerPhoto: { type: String },
         matches: [{
             season: { type: String },
             match: [{
@@ -91,6 +93,9 @@ module.exports = mongoose.model('TeamData', {
                 gevangen_ballen: { type: Number },
                 weggestompte_ballen: { type: Number },
                 doelpunten_tegen: { type: Number },
+
+                // leeftijd tijdens wedstrijd
+                spelerLeeftijd : { type: Number },
 
                 // match scores review coach
                 scores: {

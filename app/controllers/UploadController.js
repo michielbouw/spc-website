@@ -72,17 +72,49 @@ UploadController.prototype.uploadFile = function(req, res) {
             });
         }
     } else if (req.params.slug == 'players') {
-        //fileExtension = '.' + file.name.split('.').pop();
-        //renamedFile =  Math.random().toString(36).substring(7) + new Date().getTime() + fileExtension;
+        fileExtension = '.' + file.name.split('.').pop();
+        renamedFile =  Math.random().toString(36).substring(7) + new Date().getTime() + fileExtension;
 
         // rename the file with original name
         //renamedFile = file.originalFilename;
-        renamedFile = file.name;
+        //renamedFile = file.name;
 
         // set where the file should actually exist
         target_path = './media/players/' + renamedFile;
 
         if (fs.existsSync(target_path)) {
+            fs.unlink(target_path, function (err) {
+                if (err) throw err;
+
+                im.resize({
+                    srcPath: tmp_path,
+                    dstPath: target_path,
+                    width: 150
+                }, function (err, stdout, stderr) {
+                    if (err) throw err;
+                    // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+                    fs.unlink(tmp_path, function () {
+                        if (err) throw err;
+                        res.send(renamedFile);
+                    });
+                });
+            });
+        } else {
+            im.resize({
+                srcPath: tmp_path,
+                dstPath: target_path,
+                width: 150
+            }, function (err, stdout, stderr) {
+                if (err) throw err;
+                // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+                fs.unlink(tmp_path, function () {
+                    if (err) throw err;
+                    res.send(renamedFile);
+                });
+            });
+        }
+
+        /*if (fs.existsSync(target_path)) {
             fs.unlink(tmp_path, function (err) {
                 if (err) throw err;
                 res.send(renamedFile);
@@ -101,7 +133,7 @@ UploadController.prototype.uploadFile = function(req, res) {
                     res.send(renamedFile);
                 });
             });
-        }
+        }*/
     } else { // so else if data image files for match, uses matchID as req.params.slug
         fileExtension = '.' + file.name.split('.').pop();
         // rename the file with original name (slug must be matchID)

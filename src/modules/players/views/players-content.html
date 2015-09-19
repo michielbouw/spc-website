@@ -16,7 +16,10 @@
         <div ng-repeat="speler in data.player_data | orderBy:self.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
             <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
                 <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
-                <div class="col-xs-12"><img ng-src="media/players/{{ speler.playerID }}.jpg" on-error-src="images/blank-avatar.png"></div>
+                <div class="col-xs-12">
+                    <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
+                    <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                </div>
                 <div class="col-xs-12 spelernaam"><br>{{ speler.spelerNaam }}</div>
                 <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ speler.spelerRugnummer }}</span></div>
             </div>

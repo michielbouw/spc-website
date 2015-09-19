@@ -40,7 +40,7 @@ angular.module('mainapp.pageAdmin')
             }
         };
 
-        self.uploadPlayers = function (files) {
+        /*self.uploadPlayers = function (files) {
             $rootScope.errorImport = '';
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
@@ -50,7 +50,7 @@ angular.module('mainapp.pageAdmin')
                         method: 'POST',
                         file: file
                     })
-                        /* jshint ignore:start */
+                        /!* jshint ignore:start *!/
                         .progress(function (evt) {
                             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                             console.log(' progress: ' + progressPercentage + '% ' + evt.config.file.name + '. file size (bytes): ' + evt.config.file.size);
@@ -63,10 +63,10 @@ angular.module('mainapp.pageAdmin')
                             console.log('Something went wrong, could be the file size.');
                             $rootScope.errorImport = 'Something went wrong, could be the file size.';
                         });
-                        /* jshint ignore:end */
+                        /!* jshint ignore:end *!/
                 }
             }
-        };
+        };*/
 
         // function for processing the match data file (.json) and push it to the correct model in the database
         self.processMatchDataFile = function (file_path) {

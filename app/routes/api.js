@@ -9,6 +9,7 @@ var ClubController = require('../controllers/ClubController');
 var MatchDataController = require('../controllers/MatchDataController');
 var MatchesController = require('../controllers/MatchesController');
 var PageController = require('../controllers/PageController');
+var SpelersController = require('../controllers/SpelersController');
 var TeamDataController = require('../controllers/TeamDataController');
 var UploadController = require('../controllers/UploadController');
 var UserController = require('../controllers/UserController');
@@ -59,6 +60,14 @@ router.get('/pages/:_id',           PageController.get);
 router.post('/pages',               UserController.ensureAuthorized, PageController.post);
 router.put('/pages/:_id',           UserController.ensureAuthorized, PageController.put);
 router.delete('/pages/:_id',        UserController.ensureAuthorized, PageController.delete);
+
+router.get('/spelers',              UserController.ensureAuthorized, SpelersController.query);
+router.get('/spelersclub/:_id',     UserController.ensureAuthorized, SpelersController.query_club);
+router.get('/spelersid/:_id',       UserController.ensureAuthorized, SpelersController.query_id);
+router.get('/spelers/:_id',         UserController.ensureAuthorized, SpelersController.get);
+router.post('/spelers',             UserController.ensureAuthorized, SpelersController.post);
+router.put('/spelers/:_id',         UserController.ensureAuthorized, SpelersController.put);
+router.delete('/spelers/:_id',      UserController.ensureAuthorized, SpelersController.delete);
 
 router.post('/media/:slug',         UserController.ensureAuthorized, multipartMiddleware, UploadController.uploadFile);
 

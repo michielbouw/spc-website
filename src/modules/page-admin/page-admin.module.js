@@ -65,6 +65,13 @@ angular.module('mainapp.pageAdmin', ['textAngular', 'ngFileUpload'])
                     permission: 'admin'
                 }
             })
+            .when('/admin/spelers', {
+                templateUrl: 'page-admin/views/admin-spelers.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'admin'
+                }
+            })
             .when('/admin/import', {
                 templateUrl: 'page-admin/views/admin-import.html',
                 access: {

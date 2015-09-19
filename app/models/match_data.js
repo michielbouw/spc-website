@@ -577,54 +577,6 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String }
     }],
-    pass_matrix_kwartier3: {
-        thuis: {
-            passMatrix: [{}],
-            passMatrix2: [{
-                kort: { type: Number },
-                kort_succes: { type: Number },
-                kort_perc: { type: String },
-                middellang: { type: Number },
-                middellang_succes: { type: Number },
-                middellang_perc: { type: String },
-                lang: { type: Number },
-                lang_succes: { type: Number },
-                lang_perc: { type: String },
-                TOTAAL: { type: Number },
-                TOTAAL_succes: { type: Number },
-                TOTAAL_perc: { type: String },
-                gem_len: { type: String },
-                _row: { type: String }
-            }]
-        },
-        uit: {
-            passMatrix: [{}],
-            passMatrix2: [{
-                kort: { type: Number },
-                kort_succes: { type: Number },
-                kort_perc: { type: String },
-                middellang: { type: Number },
-                middellang_succes: { type: Number },
-                middellang_perc: { type: String },
-                lang: { type: Number },
-                lang_succes: { type: Number },
-                lang_perc: { type: String },
-                TOTAAL: { type: Number },
-                TOTAAL_succes: { type: Number },
-                TOTAAL_perc: { type: String },
-                gem_len: { type: String },
-                _row: { type: String }
-            }]
-        }
-    },
-    pass_matrix_kwartier3_thuis_spelers: [{
-        personID: { type: Number },
-        spelerNaam: { type: String }
-    }],
-    pass_matrix_kwartier3_uit_spelers: [{
-        personID: { type: Number },
-        spelerNaam: { type: String }
-    }],
     pass_matrix_kwartier4: {
         thuis: {
             passMatrix: [{}],
@@ -814,6 +766,9 @@ module.exports = mongoose.model('MatchData', {
         spelerNaam: { type: String },
         spelerType: { type: String },
         spelerRugnummer: { type: Number },
+        spelerGeboortedatum: { type: String },
+        spelerLeeftijd : { type: Number },
+        spelerPhoto: { type: String },
 
         // input data force/change to number type
         // -------------------
@@ -1017,6 +972,9 @@ module.exports = mongoose.model('MatchData', {
         spelerNaam: { type: String },
         spelerType: { type: String },
         spelerRugnummer: { type: Number },
+        spelerGeboortedatum: { type: String },
+        spelerLeeftijd : { type: Number },
+        spelerPhoto: { type: String },
 
         // input data force/change to number type
         // -------------------

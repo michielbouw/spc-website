@@ -25,7 +25,10 @@
         </div>
         <div class="col-xs-12 col-sm-2 content-players-left">
             <span class="tag" ng-if="data.player_stats.spelerType == 'keeper'">Keeper</span>
-            <div class="col-xs-12"><img ng-src="media/players/{{ data.playerID }}.jpg" on-error-src="images/blank-avatar.png"></div>
+            <div class="col-xs-12">
+                <img ng-if="!data.player_stats.spelerPhoto" src="images/blank-avatar.png">
+                <img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+            </div>
             <div class="col-xs-12"><br>{{ data.player_stats.spelerNaam }}</div>
             <div class="col-xs-12"><br>{{ data.club_name }}</div>
             <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ data.player_stats.spelerRugnummer }}</span></div>
