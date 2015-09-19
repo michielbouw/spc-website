@@ -5,10 +5,10 @@ angular.module('mainapp.club')
             link: function(scope, element, attrs) {
                 $timeout(function () {
                     angular.element(document).ready(function () {
-                        $timeout(function() {
-                            $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                            $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
-                        }, 400);
+                        //$timeout(function() {
+                        //    $('body').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        //    $('.intro-box').css('background-color', $rootScope.currentClub.colors[0].refcode);
+                        //}, 400);
 
                         $('.content.content-page').css({
                             'min-height': window.innerHeight - 100

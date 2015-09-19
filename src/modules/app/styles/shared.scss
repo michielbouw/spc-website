@@ -442,6 +442,24 @@ Standard layout
   min-height: calc(100vh - 225px);
 }
 
+.content.content-page-full-spelers {
+  margin-top: 75px;
+  min-height: calc(100vh - 225px);
+
+  div.spelers-table {
+  }
+  div.spelers-table:hover {
+    background-color: $background;
+
+    div {
+      background-color: $background;
+       input {
+         background-color: $background;
+       }
+    }
+  }
+}
+
 .content.content-page-main {
   background-image: url('../images/voetbal.jpg');
   background-position: center center;
