@@ -29,6 +29,7 @@ angular.module('mainapp.club')
                 self.team_data = res.team_data;
 
                 self.season_index = res.team_data[res.team_data.length - 1].season;
+                self.season_matches_init = $filter('orderBy')(($filter('filter')(res.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
                 self.season_matches = $filter('orderBy')(($filter('filter')(res.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
                 var statslength = self.season_matches.length;
@@ -50,6 +51,7 @@ angular.module('mainapp.club')
                         self.season_matches.push(tempp);
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                    statslength = self.season_matches.length;
                 }
                 $scope.round = temp1;
 
@@ -128,7 +130,7 @@ angular.module('mainapp.club')
                     self.stats_vs.rood = 0;
 
                     for (i = 0; i < statslength; i++) {
-                        if (stats_vs_temp[i].wedstrijd) {
+                        if (stats_vs_temp[i].wedstrijd && stats_vs_temp[i].doelpogingen) {
                             self.stats_vs.doelpogingen += stats_vs_temp[i].doelpogingen;
                             self.stats_vs.goals += stats_vs_temp[i].doelpunten_voor;
                             self.stats_vs.goalstegen += stats_vs_temp[i].doelpunten_tegen;
@@ -196,7 +198,7 @@ angular.module('mainapp.club')
                     self.stats_vs.rood = 0;
 
                     for (i = 0; i < i_end && i < statslength; i++) {
-                        if (stats_vs_temp1[i].wedstrijd) {
+                        if (stats_vs_temp1[i].wedstrijd && stats_vs_temp1[i].doelpogingen) {
                             if (stats_vs_temp1[i].ronde > i_end) {
                                 break;
                             }
@@ -268,7 +270,7 @@ angular.module('mainapp.club')
                     self.stats_vs.rood = 0;
 
                     for (i = i_start; i < statslength; i++) {
-                        if (stats_vs_temp2[i].wedstrijd) {
+                        if (stats_vs_temp2[i].wedstrijd && stats_vs_temp2[i].doelpogingen) {
                             if (stats_vs_temp2[i].ronde <= i_start) {
                                 continue;
                             }
@@ -318,7 +320,7 @@ angular.module('mainapp.club')
                     self.stats_vs.rood = 0;
 
                     for (i = 0; i < statslength; i++) {
-                        if (stats_vs_temp0[i].wedstrijd) {
+                        if (stats_vs_temp0[i].wedstrijd && stats_vs_temp0[i].doelpogingen) {
                             self.stats_vs.doelpogingen += stats_vs_temp0[i].doelpogingen;
                             self.stats_vs.goals += stats_vs_temp0[i].doelpunten_voor;
                             self.stats_vs.goalstegen += stats_vs_temp0[i].doelpunten_tegen;

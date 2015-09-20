@@ -38,6 +38,19 @@ angular.module('mainapp.players')
                         }
                     });
                 });*/
+                angular.forEach(self.player_data, function(value, key) {
+                    if (!value.spelerPhoto) {
+                        Api.SpelersID.query({
+                            _id: value.playerID
+                        },function(res1) {
+                            angular.forEach(res1, function(value1, key1) {
+                                if (value1.spelerPhoto && self.club_name == value1.clubNaam) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        });
+                    }
+                });
             });
         }
     }]);

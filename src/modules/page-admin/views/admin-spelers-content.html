@@ -114,7 +114,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="col-xs-12 spelers-table" ng-repeat="speler in data.spelers | filter:search:strict">
+                <div class="col-xs-12 spelers-table" ng-repeat="speler in filtered = (data.spelers | filter:search:strict)">
                     <div class="col-xs-2 no-padding">
                         <input class="form-control input-sm" ng-model="speler.spelerNaam" placeholder="spelernaam">
                     </div>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-sm-1">
                         <button ng-if="speler.spelerPhoto" class="btn btn-info btn-xs"><a ng-href="{{ speler.spelerPhoto }}" target="_blank"><i class="fa fa-external-link"></i></a></button>
-                        <button class="btn btn-default btn-xs" ngf-select ngf-change="data.uploadPlayers($files, $index)" ngf-accept="'image/*'" ngf-max-size="10485760"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-default btn-xs" ngf-select ngf-change="data.uploadPlayers($files, data.spelers.indexOf(speler))" ngf-accept="'image/*'" ngf-max-size="10485760"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="hidden-xs col-sm-1">
                         <button class="btn btn-danger btn-xs" ng-click="data.openModalDel('sm', $index)"><i class="fa fa-close"></i></button>

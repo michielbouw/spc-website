@@ -35,14 +35,17 @@ angular.module('mainapp.players')
 
                 self.player_stats = angular.copy($filter('filter')(self.player_data, {playerID: self.playerID}, true)[0]);
                 self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
+                self.season_matches_init = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
                 self.season_matches = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
 
                 Api.SpelersID.query({
                     _id: self.playerID
                 },function(res1) {
-                    if (res1[0].spelerPhoto && !self.player_stats.spelerPhoto) {
-                        self.player_stats.spelerPhoto = res1[0].spelerPhoto;
-                    }
+                    angular.forEach(res1, function(value, key) {
+                        if (value.spelerPhoto && !self.player_stats.spelerPhoto && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
+                            self.player_stats.spelerPhoto = value.spelerPhoto;
+                        }
+                    });
                 });
 
                 if (self.player_stats.spelerType == 'keeper') {
@@ -68,6 +71,16 @@ angular.module('mainapp.players')
                         self.season_matches.push(temp);
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                }
+                for (var j = 0; j < statslength; j++) {
+                    if ((j+1) != self.season_matches[j].ronde) {
+                        var tempp = {};
+                        tempp.ronde = j+1;
+
+                        self.season_matches.push(tempp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                    statslength = self.season_matches.length;
                 }
                 $scope.round = temp1;
 

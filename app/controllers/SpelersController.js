@@ -11,7 +11,7 @@ module.exports = SpelersController = {
 
     query_club: function(req, res)
     {
-        Spelers.find({clubName: req.params._id}, function(err, data){
+        Spelers.find({clubID: req.params._id}, function(err, data){
             if (err) res.send(err);
             //if (!data) res.sendStatus(404);
             res.json(data);

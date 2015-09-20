@@ -29,12 +29,14 @@ module.exports = mongoose.model('MatchData', {
     spelersthuisteam: [{
         personID: { type: Number },
         spelerNaam: { type: String },
-        rugnummer: { type: Number }
+        rugnummer: { type: Number },
+        spelerPhoto: { type: String }
     }],
     spelersuitteam: [{
         personID: { type: Number },
         spelerNaam: { type: String },
-        rugnummer: { type: Number }
+        rugnummer: { type: Number },
+        spelerPhoto: { type: String }
     }],
 
     // main match data
@@ -44,7 +46,8 @@ module.exports = mongoose.model('MatchData', {
             spelerNaam: { type: String },
             positieID: { type: Number },
             positieNaam: { type: String },
-            shirtNummer: { type: Number }
+            shirtNummer: { type: Number },
+            spelerPhoto: { type: String }
         }],
         thuis_formatie: { type: String },
         uit: [{
@@ -52,7 +55,8 @@ module.exports = mongoose.model('MatchData', {
             spelerNaam: { type: String },
             positieID: { type: Number },
             positieNaam: { type: String },
-            shirtNummer: { type: Number }
+            shirtNummer: { type: Number },
+            spelerPhoto: { type: String }
         }],
         uit_formatie: { type: String }
     },

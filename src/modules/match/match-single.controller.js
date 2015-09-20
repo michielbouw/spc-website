@@ -152,6 +152,83 @@ angular.module('mainapp.match')
             self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
             self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
+            Api.SpelersClub.query({
+             _id: self.match.thuisTeamID
+             },function(res) {
+                self.speler_profiel_thuis = res;
+                angular.forEach(self.match.opstelling.thuis, function (value, key) {
+                    if (!value.spelerPhoto) {
+                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                            angular.forEach( $filter('filter')(res, {spelerID: value.personID}, true) , function(value1, key1) {
+                                if (value1.spelerPhoto) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        }
+                    }
+                });
+                angular.forEach(self.match.spelersthuisteam, function (value, key) {
+                    if (!value.spelerPhoto) {
+                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                            angular.forEach( $filter('filter')(res, {spelerID: value.personID}, true) , function(value1, key1) {
+                                if (value1.spelerPhoto) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        }
+                    }
+                });
+                angular.forEach(self.match.player_stats_full_thuis, function (value, key) {
+                    if (!value.spelerPhoto) {
+                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                            angular.forEach( $filter('filter')(res, {spelerID: value.personID}, true) , function(value1, key1) {
+                                if (value1.spelerPhoto) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            Api.SpelersClub.query({
+             _id: self.match.uitTeamID
+             },function(res) {
+                self.speler_profiel_uit = res;
+                angular.forEach(self.match.opstelling.uit, function (value, key) {
+                    if (!value.spelerPhoto) {
+                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                            angular.forEach( $filter('filter')(res, {spelerID: value.personID}, true) , function(value1, key1) {
+                                if (value1.spelerPhoto) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        }
+                    }
+                });
+                angular.forEach(self.match.spelersuitteam, function (value, key) {
+                    if (!value.spelerPhoto) {
+                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                            angular.forEach( $filter('filter')(res, {spelerID: value.personID}, true) , function(value1, key1) {
+                                if (value1.spelerPhoto) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        }
+                    }
+                });
+                angular.forEach(self.match.player_stats_full_uit, function (value, key) {
+                    if (!value.spelerPhoto) {
+                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                            angular.forEach( $filter('filter')(res, {spelerID: value.personID}, true) , function(value1, key1) {
+                                if (value1.spelerPhoto) {
+                                    value.spelerPhoto = value1.spelerPhoto;
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
             var teams;
             var teamslug;
 
@@ -177,14 +254,18 @@ angular.module('mainapp.match')
                                     temp.spelerNaam = value.spelerNaam;
                                     temp.playerID = value.playerID;
                                     var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                                    var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                                    if (player.scores) {
-                                        temp.scores = player.scores;
-                                    } else {
-                                        temp.scores = {};
-                                        temp.scores.score_from_coach = 0;
+                                    if (temp1) {
+                                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                        if (player) {
+                                            if (player.scores) {
+                                                temp.scores = player.scores;
+                                            } else {
+                                                temp.scores = {};
+                                                temp.scores.score_from_coach = 0;
+                                            }
+                                            self.spelerscores.push(temp);
+                                        }
                                     }
-                                    self.spelerscores.push(temp);
                                 });
                             }
                         });
@@ -208,14 +289,18 @@ angular.module('mainapp.match')
                                     temp.spelerNaam = value.spelerNaam;
                                     temp.playerID = value.playerID;
                                     var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                                    var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                                    if (player.scores) {
-                                        temp.scores = player.scores;
-                                    } else {
-                                        temp.scores = {};
-                                        temp.scores.score_from_coach = 0;
+                                    if (temp1) {
+                                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                        if (player) {
+                                            if (player.scores) {
+                                                temp.scores = player.scores;
+                                            } else {
+                                                temp.scores = {};
+                                                temp.scores.score_from_coach = 0;
+                                            }
+                                            self.spelerscores.push(temp);
+                                        }
                                     }
-                                    self.spelerscores.push(temp);
                                 });
                             }
                         });
@@ -270,14 +355,18 @@ angular.module('mainapp.match')
                                             temp.spelerNaam = value.spelerNaam;
                                             temp.playerID = value.playerID;
                                             var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                                            var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                                            if (player.scores) {
-                                                temp.scores = player.scores;
-                                            } else {
-                                                temp.scores = {};
-                                                temp.scores.score_from_coach = 0;
+                                            if (temp1) {
+                                                var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                                if (player) {
+                                                    if (player.scores) {
+                                                        temp.scores = player.scores;
+                                                    } else {
+                                                        temp.scores = {};
+                                                        temp.scores.score_from_coach = 0;
+                                                    }
+                                                    self.spelerscores.push(temp);
+                                                }
                                             }
-                                            self.spelerscores.push(temp);
                                         });
                                     }
                                 });
@@ -301,14 +390,18 @@ angular.module('mainapp.match')
                                             temp.spelerNaam = value.spelerNaam;
                                             temp.playerID = value.playerID;
                                             var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                                            var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                                            if (player.scores) {
-                                                temp.scores = player.scores;
-                                            } else {
-                                                temp.scores = {};
-                                                temp.scores.score_from_coach = 0;
+                                            if (temp1) {
+                                                var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                                if (player) {
+                                                    if (player.scores) {
+                                                        temp.scores = player.scores;
+                                                    } else {
+                                                        temp.scores = {};
+                                                        temp.scores.score_from_coach = 0;
+                                                    }
+                                                    self.spelerscores.push(temp);
+                                                }
                                             }
-                                            self.spelerscores.push(temp);
                                         });
                                     }
                                 });
@@ -341,14 +434,18 @@ angular.module('mainapp.match')
                                         temp.spelerNaam = value.spelerNaam;
                                         temp.playerID = value.playerID;
                                         var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                                        if (player.scores) {
-                                            temp.scores = player.scores;
-                                        } else {
-                                            temp.scores = {};
-                                            temp.scores.score_from_coach = 0;
+                                        if (temp1) {
+                                            var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                            if (player) {
+                                                if (player.scores) {
+                                                    temp.scores = player.scores;
+                                                } else {
+                                                    temp.scores = {};
+                                                    temp.scores.score_from_coach = 0;
+                                                }
+                                                self.spelerscores.push(temp);
+                                            }
                                         }
-                                        self.spelerscores.push(temp);
                                     });
                                 }
                             });
@@ -372,14 +469,18 @@ angular.module('mainapp.match')
                                         temp.spelerNaam = value.spelerNaam;
                                         temp.playerID = value.playerID;
                                         var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                                        if (player.scores) {
-                                            temp.scores = player.scores;
-                                        } else {
-                                            temp.scores = {};
-                                            temp.scores.score_from_coach = 0;
+                                        if (temp1) {
+                                            var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                            if (player) {
+                                                if (player.scores) {
+                                                    temp.scores = player.scores;
+                                                } else {
+                                                    temp.scores = {};
+                                                    temp.scores.score_from_coach = 0;
+                                                }
+                                                self.spelerscores.push(temp);
+                                            }
                                         }
-                                        self.spelerscores.push(temp);
                                     });
                                 }
                             });
@@ -575,31 +676,46 @@ angular.module('mainapp.match')
             self.spelerlogspelernaam = temp.spelerNaam;
             var temp1 = $filter('filter')(temp.matches, {season: self.match.seizoen}, true)[0];
             var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-            self.spelerlog = player.player_log;
-            self.spelercijfers = player.scores;
+            if (player) {
+                self.spelerlog = player.player_log;
+                self.spelercijfers = player.scores;
+            } else {
+                self.spelerlog = -1;
+            }
         };
 
         $rootScope.infoSaveLog = '';
         self.savePlayerLog = function () {
             $rootScope.infoSaveLog = '';
             if ($filter('filter')(self.team_data.team_data, {season: self.match.seizoen}, true)) {
+                var exists = false;
+
                 angular.forEach(self.playerdata, function (value, key) {
                     angular.forEach(self.spelerscores, function (value1, key1) {
                         if (value.playerID == value1.playerID) {
                             var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                            var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                            player.scores = value1.scores;
+                            if (temp1) {
+                                var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                                if (player) {
+                                    player.scores = value1.scores;
+                                    exists = true;
+                                } else {
+                                    exists = false;
+                                }
+                            }
                         }
                     });
                 });
-                Api.TeamDataItem.put({
-                    _slug: self.team_data._id
-                }, {
-                    player_data: self.playerdata,
-                    date_edited: self.datetime
-                }, function (res) {
-                    $rootScope.infoSaveLog = 'Opgeslagen';
-                });
+                if (exists) {
+                    Api.TeamDataItem.put({
+                        _slug: self.team_data._id
+                    }, {
+                        player_data: self.playerdata,
+                        date_edited: self.datetime
+                    }, function (res) {
+                        $rootScope.infoSaveLog = 'Opgeslagen';
+                    });
+                }
             }
         };
 
@@ -619,26 +735,28 @@ angular.module('mainapp.match')
                 logtemp.pub_date = new Date();
                 logtemp.author = editor_name;
                 logtemp.text = self.matchlogtemp;
-                self.teamdata.match_log.push(logtemp);
+                if (self.teamdata) {
+                    self.teamdata.match_log.push(logtemp);
 
-                //var temp = $filter('filter')(self.team_data.team_data, {season: self.match.seizoen}, true)[0];
-                //var teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
-                //teamdata.match_log.push(logtemp);
+                    //var temp = $filter('filter')(self.team_data.team_data, {season: self.match.seizoen}, true)[0];
+                    //var teamdata = $filter('filter')(temp.matches, {matchID: self.match.matchID}, true)[0];
+                    //teamdata.match_log.push(logtemp);
 
-                //angular.forEach(self.team_data, function (value, key) {
-                //    if (value.season === self.match.seizoen) {
-                //        var teamdata = $filter('filter')(value.matches, {matchID: self.match.matchID}, true)[0];
-                //        teamdata.match_log.push(logtemp);
-                //    }
-                //});
-                Api.TeamDataItem.put({
-                    _slug: self.team_data._id
-                }, {
-                    team_data: self.team_data.team_data,
-                    date_edited: self.datetime
-                }, function (res) {
-                    $rootScope.infoAddMatchLog = 'Opgeslagen';
-                });
+                    //angular.forEach(self.team_data, function (value, key) {
+                    //    if (value.season === self.match.seizoen) {
+                    //        var teamdata = $filter('filter')(value.matches, {matchID: self.match.matchID}, true)[0];
+                    //        teamdata.match_log.push(logtemp);
+                    //    }
+                    //});
+                    Api.TeamDataItem.put({
+                        _slug: self.team_data._id
+                    }, {
+                        team_data: self.team_data.team_data,
+                        date_edited: self.datetime
+                    }, function (res) {
+                        $rootScope.infoAddMatchLog = 'Opgeslagen';
+                    });
+                }
             }
         };
 
@@ -660,21 +778,31 @@ angular.module('mainapp.match')
                 logtemp.text = self.playerlogtemp;
                 self.spelerlog.push(logtemp);
 
+                var exists = false;
                 angular.forEach(self.playerdata, function (value, key) {
                     if (value.playerID == i) {
                         var temp1 = $filter('filter')(value.matches, {season: self.match.seizoen}, true)[0];
-                        var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
-                        player.spelerlog = self.spelerlog;
+                        if (temp1) {
+                            var player = $filter('filter')(temp1.match, {matchID: self.match.matchID}, true)[0];
+                            if (player) {
+                                player.spelerlog = self.spelerlog;
+                                exists = true;
+                            } else {
+                                exists = false;
+                            }
+                        }
                     }
                 });
-                Api.TeamDataItem.put({
-                    _slug: self.team_data._id
-                }, {
-                    player_data: self.playerdata,
-                    date_edited: self.datetime
-                }, function (res) {
-                    $rootScope.infoAddPlayerLog = 'Opgeslagen';
-                });
+                if (exists) {
+                    Api.TeamDataItem.put({
+                        _slug: self.team_data._id
+                    }, {
+                        player_data: self.playerdata,
+                        date_edited: self.datetime
+                    }, function (res) {
+                        $rootScope.infoAddPlayerLog = 'Opgeslagen';
+                    });
+                }
             }
         };
     }]);

@@ -89,7 +89,8 @@ UploadController.prototype.uploadFile = function(req, res) {
                 im.resize({
                     srcPath: tmp_path,
                     dstPath: target_path,
-                    width: 150
+                    quality: 1,
+                    width: 400
                 }, function (err, stdout, stderr) {
                     if (err) throw err;
                     // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
@@ -103,7 +104,8 @@ UploadController.prototype.uploadFile = function(req, res) {
             im.resize({
                 srcPath: tmp_path,
                 dstPath: target_path,
-                width: 150
+                quality: 1,
+                width: 400
             }, function (err, stdout, stderr) {
                 if (err) throw err;
                 // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files

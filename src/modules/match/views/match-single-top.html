@@ -35,7 +35,7 @@
                         <li><a href="" scroll-to="overtredingen_locatie"><i class="fa fa-location-arrow"></i> Locatie overtredingen</a></li>
                     </ul>
                 </li>
-                <li role="presentation">
+                <li role="presentation" ng-if="data.match.player_stats_full_uit.length > 0 || data.match.player_stats_full_uit.length > 0">
                     <a href="#players" aria-controls="players" role="tab" data-toggle="tab" scroll-to="top">
                         <span class="caret-right"></span><span class="caret"></span> Spelers
                     </a>
@@ -59,8 +59,8 @@
                         <span class="caret-right"></span><span class="caret"></span> Logboek
                     </a>
                     <ul class="nav nav-pills nav-stacked submenu">
-                        <li><a href="" scroll-to="scorespeler"><i class="fa fa-sort-numeric-desc"></i> Score spelers</a></li>
-                        <li><a href="" scroll-to="logwedstrijd"><i class="fa fa-pencil"></i> Wedstrijd</a></li>
+                        <li ng-if="data.team_data && data.spelerscores.length > 0"><a href="" scroll-to="scorespeler"><i class="fa fa-sort-numeric-desc"></i> Score spelers</a></li>
+                        <li ng-if="data.team_data && data.teamdata"><a href="" scroll-to="logwedstrijd"><i class="fa fa-pencil"></i> Wedstrijd</a></li>
                         <li><a href="" scroll-to="logspeler"><i class="fa fa-weixin"></i> Spelers</a></li>
                     </ul>
                 </li>
