@@ -21,10 +21,16 @@ angular.module('mainapp', [
 
         $routeProvider
             .when('/404', {
-                templateUrl: 'app/views/404.html'
+                templateUrl: 'app/views/404.html',
+                access: {
+                    requiredLogin: false
+                }
             })
             .when('/500', {
-                templateUrl: 'app/views/500.html'
+                templateUrl: 'app/views/500.html',
+                access: {
+                    requiredLogin: false
+                }
             })
             .otherwise('/404');
 
