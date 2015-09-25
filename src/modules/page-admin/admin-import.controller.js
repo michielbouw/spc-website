@@ -27,7 +27,7 @@ angular.module('mainapp.pageAdmin')
                             console.log('file ' + res + ' uploaded.');
                             if (res.split('.').pop() == 'json') {
                                 $rootScope.errorImport = 'Bezig met verwerken';
-                                self.processMatchDataFile(res);
+                                //self.processMatchDataFile(res);
                             }
                         })
                         .error(function () {
@@ -37,6 +37,7 @@ angular.module('mainapp.pageAdmin')
                         /* jshint ignore:end */
                 }
                 $rootScope.errorImport = '';
+                $location.path('/admin');
             }
         };
 

@@ -1,6 +1,7 @@
 var fs = require('fs');
 var fsextra = require ('fs-extra');
 var im = require('imagemagick');
+var ImportController = require('../controllers/ImportController');
 
 UploadController = function() {};
 
@@ -180,6 +181,8 @@ UploadController.prototype.uploadFile = function(req, res) {
 
                     fs.writeFile(target_path, data, 'utf8', function (err) {
                         if (err) throw err;
+
+                        ImportController.match(target_path);
 
                         fs.unlink(tmp_path, function () {
                             if (err) throw err;
