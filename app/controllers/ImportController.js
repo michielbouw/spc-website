@@ -394,6 +394,17 @@ module.exports = ImportController = {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersthuisteam.push(value);
@@ -415,6 +426,17 @@ module.exports = ImportController = {
                                                 if (value1.spelerPhoto) {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
+                                            });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
                                             });
                                         }
                                     }
@@ -438,6 +460,17 @@ module.exports = ImportController = {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersthuisteam.push(value);
@@ -459,6 +492,17 @@ module.exports = ImportController = {
                                                 if (value1.spelerPhoto) {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
+                                            });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
                                             });
                                         }
                                     }
@@ -482,6 +526,17 @@ module.exports = ImportController = {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersthuisteam.push(value);
@@ -504,6 +559,17 @@ module.exports = ImportController = {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersthuisteam.push(value);
@@ -525,6 +591,17 @@ module.exports = ImportController = {
                                                 if (value1.spelerPhoto) {
                                                     value.spelerPhoto = value1.spelerPhoto;
                                                 }
+                                            });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.thuis,
+                                                clubID: items.thuisTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
                                             });
                                         }
                                     }
@@ -553,6 +630,17 @@ module.exports = ImportController = {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersuitteam.push(value_uit);
@@ -574,6 +662,17 @@ module.exports = ImportController = {
                                                 if (value1.spelerPhoto) {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
+                                            });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
                                             });
                                         }
                                     }
@@ -597,6 +696,17 @@ module.exports = ImportController = {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersuitteam.push(value_uit);
@@ -618,6 +728,17 @@ module.exports = ImportController = {
                                                 if (value1.spelerPhoto) {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
+                                            });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
                                             });
                                         }
                                     }
@@ -641,6 +762,17 @@ module.exports = ImportController = {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersuitteam.push(value_uit);
@@ -663,6 +795,17 @@ module.exports = ImportController = {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
                                             });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
+                                            });
                                         }
                                     }
                                     items.spelersuitteam.push(value_uit);
@@ -684,6 +827,17 @@ module.exports = ImportController = {
                                                 if (value1.spelerPhoto) {
                                                     value_uit.spelerPhoto = value1.spelerPhoto;
                                                 }
+                                            });
+                                        } else {
+                                            Spelers.create({
+                                                spelerID: Number(value.personID),
+                                                spelerNaam: value.spelerNaam,
+                                                spelerRugnummer: Number(value.rugnummer),
+                                                seizoen: 'Seizoen ' + items.seizoen,
+                                                clubNaam: match_short.match_info.uit,
+                                                clubID: items.uitTeamID,
+                                                date_edited: datetime
+                                            }, function(err, data) {
                                             });
                                         }
                                     }
