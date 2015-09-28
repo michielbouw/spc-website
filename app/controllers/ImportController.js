@@ -1194,38 +1194,38 @@ module.exports = ImportController = {
                                             }
                                         });
                                     });
-                                    if (data.team_data.pass_matrix_kwartier1) {
+                                    if (data.team_data.pass_matrix_kwartier1.length > 0) {
                                         items.pass_matrix_kwartier1 = data.team_data.pass_matrix_kwartier1;
                                         items.pass_matrix_kwartier1_thuis_spelers = [];
                                         items.pass_matrix_kwartier1_uit_spelers = [];
                                     }
-                                    if (data.team_data.pass_matrix_kwartier2) {
+                                    if (data.team_data.pass_matrix_kwartier2.length > 0) {
                                         items.pass_matrix_kwartier2 = data.team_data.pass_matrix_kwartier2;
                                         items.pass_matrix_kwartier2_thuis_spelers = [];
                                         items.pass_matrix_kwartier2_uit_spelers = [];
                                     }
-                                    if (data.team_data.pass_matrix_kwartier3) {
+                                    if (data.team_data.pass_matrix_kwartier3.length > 0) {
                                         items.pass_matrix_kwartier3 = data.team_data.pass_matrix_kwartier3;
                                         items.pass_matrix_kwartier3_thuis_spelers = [];
                                         items.pass_matrix_kwartier3_uit_spelers = [];
                                     }
-                                    if (data.team_data.pass_matrix_kwartier4) {
+                                    if (data.team_data.pass_matrix_kwartier4.length > 0) {
                                         items.pass_matrix_kwartier4 = data.team_data.pass_matrix_kwartier4;
                                         items.pass_matrix_kwartier4_thuis_spelers = [];
                                         items.pass_matrix_kwartier4_uit_spelers = [];
                                     }
-                                    if (data.team_data.pass_matrix_kwartier5) {
+                                    if (data.team_data.pass_matrix_kwartier5.length > 0) {
                                         items.pass_matrix_kwartier5 = data.team_data.pass_matrix_kwartier5;
                                         items.pass_matrix_kwartier5_thuis_spelers = [];
                                         items.pass_matrix_kwartier5_uit_spelers = [];
                                     }
-                                    if (data.team_data.pass_matrix_kwartier6) {
+                                    if (data.team_data.pass_matrix_kwartier6.length > 0) {
                                         items.pass_matrix_kwartier6 = data.team_data.pass_matrix_kwartier6;
                                         items.pass_matrix_kwartier6_thuis_spelers = [];
                                         items.pass_matrix_kwartier6_uit_spelers = [];
                                     }
                                     forEach(data.wedstrijd_data.spelers_thuisteam, function (value, key) {
-                                        if (data.team_data.pass_matrix_kwartier1) {
+                                        if (data.team_data.pass_matrix_kwartier1.length > 0) {
                                             forEach(items.pass_matrix_kwartier1.thuis.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1238,7 +1238,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier2) {
+                                        if (data.team_data.pass_matrix_kwartier2.length > 0) {
                                             forEach(items.pass_matrix_kwartier2.thuis.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1251,7 +1251,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier3) {
+                                        if (data.team_data.pass_matrix_kwartier3.length > 0) {
                                             forEach(items.pass_matrix_kwartier3.thuis.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1264,7 +1264,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier4) {
+                                        if (data.team_data.pass_matrix_kwartier4.length > 0) {
                                             forEach(items.pass_matrix_kwartier4.thuis.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1277,7 +1277,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier5) {
+                                        if (data.team_data.pass_matrix_kwartier5.length > 0) {
                                             forEach(items.pass_matrix_kwartier5.thuis.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1290,7 +1290,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier6) {
+                                        if (data.team_data.pass_matrix_kwartier6.length > 0) {
                                             forEach(items.pass_matrix_kwartier6.thuis.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1305,7 +1305,7 @@ module.exports = ImportController = {
                                         }
                                     });
                                     forEach(data.wedstrijd_data.spelers_uitteam, function (value, key) {
-                                        if (data.team_data.pass_matrix_kwartier1) {
+                                        if (data.team_data.pass_matrix_kwartier1.length > 0) {
                                             forEach(items.pass_matrix_kwartier1.uit.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1318,7 +1318,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier2) {
+                                        if (data.team_data.pass_matrix_kwartier2.length > 0) {
                                             forEach(items.pass_matrix_kwartier2.uit.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1331,7 +1331,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier3) {
+                                        if (data.team_data.pass_matrix_kwartier3.length > 0) {
                                             forEach(items.pass_matrix_kwartier3.uit.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1344,7 +1344,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier4) {
+                                        if (data.team_data.pass_matrix_kwartier4.length > 0) {
                                             forEach(items.pass_matrix_kwartier4.uit.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1357,7 +1357,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier5) {
+                                        if (data.team_data.pass_matrix_kwartier5.length > 0) {
                                             forEach(items.pass_matrix_kwartier5.uit.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
@@ -1370,7 +1370,7 @@ module.exports = ImportController = {
                                                 }
                                             });
                                         }
-                                        if (data.team_data.pass_matrix_kwartier6) {
+                                        if (data.team_data.pass_matrix_kwartier6.length > 0) {
                                             forEach(items.pass_matrix_kwartier6.uit.passMatrix, function (value1, key1) {
                                                 if (Number_converter(value1._row) === value.personID) {
                                                     value1._row = value.spelerNaam;
