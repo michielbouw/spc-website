@@ -3296,6 +3296,6 @@ module.exports = ImportController = {
                     });
                 });
             });
-        }, 1000);
+        }, 2000);
     }
 };
