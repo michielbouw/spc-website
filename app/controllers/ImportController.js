@@ -2397,7 +2397,7 @@ module.exports = ImportController = {
 
                                                 // check player and change or create, check season and round, and change or add playerdata
                                                 if (teamdata.player_data) {
-                                                    forEach(player_data.player_stats_thuis, function (value, key) {
+                                                    _.each(player_data.player_stats_thuis, function (value, key) {
                                                         if (!(_.where(teamdata.player_data, {playerID: value.personID})[0])) {
                                                             var temp = {};
                                                             temp.playerID = value.personID;
@@ -2632,7 +2632,7 @@ module.exports = ImportController = {
                                                     });
                                                 } else {
                                                     teamdata.player_data = [];
-                                                    forEach(player_data.player_stats_thuis, function (value, key1) {
+                                                    _.each(player_data.player_stats_thuis, function (value, key1) {
                                                         var temp = {};
                                                         temp.playerID = value.personID;
                                                         temp.spelerNaam = value.spelerNaam;
@@ -2914,7 +2914,7 @@ module.exports = ImportController = {
 
                                                 // check player and change or create, check season and round, and change or add playerdata
                                                 if (teamdata_uit.player_data) {
-                                                    forEach(player_data.player_stats_uit, function (value, key) {
+                                                    _.each(player_data.player_stats_uit, function (value, key) {
                                                         if (!(_.where(teamdata_uit.player_data, {playerID: value.personID})[0])) {
                                                             var temp = {};
                                                             temp.playerID = value.personID;
@@ -3149,7 +3149,7 @@ module.exports = ImportController = {
                                                     });
                                                 } else {
                                                     teamdata_uit.player_data = [];
-                                                    forEach(player_data.player_stats_uit, function (value, key1) {
+                                                    _.each(player_data.player_stats_uit, function (value, key1) {
                                                         var temp = {};
                                                         temp.playerID = value.personID;
                                                         temp.spelerNaam = value.spelerNaam;
