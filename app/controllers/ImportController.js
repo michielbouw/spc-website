@@ -16,7 +16,7 @@ module.exports = ImportController = {
         var data;
 
         var Number_converter = function (value) {
-            if (isNaN(Number(value)) || isNaN(value) || Number(value) == 'NaN' || value === 'NaN') {
+            if (isNaN(Number(value)) || isNaN(value) || Number(value) == 'NaN' || value === 'NaN' || Number(value) == 'NA' || value === 'NA') {
                 return 0;
             } else {
                 return Number(value);
@@ -1583,10 +1583,10 @@ module.exports = ImportController = {
                                             temp.locatie_reddingen = [];
                                             forEach(value.locaties_reddingen, function (value1, key1) {
                                                 var temp1 = {};
-                                                temp1.zend_length = (value1.zend_length);
-                                                temp1.zend_width = (value1.zend_width);
-                                                temp1.ontvang_length = (value1.ontvang_length);
-                                                temp1.ontvang_width = (value1.ontvang_width);
+                                                temp1.zend_length = Number_converter(value1.zend_length);
+                                                temp1.zend_width = Number_converter(value1.zend_width);
+                                                temp1.ontvang_length = Number_converter(value1.ontvang_length);
+                                                temp1.ontvang_width = Number_converter(value1.ontvang_width);
                                                 temp1.actie = (value1.actie);
 
                                                 temp.locatie_reddingen.push(temp1);
@@ -1595,10 +1595,10 @@ module.exports = ImportController = {
                                             temp.locatie_uittrappen = [];
                                             forEach(value.locaties_uittrappen, function (value1, key1) {
                                                 var temp1 = {};
-                                                temp1.zend_length = (value1.zend_lengte);
-                                                temp1.zend_width = (value1.zend_breedte);
-                                                temp1.ontvang_length = (value1.ontvang_lengte[0]);
-                                                temp1.ontvang_width = (value1.ontvang_breedte[0]);
+                                                temp1.zend_length = Number_converter(value1.zend_lengte);
+                                                temp1.zend_width = Number_converter(value1.zend_breedte);
+                                                temp1.ontvang_length = Number_converter(value1.ontvang_lengte[0]);
+                                                temp1.ontvang_width = Number_converter(value1.ontvang_breedte[0]);
                                                 forEach(items.spelersthuisteam, function (value1, key1) {
                                                     if (value1.personID == value1.teamgenoot) {
                                                         temp1.teamgenootID = (value1.personID);
@@ -1932,10 +1932,10 @@ module.exports = ImportController = {
                                             temp.locatie_reddingen = [];
                                             forEach(value.locaties_reddingen, function (value, key1) {
                                                 var temp1 = {};
-                                                temp1.zend_length = (value.zend_length);
-                                                temp1.zend_width = (value.zend_width);
-                                                temp1.ontvang_length = (value.ontvang_length);
-                                                temp1.ontvang_width = (value.ontvang_width);
+                                                temp1.zend_length = Number_converter(value.zend_length);
+                                                temp1.zend_width = Number_converter(value.zend_width);
+                                                temp1.ontvang_length = Number_converter(value.ontvang_length);
+                                                temp1.ontvang_width = Number_converter(value.ontvang_width);
                                                 temp1.actie = (value.actie);
 
                                                 temp.locatie_reddingen.push(temp1);
@@ -1944,10 +1944,10 @@ module.exports = ImportController = {
                                             temp.locatie_uittrappen = [];
                                             forEach(value.locaties_uittrappen, function (value, key1) {
                                                 var temp1 = {};
-                                                temp1.zend_length = (value.zend_lengte);
-                                                temp1.zend_width = (value.zend_breedte);
-                                                temp1.ontvang_length = (value.ontvang_lengte[0]);
-                                                temp1.ontvang_width = (value.ontvang_breedte[0]);
+                                                temp1.zend_length = Number_converter(value.zend_lengte);
+                                                temp1.zend_width = Number_converter(value.zend_breedte);
+                                                temp1.ontvang_length = Number_converter(value.ontvang_lengte[0]);
+                                                temp1.ontvang_width = Number_converter(value.ontvang_breedte[0]);
                                                 forEach(items.spelersthuisteam, function (value1, key1) {
                                                     if (value1.personID == value.teamgenoot) {
                                                         temp1.teamgenootID = (value1.personID);
