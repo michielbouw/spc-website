@@ -280,7 +280,7 @@ module.exports = ImportController = {
                                 }
 
                                 items.overzicht_wedstrijdstatistieken = [];
-                                forEach(data.wedstrijd_data.overzicht_wedstrijdstatistieken, function (value, key) {
+                                _.each(data.wedstrijd_data.overzicht_wedstrijdstatistieken, function (value, key) {
                                     var temp = {};
                                     temp.V1 = value[' '];
                                     temp.V2 = value[' .1'];
@@ -329,7 +329,7 @@ module.exports = ImportController = {
                                 }
 
                                 items.overzicht_doelpogingen = [];
-                                forEach(data.wedstrijd_data.overzicht_doelpogingen, function (value, key) {
+                                _.each(data.wedstrijd_data.overzicht_doelpogingen, function (value, key) {
                                     var temp = {};
                                     temp.V1 = value[' '];
                                     temp.V2 = value[' .1'];
@@ -338,7 +338,7 @@ module.exports = ImportController = {
                                 });
 
                                 items.duel_overzicht = [];
-                                forEach(data.wedstrijd_data.duel_overzicht, function (value, key) {
+                                _.each(data.wedstrijd_data.duel_overzicht, function (value, key) {
                                     var temp = {};
                                     temp.V1 = value[match_short.match_info.thuis];
                                     temp.V2 = value[' '];
@@ -347,7 +347,7 @@ module.exports = ImportController = {
                                 });
 
                                 items.overtredingen = [];
-                                forEach(data.wedstrijd_data.overtredingen, function (value, key) {
+                                _.each(data.wedstrijd_data.overtredingen, function (value, key) {
                                     var temp = {};
                                     temp.V1 = String(value[items.thuisTeamID]);
                                     temp.V2 = value.NA;
@@ -356,7 +356,7 @@ module.exports = ImportController = {
                                 });
 
                                 items.spelhervattingen = [];
-                                forEach(data.wedstrijd_data.spelhervattingen, function (value, key) {
+                                _.each(data.wedstrijd_data.spelhervattingen, function (value, key) {
                                     var temp = {};
                                     temp.V1 = value[items.thuisTeamID];
                                     temp.V2 = value.NA;
@@ -365,7 +365,7 @@ module.exports = ImportController = {
                                 });
 
                                 items.passes = [];
-                                forEach(data.wedstrijd_data.passes, function (value, key) {
+                                _.each(data.wedstrijd_data.passes, function (value, key) {
                                     var temp = {};
                                     temp.V1 = value[items.thuisTeamID];
                                     temp.V2 = value.NA;
@@ -374,13 +374,13 @@ module.exports = ImportController = {
                                 });
 
                                 items.spelers_thuisteam = [];
-                                forEach(data.wedstrijd_data.spelers_thuisteam, function (value, key) {
+                                _.each(data.wedstrijd_data.spelers_thuisteam, function (value, key) {
                                     if (items.spelers_thuisteam.indexOf(value) < 0) {
                                         items.spelers_thuisteam.push(value);
                                     }
                                 });
                                 items.spelers_uitteam = [];
-                                forEach(data.wedstrijd_data.spelers_uitteam, function (value, key) {
+                                _.each(data.wedstrijd_data.spelers_uitteam, function (value, key) {
                                     if (items.spelers_uitteam.indexOf(value) < 0) {
                                         items.spelers_uitteam.push(value);
                                     }
@@ -868,7 +868,7 @@ module.exports = ImportController = {
                                 items.gemiddelde_posities_kwartier5 = [];
                                 items.gemiddelde_posities_kwartier6 = [];
                                 forEach(items.spelersthuisteam, function (value, key) {
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_helft1, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_helft1, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -880,7 +880,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_helft1.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_helft2, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_helft2, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -892,7 +892,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_helft2.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier1, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier1, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -904,7 +904,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier1.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier2, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier2, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -916,7 +916,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier2.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier3, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier3, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -928,7 +928,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier3.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier4, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier4, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -940,7 +940,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier4.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier5, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier5, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -952,7 +952,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier5.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier6, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier6, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -966,7 +966,7 @@ module.exports = ImportController = {
                                     });
                                 });
                                 forEach(items.spelersuitteam, function (value, key) {
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_helft1, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_helft1, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -978,7 +978,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_helft1.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_helft2, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_helft2, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -990,7 +990,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_helft2.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier1, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier1, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -1002,7 +1002,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier1.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier2, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier2, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -1014,7 +1014,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier2.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier3, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier3, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -1026,7 +1026,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier3.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier4, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier4, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -1038,7 +1038,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier4.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier5, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier5, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
@@ -1050,7 +1050,7 @@ module.exports = ImportController = {
                                             items.gemiddelde_posities_kwartier5.push(temp);
                                         }
                                     });
-                                    forEach(data.wedstrijd_data.gemiddelde_posities_kwartier6, function (value1, key1) {
+                                    _.each(data.wedstrijd_data.gemiddelde_posities_kwartier6, function (value1, key1) {
                                         if (value1.personID[0] === value.personID) {
                                             var temp = {};
                                             temp.personID = value1.personID[0];
