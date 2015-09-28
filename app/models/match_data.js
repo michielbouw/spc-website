@@ -30,13 +30,17 @@ module.exports = mongoose.model('MatchData', {
         personID: { type: Number },
         spelerNaam: { type: String },
         rugnummer: { type: Number },
-        spelerPhoto: { type: String }
+        spelerPhoto: { type: String },
+        spelerGeboortedatum: { type: String },
+        spelerLeeftijd : { type: Number }
     }],
     spelersuitteam: [{
         personID: { type: Number },
         spelerNaam: { type: String },
         rugnummer: { type: Number },
-        spelerPhoto: { type: String }
+        spelerPhoto: { type: String },
+        spelerGeboortedatum: { type: String },
+        spelerLeeftijd : { type: Number }
     }],
 
     // main match data

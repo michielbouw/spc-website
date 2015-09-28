@@ -1,6 +1,7 @@
 angular.module('mainapp.pageAdmin')
     .controller('mainapp.pageAdmin.AdminImportController', ['Api', 'Upload', '$filter', '$rootScope', '$location', '$http',
-        function(Api, Upload, $filter, $rootScope, $location, $http) {
+        '$timeout',
+        function(Api, Upload, $filter, $rootScope, $location, $http, $timeout) {
 
         var self = this;
         self.datetime = new Date();
@@ -26,8 +27,10 @@ angular.module('mainapp.pageAdmin')
                         .success(function (res) {
                             console.log('file ' + res + ' uploaded.');
                             if (res.split('.').pop() == 'json') {
-                                $rootScope.errorImport = 'Bezig met verwerken';
+                                $timeout(function(){
+                                //$rootScope.errorImport = 'Bezig met verwerken';
                                 //self.processMatchDataFile(res);
+                                }, 7000);
                             }
                         })
                         .error(function () {
