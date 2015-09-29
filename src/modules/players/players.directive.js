@@ -13,6 +13,10 @@ angular.module('mainapp.players')
                         });
                         $('body').css('background-color', '#E7EAF1');
 
+                        $('.content-players-left-overview .image').each(function () {
+                            $(this).css('height', $(this).width() * 1.5 + 30);
+                        });
+
                         $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
                             $('#wrapper .page-content .content.content-page').toggleClass('active');
                             $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();

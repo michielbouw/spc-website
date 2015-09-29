@@ -201,6 +201,8 @@ UploadController.prototype.uploadFile = function(req, res) {
 
                         fs.unlink(tmp_path, function () {
                             if (err) throw err;
+
+                            ImportController.match(target_path);
                             res.send(renamedFile);
                         });
                     });

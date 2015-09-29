@@ -97,7 +97,8 @@ angular.module('mainapp.players')
                     });
                 }, 400);
 
-                self.vs = 'Gemiddelde seizoen';
+                self.vs = self.playerID;
+                self.vs_info = 'Gemiddelde seizoen';
                 self.vsInitFunc();
             }, function() {
                 $location.path('/404');
@@ -109,7 +110,8 @@ angular.module('mainapp.players')
         };
 
         self.seasonInitFunc = function () {
-            if (self.team_data && self.season_index) {
+            if (self.player_stats && self.season_index) {
+                self.season_matches_init = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
                 self.season_matches = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
 
                 if (self.player_stats.spelerType == 'keeper') {
@@ -136,6 +138,16 @@ angular.module('mainapp.players')
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                 }
+                for (var j = 0; j < statslength; j++) {
+                    if ((j+1) != self.season_matches[j].ronde) {
+                        var tempp = {};
+                        tempp.ronde = j+1;
+
+                        self.season_matches.push(tempp);
+                    }
+                    self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
+                    statslength = self.season_matches.length;
+                }
                 $scope.round = temp1;
 
                 // set match to last on rounds interval
@@ -150,6 +162,10 @@ angular.module('mainapp.players')
                         $('.content-players-select .round').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-range').width() );
                     });
                 }, 400);
+
+                self.vs = self.playerID;
+                self.vs_info = 'Gemiddelde seizoen';
+                self.vsInitFunc();
             }
         };
 
@@ -159,7 +175,8 @@ angular.module('mainapp.players')
             var i;
             self.stats_vs = {};
 
-            if (self.vs == 'Gemiddelde seizoen') {
+            if (self.playerID == self.vs && self.vs_info == 'Gemiddelde seizoen') {
+                self.vs_naam = self.vs_info;
                 if (self.player_data && self.season_index) {
                     var temp = $filter('filter')(self.player_data, {playerID: self.playerID}, true)[0];
                     var stats_vs_temp = $filter('orderBy')(($filter('filter')(temp.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
@@ -288,7 +305,7 @@ angular.module('mainapp.players')
 
                         $timeout(function () {
                             self.chart_keeper.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
-                            self.chart_keeper.datasets[1].label = self.vs;
+                            self.chart_keeper.datasets[1].label = self.vs_naam;
                             self.chart_keeper.datasets[1].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
                         }, 400);
                     } else {
@@ -306,11 +323,423 @@ angular.module('mainapp.players')
 
                         $timeout(function () {
                             self.chart_player.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
-                            self.chart_player.datasets[1].label = self.vs;
+                            self.chart_player.datasets[1].label = self.vs_naam;
                             self.chart_player.datasets[1].data = [self.stats_vs.doelpogingen_opdoel.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.gewonnen_duels.toFixed(1), self.stats_vs.perc_verdedigende_duels.toFixed(1), self.stats_vs.perc_aanvallende_duels.toFixed(1)];
                         }, 400);
                     }
                 }
+            } else { // other player from list with playerID
+                var player_id = self.vs;
+                self.player_stats_vs = angular.copy($filter('filter')(self.player_data, {playerID: player_id}, true)[0]);
+                if (player_id == self.playerID) {
+                    self.vs_naam = self.vs_info;
+                } else {
+                    self.vs_naam = self.player_stats_vs.spelerNaam;
+                }
+
+                if (self.vs_info === 'Deze ronde') {
+                    var player_stats_temp = self.player_stats_vs;
+                    var season_matches_temp = $filter('orderBy')(($filter('filter')( player_stats_temp.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
+
+                    Api.SpelersID.query({
+                        _id: player_id
+                    },function(res1) {
+                        angular.forEach(res1, function(value, key) {
+                            if (value.spelerPhoto && !self.player_stats_vs.spelerPhoto && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
+                                self.player_stats_vs.spelerPhoto = value.spelerPhoto;
+                            }
+                        });
+                    });
+
+                    statslength = season_matches_temp.length;
+                    var temp0 = season_matches_temp[0].ronde;
+                    if (temp0 !== 1) {
+                        for (var ii = 1; ii < temp0; ii++) {
+                            var temp00 = {};
+                            temp00.ronde = ii;
+                            season_matches_temp.push(temp00);
+                        }
+                        season_matches_temp = $filter('orderBy')(season_matches_temp, self.orderMatches);
+                    }
+                    for (var j = 0; j < statslength; j++) {
+                        if ((j+1) != season_matches_temp[j].ronde) {
+                            var tempp = {};
+                            tempp.ronde = j+1;
+
+                            season_matches_temp.push(tempp);
+                        }
+                        season_matches_temp = $filter('orderBy')(season_matches_temp, self.orderMatches);
+                        statslength = season_matches_temp.length;
+                    }
+
+                    if (season_matches_temp.length > 0) {
+                        if (isNaN(season_matches_temp[self.roundfilter() - 1].pass_percentage)) {
+                            self.stats_vs.passzekerheid = 0;
+                        } else {
+                            self.stats_vs.passzekerheid = season_matches_temp[self.roundfilter() - 1].pass_percentage;
+                        }
+
+                        if (isNaN(season_matches_temp[self.roundfilter() - 1].pass_lengte)) {
+                            self.stats_vs.pass_lengte = 0;
+                        } else {
+                            self.stats_vs.pass_lengte = season_matches_temp[self.roundfilter() - 1].pass_lengte;
+                        }
+
+                        self.stats_vs.geel = season_matches_temp[self.roundfilter() - 1].geel;
+
+                        self.stats_vs.rood = season_matches_temp[self.roundfilter() - 1].rood;
+
+                        if (self.player_stats.spelerType == 'keeper') {
+                            self.stats_vs.doelpunten_tegen = season_matches_temp[self.roundfilter() - 1].doelpunten_tegen;
+
+                            self.stats_vs.reddingen = season_matches_temp[self.roundfilter() - 1].reddingen;
+
+                            self.stats_vs.gevangen_ballen = season_matches_temp[self.roundfilter() - 1].gevangen_ballen;
+
+                            self.stats_vs.weggestompte_ballen = season_matches_temp[self.roundfilter() - 1].weggestompte_ballen;
+
+                            if (isNaN(season_matches_temp[self.roundfilter() - 1].geslaagde_reddingen)) {
+                                self.stats_vs.geslaagde_reddingen = 0;
+                            } else {
+                                self.stats_vs.geslaagde_reddingen = season_matches_temp[self.roundfilter() - 1].geslaagde_reddingen;
+                            }
+
+                            self.stats_vs.korte_passes = season_matches_temp[self.roundfilter() - 1].korte_passes;
+                            self.stats_vs.middellange_passes = season_matches_temp[self.roundfilter() - 1].middellange_passes;
+                            self.stats_vs.lange_passes = season_matches_temp[self.roundfilter() - 1].lange_passes;
+                            self.stats_vs.perc_korte_passes = 100 * (season_matches_temp[self.roundfilter() - 1].korte_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes));
+                            self.stats_vs.perc_middellange_passes = 100 * (season_matches_temp[self.roundfilter() - 1].middellange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes));
+                            self.stats_vs.perc_lange_passes = 100 * (season_matches_temp[self.roundfilter() - 1].lange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes));
+
+                            if (isNaN(season_matches_temp[self.roundfilter() - 1].succesvolle_uittrappen)) {
+                                self.stats_vs.succesvolle_uittrappen = 0;
+                            } else {
+                                self.stats_vs.succesvolle_uittrappen = season_matches_temp[self.roundfilter() - 1].succesvolle_uittrappen;
+                            }
+
+                            $timeout(function () {
+                                self.chart_keeper.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
+                                self.chart_keeper.datasets[1].label = player_stats_temp.spelerNaam;
+                                self.chart_keeper.datasets[1].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
+                            }, 400);
+                        } else {
+                            self.stats_vs.doelpunten = season_matches_temp[self.roundfilter() - 1].doelpunten;
+
+                            self.stats_vs.doelpogingen = season_matches_temp[self.roundfilter() - 1].doelpogingen;
+
+                            if (isNaN(season_matches_temp[self.roundfilter() - 1].doelpogingen_opdoel)) {
+                                self.stats_vs.doelpogingen_opdoel = 0;
+                            } else {
+                                self.stats_vs.doelpogingen_opdoel = Number(season_matches_temp[self.roundfilter() - 1].doelpogingen_opdoel);
+                            }
+
+                            self.stats_vs.aantal_passes = season_matches_temp[self.roundfilter() - 1].aantal_passes;
+
+                            self.stats_vs.verdedigende_duels = season_matches_temp[self.roundfilter() - 1].verdedigende_duels;
+                            self.stats_vs.aanvallende_duels = season_matches_temp[self.roundfilter() - 1].aanvallende_duels;
+                            self.stats_vs.perc_verdedigende_duels = 100 * (season_matches_temp[self.roundfilter() - 1].verdedigende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels));
+                            self.stats_vs.perc_aanvallende_duels = 100 * (season_matches_temp[self.roundfilter() - 1].aanvallende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels));
+
+                            self.stats_vs.intercepties = season_matches_temp[self.roundfilter() - 1].intercepties;
+
+                            self.stats_vs.overtredingen = season_matches_temp[self.roundfilter() - 1].overtredingen;
+
+                            if (isNaN(season_matches_temp[self.roundfilter() - 1].gewonnen_duels)) {
+                                self.stats_vs.gewonnen_duels = 0;
+                            } else {
+                                self.stats_vs.gewonnen_duels = season_matches_temp[self.roundfilter() - 1].gewonnen_duels;
+                            }
+
+                            $timeout(function () {
+                                self.chart_player.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
+                                self.chart_player.datasets[1].label = player_stats_temp.spelerNaam;
+                                self.chart_player.datasets[1].data = [self.stats_vs.doelpogingen_opdoel.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.gewonnen_duels.toFixed(1), self.stats_vs.perc_verdedigende_duels.toFixed(1), self.stats_vs.perc_aanvallende_duels.toFixed(1)];
+                            }, 400);
+                        }
+                    }
+                } else if (self.vs_info === 'Gemiddelde seizoen') {
+                    var player_stats_temp1 = self.player_stats_vs;
+                    var season_matches_temp1 = $filter('orderBy')(($filter('filter')( player_stats_temp1.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
+
+                    Api.SpelersID.query({
+                        _id: player_id
+                    },function(res1) {
+                        angular.forEach(res1, function(value, key) {
+                            if (value.spelerPhoto && !self.player_stats_vs.spelerPhoto && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
+                                self.player_stats_vs.spelerPhoto = value.spelerPhoto;
+                            }
+                        });
+                    });
+
+                    statslength = season_matches_temp1.length;
+                    count1 = 0;
+
+                    self.stats_vs.passzekerheid = 0;
+                    self.stats_vs.pass_lengte = 0;
+                    self.stats_vs.geel = 0;
+                    self.stats_vs.rood = 0;
+                    if (self.player_stats.spelerType == 'keeper') {
+                        self.stats_vs.doelpunten_tegen = 0;
+                        self.stats_vs.reddingen = 0;
+                        self.stats_vs.gevangen_ballen = 0;
+                        self.stats_vs.weggestompte_ballen = 0;
+                        self.stats_vs.geslaagde_reddingen = 0;
+                        self.stats_vs.korte_passes = 0;
+                        self.stats_vs.middellange_passes = 0;
+                        self.stats_vs.lange_passes = 0;
+                        self.stats_vs.perc_korte_passes = 0;
+                        self.stats_vs.perc_middellange_passes = 0;
+                        self.stats_vs.perc_lange_passes = 0;
+                        self.stats_vs.succesvolle_uittrappen = 0;
+                    } else {
+                        self.stats_vs.doelpunten = 0;
+                        self.stats_vs.doelpogingen = 0;
+                        self.stats_vs.doelpogingen_opdoel = 0;
+                        self.stats_vs.aantal_passes = 0;
+                        self.stats_vs.verdedigende_duels = 0;
+                        self.stats_vs.aanvallende_duels = 0;
+                        self.stats_vs.perc_verdedigende_duels = 0;
+                        self.stats_vs.perc_aanvallende_duels = 0;
+                        self.stats_vs.intercepties = 0;
+                        self.stats_vs.overtredingen = 0;
+                        self.stats_vs.gewonnen_duels = 0;
+                    }
+
+                    for (i = 0; i < statslength; i++) {
+                        if (season_matches_temp1[i]) {
+                            if (isNaN(season_matches_temp1[i].pass_percentage)) {
+                                self.stats_vs.passzekerheid += 0;
+                            } else {
+                                self.stats_vs.passzekerheid += season_matches_temp1[i].pass_percentage;
+                            }
+
+                            if (isNaN(season_matches_temp1[i].pass_lengte)) {
+                                self.stats_vs.pass_lengte += 0;
+                            } else {
+                                self.stats_vs.pass_lengte += season_matches_temp1[i].pass_lengte;
+                            }
+
+                            self.stats_vs.geel += season_matches_temp1[i].geel;
+                            self.stats_vs.rood += season_matches_temp1[i].rood;
+
+                            if (self.player_stats.spelerType == 'keeper') {
+                                self.stats_vs.doelpunten_tegen += season_matches_temp1[i].doelpunten_tegen;
+                                self.stats_vs.reddingen += season_matches_temp1[i].reddingen;
+                                self.stats_vs.gevangen_ballen += season_matches_temp1[i].gevangen_ballen;
+                                self.stats_vs.weggestompte_ballen += season_matches_temp1[i].weggestompte_ballen;
+
+                                if (isNaN(season_matches_temp1[i].geslaagde_reddingen)) {
+                                    self.stats_vs.geslaagde_reddingen += 0;
+                                } else {
+                                    self.stats_vs.geslaagde_reddingen += season_matches_temp1[i].geslaagde_reddingen;
+                                }
+
+                                self.stats_vs.korte_passes += season_matches_temp1[i].korte_passes;
+                                self.stats_vs.middellange_passes += season_matches_temp1[i].middellange_passes;
+                                self.stats_vs.lange_passes += season_matches_temp1[i].lange_passes;
+                                self.stats_vs.perc_korte_passes += 100 * (season_matches_temp1[i].korte_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes));
+                                self.stats_vs.perc_middellange_passes += 100 * (season_matches_temp1[i].middellange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes));
+                                self.stats_vs.perc_lange_passes += 100 * (season_matches_temp1[i].lange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes));
+
+                                if (isNaN(season_matches_temp1[i].succesvolle_uittrappen)) {
+                                    self.stats_vs.succesvolle_uittrappen += 0;
+                                } else {
+                                    self.stats_vs.succesvolle_uittrappen += season_matches_temp1[i].succesvolle_uittrappen;
+                                }
+                            } else {
+                                self.stats_vs.doelpunten += season_matches_temp1[i].doelpunten;
+                                self.stats_vs.doelpogingen += season_matches_temp1[i].doelpogingen;
+
+                                if (isNaN(season_matches_temp1[i].doelpogingen_opdoel)) {
+                                    self.stats_vs.doelpogingen_opdoel += 0;
+                                } else {
+                                    self.stats_vs.doelpogingen_opdoel += Number(season_matches_temp1[i].doelpogingen_opdoel);
+                                }
+
+                                self.stats_vs.aantal_passes += season_matches_temp1[i].aantal_passes;
+                                self.stats_vs.verdedigende_duels += season_matches_temp1[i].verdedigende_duels;
+                                self.stats_vs.aanvallende_duels += season_matches_temp1[i].aanvallende_duels;
+                                self.stats_vs.perc_verdedigende_duels += 100 * (season_matches_temp1[i].verdedigende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels));
+                                self.stats_vs.perc_aanvallende_duels += 100 * (season_matches_temp1[i].aanvallende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels));
+                                self.stats_vs.intercepties += season_matches_temp1[i].intercepties;
+                                self.stats_vs.overtredingen += season_matches_temp1[i].overtredingen;
+
+                                if (isNaN(season_matches_temp1[i].gewonnen_duels)) {
+                                    self.stats_vs.gewonnen_duels += 0;
+                                } else {
+                                    self.stats_vs.gewonnen_duels += season_matches_temp1[i].gewonnen_duels;
+                                }
+                            }
+
+                            count1++;
+                        }
+                    }
+
+                    self.stats_vs.passzekerheid /= count1;
+                    self.stats_vs.pass_lengte /= count1;
+                    self.stats_vs.geel /= count1;
+                    self.stats_vs.rood /= count1;
+                    if (self.player_stats.spelerType == 'keeper') {
+                        self.stats_vs.doelpunten_tegen /= count1;
+                        self.stats_vs.reddingen /= count1;
+                        self.stats_vs.gevangen_ballen /= count1;
+                        self.stats_vs.weggestompte_ballen /= count1;
+                        self.stats_vs.geslaagde_reddingen /= count1;
+                        self.stats_vs.korte_passes /= count1;
+                        self.stats_vs.middellange_passes /= count1;
+                        self.stats_vs.lange_passes /= count1;
+                        self.stats_vs.perc_korte_passes /= count1;
+                        self.stats_vs.perc_middellange_passes /= count1;
+                        self.stats_vs.perc_lange_passes /= count1;
+                        self.stats_vs.succesvolle_uittrappen /= count1;
+
+                        $timeout(function () {
+                            self.chart_keeper.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
+                            self.chart_keeper.datasets[1].label = player_stats_temp1.spelerNaam;
+                            self.chart_keeper.datasets[1].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
+                        }, 400);
+                    } else {
+                        self.stats_vs.doelpunten /= count1;
+                        self.stats_vs.doelpogingen /= count1;
+                        self.stats_vs.doelpogingen_opdoel /= count1;
+                        self.stats_vs.aantal_passes /= count1;
+                        self.stats_vs.verdedigende_duels /= count1;
+                        self.stats_vs.aanvallende_duels /= count1;
+                        self.stats_vs.perc_verdedigende_duels /= count1;
+                        self.stats_vs.perc_aanvallende_duels /= count1;
+                        self.stats_vs.intercepties /= count1;
+                        self.stats_vs.overtredingen /= count1;
+                        self.stats_vs.gewonnen_duels /= count1;
+
+                        $timeout(function () {
+                            self.chart_player.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
+                            self.chart_player.datasets[1].label = player_stats_temp1.spelerNaam;
+                            self.chart_player.datasets[1].data = [self.stats_vs.doelpogingen_opdoel.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.gewonnen_duels.toFixed(1), self.stats_vs.perc_verdedigende_duels.toFixed(1), self.stats_vs.perc_aanvallende_duels.toFixed(1)];
+                        }, 400);
+                    }
+                } else {
+                    var player_stats_temp2 = angular.copy($filter('filter')(self.player_data, {playerID: player_id}, true)[0]);
+                    var season_matches_temp2 = $filter('orderBy')(($filter('filter')( player_stats_temp2.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
+
+                    Api.SpelersID.query({
+                        _id: player_id
+                    },function(res1) {
+                        angular.forEach(res1, function(value, key) {
+                            if (value.spelerPhoto && !self.player_stats.spelerPhoto && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
+                                player_stats.spelerPhoto = value.spelerPhoto;
+                            }
+                        });
+                    });
+
+                    statslength = season_matches_temp2.length;
+                    var temp01 = season_matches_temp2[0].ronde;
+                    if (temp01 !== 1) {
+                        for (var ij = 1; ij < temp01; ij++) {
+                            var temp001 = {};
+                            temp001.ronde = ij;
+                            season_matches_temp2.push(temp001);
+                        }
+                        season_matches_temp2 = $filter('orderBy')(season_matches_temp2, self.orderMatches);
+                    }
+                    for (var j1 = 0; j1 < statslength; j1++) {
+                        if ((j1+1) != season_matches_temp2[j1].ronde) {
+                            var tempp1 = {};
+                            tempp1.ronde = j1+1;
+
+                            season_matches_temp2.push(tempp1);
+                        }
+                        season_matches_temp2 = $filter('orderBy')(season_matches_temp2, self.orderMatches);
+                        statslength = season_matches_temp2.length;
+                    }
+
+                    if (season_matches_temp2.length > 0) {
+                        if (isNaN(season_matches_temp2[self.roundfilter() - 1].pass_percentage)) {
+                            self.stats_vs.passzekerheid = 0;
+                        } else {
+                            self.stats_vs.passzekerheid = season_matches_temp2[self.roundfilter() - 1].pass_percentage;
+                        }
+
+                        if (isNaN(season_matches_temp2[self.roundfilter() - 1].pass_lengte)) {
+                            self.stats_vs.pass_lengte = 0;
+                        } else {
+                            self.stats_vs.pass_lengte = season_matches_temp2[self.roundfilter() - 1].pass_lengte;
+                        }
+
+                        self.stats_vs.geel = season_matches_temp2[self.roundfilter() - 1].geel;
+
+                        self.stats_vs.rood = season_matches_temp2[self.roundfilter() - 1].rood;
+
+                        if (self.player_stats.spelerType == 'keeper') {
+                            self.stats_vs.doelpunten_tegen = season_matches_temp2[self.roundfilter() - 1].doelpunten_tegen;
+
+                            self.stats_vs.reddingen = season_matches_temp2[self.roundfilter() - 1].reddingen;
+
+                            self.stats_vs.gevangen_ballen = season_matches_temp2[self.roundfilter() - 1].gevangen_ballen;
+
+                            self.stats_vs.weggestompte_ballen = season_matches_temp2[self.roundfilter() - 1].weggestompte_ballen;
+
+                            if (isNaN(season_matches_temp2[self.roundfilter() - 1].geslaagde_reddingen)) {
+                                self.stats_vs.geslaagde_reddingen = 0;
+                            } else {
+                                self.stats_vs.geslaagde_reddingen = season_matches_temp2[self.roundfilter() - 1].geslaagde_reddingen;
+                            }
+
+                            self.stats_vs.korte_passes = season_matches_temp2[self.roundfilter() - 1].korte_passes;
+                            self.stats_vs.middellange_passes = season_matches_temp2[self.roundfilter() - 1].middellange_passes;
+                            self.stats_vs.lange_passes = season_matches_temp2[self.roundfilter() - 1].lange_passes;
+                            self.stats_vs.perc_korte_passes = 100 * (season_matches_temp2[self.roundfilter() - 1].korte_passes / (season_matches_temp2[self.roundfilter() - 1].korte_passes + season_matches_temp2[self.roundfilter() - 1].middellange_passes + season_matches_temp2[self.roundfilter() - 1].lange_passes));
+                            self.stats_vs.perc_middellange_passes = 100 * (season_matches_temp2[self.roundfilter() - 1].middellange_passes / (season_matches_temp2[self.roundfilter() - 1].korte_passes + season_matches_temp2[self.roundfilter() - 1].middellange_passes + season_matches_temp2[self.roundfilter() - 1].lange_passes));
+                            self.stats_vs.perc_lange_passes = 100 * (season_matches_temp2[self.roundfilter() - 1].lange_passes / (season_matches_temp2[self.roundfilter() - 1].korte_passes + season_matches_temp2[self.roundfilter() - 1].middellange_passes + season_matches_temp2[self.roundfilter() - 1].lange_passes));
+
+                            if (isNaN(season_matches_temp2[self.roundfilter() - 1].succesvolle_uittrappen)) {
+                                self.stats_vs.succesvolle_uittrappen = 0;
+                            } else {
+                                self.stats_vs.succesvolle_uittrappen = season_matches_temp2[self.roundfilter() - 1].succesvolle_uittrappen;
+                            }
+
+                            $timeout(function () {
+                                self.chart_keeper.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
+                                self.chart_keeper.datasets[1].label = player_stats_temp.spelerNaam;
+                                self.chart_keeper.datasets[1].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
+                            }, 400);
+                        } else {
+                            self.stats_vs.doelpunten = season_matches_temp2[self.roundfilter() - 1].doelpunten;
+
+                            self.stats_vs.doelpogingen = season_matches_temp2[self.roundfilter() - 1].doelpogingen;
+
+                            if (isNaN(season_matches_temp2[self.roundfilter() - 1].doelpogingen_opdoel)) {
+                                self.stats_vs.doelpogingen_opdoel = 0;
+                            } else {
+                                self.stats_vs.doelpogingen_opdoel = Number(season_matches_temp2[self.roundfilter() - 1].doelpogingen_opdoel);
+                            }
+
+                            self.stats_vs.aantal_passes = season_matches_temp2[self.roundfilter() - 1].aantal_passes;
+
+                            self.stats_vs.verdedigende_duels = season_matches_temp2[self.roundfilter() - 1].verdedigende_duels;
+                            self.stats_vs.aanvallende_duels = season_matches_temp2[self.roundfilter() - 1].aanvallende_duels;
+                            self.stats_vs.perc_verdedigende_duels = 100 * (season_matches_temp2[self.roundfilter() - 1].verdedigende_duels / (season_matches_temp2[self.roundfilter() - 1].verdedigende_duels + season_matches_temp2[self.roundfilter() - 1].aanvallende_duels));
+                            self.stats_vs.perc_aanvallende_duels = 100 * (season_matches_temp2[self.roundfilter() - 1].aanvallende_duels / (season_matches_temp2[self.roundfilter() - 1].verdedigende_duels + season_matches_temp2[self.roundfilter() - 1].aanvallende_duels));
+
+                            self.stats_vs.intercepties = season_matches_temp2[self.roundfilter() - 1].intercepties;
+
+                            self.stats_vs.overtredingen = season_matches_temp2[self.roundfilter() - 1].overtredingen;
+
+                            if (isNaN(season_matches_temp2[self.roundfilter() - 1].gewonnen_duels)) {
+                                self.stats_vs.gewonnen_duels = 0;
+                            } else {
+                                self.stats_vs.gewonnen_duels = season_matches_temp2[self.roundfilter() - 1].gewonnen_duels;
+                            }
+
+                            $timeout(function () {
+                                self.chart_player.datasets[0].label = self.player_stats.spelerNaam || 'Huidige speler';
+                                self.chart_player.datasets[1].label = player_stats_temp.spelerNaam;
+                                self.chart_player.datasets[1].data = [self.stats_vs.doelpogingen_opdoel.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.gewonnen_duels.toFixed(1), self.stats_vs.perc_verdedigende_duels.toFixed(1), self.stats_vs.perc_aanvallende_duels.toFixed(1)];
+                            }, 400);
+                        }
+                    }
+                }
+            }
+                /*
             } else if (self.vs == 'Gemiddelde team ronde') {
                 if (self.player_data && self.season_index) {
                     count2 = 0;
@@ -768,9 +1197,10 @@ angular.module('mainapp.players')
                         }, 400);
                     }
                 }
-            }
+            }*/
         };
-        self.vs = 'Gemiddelde seizoen';
+        self.vs = self.playerID;
+        self.vs_info = 'Gemiddelde seizoen';
         self.vsInitFunc();
 
         $rootScope.infoSaveLog = '';
@@ -922,7 +1352,7 @@ angular.module('mainapp.players')
                             data: [self.stats.doelpogingen_opdoel.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.gewonnen_duels.toFixed(1), self.stats.perc_verdedigende_duels.toFixed(1), self.stats.perc_aanvallende_duels.toFixed(1)]
                         },
                         {
-                            label: self.vs,
+                            label: self.vs_naam,
                             fillColor: 'rgba(151,151,151,0.1)',
                             strokeColor: 'rgba(151,151,151,0.8)',
                             pointColor: '#979797',
@@ -949,7 +1379,7 @@ angular.module('mainapp.players')
                             data: [self.stats.geslaagde_reddingen.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.succesvolle_uittrappen.toFixed(1), self.stats.perc_korte_passes.toFixed(1), self.stats.perc_middellange_passes.toFixed(1), self.stats.perc_lange_passes.toFixed(1)]
                         },
                         {
-                            label: self.vs,
+                            label: self.vs_naam,
                             fillColor: 'rgba(151,151,151,0.2)',
                             strokeColor: 'rgba(151,151,151,0.8)',
                             pointColor: '#979797',

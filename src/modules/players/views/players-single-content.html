@@ -36,22 +36,36 @@
 
             <div class="col-xs-12 text-center player-vs"><h4>VS</h4></div>
 
-            <div class="col-xs-12 grey"><img ng-src="media/players/.jpg" on-error-src="images/blank-avatar.png"></div>
+            <div class="col-xs-12 grey">
+                <span ng-if="data.vs == data.playerID"><img ng-if="!data.player_stats.spelerPhoto" src="images/blank-avatar.png"><img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png"></span>
+                <span ng-if="data.vs !== data.playerID"><img ng-if="!data.player_stats_vs.spelerPhoto" src="images/blank-avatar.png"><img ng-if="data.player_stats_vs.spelerPhoto" ng-src="{{ data.player_stats_vs.spelerPhoto }}" on-error-src="images/blank-avatar.png"></span>
+            </div>
             <div class="col-xs-12 grey">
                 <br>
-                <span ng-if="data.vs == 'Gemiddelde seizoen'">{{ data.player_stats.spelerNaam }} </span>{{ data.vs }}
+                <span ng-if="data.vs == data.playerID">{{ data.player_stats.spelerNaam }}<br>{{ data.vs_naam }}</span>
+                <span ng-if="data.vs !== data.playerID">{{ data.player_stats_vs.spelerNaam }}<br>{{ data.vs_info }}</span>
             </div>
             <div class="col-xs-12 grey"><br>{{ data.club_name }}</div>
-            <div class="col-xs-12"><br><img ng-src="images/shirt-grey.png"><span class="text-center rugnummer"><span ng-if="data.vs == 'Gemiddelde seizoen'">{{ data.player_stats.spelerRugnummer }}</span><span ng-if="data.vs !== 'Gemiddelde seizoen'">?</span></span></div>
+            <div class="col-xs-12"><br>
+                <img ng-src="images/shirt-grey.png">
+                <span class="text-center rugnummer">
+                    <span ng-if="data.vs == data.playerID">{{ data.player_stats.spelerRugnummer }}</span>
+                    <span ng-if="data.vs !== data.playerID">{{ data.player_stats_vs.spelerRugnummer }}</span>
+                </span>
+            </div>
 
             <div class="col-xs-12 orange">
                 <br><h4>Kies VS speler</h4>
                 <select ng-model="data.vs" class="form-control input-md input-vs"
-                        ng-change="data.vsInitFunc()">
+                        ng-change="data.vsInitFunc()"
+                        ng-options="player.playerID as player.spelerNaam for player in data.player_data | orderBy:'spelerNaam'">
                     <!--<option>.. kies speler ..</option>-->
+                </select>
+                <h4>Seizoen / ronde</h4>
+                <select ng-model="data.vs_info" class="form-control input-md input-vs"
+                        ng-change="data.vsInitFunc()">
+                    <option>Deze ronde</option>
                     <option>Gemiddelde seizoen</option>
-                    <option ng-if="data.player_stats.spelerType !== 'keeper'">Gemiddelde team ronde</option>
-                    <option ng-if="data.player_stats.spelerType !== 'keeper'">Gemiddelde team seizoen</option>
                 </select>
             </div>
         </div>
@@ -77,9 +91,9 @@
                         <span ng-if="(data.stats.doelpunten | number:0) > 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.doelpunten | number:0) > (data.stats.doelpunten | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.doelpunten | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.doelpunten | number:0) == 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.doelpunten | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.doelpunten | number:0) > 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.doelpunten | number:0 }} / {{ data.stats.doelpunten | number:0 }})));">{{ data.stats_vs.doelpunten | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.doelpunten | number:0) > (data.stats.doelpunten | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.doelpunten | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.doelpunten | number:0) == 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.doelpunten | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.doelpunten | number:0) > 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.doelpunten | number:0 }} / {{ data.stats.doelpunten | number:0 }})));">{{ data.stats_vs.doelpunten | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
@@ -96,9 +110,9 @@
                         <span ng-if="(data.stats.doelpogingen | number:0) > 0 && (data.stats_vs.doelpogingen | number:0) <= (data.stats.doelpogingen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.doelpogingen | number:0) > (data.stats.doelpogingen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.doelpogingen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.doelpogingen | number:0) == 0 && (data.stats_vs.doelpogingen | number:0) <= (data.stats.doelpogingen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.doelpogingen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.doelpogingen | number:0) > 0 && (data.stats_vs.doelpogingen | number:0) <= (data.stats.doelpogingen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.doelpogingen | number:0 }} / {{ data.stats.doelpogingen | number:0 }})));">{{ data.stats_vs.doelpogingen | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.doelpogingen | number:0) > (data.stats.doelpogingen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.doelpogingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.doelpogingen | number:0) == 0 && (data.stats_vs.doelpogingen | number:0) <= (data.stats.doelpogingen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.doelpogingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.doelpogingen | number:0) > 0 && (data.stats_vs.doelpogingen | number:0) <= (data.stats.doelpogingen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.doelpogingen | number:0 }} / {{ data.stats.doelpogingen | number:0 }})));">{{ data.stats_vs.doelpogingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
@@ -115,9 +129,9 @@
                         <span ng-if="(data.stats.intercepties | number:0) > 0 && (data.stats_vs.intercepties | number:0) <= (data.stats.intercepties | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.intercepties | number:0) > (data.stats.intercepties | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.intercepties | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.intercepties | number:0) == 0 && (data.stats_vs.intercepties | number:0) <= (data.stats.intercepties | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.intercepties | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.intercepties | number:0) > 0 && (data.stats_vs.intercepties | number:0) <= (data.stats.intercepties | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.intercepties | number:0 }} / {{ data.stats.intercepties | number:0 }})));">{{ data.stats_vs.intercepties | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.intercepties | number:0) > (data.stats.intercepties | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.intercepties | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.intercepties | number:0) == 0 && (data.stats_vs.intercepties | number:0) <= (data.stats.intercepties | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.intercepties | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.intercepties | number:0) > 0 && (data.stats_vs.intercepties | number:0) <= (data.stats.intercepties | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.intercepties | number:0 }} / {{ data.stats.intercepties | number:0 }})));">{{ data.stats_vs.intercepties | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
@@ -134,9 +148,9 @@
                         <span ng-if="(data.stats.overtredingen | number:0) > 0 && (data.stats_vs.overtredingen | number:0) <= (data.stats.overtredingen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.overtredingen | number:0) > (data.stats.overtredingen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.overtredingen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.overtredingen | number:0) == 0 && (data.stats_vs.overtredingen | number:0) <= (data.stats.overtredingen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.overtredingen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.overtredingen | number:0) > 0 && (data.stats_vs.overtredingen | number:0) <= (data.stats.overtredingen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.overtredingen | number:0 }} / {{ data.stats.overtredingen | number:0 }})));">{{ data.stats_vs.overtredingen | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.overtredingen | number:0) > (data.stats.overtredingen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.overtredingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.overtredingen | number:0) == 0 && (data.stats_vs.overtredingen | number:0) <= (data.stats.overtredingen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.overtredingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.overtredingen | number:0) > 0 && (data.stats_vs.overtredingen | number:0) <= (data.stats.overtredingen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.overtredingen | number:0 }} / {{ data.stats.overtredingen | number:0 }})));">{{ data.stats_vs.overtredingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             </div>
@@ -156,9 +170,9 @@
                         <span ng-if="(data.stats.reddingen | number:0) > 0 && (data.stats_vs.reddingen | number:0) <= (data.stats.reddingen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.reddingen | number:0) > (data.stats.reddingen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.reddingen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.reddingen | number:0) == 0 && (data.stats_vs.reddingen | number:0) <= (data.stats.reddingen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.reddingen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.reddingen | number:0) > 0 && (data.stats_vs.reddingen | number:0) <= (data.stats.reddingen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.reddingen | number:0 }} / {{ data.stats.reddingen | number:0 }})));">{{ data.stats_vs.reddingen | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.reddingen | number:0) > (data.stats.reddingen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.reddingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.reddingen | number:0) == 0 && (data.stats_vs.reddingen | number:0) <= (data.stats.reddingen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.reddingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.reddingen | number:0) > 0 && (data.stats_vs.reddingen | number:0) <= (data.stats.reddingen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.reddingen | number:0 }} / {{ data.stats.reddingen | number:0 }})));">{{ data.stats_vs.reddingen | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
@@ -175,9 +189,9 @@
                         <span ng-if="(data.stats.doelpunten_tegen | number:0) > 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) > (data.stats.doelpunten_tegen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.doelpunten_tegen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) == 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.doelpunten_tegen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) > 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.doelpunten_tegen | number:0 }} / {{ data.stats.doelpunten_tegen | number:0 }})));">{{ data.stats_vs.doelpunten_tegen | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) > (data.stats.doelpunten_tegen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.doelpunten_tegen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) == 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.doelpunten_tegen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) > 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.doelpunten_tegen | number:0 }} / {{ data.stats.doelpunten_tegen | number:0 }})));">{{ data.stats_vs.doelpunten_tegen | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
@@ -194,9 +208,9 @@
                         <span ng-if="(data.stats.gevangen_ballen | number:0) > 0 && (data.stats_vs.gevangen_ballen | number:0) <= (data.stats.gevangen_ballen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.gevangen_ballen | number:0) > (data.stats.gevangen_ballen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.gevangen_ballen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.gevangen_ballen | number:0) == 0 && (data.stats_vs.gevangen_ballen | number:0) <= (data.stats.gevangen_ballen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.gevangen_ballen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.gevangen_ballen | number:0) > 0 && (data.stats_vs.gevangen_ballen | number:0) <= (data.stats.gevangen_ballen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.gevangen_ballen | number:0 }} / {{ data.stats.gevangen_ballen | number:0 }})));">{{ data.stats_vs.gevangen_ballen | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.gevangen_ballen | number:0) > (data.stats.gevangen_ballen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.gevangen_ballen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.gevangen_ballen | number:0) == 0 && (data.stats_vs.gevangen_ballen | number:0) <= (data.stats.gevangen_ballen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.gevangen_ballen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.gevangen_ballen | number:0) > 0 && (data.stats_vs.gevangen_ballen | number:0) <= (data.stats.gevangen_ballen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.gevangen_ballen | number:0 }} / {{ data.stats.gevangen_ballen | number:0 }})));">{{ data.stats_vs.gevangen_ballen | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
@@ -213,9 +227,9 @@
                         <span ng-if="(data.stats.weggestompte_ballen | number:0) > 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>
-                <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) > (data.stats.weggestompte_ballen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.weggestompte_ballen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) == 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.weggestompte_ballen | number:0 }}<span>{{ data.vs }}</span></div>
-                <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) > 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.weggestompte_ballen | number:0 }} / {{ data.stats.weggestompte_ballen | number:0 }})));">{{ data.stats_vs.weggestompte_ballen | number:0 }}<span>{{ data.vs }}</span></div>
+                <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) > (data.stats.weggestompte_ballen | number:0)" class="value-bottom" style="right: 0%;">{{ data.stats_vs.weggestompte_ballen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) == 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="value-bottom" style="right: 100%;">{{ data.stats_vs.weggestompte_ballen | number:0 }}<span>{{ data.vs_naam }}</span></div>
+                <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) > 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="value-bottom" style="right: calc((100% - 80% * ({{ data.stats_vs.weggestompte_ballen | number:0 }} / {{ data.stats.weggestompte_ballen | number:0 }})));">{{ data.stats_vs.weggestompte_ballen | number:0 }}<span>{{ data.vs_naam }}</span></div>
             </div>
 
             </div>

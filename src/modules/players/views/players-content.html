@@ -16,7 +16,7 @@
         <div ng-repeat="speler in data.player_data | orderBy:self.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
             <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
                 <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
-                <div class="col-xs-12">
+                <div class="col-xs-12 image">
                     <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
                     <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
                 </div>
