@@ -16,7 +16,7 @@ var UserController = require('../controllers/UserController');
 
 // Logging
 router.use(function(req, res, next) {
-    console.log('[api]', req.method, req.url);
+    console.log('[api (v1)]', req.method, req.url);
     next();
 });
 

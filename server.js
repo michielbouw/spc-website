@@ -59,7 +59,7 @@ app.use(multipart({
 //});
 
 // routes ==================================================
-app.use('/api', api_router);
+app.use('/api/v1', api_router);
 app.get('*', function(req, res) {
     res.render('index');
 });

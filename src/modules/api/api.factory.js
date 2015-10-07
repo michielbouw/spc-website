@@ -1,31 +1,33 @@
 angular.module('mainapp.api')
     .factory('Api', function($resource)
     {
-        return {
-            //News:           $resource('/api/news',              {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            //NewsItem:       $resource('/api/news/:_slug',       {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+        var url1 = '/api/v1/';
 
-            Clubs:          $resource('/api/clubs',             {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            Club:           $resource('/api/clubs/:_slug',      {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
-            Matches:        $resource('/api/matches',           {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            MatchesTeam:    $resource('/api/matches/:_id',      {_id:'@_id'},           { 'query': {method:'GET', isArray:true} }),
-            Match:          $resource('/api/match/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
-            Toeschouwers:   $resource('/api/toeschouwers/:_id', {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'} }),
-            TeamData:       $resource('/api/teamdata',          {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            TeamDataItem:   $resource('/api/teamdata/:_slug',   {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
-            MatchData:      $resource('/api/matchdata',         {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            MatchDataItem:  $resource('/api/matchdata/:_id',    {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
-            MatchDataID:    $resource('/api/matchdataid/:_id',  {_id:'@_id'},           { 'get': {method:'GET'}, 'delete': {method:'DELETE'} }),
-            Pages:          $resource('/api/pages',             {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            Page:           $resource('/api/pages/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
-            Spelers:        $resource('/api/spelers',           {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
-            SpelersClub:    $resource('/api/spelersclub/:_id',  {_id:'@_id'},           { 'query': {method:'GET', isArray:true}, }),
-            SpelersID:      $resource('/api/spelersid/:_id',    {_id:'@_id'},           { 'query': {method:'GET', isArray:true}, }),
-            Speler:         $resource('/api/spelers/:_id',      {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
-            Login:          $resource('/api/login',             {},                     { 'post': {method:'POST'} }),
-            Signin:         $resource('/api/signin',            {},                     { 'post': {method:'POST'} }),
-            Me:             $resource('/api/me',                {},                     { 'get': {method:'GET'} }),
-            Users:          $resource('/api/users',             {},                     { 'query': {method:'GET', isArray:true} }),
-            User:           $resource('/api/users/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} })
+        return {
+            //News:           $resource(url1 + 'news',              {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            //NewsItem:       $resource(url1 + 'news/:_slug',       {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+
+            Clubs:          $resource(url1 + 'clubs',             {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            Club:           $resource(url1 + 'clubs/:_slug',      {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            Matches:        $resource(url1 + 'matches',           {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            MatchesTeam:    $resource(url1 + 'matches/:_id',      {_id:'@_id'},           { 'query': {method:'GET', isArray:true} }),
+            Match:          $resource(url1 + 'match/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            Toeschouwers:   $resource(url1 + 'toeschouwers/:_id', {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'} }),
+            TeamData:       $resource(url1 + 'teamdata',          {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            TeamDataItem:   $resource(url1 + 'teamdata/:_slug',   {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            MatchData:      $resource(url1 + 'matchdata',         {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            MatchDataItem:  $resource(url1 + 'matchdata/:_id',    {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            MatchDataID:    $resource(url1 + 'matchdataid/:_id',  {_id:'@_id'},           { 'get': {method:'GET'}, 'delete': {method:'DELETE'} }),
+            Pages:          $resource(url1 + 'pages',             {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            Page:           $resource(url1 + 'pages/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            Spelers:        $resource(url1 + 'spelers',           {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
+            SpelersClub:    $resource(url1 + 'spelersclub/:_id',  {_id:'@_id'},           { 'query': {method:'GET', isArray:true}, }),
+            SpelersID:      $resource(url1 + 'spelersid/:_id',    {_id:'@_id'},           { 'query': {method:'GET', isArray:true}, }),
+            Speler:         $resource(url1 + 'spelers/:_id',      {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            Login:          $resource(url1 + 'login',             {},                     { 'post': {method:'POST'} }),
+            Signin:         $resource(url1 + 'signin',            {},                     { 'post': {method:'POST'} }),
+            Me:             $resource(url1 + 'me',                {},                     { 'get': {method:'GET'} }),
+            Users:          $resource(url1 + 'users',             {},                     { 'query': {method:'GET', isArray:true} }),
+            User:           $resource(url1 + 'users/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} })
         };
     });
