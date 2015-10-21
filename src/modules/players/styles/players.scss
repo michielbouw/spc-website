@@ -321,9 +321,10 @@
       margin: 0;
       left: 80%;
       top: 0;
-      min-width: 190px;
+      //min-width: 190px;
       z-index: 10;
-      display: block;
+      //display: block;
+      display: inline-table;
       text-align: center;
       background-color: $black;
       color: $white;
@@ -335,7 +336,7 @@
       margin: 0;
       margin-top: -2px;
       right: 0;
-      top: calc(100% - 23px);
+      top: calc(100% - 33px);
       z-index: 10;
       display: block;
       text-align: center;
@@ -372,7 +373,7 @@
     .slider1 {
       height: 19px;
       padding-top: 0;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
       margin-top: 24px;
 
       .slider {

@@ -34,6 +34,26 @@ module.exports = mongoose.model('TeamData', {
             geel: { type: Number },
             rood: { type: Number },
 
+            // team leeftijd
+            team_leeftijd: {
+                thuisLeeftijd_basis: {
+                    jaar: {type: Number},
+                    dagen: {type: Number}
+                },
+                thuisLeeftijd_bank: {
+                    jaar: {type: Number},
+                    dagen: {type: Number}
+                },
+                uitLeeftijd_basis: {
+                    jaar: {type: Number},
+                    dagen: {type: Number}
+                },
+                uitLeeftijd_bank: {
+                    jaar: {type: Number},
+                    dagen: {type: Number}
+                }
+            },
+
             // team match log
             match_log: [{
                 pub_date: { type: Date, default: Date.now },
@@ -51,6 +71,8 @@ module.exports = mongoose.model('TeamData', {
         spelerRugnummer: { type: Number },
         spelerPositie: { type: String },
         spelerGeboortedatum: { type: String },
+        spelerLeeftijd : { type: Number },
+        spelerNationaliteit: { type: String },
         spelerPhoto: { type: String },
         matches: [{
             season: { type: String },

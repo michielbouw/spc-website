@@ -42,6 +42,32 @@ module.exports = mongoose.model('MatchData', {
         spelerGeboortedatum: { type: String },
         spelerLeeftijd : { type: Number }
     }],
+    alle_spelers: [
+        {
+            personID: { type: Number },
+            teamID: { type: Number },
+            geboorteDatum: { type: String },
+            nationaliteit: { type: String }
+        }
+    ],
+    team_leeftijd: {
+        thuisLeeftijd_basis: {
+            jaar: {type: Number},
+            dagen: {type: Number}
+        },
+        thuisLeeftijd_bank: {
+            jaar: {type: Number},
+            dagen: {type: Number}
+        },
+        uitLeeftijd_basis: {
+            jaar: {type: Number},
+            dagen: {type: Number}
+        },
+        uitLeeftijd_bank: {
+            jaar: {type: Number},
+            dagen: {type: Number}
+        }
+    },
 
     // main match data
     opstelling: {
@@ -776,6 +802,7 @@ module.exports = mongoose.model('MatchData', {
         spelerRugnummer: { type: Number },
         spelerGeboortedatum: { type: String },
         spelerLeeftijd : { type: Number },
+        spelerNationaliteit: { type: String },
         spelerPhoto: { type: String },
 
         // input data force/change to number type
@@ -982,6 +1009,7 @@ module.exports = mongoose.model('MatchData', {
         spelerRugnummer: { type: Number },
         spelerGeboortedatum: { type: String },
         spelerLeeftijd : { type: Number },
+        spelerNationaliteit: { type: String },
         spelerPhoto: { type: String },
 
         // input data force/change to number type
