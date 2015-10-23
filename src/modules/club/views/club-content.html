@@ -3,11 +3,11 @@
     <div class="col-xs-12 content content-page content-page-full">
 
         <div class="col-xs-12 content-club-title">
-            <div class="col-xs-12 col-sm-4 no-padding">
+            <div class="col-xs-12 col-sm-4 no-padding title">
                 <h3 class="hidden-sm hidden-xs">Club overzicht</h3>
                 <h4 class="hidden-lg hidden-md">Club overzicht</h4>
             </div>
-            <div class="col-xs-12 col-sm-4 season">
+            <div class="col-xs-12 col-sm-4 col-md-4 season">
                 <select ng-model="data.season_index" class="form-control input-sm"
                         ng-change="data.seasonInitFunc()"
                         ng-options="team.season as team.season for team in data.team_data">
@@ -15,14 +15,14 @@
             </div>
         </div>
         <div class="col-xs-12 content-club-name">
-            <div class="col-xs-6 col-sm-5 col-md-5">
-                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg"><h3>{{ data.club_name }}</h3>
+            <div class="col-xs-6 col-sm-5 col-md-5 club_name">
+                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg"><h3 class="hidden-xs">{{ data.club_name }}</h3><h4 class="hidden-lg hidden-md hidden-sm">{{ data.club_name }}</h4>
             </div>
             <div class="hidden-xs col-sm-2 col-md-2 no-padding text-center center-block">
                 <h2>VS</h2>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
-                <h4>
+            <div class="col-xs-6 col-sm-5 col-md-5 text-right season_selector">
+                <h4 class="selector">
                     <select ng-model="data.vs" class="form-control input-md input-vs" dir="rtl"
                             ng-change="data.vsInitFunc()">
                         <!--<option>.. kies ..</option>-->
@@ -39,22 +39,29 @@
             <statssliderclub model="round"></statssliderclub>
         </div>
         <div class="col-xs-12 content-club">
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right no-padding"><h4>{{ data.club_name }}</h4></div>
-            <div class="hidden-xs col-sm-2 col-md-2"></div>
-            <div class="col-xs-6 col-sm-5 col-md-5 no-padding orange"><h4>{{ data.vs }}&nbsp;</h4></div>
+            <div class="hidden-xs col-sm-4 col-md-5 text-right no-padding"><h4>{{ data.club_name }}</h4></div>
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg no-padding"><h4>{{ data.club_name }}</h4></div>
+            <div class="hidden-xs col-sm-4 col-md-2"></div>
+            <div class="hidden-xs col-sm-4 col-md-5 no-padding orange"><h4>{{ data.vs }}&nbsp;</h4></div>
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg text-right no-padding orange"><h4>{{ data.vs }}&nbsp;</h4></div>
 
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center no-padding">
-                <img src="/images/doelpogingen.png" width="35%">
-                <h4>Doelpogingen</h4>
+                <h4><img src="/images/doelpogingen.png" height="35px"> Doelpogingen</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
+            <div class="hidden-xs col-sm-4 col-md-5 text-right">
                 <h1 class="large">{{ data.stats.doelpogingen | number:0 }}</h1>
             </div>
-            <div class="hidden-xs col-sm-2 col-md-2 text-center no-padding">
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg">
+                <h1 class="large">{{ data.stats.doelpogingen | number:0 }}</h1>
+            </div>
+            <div class="hidden-xs col-sm-4 col-md-2 text-center no-padding">
                 <img src="/images/doelpogingen.png" width="35%">
                 <h4>Doelpogingen</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 orange">
+            <div class="hidden-xs col-sm-4 col-md-5 orange">
+                <h1 class="large">{{ data.stats_vs.doelpogingen | number:0 }}</h1>
+            </div>
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg text-right orange">
                 <h1 class="large">{{ data.stats_vs.doelpogingen | number:0 }}</h1>
             </div>
             <br class="clear">
@@ -62,23 +69,28 @@
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center no-padding">
                 <h4>Goals voor / tegen</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
+            <div class="hidden-xs col-sm-4 col-md-5 text-right">
                 <h1>{{ data.stats.goals | number:0 }} / <small>{{ data.stats.goalstegen | number:0 }}</small></h1>
             </div>
-            <div class="hidden-xs col-sm-2 col-md-2 text-center no-padding">
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg">
+                <h1>{{ data.stats.goals | number:0 }} / <small>{{ data.stats.goalstegen | number:0 }}</small></h1>
+            </div>
+            <div class="hidden-xs col-sm-4 col-md-2 text-center no-padding">
                 <br>
                 <h4>Goals voor / tegen</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 orange">
+            <div class="hidden-xs col-sm-4 col-md-5 orange">
+                <h1>{{ data.stats_vs.goals | number:0 }} / <small class="orange">{{ data.stats_vs.goalstegen | number:0 }}</small></h1>
+            </div>
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg text-right orange">
                 <h1>{{ data.stats_vs.goals | number:0 }} / <small class="orange">{{ data.stats_vs.goalstegen | number:0 }}</small></h1>
             </div>
         </div>
         <div class="col-xs-12 content-club">
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center no-padding">
-                <img src="/images/balbezit.png" width="35%">
-                <h4>Balbezit</h4>
+                <h4><img src="/images/balbezit.png" height="35px"> Balbezit</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
+            <div class="col-xs-6 col-sm-4 col-md-5 text-right circle">
                 <div class="c100 p{{ data.stats.balbezit | number:0 }} pull-right">
                     <span>{{ data.stats.balbezit | number:1 }}%</span>
                     <div class="slice">
@@ -87,11 +99,11 @@
                     </div>
                 </div>
             </div>
-            <div class="hidden-xs col-sm-2 col-md-2 text-center no-padding">
+            <div class="hidden-xs col-sm-4 col-md-2 text-center no-padding">
                 <img src="/images/balbezit.png" width="35%">
                 <h4>Balbezit</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 orange">
+            <div class="col-xs-6 col-sm-4 col-md-5 orange circle">
                 <div class="c100 p{{ data.stats_vs.balbezit | number:0 }} orange">
                     <span>{{ data.stats_vs.balbezit | number:1 }}%</span>
                     <div class="slice">
@@ -102,24 +114,24 @@
             </div>
         </div>
         <div class="col-xs-12 content-club">
-            <div class="col-xs-12 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 text-center no-padding">
-                <img src="/images/passes.png" width="35%">
-                <h4>Lengte passes</h4>
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 text-center no-padding">
+                <img class="hidden-xs" src="/images/passes.png" width="35%">
+                <h4><img class="hidden-sm hidden-md hidden-lg" src="/images/passes.png" height="35px"> Lengte passes</h4>
             </div>
             <div class="col-xs-12 no-padding">
-                <div class="col-xs-4 col-sm-5 col-sm-offset-1 col-md-3 col-md-offset-2 text-right">{{ data.club_name }}</div>
-                <div class="col-xs-8 col-sm-6 col-md-5 no-padding"><span style="width:calc(30% + {{ data.stats.lengte_passes | number:0 }}%);" id="arrow"></span> {{ data.stats.lengte_passes | number:1 }} m</div>
+                <div class="col-xs-4 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2 text-right">{{ data.club_name }}</div>
+                <div class="col-xs-8 col-sm-7 col-md-5 no-padding"><span style="width:calc(30% + {{ data.stats.lengte_passes | number:0 }}%);" id="arrow"></span> {{ data.stats.lengte_passes | number:1 }} m</div>
             </div>
             <div class="col-xs-12 no-padding orange">
-                <div class="col-xs-4 col-sm-5 col-sm-offset-1 col-md-3 col-md-offset-2 text-right">{{ data.vs }}</div>
-                <div class="col-xs-8 col-sm-6 col-md-5 no-padding"><span style="width:calc(30% + {{ data.stats_vs.lengte_passes | number:0 }}%);" id="arrow-vs"></span> {{ data.stats_vs.lengte_passes | number:1 }} m</div>
+                <div class="col-xs-4 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2 text-right">{{ data.vs }}</div>
+                <div class="col-xs-8 col-sm-7 col-md-5 no-padding"><span style="width:calc(30% + {{ data.stats_vs.lengte_passes | number:0 }}%);" id="arrow-vs"></span> {{ data.stats_vs.lengte_passes | number:1 }} m</div>
                 <div class="col-xs-12">&nbsp;</div>
             </div>
 
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center no-padding">
                 <h4>Pass zekerheid</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
+            <div class="col-xs-6 col-sm-4 col-md-5 text-right circle">
                 <div class="c100 p{{ data.stats.passzekerheid | number:0 }} pull-right">
                     <span>{{ data.stats.passzekerheid | number:1 }}%</span>
                     <div class="slice">
@@ -130,11 +142,11 @@
                 <br class="clear">
                 van de <span class="medium">{{ data.stats.tot_passes | number:0 }}</span> passes
             </div>
-            <div class="hidden-xs col-sm-2 col-md-2 text-center no-padding">
+            <div class="hidden-xs col-sm-4 col-md-2 text-center no-padding">
                 <br><br>
                 <h4>Pass zekerheid</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 orange">
+            <div class="col-xs-6 col-sm-4 col-md-5 orange circle">
                 <div class="c100 p{{ data.stats_vs.passzekerheid | number:0 }} orange">
                     <span>{{ data.stats_vs.passzekerheid | number:1 }}%</span>
                     <div class="slice">
@@ -148,10 +160,10 @@
         </div>
         <div class="col-xs-12 content-club">
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center no-padding">
-                <img src="/images/duels.png" width="47%">
-                <h4>Duels gewonnen</h4>
+                <img class="hidden-xs" src="/images/duels.png" width="47%">
+                <h4><img class="hidden-sm hidden-md hidden-lg" src="/images/duels.png" height="35px"> Duels gewonnen</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
+            <div class="col-xs-6 col-sm-4 col-md-5 text-right circle">
                 <div class="c100 p{{ data.stats.gewonnen_duels | number:0 }} pull-right">
                     <span>{{ data.stats.gewonnen_duels | number:1 }}%</span>
                     <div class="slice">
@@ -160,11 +172,11 @@
                     </div>
                 </div>
             </div>
-            <div class="hidden-xs col-sm-2 col-md-2 text-center no-padding">
+            <div class="hidden-xs col-sm-4 col-md-2 text-center no-padding">
                 <img src="/images/duels.png" width="47%">
                 <h4>Duels gewonnen</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 orange">
+            <div class="col-xs-6 col-sm-4 col-md-5 orange circle">
                 <div class="c100 p{{ data.stats_vs.gewonnen_duels | number:0 }} orange">
                     <span>{{ data.stats_vs.gewonnen_duels | number:1 }}%</span>
                     <div class="slice">
@@ -176,21 +188,35 @@
         </div>
         <div class="col-xs-12 content-club">
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg text-center no-padding">
-                <img src="/images/kaarten.png" width="35%">
-                <h4>Kaarten</h4>
+                <img class="hidden-xs" src="/images/kaarten.png" width="35%">
+                <h4><img class="hidden-sm hidden-md hidden-lg" src="/images/kaarten.png" height="35px"> Kaarten</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 text-right">
+            <div class="hidden-xs col-sm-4 col-md-5 text-right">
                 <br>
                 <h3>
                     <span ng-repeat="n in [] | range: data.stats.rood"><i class="fa fa-file" style="color: #ED1C24;"></i>&nbsp;</span>
                     <span ng-repeat="n in [] | range: data.stats.geel"><i class="fa fa-file" style="color: #ffcc00;"></i>&nbsp;</span>
                 </h3>
             </div>
-            <div class="hidden-xs col-sm-2 col-md-2 text-center no-padding">
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg">
+                <br>
+                <h3>
+                    <span ng-repeat="n in [] | range: data.stats.rood"><i class="fa fa-file" style="color: #ED1C24;"></i>&nbsp;</span>
+                    <span ng-repeat="n in [] | range: data.stats.geel"><i class="fa fa-file" style="color: #ffcc00;"></i>&nbsp;</span>
+                </h3>
+            </div>
+            <div class="hidden-xs col-sm-4 col-md-2 text-center no-padding">
                 <img src="/images/kaarten.png" width="35%">
                 <h4>Kaarten</h4>
             </div>
-            <div class="col-xs-6 col-sm-5 col-md-5 orange">
+            <div class="hidden-xs col-sm-4 col-md-5 orange">
+                <br>
+                <h3>
+                    <span ng-repeat="n in [] | range: data.stats_vs.rood"><i class="fa fa-file" style="color: #ED1C24;"></i>&nbsp;</span>
+                    <span ng-repeat="n in [] | range: data.stats_vs.geel"><i class="fa fa-file" style="color: #ffcc00;"></i>&nbsp;</span>
+                </h3>
+            </div>
+            <div class="col-xs-6 hidden-sm hidden-md hidden-lg text-right orange">
                 <br>
                 <h3>
                     <span ng-repeat="n in [] | range: data.stats_vs.rood"><i class="fa fa-file" style="color: #ED1C24;"></i>&nbsp;</span>
@@ -199,10 +225,10 @@
             </div>
         </div>
         <div class="col-xs-12 content-club-end">
-            <div class="col-xs-12 col-sm-11 col-sm-offset-1">
+            <div class="col-xs-12 col-sm-12">
                 <a ng-href="/wedstrijd/{{ data.match.matchID }}" tooltip-placement="right" tooltip="ga naar wedstrijd rapport">Deze wedstrijd: {{ data.match.wedstrijd }} (ronde {{ data.match.ronde }})</a>
             </div>
-            <div class="col-xs-12 col-sm-11 col-sm-offset-1">
+            <div class="col-xs-12 col-sm-12">
                 <br>
                 <div class="col-xs-12 no-padding orange">Laatste wedstrijden dit seizoen ({{ data.season_index }})</div>
                 <div class="col-xs-12 no-padding"><div class="col-xs-5 col-md-2 no-padding">{{ data.season_matches_init[data.season_matches_init.length - 1].datum }}</div><div class="col-xs-5 col-md-4"><a ng-href="/wedstrijd/{{ data.season_matches_init[data.season_matches_init.length - 1].matchID }}" tooltip-placement="right" tooltip="ga naar wedstrijd rapport">{{ data.season_matches_init[data.season_matches_init.length - 1].wedstrijd }}</a></div><div class="col-xs-2 col-md-2"><small ng-if="data.season_matches_init[data.season_matches_init.length - 1].wedstrijd.split(' - ',1)[0] == data.club_name">{{ data.season_matches_init[data.season_matches_init.length - 1].doelpunten_voor }} - {{ data.season_matches_init[data.season_matches_init.length - 1].doelpunten_tegen }}</small><small ng-if="data.season_matches_init[data.season_matches_init.length - 1].wedstrijd.split(' - ',2)[1] == data.club_name">{{ data.season_matches_init[data.season_matches_init.length - 1].doelpunten_tegen }} - {{ data.season_matches_init[data.season_matches_init.length - 1].doelpunten_voor }}</small></div></div>

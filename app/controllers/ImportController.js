@@ -117,6 +117,13 @@ module.exports = ImportController = {
                                 team_data.uit.geel = Number_converter(_.where(data.team_matrix, {_row: 'Gele kaarten'})[0][items.uitTeamID]);
                                 team_data.thuis.rood = Number_converter(_.where(data.team_matrix, {_row: 'Rode kaarten'})[0][items.thuisTeamID]);
                                 team_data.uit.rood = Number_converter(_.where(data.team_matrix, {_row: 'Rode kaarten'})[0][items.uitTeamID]);
+
+                                team_data.thuis.team_leeftijd = {};
+                                team_data.thuis.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.thuisLeeftijd_basis[0];
+                                team_data.thuis.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.thuisLeeftijd_bank[0];
+                                team_data.uit.team_leeftijd = {};
+                                team_data.uit.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.uitLeeftijd_basis[0];
+                                team_data.uit.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.uitLeeftijd_bank[0];
                             } else {
                                 team_data.thuis.balbezit = Number_converter(data.wedstrijd_data.balbezit.hele_wedstrijd[0][items.thuisTeamID]);
                                 team_data.uit.balbezit = Number_converter(data.wedstrijd_data.balbezit.hele_wedstrijd[0][items.uitTeamID]);
@@ -165,9 +172,12 @@ module.exports = ImportController = {
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
                                 }
-                            } else {
+                            } else if (items.matchID >= 17009) {
                                 items.seizoen = "2015-2016";
                                 match_short.seizoen = "2015-2016";
+                            } else {
+                                items.seizoen = "2015-2016 Play-offs";
+                                match_short.seizoen = "2015-2016 Play-offs";
                             }
 
                             // INFO:
@@ -175,6 +185,7 @@ module.exports = ImportController = {
                             // seizoen 1314 PO: 6495-6502, 6507-6510, 6515-6518.
                             // seizoen 1415: 7288-7667
                             // seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
+                            // seizoen 1516: 17009-
                             // Alle intervallen zijn inclusief de linker- en rechterwaarde.
 
                             // for now this is correct later maybe need a if statement to choose correct division
@@ -373,17 +384,32 @@ module.exports = ImportController = {
                             });
 
                             items.spelers_thuisteam = [];
+                            items.spelers_uitteam = [];
+                            items.alle_spelers = data.wedstrijd_data.alle_spelers;
+
                             _.each(data.wedstrijd_data.spelers_thuisteam, function (value, key) {
                                 if (items.spelers_thuisteam.indexOf(value) < 0) {
+                                    _.each(items.alle_spelers, function (value1, key1) {
+                                        if (value.personID == value1.personID) {
+                                            value.spelerGeboortedatum = value1.geboorteDatum;
+                                            value.spelerNationaliteit = value1.nationaliteit;
+                                        }
+                                    });
                                     items.spelers_thuisteam.push(value);
                                 }
                             });
-                            items.spelers_uitteam = [];
                             _.each(data.wedstrijd_data.spelers_uitteam, function (value, key) {
                                 if (items.spelers_uitteam.indexOf(value) < 0) {
+                                    _.each(items.alle_spelers, function (value1, key1) {
+                                        if (value.personID == value1.personID) {
+                                            value.spelerGeboortedatum = value1.geboorteDatum;
+                                            value.spelerNationaliteit = value1.nationaliteit;
+                                        }
+                                    });
                                     items.spelers_uitteam.push(value);
                                 }
                             });
+
 
                             items.spelersthuisteam = [];
                             var k1;
@@ -396,6 +422,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -407,6 +435,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -429,6 +459,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 1].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -440,6 +472,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -462,6 +496,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 2].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -473,6 +509,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -495,6 +533,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 3].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -506,6 +546,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -528,6 +570,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 4].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -539,6 +583,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -561,6 +607,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 5].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -572,6 +620,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -594,6 +644,8 @@ module.exports = ImportController = {
                                         value.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 6].V1;
                                         if (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]) {
                                             value.personID = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).personID;
+                                            value.spelerGeboortedatum = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerGeboortedatum;
+                                            value.spelerNationaliteit = (_.where(items.spelers_thuisteam, {spelerNaam: value.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_thuis, {spelerID: value.personID})) {
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value.personID}), function (value1, key1) {
@@ -605,6 +657,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value.personID),
                                                     spelerNaam: value.spelerNaam,
+                                                    spelerGeboorteland: value.spelerNationaliteit,
+                                                    spelerGeboortedatum: value.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -632,6 +686,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -641,9 +697,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -665,6 +723,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 1].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -674,9 +734,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -698,6 +760,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 2].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -707,9 +771,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -731,6 +797,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 3].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -740,9 +808,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -764,6 +834,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 4].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -773,9 +845,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -797,6 +871,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 5].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -806,9 +882,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -830,6 +908,8 @@ module.exports = ImportController = {
                                         value_uit.rugnummer = data.wedstrijd_data.overzicht_lineup[k1 + 6].V3;
                                         if (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]) {
                                             value_uit.personID = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).personID;
+                                            value_uit.spelerGeboortedatum = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerGeboortedatum;
+                                            value_uit.spelerNationaliteit = (_.where(items.spelers_uitteam, {spelerNaam: value_uit.spelerNaam})[0]).spelerNationaliteit;
 
                                             if (_.where(speler_profiel_uit, {spelerID: value_uit.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value_uit.personID}), function (value1, key1) {
@@ -839,9 +919,11 @@ module.exports = ImportController = {
                                                 });
                                             } else {
                                                 Spelers.create({
-                                                    spelerID: Number_converter(value.personID),
-                                                    spelerNaam: value.spelerNaam,
-                                                    spelerRugnummer: Number_converter(value.rugnummer),
+                                                    spelerID: Number_converter(value_uit.personID),
+                                                    spelerNaam: value_uit.spelerNaam,
+                                                    spelerGeboorteland: value_uit.spelerNationaliteit,
+                                                    spelerGeboortedatum: value_uit.spelerGeboortedatum,
+                                                    spelerRugnummer: Number_converter(value_uit.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
@@ -1064,6 +1146,8 @@ module.exports = ImportController = {
                             });
 
                             if (data.team_data) {
+                                items.thuis_team_leeftijd = team_data.thuis.team_leeftijd;
+                                items.uit_team_leeftijd = team_data.uit.team_leeftijd;
 
                                 items.duel_matrix_hele_wedstrijd = data.team_data.duel_matrix_hele_wedstrijd;
                                 items.duel_matrix_hele_wedstrijd_thuis_spelers_uitteam = [];
@@ -1463,11 +1547,14 @@ module.exports = ImportController = {
                                     temp.teamID = (items.thuisTeamID);
                                     temp.type = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
+                                    temp.spelerLeeftijd = value.leeftijd[0];
+                                    temp.spelerNationaliteit = value.nationaliteit[0];
                                     forEach(items.spelersthuisteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
                                             temp.rugnummer = Number_converter((value1.rugnummer));
-                                            temp.spelerPhoto = (value1.spelerPhoto);
+                                            temp.spelerPhoto = value1.spelerPhoto;
+                                            temp.spelerGeboortedatum = value1.spelerGeboortedatum;
                                         }
 
                                         if (_.where(speler_profiel_thuis, {spelerID: value1.personID})) {
@@ -1482,6 +1569,8 @@ module.exports = ImportController = {
                                                     Spelers.update({
                                                         _id: value2._id
                                                     }, {
+                                                        spelerGeboorteland: value1.spelerNationaliteit,
+                                                        spelerGeboortedatum: value1.spelerGeboortedatum,
                                                         spelerRugnummer: value2.spelerRugnummer,
                                                         spelerType: value2.spelerType
                                                     }, function (err, data) {
@@ -1492,6 +1581,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
                                                     spelerNaam: value1.spelerNaam,
+                                                    spelerGeboorteland: value1.spelerNationaliteit,
+                                                    spelerGeboortedatum: value1.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value1.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.thuis,
@@ -1504,6 +1595,8 @@ module.exports = ImportController = {
                                             Spelers.create({
                                                 spelerID: Number_converter(value1.personID),
                                                 spelerNaam: value1.spelerNaam,
+                                                spelerGeboorteland: value1.spelerNationaliteit,
+                                                spelerGeboortedatum: value1.spelerGeboortedatum,
                                                 spelerRugnummer: Number_converter(value1.rugnummer),
                                                 seizoen: 'Seizoen ' + items.seizoen,
                                                 clubNaam: match_short.match_info.thuis,
@@ -1554,11 +1647,14 @@ module.exports = ImportController = {
                                     var temp = {};
                                     temp.spelerType = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
+                                    temp.spelerLeeftijd = value.leeftijd[0];
+                                    temp.spelerNationaliteit = value.nationaliteit[0];
                                     forEach(items.spelersthuisteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
-                                            temp.spelerRugnummer = Number_converter((value1.rugnummer));
+                                            temp.rugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = (value1.spelerPhoto);
+                                            temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
                                         }
                                     });
                                     if (temp.spelerType == 'keeper') {
@@ -1812,11 +1908,14 @@ module.exports = ImportController = {
                                     temp.teamID = (items.thuisTeamID);
                                     temp.type = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
+                                    temp.spelerLeeftijd = value.leeftijd[0];
+                                    temp.spelerNationaliteit = value.nationaliteit[0];
                                     forEach(items.spelersuitteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
                                             temp.rugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = (value1.spelerPhoto);
+                                            temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
                                         }
 
                                         if (_.where(speler_profiel_uit, {spelerID: value1.personID})) {
@@ -1831,6 +1930,8 @@ module.exports = ImportController = {
                                                     Spelers.update({
                                                         _id: value2._id
                                                     }, {
+                                                        spelerGeboorteland: value1.spelerNationaliteit,
+                                                        spelerGeboortedatum: value1.spelerGeboortedatum,
                                                         spelerRugnummer: value2.spelerRugnummer,
                                                         spelerType: value2.spelerType
                                                     }, function (err, data) {
@@ -1841,6 +1942,8 @@ module.exports = ImportController = {
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
                                                     spelerNaam: value1.spelerNaam,
+                                                    spelerGeboorteland: value1.spelerNationaliteit,
+                                                    spelerGeboortedatum: value1.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value1.rugnummer),
                                                     seizoen: 'Seizoen ' + items.seizoen,
                                                     clubNaam: match_short.match_info.uit,
@@ -1853,6 +1956,8 @@ module.exports = ImportController = {
                                             Spelers.create({
                                                 spelerID: Number_converter(value1.personID),
                                                 spelerNaam: value1.spelerNaam,
+                                                spelerGeboorteland: value1.spelerNationaliteit,
+                                                spelerGeboortedatum: value1.spelerGeboortedatum,
                                                 spelerRugnummer: Number_converter(value1.rugnummer),
                                                 seizoen: 'Seizoen ' + items.seizoen,
                                                 clubNaam: match_short.match_info.uit,
@@ -1903,11 +2008,14 @@ module.exports = ImportController = {
                                     var temp = {};
                                     temp.spelerType = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
+                                    temp.spelerLeeftijd = value.leeftijd[0];
+                                    temp.spelerNationaliteit = value.nationaliteit[0];
                                     forEach(items.spelersuitteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
-                                            temp.spelerRugnummer = (value1.rugnummer);
+                                            temp.rugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = (value1.spelerPhoto);
+                                            temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
                                         }
                                     });
                                     if (temp.spelerType == 'keeper') {
@@ -2156,6 +2264,9 @@ module.exports = ImportController = {
                             else if (match_short.match_info.thuis === 'Roda JC Kerkrade') {
                                 match_short.match_info.thuis_kort = 'Roda JC';
                             }
+                            else if (match_short.match_info.thuis === 'FC Eindhoven') {
+                                match_short.match_info.thuis_kort = 'Eindhoven';
+                            }
                             else {
                                 match_short.match_info.thuis_kort = (match_short.match_info.thuis);
                             }
@@ -2165,6 +2276,9 @@ module.exports = ImportController = {
                             }
                             else if (match_short.match_info.uit === 'Roda JC Kerkrade') {
                                 match_short.match_info.uit_kort = 'Roda JC';
+                            }
+                            else if (match_short.match_info.uit === 'FC Eindhoven') {
+                                match_short.match_info.uit_kort = 'Eindhoven';
                             }
                             else {
                                 match_short.match_info.uit_kort = (match_short.match_info.uit);
@@ -2301,11 +2415,14 @@ module.exports = ImportController = {
                                                 temp.spelerType = value.type;
                                                 temp.spelerRugnummer = value.rugnummer;
                                                 temp.spelerPhoto = value.spelerPhoto;
+                                                temp.spelerNationaliteit = value.spelerNationaliteit;
+                                                temp.spelerGeboortedatum = value.spelerGeboortedatum;
                                                 temp.matches = [];
                                                 var temp1 = {};
                                                 temp1.season = match_short.seizoen;
                                                 temp1.match = [];
                                                 var temp2 = {};
+                                                temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                 temp2.wedstrijd = value.match;
                                                 temp2.eindstand = value.result;
                                                 temp2.datum = value.date;
@@ -2371,6 +2488,7 @@ module.exports = ImportController = {
                                                                         value1.gewonnen_duels = team_data.thuis.gewonnen_duels;
                                                                         value1.geel = team_data.thuis.geel;
                                                                         value1.rood = team_data.thuis.rood;
+                                                                        value1.team_leeftijd = team_data.thuis.team_leeftijd;
                                                                     }
                                                                 });
                                                             } else {
@@ -2404,6 +2522,8 @@ module.exports = ImportController = {
                                                         temp.spelerType = value.type;
                                                         temp.spelerRugnummer = value.rugnummer;
                                                         temp.spelerPhoto = value.spelerPhoto;
+                                                        temp.spelerNationaliteit = value.spelerNationaliteit;
+                                                        temp.spelerGeboortedatum = value.spelerGeboortedatum;
                                                         temp.matches = [];
 
                                                         var temp1 = {};
@@ -2411,6 +2531,7 @@ module.exports = ImportController = {
                                                         temp1.match = [];
 
                                                         var temp2 = {};
+                                                        temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                         temp2.wedstrijd = value.match;
                                                         temp2.eindstand = value.result;
                                                         temp2.datum = value.date;
@@ -2453,6 +2574,8 @@ module.exports = ImportController = {
                                                                 value1.spelerNaam = value.spelerNaam;
                                                                 value1.spelerRugnummer = value.rugnummer;
                                                                 value1.spelerPhoto = value.spelerPhoto;
+                                                                value1.spelerNationaliteit = value.spelerNationaliteit;
+                                                                value1.spelerGeboortedatum = value.spelerGeboortedatum;
 
                                                                 if (value1.matches) {
                                                                     if (_.where(value1.matches, {season: match_short.seizoen})[0]) {
@@ -2462,6 +2585,7 @@ module.exports = ImportController = {
                                                                                 if (_.where(value2.match, {ronde: value.ronde})[0]) {
                                                                                     forEach(value2.match, function (value3, key3) {
                                                                                         if (value3.ronde == value.ronde) {
+                                                                                            value3.spelerLeeftijd = value.spelerLeeftijd;
                                                                                             value3.wedstrijd = value.match;
                                                                                             value3.eindstand = value.result;
                                                                                             value3.datum = value.date;
@@ -2496,6 +2620,7 @@ module.exports = ImportController = {
                                                                                     });
                                                                                 } else {
                                                                                     var temp2 = {};
+                                                                                    temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                                                     temp2.wedstrijd = value.match;
                                                                                     temp2.eindstand = value.result;
                                                                                     temp2.datum = value.date;
@@ -2537,6 +2662,7 @@ module.exports = ImportController = {
                                                                         temp11.match = [];
 
                                                                         var temp21 = {};
+                                                                        temp21.spelerLeeftijd = value.spelerLeeftijd;
                                                                         temp21.wedstrijd = value.match;
                                                                         temp21.eindstand = value.result;
                                                                         temp21.datum = value.date;
@@ -2580,6 +2706,7 @@ module.exports = ImportController = {
                                                                     temp12.match = [];
 
                                                                     var temp22 = {};
+                                                                    temp22.spelerLeeftijd = value.spelerLeeftijd;
                                                                     temp22.wedstrijd = value.match;
                                                                     temp22.eindstand = value.result;
                                                                     temp22.datum = value.date;
@@ -2638,6 +2765,8 @@ module.exports = ImportController = {
                                                     temp.spelerType = value.type;
                                                     temp.spelerRugnummer = value.rugnummer;
                                                     temp.spelerPhoto = value.spelerPhoto;
+                                                    temp.spelerNationaliteit = value.spelerNationaliteit;
+                                                    temp.spelerGeboortedatum = value.spelerGeboortedatum;
                                                     temp.matches = [];
 
                                                     var temp1 = {};
@@ -2645,6 +2774,7 @@ module.exports = ImportController = {
                                                     temp1.match = [];
 
                                                     var temp2 = {};
+                                                    temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                     temp2.wedstrijd = value.match;
                                                     temp2.eindstand = value.result;
                                                     temp2.datum = value.date;
@@ -2819,11 +2949,14 @@ module.exports = ImportController = {
                                                 temp.spelerType = value.type;
                                                 temp.spelerRugnummer = value.rugnummer;
                                                 temp.spelerPhoto = value.spelerPhoto;
+                                                temp.spelerNationaliteit = value.spelerNationaliteit;
+                                                temp.spelerGeboortedatum = value.spelerGeboortedatum;
                                                 temp.matches = [];
                                                 var temp1 = {};
                                                 temp1.season = match_short.seizoen;
                                                 temp1.match = [];
                                                 var temp2 = {};
+                                                temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                 temp2.wedstrijd = value.match;
                                                 temp2.eindstand = value.result;
                                                 temp2.datum = value.date;
@@ -2888,6 +3021,7 @@ module.exports = ImportController = {
                                                                         value1.gewonnen_duels = team_data.uit.gewonnen_duels;
                                                                         value1.geel = team_data.uit.geel;
                                                                         value1.rood = team_data.uit.rood;
+                                                                        value1.team_leeftijd = team_data.uit.team_leeftijd;
                                                                     }
                                                                 });
                                                             } else {
@@ -2921,6 +3055,8 @@ module.exports = ImportController = {
                                                         temp.spelerType = value.type;
                                                         temp.spelerRugnummer = value.rugnummer;
                                                         temp.spelerPhoto = value.spelerPhoto;
+                                                        temp.spelerNationaliteit = value.spelerNationaliteit;
+                                                        temp.spelerGeboortedatum = value.spelerGeboortedatum;
                                                         temp.matches = [];
 
                                                         var temp1 = {};
@@ -2928,6 +3064,7 @@ module.exports = ImportController = {
                                                         temp1.match = [];
 
                                                         var temp2 = {};
+                                                        temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                         temp2.wedstrijd = value.match;
                                                         temp2.eindstand = value.result;
                                                         temp2.datum = value.date;
@@ -2970,6 +3107,8 @@ module.exports = ImportController = {
                                                                 value1.spelerNaam = value.spelerNaam;
                                                                 value1.spelerRugnummer = value.rugnummer;
                                                                 value1.spelerPhoto = value.spelerPhoto;
+                                                                value1.spelerNationaliteit = value.spelerNationaliteit;
+                                                                value1.spelerGeboortedatum = value.spelerGeboortedatum;
 
                                                                 if (value1.matches) {
                                                                     if (_.where(value1.matches, {season: match_short.seizoen})[0]) {
@@ -2979,6 +3118,7 @@ module.exports = ImportController = {
                                                                                 if (_.where(value2.match, {ronde: value.ronde})[0]) {
                                                                                     forEach(value2.match, function (value3, key3) {
                                                                                         if (value3.ronde == value.ronde) {
+                                                                                            value3.spelerLeeftijd = value.spelerLeeftijd;
                                                                                             value3.wedstrijd = value.match;
                                                                                             value3.eindstand = value.result;
                                                                                             value3.datum = value.date;
@@ -3013,6 +3153,7 @@ module.exports = ImportController = {
                                                                                     });
                                                                                 } else {
                                                                                     var temp2 = {};
+                                                                                    temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                                                     temp2.wedstrijd = value.match;
                                                                                     temp2.eindstand = value.result;
                                                                                     temp2.datum = value.date;
@@ -3054,6 +3195,7 @@ module.exports = ImportController = {
                                                                         temp11.match = [];
 
                                                                         var temp21 = {};
+                                                                        temp21.spelerLeeftijd = value.spelerLeeftijd;
                                                                         temp21.wedstrijd = value.match;
                                                                         temp21.eindstand = value.result;
                                                                         temp21.datum = value.date;
@@ -3097,6 +3239,7 @@ module.exports = ImportController = {
                                                                     temp12.match = [];
 
                                                                     var temp22 = {};
+                                                                    temp22.spelerLeeftijd = value.spelerLeeftijd;
                                                                     temp22.wedstrijd = value.match;
                                                                     temp22.eindstand = value.result;
                                                                     temp22.datum = value.date;
@@ -3155,6 +3298,8 @@ module.exports = ImportController = {
                                                     temp.spelerType = value.type;
                                                     temp.spelerRugnummer = value.rugnummer;
                                                     temp.spelerPhoto = value.spelerPhoto;
+                                                    temp.spelerNationaliteit = value.spelerNationaliteit;
+                                                    temp.spelerGeboortedatum = value.spelerGeboortedatum;
                                                     temp.matches = [];
 
                                                     var temp1 = {};
@@ -3162,6 +3307,7 @@ module.exports = ImportController = {
                                                     temp1.match = [];
 
                                                     var temp2 = {};
+                                                    temp2.spelerLeeftijd = value.spelerLeeftijd;
                                                     temp2.wedstrijd = value.match;
                                                     temp2.eindstand = value.result;
                                                     temp2.datum = value.date;

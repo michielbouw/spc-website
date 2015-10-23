@@ -24,15 +24,15 @@
             <statssliderclub model="round"></statssliderclub>
         </div>
         <div class="col-xs-12 col-sm-2 content-players-left">
-            <span class="tag" ng-if="data.player_stats.spelerType == 'keeper'">Keeper</span>
+            <span class="tag" ng-if="data.player_stats.spelerType == 'keeper'"><strong>Keeper</strong></span>
             <div class="col-xs-12">
                 <img ng-if="!data.player_stats.spelerPhoto" src="images/blank-avatar.png">
                 <img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png">
             </div>
-            <div class="col-xs-12"><br>{{ data.player_stats.spelerNaam }}</div>
-            <div class="col-xs-12"><br>{{ data.club_name }}</div>
+            <div class="col-xs-12"><br><strong>{{ data.player_stats.spelerNaam }}</strong></div>
+            <div class="col-xs-12"><br><strong>{{ data.club_name }}</strong></div>
             <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ data.player_stats.spelerRugnummer }}</span></div>
-            <div class="col-xs-12 text-center"><a ng-href="/spelers/{{ data.team_slug }}" class="orange"><i class="fa fa-refresh"></i> andere speler</a></div>
+            <div class="col-xs-12 text-center"><a ng-href="/spelers/{{ data.team_slug }}" class="orange"><strong><i class="fa fa-refresh"></i> andere speler</strong></a></div>
 
             <div class="col-xs-12 text-center player-vs"><h4>VS</h4></div>
 
@@ -42,10 +42,10 @@
             </div>
             <div class="col-xs-12 grey">
                 <br>
-                <span ng-if="data.vs == data.playerID">{{ data.player_stats.spelerNaam }}<br>{{ data.vs_naam }}</span>
-                <span ng-if="data.vs !== data.playerID">{{ data.player_stats_vs.spelerNaam }}<br>{{ data.vs_info }}</span>
+                <span ng-if="data.vs == data.playerID"><strong>{{ data.player_stats.spelerNaam }}<br>{{ data.vs_naam }}</strong></span>
+                <span ng-if="data.vs !== data.playerID"><strong>{{ data.player_stats_vs.spelerNaam }}<br>{{ data.vs_info }}</strong></span>
             </div>
-            <div class="col-xs-12 grey"><br>{{ data.club_name }}</div>
+            <div class="col-xs-12 grey"><br><strong>{{ data.club_name }}</strong></div>
             <div class="col-xs-12"><br>
                 <img ng-src="images/shirt-grey.png">
                 <span class="text-center rugnummer">
@@ -71,7 +71,7 @@
         </div>
         <div class="col-xs-12 col-sm-10" id="content-players-main">
         <div class="col-xs-12 col-sm-10 content-players">
-            <div class="col-xs-12 no-padding"><img src="/images/doelpogingen.png" width="5%"> {{ data.matches_played }} wedstrijden gespeeld <span ng-if="data.player_stats.spelerType == 'keeper'">en {{ data.clean_sheets }} clean sheets</span></div>
+            <div class="col-xs-12 no-padding"><img src="/images/doelpogingen.png" width="5%"><strong> {{ data.matches_played }} wedstrijden gespeeld <span ng-if="data.player_stats.spelerType == 'keeper'">en {{ data.clean_sheets }} clean sheets</span></strong></div>
 
             <div class="col-xs-12 no-padding"><br><h4>Algemeen</h4></div>
 

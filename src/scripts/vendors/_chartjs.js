@@ -267,7 +267,7 @@
             maintainAspectRatio: true,
 
             // Boolean - Determines whether to draw tooltips on the canvas or not - attaches events to touchmove & mousemove
-            showTooltips: true,
+            showTooltips: false,
 
             // Boolean - Determines whether to draw built-in tooltip or call custom tooltip function
             customTooltips: false,
@@ -2139,29 +2139,41 @@
                         var baseline;
                         var paddingX;
                         var paddingY;
+                        var paddingY1;
+                        var vswidth;
+                        var vsheight;
                         var labelWidth = ctx.measureText(this.labels[i].toUpperCase() + ' ' + Number(this.datasets[1].data[i]).toFixed(0) + '%').width;
+                        var labelvsWidth = ctx.measureText(Number(this.datasets[0].data[i]).toFixed(0) + '%').width;
 
                         if (i === 0){
                             ctx.textAlign = 'left';
                             //align = labelWidth/2;
                             align = 0;
                             paddingX = 4;
-                            paddingY = -8;
+                            paddingY = 4;
+                            vswidth = labelWidth - labelvsWidth;
+                            vsheight = this.fontSize + 2*2 + 4;
                         } else if(i === halfLabelsCount){
                             ctx.textAlign = 'center';
                             align = labelWidth/2;
                             paddingX = 0;
                             paddingY = -2;
+                            vswidth = labelWidth + 4*2 + 4;
+                            vsheight = 0;
                         } else if (i < halfLabelsCount){
                             ctx.textAlign = 'left';
                             align = 0;
                             paddingX = 2;
                             paddingY = 0;
+                            vswidth = labelWidth - labelvsWidth;
+                            vsheight = this.fontSize + 2*2 + 4;
                         } else {
                             ctx.textAlign = 'right';
                             align = labelWidth;
                             paddingX = -2;
                             paddingY = 0;
+                            vswidth = 0;
+                            vsheight = this.fontSize + 2*2 + 4;
                         }
 
                         // Set the correct text baseline based on outer positioning
@@ -2171,28 +2183,36 @@
                         } else if (upperHalf){
                             ctx.textBaseline = 'bottom';
                             baseline = this.fontSize + 1;
-                            paddingY = -2;
+                            paddingY1 = -4;
                         } else {
                             ctx.textBaseline = 'top';
                             baseline = -2;
-                            paddingY = 2;
+                            paddingY1 = 0;
                         }
 
                         ctx.fillStyle = "#037dc9";
                         ctx.fillRect(
                             pointLabelPosition.x + paddingX - align - 4,
-                            pointLabelPosition.y + paddingY - baseline - 2,
+                            pointLabelPosition.y + paddingY + paddingY1 - baseline - 2,
                             labelWidth + 4*2,
                             this.fontSize + 2*2
                         );
 
                         ctx.fillStyle = "#ffffff";
-                        ctx.fillText(this.labels[i].toUpperCase() + ' ' + Number(this.datasets[1].data[i]).toFixed(0) + '%', pointLabelPosition.x + paddingX, pointLabelPosition.y + paddingY);
+                        ctx.fillText(this.labels[i].toUpperCase() + ' ' + Number(this.datasets[1].data[i]).toFixed(0) + '%', pointLabelPosition.x + paddingX, pointLabelPosition.y + paddingY + paddingY1);
                         //ctx.fillText(this.labels[i], pointLabelPosition.x, pointLabelPosition.y);
 
-// TODO: draw vs values under the label
+                        ctx.fillStyle = "#979797";
+                        ctx.fillRect(
+                            pointLabelPosition.x + paddingX - align - 4 + vswidth,
+                            pointLabelPosition.y + paddingY + paddingY1 - baseline - 2 + vsheight,
+                            labelvsWidth + 4*2,
+                            this.fontSize + 2*2
+                        );
 
-
+                        ctx.textAlign = 'left';
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillText(Number(this.datasets[0].data[i]).toFixed(0) + '%', pointLabelPosition.x + vswidth - align + paddingX, pointLabelPosition.y + vsheight + paddingY + paddingY1);
                     }
                 }
             }

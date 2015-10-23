@@ -20,11 +20,15 @@ module.exports = mongoose.model('MatchData', {
     // players
     spelers_thuisteam: [{
         personID: { type: Number },
-        spelerNaam: { type: String }
+        spelerNaam: { type: String },
+        spelerGeboortedatum: { type: String },
+        spelerNationaliteit: { type: String }
     }],
     spelers_uitteam: [{
         personID: { type: Number },
-        spelerNaam: { type: String }
+        spelerNaam: { type: String },
+        spelerGeboortedatum: { type: String },
+        spelerNationaliteit: { type: String }
     }],
     spelersthuisteam: [{
         personID: { type: Number },
@@ -32,7 +36,7 @@ module.exports = mongoose.model('MatchData', {
         rugnummer: { type: Number },
         spelerPhoto: { type: String },
         spelerGeboortedatum: { type: String },
-        spelerLeeftijd : { type: Number }
+        spelerNationaliteit: { type: String }
     }],
     spelersuitteam: [{
         personID: { type: Number },
@@ -40,30 +44,30 @@ module.exports = mongoose.model('MatchData', {
         rugnummer: { type: Number },
         spelerPhoto: { type: String },
         spelerGeboortedatum: { type: String },
-        spelerLeeftijd : { type: Number }
+        spelerNationaliteit: { type: String }
     }],
-    alle_spelers: [
-        {
-            personID: { type: Number },
-            teamID: { type: Number },
-            geboorteDatum: { type: String },
-            nationaliteit: { type: String }
+    alle_spelers: [{
+        personID: {type: Number},
+        teamID: {type: Number},
+        geboorteDatum: {type: String},
+        nationaliteit: {type: String}
+    }],
+    thuis_team_leeftijd: {
+        leeftijd_basis: {
+            jaar: {type: Number},
+            dagen: {type: Number}
+        },
+        leeftijd_bank: {
+            jaar: {type: Number},
+            dagen: {type: Number}
         }
-    ],
-    team_leeftijd: {
-        thuisLeeftijd_basis: {
+    },
+    uit_team_leeftijd: {
+        leeftijd_basis: {
             jaar: {type: Number},
             dagen: {type: Number}
         },
-        thuisLeeftijd_bank: {
-            jaar: {type: Number},
-            dagen: {type: Number}
-        },
-        uitLeeftijd_basis: {
-            jaar: {type: Number},
-            dagen: {type: Number}
-        },
-        uitLeeftijd_bank: {
+        leeftijd_bank: {
             jaar: {type: Number},
             dagen: {type: Number}
         }

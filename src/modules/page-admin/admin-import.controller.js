@@ -15,7 +15,7 @@ angular.module('mainapp.pageAdmin')
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
                     Upload.upload({
-                        url: 'api/media/' + self.temp.matchID,
+                        url: 'api/v1/media/' + self.temp.matchID,
                         method: 'POST',
                         file: file
                     })

@@ -369,8 +369,89 @@ Responsive setup
 @media screen and (max-width:1199px) {
 }
 @media screen and (max-width:991px) {
+  .content.content-page {
+    .content-club-title {
+      padding-bottom: 0;
+
+      .season {
+        padding: 0;
+        margin-top: 4px;
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 @media screen and (max-width:767px) {
+  .content.content-page {
+    .content-club-title {
+      position: relative;
+      .title {
+        width: 50%;
+      }
+      .season {
+        width: 50%;
+      }
+    }
+    .content-club-name {
+      margin-bottom: 10px;
+
+      h4 {
+        margin-top: 10px;
+        margin-bottom: 8px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      h4.selector {
+        font-size: 20px;
+        margin: 0;
+        margin-top: 4px;
+      }
+      img {
+        height: 38px;
+        margin-right: 10px;
+      }
+      select.input-vs {
+        padding: 4px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+@media screen and (max-width:500px) {
+  .content.content-page {
+    .content-club-name {
+      margin-bottom: 10px;
+
+      .club_name {
+        width: 100%;
+      }
+      .season_selector {
+        width: 100%;
+      }
+    }
+  }
 }
 @media screen and (max-width:320px) {
+  .content.content-page {
+    .content-club-name {
+      margin-bottom: 10px;
+
+      .club_name {
+        width: 100%;
+      }
+      .season_selector {
+        width: 100%;
+      }
+    }
+    .content-club {
+      .circle {
+        width: 100%;
+        text-align: left;
+
+        .c100 {
+          float: left !important;
+        }
+      }
+    }
+  }
 }
