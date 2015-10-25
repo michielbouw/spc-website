@@ -171,8 +171,9 @@ module.exports = ImportController = {
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
+
                                 }
-                            } else if (items.matchID >= 17009) {
+                            } else if (items.matchID >= 17009 && items.matchID <= 17350) {
                                 items.seizoen = "2015-2016";
                                 match_short.seizoen = "2015-2016";
                             } else {
@@ -185,7 +186,7 @@ module.exports = ImportController = {
                             // seizoen 1314 PO: 6495-6502, 6507-6510, 6515-6518.
                             // seizoen 1415: 7288-7667
                             // seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
-                            // seizoen 1516: 17009-
+                            // seizoen 1516: 17009-17350
                             // Alle intervallen zijn inclusief de linker- en rechterwaarde.
 
                             // for now this is correct later maybe need a if statement to choose correct division

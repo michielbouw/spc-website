@@ -149,7 +149,7 @@ UploadController.prototype.uploadFile = function(req, res) {
         if (fileExtension == '.jpg' || fileExtension == '.png') {
             if (fs.existsSync(target_path)) {
                 fs.unlink(tmp_path, function (err) {
-                    if (err) throw err;
+                    if (err) { console.log(err); throw err; }
                     res.send(renamedFile);
                 });
             } else {
@@ -162,7 +162,7 @@ UploadController.prototype.uploadFile = function(req, res) {
                     if (err) throw err;
                     // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
                     fs.unlink(tmp_path, function () {
-                        if (err) throw err;
+                        if (err) { console.log(err); throw err; }
                         res.send(renamedFile);
                     });
                 });
@@ -170,20 +170,20 @@ UploadController.prototype.uploadFile = function(req, res) {
         } else if (fileExtension == '.json') {
             if (fs.existsSync(target_path)) {
                 //fs.unlink(tmp_path, function (err) {
-                //    if (err) throw err;
+                //    if (err) { console.log(err); throw err; }
                 //    res.send(renamedFile);
                 //});
 
                 // move the file from the temporary location to the intended location
                 // remove wrong encoding
                 fs.readFile(tmp_path, 'binary', function (err, data) {
-                    if (err) throw err;
+                    if (err) { console.log(err); throw err; }
 
                     fs.writeFile(target_path, data, 'utf8', function (err) {
-                        if (err) throw err;
+                        if (err) { console.log(err); throw err; }
 
                         fs.unlink(tmp_path, function () {
-                            if (err) throw err;
+                            if (err) { console.log(err); throw err; }
 
                             ImportController.match(target_path);
                             res.send(renamedFile);
@@ -194,13 +194,13 @@ UploadController.prototype.uploadFile = function(req, res) {
                 // move the file from the temporary location to the intended location
                 // remove wrong encoding
                 fs.readFile(tmp_path, 'binary', function (err, data) {
-                    if (err) throw err;
+                    if (err) { console.log(err); throw err; }
 
                     fs.writeFile(target_path, data, 'utf8', function (err) {
-                        if (err) throw err;
+                        if (err) { console.log(err); throw err; }
 
                         fs.unlink(tmp_path, function () {
-                            if (err) throw err;
+                            if (err) { console.log(err); throw err; }
 
                             ImportController.match(target_path);
                             res.send(renamedFile);
@@ -211,13 +211,13 @@ UploadController.prototype.uploadFile = function(req, res) {
         } else {
             if (fs.existsSync(target_path)) {
                 fs.unlink(tmp_path, function (err) {
-                    if (err) throw err;
+                    if (err) { console.log(err); throw err; }
                     res.send(renamedFile);
                 });
             } else {
                 // move the file from the temporary location to the intended location
                 fsextra.move(tmp_path, target_path, function (err) {
-                    if (err) throw err;
+                    if (err) { console.log(err); throw err; }
                     res.send(renamedFile);
                 });
             }

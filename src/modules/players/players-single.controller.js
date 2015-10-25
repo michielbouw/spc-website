@@ -872,7 +872,7 @@ angular.module('mainapp.players')
                         }, 500);
                     }
                 }
-            }, 500);
+            }, 400);
         }, true);
 
         $timeout(function () {
@@ -993,5 +993,5 @@ angular.module('mainapp.players')
                 //String - A legend template
                 legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li style="color:<%=datasets[i].pointColor%>"><span style="background-color:<%=datasets[i].pointColor%>"></span><strong><%if(datasets[i].label){%><%=datasets[i].label%><%}%></strong></li><%}%></ul>'
             };
-        }, 500);
+        }, 600);
     }]);
