@@ -4,7 +4,6 @@ var router = require('express').Router();
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
-//var NewsController = require('../controllers/NewsController');
 var ClubController = require('../controllers/ClubController');
 var MatchDataController = require('../controllers/MatchDataController');
 var MatchesController = require('../controllers/MatchesController');

@@ -22,7 +22,7 @@
     "connect-flash": "0.1.1",
     "connect-livereload": "^0.5.2",
     "connect-mongo": "0.4.2",
-    "connect-multiparty": "~1.2.5",
+    "connect-multiparty": "~2.0.0",
     "consolidate": "0.10.0",
     "d3": "~3.5.5",
     "dependable": "0.2.5",

@@ -6,6 +6,7 @@ var ImportController = require('../controllers/ImportController');
 UploadController = function() {};
 
 UploadController.prototype.uploadFile = function(req, res) {
+    console.log('upload process start (' + req.files + ')');
     // We are able to access req.files.file thanks to
     // the multiparty middleware
     var file = req.files.file;
