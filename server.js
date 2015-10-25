@@ -65,8 +65,8 @@ app.get('*', function(req, res) {
 });
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    if (err.status) res.render('errors/404');
-    else res.render('errors/500');
+    if (err.status) { console.log(err); res.render('errors/404'); }
+    else { console.log(err); res.render('errors/500'); }
 });
 
 // add fixtures data =======================================
