@@ -417,6 +417,10 @@
   }
   .logboek {
     color: $primary-color;
+
+    small {
+      color: $primary-color;
+    }
   }
 }
 

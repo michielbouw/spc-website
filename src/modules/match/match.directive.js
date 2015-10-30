@@ -182,7 +182,7 @@ angular.module('mainapp.match')
                         });
 
                     });
-                }, 200);
+                }, 100);
             }
         };
     });

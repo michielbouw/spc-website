@@ -26,7 +26,7 @@
                     <select ng-model="data.vs" class="form-control input-md input-vs" dir="rtl"
                             ng-change="data.vsInitFunc()">
                         <!--<option>.. kies ..</option>-->
-                        <option>Gemiddeld team</option>
+                        <option>Gemiddelde seizoen</option>
                         <option ng-hide="data.season_index.split(' ', 2)[1] == 'Play-offs'">1e helft seizoen team</option>
                         <option ng-hide="data.season_index.split(' ', 2)[1] == 'Play-offs'">2e helft seizoen team</option>
                         <!--<option>Gemiddeld JL</option>-->
@@ -92,7 +92,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 text-right circle">
                 <div class="c100 p{{ data.stats.balbezit | number:0 }} pull-right">
-                    <span>{{ data.stats.balbezit | number:1 }}%</span>
+                    <span>{{ data.stats.balbezit | number:0 }}%</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -105,7 +105,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 orange circle">
                 <div class="c100 p{{ data.stats_vs.balbezit | number:0 }} orange">
-                    <span>{{ data.stats_vs.balbezit | number:1 }}%</span>
+                    <span>{{ data.stats_vs.balbezit | number:0 }}%</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -133,7 +133,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 text-right circle">
                 <div class="c100 p{{ data.stats.passzekerheid | number:0 }} pull-right">
-                    <span>{{ data.stats.passzekerheid | number:1 }}%</span>
+                    <span>{{ data.stats.passzekerheid | number:0 }}%</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -148,7 +148,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 orange circle">
                 <div class="c100 p{{ data.stats_vs.passzekerheid | number:0 }} orange">
-                    <span>{{ data.stats_vs.passzekerheid | number:1 }}%</span>
+                    <span>{{ data.stats_vs.passzekerheid | number:0 }}%</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -165,7 +165,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 text-right circle">
                 <div class="c100 p{{ data.stats.gewonnen_duels | number:0 }} pull-right">
-                    <span>{{ data.stats.gewonnen_duels | number:1 }}%</span>
+                    <span>{{ data.stats.gewonnen_duels | number:0 }}%</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -178,7 +178,7 @@
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 orange circle">
                 <div class="c100 p{{ data.stats_vs.gewonnen_duels | number:0 }} orange">
-                    <span>{{ data.stats_vs.gewonnen_duels | number:1 }}%</span>
+                    <span>{{ data.stats_vs.gewonnen_duels | number:0 }}%</span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>

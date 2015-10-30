@@ -742,7 +742,7 @@ angular.module('mainapp.players')
         };
         self.vs = self.playerID;
         self.vs_info = 'Gemiddelde seizoen';
-        self.vsInitFunc();
+        //self.vsInitFunc();
 
         $rootScope.infoSaveLog = '';
         self.savePlayerLog = function () {
@@ -838,7 +838,7 @@ angular.module('mainapp.players')
 
                         $timeout(function () {
                             self.chart_keeper.datasets[1].data = [self.stats.geslaagde_reddingen.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.succesvolle_uittrappen.toFixed(1), self.stats.perc_korte_passes.toFixed(1), self.stats.perc_middellange_passes.toFixed(1), self.stats.perc_lange_passes.toFixed(1)];
-                        }, 500);
+                        }, 600);
                     } else {
                         self.stats.doelpunten = self.season_matches[self.roundfilter() - 1].doelpunten;
 
@@ -869,10 +869,10 @@ angular.module('mainapp.players')
 
                         $timeout(function () {
                             self.chart_player.datasets[1].data = [self.stats.doelpogingen_opdoel.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.gewonnen_duels.toFixed(1), self.stats.perc_verdedigende_duels.toFixed(1), self.stats.perc_aanvallende_duels.toFixed(1)];
-                        }, 500);
+                        }, 600);
                     }
                 }
-            }, 400);
+            }, 100);
         }, true);
 
         $timeout(function () {
@@ -993,5 +993,5 @@ angular.module('mainapp.players')
                 //String - A legend template
                 legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li style="color:<%=datasets[i].pointColor%>"><span style="background-color:<%=datasets[i].pointColor%>"></span><strong><%if(datasets[i].label){%><%=datasets[i].label%><%}%></strong></li><%}%></ul>'
             };
-        }, 600);
+        }, 400);
     }]);

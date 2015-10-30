@@ -25,19 +25,6 @@ angular.module('mainapp.players')
                 self.divisie = res.divisie;
                 self.player_data = res.player_data;
 
-                /*Api.SpelersClub.query({
-                    _id: self.club_name
-                },function(res) {
-                    var club_players = res;
-
-                    angular.forEach(self.player_data, function(value, key) {
-                        if (!value.spelerPhoto) {
-                            if ($filter('filter')(club_players, {spelerID: value.playerID}, true) && $filter('filter')(club_players, {spelerID: value.playerID}, true)[0] && $filter('filter')(club_players, {spelerID: value.playerID}, true)[0].spelerPhoto) {
-                                value.spelerPhoto = $filter('filter')(club_players, {spelerID: value.playerID}, true)[0].spelerPhoto;
-                            }
-                        }
-                    });
-                });*/
                 angular.forEach(self.player_data, function(value, key) {
                     if (!value.spelerPhoto) {
                         Api.SpelersID.query({
