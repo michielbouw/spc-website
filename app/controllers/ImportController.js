@@ -119,11 +119,19 @@ module.exports = ImportController = {
                                 team_data.uit.rood = Number_converter(_.where(data.team_matrix, {_row: 'Rode kaarten'})[0][items.uitTeamID]);
 
                                 team_data.thuis.team_leeftijd = {};
-                                team_data.thuis.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.thuisLeeftijd_basis[0];
-                                team_data.thuis.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.thuisLeeftijd_bank[0];
+                                if (data.team_data.team_leeftijd.thuisLeeftijd_basis) {
+                                    team_data.thuis.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.thuisLeeftijd_basis[0];
+                                }
+                                if (data.team_data.team_leeftijd.thuisLeeftijd_bank) {
+                                    team_data.thuis.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.thuisLeeftijd_bank[0];
+                                }
                                 team_data.uit.team_leeftijd = {};
-                                team_data.uit.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.uitLeeftijd_basis[0];
-                                team_data.uit.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.uitLeeftijd_bank[0];
+                                if (data.team_data.team_leeftijd.uitLeeftijd_basis) {
+                                    team_data.uit.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.uitLeeftijd_basis[0];
+                                }
+                                if (data.team_data.team_leeftijd.uitLeeftijd_bank) {
+                                    team_data.uit.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.uitLeeftijd_bank[0];
+                                }
                             } else {
                                 team_data.thuis.balbezit = Number_converter(data.wedstrijd_data.balbezit.hele_wedstrijd[0][items.thuisTeamID]);
                                 team_data.uit.balbezit = Number_converter(data.wedstrijd_data.balbezit.hele_wedstrijd[0][items.uitTeamID]);
@@ -2355,7 +2363,7 @@ module.exports = ImportController = {
                                                 });
                                             }
                                             team_slug = teamstemp3.team_slug;
-                                            match_short.match_info.coach_thuis = teamstemp3.coach;
+                                            //match_short.match_info.coach_thuis = teamstemp3.coach;
                                             match_short.thuisTeamSlug = teamstemp3.team_slug;
                                             items.thuisTeamSlug = teamstemp3.team_slug;
                                         } else {
@@ -2890,7 +2898,7 @@ module.exports = ImportController = {
                                                 });
                                             }
                                             team_slug_uit = teamstemp3.team_slug;
-                                            match_short.match_info.coach_uit = teamstemp3.coach;
+                                            //match_short.match_info.coach_uit = teamstemp3.coach;
                                             match_short.uitTeamSlug = teamstemp3.team_slug;
                                             items.uitTeamSlug = teamstemp3.team_slug;
                                         } else {
