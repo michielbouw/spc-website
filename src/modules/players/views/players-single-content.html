@@ -223,7 +223,7 @@
                         <div ng-if="(data.stats_vs.weggestompte_ballen | number:0) > (data.stats.weggestompte_ballen | number:0)" class="slider-range corner-all" ng-style="{ width: 'calc(100% * (' + data.stats.weggestompte_ballen.toFixed(0) + ' / ' + data.stats_vs.weggestompte_ballen.toFixed(0) + '))' }"></div>
                         <div ng-if="(data.stats.weggestompte_ballen | number:0) > 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="slider-range corner-all" style="width: 80%;"></div>
                         <span ng-if="(data.stats.weggestompte_ballen | number:0) == 0" class="slider-handle corner-all" tabindex="0" style="left: 0;"></span>
-                        <span ng-if="(data.stats_vs.weggestompte_ballen | number:0) > (data.stats.weggestompte_ballen | number:0)" class="slider-handle corner-all" tabindex="0" ng-style="{ left: calc(100% * (' + data.stats.weggestompte_ballen.toFixed(0) + ' / ' + data.stats_vs.weggestompte_ballen.toFixed(0) + '))' }"></span>
+                        <span ng-if="(data.stats_vs.weggestompte_ballen | number:0) > (data.stats.weggestompte_ballen | number:0)" class="slider-handle corner-all" tabindex="0" ng-style="{ left: 'calc(100% * (' + data.stats.weggestompte_ballen.toFixed(0) + ' / ' + data.stats_vs.weggestompte_ballen.toFixed(0) + '))' }"></span>
                         <span ng-if="(data.stats.weggestompte_ballen | number:0) > 0 && (data.stats_vs.weggestompte_ballen | number:0) <= (data.stats.weggestompte_ballen | number:0)" class="slider-handle corner-all" tabindex="0" style="left: 80%;"></span>
                     </div>
                 </div>

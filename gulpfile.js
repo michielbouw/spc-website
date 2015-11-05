@@ -48,6 +48,9 @@ gulp.task('build:resources:prod', function()
     var errors = gulp.src('src/errors/*.html')
         .pipe(gulp.dest('build/errors/'));
 
+    var mailer = gulp.src('src/mailer/*.html')
+        .pipe(gulp.dest('build/mailer/'));
+
     var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
         .pipe(gulp.dest('build/styles/fonts/'));
 
@@ -57,7 +60,7 @@ gulp.task('build:resources:prod', function()
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, fonts, text, images);
+    return es.concat(views, errors, mailer, fonts, text, images);
 });
 
 // Tasks
@@ -110,6 +113,9 @@ gulp.task('build:resources', function()
     var errors = gulp.src('src/errors/*.html')
         .pipe(gulp.dest('build/errors/'));
 
+    var mailer = gulp.src('src/mailer/*.html')
+        .pipe(gulp.dest('build/mailer/'));
+
     var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
         .pipe(gulp.dest('build/styles/fonts/'));
 
@@ -131,7 +137,7 @@ gulp.task('build:resources', function()
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, fonts, text, uploads, uploads2, uploads3, uploads4, images);
+    return es.concat(views, errors, mailer, fonts, text, uploads, uploads2, uploads3, uploads4, images);
 });
 
 gulp.task('build:styles', function()

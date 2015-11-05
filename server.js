@@ -12,6 +12,8 @@ var swig           = require('swig');
 
 var multipart      = require('connect-multiparty');
 
+var mailer         = require('express-mailer');
+
 var morgan         = require("morgan");
 var formage        = require("formage");
 
@@ -49,6 +51,19 @@ app.use(multipart({
     keepExtensions: true
 }));
 
+// mailer for mails from server ============================
+mailer.extend(app, {
+    from: 'contact@mpbeta.nl',
+    host: 'smtp.mijnhostingpartner.nl', // hostname
+    secureConnection: false, // use SSL
+    port: 25, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: 'contact@mpbeta.nl',
+        pass: 'MPBouw-94'
+    }
+});
+
 // Formage MongoDB admin panel =============================
 //formage.init(app, express, require('./app/models'), {
 //    title: 'MongoDB',
@@ -65,8 +80,41 @@ app.get('*', function(req, res) {
 });
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    if (err.status) { console.log(err); res.render('errors/404'); }
-    else { console.log(err); res.render('errors/500'); }
+    if (err.status) {
+        //console.log(err);
+        app.mailer.send('mailer/error', {
+            to: 'contact@mpbeta.nl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+            subject: 'A 404 Error Has Occurred On soccerpc.nl', // REQUIRED.
+            // All additional properties are also passed to the template as local variables.
+            title: 'A 404 Error Has Occurred On soccerpc.nl',
+            error: err
+        }, function (err1) {
+            if (err1) {
+                // handle error
+                console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
+            }
+
+            console.log('Error email send to: contact@mpbeta.nl\n\n' + err);
+        });
+        res.render('errors/404');
+    } else {
+        //console.log(err);
+        app.mailer.send('mailer/error', {
+            to: 'contact@mpbeta.nl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+            subject: 'An Error Has Occurred On soccerpc.nl', // REQUIRED.
+            // All additional properties are also passed to the template as local variables.
+            title: 'An Error Has Occurred On soccerpc.nl',
+            error: err
+        }, function (err1) {
+            if (err1) {
+                // handle error
+                console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
+            }
+
+            console.log('Error email send to: contact@mpbeta.nl\n\n' + err);
+        });
+        res.render('errors/500');
+    }
 });
 
 // add fixtures data =======================================
@@ -74,8 +122,22 @@ app.use(function(err, req, res, next) {
 
 // start localhost =========================================
 app.listen(port, function(err) {
-    if (err)
-        return console.log(err);
+    if (err) {
+        app.mailer.send('mailer/error', {
+            to: 'contact@mpbeta.nl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+            subject: 'An Error Has Occurred On soccerpc.nl', // REQUIRED.
+            // All additional properties are also passed to the template as local variables.
+            title: 'An Error Has Occurred On soccerpc.nl',
+            error: err
+        }, function (err1) {
+            if (err1) {
+                // handle error
+                return console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
+            }
+
+            return console.log('Error email send to: contact@mpbeta.nl\n\n' + err);
+        });
+    }
 
     console.log('Server is live! Btw, port:' + port);
 });

@@ -23,6 +23,18 @@ module.exports = mongoose.model('Spelers', {
     aanvangsdatum: { type: String },
     afmelddatum: { type: String },
 
+    wedstrijden: { type: Number },
+    hele_wedstrijd: { type: Number },
+    ingevallen: { type: Number },
+    vervangen: { type: Number },
+    doelpunten: { type: Number },
+    voorzetten: { type: Number },
+    penalties: { type: Number },
+    minuten: { type: Number },
+    geel: { type: Number },
+    rood: { type: Number },
+    tweede_geel: { type: Number },
+
     editor : {type : String},
     date_edited: { type: Date, default: Date.now, required: true }
 });

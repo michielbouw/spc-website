@@ -24,7 +24,7 @@ module.exports = ImportController = {
         };
         
         fs.readFile(file_path, 'utf8', function handleFile(err, data1) {
-            if (err) throw err;
+            if (err) { console.log(err); throw err; }
             data = JSON.parse(data1);
 
             var datetime = new Date();
@@ -39,9 +39,11 @@ module.exports = ImportController = {
             var speler_profiel_uit;
 
             Spelers.find({clubID: data.wedstrijd_data.thuisTeamID[0]}, function (err, res) {
+                if (err) { console.log(err); throw err; }
                 speler_profiel_thuis = res;
 
                 Spelers.find({clubID: data.wedstrijd_data.uitTeamID[0]}, function (err1, res1) {
+                    if (err) { console.log(err); throw err; }
                     speler_profiel_uit = res1;
 
                     _.delay(function () {
@@ -2276,6 +2278,18 @@ module.exports = ImportController = {
                             else if (match_short.match_info.thuis === 'FC Eindhoven') {
                                 match_short.match_info.thuis_kort = 'Eindhoven';
                             }
+                            else if (match_short.match_info.thuis === 'FC Volendam') {
+                                match_short.match_info.thuis_kort = 'Volendam';
+                            }
+                            else if (match_short.match_info.thuis === 'FC Den Bosch') {
+                                match_short.match_info.thuis_kort = 'Den Bosch';
+                            }
+                            else if (match_short.match_info.thuis === 'SC Telstar') {
+                                match_short.match_info.thuis_kort = 'Telstar';
+                            }
+                            else if (match_short.match_info.thuis === 'VVV-Venlo') {
+                                match_short.match_info.thuis_kort = 'VVV';
+                            }
                             else {
                                 match_short.match_info.thuis_kort = (match_short.match_info.thuis);
                             }
@@ -2288,6 +2302,18 @@ module.exports = ImportController = {
                             }
                             else if (match_short.match_info.uit === 'FC Eindhoven') {
                                 match_short.match_info.uit_kort = 'Eindhoven';
+                            }
+                            else if (match_short.match_info.uit === 'FC Volendam') {
+                                match_short.match_info.uit_kort = 'Volendam';
+                            }
+                            else if (match_short.match_info.uit === 'FC Den Bosch') {
+                                match_short.match_info.uit_kort = 'Den Bosch';
+                            }
+                            else if (match_short.match_info.uit === 'SC Telstar') {
+                                match_short.match_info.uit_kort = 'Telstar';
+                            }
+                            else if (match_short.match_info.uit === 'VVV-Venlo') {
+                                match_short.match_info.uit_kort = 'VVV';
                             }
                             else {
                                 match_short.match_info.uit_kort = (match_short.match_info.uit);
