@@ -36,7 +36,9 @@ module.exports = mongoose.model('MatchData', {
         rugnummer: { type: Number },
         spelerPhoto: { type: String },
         spelerGeboortedatum: { type: String },
-        spelerNationaliteit: { type: String }
+        spelerNationaliteit: { type: String },
+        vervangen: { type: Boolean },
+        ingevallen: { type: Boolean }
     }],
     spelersuitteam: [{
         personID: { type: Number },
@@ -44,7 +46,9 @@ module.exports = mongoose.model('MatchData', {
         rugnummer: { type: Number },
         spelerPhoto: { type: String },
         spelerGeboortedatum: { type: String },
-        spelerNationaliteit: { type: String }
+        spelerNationaliteit: { type: String },
+        vervangen: { type: Boolean },
+        ingevallen: { type: Boolean }
     }],
     alle_spelers: [{
         personID: {type: Number},

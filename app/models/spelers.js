@@ -23,6 +23,8 @@ module.exports = mongoose.model('Spelers', {
     aanvangsdatum: { type: String },
     afmelddatum: { type: String },
 
+    // statistieken
+    laatste_ronde_sync: { type: Number },
     wedstrijden: { type: Number },
     hele_wedstrijd: { type: Number },
     ingevallen: { type: Number },
