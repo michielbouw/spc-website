@@ -5,6 +5,15 @@
   margin-bottom: 0;
   @include border-radius(1px);
 
+  .content-top-title {
+    padding-top: 0px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: $white;
+    background-color: $lightblue;
+  }
+
   #match-info {
     padding-top: 0;
 
@@ -22,9 +31,13 @@
       }
     }
     .extra-info {
-      background-color: $white;
-      color: $black;
-      padding-top: 10px;
+      //background-color: $white;
+      //color: $black;
+      //padding-top: 10px;
+
+      color: $white;
+      background: url('../images/background.jpg') no-repeat center bottom fixed;
+      background-size: cover;
     }
   }
   #match-info-short {
@@ -34,6 +47,7 @@
       margin: 16px;
     }
     .result {
+      color: $white;
       background: $middleblue;
       height: 60px;
 
@@ -60,6 +74,7 @@
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
 }
+
 .page-content.page-content-match {
   margin-top: 0;
 }

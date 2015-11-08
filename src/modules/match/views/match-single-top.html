@@ -87,8 +87,8 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-4 text-center result">
                     <h3>
-                        {{ data.matchshort.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand }})</small>
+                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
+                        <small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small>
                     </h3>
                 </div>
                 <div class="col-md-4 col-sm-3 hidden-xs text-right">
@@ -100,6 +100,16 @@
                 </div>
                 </div>
                 <div class="row extra-info">
+                    <div class="col-xs-12">
+                        <h4 style="text-transform: capitalize; text-align: justify; text-justify: inter-word;">
+                            {{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}
+                            &nbsp;&nbsp;&#183;&#183;&nbsp;&nbsp;ronde {{ data.matchshort.match_info.ronde }}
+                            &nbsp;&nbsp;&#183;&#183;&nbsp;&nbsp;<img src="images/referee.svg" height="22px"> {{ data.matchshort.match_info.scheids }}
+                            <span ng-if="data.matchshort.match_info.toeschouwers || data.matchshort.match_info.locatie">&nbsp;&nbsp;&#183;&#183;&nbsp;&nbsp;<i class="fa fa-group"></i> {{ data.matchshort.match_info.locatie }} ({{ data.matchshort.match_info.toeschouwers }})</span>
+                        </h4>
+                    </div>
+                </div>
+                <!--<div class="row extra-info">
                 <div class="col-xs-12 text-left">
                     <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
                         <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
@@ -107,7 +117,7 @@
                     <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br ng-if="data.matchshort.match_info.locatie">
                     <small ng-if="data.matchshort.match_info.locatie"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.locatie }}</small>
                 </div>
-                </div>
+                </div>-->
             </div>
             <div id="match-info-short">
                 <div class="col-md-1 col-sm-2 col-xs-4 no-padding text-center">
@@ -119,8 +129,8 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-4 text-center result">
                     <h3>
-                        {{ data.matchshort.match_info.eindstand }}<br>
-                        <small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand }})</small>
+                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
+                        <small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small>
                     </h3>
                 </div>
                 <div class="col-md-4 col-sm-3 hidden-xs text-right">

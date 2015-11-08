@@ -27,10 +27,13 @@ html {
 body {
   height: calc(100% - 65px);
   color: $primary-color;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-stack;
   background-color: $background;
-  background-image: url('../images/soccer-field.png');
-  background-position: right top;
+  //background-image: url('../images/soccer-field.png');
+  background-image: url('../images/background.jpg');
+  //background-position: right top;
+  background-position: center bottom;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -59,29 +62,36 @@ body {
 }
 
 .btn-primary {
-  color: #fff;
+  color: $white;
   background-color: $darkblue;
-  border-color: #2e6da4;
+  border-color: $middleblue;
 }
 
 .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  color: $white;
+  background-color: $lightblue;
+  border-color: $lightblue;
 }
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
-  color: #fff;
-  background-color: $darkblue;
+  color: $white;
+  background-color: $lightblue;
 }
 
 .nav>li>a:focus, .nav>li>a:hover {
-  text-decoration: none;
-  background-color: $backgroundlight;
+  color: $white;
+  background-color: $lightblue;
 }
 
 .navbar-toggle {
   margin-right: 0px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 1.1;
+  color: inherit;
 }
 
 a {
@@ -143,27 +153,33 @@ Standard layout
 }
 
 .navbar-sub {
+  color: $white;
+  font-weight: bold;
   padding: 0;
   top: 75px;
   position: fixed;
   overflow-y: auto;
 
   .item-title, .item-title a {
+    color: $white;
     font-size: 12px;
     text-transform: uppercase;
-    color: $blue;
+    //color: $blue;
     margin: 18px 0 4px 2px;
   }
   .nav-pills > li > a {
+    color: $white;
     border-radius: 15px;
     font-size: 13px;
   }
   .nav > li > a {
+    color: $white;
     position: relative;
     display: block;
     padding: 3px 10px;
   }
   .nav > li > a .caret {
+    color: $white;
     display: none;
   }
   .nav-pills > li.active > a .caret {
@@ -196,8 +212,10 @@ Standard layout
     }
   }
   .submenu.nav-pills > li.active > a {
-    color: $darkblue;
-    background-color: transparent;
+    background-color: $lightblue;
+    color: $white;
+    //color: $darkblue;
+    //background-color: transparent;
   }
 }
 
@@ -252,9 +270,13 @@ Standard layout
 .intro-box {
   background-color: $background;
   color: $primary-color;
-  background-image: url('../images/soccer-field.png');
-  background-position: right top;
+  //background-image: url('../images/soccer-field.png');
+  background-image: url('../images/background.jpg');
+  //background-position: right top;
+  background-position: center bottom;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   min-height: 60vh;
   position: fixed;
   top: 0;
@@ -311,7 +333,7 @@ Standard layout
 }
 
 .page-top {
-  padding-top: 10px;
+  padding-top: 20px;
   margin-top: 65px;
   top: 0;
   left: 0;
@@ -319,7 +341,7 @@ Standard layout
   z-index: 100;
 }
 .page-content {
-  margin-top: 10px;
+  margin-top: 0px;
   overflow: hidden;
 }
 
@@ -405,17 +427,17 @@ Standard layout
 }
 
 .content.content-page {
+  color: $middleblue;
   min-height: 60vh;
   padding-bottom: 15px;
 
   .content-page-title {
-    color: $primary-color;
-    background-color: $backgroundlight;
-    border-bottom: 1px solid #ddd;
     padding-top: 0px;
     padding-bottom: 10px;
     margin-top: 0;
     margin-bottom: 15px;
+    color: $white;
+    background-color: $lightblue;
 
     img {
     }
@@ -438,12 +460,12 @@ Standard layout
 }
 
 .content.content-page-full {
-  margin-top: 75px;
+  margin-top: 85px;
   min-height: calc(100vh - 225px);
 }
 
 .content.content-page-full-spelers {
-  margin-top: 75px;
+  margin-top: 85px;
   min-height: calc(100vh - 225px);
 
   div.spelers-table {

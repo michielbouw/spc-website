@@ -12,6 +12,7 @@ angular.module('mainapp.players')
         self.stats = {};
         self.stats_vs = {};
         self.vs = '.. kies ..';
+        $scope.rounds = [1, 1];
 
         if ((!$routeParams.playerid || $routeParams.playerid === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/spelers/' + $rootScope.currentClub.teams[0].team_slug);
@@ -82,20 +83,44 @@ angular.module('mainapp.players')
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                     statslength = self.season_matches.length;
                 }
-                $scope.round = temp1;
+                $scope.rounds = [temp0, temp1];
 
                 // set match to last on rounds interval
-                self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+                self.match = $filter('filter')(self.season_matches, {ronde: $scope.rounds[1]}, true)[0];
 
                 $timeout(function () {
                     angular.element(document).ready(function () {
                         $('.slider-control .slider').slider({
+                            range: true,
                             min: temp0,
-                            value: $scope.round
+                            values: $scope.rounds
                         });
-                        $('.content-players-select .round').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-range').width() );
+                        $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
+                        $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round0').width() - 0.5 * $('.content-players-select .round1').width() );
                     });
                 }, 400);
+
+                if (temp0 == temp1) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - temp0) <= 0) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - 5) <= 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [1];
+                        $scope.rounds.push(temp1);
+                    }
+                } else if ((temp1 - 5) > 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [temp1 - 5];
+                        $scope.rounds.push(temp1);
+                    }
+                } else {
+                    $scope.rounds = [1, 1];
+                }
 
                 self.vs = self.playerID;
                 self.vs_info = 'Gemiddelde seizoen';
@@ -105,8 +130,11 @@ angular.module('mainapp.players')
             });
         }
 
+        self.roundsfilterfrom = function () {
+            return $scope.rounds[0];
+        };
         self.roundfilter = function () {
-            return $scope.round;
+            return $scope.rounds[1];
         };
 
         self.seasonInitFunc = function () {
@@ -148,20 +176,44 @@ angular.module('mainapp.players')
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                     statslength = self.season_matches.length;
                 }
-                $scope.round = temp1;
+                $scope.rounds = [temp0, temp1];
 
                 // set match to last on rounds interval
-                self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+                self.match = $filter('filter')(self.season_matches, {ronde: $scope.rounds[1]}, true)[0];
 
                 $timeout(function () {
                     angular.element(document).ready(function () {
                         $('.slider-control .slider').slider({
+                            range: true,
                             min: temp0,
-                            value: $scope.round
+                            values: $scope.rounds
                         });
-                        $('.content-players-select .round').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-range').width() );
+                        $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
+                        $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round0').width() - 0.5 * $('.content-players-select .round1').width() );
                     });
                 }, 400);
+
+                if (temp0 == temp1) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - temp0) <= 0) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - 5) <= 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [1];
+                        $scope.rounds.push(temp1);
+                    }
+                } else if ((temp1 - 5) > 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [temp1 - 5];
+                        $scope.rounds.push(temp1);
+                    }
+                } else {
+                    $scope.rounds = [1, 1];
+                }
 
                 self.vs = self.playerID;
                 self.vs_info = 'Gemiddelde seizoen';
@@ -785,10 +837,11 @@ angular.module('mainapp.players')
 
         $scope.$watch('round', function() {
             $timeout(function () {
-                $('.content-players-select .round').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-range').width() );
-            }, 0);
+                $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
+                $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round0').width() - 0.5 * $('.content-players-select .round1').width() );
+            }, 400);
 
-            self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+            self.match = $filter('filter')(self.season_matches, {ronde: self.roundfilter()}, true)[0];
 
             $timeout(function () {
                 if (self.season_matches.length > 0) {

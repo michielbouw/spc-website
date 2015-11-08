@@ -10,6 +10,7 @@ angular.module('mainapp.club')
         self.stats = {};
         self.stats_vs = {};
         self.vs = '.. kies ..';
+        $scope.rounds = [1, 1];
 
         if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/club/' + $rootScope.currentClub.teams[0].team_slug);
@@ -53,19 +54,43 @@ angular.module('mainapp.club')
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                     statslength = self.season_matches.length;
                 }
-                $scope.round = temp1;
+                $scope.rounds = [temp0, temp1];
 
-                self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+                self.match = $filter('filter')(self.season_matches, {ronde: $scope.rounds[1]}, true)[0];
 
                 $timeout(function () {
                     angular.element(document).ready(function () {
                         $('.slider-control .slider').slider({
+                            range: true,
                             min: temp0,
-                            value: $scope.round
+                            values: $scope.rounds
                         });
-                        $('.content-club-select .round').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-range').width() );
+                        $('.content-club-select .round0').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width() );
+                        $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round0').width() - 0.5 * $('.content-club-select .round1').width() );
                     });
                 }, 400);
+
+                if (temp0 == temp1) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - temp0) <= 0) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - 5) <= 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [1];
+                        $scope.rounds.push(temp1);
+                    }
+                } else if ((temp1 - 5) > 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [temp1 - 5];
+                        $scope.rounds.push(temp1);
+                    }
+                } else {
+                    $scope.rounds = [1, 1];
+                }
 
                 self.vs = 'Gemiddelde seizoen';
                 self.vsInitFunc();
@@ -89,19 +114,43 @@ angular.module('mainapp.club')
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                 }
-                $scope.round = temp1;
+                $scope.rounds = [temp0, temp1];
 
-                self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+                self.match = $filter('filter')(self.season_matches, {ronde: $scope.rounds[1]}, true)[0];
 
                 $timeout(function () {
                     angular.element(document).ready(function () {
                         $('.slider-control .slider').slider({
+                            range: true,
                             min: temp0,
-                            value: $scope.round
+                            values: $scope.rounds
                         });
-                        $('.content-club-select .round').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-range').width() );
+                        $('.content-club-select .round0').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width() );
+                        $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round0').width() - 0.5 * $('.content-club-select .round1').width() );
                     });
                 }, 400);
+
+                if (temp0 == temp1) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - temp0) <= 0) {
+                    $scope.rounds = [temp0, temp1];
+                } else if ((temp1 - 5) <= 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [1];
+                        $scope.rounds.push(temp1);
+                    }
+                } else if ((temp1 - 5) > 0) {
+                    if (temp1 - temp0 < 4) {
+                        $scope.rounds = [temp0, temp1];
+                    } else {
+                        $scope.rounds = [temp1 - 5];
+                        $scope.rounds.push(temp1);
+                    }
+                } else {
+                    $scope.rounds = [1, 1];
+                }
             }
         };
 
@@ -352,16 +401,20 @@ angular.module('mainapp.club')
         self.vs = 'Gemiddeld team';
         self.vsInitFunc();
 
+        self.roundsfilterfrom = function () {
+            return $scope.rounds[0];
+        };
         self.roundfilter = function () {
-            return $scope.round;
+            return $scope.rounds[1];
         };
 
-        $scope.$watch('round', function() {
+        $scope.$watch('rounds', function() {
             $timeout(function () {
-                $('.content-club-select .round').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-range').width() );
-            }, 0);
+                $('.content-club-select .round0').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width() );
+                $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round0').width() - 0.5 * $('.content-club-select .round1').width() );
+            }, 400);
 
-            self.match = $filter('filter')(self.season_matches, {ronde: $scope.round}, true)[0];
+            self.match = $filter('filter')(self.season_matches, {ronde: self.roundfilter()}, true)[0];
 
             $timeout(function () {
                 if (self.season_matches.length > 0) {

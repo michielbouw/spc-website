@@ -1833,7 +1833,7 @@ module.exports = ImportController = {
                                             forEach(_.where(speler_profiel_thuis, {spelerID: value1.personID}), function (value2, key2) {
                                                 if (value2.seizoen === 'Seizoen ' + items.seizoen) {
                                                     if (!value2.spelerRugnummer) {
-                                                        value2.spelerRugnummer = temp.rugnummer;
+                                                        value2.spelerRugnummer = temp.spelerRugnummer;
                                                     }
                                                     if (!value2.spelerType) {
                                                         value2.spelerType = temp.type;
@@ -1843,11 +1843,16 @@ module.exports = ImportController = {
                                                     var vervangen = 0;
                                                     if (value1.ingevallen) ingevallen = 1;
                                                     if (value1.vervangen) vervangen = 1;
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) var doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) var voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) var minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) var geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) var rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
+                                                    var doelpunten = 0;
+                                                    var voorzetten = 0;
+                                                    var minuten = 0;
+                                                    var geel = 0;
+                                                    var rood = 0;
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
                                                     if (!value2.laatste_ronde_sync || value2.laatste_ronde_sync == null || value2.laatste_ronde_sync === "null" || value2.laatste_ronde_sync === undefined) {
                                                         Spelers.update({
@@ -1907,11 +1912,16 @@ module.exports = ImportController = {
                                                 var vervangen = 0;
                                                 if (value1.ingevallen) ingevallen = 1;
                                                 if (value1.vervangen) vervangen = 1;
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) var doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) var voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) var minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) var geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) var rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
+                                                var doelpunten = 0;
+                                                var voorzetten = 0;
+                                                var minuten = 0;
+                                                var geel = 0;
+                                                var rood = 0;
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
@@ -1944,11 +1954,16 @@ module.exports = ImportController = {
                                             var vervangen = 0;
                                             if (value1.ingevallen) ingevallen = 1;
                                             if (value1.vervangen) vervangen = 1;
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) var doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) var voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) var minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) var geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) var rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
+                                            var doelpunten = 0;
+                                            var voorzetten = 0;
+                                            var minuten = 0;
+                                            var geel = 0;
+                                            var rood = 0;
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
                                             Spelers.create({
                                                 spelerID: Number_converter(value1.personID),
@@ -2293,7 +2308,7 @@ module.exports = ImportController = {
                                             forEach(_.where(speler_profiel_uit, {spelerID: value1.personID}), function (value2, key2) {
                                                 if (value2.seizoen === 'Seizoen ' + items.seizoen) {
                                                     if (!value2.spelerRugnummer) {
-                                                        value2.spelerRugnummer = temp.rugnummer;
+                                                        value2.spelerRugnummer = temp.spelerRugnummer;
                                                     }
                                                     if (!value2.spelerType) {
                                                         value2.spelerType = temp.type;
@@ -2303,11 +2318,16 @@ module.exports = ImportController = {
                                                     var vervangen = 0;
                                                     if (value1.ingevallen) ingevallen = 1;
                                                     if (value1.vervangen) vervangen = 1;
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) var doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) var voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) var minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) var geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) var rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
+                                                    var doelpunten = 0;
+                                                    var voorzetten = 0;
+                                                    var minuten = 0;
+                                                    var geel = 0;
+                                                    var rood = 0;
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
+                                                    if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
                                                     if (!value2.laatste_ronde_sync || value2.laatste_ronde_sync == null || value2.laatste_ronde_sync === "null" || value2.laatste_ronde_sync === undefined) {
                                                         Spelers.update({
@@ -2367,11 +2387,16 @@ module.exports = ImportController = {
                                                 var vervangen = 0;
                                                 if (value1.ingevallen) ingevallen = 1;
                                                 if (value1.vervangen) vervangen = 1;
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) var doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) var voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) var minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) var geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) var rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
+                                                var doelpunten = 0;
+                                                var voorzetten = 0;
+                                                var minuten = 0;
+                                                var geel = 0;
+                                                var rood = 0;
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
+                                                if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
@@ -2404,11 +2429,16 @@ module.exports = ImportController = {
                                             var vervangen = 0;
                                             if (value1.ingevallen) ingevallen = 1;
                                             if (value1.vervangen) vervangen = 1;
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) var doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) var voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) var minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) var geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) var rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
+                                            var doelpunten = 0;
+                                            var voorzetten = 0;
+                                            var minuten = 0;
+                                            var geel = 0;
+                                            var rood = 0;
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
+                                            if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
                                             Spelers.create({
                                                 spelerID: Number_converter(value1.personID),

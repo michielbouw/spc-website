@@ -20,8 +20,9 @@
             </div>
         </div>
         <div class="col-xs-12 content-players-select">
-            <div class="round">ronde {{ data.match.ronde }}</div>
-            <statssliderclub model="round"></statssliderclub>
+            <div class="round0" ng-if="rounds[0] != rounds[1]">{{ rounds[0] }}</div>
+            <div class="round1">{{ rounds[1] }}</div>
+            <statssliderclub model="rounds"></statssliderclub>
         </div>
         <div class="col-xs-12 col-sm-2 content-players-left">
             <span class="tag" ng-if="data.player_stats.spelerType == 'keeper'"><strong>Keeper</strong></span>

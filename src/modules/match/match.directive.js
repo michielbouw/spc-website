@@ -81,7 +81,7 @@ angular.module('mainapp.match')
                                     $("#match-select").show();
                                     $(".page-top").css({
                                         'position': 'relative',
-                                        'padding-top': '10px',
+                                        'padding-top': '20px',
                                         'background-color': 'transparent',
                                         'border-bottom': 'none',
                                         '-webkit-box-shadow': 'none',

@@ -2,7 +2,79 @@
 
 nav#navbar-main {
   background-color: $white;
+  border: none;
 
+  .navbar-toggle {
+    @media (max-width: 767px) { margin-top: 16px; }
+    @media (max-width: 480px) {  }
+  }
+}
+.navbar-brand img {
+  display: inline-block !important;
+  height: 55px !important;
+  width: auto !important;
+}
+.navbar-brand span {
+  @media (max-width: 480px) { display: none; }
+}
+.navbar-brand {
+  color: $middleblue !important;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 65px;
+  height: 65px;
+  padding: 0;
+  margin: 0 16px 0 0 !important;
+}
+.navbar-brand:hover, .navbar-brand:focus {
+  color: $middleblue !important;
+  border-bottom: $lightblue 4px solid;
+}
+.navbar-nav > li {
+  padding: 0 16px;
+}
+.navbar-nav > li > a {
+  padding: 0;
+}
+.navbar-nav {
+  li {
+    a {
+      color: $middleblue !important;
+      font-size: 17px;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height: 65px;
+      height: 65px;
+      padding: 0;
+    }
+    a:hover, a:focus {
+      background-color: $white !important;
+      color: $middleblue !important;
+      border-bottom: $lightblue 4px solid;
+    }
+  }
+  .dropdown-menu {
+    border: none;
+    padding: 0;
+    li {
+      padding: 0 16px;
+      a {
+        color: $middleblue !important;
+        font-size: 17px;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 40px;
+        height: 40px;
+        padding: 0;
+      }
+      a:hover, a:focus {
+        background-color: $white !important;
+        color: $middleblue !important;
+        border-bottom: $lightblue 4px solid;
+      }
+    }
+  }
   img {
     display: inline-block;
     height: 30px;
@@ -11,29 +83,63 @@ nav#navbar-main {
     @media (max-width: 767px) {  }
     @media (max-width: 480px) { display: none; }
   }
-  .navbar-toggle {
-    @media (max-width: 767px) { margin-top: 16px; }
-    @media (max-width: 480px) {  }
+}
+.navbar-right {
+  li {
+    padding: 0 16px;
+    a {
+      color: $middleblue !important;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 65px;
+      height: 65px;
+      padding: 0;
+    }
+    a:hover, a:focus {
+      background-color: $white !important;
+      color: $middleblue !important;
+      border-bottom: $lightblue 4px solid;
+    }
+  }
+  .dropdown-menu {
+    border: none;
+    padding: 0;
+    li {
+      padding: 0 15px;
+      a {
+        color: $middleblue !important;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 40px;
+        height: 40px;
+        padding: 0;
+      }
+      a:hover, a:focus {
+        background-color: $white !important;
+        color: $middleblue !important;
+        border-bottom: $lightblue 4px solid;
+      }
+    }
+  }
+  img {
+    display: inline-block;
+    height: 25px;
+    width: auto;
+
+    @media (max-width: 767px) {  }
+    @media (max-width: 480px) { display: none; }
   }
 }
-.navbar-brand img {
-  display: inline-block !important;
-  height: 60px !important;
-  width: auto !important;
+.navbar-nav > li.active > a {
+  background-color: $white !important;
+  color: $middleblue !important;
+  border-bottom: $lightblue 4px solid;
 }
-.navbar-brand span {
-  @media (max-width: 480px) { display: none; }
-}
-.navbar-brand,
-.navbar-nav li a {
-  line-height: 65px;
-  height: 65px;
-  padding-top: 0;
-}
-.navbar-nav .dropdown-menu li a {
-  line-height: 40px;
-  height: 40px;
-  padding-top: 0;
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: $white !important;
+  color: $middleblue !important;
 }
 
 /********************************************************

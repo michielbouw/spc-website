@@ -66,15 +66,15 @@ angular.module('mainapp.players')
             link: function (scope, element, attrs) {
                 $timeout(function () {
                     $('.slider-control .slider').slider({
-                        range: "min",
+                        range: true,
                         min: 1,
                         max: 38,
                         step: 1,
-                        value: scope.model,
+                        values: scope.model,
                         slide: function( event, ui ) {
                             event.stopPropagation();
                             scope.$apply(function() {
-                                scope.model = ui.value;
+                                scope.model = ui.values;
                             });
                         }
                     });

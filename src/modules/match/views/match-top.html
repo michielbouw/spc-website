@@ -14,7 +14,7 @@
             <div class="item-title">Analyse</div>
             <ul id="nav-sub" class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a href="/wedstrijd" scroll-to="top"><i class="fa fa-soccer-ball-o"></i> Wedstrijd</a></li>
-                <li role="presentation"><a href="/spelers" scroll-to="top"><i class="fa fa-user"></i> Spelers</a></li>
+                <!--<li role="presentation"><a href="/spelers" scroll-to="top"><i class="fa fa-user"></i> Spelers</a></li>-->
                 <!--<li role="presentation"><a href="/extra" scroll-to="top"><i class="fa fa-plus"></i> Extra analyse</a></li>-->
                 <!--<li role="presentation"><a href="/training" scroll-to="top"><i class="fa fa-steam"></i> Training</a></li>-->
             </ul>
@@ -22,37 +22,35 @@
     </div>
 
     <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12 content content-top">
-        <div class="col-xs-12">
-            <div class="col-xs-12">
-                <h2 class="hidden-sm hidden-xs">Soccer performance</h2>
-                <h4>Wedstrijd rapport</h4>
-            </div>
-            <div class="col-xs-12 text-center"><h4>Seizoen kiezen</h4></div>
-            <div id="season-select" class="col-xs-12">
-                <br>
-                <select ng-model="data.season_index" class="form-control input-sm"
-                        ng-change="data.seasonInitFunc()">
-                    <option>2015-2016</option>
-                    <option>2014-2015 Play-offs</option>
-                    <option>2014-2015</option>
-                    <option>2013-2014 Play-offs</option>
-                    <option>2013-2014</option>
-                </select>
-                <br>
-            </div>
-            <div class="col-xs-12 text-center" ng-show="data.season_index"><h4>Wedstrijd kiezen</h4></div>
-            <div id="match-select" class="col-xs-12" ng-show="data.season_index">
-                <br>
-                <select ng-model="data.match_index" class="form-control input-sm"
-                        ng-change="data.matchInitFunc()"
-                        ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in data.season_matches">
-                </select>
-                <br>
-            </div>
-            <div class="col-xs-12 text-center" ng-show="data.match_index">
-                <button class="btn btn-xs btn-info"><a ng-href="/wedstrijd/{{ data.match_index }}">Ga naar deze wedstrijd</a></button>
-                <br><br>
-            </div>
+        <div class="col-xs-12 content-top-title">
+            <h3 class="hidden-sm hidden-xs">Wedstrijd rapport</h3>
+            <h4 class="hidden-lg hidden-md">Wedstrijd rapport</h4>
+        </div>
+        <div class="col-xs-12 text-center"><h4>Seizoen kiezen</h4></div>
+        <div id="season-select" class="col-xs-12">
+            <br>
+            <select ng-model="data.season_index" class="form-control input-sm"
+                    ng-change="data.seasonInitFunc()">
+                <option>2015-2016</option>
+                <option>2014-2015 Play-offs</option>
+                <option>2014-2015</option>
+                <option>2013-2014 Play-offs</option>
+                <option>2013-2014</option>
+            </select>
+            <br>
+        </div>
+        <div class="col-xs-12 text-center" ng-show="data.season_index"><h4>Wedstrijd kiezen</h4></div>
+        <div id="match-select" class="col-xs-12" ng-show="data.season_index">
+            <br>
+            <select ng-model="data.match_index" class="form-control input-sm"
+                    ng-change="data.matchInitFunc()"
+                    ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in data.season_matches">
+            </select>
+            <br>
+        </div>
+        <div class="col-xs-12 text-center" ng-show="data.match_index">
+            <button class="btn btn-xs btn-info"><a ng-href="/wedstrijd/{{ data.match_index }}">Ga naar deze wedstrijd</a></button>
+            <br><br>
         </div>
     </div>
 </div>
