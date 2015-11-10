@@ -2,6 +2,7 @@ var fs          = require('fs');
 var mongoose    = require('mongoose');
 var _           = require('underscore');
 var forEach     = require('array-foreach');
+var Buffer      = require('buffer').Buffer;
 
 var Club        = require('../models/club');
 var MatchData   = require('../models/match_data');
@@ -1833,7 +1834,7 @@ module.exports = ImportController = {
                                             forEach(_.where(speler_profiel_thuis, {spelerID: value1.personID}), function (value2, key2) {
                                                 if (value2.seizoen === 'Seizoen ' + items.seizoen) {
                                                     if (!value2.spelerRugnummer) {
-                                                        value2.spelerRugnummer = temp.spelerRugnummer;
+                                                        value2.spelerRugnummer = Number_converter((value1.rugnummer));
                                                     }
                                                     if (!value2.spelerType) {
                                                         value2.spelerType = temp.type;
@@ -2308,7 +2309,7 @@ module.exports = ImportController = {
                                             forEach(_.where(speler_profiel_uit, {spelerID: value1.personID}), function (value2, key2) {
                                                 if (value2.seizoen === 'Seizoen ' + items.seizoen) {
                                                     if (!value2.spelerRugnummer) {
-                                                        value2.spelerRugnummer = temp.spelerRugnummer;
+                                                        value2.spelerRugnummer = Number_converter((value1.rugnummer));
                                                     }
                                                     if (!value2.spelerType) {
                                                         value2.spelerType = temp.type;

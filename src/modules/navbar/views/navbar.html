@@ -26,8 +26,8 @@
                     <li ng-if="isLogged() && currentUser.role !== 'admin' && currentUser.role == 'club-beheer'"><a href="/user">Beheer</a></li>
                     <li ng-if="isLogged() && currentUser.role !== 'admin'" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img ng-if="currentUser.speler_id" ng-src="media/players/{{ currentUser.speler_id }}.jpg" on-error-src="images/blank-avatar.png">
-                            <img ng-if="!currentUser.speler_id" src="images/blank-avatar.png">
+                            <img ng-if="currentUser.speler_id" ng-src="media/players/{{ currentUser.speler_id }}.jpg" on-error-src="images/blank-avatar-square.png">
+                            <img ng-if="!currentUser.speler_id" src="images/blank-avatar-square.png">
                             {{ currentUser.first_name }} {{ currentUser.middle_name }} {{ currentUser.last_name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
@@ -38,8 +38,8 @@
                     <li ng-if="isLogged() && currentUser.role == 'admin'"><a href="/admin">Admin</a></li>
                     <li ng-if="isLogged() && currentUser.role == 'admin'" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img ng-if="currentUser.speler_id" ng-src="media/players/{{ currentUser.speler_id }}.jpg" on-error-src="images/blank-avatar.png">
-                            <img ng-if="!currentUser.speler_id" src="images/blank-avatar.png">
+                            <img ng-if="currentUser.speler_id" ng-src="media/players/{{ currentUser.speler_id }}.jpg" on-error-src="images/blank-avatar-square.png">
+                            <img ng-if="!currentUser.speler_id" src="images/blank-avatar-square.png">
                             {{ currentUser.first_name }} {{ currentUser.middle_name }} {{ currentUser.last_name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">

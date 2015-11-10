@@ -1,5 +1,7 @@
 var fs = require('fs');
 var fsextra = require ('fs-extra');
+var Buffer = require('buffer').Buffer;
+var Iconv  = require('iconv').Iconv;
 var im = require('imagemagick');
 var ImportController = require('../controllers/ImportController');
 
@@ -181,8 +183,21 @@ UploadController.prototype.uploadFile = function(req, res) {
                 fs.readFile(tmp_path, 'binary', function (err, data) {
                     if (err) { console.log(err); throw err; }
 
-                    fs.writeFile(target_path, data, 'utf8', function (err) {
+                    //var buffer0 = new Buffer(data);
+                    //var iconv = new Iconv('UTF-16LE', 'UTF-8//TRANSLIT//IGNORE');
+                    //var conv = iconv.convert(buffer0).toString('utf8');
+                    //var buffer = new Buffer(conv);
+
+                    fs.writeFile(target_path, data, 'utf16le', function (err) {
                         if (err) { console.log(err); throw err; }
+
+                        //var text = fs.readFileSync(target_path, 'utf8');
+                        //fs.writeFileSync(target_path, text, 'utf8');
+
+                        var text = fs.readFileSync(target_path);
+                        var iconv = new Iconv('UTF-16LE', 'UTF-8//TRANSLIT//IGNORE');
+                        var buffer = new Buffer(iconv.convert(text));
+                        fs.writeFileSync(target_path, buffer, 'utf8');
 
                         fs.unlink(tmp_path, function () {
                             if (err) { console.log(err); throw err; }
@@ -198,8 +213,21 @@ UploadController.prototype.uploadFile = function(req, res) {
                 fs.readFile(tmp_path, 'binary', function (err, data) {
                     if (err) { console.log(err); throw err; }
 
-                    fs.writeFile(target_path, data, 'utf8', function (err) {
+                    //var buffer0 = new Buffer(data);
+                    //var iconv = new Iconv('UTF-16', 'UTF-8//TRANSLIT//IGNORE');
+                    //var conv = iconv.convert(buffer0).toString('utf8');
+                    //var buffer = new Buffer(conv);
+
+                    fs.writeFile(target_path, data, 'utf16le', function (err) {
                         if (err) { console.log(err); throw err; }
+
+                        //var text = fs.readFileSync(target_path, 'utf8');
+                        //fs.writeFileSync(target_path, text, 'utf8');
+
+                        var text = fs.readFileSync(target_path);
+                        var iconv = new Iconv('UTF-16LE', 'UTF-8//TRANSLIT//IGNORE');
+                        var buffer = new Buffer(iconv.convert(text));
+                        fs.writeFileSync(target_path, buffer, 'utf8');
 
                         fs.unlink(tmp_path, function () {
                             if (err) { console.log(err); throw err; }
