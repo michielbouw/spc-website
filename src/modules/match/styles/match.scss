@@ -460,6 +460,107 @@
     content: "\21ea";
   }
 
+  .penalty-visualisatie {
+    color: $white;
+    background: url('../images/background.jpg') no-repeat center bottom;
+    background-size: cover;
+    position: relative;
+    margin: 0;
+    margin-top: -15px;
+    padding: 0;
+    //margin-bottom: -20px;
+
+    .div {
+      height: 100%;
+    }
+    small {
+      color: inherit;
+      font-size: 45%;
+      font-weight: bold;
+    }
+    h1 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      line-height: 0.5;
+    }
+    .grey {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .links {
+      border-left: $white 10px solid;
+    }
+    .boven {
+      border-top: $white 10px solid;
+    }
+    .onder {
+      border-bottom: $white 10px solid;
+    }
+    .rechts {
+      border-right: $white 10px solid;
+    }
+    .links-dot {
+      border-left: $white 1px dashed;
+    }
+    .rechts-dot {
+      border-right: $white 1px dashed;
+    }
+    .boven-dot {
+      border-top: $white 1px dashed;
+    }
+    .arrow-down-after:before {
+      content: "";
+      border-left: $white 1px solid;
+      height: 20%;
+      position: absolute;
+      top: 80%;
+      left: 40%;
+    }
+    .arrow-down-after:after {
+      content: ' \25CF';
+      font-size: 21px;
+      color: $lightblue;
+      position: absolute;
+      top: calc(80% + 7px);
+      left: calc(40% - 6px);
+      z-index: 1;
+    }
+    .arrow-left-after:before {
+      content: '';
+      border-bottom: $white 1px solid;
+      width: 20%;
+      position: absolute;
+      top: 50%;
+      right: 0;
+    }
+    .arrow-left-after:after {
+      content: ' \25CF';
+      font-size: 21px;
+      color: #1d8acf;
+      position: absolute;
+      top: calc(50% - 15px);
+      right: -9px;
+      z-index: 1;
+    }
+    .arrow-right-after:before {
+      content: "";
+      border-bottom: $white 1px solid;
+      width: 20%;
+      position: absolute;
+      top: 50%;
+      left: 0;
+    }
+    .arrow-right-after:after {
+      content: ' \25CF';
+      font-size: 21px;
+      color: $lightblue;
+      position: absolute;
+      top: calc(50% - 15px);
+      left: -9px;
+      z-index: 1;
+    }
+  }
+
   .overtredingen_field {
     p {
       cursor: pointer;

@@ -2510,56 +2510,266 @@
         </div>
         <div ng-if="!data.match.penalty_visualisatie || data.match.penalty_visualisatie.length <= 0 || data.match.penalty_visualisatie[0] == -999"
              class="stat-table penalty_visualisatie"><div class="col-xs-12">Geen penalties gemaakt</div></div>
-        <div ng-if="data.match.penalty_visualisatie.length > 0 && data.match.penalty_visualisatie[0] !== -999"
-             class="stat-table penalty_visualisatie">
-            <div class="col-xs-8 col-xs-offset-2 col-lg-6 col-lg-offset-3" ng-repeat="penalty in data.match.penalty_visualisatie"
-                    style="margin-top: 15px; margin-bottom: 15px;">
-                <img src="images/penalty.png" class="img-responsive">
-                <span ng-if="penalty.linkerpaal" style="position: absolute; top: 0; left: 0; width: 4%; height: 60%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.linkerpaal" style="font-size: xx-large; position: absolute; left: 0; top: 30%;"><i class="fa fa-soccer-ball-o"></i></span>
-                <span ng-if="penalty.rechterpaal" style="position: absolute; top: 0; right: 0; width: 4%; height: 60%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.rechterpaal" style="font-size: xx-large; position: absolute; right: 0; top: 30%;"><i class="fa fa-soccer-ball-o"></i></span>
-                <span ng-if="penalty.lat" style="position: absolute; top: 0; left: 0; width: 100%; height: 4%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.lat" style="font-size: xx-large; position: absolute; left: 50%; top: 0;"><i class="fa fa-soccer-ball-o"></i></span>
-                <span ng-if="penalty.links && penalty.naastover" style="font-size: xx-large; position: absolute; left: -5%; top: 30%;"><i class="fa fa-soccer-ball-o"></i></span>
-                <span ng-if="penalty.rechts && penalty.naastover" style="font-size: xx-large; position: absolute; right: -5%; top: 30%;"><i class="fa fa-soccer-ball-o"></i></span>
-                <span ng-if="penalty.midden && penalty.naastover" style="font-size: xx-large; position: absolute; top: -9%; left: 50%;"><i class="fa fa-soccer-ball-o"></i></span>
 
-                <span ng-if="penalty.hoog && penalty.links && penalty.gescoord" style="position: absolute; top: 5%; left: 6%; width: 28%; height: 30%; background: green; opacity: 0.5;"></span>
-                <span ng-if="penalty.hoog && penalty.links && penalty.gestopt" style="position: absolute; top: 5%; left: 6%; width: 28%; height: 30%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.hoog && penalty.links" style="font-size: xx-large; position: absolute; left: 20%; top: 15%;"><i class="fa fa-soccer-ball-o"></i></span>
+        <div ng-if="data.match.penalty_visualisatie.length > 0 && data.match.penalty_visualisatie[0] !== -999 && data.match.penalty_thuis.count"
+             class="col-xs-12 no-padding penalty-visualisatie" ng-init="no_pen = data.match.penalty_visualisatie.length">
+            <div class="row">
+            <div class="col-xs-3 no-padding">
+                &nbsp;
+            </div>
+            <div class="col-xs-6 no-padding text-center links-dot rechts-dot">
+                &nbsp;
+                <h4>PENALTIES THUISTEAM</h4>
+            </div>
+            <div class="col-xs-3 no-padding">
+                &nbsp;
+            </div>
+            </div>
 
-                <span ng-if="penalty.hoog && penalty.midden && penalty.gescoord" style="position: absolute; top: 5%; left: 34%; width: 30%; height: 30%; background: green; opacity: 0.5;"></span>
-                <span ng-if="penalty.hoog && penalty.midden && penalty.gestopt" style="position: absolute; top: 5%; left: 34%; width: 30%; height: 30%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.hoog && penalty.midden" style="font-size: xx-large; position: absolute; left: 46%; top: 15%;"><i class="fa fa-soccer-ball-o"></i></span>
-
-                <span ng-if="penalty.hoog && penalty.rechts && penalty.gescoord" style="position: absolute; top: 5%; left: 64%; width: 30%; height: 30%; background: green; opacity: 0.5;"></span>
-                <span ng-if="penalty.hoog && penalty.rechts && penalty.gestopt" style="position: absolute; top: 5%; left: 64%; width: 30%; height: 30%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.hoog && penalty.rechts" style="font-size: xx-large; position: absolute; left: 75%; top: 15%;"><i class="fa fa-soccer-ball-o"></i></span>
-
-                <span ng-if="penalty.laag && penalty.links && penalty.gescoord" style="position: absolute; top: 35%; left: 6%; width: 28%; height: 30%; background: green; opacity: 0.5;"></span>
-                <span ng-if="penalty.laag && penalty.links && penalty.gestopt" style="position: absolute; top: 35%; left: 6%; width: 28%; height: 30%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.laag && penalty.links" style="font-size: xx-large; position: absolute; left: 20%; top: 45%;"><i class="fa fa-soccer-ball-o"></i></span>
-
-                <span ng-if="penalty.laag && penalty.midden && penalty.gescoord" style="position: absolute; top: 35%; left: 34%; width: 30%; height: 30%; background: green; opacity: 0.5;"></span>
-                <span ng-if="penalty.laag && penalty.midden && penalty.gestopt" style="position: absolute; top: 35%; left: 34%; width: 30%; height: 30%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.laag && penalty.midden" style="font-size: xx-large; position: absolute; left: 46%; top: 45%;"><i class="fa fa-soccer-ball-o"></i></span>
-
-                <span ng-if="penalty.laag && penalty.rechts && penalty.gescoord" style="position: absolute; top: 35%; left: 64%; width: 30%; height: 30%; background: green; opacity: 0.5;"></span>
-                <span ng-if="penalty.laag && penalty.rechts && penalty.gestopt" style="position: absolute; top: 35%; left: 64%; width: 30%; height: 30%; background: red; opacity: 0.5;"></span>
-                <span ng-if="penalty.laag && penalty.rechts" style="font-size: xx-large; position: absolute; left: 75%; top: 45%;"><i class="fa fa-soccer-ball-o"></i></span>
-
-                <div class="col-xs-12 text-center">
-                    <h1 ng-if="penalty.linkerpaal">Linker paal</h1>
-                    <h1 ng-if="penalty.rechterpaal">Rechter paal</h1>
-                    <h1 ng-if="penalty.lat">Lat</h1>
-                    <h1 ng-if="penalty.gescoord">Gescoord</h1>
-                    <h1 ng-if="penalty.gestopt">Gestopt</h1>
-                    <h1 ng-if="penalty.naastover">Naast / Over</h1>
+            <div class="row">
+            <div class="col-xs-3 no-padding">
+                &nbsp;
+            </div>
+            <div class="col-xs-6 no-padding links-dot rechts-dot onder">
+                <div class="col-xs-4 no-padding text-center arrow-down-after">
+                    <h1>
+                        <span ng-if="data.match.penalty_thuis.lat > 0">{{ data.match.penalty_thuis.lat }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>lat</small></span>
+                        <span ng-if="data.match.penalty_thuis.lat <= 0" class="grey">0<small>/{{ data.match.penalty_thuis.count }}</small><br><small>lat</small></span>
+                    </h1>
                 </div>
-                <span class="pull-right"><i class="fa fa-clock-o"></i> {{ penalty.minuut }}'</span>
-                <strong>Schutter</strong> {{ penalty.schutter }}<br>
-                <strong>Keeper</strong> {{ penalty.keeper }}<br>
+                <div class="col-xs-4 no-padding text-center">
+                    <h1>
+                        <span ng-if="data.match.penalty_thuis.midden_over > 0">{{ data.match.penalty_thuis.midden_over }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>over</small></span>
+                        <span ng-if="data.match.penalty_thuis.midden_over <= 0" class="grey">0<small>/{{ data.match.penalty_thuis.count }}</small><br><small>over</small></span>
+                    </h1>
+                </div>
+                <div class="col-xs-4 no-padding text-center">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="col-xs-3 no-padding">
+                &nbsp;
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3 no-padding text-right">
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-6 no-padding text-center arrow-left-after">
+                        <h1>
+                            <span ng-if="data.match.penalty_thuis.linkerpaal > 0">{{ data.match.penalty_thuis.linkerpaal }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>paal</small></span>
+                            <span ng-if="data.match.penalty_thuis.linkerpaal <= 0" class="grey">0<small>/{{ data.match.penalty_thuis.count }}</small><br><small>paal</small></span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-xs-6 no-padding links rechts">
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_thuis.links_hoog_goal > 0"><h1>{{ data.match.penalty_thuis.links_hoog }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_thuis.links_hoog_goal <= 0" class="grey"><h1>{{ data.match.penalty_thuis.links_hoog }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center links-dot rechts-dot">
+                        <span ng-if="data.match.penalty_thuis.midden_hoog_goal > 0"><h1>{{ data.match.penalty_thuis.midden_hoog }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_thuis.midden_hoog_goal <= 0" class="grey"><h1>{{ data.match.penalty_thuis.midden_hoog }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_thuis.rechts_hoog_goal > 0"><h1>{{ data.match.penalty_thuis.rechts_hoog }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_thuis.rechts_hoog_goal <= 0" class="grey"><h1>{{ data.match.penalty_thuis.rechts_hoog }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                </div>
+                <div class="col-xs-3 no-padding">
+                    <div class="col-xs-6 no-padding text-center arrow-right-after">
+                        <h1>
+                            <span ng-if="data.match.penalty_thuis.rechterpaal > 0">{{ data.match.penalty_thuis.rechterpaal }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>paal</small></span>
+                            <span ng-if="data.match.penalty_thuis.rechterpaal <= 0" class="grey">0<small>/{{ data.match.penalty_thuis.count }}</small><br><small>paal</small></span>
+                        </h1>
+                    </div>
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3 no-padding text-right">
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-6 no-padding text-center">
+                        <h1>
+                            <span ng-if="data.match.penalty_thuis.links_naast > 0">{{ data.match.penalty_thuis.links_naast }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>naast</small></span>
+                            <span ng-if="data.match.penalty_thuis.links_naast <= 0" class="grey">0<small>/{{ data.match.penalty_thuis.count }}</small><br><small>naast</small></span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-xs-6 no-padding links rechts boven-dot">
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_thuis.links_laag_goal > 0"><h1>{{ data.match.penalty_thuis.links_laag }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_thuis.links_laag_goal <= 0" class="grey"><h1>{{ data.match.penalty_thuis.links_laag }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center links-dot rechts-dot">
+                        <span ng-if="data.match.penalty_thuis.midden_laag_goal > 0"><h1>{{ data.match.penalty_thuis.midden_laag }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_thuis.midden_laag_goal <= 0" class="grey"><h1>{{ data.match.penalty_thuis.midden_laag }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_thuis.rechts_laag_goal > 0"><h1>{{ data.match.penalty_thuis.rechts_laag }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_thuis.rechts_laag_goal <= 0" class="grey"><h1>{{ data.match.penalty_thuis.rechts_laag }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                </div>
+                <div class="col-xs-3 no-padding">
+                    <div class="col-xs-6 no-padding text-center">
+                        <h1>
+                            <span ng-if="data.match.penalty_thuis.rechts_naast > 0">{{ data.match.penalty_thuis.rechts_naast }}<small>/{{ data.match.penalty_thuis.count }}</small><br><small>naast</small></span>
+                            <span ng-if="data.match.penalty_thuis.rechts_naast <= 0" class="grey"`>0<small>/{{ data.match.penalty_thuis.count }}</small><br><small>naast</small></span>
+                        </h1>
+                    </div>
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="data.match.penalty_visualisatie.length > 0 && data.match.penalty_visualisatie[0] !== -999 && data.match.penalty_thuis.count"
+             class="col-xs-12" style="margin-top: 15px; margin-bottom: 15px;">
+            <div class="col-xs-12 no-padding" ng-repeat="penalty in data.match.penalty_visualisatie | filter:{ schutter_teamID: data.matchshort.thuisTeamID }">
+                {{ $index + 1 }}. Schutter: {{ penalty.schutter }} - Keeper: {{ penalty.keeper }} - <i class="fa fa-soccer-ball-o"></i>
+                <span ng-if="penalty.links"> links</span><span ng-if="penalty.rechts"> rechts</span><span ng-if="penalty.midden"> midden</span><span ng-if="penalty.naastover"> naast/over</span>
+                <span ng-if="penalty.linkerpaal"> linkerpaal</span><span ng-if="penalty.rechterpaal"> rechterpaal</span><span ng-if="penalty.lat"> lat</span>
+                <span ng-if="penalty.laag"> laag</span><span ng-if="penalty.hoog"> hoog</span>
+                <span ng-if="penalty.gescoord"> gescoord</span><span ng-if="penalty.gestopt"> gestopt</span>
+                <br>
+            </div>
+        </div>
+
+        <div ng-if="data.match.penalty_visualisatie.length > 0 && data.match.penalty_visualisatie[0] !== -999 && data.match.penalty_uit.count"
+             class="col-xs-12 no-padding penalty-visualisatie" style="margin-top: 0;">
+            <div class="row">
+            <div class="col-xs-3 no-padding">
+                &nbsp;
+            </div>
+            <div class="col-xs-6 no-padding text-center links-dot rechts-dot">
+                &nbsp;
+                <h4>PENALTIES UITTEAM</h4>
+            </div>
+            <div class="col-xs-3 no-padding">
+                &nbsp;
+            </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3 no-padding">
+                    &nbsp;
+                </div>
+                <div class="col-xs-6 no-padding links-dot rechts-dot onder">
+                    <div class="col-xs-4 no-padding text-center arrow-down-after">
+                        <h1>
+                            <span ng-if="data.match.penalty_uit.lat > 0">{{ data.match.penalty_uit.lat }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>lat</small></span>
+                            <span ng-if="data.match.penalty_uit.lat <= 0" class="grey">0<small>/{{ data.match.penalty_uit.count }}</small><br><small>lat</small></span>
+                        </h1>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center">
+                        <h1>
+                            <span ng-if="data.match.penalty_uit.midden_over > 0">{{ data.match.penalty_uit.midden_over }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>over</small></span>
+                            <span ng-if="data.match.penalty_uit.midden_over <= 0" class="grey">0<small>/{{ data.match.penalty_uit.count }}</small><br><small>over</small></span>
+                        </h1>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="col-xs-3 no-padding">
+                    &nbsp;
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3 no-padding text-right">
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-6 no-padding text-center arrow-left-after">
+                        <h1>
+                            <span ng-if="data.match.penalty_uit.linkerpaal > 0">{{ data.match.penalty_uit.linkerpaal }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>paal</small></span>
+                            <span ng-if="data.match.penalty_uit.linkerpaal <= 0" class="grey">0<small>/{{ data.match.penalty_uit.count }}</small><br><small>paal</small></span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-xs-6 no-padding links rechts">
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_uit.links_hoog_goal > 0"><h1>{{ data.match.penalty_uit.links_hoog }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_uit.links_hoog_goal <= 0" class="grey"><h1>{{ data.match.penalty_uit.links_hoog }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center links-dot rechts-dot">
+                        <span ng-if="data.match.penalty_uit.midden_hoog_goal > 0"><h1>{{ data.match.penalty_uit.midden_hoog }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_uit.midden_hoog_goal <= 0" class="grey"><h1>{{ data.match.penalty_uit.midden_hoog }}<small>/{{ data.match.penalty_uit.count}}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_uit.rechts_hoog_goal > 0"><h1>{{ data.match.penalty_uit.rechts_hoog }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_uit.rechts_hoog_goal <= 0" class="grey"><h1>{{ data.match.penalty_uit.rechts_hoog }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                </div>
+                <div class="col-xs-3 no-padding">
+                    <div class="col-xs-6 no-padding text-center arrow-right-after">
+                        <h1>
+                            <span ng-if="data.match.penalty_uit.rechterpaal > 0">{{ data.match.penalty_uit.rechterpaal }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>paal</small></span>
+                            <span ng-if="data.match.penalty_uit.rechterpaal <= 0" class="grey">0<small>/{{ data.match.penalty_uit.count }}</small><br><small>paal</small></span>
+                        </h1>
+                    </div>
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3 no-padding text-right">
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-6 no-padding text-center">
+                        <h1>
+                            <span ng-if="data.match.penalty_uit.links_naast > 0">{{ data.match.penalty_uit.links_naast }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>naast</small></span>
+                            <span ng-if="data.match.penalty_uit.links_naast <= 0" class="grey">0<small>/{{ data.match.penalty_uit.count }}</small><br><small>naast</small></span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-xs-6 no-padding links rechts boven-dot">
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_uit.links_laag_goal > 0"><h1>{{ data.match.penalty_uit.links_laag }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_uit.links_laag_goal <= 0" class="grey"><h1>{{ data.match.penalty_uit.links_laag }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center links-dot rechts-dot">
+                        <span ng-if="data.match.penalty_uit.midden_laag_goal > 0"><h1>{{ data.match.penalty_uit.midden_laag }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_uit.midden_laag_goal <= 0" class="grey"><h1>{{ data.match.penalty_uit.midden_laag }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                    <div class="col-xs-4 no-padding text-center">
+                        <span ng-if="data.match.penalty_uit.rechts_laag_goal > 0"><h1>{{ data.match.penalty_uit.rechts_laag }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>goal</small></h1></span>
+                        <span ng-if="data.match.penalty_uit.rechts_laag_goal <= 0" class="grey"><h1>{{ data.match.penalty_uit.rechts_laag }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>&nbsp;</small></h1></span>
+                    </div>
+                </div>
+                <div class="col-xs-3 no-padding">
+                    <div class="col-xs-6 no-padding text-center">
+                        <h1>
+                            <span ng-if="data.match.penalty_uit.rechts_naast > 0">{{ data.match.penalty_uit.rechts_naast }}<small>/{{ data.match.penalty_uit.count }}</small><br><small>naast</small></span>
+                            <span ng-if="data.match.penalty_uit.rechts_naast <= 0" class="grey"`>0<small>/{{ data.match.penalty_uit.count }}</small><br><small>naast</small></span>
+                        </h1>
+                    </div>
+                    <div class="col-xs-6 no-padding text-center">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="data.match.penalty_visualisatie.length > 0 && data.match.penalty_visualisatie[0] !== -999 && data.match.penalty_uit.count"
+             class="col-xs-12" style="margin-top: 15px;">
+            <div class="col-xs-12 no-padding" ng-repeat="penalty in data.match.penalty_visualisatie | filter:{ schutter_teamID: data.matchshort.uitTeamID }">
+                {{ $index + 1 }}. Schutter: {{ penalty.schutter }} - Keeper: {{ penalty.keeper }} - <i class="fa fa-soccer-ball-o"></i>
+                <span ng-if="penalty.links"> links</span><span ng-if="penalty.rechts"> rechts</span><span ng-if="penalty.midden"> midden</span><span ng-if="penalty.naastover"> naast/over</span>
+                <span ng-if="penalty.linkerpaal"> linkerpaal</span><span ng-if="penalty.rechterpaal"> rechterpaal</span><span ng-if="penalty.lat"> lat</span>
+                <span ng-if="penalty.laag"> laag</span><span ng-if="penalty.hoog"> hoog</span>
+                <span ng-if="penalty.gescoord"> gescoord</span><span ng-if="penalty.gestopt"> gestopt</span>
+                <br>
             </div>
         </div>
 

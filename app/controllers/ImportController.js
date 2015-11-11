@@ -122,18 +122,20 @@ module.exports = ImportController = {
                                 team_data.uit.rood = Number_converter(_.where(data.team_matrix, {_row: 'Rode kaarten'})[0][items.uitTeamID]);
 
                                 team_data.thuis.team_leeftijd = {};
-                                if (data.team_data.team_leeftijd.thuisLeeftijd_basis) {
-                                    team_data.thuis.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.thuisLeeftijd_basis[0];
-                                }
-                                if (data.team_data.team_leeftijd.thuisLeeftijd_bank) {
-                                    team_data.thuis.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.thuisLeeftijd_bank[0];
-                                }
                                 team_data.uit.team_leeftijd = {};
-                                if (data.team_data.team_leeftijd.uitLeeftijd_basis) {
-                                    team_data.uit.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.uitLeeftijd_basis[0];
-                                }
-                                if (data.team_data.team_leeftijd.uitLeeftijd_bank) {
-                                    team_data.uit.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.uitLeeftijd_bank[0];
+                                if (data.team_data.team_leeftijd) {
+                                    if (data.team_data.team_leeftijd.thuisLeeftijd_basis) {
+                                        team_data.thuis.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.thuisLeeftijd_basis[0];
+                                    }
+                                    if (data.team_data.team_leeftijd.thuisLeeftijd_bank) {
+                                        team_data.thuis.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.thuisLeeftijd_bank[0];
+                                    }
+                                    if (data.team_data.team_leeftijd.uitLeeftijd_basis) {
+                                        team_data.uit.team_leeftijd.leeftijd_basis = data.team_data.team_leeftijd.uitLeeftijd_basis[0];
+                                    }
+                                    if (data.team_data.team_leeftijd.uitLeeftijd_bank) {
+                                        team_data.uit.team_leeftijd.leeftijd_bank = data.team_data.team_leeftijd.uitLeeftijd_bank[0];
+                                    }
                                 }
                             } else {
                                 team_data.thuis.balbezit = Number_converter(data.wedstrijd_data.balbezit.hele_wedstrijd[0][items.thuisTeamID]);
@@ -1696,20 +1698,24 @@ module.exports = ImportController = {
                                         if (value1.personID == value.schutter) {
                                             value.schutter_personID = value.schutter;
                                             value.schutter = value1.spelerNaam;
+                                            value.schutter_teamID = items.thuisTeamID;
                                         }
                                         if (value1.personID == value.keeper) {
                                             value.keeper_personID = value.keeper;
                                             value.keeper = value1.spelerNaam;
+                                            value.keeper_teamID = items.thuisTeamID;
                                         }
                                     });
                                     forEach(items.spelersuitteam, function (value1, key1) {
                                         if (value1.personID == value.schutter) {
                                             value.schutter_personID = value.schutter;
                                             value.schutter = value1.spelerNaam;
+                                            value.schutter_teamID = items.uitTeamID;
                                         }
                                         if (value1.personID == value.keeper) {
                                             value.keeper_personID = value.keeper;
                                             value.keeper = value1.spelerNaam;
+                                            value.keeper_teamID = items.uitTeamID;
                                         }
                                     });
                                 });
@@ -1769,8 +1775,12 @@ module.exports = ImportController = {
                                     temp.teamID = (items.thuisTeamID);
                                     temp.type = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
-                                    temp.spelerLeeftijd = value.leeftijd[0];
-                                    temp.spelerNationaliteit = value.nationaliteit[0];
+                                    if (value.leeftijd) {
+                                        temp.spelerLeeftijd = value.leeftijd[0];
+                                    }
+                                    if (value.nationaliteit) {
+                                        temp.spelerNationaliteit = value.nationaliteit[0];
+                                    }
                                     forEach(items.spelersthuisteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
@@ -1820,8 +1830,12 @@ module.exports = ImportController = {
                                     var temp = {};
                                     temp.spelerType = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
-                                    temp.spelerLeeftijd = value.leeftijd[0];
-                                    temp.spelerNationaliteit = value.nationaliteit[0];
+                                    if (value.leeftijd) {
+                                        temp.spelerLeeftijd = value.leeftijd[0];
+                                    }
+                                    if (value.nationaliteit) {
+                                        temp.spelerNationaliteit = value.nationaliteit[0];
+                                    }
                                     forEach(items.spelersthuisteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
@@ -2244,8 +2258,12 @@ module.exports = ImportController = {
                                     temp.teamID = (items.thuisTeamID);
                                     temp.type = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
-                                    temp.spelerLeeftijd = value.leeftijd[0];
-                                    temp.spelerNationaliteit = value.nationaliteit[0];
+                                    if (value.leeftijd) {
+                                        temp.spelerLeeftijd = value.leeftijd[0];
+                                    }
+                                    if (value.nationaliteit) {
+                                        temp.spelerNationaliteit = value.nationaliteit[0];
+                                    }
                                     forEach(items.spelersuitteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);
@@ -2295,8 +2313,12 @@ module.exports = ImportController = {
                                     var temp = {};
                                     temp.spelerType = (value.stat_matrix.type[0]);
                                     temp.personID = Number_converter(value.speler[0]);
-                                    temp.spelerLeeftijd = value.leeftijd[0];
-                                    temp.spelerNationaliteit = value.nationaliteit[0];
+                                    if (value.leeftijd) {
+                                        temp.spelerLeeftijd = value.leeftijd[0];
+                                    }
+                                    if (value.nationaliteit) {
+                                        temp.spelerNationaliteit = value.nationaliteit[0];
+                                    }
                                     forEach(items.spelersuitteam, function (value1, key1) {
                                         if (value1.personID == temp.personID) {
                                             temp.spelerNaam = (value1.spelerNaam);

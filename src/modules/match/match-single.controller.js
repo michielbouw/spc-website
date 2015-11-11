@@ -502,6 +502,97 @@ angular.module('mainapp.match')
                 self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
                 self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
+                if (self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
+                    self.match.penalty_thuis = {};
+                    self.match.penalty_uit = {};
+                    var temp_thuis = {};
+                    temp_thuis.rechts_naast = 0;
+                    temp_thuis.links_naast = 0;
+                    temp_thuis.rechterpaal = 0;
+                    temp_thuis.linkerpaal = 0;
+                    temp_thuis.midden_over = 0;
+                    temp_thuis.lat = 0;
+                    temp_thuis.links_hoog = 0;
+                    temp_thuis.midden_hoog = 0;
+                    temp_thuis.rechts_hoog = 0;
+                    temp_thuis.links_laag = 0;
+                    temp_thuis.midden_laag = 0;
+                    temp_thuis.rechts_laag = 0;
+                    temp_thuis.links_hoog_goal = 0;
+                    temp_thuis.midden_hoog_goal = 0;
+                    temp_thuis.rechts_hoog_goal = 0;
+                    temp_thuis.links_laag_goal = 0;
+                    temp_thuis.midden_laag_goal = 0;
+                    temp_thuis.rechts_laag_goal = 0;
+                    temp_thuis.count = 0;
+                    var temp_uit = {};
+                    temp_uit.rechts_naast = 0;
+                    temp_uit.links_naast = 0;
+                    temp_uit.rechterpaal = 0;
+                    temp_uit.linkerpaal = 0;
+                    temp_uit.midden_over = 0;
+                    temp_uit.lat = 0;
+                    temp_uit.links_hoog = 0;
+                    temp_uit.midden_hoog = 0;
+                    temp_uit.rechts_hoog = 0;
+                    temp_uit.links_laag = 0;
+                    temp_uit.midden_laag = 0;
+                    temp_uit.rechts_laag = 0;
+                    temp_uit.links_hoog_goal = 0;
+                    temp_uit.midden_hoog_goal = 0;
+                    temp_uit.rechts_hoog_goal = 0;
+                    temp_uit.links_laag_goal = 0;
+                    temp_uit.midden_laag_goal = 0;
+                    temp_uit.rechts_laag_goal = 0;
+                    temp_uit.count = 0;
+                    angular.forEach(self.match.penalty_visualisatie, function (value, key) {
+                        if (value.schutter_teamID == self.matchshort.thuisTeamID) {
+                            temp_thuis.rechts_naast += value.rechts && value.naastover ? 1 : 0;
+                            temp_thuis.links_naast += value.links && value.naastover ? 1 : 0;
+                            temp_thuis.rechterpaal += value.rechterpaal ? 1 : 0;
+                            temp_thuis.linkerpaal += value.linkerpaal ? 1 : 0;
+                            temp_thuis.midden_over += value.midden && value.naastover ? 1 : 0;
+                            temp_thuis.lat += value.lat ? 1 : 0;
+                            temp_thuis.links_hoog += value.hoog && value.links ? 1 : 0;
+                            temp_thuis.midden_hoog += value.hoog && value.midden ? 1 : 0;
+                            temp_thuis.rechts_hoog += value.hoog && value.rechts ? 1 : 0;
+                            temp_thuis.links_laag += value.laag && value.links ? 1 : 0;
+                            temp_thuis.midden_laag += value.laag && value.midden ? 1 : 0;
+                            temp_thuis.rechts_laag += value.laag && value.rechts ? 1 : 0;
+                            temp_thuis.links_hoog_goal += value.hoog && value.links && value.gescoord ? 1 : 0;
+                            temp_thuis.midden_hoog_goal += value.hoog && value.midden && value.gescoord ? 1 : 0;
+                            temp_thuis.rechts_hoog_goal += value.hoog && value.rechts && value.gescoord ? 1 : 0;
+                            temp_thuis.links_laag_goal += value.laag && value.links && value.gescoord ? 1 : 0;
+                            temp_thuis.midden_laag_goal += value.laag && value.midden && value.gescoord ? 1 : 0;
+                            temp_thuis.rechts_laag_goal += value.laag && value.rechts && value.gescoord ? 1 : 0;
+                            temp_thuis.count += 1;
+                        }
+                        if (value.schutter_teamID == self.matchshort.uitTeamID) {
+                            temp_uit.rechts_naast += value.rechts && value.naastover ? 1 : 0;
+                            temp_uit.links_naast += value.links && value.naastover ? 1 : 0;
+                            temp_uit.rechterpaal += value.rechterpaal ? 1 : 0;
+                            temp_uit.linkerpaal += value.linkerpaal ? 1 : 0;
+                            temp_uit.midden_over += value.midden && value.naastover ? 1 : 0;
+                            temp_uit.lat += value.lat ? 1 : 0;
+                            temp_uit.links_hoog += value.hoog && value.links ? 1 : 0;
+                            temp_uit.midden_hoog += value.hoog && value.midden ? 1 : 0;
+                            temp_uit.rechts_hoog += value.hoog && value.rechts ? 1 : 0;
+                            temp_uit.links_laag += value.laag && value.links ? 1 : 0;
+                            temp_uit.midden_laag += value.laag && value.midden ? 1 : 0;
+                            temp_uit.rechts_laag += value.laag && value.rechts ? 1 : 0;
+                            temp_uit.links_hoog_goal += value.hoog && value.links && value.gescoord ? 1 : 0;
+                            temp_uit.midden_hoog_goal += value.hoog && value.midden && value.gescoord ? 1 : 0;
+                            temp_uit.rechts_hoog_goal += value.hoog && value.rechts && value.gescoord ? 1 : 0;
+                            temp_uit.links_laag_goal += value.laag && value.links && value.gescoord ? 1 : 0;
+                            temp_uit.midden_laag_goal += value.laag && value.midden && value.gescoord ? 1 : 0;
+                            temp_uit.rechts_laag_goal += value.laag && value.rechts && value.gescoord ? 1 : 0;
+                            temp_uit.count += 1;
+                        }
+                    });
+                    self.match.penalty_thuis = temp_thuis;
+                    self.match.penalty_uit = temp_uit;
+                }
+
                 Api.SpelersClub.query({
                     _id: self.match.thuisTeamID
                 }, function (res) {
