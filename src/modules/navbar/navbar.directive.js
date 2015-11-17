@@ -40,7 +40,7 @@ angular.module('mainapp.navbar')
                         path = decodeURIComponent(path);
                         $('.navbar-nav li a').each(function(){
                             var $this = $(this);
-                            if($this.attr("href") === path.substring(window.location.href.lastIndexOf("/")+1) || ($this.attr("href") === path.substring(0, $this.attr("href") ? $this.attr("href").length : 0) && $this.attr("href").substring($this.attr("href") ? $this.attr("href").lastIndexOf("/")+1 : 0) !== '')) {
+                            if($this.attr("href") === path.substring(window.location.href.lastIndexOf("/")+1) || ($this.attr("href") === path.substring(0, $this.attr("href") ? $this.attr("href").length : 0) && $this.attr("href").substring($this.attr("href") ? $this.attr("href").lastIndexOf("/")+1 : 0) !== '') || ($this.attr("href") === '/analyse' && '/wedstrijd' === path.substring(0, 10) && $this.attr("href").substring($this.attr("href") ? $this.attr("href").lastIndexOf("/")+1 : 0) !== '')) {
                                 if (!$this.closest('li').hasClass('active')) {
                                     $this.closest('li').addClass('active');
                                 }
