@@ -96,7 +96,11 @@ angular.module('mainapp.players')
                             values: $scope.rounds
                         });
                         $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
-                        $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round0').width() - 0.5 * $('.content-players-select .round1').width() );
+                        if ($scope.rounds[0] == $scope.rounds[1]) {
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
+                        } else {
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width());
+                        }
                     });
                 }, 400);
 
@@ -189,7 +193,11 @@ angular.module('mainapp.players')
                             values: $scope.rounds
                         });
                         $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
-                        $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round0').width() - 0.5 * $('.content-players-select .round1').width() );
+                        if ($scope.rounds[0] == $scope.rounds[1]) {
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
+                        } else {
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width());
+                        }
                     });
                 }, 400);
 
@@ -1057,7 +1065,11 @@ angular.module('mainapp.players')
         $scope.$watch('rounds', function() {
             $timeout(function () {
                 $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
-                $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round0').width() - 0.5 * $('.content-players-select .round1').width() );
+                if ($scope.rounds[0] == $scope.rounds[1]) {
+                    $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
+                } else {
+                    $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width());
+                }
             }, 400);
 
             self.match = $filter('filter')(self.season_matches, {ronde: self.roundfilter()}, true)[0];
@@ -1250,10 +1262,10 @@ angular.module('mainapp.players')
 
                         self.stats.passzekerheid /= count1;
                         self.stats.pass_lengte /= count1;
-                        self.stats.geel /= count1;
-                        self.stats.rood /= count1;
+                        //self.stats.geel /= count1;
+                        //self.stats.rood /= count1;
                         if (self.player_stats.spelerType == 'keeper') {
-                            self.stats.doelpunten_tegen /= count1;
+                            //self.stats.doelpunten_tegen /= count1;
                             self.stats.reddingen /= count1;
                             self.stats.gevangen_ballen /= count1;
                             self.stats.weggestompte_ballen /= count1;
@@ -1270,7 +1282,7 @@ angular.module('mainapp.players')
                                 self.chart_keeper.datasets[1].data = [self.stats.geslaagde_reddingen.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.succesvolle_uittrappen.toFixed(1), self.stats.perc_korte_passes.toFixed(1), self.stats.perc_middellange_passes.toFixed(1), self.stats.perc_lange_passes.toFixed(1)];
                             }, 800);
                         } else {
-                            self.stats.doelpunten /= count1;
+                            //self.stats.doelpunten /= count1;
                             self.stats.doelpogingen /= count1;
                             self.stats.doelpogingen_opdoel /= count1;
                             self.stats.aantal_passes /= count1;

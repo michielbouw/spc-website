@@ -14,7 +14,8 @@ angular.module('mainapp', [
     'mainapp.pageClubadmin',
     'mainapp.pageIndex',
     'mainapp.pageUser',
-    'mainapp.players'
+    'mainapp.players',
+    'mainapp.scouting'
 ])
     .config(function($locationProvider, $routeProvider, $httpProvider) {
         $locationProvider.html5Mode(true);

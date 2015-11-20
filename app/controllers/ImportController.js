@@ -1802,7 +1802,7 @@ module.exports = ImportController = {
                                         temp.succesvolle_uittrappen = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Succesvolle uittrappen'})[0][temp.personID].split("%")[0]);
                                         temp.geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                         temp.rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
-                                        temp.doelpunten_tegen = Number_converter(match_short.match_info.eindstand.split(" - ", 1)[0]);
+                                        temp.doelpunten_tegen = Number_converter(match_short.match_info.eindstand.split(" - ", 2)[1]);
                                         temp.pass_lengte = Number_converter((Number_converter(value.pass_soorten_helft1[temp.personID][0].gem_len.split("m")[0]) + Number_converter(value.pass_soorten_helft2[temp.personID][0].gem_len.split("m")[0]) / 2).toFixed(1));
                                     } else {
                                         temp.minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
@@ -2020,7 +2020,7 @@ module.exports = ImportController = {
                                         temp.succesvolle_uittrappen = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Succesvolle uittrappen'})[0][temp.personID].split("%")[0]);
                                         temp.geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                         temp.rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
-                                        temp.doelpunten_tegen = Number_converter(match_short.match_info.eindstand.split(" - ", 1)[0]);
+                                        temp.doelpunten_tegen = Number_converter(match_short.match_info.eindstand.split(" - ", 2)[1]);
                                         temp.pass_lengte = Number_converter((Number_converter(value.pass_soorten_helft1[temp.personID][0].gem_len.split("m")[0]) + Number_converter(value.pass_soorten_helft2[temp.personID][0].gem_len.split("m")[0]) / 2).toFixed(1));
 
                                         temp.doelpunten = Number_converter((value.algemene_stats[1][0][0]));

@@ -10,7 +10,7 @@
             <div class="col-xs-12 col-sm-4 col-md-4 season">
                 <select ng-model="data.season_index" class="form-control input-sm"
                         ng-change="data.seasonInitFunc()"
-                        ng-options="team.season as team.season for team in data.team_data">
+                        ng-options="team.season as team.season for team in data.team_data | orderBy:'season':-1">
                 </select>
             </div>
         </div>
@@ -26,10 +26,10 @@
                     <select ng-model="data.vs" class="form-control input-md input-vs" dir="rtl"
                             ng-change="data.vsInitFunc()">
                         <!--<option>.. kies ..</option>-->
-                        <option>Gemiddelde seizoen</option>
+                        <option>Gemiddelde JL</option>
+                        <option>Gemiddelde team</option>
                         <option ng-hide="data.season_index.split(' ', 2)[1] == 'Play-offs'">1e helft seizoen team</option>
                         <option ng-hide="data.season_index.split(' ', 2)[1] == 'Play-offs'">2e helft seizoen team</option>
-                        <!--<option>Gemiddeld JL</option>-->
                     </select>
                 </h4>
             </div>

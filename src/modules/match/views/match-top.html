@@ -44,7 +44,7 @@
             <br>
             <select ng-model="data.match_index" class="form-control input-sm"
                     ng-change="data.matchInitFunc()"
-                    ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in data.season_matches">
+                    ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in data.season_matches | orderBy:'match_info.datum':-1">
             </select>
             <br>
         </div>

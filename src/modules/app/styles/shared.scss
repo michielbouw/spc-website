@@ -88,7 +88,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: inherit;
+  font-family: $font-title;
   font-weight: bold;
   line-height: 1.1;
   color: inherit;
@@ -153,6 +153,7 @@ Standard layout
 }
 
 .navbar-sub {
+  font-family: $font-title;
   color: $white;
   font-weight: bold;
   padding: 0;
@@ -220,6 +221,7 @@ Standard layout
 }
 
 .navbar-sub-mobile {
+  font-family: $font-title;
   display: none;
   opacity: 0;
   margin-bottom: 5px;
@@ -354,6 +356,7 @@ Standard layout
   @include border-radius(1px);
 
   .content-title {
+    font-family: $font-title;
     background-color: $backgroundlight;
     //border-bottom: 1px solid $lightgrey;
     //border-top: 1px solid $lightgrey;
@@ -387,6 +390,7 @@ Standard layout
     }
   }
   .content-title-top {
+    font-family: $font-title;
     //background-color: $backgroundlight;
     //border-bottom: 1px solid $lightgrey;
     border-top: 1px solid $lightgrey;
@@ -407,6 +411,7 @@ Standard layout
     }
   }
   .content-title-bottom {
+    font-family: $font-title;
     background-color: $backgroundlight;
     //border-top: 1px solid $lightgrey;
     padding-top: 15px;
@@ -418,6 +423,7 @@ Standard layout
     //box-shadow: 0px -4px 14px rgba(0, 0, 0, 0.1);
 
     a {
+      font-weight: bold;
       margin-top: 0px;
       font-size: 12px;
       text-transform: uppercase;
@@ -432,6 +438,7 @@ Standard layout
   padding-bottom: 15px;
 
   .content-page-title {
+    font-family: $font-title;
     padding-top: 0px;
     padding-bottom: 10px;
     margin-top: 0;

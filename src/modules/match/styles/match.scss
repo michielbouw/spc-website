@@ -185,6 +185,10 @@
     .stat-table-row {
       text-transform: capitalize;
     }
+    .stat-table-row-title {
+      font-family: $font-title;
+      font-weight: bold;
+    }
     .stat-table-row:hover {
       background-color: #F6F8F9;
       color: #18385F;
@@ -194,6 +198,7 @@
     .stat-table-row:first-of-type div,
     .stat-table-row:first-of-type div span {
       text-transform: uppercase;
+      font-family: $font-title;
       font-weight: bold;
     }
   }

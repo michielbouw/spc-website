@@ -30,8 +30,8 @@
             <br>
         </div>
         <div class="col-xs-12">
-            <div class="hidden-xs  stat-table opstelling">
-                <div class="col-sm-12 stat-table-row">
+            <div class="hidden-xs stat-table opstelling">
+                <div class="col-sm-12 stat-table-row stat-table-row-title">
                     <div class="col-md-5 col-sm-5 text-right blue">
                         <strong>{{ data.matchshort.match_info.thuis }}</strong>
                     </div>
@@ -578,7 +578,7 @@
         <div class="stat-table opstelling">
             <div class="col-sm-12 hidden-xs stat-table-row" ng-repeat="row in data.match.overzicht_lineup">
                 <div class="col-md-5 col-sm-5 text-right blue">
-                    <span ng-if="row.V2 == 'INGEVALLEN' || row.V2 == 'BANK'"><strong>{{ row.V2 }}</strong></span>
+                    <span ng-if="row.V2 == 'INGEVALLEN' || row.V2 == 'BANK'"><strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V2 }}</strong></span>
                     <span ng-if="row.V2 !== 'INGEVALLEN' && row.V2 !== 'BANK'" ng-bind-html="row.V2 | html_trusted"></span>
                     <span ng-show="row.V2 == ' '">&nbsp;</span>
                 </div>
@@ -591,13 +591,13 @@
                     <span ng-show="row.V3 == ' '">&nbsp;</span>
                 </div>
                 <div class="col-md-5 col-sm-5 orange">
-                    <span ng-if="row.V4 == 'INGEVALLEN' || row.V4 == 'BANK'"><strong>{{ row.V4 }}</strong></span>
+                    <span ng-if="row.V4 == 'INGEVALLEN' || row.V4 == 'BANK'"><strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V4 }}</strong></span>
                     <span ng-if="row.V4 !== 'INGEVALLEN' && row.V4 !== 'BANK'" ng-bind-html="row.V4 | html_trusted"></span>
                     <span ng-show="row.V4 == ' '">&nbsp;</span>
                 </div>
             </div>
             <div class="col-sm-12 hidden-xs stat-table-row text-center">&nbsp;</div>
-            <div class="col-sm-12 hidden-xs stat-table-row">
+            <div class="col-sm-12 hidden-xs stat-table-row stat-table-row-title">
                 <div class="col-md-5 col-sm-5 text-right blue">
                     <strong>COACH</strong>
                 </div>
@@ -620,7 +620,7 @@
                     <span ng-show="row.V2 == ' '">&nbsp;</span>
                 </div>
                 <div ng-if="$index !== 0" class="col-xs-10 blue">
-                    <span ng-if="row.V2 == 'INGEVALLEN' || row.V2 == 'BANK'"><strong>{{ row.V2 }}</strong></span>
+                    <span ng-if="row.V2 == 'INGEVALLEN' || row.V2 == 'BANK'"><strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V2 }}</strong></span>
                     <span ng-if="row.V2 !== 'INGEVALLEN' && row.V2 !== 'BANK'" ng-bind-html="row.V2 | html_trusted"></span>
                     <span ng-show="row.V2 == ' '">&nbsp;</span>
                 </div>
@@ -630,7 +630,7 @@
                 </div>
             </div>
             <div class="hidden-lg hidden-md hidden-sm col-xs-12 stat-table-row text-center">&nbsp;</div>
-            <div class="hidden-lg hidden-md hidden-sm col-xs-12 stat-table-row">
+            <div class="hidden-lg hidden-md hidden-sm col-xs-12 stat-table-row stat-table-row-title">
                 <div class="col-xs-10 blue">
                     <strong>COACH</strong>
                 </div>
@@ -649,7 +649,7 @@
                     <span ng-show="row.V4 == ' '">&nbsp;</span>
                 </div>
                 <div ng-if="$index !== 0" class="col-xs-10 orange">
-                    <span ng-if="row.V4 == 'INGEVALLEN' || row.V4 == 'BANK'"><strong>{{ row.V4 }}</strong></span>
+                    <span ng-if="row.V4 == 'INGEVALLEN' || row.V4 == 'BANK'"><strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V4 }}</strong></span>
                     <span ng-if="row.V4 !== 'INGEVALLEN' && row.V4 !== 'BANK'" ng-bind-html="row.V4 | html_trusted"></span>
                     <span ng-show="row.V4 == ' '">&nbsp;</span>
                 </div>
@@ -659,7 +659,7 @@
                 </div>
             </div>
             <div class="hidden-lg hidden-md hidden-sm col-xs-12 stat-table-row text-center">&nbsp;</div>
-            <div class="hidden-lg hidden-md hidden-sm col-xs-12 stat-table-row">
+            <div class="hidden-lg hidden-md hidden-sm col-xs-12 stat-table-row stat-table-row-title">
                 <div class="col-xs-10 orange">
                     <strong>COACH</strong>
                 </div>
@@ -994,8 +994,8 @@
             </div>
             <div class="col-xs-12 stat-table-row text-center">
                 <h4>Blessuretijd<br>
-                    <small>1e helft: {{ data.matchshort.match_info.blessure_tijd.blessuretijd_1ehelft }}</small><br>
-                    <small>2e helft: {{ data.matchshort.match_info.blessure_tijd.blessuretijd_2ehelft }}</small>
+                    <small style="font-family: 'Open Sans', Helvetica, Verdana, sans-serif;color: #000000;">1e helft: {{ data.matchshort.match_info.blessure_tijd.blessuretijd_1ehelft }}</small><br>
+                    <small style="font-family: 'Open Sans', Helvetica, Verdana, sans-serif;color: #000000;">2e helft: {{ data.matchshort.match_info.blessure_tijd.blessuretijd_2ehelft }}</small>
                 </h4>
             </div>
         </div>
@@ -1223,7 +1223,7 @@
                     {{ row.V2 }}
                 </div>
                 <div ng-if="row.V2 == 'DOELPOGINGEN' || row.V2 == 'SCHOTEN' || row.V2 == 'PENALTIES' || row.V2 == 'DIRECT GENOMEN VRIJE TRAPPEN'" class="col-xs-4 text-center">
-                    <strong>{{ row.V2 }}</strong>
+                    <strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V2 }}</strong>
                 </div>
                 <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
@@ -1319,7 +1319,7 @@
             <br>
         </div>-->
         <div ng-if="data.match.spelhervattingen.length > 0" class="stat-table spelhervattingen">
-            <div class="col-xs-12 stat-table-row">
+            <div class="col-xs-12 stat-table-row stat-table-row-title">
                 <div class="col-xs-4 text-right">
                     <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
@@ -1341,7 +1341,7 @@
                     {{ row.V2 }}
                 </div>
                 <div ng-if="row.V2 == 'VRIJE TRAPPEN' || row.V2 == 'HOEKSCHOPPEN' || row.V2 == 'INWORPEN'" class="col-xs-4 text-center">
-                    <strong>{{ row.V2 }}</strong>
+                    <strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V2 }}</strong>
                 </div>
                 <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
@@ -1364,7 +1364,7 @@
             <br>
         </div>-->
         <div ng-if="data.match.passes.length > 0" class="stat-table overtredingen">
-            <div class="col-xs-12 stat-table-row">
+            <div class="col-xs-12 stat-table-row stat-table-row-title">
                 <div class="col-xs-4 text-right">
                     <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
@@ -1389,7 +1389,7 @@
                     <strong>{{ row.V2 }}</strong>
                 </div>-->
                 <div ng-if="row.V2 == 'totaal'" class="col-xs-4 text-center">
-                    <strong>{{ row.V2 }}</strong>
+                    <strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V2 }}</strong>
                 </div>
                 <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
@@ -2807,7 +2807,7 @@
                     <strong>{{ data.matchshort.match_info.thuis }}</strong>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row">
+            <div class="col-xs-12 stat-table-row stat-table-row-title">
                 <div class="col-xs-2">&nbsp;</div>
                 <div class="col-xs-3"><strong>Speler</strong></div>
                 <div class="col-xs-2"><strong>Gemaakt</strong></div>
@@ -2827,7 +2827,7 @@
                     <strong>{{ data.matchshort.match_info.uit }}</strong>
                 </div>
             </div>
-            <div class="col-xs-12 stat-table-row">
+            <div class="col-xs-12 stat-table-row stat-table-row-title">
                 <div class="col-xs-2">&nbsp;</div>
                 <div class="col-xs-3"><strong>Speler</strong></div>
                 <div class="col-xs-2"><strong>Gemaakt</strong></div>

@@ -96,7 +96,7 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde seizoen';
+                self.vs = 'Gemiddelde JL';
                 self.vsInitFunc();
             }, function() {
                 $location.path('/404');
@@ -160,7 +160,7 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde seizoen';
+                self.vs = 'Gemiddelde JL';
                 self.vsInitFunc();
             }
         };
@@ -171,7 +171,62 @@ angular.module('mainapp.club')
             var i;
             self.stats_vs = {};
 
-            if (self.vs == 'Gemiddelde seizoen') {
+            if (self.vs == 'Gemiddelde JL') {
+                if (self.season_index) {
+                    Api.TeamData.query(function (res) {
+                        count = 0;
+
+                        self.stats_vs.doelpogingen = 0;
+                        self.stats_vs.goals = 0;
+                        self.stats_vs.goalstegen = 0;
+                        self.stats_vs.balbezit = 0;
+                        self.stats_vs.gewonnen_duels = 0;
+                        self.stats_vs.passzekerheid = 0;
+                        self.stats_vs.lengte_passes = 0;
+                        self.stats_vs.tot_passes = 0;
+                        self.stats_vs.geel = 0;
+                        self.stats_vs.rood = 0;
+
+                        angular.forEach(res, function(value, key) {
+                            if ($filter('filter')(value.team_data, {season: self.season_index}, true)[0]) {
+                                var season_matches_temp = $filter('orderBy')(($filter('filter')(value.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+
+                                statslength = season_matches_temp.length;
+
+                                for (i = 0; i < statslength; i++) {
+                                    if (season_matches_temp[i].wedstrijd && season_matches_temp[i].doelpogingen) {
+                                        self.stats_vs.doelpogingen += season_matches_temp[i].doelpogingen;
+                                        self.stats_vs.goals += season_matches_temp[i].doelpunten_voor;
+                                        self.stats_vs.goalstegen += season_matches_temp[i].doelpunten_tegen;
+                                        self.stats_vs.balbezit += season_matches_temp[i].balbezit;
+                                        self.stats_vs.gewonnen_duels += season_matches_temp[i].gewonnen_duels;
+                                        self.stats_vs.passzekerheid += season_matches_temp[i].geslaagde_passes;
+                                        self.stats_vs.lengte_passes += season_matches_temp[i].lengte_passes;
+                                        self.stats_vs.tot_passes += season_matches_temp[i].tot_passes;
+                                        self.stats_vs.geel += season_matches_temp[i].geel;
+                                        self.stats_vs.rood += season_matches_temp[i].rood;
+
+                                        count++;
+                                    }
+                                }
+                            }
+                        });
+
+                        self.stats_vs.doelpogingen /= count;
+                        self.stats_vs.goals /= count;
+                        self.stats_vs.goalstegen /= count;
+                        self.stats_vs.balbezit /= count;
+                        self.stats_vs.gewonnen_duels /= count;
+                        self.stats_vs.passzekerheid /= count;
+                        self.stats_vs.lengte_passes /= count;
+                        self.stats_vs.tot_passes /= count;
+                        self.stats_vs.geel /= count;
+                        self.stats_vs.rood /= count;
+                    }, function() {
+                        $location.path('/club');
+                    });
+                }
+            } else if (self.vs == 'Gemiddelde team') {
                 if (self.team_data && self.season_index) {
                     var stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
@@ -362,54 +417,63 @@ angular.module('mainapp.club')
                     self.stats_vs.rood /= count;
                 }
             } else {
-                if (self.team_data && self.season_index) {
-                    var stats_vs_temp0 = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
+                if (self.season_index) {
+                    Api.TeamData.query(function (res) {
+                        count = 0;
 
-                    statslength = stats_vs_temp0.length;
-                    count = 0;
+                        self.stats_vs.doelpogingen = 0;
+                        self.stats_vs.goals = 0;
+                        self.stats_vs.goalstegen = 0;
+                        self.stats_vs.balbezit = 0;
+                        self.stats_vs.gewonnen_duels = 0;
+                        self.stats_vs.passzekerheid = 0;
+                        self.stats_vs.lengte_passes = 0;
+                        self.stats_vs.tot_passes = 0;
+                        self.stats_vs.geel = 0;
+                        self.stats_vs.rood = 0;
 
-                    self.stats_vs.doelpogingen = 0;
-                    self.stats_vs.goals = 0;
-                    self.stats_vs.goalstegen = 0;
-                    self.stats_vs.balbezit = 0;
-                    self.stats_vs.gewonnen_duels = 0;
-                    self.stats_vs.passzekerheid = 0;
-                    self.stats_vs.lengte_passes = 0;
-                    self.stats_vs.tot_passes = 0;
-                    self.stats_vs.geel = 0;
-                    self.stats_vs.rood = 0;
+                        angular.forEach(res, function(value, key) {
+                            if ($filter('filter')(value.team_data, {season: self.season_index}, true)[0]) {
+                                var season_matches_temp = $filter('orderBy')(($filter('filter')(value.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
-                    for (i = 0; i < statslength; i++) {
-                        if (stats_vs_temp0[i].wedstrijd && stats_vs_temp0[i].doelpogingen) {
-                            self.stats_vs.doelpogingen += stats_vs_temp0[i].doelpogingen;
-                            self.stats_vs.goals += stats_vs_temp0[i].doelpunten_voor;
-                            self.stats_vs.goalstegen += stats_vs_temp0[i].doelpunten_tegen;
-                            self.stats_vs.balbezit += stats_vs_temp0[i].balbezit;
-                            self.stats_vs.gewonnen_duels += stats_vs_temp0[i].gewonnen_duels;
-                            self.stats_vs.passzekerheid += stats_vs_temp0[i].geslaagde_passes;
-                            self.stats_vs.lengte_passes += stats_vs_temp0[i].lengte_passes;
-                            self.stats_vs.tot_passes += stats_vs_temp0[i].tot_passes;
-                            self.stats_vs.geel += stats_vs_temp0[i].geel;
-                            self.stats_vs.rood += stats_vs_temp0[i].rood;
+                                statslength = season_matches_temp.length;
 
-                            count++;
-                        }
-                    }
+                                for (i = 0; i < statslength; i++) {
+                                    if (season_matches_temp[i].wedstrijd && season_matches_temp[i].doelpogingen) {
+                                        self.stats_vs.doelpogingen += season_matches_temp[i].doelpogingen;
+                                        self.stats_vs.goals += season_matches_temp[i].doelpunten_voor;
+                                        self.stats_vs.goalstegen += season_matches_temp[i].doelpunten_tegen;
+                                        self.stats_vs.balbezit += season_matches_temp[i].balbezit;
+                                        self.stats_vs.gewonnen_duels += season_matches_temp[i].gewonnen_duels;
+                                        self.stats_vs.passzekerheid += season_matches_temp[i].geslaagde_passes;
+                                        self.stats_vs.lengte_passes += season_matches_temp[i].lengte_passes;
+                                        self.stats_vs.tot_passes += season_matches_temp[i].tot_passes;
+                                        self.stats_vs.geel += season_matches_temp[i].geel;
+                                        self.stats_vs.rood += season_matches_temp[i].rood;
 
-                    self.stats_vs.doelpogingen /= count;
-                    self.stats_vs.goals /= count;
-                    self.stats_vs.goalstegen /= count;
-                    self.stats_vs.balbezit /= count;
-                    self.stats_vs.gewonnen_duels /= count;
-                    self.stats_vs.passzekerheid /= count;
-                    self.stats_vs.lengte_passes /= count;
-                    self.stats_vs.tot_passes /= count;
-                    self.stats_vs.geel /= count;
-                    self.stats_vs.rood /= count;
+                                        count++;
+                                    }
+                                }
+                            }
+                        });
+
+                        self.stats_vs.doelpogingen /= count;
+                        self.stats_vs.goals /= count;
+                        self.stats_vs.goalstegen /= count;
+                        self.stats_vs.balbezit /= count;
+                        self.stats_vs.gewonnen_duels /= count;
+                        self.stats_vs.passzekerheid /= count;
+                        self.stats_vs.lengte_passes /= count;
+                        self.stats_vs.tot_passes /= count;
+                        self.stats_vs.geel /= count;
+                        self.stats_vs.rood /= count;
+                    }, function() {
+                        $location.path('/club');
+                    });
                 }
             }
         };
-        self.vs = 'Gemiddeld team';
+        self.vs = 'Gemiddeld JL';
         self.vsInitFunc();
 
         self.roundfilterfrom = function () {

@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="col-lg-12 content content-page content-page-full">
+
+        <div class="col-xs-12 content-players-title">
+            <div class="col-xs-12 col-sm-4 no-padding">
+                <h3 class="hidden-sm hidden-xs">Scouting</h3>
+                <h4 class="hidden-lg hidden-md">Scouting</h4>
+            </div>
+        </div>
+        <div class="col-xs-12 content-players-name">
+            <div class="col-xs-12">
+                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg"><h3>{{ data.club_name }}</h3>
+            </div>
+        </div>
+        <div ng-repeat="speler in data.player_data | orderBy:self.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+            <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
+                <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
+                <div class="col-xs-12 image">
+                    <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
+                    <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                </div>
+                <div class="col-xs-12 spelernaam"><br>{{ speler.spelerNaam }}</div>
+                <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ speler.spelerRugnummer }}</span></div>
+            </div>
+        </a></div>
+
+        <br class="clear">
+
+    </div>
+
+</div>
