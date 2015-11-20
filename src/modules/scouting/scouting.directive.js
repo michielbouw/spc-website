@@ -47,6 +47,13 @@ angular.module('mainapp.scouting')
                             'min-height': $('.content.content-page #content-players-main').height()
                         });
 
+                        $timeout(function() {
+                            $('.content.content-page .content-players.choose-player').css({
+                                'margin-top': ($('.content.content-page .content-players-left').height() / 2) - 95
+                            });
+                            $('.content.content-page .content-players.choose-player').effect('shake', {times:8, distance:10}, 4000);
+                        }, 1000);
+
                         $(function () {
                             $('[data-toggle="tooltip"]').tooltip();
                         });

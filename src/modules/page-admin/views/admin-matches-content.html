@@ -37,6 +37,13 @@
 
         <div class="col-xs-12 col-md-10 col-md-offset-2 content content-page">
 
+            <div ng-hide="!data.loading" class="loading">
+                <div class="spinner text-center">
+                    <h1><i class="fa fa-spinner fa-pulse"></i></h1>
+                    <h4>LOADING</h4>
+                </div>
+            </div>
+
             <div class="col-xs-12 content-page-title">
                 <h3 class="hidden-sm hidden-xs">Wedstrijden</h3>
                 <h4 class="hidden-lg hidden-md">Wedstrijden</h4>

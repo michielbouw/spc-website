@@ -2,10 +2,17 @@
 
     <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12 content tab-pane fade in active" role="tabpanel" id="home">
 
-        <div class="col-xs-12 content-title-top text-center" ng-hide="!data.loading" style="margin-bottom: 0;">
+        <div ng-hide="!data.loading" class="loading">
+            <div class="spinner text-center">
+                <h1><i class="fa fa-spinner fa-pulse"></i></h1>
+                <h4>LOADING</h4>
+            </div>
+        </div>
+
+        <!--<div class="col-xs-12 content-title-top text-center" ng-hide="!data.loading" style="margin-bottom: 0;">
             <h4><i class="fa fa-spinner fa-pulse"></i></h4>
             <h4 class="small">Loading</h4>
-        </div>
+        </div>-->
 
         <div class="col-xs-12 content-title-top-match">
             <h4>Wedstrijd</h4>
@@ -18,10 +25,10 @@
             <!--<h4 class="small"><span><button type="button" class="btn btn-primary btn-xs info" data-toggle="collapse" data-target="#collapseInfoOpstelling" aria-expanded="false" aria-controls="collapseInfoOpstelling"><i class="fa fa-info"></i></button></span></h4>-->
         </div>
 
-        <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
+        <!--<div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
             <h4><i class="fa fa-spinner fa-pulse"></i></h4>
             <h4 class="small">Loading</h4>
-        </div>
+        </div>-->
 
         <div class="col-xs-12 collapse" id="collapseInfoOpstelling">
             <p><small>Overzicht van de opstelling met naam en rugnummers erbij. Als je met de muis over het poppetje in
@@ -671,10 +678,10 @@
             </div>
         </div>
 
-        <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
+        <!--<div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
             <h4><i class="fa fa-spinner fa-pulse"></i></h4>
             <h4 class="small">Loading</h4>
-        </div>
+        </div>-->
 
         <div id="wedstrijd" class="col-xs-12 content-title text-center">
             <h4><p class="link pull-right hidden-md hidden-lg"><a scroll-to="top" href=""><i class="fa fa-arrow-up"></i></a></p>Wedstrijdverloop</h4>
@@ -803,10 +810,10 @@
             </div>
         </div>
 
-        <div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
+        <!--<div class="col-xs-12 content-title text-center" ng-hide="!data.loading">
             <h4><i class="fa fa-spinner fa-pulse"></i></h4>
             <h4 class="small">Loading</h4>
-        </div>
+        </div>-->
 
         <div class="col-xs-12 collapse" id="collapseInfoWedstrijd">
             <p><small>Een overzicht van alle gebeurtenissen tijdens de wedstrijd en tijdens eventuele verlenging.</small></p>

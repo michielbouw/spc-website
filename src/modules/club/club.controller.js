@@ -96,7 +96,7 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde JL';
+                self.vs = 'Gemiddelde team';
                 self.vsInitFunc();
             }, function() {
                 $location.path('/404');
@@ -160,7 +160,7 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde JL';
+                self.vs = 'Gemiddelde team';
                 self.vsInitFunc();
             }
         };
@@ -173,6 +173,7 @@ angular.module('mainapp.club')
 
             if (self.vs == 'Gemiddelde JL') {
                 if (self.season_index) {
+                    self.loading = true;
                     Api.TeamData.query(function (res) {
                         count = 0;
 
@@ -222,6 +223,8 @@ angular.module('mainapp.club')
                         self.stats_vs.tot_passes /= count;
                         self.stats_vs.geel /= count;
                         self.stats_vs.rood /= count;
+
+                        self.loading = false;
                     }, function() {
                         $location.path('/club');
                     });
@@ -473,7 +476,7 @@ angular.module('mainapp.club')
                 }
             }
         };
-        self.vs = 'Gemiddeld JL';
+        self.vs = 'Gemiddeld team';
         self.vsInitFunc();
 
         self.roundfilterfrom = function () {

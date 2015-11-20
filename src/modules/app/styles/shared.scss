@@ -437,6 +437,29 @@ Standard layout
   min-height: 60vh;
   padding-bottom: 15px;
 
+  .loading {
+    z-index: 99999;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 65px);
+    background-color: rgba(255, 255, 255, 0.5);
+
+    .spinner {
+      z-index: 999999;
+      position: absolute;
+      color: $middleblue;
+      top: 50%;
+      width: 100%;
+
+      h1 {
+        font-size: 60px;
+      }
+    }
+  }
+
   .content-page-title {
     font-family: $font-title;
     padding-top: 0px;

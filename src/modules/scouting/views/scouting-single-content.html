@@ -116,6 +116,9 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-10" id="content-players-main">
+        <div ng-if="!data.player_stats" class="col-xs-12 col-sm-10 content-players choose-player">
+            <div class="col-xs-12 no-padding"><h4><i class="fa fa-arrow-left"></i> KIES EEN SPELER</h4></div>
+        </div>
         <div ng-if="data.player_stats" class="col-xs-12 col-sm-10 content-players">
             <div class="col-xs-12 no-padding"><img src="/images/doelpogingen.png" width="5%"><strong> {{ data.matches_played }} wedstrijden gespeeld <span ng-if="data.player_stats.spelerType == 'keeper'">en {{ data.clean_sheets }} clean sheet<span ng-if="data.clean_sheets.toFixed(0) != 1">s</span></span></strong></div>
 

@@ -87,7 +87,6 @@ angular.module('mainapp.match')
                 } else {
                     if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
                         Api.Me.get(function (res1) {
-                            //$rootScope.currentUser = res1.data;
                             $sessionStorage.currentUser = res1.data;
 
                             $sessionStorage.currentClub = {};
@@ -95,12 +94,6 @@ angular.module('mainapp.match')
                             $sessionStorage.currentClub.slug = res1.data.club_slug;
                             $sessionStorage.currentClub.teams = res1.data.teams;
                             $sessionStorage.currentClub.colors = [];
-
-                            //$rootScope.currentClub = {};
-                            //$rootScope.currentClub.name = res1.data.club;
-                            //$rootScope.currentClub.slug = res1.data.club_slug;
-                            //$rootScope.currentClub.teams = res1.data.teams;
-                            //$rootScope.currentClub.colors = [];
 
                             if (res1.data.role == 'admin') {
                                 self.matchshort = res;
@@ -401,7 +394,6 @@ angular.module('mainapp.match')
             } else {
                 if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
                     Api.Me.get(function (res1) {
-                        //$rootScope.currentUser = res1.data;
                         $sessionStorage.currentUser = res1.data;
 
                         $sessionStorage.currentClub = {};
@@ -409,12 +401,6 @@ angular.module('mainapp.match')
                         $sessionStorage.currentClub.slug = res1.data.club_slug;
                         $sessionStorage.currentClub.teams = res1.data.teams;
                         $sessionStorage.currentClub.colors = [];
-
-                        //$rootScope.currentClub = {};
-                        //$rootScope.currentClub.name = res1.data.club;
-                        //$rootScope.currentClub.slug = res1.data.club_slug;
-                        //$rootScope.currentClub.teams = res1.data.teams;
-                        //$rootScope.currentClub.colors = [];
 
                         Api.Club.get({
                             _slug: res.data.club_slug
@@ -841,7 +827,6 @@ angular.module('mainapp.match')
                 } else {
                     if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
                         Api.Me.get(function (res1) {
-                            //$rootScope.currentUser = res1.data;
                             $sessionStorage.currentUser = res1.data;
 
                             $sessionStorage.currentClub = {};
@@ -849,12 +834,6 @@ angular.module('mainapp.match')
                             $sessionStorage.currentClub.slug = res1.data.club_slug;
                             $sessionStorage.currentClub.teams = res1.data.teams;
                             $sessionStorage.currentClub.colors = [];
-
-                            //$rootScope.currentClub = {};
-                            //$rootScope.currentClub.name = res1.data.club;
-                            //$rootScope.currentClub.slug = res1.data.club_slug;
-                            //$rootScope.currentClub.teams = res1.data.teams;
-                            //$rootScope.currentClub.colors = [];
 
                             Api.Club.get({
                                 _slug: res.data.club_slug

@@ -5,8 +5,11 @@ angular.module('mainapp.pageAdmin')
         var self = this;
         self.datetime = new Date();
 
+        self.loading = true;
+
         Api.Matches.query(function(res) {
             self.matches = res;
+            self.loading = false;
         });
 
         self.orderMatches = function(match) {

@@ -5,8 +5,11 @@ angular.module('mainapp.pageAdmin')
         var self = this;
         self.datetime = new Date();
 
+        self.loading = true;
+
         Api.Spelers.query(function(res) {
             self.spelers = res;
+            self.loading = false;
         });
 
         //self.orderSpelers = 'clubNaam';

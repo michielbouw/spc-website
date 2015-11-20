@@ -31,12 +31,15 @@ angular.module('mainapp.scouting')
 
                 self.player_data = $filter('orderBy')(res.player_data, 'spelerNaam');
 
-                $timeout(function () {
-                    self.speler_info = 'Gemiddelde seizoen';
-                    self.round_index = '';
-                    self.speler = self.player_data[0].playerID;
-                    self.spelerInitFunc();
-                }, 400);
+                self.speler_info = 'Gemiddelde seizoen';
+                self.round_index = '';
+
+                //$timeout(function () {
+                //    self.speler_info = 'Gemiddelde seizoen';
+                //    self.round_index = '';
+                //    self.speler = self.player_data[0].playerID;
+                //    self.spelerInitFunc();
+                //}, 1000);
             }, function() {
                 $location.path('/404');
             });
@@ -65,6 +68,10 @@ angular.module('mainapp.scouting')
 
                 self.player_stats = {};
                 self.player_stats = angular.copy($filter('filter')(self.player_data, {playerID: self.playerID}, true)[0]);
+
+                $timeout(function () {
+                    $('.content.content-page .content-players.choose-player').hide();
+                }, 0);
 
                 if (!self.season_index || new_player) {
                     self.season_index = self.player_stats.matches[self.player_stats.matches.length - 1].season;
