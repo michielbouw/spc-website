@@ -3,6 +3,7 @@ var mongoose    = require('mongoose');
 var _           = require('underscore');
 var forEach     = require('array-foreach');
 var Buffer      = require('buffer').Buffer;
+var mailer      = require('express-mailer');
 
 var Club        = require('../models/club');
 var MatchData   = require('../models/match_data');
@@ -12,7 +13,7 @@ var TeamData    = require('../models/team_data');
 
 module.exports = ImportController = {
 
-    match : function(file_path)
+    match : function(file_path, res)
     {
         var data;
 
@@ -25,7 +26,24 @@ module.exports = ImportController = {
         };
         
         fs.readFile(file_path, 'utf8', function handleFile(err, data1) {
-            if (err) { console.log(err); throw err; }
+            if (err) {
+                console.log(err);
+                res.mailer.send('mailer/error', {
+                    to: 'contact@mpbeta.nl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                    subject: 'A 404 Error Has Occurred On soccerpc.nl', // REQUIRED.
+                    // All additional properties are also passed to the template as local variables.
+                    title: 'A 404 Error Has Occurred On soccerpc.nl',
+                    error: err
+                }, function (err1) {
+                    if (err1) {
+                        // handle error
+                        console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
+                    }
+
+                    console.log('Error email send to administrator\n\n' + err);
+                });
+                throw err;
+            }
             data = JSON.parse(data1);
 
             var datetime = new Date();

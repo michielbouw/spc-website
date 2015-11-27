@@ -61,9 +61,9 @@ angular.module('mainapp', [
                             ip_info = location;
                         }
                     }).always(function() {
-                        if ($filter('filter')(res.ip_addresses, {ip_address: ip_info.id}, true)) {
-                            $filter('filter')(res.ip_addresses, {ip_address: ip_info.id}, true)[0].browser = navigator.appName + ' ' + navigator.userAgent;
-                            $filter('filter')(res.ip_addresses, {ip_address: ip_info.id}, true)[0].date = new Date();
+                        if ($filter('filter')(res.ip_addresses, {ip_address: ip_info.ip}, true) && $filter('filter')(res.ip_addresses, {ip_address: ip_info.ip}, true)[0]) {
+                            $filter('filter')(res.ip_addresses, {ip_address: ip_info.ip}, true)[0].browser = navigator.appName + ' ' + navigator.userAgent;
+                            $filter('filter')(res.ip_addresses, {ip_address: ip_info.ip}, true)[0].date = new Date();
                         } else {
                             var temp = {};
                             temp.ip_address = ip_info.ip;
@@ -82,27 +82,27 @@ angular.module('mainapp', [
                             ip_addresses: res.ip_addresses
                         }, function (res1) {
                         });
+                    });
 
-                        $sessionStorage.currentUser = res;
+                    $sessionStorage.currentUser = res;
 
-                        $sessionStorage.currentClub = {};
-                        $sessionStorage.currentClub.name = res.club;
-                        $sessionStorage.currentClub.slug = res.club_slug;
-                        $sessionStorage.currentClub.teams = res.teams;
-                        $sessionStorage.currentClub.colors = [];
+                    $sessionStorage.currentClub = {};
+                    $sessionStorage.currentClub.name = res.club;
+                    $sessionStorage.currentClub.slug = res.club_slug;
+                    $sessionStorage.currentClub.teams = res.teams;
+                    $sessionStorage.currentClub.colors = [];
 
-                        Api.Club.get({
-                            _slug: res.club_slug
-                        }, function(res2) {
-                            $sessionStorage.currentClub.colors = res2.colors;
-                            $sessionStorage.currentClub.spc_package = res2.spc_package;
+                    Api.Club.get({
+                        _slug: res.club_slug
+                    }, function(res2) {
+                        $sessionStorage.currentClub.colors = res2.colors;
+                        $sessionStorage.currentClub.spc_package = res2.spc_package;
 
-                            $rootScope.currentUser = $sessionStorage.currentUser;
-                            $rootScope.currentClub = $sessionStorage.currentClub;
-                        }, function() {
-                            $rootScope.currentUser = $sessionStorage.currentUser;
-                            $rootScope.currentClub = $sessionStorage.currentClub;
-                        });
+                        $rootScope.currentUser = $sessionStorage.currentUser;
+                        $rootScope.currentClub = $sessionStorage.currentClub;
+                    }, function() {
+                        $rootScope.currentUser = $sessionStorage.currentUser;
+                        $rootScope.currentClub = $sessionStorage.currentClub;
                     });
                 });
             }

@@ -13,6 +13,14 @@ angular.module('mainapp.memberAuth', [])
                 templateUrl: 	'member-auth/views/signin.html',
                 access: {
                     requiredLogin: false,
+                    //permission: 'public'
+                    permission: 'admin'
+                }
+            })
+            .when('/getaccount', {
+                templateUrl: 	'member-auth/views/getaccount.html',
+                access: {
+                    requiredLogin: false,
                     permission: 'public'
                 }
             });

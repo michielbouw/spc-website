@@ -9,6 +9,10 @@ angular.module('mainapp.memberAuth')
                 return (AuthenticationService.isLogged);
             };
 
+            Api.Clubs.query(function(res) {
+                self.clubs = res;
+            });
+
             if (AuthenticationService.isLogged && !$sessionStorage.currentUser && !$sessionStorage.currentClub) {
                 Api.Me.get(function (res) {
                     $sessionStorage.currentUser = res.data;
@@ -129,12 +133,20 @@ angular.module('mainapp.memberAuth')
                                 ip_info = location;
                             }
                         }).always(function() {
+                            if (self.login.fan_club) {
+                                self.login.fan_club_slug = self.login.fan_club.trim().toLowerCase().replace(/\s+/g, '');
+                            } else {
+                                self.login.fan_club_slug = '';
+                            }
+
                             Api.Signin.post({
                                 email: self.login.email,
                                 password: self.login.password,
                                 first_name: self.login.first_name,
                                 middle_name: self.login.middle_name,
                                 last_name: self.login.last_name,
+                                fan_club: self.login.fan_club,
+                                fan_club_slug: self.login.fan_club_slug,
                                 datetime: self.datetime,
                                 ip_info: ip_info,
                                 browser: navigator.appName + ' ' + navigator.userAgent
@@ -146,10 +158,64 @@ angular.module('mainapp.memberAuth')
                                 }
                             }, function () {
                                 $rootScope.error = 'Er ging iets mis, account niet aangemaakt';
+                                alert('Er ging iets mis, account niet aangemaakt');
                             });
                         });
                     } else {
                         $rootScope.error = 'Je hebt het wachtwoord niet (correct) bevestigd';
+                        alert('Je hebt het wachtwoord niet (correct) bevestigd');
+                    }
+                }
+            };
+            self.getAccount = function () {
+                if (self.login.email !== undefined && self.login.password !== undefined && self.login.password2 !== undefined) {
+
+                    if (self.login.password === self.login.password2) {
+                        if ( self.login.password.length > 5 && self.login.password.match(/[a-z]/) && self.login.password.match(/[0-9]/) ) {
+                            var ip_info;
+                            $.ajax({
+                                url: '//freegeoip.net/json/',
+                                type: 'POST',
+                                dataType: 'jsonp',
+                                success: function (location) {
+                                    ip_info = location;
+                                }
+                            }).always(function () {
+                                if (self.login.club) {
+                                    self.login.club_slug = self.login.club.trim().toLowerCase().replace(/\s+/g, '');
+                                } else {
+                                    self.login.club_slug = '';
+                                }
+
+                                Api.GetAccount.post({
+                                    email: self.login.email,
+                                    password: self.login.password,
+                                    first_name: self.login.first_name,
+                                    middle_name: self.login.middle_name,
+                                    last_name: self.login.last_name,
+                                    club: self.login.club,
+                                    club_slug: self.login.club_slug,
+                                    datetime: self.datetime,
+                                    ip_info: ip_info,
+                                    browser: navigator.appName + ' ' + navigator.userAgent
+                                }, function (res) {
+                                    if (res.type === false) {
+                                        alert(res.data);
+                                    } else {
+                                        $location.path("/");
+                                    }
+                                }, function () {
+                                    $rootScope.error = 'Er ging iets mis, account niet aangemaakt';
+                                    alert('Er ging iets mis, account niet aangemaakt');
+                                });
+                            });
+                        } else {
+                            $rootScope.error = 'Een wachtwoord moet tenminste 1 letter en 1 cijfer bevatten en minimaal 6 tekens lang zijn';
+                            alert('Een wachtwoord moet tenminste 1 letter en 1 cijfer bevatten en minimaal 6 tekens lang zijn');
+                        }
+                    } else {
+                        $rootScope.error = 'Je hebt het wachtwoord niet (correct) bevestigd';
+                        alert('Je hebt het wachtwoord niet (correct) bevestigd');
                     }
                 }
             };

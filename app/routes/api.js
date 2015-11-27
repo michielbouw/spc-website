@@ -25,7 +25,7 @@ router.use(function(req, res, next) {
 //router.put('/news/:_slug',          UserController.ensureAuthorized, NewsController.put);
 //router.delete('/news/:_slug',       UserController.ensureAuthorized, NewsController.delete);
 
-router.get('/clubs',                UserController.ensureAuthorized, ClubController.query);
+router.get('/clubs',                ClubController.query);
 router.get('/clubs/:_slug',         UserController.ensureAuthorized, ClubController.get);
 router.post('/clubs',               UserController.ensureAuthorized, ClubController.post);
 router.put('/clubs/:_slug',         UserController.ensureAuthorized, ClubController.put);
@@ -72,6 +72,7 @@ router.post('/media/:slug',         UserController.ensureAuthorized, multipartMi
 
 router.post('/login',               UserController.login);
 router.post('/signin',              UserController.signin);
+router.post('/getaccount',          UserController.get_account);
 router.get('/me',                   UserController.ensureAuthorized, UserController.me);
 router.get('/users',                UserController.ensureAuthorized, UserController.query);
 router.get('/users/:_id',           UserController.ensureAuthorized, UserController.get);

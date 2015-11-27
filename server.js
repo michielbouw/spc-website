@@ -94,7 +94,7 @@ app.use(function(err, req, res, next) {
                 console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
             }
 
-            console.log('Error email send to: contact@mpbeta.nl\n\n' + err);
+            console.log('Error email send to administrator\n\n' + err);
         });
         res.render('errors/404');
     } else {
@@ -111,7 +111,7 @@ app.use(function(err, req, res, next) {
                 console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
             }
 
-            console.log('Error email send to: contact@mpbeta.nl\n\n' + err);
+            console.log('Error email send to administrator\n\n' + err);
         });
         res.render('errors/500');
     }
@@ -135,7 +135,7 @@ app.listen(port, function(err) {
                 return console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
             }
 
-            return console.log('Error email send to: contact@mpbeta.nl\n\n' + err);
+            return console.log('Error email send to administrator\n\n' + err);
         });
     }
 

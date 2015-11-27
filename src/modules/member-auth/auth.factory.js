@@ -63,12 +63,110 @@ angular.module('mainapp.memberAuth')
             }
         };
     })
-    .run(function($rootScope, $location, AuthenticationService, $sessionStorage, $localStorage, Api) {
+    .run(function($rootScope, $location, AuthenticationService, $sessionStorage, $localStorage, Api, $filter, $timeout) {
         $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
-            if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged && nextRoute != "/login") {
+            if (AuthenticationService.isLogged) {
+                var temp = {};
+                var _t;
+
+                $timeout(function () {
+                    if ($localStorage.id && $sessionStorage.currentUser) {
+                        if ($sessionStorage.currentUser.visits) {
+                            _t = angular.copy($sessionStorage.currentUser.visits);
+                        } else {
+                            _t = [];
+                        }
+
+                        if ($filter('filter')(_t, {page_url: $location.path()}, true) && $filter('filter')(_t, {page_url: $location.path()}, true)[0]) {
+                            $filter('filter')(_t, {page_url: $location.path()}, true)[0].last_visit = new Date();
+                            $filter('filter')(_t, {page_url: $location.path()}, true)[0].count = Number($filter('filter')(_t, {page_url: $location.path()}, true)[0].count) + 1;
+                        } else {
+                            temp.page_url = $location.path();
+                            temp.last_visit = new Date();
+                            temp.count = 1;
+                            _t.push(temp);
+                        }
+
+                        console.log(JSON.stringify($location.path()));
+
+                        Api.User.put({
+                            _id: $localStorage.id
+                        }, {
+                            visits: _t
+                        }, function (res1) {
+                            Api.User.get({
+                                _id: $localStorage.id
+                            }, function (res) {
+                                $sessionStorage.currentUser = res;
+                                $rootScope.currentUser = $sessionStorage.currentUser;
+                            });
+                        });
+                    } else if (!$localStorage.id && $sessionStorage.currentUser && $sessionStorage.currentUser._id) {
+                        if ($sessionStorage.currentUser.visits) {
+                            _t = angular.copy($sessionStorage.currentUser.visits);
+                        } else {
+                            _t = [];
+                        }
+
+                        if ($filter('filter')(_t, {page_url: $location.path()}, true) && $filter('filter')(_t, {page_url: $location.path()}, true)[0]) {
+                            $filter('filter')(_t, {page_url: $location.path()}, true)[0].last_visit = new Date();
+                            $filter('filter')(_t, {page_url: $location.path()}, true)[0].count = Number($filter('filter')(_t, {page_url: $location.path()}, true)[0].count) + 1;
+                        } else {
+                            temp.page_url = $location.path();
+                            temp.last_visit = new Date();
+                            temp.count = 1;
+                            _t.push(temp);
+                        }
+
+                        Api.User.put({
+                            _id: $sessionStorage.currentUser._id
+                        }, {
+                            visits: _t
+                        }, function (res1) {
+                            Api.User.get({
+                                _id: $localStorage.id
+                            }, function (res) {
+                                $sessionStorage.currentUser = res;
+                                $rootScope.currentUser = $sessionStorage.currentUser;
+                            });
+                        });
+                    } else {
+                        if ($rootScope.currentUser.visits) {
+                            _t = angular.copy($rootScope.currentUser.visits);
+                        } else {
+                            _t = [];
+                        }
+
+                        if ($filter('filter')(_t, {page_url: $location.path()}, true) && $filter('filter')(_t, {page_url: $location.path()}, true)[0]) {
+                            $filter('filter')(_t, {page_url: $location.path()}, true)[0].last_visit = new Date();
+                            $filter('filter')(_t, {page_url: $location.path()}, true)[0].count = Number($filter('filter')(_t, {page_url: $location.path()}, true)[0].count) + 1;
+                        } else {
+                            temp.page_url = $location.path();
+                            temp.last_visit = new Date();
+                            temp.count = 1;
+                            _t.push(temp);
+                        }
+
+                        Api.User.put({
+                            _id: $rootScope.currentUser._id
+                        }, {
+                            visits: _t
+                        }, function (res1) {
+                            Api.User.get({
+                                _id: $localStorage.id
+                            }, function (res) {
+                                $sessionStorage.currentUser = res;
+                                $rootScope.currentUser = $sessionStorage.currentUser;
+                            });
+                        });
+                    }
+                }, 200);
+            }
+
+            if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged && nextRoute !== "/login") {
                 $location.path("/login");
             }
-            else if (nextRoute.access.requiredLogin && AuthenticationService.isLogged && nextRoute != "/login") {
+            else if (nextRoute.access.requiredLogin && AuthenticationService.isLogged && nextRoute !== "/login") {
                 // check user permissions by checking url permission and user role to make sure user has correct authority
                 var user = {};
                 if ($sessionStorage.role) {

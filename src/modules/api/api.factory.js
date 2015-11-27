@@ -26,6 +26,7 @@ angular.module('mainapp.api')
             Speler:         $resource(url1 + 'spelers/:_id',      {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
             Login:          $resource(url1 + 'login',             {},                     { 'post': {method:'POST'} }),
             Signin:         $resource(url1 + 'signin',            {},                     { 'post': {method:'POST'} }),
+            GetAccount:     $resource(url1 + 'getaccount',        {},                     { 'post': {method:'POST'} }),
             Me:             $resource(url1 + 'me',                {},                     { 'get': {method:'GET'} }),
             Users:          $resource(url1 + 'users',             {},                     { 'query': {method:'GET', isArray:true} }),
             User:           $resource(url1 + 'users/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} })
