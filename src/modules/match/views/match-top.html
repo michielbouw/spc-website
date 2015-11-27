@@ -44,12 +44,12 @@
             <br>
             <select ng-model="data.match_index" class="form-control input-sm"
                     ng-change="data.matchInitFunc()"
-                    ng-options="match.matchID as match.match_info.wedstrijd group by match.match_info.datum for match in data.season_matches | orderBy:'match_info.datum':-1">
+                    ng-options="match.matchID as match.match_info.wedstrijd group by (match.match_info.datum | date:'d MMM yyyy') for match in data.season_matches | orderBy:'match_info.datum':-1">
             </select>
             <br>
         </div>
         <div class="col-xs-12 text-center" ng-show="data.match_index">
-            <button class="btn btn-xs btn-info"><a ng-href="/wedstrijd/{{ data.match_index }}">Ga naar deze wedstrijd</a></button>
+            <button class="btn btn-xs btn-primary"><a ng-href="/wedstrijd/{{ data.match_index }}">Ga naar deze wedstrijd</a></button>
             <br><br>
         </div>
     </div>

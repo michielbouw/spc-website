@@ -1,6 +1,7 @@
 var mongoose    = require('mongoose');
 var jwt         = require('jsonwebtoken');
 var bcrypt      = require('bcrypt');
+var _           = require('underscore');
 var User        = require('../models/user');
 
 module.exports = UserController = {
@@ -29,6 +30,19 @@ module.exports = UserController = {
                                 });
                             } else if (res1) {
                                 user.last_login = req.body.datetime;
+
+                                if (_.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true)) {
+                                    _.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
+                                } else {
+                                    var temp = {};
+                                    temp.ip_address = req.body.ip_info.ip;
+                                    temp.country_code = req.body.ip_info.country_code;
+                                    temp.city = req.body.ip_info.city;
+                                    temp.browser = navigator.appName + ' ' + navigator.userAgent;
+                                    temp.date = req.body.datetime;
+                                    user.ip_addresses.push(temp);
+                                }
+
                                 user.number_of_logins += 1;
                                 user.save();
                                 res.json({
@@ -79,6 +93,18 @@ module.exports = UserController = {
                     userModel.middle_name = req.body.middle_name;
                     userModel.last_name = req.body.last_name;
                     userModel.last_login = req.body.datetime;
+
+                    if (_.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)) {
+                        _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
+                    } else {
+                        var temp = {};
+                        temp.ip_address = req.body.ip_info.ip;
+                        temp.country_code = req.body.ip_info.country_code;
+                        temp.city = req.body.ip_info.city;
+                        temp.browser = navigator.appName + ' ' + navigator.userAgent;
+                        temp.date = req.body.datetime;
+                        userModel.ip_addresses.push(temp);
+                    }
 
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(req.body.password, salt, function(err, hash) {

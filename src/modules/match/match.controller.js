@@ -91,6 +91,16 @@ angular.module('mainapp.match')
         self.seasonInitFunc = function () {
             self.season_matches = [];
             self.season_matches = $filter('filter')(self.matches, {seizoen: self.season_index}, true);
+
+            angular.forEach(self.season_matches, function(value, key) {
+                var DateInNumber = value.match_info.datum;
+                var day = DateInNumber.split('-')[0];
+                var month = DateInNumber.split('-')[1];
+                var year = DateInNumber.split('-')[2];
+                var monthName = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+                var dateInAlphabatical = day + ' ' + monthName[month - 1] + ' ' + year;
+                value.match_info.datum = new Date(dateInAlphabatical);
+            });
         };
         self.matchInitFunc = function () {
             self.match = {};

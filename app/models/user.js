@@ -35,5 +35,12 @@ module.exports = mongoose.model('User', {
         page_url: { type: String },
         count: { type: Number, default: 0 },
         last_visit: { type: Date, default: Date.now }
+    }],
+    ip_addresses: [{
+        ip_address: { type: String },
+        country_code: { type: String },
+        city: { type: String },
+        browser: { type: String },
+        date: { type: Date, default: Date.now }
     }]
 });

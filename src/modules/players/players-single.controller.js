@@ -93,13 +93,14 @@ angular.module('mainapp.players')
                         $('.slider-control .slider').slider({
                             range: true,
                             min: temp0,
+                            max: temp1,
                             values: $scope.rounds
                         });
                         $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
                         } else {
-                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width());
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
                         }
                     });
                 }, 400);
@@ -190,13 +191,14 @@ angular.module('mainapp.players')
                         $('.slider-control .slider').slider({
                             range: true,
                             min: temp0,
+                            max: temp1,
                             values: $scope.rounds
                         });
                         $('.content-players-select .round0').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width() );
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
                         } else {
-                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width());
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
                         }
                     });
                 }, 400);
@@ -537,10 +539,10 @@ angular.module('mainapp.players')
 
                     self.stats_vs.passzekerheid /= count1;
                     self.stats_vs.pass_lengte /= count1;
-                    self.stats_vs.geel /= count1;
-                    self.stats_vs.rood /= count1;
+                    //self.stats_vs.geel /= count1;
+                    //self.stats_vs.rood /= count1;
                     if (self.player_stats.spelerType == 'keeper') {
-                        self.stats_vs.doelpunten_tegen /= count1;
+                        //self.stats_vs.doelpunten_tegen /= count1;
                         self.stats_vs.reddingen /= count1;
                         self.stats_vs.gevangen_ballen /= count1;
                         self.stats_vs.weggestompte_ballen /= count1;
@@ -559,7 +561,7 @@ angular.module('mainapp.players')
                             self.chart_keeper.datasets[0].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
                         }, 800);
                     } else {
-                        self.stats_vs.doelpunten /= count1;
+                        //self.stats_vs.doelpunten /= count1;
                         self.stats_vs.doelpogingen /= count1;
                         self.stats_vs.doelpogingen_opdoel /= count1;
                         self.stats_vs.aantal_passes /= count1;
@@ -1068,7 +1070,7 @@ angular.module('mainapp.players')
                 if ($scope.rounds[0] == $scope.rounds[1]) {
                     $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
                 } else {
-                    $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-players-select .round0').width());
+                    $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
                 }
             }, 400);
 

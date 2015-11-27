@@ -40,7 +40,7 @@ angular.module('mainapp', [
     .run(['$anchorScroll', function($anchorScroll) {
         $anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
     }])
-    .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService, $rootScope) {
+    .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService, $rootScope, $filter) {
         //Set credentials if remember in localstorage
         if ($localStorage.token && $localStorage.remember && $localStorage.role) {
             AuthenticationService.isLogged = true;
@@ -52,33 +52,57 @@ angular.module('mainapp', [
                 Api.User.get({
                     _id: $localStorage.id
                 }, function (res) {
-                    Api.User.put({
-                        _id: $localStorage.id
-                    }, {
-                        last_login: new Date(),
-                        number_of_logins: Number(res.number_of_logins + 1)
-                    }, function (res1) {
-                    });
+                    var ip_info;
+                    $.ajax({
+                        url: '//freegeoip.net/json/',
+                        type: 'POST',
+                        dataType: 'jsonp',
+                        success: function (location) {
+                            ip_info = location;
+                        }
+                    }).always(function() {
+                        if ($filter('filter')(res.ip_addresses, {ip_address: ip_info.id}, true)) {
+                            $filter('filter')(res.ip_addresses, {ip_address: ip_info.id}, true)[0].browser = navigator.appName + ' ' + navigator.userAgent;
+                            $filter('filter')(res.ip_addresses, {ip_address: ip_info.id}, true)[0].date = new Date();
+                        } else {
+                            var temp = {};
+                            temp.ip_address = ip_info.ip;
+                            temp.country_code = ip_info.country_code;
+                            temp.city = ip_info.city;
+                            temp.browser = navigator.appName + ' ' + navigator.userAgent;
+                            temp.date = new Date();
+                            res.ip_addresses.push(temp);
+                        }
 
-                    $sessionStorage.currentUser = res;
+                        Api.User.put({
+                            _id: $localStorage.id
+                        }, {
+                            last_login: new Date(),
+                            number_of_logins: Number(res.number_of_logins + 1),
+                            ip_addresses: res.ip_addresses
+                        }, function (res1) {
+                        });
 
-                    $sessionStorage.currentClub = {};
-                    $sessionStorage.currentClub.name = res.club;
-                    $sessionStorage.currentClub.slug = res.club_slug;
-                    $sessionStorage.currentClub.teams = res.teams;
-                    $sessionStorage.currentClub.colors = [];
+                        $sessionStorage.currentUser = res;
 
-                    Api.Club.get({
-                        _slug: res.club_slug
-                    }, function(res2) {
-                        $sessionStorage.currentClub.colors = res2.colors;
-                        $sessionStorage.currentClub.spc_package = res2.spc_package;
+                        $sessionStorage.currentClub = {};
+                        $sessionStorage.currentClub.name = res.club;
+                        $sessionStorage.currentClub.slug = res.club_slug;
+                        $sessionStorage.currentClub.teams = res.teams;
+                        $sessionStorage.currentClub.colors = [];
 
-                        $rootScope.currentUser = $sessionStorage.currentUser;
-                        $rootScope.currentClub = $sessionStorage.currentClub;
-                    }, function() {
-                        $rootScope.currentUser = $sessionStorage.currentUser;
-                        $rootScope.currentClub = $sessionStorage.currentClub;
+                        Api.Club.get({
+                            _slug: res.club_slug
+                        }, function(res2) {
+                            $sessionStorage.currentClub.colors = res2.colors;
+                            $sessionStorage.currentClub.spc_package = res2.spc_package;
+
+                            $rootScope.currentUser = $sessionStorage.currentUser;
+                            $rootScope.currentClub = $sessionStorage.currentClub;
+                        }, function() {
+                            $rootScope.currentUser = $sessionStorage.currentUser;
+                            $rootScope.currentClub = $sessionStorage.currentClub;
+                        });
                     });
                 });
             }

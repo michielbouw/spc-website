@@ -63,13 +63,14 @@ angular.module('mainapp.club')
                         $('.slider-control .slider').slider({
                             range: true,
                             min: temp0,
+                            max: temp1,
                             values: $scope.rounds
                         });
                         $('.content-club-select .round0').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width() );
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - 0.5 * $('.content-club-select .round0').width());
                         } else {
-                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width());
+                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
                         }
                     });
                 }, 400);
@@ -96,7 +97,7 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde team';
+                self.vs = 'Gemiddelde JL';
                 self.vsInitFunc();
             }, function() {
                 $location.path('/404');
@@ -127,13 +128,14 @@ angular.module('mainapp.club')
                         $('.slider-control .slider').slider({
                             range: true,
                             min: temp0,
+                            max: temp1,
                             values: $scope.rounds
                         });
                         $('.content-club-select .round0').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width() );
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - 0.5 * $('.content-club-select .round0').width());
                         } else {
-                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width());
+                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
                         }
                     });
                 }, 400);
@@ -160,7 +162,7 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde team';
+                self.vs = 'Gemiddelde JL';
                 self.vsInitFunc();
             }
         };
@@ -476,7 +478,7 @@ angular.module('mainapp.club')
                 }
             }
         };
-        self.vs = 'Gemiddeld team';
+        self.vs = 'Gemiddeld JL';
         self.vsInitFunc();
 
         self.roundfilterfrom = function () {
@@ -492,7 +494,7 @@ angular.module('mainapp.club')
                 if ($scope.rounds[0] == $scope.rounds[1]) {
                     $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - 0.5 * $('.content-club-select .round0').width());
                 } else {
-                    $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.25 * $('.content-club-select .round0').width());
+                    $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
                 }
             }, 400);
 
