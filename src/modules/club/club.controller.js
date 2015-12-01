@@ -70,7 +70,7 @@ angular.module('mainapp.club')
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - 0.5 * $('.content-club-select .round0').width());
                         } else {
-                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
+                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.75 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
                         }
                     });
                 }, 400);
@@ -135,7 +135,7 @@ angular.module('mainapp.club')
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - 0.5 * $('.content-club-select .round0').width());
                         } else {
-                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
+                            $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.75 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
                         }
                     });
                 }, 400);
@@ -494,7 +494,7 @@ angular.module('mainapp.club')
                 if ($scope.rounds[0] == $scope.rounds[1]) {
                     $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - 0.5 * $('.content-club-select .round0').width());
                 } else {
-                    $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
+                    $('.content-club-select .round1').css('margin-left', $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.75 * $('.content-club-select .round1').width() - $('.content-club-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-club-select .round0').width());
                 }
             }, 400);
 

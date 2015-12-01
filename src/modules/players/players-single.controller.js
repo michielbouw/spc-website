@@ -100,7 +100,7 @@ angular.module('mainapp.players')
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
                         } else {
-                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.75 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
                         }
                     });
                 }, 400);
@@ -198,7 +198,7 @@ angular.module('mainapp.players')
                         if ($scope.rounds[0] == $scope.rounds[1]) {
                             $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
                         } else {
-                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
+                            $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.75 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
                         }
                     });
                 }, 400);
@@ -1070,7 +1070,7 @@ angular.module('mainapp.players')
                 if ($scope.rounds[0] == $scope.rounds[1]) {
                     $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - 0.5 * $('.content-players-select .round0').width());
                 } else {
-                    $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.5 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
+                    $('.content-players-select .round1').css('margin-left', $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(2)').position().left - 0.75 * $('.content-players-select .round1').width() - $('.content-players-select .slider-control .slider .ui-slider-handle:nth-of-type(1)').position().left - 0.5 * $('.content-players-select .round0').width());
                 }
             }, 400);
 
