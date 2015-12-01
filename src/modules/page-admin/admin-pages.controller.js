@@ -49,7 +49,8 @@ angular.module('mainapp.pageAdmin')
             }, {
                 home: _t.home,
                 over: _t.over,
-                jupiler: _t.jupiler,
+                contact: _t.contact,
+                disclaimer: _t.disclaimer,
                 editor: editor_name,
                 date_edited: self.datetime
             }, function() {
@@ -63,7 +64,8 @@ angular.module('mainapp.pageAdmin')
             Api.Pages.post({
                 home: {},
                 over: {},
-                jupiler: {},
+                contact: {},
+                disclaimer: {},
                 editor: editor_name,
                 date_edited: self.datetime
             }, function() {

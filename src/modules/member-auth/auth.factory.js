@@ -87,7 +87,7 @@ angular.module('mainapp.memberAuth')
                             _t.push(temp);
                         }
 
-                        console.log(JSON.stringify($location.path()));
+                        //console.log(JSON.stringify($location.path()));
 
                         Api.User.put({
                             _id: $localStorage.id

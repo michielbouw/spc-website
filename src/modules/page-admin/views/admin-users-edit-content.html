@@ -177,6 +177,29 @@
                 </form>
             </div>
 
+            <div ng-show="data.user._id" class="col-xs-12">
+                <hr>
+                <p>Laatst online: {{ data.user.last_login | date:'d MMM yyyy HH:mm' }}</p>
+                <p>IP Adres: {{ data.user.ip_addresses[0].ip_address }} - {{ data.user.ip_addresses[0].city }} ({{ data.user.ip_addresses[0].country_code }})</p>
+                <p>Browser: {{ data.user.ip_addresses[0].browser }}</p>
+                <br>
+                <p>Bezoekgeschiedenis:</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Aantal bezoeken</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="visit in data.user.visits | orderBy:'last_visit':-1 | orderBy:'count':-1 | orderBy:'page_url'">
+                        <td>{{ visit.page_url }}</td>
+                        <td>{{ visit.count }}x</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <script type="text/ng-template" id="modalDel.html">
                 <div class="modal-header">
                     <h3 class="modal-title">Waarschuwing!</h3>

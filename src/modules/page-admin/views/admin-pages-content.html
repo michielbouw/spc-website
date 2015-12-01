@@ -162,6 +162,28 @@
                     <h3><i class="fa fa-plus"></i></h3>
                 </div>
             </div>
+            <div class="col-xs-12" ng-if="data.pages">
+                <hr>
+                <div class="col-lg-12">
+                    <h4><a href="/contact">Contact pagina</a></h4>
+                </div>
+                <div class="col-xs-6 col-sm-2"><p><strong>Inhoud text</strong></p></div>
+                <div class="col-xs-12">
+                    <br>
+                    <text-angular ng-model="data.pages.contact"></text-angular>
+                </div>
+            </div>
+            <div class="col-xs-12" ng-if="data.pages">
+                <hr>
+                <div class="col-lg-12">
+                    <h4><a href="/disclaimer">Disclaimer pagina</a></h4>
+                </div>
+                <div class="col-xs-6 col-sm-2"><p><strong>Inhoud text</strong></p></div>
+                <div class="col-xs-12">
+                    <br>
+                    <text-angular ng-model="data.pages.disclaimer"></text-angular>
+                </div>
+            </div>
 
         </div>
 

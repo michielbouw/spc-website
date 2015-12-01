@@ -33,7 +33,7 @@ nav#navbar-main {
   border-bottom: $lightblue 4px solid;
 }
 .navbar-nav > li {
-  padding: 0 16px;
+  padding: 0 15px;
 }
 .navbar-nav > li > a {
   padding: 0;
@@ -59,7 +59,7 @@ nav#navbar-main {
     border: none;
     padding: 0;
     li {
-      padding: 0 16px;
+      padding: 0 15px;
       a {
         color: $middleblue !important;
         font-size: 17px;
@@ -87,7 +87,7 @@ nav#navbar-main {
 }
 .navbar-right {
   li {
-    padding: 0 16px;
+    padding: 0 15px;
     a {
       color: $middleblue !important;
       font-size: 14px;
@@ -153,8 +153,31 @@ Responsive setup
 @media screen and (max-width:1199px) {
 }
 @media screen and (max-width:991px) {
+  .navbar-nav > li {
+    padding: 0 12px;
+  }
+  .navbar-nav {
+    .dropdown-menu {
+      li {
+        padding: 0 12px;
+      }
+    }
+  }
+  .navbar-right {
+    li {
+      padding: 0 12px;
+    }
+    .dropdown-menu {
+      li {
+        padding: 0 12px;
+      }
+    }
+  }
 }
 @media screen and (max-width:767px) {
+  .navbar-brand {
+    padding-left: 20px;
+  }
 }
 @media screen and (max-width:320px) {
 }
