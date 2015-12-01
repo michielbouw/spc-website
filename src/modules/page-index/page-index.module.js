@@ -16,6 +16,13 @@ angular.module('mainapp.pageIndex', [])
                     permission: 'public'
                 }
             })
+            .when('/contact', {
+                templateUrl: 	'page-index/views/contact.html',
+                access: {
+                    requiredLogin: false,
+                    permission: 'public'
+                }
+            })
             .when('/disclaimer', {
                 templateUrl: 	'page-index/views/disclaimer.html',
                 access: {

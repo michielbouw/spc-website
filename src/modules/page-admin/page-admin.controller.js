@@ -12,7 +12,7 @@ angular.module('mainapp.pageAdmin')
 
             angular.forEach(self.users, function (value, key) {
                 if (value.club && value.club !== '' && value.club !== null) {
-                    if (self.usergroups.length > 0 && $filter('filter')(self.usergroups, {club: value.club}, true)) {
+                    if (self.usergroups.length > 0 && $filter('filter')(self.usergroups, {club: value.club}, true) && $filter('filter')(self.usergroups, {club: value.club}, true)[0]) {
                         var club = $filter('filter')(self.usergroups, {club: value.club}, true)[0];
                         if (isNew(value.last_login)) {
                             club.recently_online += 1;

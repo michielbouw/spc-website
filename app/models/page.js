@@ -25,6 +25,8 @@ module.exports = mongoose.model('Page', {
             photo_width : {type : Number}
         }]
     },
+    contact : {type : String},
+    disclaimer : {type : String},
     editor : {type : String},
     date_edited : {type : Date, default: Date.now, required: true}
 });

@@ -3,13 +3,14 @@
 
 <div class="container-fluid intro-box"></div>
 
-<div class="page-content">
+<div class="page-content" ng-controller="mainapp.pageIndex.IndexController as data">
     <div class="container">
         <div class="col-xs-12 content content-page content-page-full">
             <div class="col-xs-12">
                 <h1>Disclaimer</h1>
                 <h2></h2>
                 <hr>
+                <p ng-bind-html="data.pages.disclaimer | html_trusted"></p>
                 <p>De data die hier gebruikt wordt is afkomstig van Ortect TSS. Er kunnen kleine fouten voorkomen in deze data.
                     Het Soccer Performance Centre is niet verantwoordelijk voor de controle op juistheid van de data. Uiteraard
                     doen wij ons best om de data correct weer te geven. Zo nodig zal bij incorrecte data of missen van grote
