@@ -179,11 +179,15 @@
 
             <div ng-show="data.user._id" class="col-xs-12">
                 <hr>
-                <p>Laatst online: {{ data.user.last_login | date:'d MMM yyyy HH:mm' }}</p>
-                <p>IP Adres: {{ data.user.ip_addresses[0].ip_address }} - {{ data.user.ip_addresses[0].city }} ({{ data.user.ip_addresses[0].country_code }})</p>
-                <p>Browser: {{ data.user.ip_addresses[0].browser }}</p>
+                <p><strong>Laatst online:</strong> {{ data.user.last_login | date:'d MMM yyyy HH:mm' }}</p>
+                <p><strong>IP Adressen:</strong></p>
+                <p ng-repeat="ip in data.user.ip_addresses | orderBy:'date':-1">
+                    {{ ip.ip_address }} - {{ ip.city }} ({{ ip.country_code }}) - laatste datum: {{ ip.date | date:'d MMM yyyy HH:mm' }}
+                </p>
                 <br>
-                <p>Bezoekgeschiedenis:</p>
+                <p><strong>Browser:</strong> {{ data.user.ip_addresses[0].browser }}</p>
+                <br>
+                <p><strong>Bezoekgeschiedenis:</strong></p>
                 <table class="table">
                     <thead>
                     <tr>

@@ -33,16 +33,18 @@ module.exports = UserController = {
                             } else if (res1) {
                                 user.last_login = req.body.datetime;
 
-                                if (_.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true) && _.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0]) {
-                                    _.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
-                                } else {
-                                    var temp = {};
-                                    temp.ip_address = req.body.ip_info.ip;
-                                    temp.country_code = req.body.ip_info.country_code;
-                                    temp.city = req.body.ip_info.city;
-                                    temp.browser = req.body.browser;
-                                    temp.date = req.body.datetime;
-                                    user.ip_addresses.push(temp);
+                                if (req.body.ip_info) {
+                                    if (_.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true) && _.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0]) {
+                                        _.filter(user.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
+                                    } else {
+                                        var temp = {};
+                                        temp.ip_address = req.body.ip_info.ip;
+                                        temp.country_code = req.body.ip_info.country_code;
+                                        temp.city = req.body.ip_info.city;
+                                        temp.browser = req.body.browser;
+                                        temp.date = req.body.datetime;
+                                        user.ip_addresses.push(temp);
+                                    }
                                 }
 
                                 user.number_of_logins += 1;
@@ -96,16 +98,18 @@ module.exports = UserController = {
                     userModel.last_name = req.body.last_name;
                     userModel.last_login = req.body.datetime;
 
-                    if (_.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true) && _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0]) {
-                        _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
-                    } else {
-                        var temp = {};
-                        temp.ip_address = req.body.ip_info.ip;
-                        temp.country_code = req.body.ip_info.country_code;
-                        temp.city = req.body.ip_info.city;
-                        temp.browser = req.body.browser;
-                        temp.date = req.body.datetime;
-                        userModel.ip_addresses.push(temp);
+                    if (req.body.ip_info) {
+                        if (_.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true) && _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0]) {
+                            _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
+                        } else {
+                            var temp = {};
+                            temp.ip_address = req.body.ip_info.ip;
+                            temp.country_code = req.body.ip_info.country_code;
+                            temp.city = req.body.ip_info.city;
+                            temp.browser = req.body.browser;
+                            temp.date = req.body.datetime;
+                            userModel.ip_addresses.push(temp);
+                        }
                     }
 
                     bcrypt.genSalt(10, function(err, salt) {
@@ -160,16 +164,18 @@ module.exports = UserController = {
                     userModel.club_slug = req.body.club_slug;
                     userModel.role = 'technische-staff';
 
-                    if (_.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true) && _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0]) {
-                        _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
-                    } else {
-                        var temp = {};
-                        temp.ip_address = req.body.ip_info.ip;
-                        temp.country_code = req.body.ip_info.country_code;
-                        temp.city = req.body.ip_info.city;
-                        temp.browser = req.body.browser;
-                        temp.date = req.body.datetime;
-                        userModel.ip_addresses.push(temp);
+                    if (req.body.ip_info) {
+                        if (_.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true) && _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0]) {
+                            _.filter(userModel.ip_addresses, {ip_address: req.body.ip_info.ip}, true)[0].date = new Date();
+                        } else {
+                            var temp = {};
+                            temp.ip_address = req.body.ip_info.ip;
+                            temp.country_code = req.body.ip_info.country_code;
+                            temp.city = req.body.ip_info.city;
+                            temp.browser = req.body.browser;
+                            temp.date = req.body.datetime;
+                            userModel.ip_addresses.push(temp);
+                        }
                     }
 
                     bcrypt.genSalt(10, function(err, salt) {
