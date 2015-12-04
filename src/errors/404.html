@@ -45,21 +45,51 @@
     <navbar ng-hide="isLogged()"></navbar>
     <navbarclub ng-show="isLogged()"></navbarclub>
 
-    <div class="container-fluid intro-box"></div>
+    <!--<div class="container-fluid intro-box"></div>
 
     <div class="page-content">
         <div class="container">
             <div class="col-lg-12 content content-page content-page-full">
-                <h1>404 - Page not found!</h1>
-                <h2>Pagina niet gevonden.</h2>
+                <h1>Oeps, er is iets mis gegaan, je poging was naast</h1>
+                <h2>Deze pagina kunnen wij helaas niet vinden</h2>
                 <hr>
-                <p>Not possible to find the page you are looking for. Use this link to return to the <a href="/">homepage</a>.</p>
-                <p>De pagina die u zoekt is niet beschikbaar. Om terug te keren naar de <a href="/">homepagina klik hier</a>.</p>
+                <p>Ga terug naar de <a ng-hide="isLogged()" href="/">homepagina</a><a ng-show="isLogged()" href="/club">club homepagina</a></p>
+                <br>
+                <p><small>(404) De pagina die u zoekt is niet beschikbaar. Om terug te keren naar de <a ng-hide="isLogged()" href="/">homepagina klik hier</a><a ng-show="isLogged()" href="/club">club homepagina klik hier</a>.</small></p>
+                <p><small>(404) Not possible to find the page you are looking for. Use this link to return to the <a ng-hide="isLogged()" href="/">homepage</a><a ng-show="isLogged()" href="/club">club homepage</a>.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>-->
+
+    <div class="block-error">
+        <div class="home-intro">
+            <div class="container">
+                <div class="col-lg-12">
+                    <h2><i class="fa fa-soccer-ball-o"></i> Oeps, er is iets mis gegaan, je poging was naast</h2>
+                    <h4>Deze pagina kunnen wij helaas niet vinden</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-xs-12">
+                <p><strong>Ga terug naar de <a ng-hide="isLogged()" href="/">homepagina</a><a ng-show="isLogged()" href="/club">club homepagina</a></strong></p>
+                <br>
+                <p><small>(404) De pagina die u zoekt is niet beschikbaar. Om terug te keren naar de <a ng-hide="isLogged()" href="/">homepagina klik hier</a><a ng-show="isLogged()" href="/club">club homepagina klik hier</a>.</small></p>
+                <p><small>(404) Not possible to find the page you are looking for. Use this link to return to the <a ng-hide="isLogged()" href="/">homepage</a><a ng-show="isLogged()" href="/club">club homepage</a>.</small></p>
             </div>
         </div>
     </div>
 
     <div class="clear"></div>
+
+    <script>
+        angular.element(document).ready(function () {
+            $('body').css('background-color', '#E7EAF1');
+        });
+    </script>
 
 </div><!-- end wrapper -->
 
