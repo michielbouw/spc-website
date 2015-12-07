@@ -3,6 +3,8 @@ angular.module('mainapp.pageAdmin')
         var self = this;
 
         self.usergroups = [];
+        self.browsers = [];
+        self.visits = [];
         $rootScope.errorImport = '';
 
         Api.Users.query({
@@ -27,6 +29,40 @@ angular.module('mainapp.pageAdmin')
                         }
                         self.usergroups.push(temp);
                     }
+                }
+
+                if (value.ip_addresses && value.ip_addresses !== '' && value.ip_addresses !== null && value.role !== 'admin') {
+                    angular.forEach(value.ip_addresses, function (value1, key1) {
+                        if (value1.browser && value1.browser !== '' && value1.browser !== null) {
+                            if (self.browsers.length > 0 && $filter('filter')(self.browsers, {browser: value1.browser}, true) && $filter('filter')(self.browsers, {browser: value1.browser}, true)[0]) {
+                                var browser = $filter('filter')(self.browsers, {browser: value1.browser}, true)[0];
+                                browser.count += 1;
+                            } else {
+                                var temp1 = {};
+                                temp1.browser = value1.browser;
+                                temp1.count = 1;
+                                self.browsers.push(temp1);
+                            }
+                        }
+                    });
+                }
+
+                if (value.visits && value.visits !== '' && value.visits !== null && value.role !== 'admin') {
+                    angular.forEach(value.visits, function (value1, key1) {
+                        if (value1.page_url && value1.page_url !== '' && value1.page_url !== null) {
+                            if (self.visits.length > 0 && $filter('filter')(self.visits, {page_url: value1.page_url}, true) && $filter('filter')(self.visits, {page_url: value1.page_url}, true)[0]) {
+                                var visit = $filter('filter')(self.visits, {page_url: value1.page_url}, true)[0];
+                                visit.count += value1.count;
+                                visit.last_visit = value1.last_visit;
+                            } else {
+                                var temp2 = {};
+                                temp2.page_url = value1.page_url;
+                                temp2.count = value1.count;
+                                temp2.last_visit = value1.last_visit;
+                                self.visits.push(temp2);
+                            }
+                        }
+                    });
                 }
             });
         });

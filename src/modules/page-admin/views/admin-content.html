@@ -9,6 +9,11 @@
                             <i class="fa fa-users"></i> Status gebruikers
                         </a>
                     </li>
+                    <li role="presentation">
+                        <a href="#analytics" aria-controls="analytics" role="tab" data-toggle="tab" scroll-to="top">
+                            <i class="fa fa-bar-chart"></i> Analytics
+                        </a>
+                    </li>
                     <!--<li role="presentation">
                         <a href="#errors" aria-controls="errors" role="tab" data-toggle="tab" scroll-to="top">
                             <i class="fa fa-power-off"></i> Error log
@@ -108,6 +113,37 @@
                 </div>
 
 
+            </div>
+
+            <div class="col-xs-12 tab-pane fade" role="tabpanel" id="analytics">
+                <div class="col-xs-12">
+                    <h4><i class="fa fa-bar-chart"></i> Analytics</h4>
+                </div>
+                <div ng-show="data.users" class="col-xs-12">
+                    <p><strong>Most used browser (admin user browsers weggelaten):</strong></p>
+                    <p ng-repeat="browser in data.browsers | orderBy:'count' | limitTo:1:0"><small>{{ browser.browser }} ({{ browser.count }}x)</small></p>
+                    <hr>
+                    <p><strong>Bezoekgeschiedenis (admin user geschiedenis weggelaten):</strong><br>
+                        <input class="form-control input-sm" ng-model="search.page_url" placeholder="url zoeken">
+                    </p>
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>URL</th>
+                            <th>Aantal bezoeken</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="visit in data.visits | orderBy:'page_url' | orderBy:'last_visit':-1 | orderBy:'count':-1 | filter:search:strict">
+                            <td>{{ visit.page_url }}</td>
+                            <td>{{ visit.count }}x</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-4">
+                    <br>
+                </div>
             </div>
 
             <!--<div class="col-xs-12 tab-pane fade" role="tabpanel" id="errors">
