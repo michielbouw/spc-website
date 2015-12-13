@@ -12,7 +12,7 @@ angular.module('mainapp.memberAuth', [])
             .when('/signin', {
                 templateUrl: 	'member-auth/views/signin.html',
                 access: {
-                    requiredLogin: false,
+                    requiredLogin: true,
                     //permission: 'public'
                     permission: 'admin'
                 }
