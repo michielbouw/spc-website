@@ -24,6 +24,7 @@ angular.module('mainapp.club')
             Api.TeamDataItem.get({
                 _slug: $routeParams.team_slug
             }, function (res) {
+                self.clubSelected = $routeParams.team_slug;
                 self.team_name = res.team_name;
                 self.club_name = res.club_name;
                 self.divisie = res.divisie;
@@ -102,7 +103,26 @@ angular.module('mainapp.club')
             }, function() {
                 $location.path('/404');
             });
+
+            Api.Clubs.query(function(res) {
+                self.teams = [];
+                angular.forEach(res, function (value, key) {
+                    angular.forEach(value.teams, function (value1, key1) {
+                        var temp = {};
+                        temp.club_name = value.name;
+                        temp.team_name = value1.team_name;
+                        temp.team_slug = value1.team_slug;
+                        self.teams.push(temp);
+                    });
+                });
+            });
         }
+
+        self.clubSelector = function () {
+            if (self.clubSelected) {
+                $location.path('/club/' + self.clubSelected);
+            }
+        };
 
         self.seasonInitFunc = function () {
             if (self.team_data && self.season_index) {

@@ -23,10 +23,17 @@
         </div>
         <div class="col-xs-12 content-club-name">
             <div class="col-xs-6 col-sm-4 col-md-5 club_name">
-                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg"><h3 class="hidden-xs">{{ data.club_name }}</h3><h4 class="hidden-lg hidden-md hidden-sm">{{ data.club_name }}</h4>
+                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg" ng-if="currentUser.role !== 'admin'">
+                <h3 class="hidden-xs" ng-if="currentUser.role !== 'admin'">{{ data.club_name }}</h3><h4 class="hidden-lg hidden-md hidden-sm" ng-if="currentUser.role !== 'admin'">{{ data.club_name }}</h4>
+                <h4 class="selector" ng-if="currentUser.role === 'admin'">
+                    <select ng-model="data.clubSelected" class="form-control input-md input-vs"
+                            ng-change="data.clubSelector()"
+                            ng-options="team.team_slug as (team.club_name + ' ' + team.team_name) group by team.club_name for team in data.teams">
+                    </select>
+                </h4>
             </div>
             <div class="hidden-xs col-sm-4 col-md-2 no-padding text-center center-block">
-                <h3>&#183;&#183;&#183;&#183;&#183; &nbsp;&nbsp;&nbsp;VS&nbsp;&nbsp;&nbsp; &#183;&#183;&#183;&#183;&#183;</h3>
+                <h3><span class="hidden-sm hidden-md">&#183;</span>&#183;&#183;&#183;&#183; &nbsp;&nbsp;&nbsp;VS&nbsp;&nbsp;&nbsp; &#183;&#183;&#183;&#183;<span class="hidden-sm hidden-md">&#183;</span></h3>
             </div>
             <div class="col-xs-6 col-sm-4 col-md-5 text-right season_selector">
                 <h4 class="selector">

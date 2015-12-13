@@ -102,6 +102,17 @@
       margin-top: -4px;
       color: $middleblue;
     }
+    .not-played {
+      position: relative;
+      font-size: 25px;
+      font-weight: bold;
+      float: left;
+      display: block;
+      text-align: left;
+      margin-top: -6px;
+      z-index: 10;
+      color: $red;
+    }
 
     .slider-control {
       width: 99%;

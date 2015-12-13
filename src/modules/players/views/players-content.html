@@ -10,7 +10,13 @@
         </div>
         <div class="col-xs-12 content-players-name">
             <div class="col-xs-12">
-                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg"><h3>{{ data.club_name }}</h3>
+                <img ng-src="/images/logo_clubs/{{ data.club_name }}.jpg" ng-if="currentUser.role !== 'admin'"><h3 ng-if="currentUser.role !== 'admin'">{{ data.club_name }}</h3>
+                <h4 class="selector" ng-if="currentUser.role === 'admin'">
+                    <select ng-model="data.clubSelected" class="form-control input-md input-vs"
+                            ng-change="data.clubSelector()"
+                            ng-options="team.team_slug as (team.club_name + ' ' + team.team_name) group by team.club_name for team in data.teams">
+                    </select>
+                </h4>
             </div>
         </div>
         <div ng-repeat="speler in data.player_data | orderBy:self.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">

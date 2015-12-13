@@ -35,7 +35,7 @@
                         <li><a href="" scroll-to="overtredingen_locatie"><i class="fa fa-location-arrow"></i> Locatie overtredingen</a></li>
                     </ul>
                 </li>
-                <li role="presentation" ng-if="data.match.player_stats_full_uit.length > 0 || data.match.player_stats_full_uit.length > 0">
+                <li role="presentation" ng-if="data.match.player_stats_full_thuis.length > 0 || data.match.player_stats_full_uit.length > 0">
                     <a href="#players" aria-controls="players" role="tab" data-toggle="tab" scroll-to="top">
                         <span class="caret-right"></span><span class="caret"></span> Spelers
                     </a>
@@ -87,8 +87,8 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-4 text-center result">
                     <h2>
-                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
-                        <small><small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small></small>
+                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
+                        <small><small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small></small>
                     </h2>
                 </div>
                 <div class="col-md-4 col-sm-3 hidden-xs text-right">
@@ -103,9 +103,9 @@
                     <div class="col-xs-12">
                         <h4>
                             {{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}
-                            &nbsp;&nbsp;&#183;&#183;&nbsp;&nbsp;ronde {{ data.matchshort.match_info.ronde }}
-                            &nbsp;&nbsp;&#183;&#183;&nbsp;&nbsp;<img src="images/referee.svg" height="22px"> {{ data.matchshort.match_info.scheids }}
-                            <span ng-if="data.matchshort.match_info.toeschouwers || data.matchshort.match_info.locatie">&nbsp;&nbsp;&#183;&#183;&nbsp;&nbsp;<i class="fa fa-group"></i> {{ data.matchshort.match_info.locatie }} ({{ data.matchshort.match_info.toeschouwers }})</span>
+                            &nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;ronde {{ data.matchshort.match_info.ronde }}
+                            &nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;<img src="images/referee.svg" height="22px"> {{ data.matchshort.match_info.scheids }}
+                            <span ng-if="data.matchshort.match_info.toeschouwers || data.matchshort.match_info.locatie">&nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;<i class="fa fa-group"></i> {{ data.matchshort.match_info.locatie }} ({{ data.matchshort.match_info.toeschouwers }})</span>
                         </h4>
                     </div>
                 </div>
@@ -129,8 +129,8 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-4 text-center result">
                     <h2>
-                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
-                        <small><small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} &#183;&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small></small>
+                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
+                        <small><small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small></small>
                     </h2>
                 </div>
                 <div class="col-md-4 col-sm-3 hidden-xs text-right">

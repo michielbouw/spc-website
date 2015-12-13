@@ -9,6 +9,7 @@ angular.module('mainapp.players')
         self.season_matches = [];
         self.match = {};
         self.matches_played = 0;
+        self.rounds_not_played = [];
         self.stats = {};
         self.stats_vs = {};
         self.vs = '.. kies ..';
@@ -70,6 +71,7 @@ angular.module('mainapp.players')
                         var temp = {};
                         temp.ronde = i;
                         self.season_matches.push(temp);
+                        //self.rounds_not_played.push(temp);
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                 }
@@ -77,8 +79,10 @@ angular.module('mainapp.players')
                     if ((j+1) != self.season_matches[j].ronde) {
                         var tempp = {};
                         tempp.ronde = j+1;
-
                         self.season_matches.push(tempp);
+                        tempp.ronde_min = temp0;
+                        tempp.ronde_max = temp1;
+                        self.rounds_not_played.push(tempp);
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                     statslength = self.season_matches.length;
@@ -105,27 +109,27 @@ angular.module('mainapp.players')
                     });
                 }, 400);
 
-                if (temp0 == temp1) {
-                    $scope.rounds = [temp0, temp1];
-                } else if ((temp1 - temp0) <= 0) {
-                    $scope.rounds = [temp0, temp1];
-                } else if ((temp1 - 5) <= 0) {
-                    if (temp1 - temp0 < 4) {
-                        $scope.rounds = [temp0, temp1];
-                    } else {
-                        $scope.rounds = [1];
-                        $scope.rounds.push(temp1);
-                    }
-                } else if ((temp1 - 5) > 0) {
-                    if (temp1 - temp0 < 4) {
-                        $scope.rounds = [temp0, temp1];
-                    } else {
-                        $scope.rounds = [temp1 - 5];
-                        $scope.rounds.push(temp1);
-                    }
-                } else {
-                    $scope.rounds = [1, 1];
-                }
+                //if (temp0 == temp1) {
+                //    $scope.rounds = [temp0, temp1];
+                //} else if ((temp1 - temp0) <= 0) {
+                //    $scope.rounds = [temp0, temp1];
+                //} else if ((temp1 - 5) <= 0) {
+                //    if (temp1 - temp0 < 4) {
+                //        $scope.rounds = [temp0, temp1];
+                //    } else {
+                //        $scope.rounds = [1];
+                //        $scope.rounds.push(temp1);
+                //    }
+                //} else if ((temp1 - 5) > 0) {
+                //    if (temp1 - temp0 < 4) {
+                //        $scope.rounds = [temp0, temp1];
+                //    } else {
+                //        $scope.rounds = [temp1 - 5];
+                //        $scope.rounds.push(temp1);
+                //    }
+                //} else {
+                //    $scope.rounds = [1, 1];
+                //}
 
                 self.vs = self.playerID;
                 self.vs_info = 'Gemiddelde seizoen';
@@ -168,6 +172,7 @@ angular.module('mainapp.players')
                         var temp = {};
                         temp.ronde = i;
                         self.season_matches.push(temp);
+                        //self.rounds_not_played.push(temp);
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                 }
@@ -175,8 +180,10 @@ angular.module('mainapp.players')
                     if ((j+1) != self.season_matches[j].ronde) {
                         var tempp = {};
                         tempp.ronde = j+1;
-
                         self.season_matches.push(tempp);
+                        tempp.ronde_min = temp0;
+                        tempp.ronde_max = temp1;
+                        self.rounds_not_played.push(tempp);
                     }
                     self.season_matches = $filter('orderBy')(self.season_matches, self.orderMatches);
                     statslength = self.season_matches.length;
@@ -203,27 +210,27 @@ angular.module('mainapp.players')
                     });
                 }, 400);
 
-                if (temp0 == temp1) {
-                    $scope.rounds = [temp0, temp1];
-                } else if ((temp1 - temp0) <= 0) {
-                    $scope.rounds = [temp0, temp1];
-                } else if ((temp1 - 5) <= 0) {
-                    if (temp1 - temp0 < 4) {
-                        $scope.rounds = [temp0, temp1];
-                    } else {
-                        $scope.rounds = [1];
-                        $scope.rounds.push(temp1);
-                    }
-                } else if ((temp1 - 5) > 0) {
-                    if (temp1 - temp0 < 4) {
-                        $scope.rounds = [temp0, temp1];
-                    } else {
-                        $scope.rounds = [temp1 - 5];
-                        $scope.rounds.push(temp1);
-                    }
-                } else {
-                    $scope.rounds = [1, 1];
-                }
+                //if (temp0 == temp1) {
+                //    $scope.rounds = [temp0, temp1];
+                //} else if ((temp1 - temp0) <= 0) {
+                //    $scope.rounds = [temp0, temp1];
+                //} else if ((temp1 - 5) <= 0) {
+                //    if (temp1 - temp0 < 4) {
+                //        $scope.rounds = [temp0, temp1];
+                //    } else {
+                //        $scope.rounds = [1];
+                //        $scope.rounds.push(temp1);
+                //    }
+                //} else if ((temp1 - 5) > 0) {
+                //    if (temp1 - temp0 < 4) {
+                //        $scope.rounds = [temp0, temp1];
+                //    } else {
+                //        $scope.rounds = [temp1 - 5];
+                //        $scope.rounds.push(temp1);
+                //    }
+                //} else {
+                //    $scope.rounds = [1, 1];
+                //}
 
                 self.vs = self.playerID;
                 self.vs_info = 'Gemiddelde seizoen';

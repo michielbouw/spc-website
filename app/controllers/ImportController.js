@@ -1912,7 +1912,7 @@ module.exports = ImportController = {
                                                         }, function (err, data) {
                                                             if (err) throw err;
                                                         });
-                                                    } else if (value2.laatste_ronde_sync != items.ronde) {
+                                                    } else if (value2.laatste_ronde_sync != items.ronde && value2.laatste_ronde_sync < items.ronde) {
                                                         Spelers.update({
                                                             _id: value2._id
                                                         }, {
@@ -2395,7 +2395,7 @@ module.exports = ImportController = {
                                                         }, function (err, data) {
                                                             if (err) throw err;
                                                         });
-                                                    } else if (value2.laatste_ronde_sync != items.ronde) {
+                                                    } else if (value2.laatste_ronde_sync != items.ronde && value2.laatste_ronde_sync < items.ronde) {
                                                         Spelers.update({
                                                             _id: value2._id
                                                         }, {
