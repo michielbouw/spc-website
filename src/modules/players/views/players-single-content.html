@@ -22,7 +22,7 @@
         <div class="col-xs-12 content-players-select">
             <div class="round0" ng-if="rounds[0] != rounds[1]">{{ rounds[0] }}</div>
             <div class="round1">{{ rounds[1] }}</div>
-            <span class="not-played" ng-repeat="round in data.rounds_not_played" style="margin-left: calc((100%/{{ round.ronde_max - round.ronde_min }}) - 10px);"><i class="fa fa-close" tooltip-placement="right" tooltip="ronde niet gespeeld"></i></span>
+            <span class="not-played" ng-repeat="round in data.rounds_not_played" style="margin-left: calc((99%/{{ round.ronde_max - round.ronde_min + 1 }})*{{ round.ronde - 1 }} - 10px - 2.5*{{ round.ronde - 1 }}px);"><i class="fa fa-close" tooltip-placement="right" tooltip="ronde niet gespeeld"></i></span>
             <statssliderclub model="rounds"></statssliderclub>
         </div>
         <div class="col-xs-12 col-sm-2 content-players-left">

@@ -103,13 +103,13 @@
       color: $middleblue;
     }
     .not-played {
-      position: relative;
+      position: absolute;
       font-size: 25px;
       font-weight: bold;
       float: left;
       display: block;
       text-align: left;
-      margin-top: -6px;
+      margin-top: 9px;
       z-index: 10;
       color: $red;
     }
