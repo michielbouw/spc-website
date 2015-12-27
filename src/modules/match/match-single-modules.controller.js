@@ -1,19 +1,22 @@
 angular.module('mainapp.match')
-    .controller('mainapp.match.MatchSingleController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location',
+    .controller('mainapp.match.MatchSingleModulesController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location',
         '$rootScope', '$routeParams', '$sessionStorage',
         function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $routeParams, $sessionStorage)
     {
         var self = this;
         self.datetime = new Date();
 
-        $location.path('/wedstrijd/' + $routeParams._id + '/wedstrijd');
+        if (!$routeParams.slug || $routeParams.slug === '' || $routeParams.slug == null) {
+            $location.path('/wedstrijd/' + $routeParams._id + '/wedstrijd');
+        }
 
-        //self.matchshort = {};
-        //self.match = {};
+        self.matchshort = {};
+        self.match = {};
 
         self.loading = true;
+        self.loading_slug = $routeParams.slug || '';
 
-        /*
+        self.loading_id = $routeParams._id;
 
         if ($sessionStorage.matchshort && $sessionStorage.matchshort.matchID == $routeParams._id) {
             if ($sessionStorage.currentClub) {
@@ -146,11 +149,14 @@ angular.module('mainapp.match')
 
         if ($sessionStorage.matchdata && $sessionStorage.matchdata.matchID == $routeParams._id) {
             self.match = $sessionStorage.matchdata;
-            self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
-            self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-            self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
-            if (self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
+            if (self.loading_slug === 'team') {
+                self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
+                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
+            }
+
+            if (self.loading_slug === 'team' && self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
                 self.match.penalty_thuis = {};
                 self.match.penalty_uit = {};
                 var temp_thuis = {};
@@ -267,17 +273,19 @@ angular.module('mainapp.match')
                         }
                     }
                 });
-                angular.forEach(self.match.player_stats_full_thuis, function (value, key) {
-                    if (!value.spelerPhoto) {
-                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
-                            angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
-                                if (value1.spelerPhoto) {
-                                    value.spelerPhoto = value1.spelerPhoto;
-                                }
-                            });
+                if (self.loading_slug === 'spelers') {
+                    angular.forEach(self.match.player_stats_full_thuis, function (value, key) {
+                        if (!value.spelerPhoto) {
+                            if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                                angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
+                                    if (value1.spelerPhoto) {
+                                        value.spelerPhoto = value1.spelerPhoto;
+                                    }
+                                });
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
             Api.SpelersClub.query({
                 _id: self.match.uitTeamID
@@ -305,17 +313,19 @@ angular.module('mainapp.match')
                         }
                     }
                 });
-                angular.forEach(self.match.player_stats_full_uit, function (value, key) {
-                    if (!value.spelerPhoto) {
-                        if ($filter('filter')(res, {spelerID: value.personID}, true)) {
-                            angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
-                                if (value1.spelerPhoto) {
-                                    value.spelerPhoto = value1.spelerPhoto;
-                                }
-                            });
+                if (self.loading_slug === 'spelers') {
+                    angular.forEach(self.match.player_stats_full_uit, function (value, key) {
+                        if (!value.spelerPhoto) {
+                            if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                                angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
+                                    if (value1.spelerPhoto) {
+                                        value.spelerPhoto = value1.spelerPhoto;
+                                    }
+                                });
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
 
             var teams;
@@ -324,7 +334,7 @@ angular.module('mainapp.match')
             if ($sessionStorage.currentClub) {
                 teams = $sessionStorage.currentClub.teams;
                 teamslug = '';
-                if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
+                if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                     teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                     if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -359,7 +369,7 @@ angular.module('mainapp.match')
                             }
                         });
                     }
-                } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
+                } else if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                     teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                     if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -418,7 +428,7 @@ angular.module('mainapp.match')
 
                         teams = res1.data.teams;
                         teamslug = '';
-                        if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
+                        if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -453,7 +463,7 @@ angular.module('mainapp.match')
                                     }
                                 });
                             }
-                        } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
+                        } else if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -497,7 +507,7 @@ angular.module('mainapp.match')
 
                     teams = $sessionStorage.currentClub.teams;
                     teamslug = '';
-                    if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
+                    if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                         teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                         if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -532,7 +542,7 @@ angular.module('mainapp.match')
                                 }
                             });
                         }
-                    } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
+                    } else if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                         teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                         if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -579,11 +589,14 @@ angular.module('mainapp.match')
             }, function (res) {
                 self.match = res;
                 $sessionStorage.matchdata = res;
-                self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
-                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-                self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
 
-                if (self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
+                if (self.loading_slug === 'team') {
+                    self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
+                }
+
+                if (self.loading_slug === 'team' && self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
                     self.match.penalty_thuis = {};
                     self.match.penalty_uit = {};
                     var temp_thuis = {};
@@ -700,17 +713,19 @@ angular.module('mainapp.match')
                             }
                         }
                     });
-                    angular.forEach(self.match.player_stats_full_thuis, function (value, key) {
-                        if (!value.spelerPhoto) {
-                            if ($filter('filter')(res, {spelerID: value.personID}, true)) {
-                                angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
-                                    if (value1.spelerPhoto) {
-                                        value.spelerPhoto = value1.spelerPhoto;
-                                    }
-                                });
+                    if (self.loading_slug === 'spelers') {
+                        angular.forEach(self.match.player_stats_full_thuis, function (value, key) {
+                            if (!value.spelerPhoto) {
+                                if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                                    angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
+                                        if (value1.spelerPhoto) {
+                                            value.spelerPhoto = value1.spelerPhoto;
+                                        }
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 });
                 Api.SpelersClub.query({
                     _id: self.match.uitTeamID
@@ -738,17 +753,19 @@ angular.module('mainapp.match')
                             }
                         }
                     });
-                    angular.forEach(self.match.player_stats_full_uit, function (value, key) {
-                        if (!value.spelerPhoto) {
-                            if ($filter('filter')(res, {spelerID: value.personID}, true)) {
-                                angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
-                                    if (value1.spelerPhoto) {
-                                        value.spelerPhoto = value1.spelerPhoto;
-                                    }
-                                });
+                    if (self.loading_slug === 'spelers') {
+                        angular.forEach(self.match.player_stats_full_uit, function (value, key) {
+                            if (!value.spelerPhoto) {
+                                if ($filter('filter')(res, {spelerID: value.personID}, true)) {
+                                    angular.forEach($filter('filter')(res, {spelerID: value.personID}, true), function (value1, key1) {
+                                        if (value1.spelerPhoto) {
+                                            value.spelerPhoto = value1.spelerPhoto;
+                                        }
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 });
 
                 var teams;
@@ -757,7 +774,7 @@ angular.module('mainapp.match')
                 if ($sessionStorage.currentClub) {
                     teams = $sessionStorage.currentClub.teams;
                     teamslug = '';
-                    if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
+                    if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                         teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                         if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -792,7 +809,7 @@ angular.module('mainapp.match')
                                 }
                             });
                         }
-                    } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
+                    } else if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                         teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                         if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -851,7 +868,7 @@ angular.module('mainapp.match')
 
                             teams = res1.data.teams;
                             teamslug = '';
-                            if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
+                            if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                                 teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                                 if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -886,7 +903,7 @@ angular.module('mainapp.match')
                                         }
                                     });
                                 }
-                            } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
+                            } else if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                                 teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                                 if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -930,7 +947,7 @@ angular.module('mainapp.match')
 
                         teams = $sessionStorage.currentClub.teams;
                         teamslug = '';
-                        if (teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
+                        if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.thuisTeamSlug) || (teams[1] && teams[1].team_slug == self.match.thuisTeamSlug) )) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.thuisTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -965,7 +982,7 @@ angular.module('mainapp.match')
                                     }
                                 });
                             }
-                        } else if (teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
+                        } else if (self.loading_slug === 'logboek' && teams && ( (teams[0] && teams[0].team_slug == self.match.uitTeamSlug) || (teams[1] && teams[1].team_slug == self.match.uitTeamSlug) )) {
                             teamslug = $filter('filter')(teams, {team_slug: self.match.uitTeamSlug}, true)[0].team_slug;
 
                             if (teamslug == self.match.thuisTeamSlug || teamslug == self.match.uitTeamSlug) {
@@ -1007,6 +1024,8 @@ angular.module('mainapp.match')
             });
         }
 
+
+        // Wedstrijd
         self.splitTime = function(string) {
             if ( !isNaN( Number(string.split("'")[0]) ) ) {
                 return Number(string.split("'")[0]);
@@ -1015,6 +1034,8 @@ angular.module('mainapp.match')
             }
         };
 
+
+        // Team
         $scope.position_field_interval = '1e helft';
         $scope.$watch('position_field_interval', function () {
             if ($scope.position_field_interval == '00 - 15 min') { self.match.gemiddelde_posities = self.match.gemiddelde_posities_kwartier1; }
@@ -1074,6 +1095,7 @@ angular.module('mainapp.match')
                 selectpositions_uit = false;
             }
         };
+
         var selectpogingen_uit = true;
         var selectpogingen_thuis = true;
         var selectpogingen_doel = true;
@@ -1162,6 +1184,8 @@ angular.module('mainapp.match')
             }
         };
 
+
+        // Spelers
         self.orderSpelers = 'personID';
         self.orderSpelersNaam = 'spelerNaam';
         self.orderSpelersNaamType = ['-type', 'spelerNaam'];
@@ -1187,6 +1211,8 @@ angular.module('mainapp.match')
             self.speler4 = $filter('filter')(self.match.player_stats_full_uit, {personID: i}, true)[0];
         };
 
+
+        // Logboek
         self.playerlog1InitFunc = function (i) {
             var temp = $filter('filter')(self.playerdata, {playerID: i}, true)[0];
             self.spelerlogspelernaam = temp.spelerNaam;
@@ -1311,5 +1337,4 @@ angular.module('mainapp.match')
                 }
             }
         };
-        */
     }]);

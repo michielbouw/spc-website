@@ -9,8 +9,15 @@ angular.module('mainapp.match', [])
                     permission: 'speler'
                 }
             })
-            .when('/wedstrijd/:_id', {
-                templateUrl: 	'match/views/match-single.html',
+            //.when('/wedstrijd/:_id', {
+            //    templateUrl: 	'match/views/match-single.html',
+            //    access: {
+            //        requiredLogin: true,
+            //        permission: 'speler'
+            //    }
+            //})
+            .when('/wedstrijd/:_id/:slug?', {
+                templateUrl: 	'match/views/match-single-modules.html',
                 access: {
                     requiredLogin: true,
                     permission: 'speler'

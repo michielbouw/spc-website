@@ -144,8 +144,8 @@ Standard layout
 
 #wrapper {
   min-height: 100%;
-  //margin-bottom: -100px;
-  margin-bottom: -84px;
+  margin-bottom: -100px;
+  //margin-bottom: -84px;
 }
 #wrapper:after {
   content: " ";
@@ -341,7 +341,9 @@ Standard layout
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 99999;
+  -webkit-transition: margin 0.5s, background 1s;
+  transition: margin 0.5s, background 1s;
 }
 .page-content {
   margin-top: 0px;

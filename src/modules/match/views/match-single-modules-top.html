@@ -1,0 +1,148 @@
+<div class="container">
+    <div class="col-md-2 col-sm-5 col-xs-8 sidebar-offcanvas">
+        <div class="navbar-sub">
+            <div class="item-title"><a href="/analyse">Analyse</a> / <a href="/wedstrijd">Wedstrijd</a></div>
+            <ul id="nav-sub" class="nav nav-pills nav-stacked" role="tablist">
+                <li role="presentation" ng-class="{active: data.loading_slug === 'wedstrijd'}">
+                    <a href="/wedstrijd/{{ data.loading_id }}/wedstrijd" class="tab" scroll-to="top">
+                        <span class="caret-right"></span><span class="caret"></span> Wedstrijd
+                    </a>
+                    <ul class="nav nav-pills nav-stacked submenu">
+                        <li><a href="" scroll-to="opstelling"><i class="fa fa-group"></i> Opstelling</a></li>
+                        <li><a href="" scroll-to="wedstrijd"><i class="fa fa-refresh"></i> Wedstrijd</a></li>
+                        <li><a href="" scroll-to="statistieken"><i class="fa fa-bar-chart"></i> Overzicht</a></li>
+                        <!--<li><a href="" scroll-to="balbezit"><i class="fa fa-soccer-ball-o"></i> Balbezit</a></li>-->
+                        <li><a href="" scroll-to="doelpogingen"><i class="fa fa-soccer-ball-o"></i> Doelpogingen</a></li>
+                        <!--<li><a href="" scroll-to="overtredingen"><i class="fa fa-exclamation-circle"></i> Overtredingen</a></li>-->
+                        <li><a href="" scroll-to="spelhervattingen"><i class="fa fa-pause"></i> Spelhervattingen</a></li>
+                        <li><a href="" scroll-to="passoverzicht"><i class="fa fa-code-fork"></i> Passes</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" ng-class="{active: data.loading_slug === 'team'}">
+                    <a href="/wedstrijd/{{ data.loading_id }}/team" class="tab" scroll-to="top">
+                        <span class="caret-right"></span><span class="caret"></span> Team
+                    </a>
+                    <ul class="nav nav-pills nav-stacked submenu">
+                        <li><a href="" scroll-to="veld"><i class="fa fa-bullseye"></i> Veld posities</a></li>
+                        <li><a href="" scroll-to="locatiedoelpogingen"><i class="fa fa-soccer-ball-o"></i> Doelpogingen</a></li>
+                        <li><a href="" scroll-to="locatiebalcontact"><i class="fa fa-location-arrow"></i> Locatie balcontact</a></li>
+                        <li><a href="" scroll-to="passes_zone"><i class="fa fa-angle-double-right"></i> Passes per zone</a></li>
+                        <li><a href="" scroll-to="passmatrix"><i class="fa fa-th"></i> Passmatrix</a></li>
+                        <li><a href="" scroll-to="dueloverzicht"><i class="fa fa-compress"></i> Duels</a></li>
+                        <li><a href="" scroll-to="duelmatrix"><i class="fa fa-th-large"></i> Duelmatrix</a></li>
+                        <li><a href="" scroll-to="penalty_visualisatie"><i class="fa fa-dot-circle-o"></i> Penalties</a></li>
+                        <li><a href="" scroll-to="overtredingen_speler"><i class="fa fa-exclamation-circle"></i> Overtredingen</a></li>
+                        <li><a href="" scroll-to="overtredingen_locatie"><i class="fa fa-location-arrow"></i> Locatie overtredingen</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" ng-class="{active: data.loading_slug === 'spelers'}"
+                    ng-if="data.match.player_stats_full_thuis.length > 0 || data.match.player_stats_full_uit.length > 0">
+                    <a href="/wedstrijd/{{ data.loading_id }}/spelers" class="tab" scroll-to="top">
+                        <span class="caret-right"></span><span class="caret"></span> Spelers
+                    </a>
+                    <ul class="nav nav-pills nav-stacked submenu">
+                        <li>
+                            <a href="" scroll-to="thuis">
+                                <!--<span class="caret-right"></span><span class="caret"></span>--> {{ data.matchshort.match_info.thuis }}
+                            </a>
+                            <!--<ul class="nav nav-pills nav-stacked submenu">
+                                <li ng-repeat="speler in data.match.spelersthuisteam">
+                                    <a href="">{{ speler.spelerNaam }}</a>
+                                </li>
+                            </ul>-->
+                        </li>
+                        <li><a href="" scroll-to="uit"> {{ data.matchshort.match_info.uit }}</a></li>
+                        <li><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
+                    </ul>
+                </li>
+                <li role="presentation" ng-class="{active: data.loading_slug === 'logboek'}"
+                    ng-show="(currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
+                    <a href="/wedstrijd/{{ data.loading_id }}/logboek" class="tab" scroll-to="top">
+                        <span class="caret-right"></span><span class="caret"></span> Logboek
+                    </a>
+                    <ul class="nav nav-pills nav-stacked submenu">
+                        <li ng-if="data.team_data && data.spelerscores.length > 0"><a href="" scroll-to="scorespeler"><i class="fa fa-sort-numeric-desc"></i> Score spelers</a></li>
+                        <li ng-if="data.team_data && data.teamdata"><a href="" scroll-to="logwedstrijd"><i class="fa fa-pencil"></i> Wedstrijd</a></li>
+                        <li><a href="" scroll-to="logspeler"><i class="fa fa-weixin"></i> Spelers</a></li>
+                    </ul>
+                </li>
+                <!--<li role="presentation">
+                    <a href="">
+                        <i class="fa fa-download"></i> Download PDF
+                    </a>
+                </li>-->
+            </ul>
+            <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
+        </div>
+    </div>
+
+    <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12 content content-top content-top-match">
+        <div class="col-xs-12">
+            <div id="match-info">
+                <div class="row">
+                <div class="col-md-1 col-sm-2 col-xs-4 no-padding text-center">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
+                </div>
+                <div class="col-md-4 col-sm-3 hidden-xs">
+                    <h3 class="hidden-sm">{{ data.matchshort.match_info.thuis }}</h3>
+                    <h4 style="margin-top: 20px;" class="hidden-lg hidden-md">{{ data.matchshort.match_info.thuis }}</h4>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-4 text-center result">
+                    <h2>
+                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
+                        <small><small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small></small>
+                    </h2>
+                </div>
+                <div class="col-md-4 col-sm-3 hidden-xs text-right">
+                    <h3 class="hidden-sm">{{ data.matchshort.match_info.uit }}</h3>
+                    <h4 style="margin-top: 20px;" class="hidden-lg hidden-md">{{ data.matchshort.match_info.uit }}</h4>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-4 no-padding text-center">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
+                </div>
+                </div>
+                <div class="row extra-info">
+                    <div class="col-xs-12">
+                        <h4>
+                            {{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}
+                            &nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;ronde {{ data.matchshort.match_info.ronde }}
+                            &nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;<img src="images/referee.svg" height="22px"> {{ data.matchshort.match_info.scheids }}
+                            <span ng-if="data.matchshort.match_info.toeschouwers || data.matchshort.match_info.locatie">&nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;<i class="fa fa-group"></i> {{ data.matchshort.match_info.locatie }} ({{ data.matchshort.match_info.toeschouwers }})</span>
+                        </h4>
+                    </div>
+                </div>
+                <!--<div class="row extra-info">
+                <div class="col-xs-12 text-left">
+                    <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
+                        <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
+                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br ng-if="data.matchshort.match_info.toeschouwers">
+                    <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br ng-if="data.matchshort.match_info.locatie">
+                    <small ng-if="data.matchshort.match_info.locatie"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.locatie }}</small>
+                </div>
+                </div>-->
+            </div>
+            <div id="match-info-short">
+                <div class="col-md-1 col-sm-2 col-xs-4 no-padding text-center">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_thuis }}" class="logo">
+                </div>
+                <div class="col-md-4 col-sm-3 hidden-xs">
+                    <h3 class="hidden-sm">{{ data.matchshort.match_info.thuis }}</h3>
+                    <h4 style="margin-top: 20px;" class="hidden-lg hidden-md">{{ data.matchshort.match_info.thuis }}</h4>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-4 text-center result">
+                    <h2>
+                        {{ data.matchshort.match_info.eindstand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.eindstand.split(" - ", 2)[1]}}<br>
+                        <small><small tooltip-placement="right" tooltip="ruststand" style="color: #fff;">({{ data.matchshort.match_info.ruststand.split(" - ", 1)[0] }} <span class="hidden-sm hidden-md">&#183;</span>&#183;&#183; {{ data.matchshort.match_info.ruststand.split(" - ", 2)[1]}})</small></small>
+                    </h2>
+                </div>
+                <div class="col-md-4 col-sm-3 hidden-xs text-right">
+                    <h3 class="hidden-sm">{{ data.matchshort.match_info.uit }}</h3>
+                    <h4 style="margin-top: 20px;" class="hidden-lg hidden-md">{{ data.matchshort.match_info.uit }}</h4>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-4 no-padding text-center">
+                    <img ng-src="images/logo_clubs/{{ data.matchshort.match_info.logo_uit }}" class="logo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
