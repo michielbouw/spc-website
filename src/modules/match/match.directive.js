@@ -54,7 +54,7 @@ angular.module('mainapp.match')
     //                        $(window).scroll(function () {
     //                            var scrollYpos = $(document).scrollTop();
     //                            if (scrollYpos > sOffset) {
-    //                                $(".page-top").css({
+    //                                $(".page-top.page-top-match").css({
     //                                    'position': 'fixed',
     //                                    'padding-top': '0px',
     //                                    //'background-color': '#ffffff',
@@ -79,7 +79,7 @@ angular.module('mainapp.match')
     //                                $("#match-info").show();
     //                                $("#match-info-short").hide();
     //                                $("#match-select").show();
-    //                                $(".page-top").css({
+    //                                $(".page-top.page-top-match").css({
     //                                    'position': 'relative',
     //                                    'padding-top': '20px',
     //                                    'background-color': 'transparent',
@@ -217,7 +217,7 @@ angular.module('mainapp.match')
                             $(window).scroll(function () {
                                 var scrollYpos = $(document).scrollTop();
                                 if (scrollYpos > sOffset) {
-                                    $(".page-top").css({
+                                    $(".page-top.page-top-match").css({
                                         'position': 'fixed',
                                         'padding-top': '0px',
                                         //'background-color': '#ffffff',
@@ -226,7 +226,8 @@ angular.module('mainapp.match')
                                         '-webkit-box-shadow': '0px 2px 5px rgba(0,0,0,0.2)',
                                         '-moz-box-shadow': '0px 2px 5px rgba(0,0,0,0.2)',
                                         'box-shadow': '0px 2px 5px rgba(0,0,0,0.2)',
-                                        'margin-top': '5px'
+                                        //'margin-top': '5px'
+                                        'margin-top': '0px'
                                     });
                                     //$('.page-content.page-content-match').css('margin-top', 240);
                                     $(".content-top").css({
@@ -236,14 +237,16 @@ angular.module('mainapp.match')
                                         //'top': '140px',
                                         'height': window.innerHeight - 250
                                     });
+                                    $(".navbar-match .navbar.navbar-default.navbar-fixed-top").hide(500);
                                     $("#match-select").hide();
                                     $("#match-info").hide();
                                     $("#match-info-short").show();
                                 } else {
+                                    $(".navbar-match .navbar.navbar-default.navbar-fixed-top").show(500);
                                     $("#match-info").show();
                                     $("#match-info-short").hide();
                                     $("#match-select").show();
-                                    $(".page-top").css({
+                                    $(".page-top.page-top-match").css({
                                         'position': 'relative',
                                         'padding-top': '20px',
                                         'background-color': 'transparent',
@@ -298,7 +301,7 @@ angular.module('mainapp.match')
                                 scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
                                 scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
                                 scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
-                            }, 200);
+                            }, 500);
 
                             if ($('#wrapper .page-top .content.content-top').hasClass('active')) {
                                 $('#wrapper .page-top .content.content-top').removeClass('active');
@@ -318,7 +321,7 @@ angular.module('mainapp.match')
                             scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
                             scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
                             scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
-                        }, 200);
+                        }, 300);
 
                         $('.content#duelmatrix div#choosehalfduelmatrix button').click(function (e) {
                             e.preventDefault();

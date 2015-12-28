@@ -342,8 +342,8 @@ Standard layout
   left: 0;
   right: 0;
   z-index: 99999;
-  -webkit-transition: margin 0.5s, background 1s;
-  transition: margin 0.5s, background 1s;
+  -webkit-transition: background 1s;
+  transition: background 1s;
 }
 .page-content {
   margin-top: 0px;

@@ -6,7 +6,7 @@ angular.module('mainapp.match')
         var self = this;
         self.datetime = new Date();
 
-        if (!$routeParams.slug || $routeParams.slug === '' || $routeParams.slug == null) {
+        if (!$routeParams.slug || $routeParams.slug === '' || $routeParams.slug === null) {
             $location.path('/wedstrijd/' + $routeParams._id + '/wedstrijd');
         }
 

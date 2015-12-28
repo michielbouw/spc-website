@@ -38,9 +38,22 @@ angular.module('mainapp', [
         $httpProvider.interceptors.push('TokenInterceptor');
     })
     .run(['$anchorScroll', function($anchorScroll) {
-        $anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
+        //$anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
+        $anchorScroll.yOffset = 250;   // always scroll by 50 extra pixels
     }])
     .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService, $rootScope, $filter) {
+        //jQuery(document).ready(function() {
+        //    var sOffset = $(".content").offset().top;
+        //    $(window).scroll(function () {
+        //        var scrollYpos = $(document).scrollTop();
+        //        if (scrollYpos > sOffset) {
+        //            $(".navbar.navbar-default.navbar-fixed-top").hide(500);
+        //        } else {
+        //            $(".navbar.navbar-default.navbar-fixed-top").show(500);
+        //        }
+        //    });
+        //});
+
         //Set credentials if remember in localstorage
         if ($localStorage.token && $localStorage.remember && $localStorage.role) {
             AuthenticationService.isLogged = true;
