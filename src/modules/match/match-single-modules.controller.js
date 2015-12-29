@@ -1186,17 +1186,17 @@ angular.module('mainapp.match')
 
 
         // Spelers
-        self.orderSpelers = 'personID';
-        self.orderSpelersNaam = 'spelerNaam';
-        self.orderSpelersNaamType = ['-type', 'spelerNaam'];
-
-        self.createLineTransform = function (x1,y1,x2,y2) {
-            var angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-            return 'rotate(' + angle + 'deg)';
-        };
-        self.createLineLength = function (x1,y1,x2,y2) {
-            return Math.sqrt(Math.abs(x1 - x2) * Math.abs(x1 - x2) + Math.abs(y1 - y2) * Math.abs(y1 - y2));
-        };
+        //self.orderSpelers = 'personID';
+        //self.orderSpelersNaam = 'spelerNaam';
+        //self.orderSpelersNaamType = ['-type', 'spelerNaam'];
+        //
+        //self.createLineTransform = function (x1,y1,x2,y2) {
+        //    var angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        //    return 'rotate(' + angle + 'deg)';
+        //};
+        //self.createLineLength = function (x1,y1,x2,y2) {
+        //    return Math.sqrt(Math.abs(x1 - x2) * Math.abs(x1 - x2) + Math.abs(y1 - y2) * Math.abs(y1 - y2));
+        //};
 
         self.player1InitFunc = function (i) {
             self.speler1 = $filter('filter')(self.match.player_stats_full_thuis, {personID: i}, true)[0];

@@ -35,24 +35,18 @@
                         <li><a href="" scroll-to="overtredingen_locatie"><i class="fa fa-location-arrow"></i> Locatie overtredingen</a></li>
                     </ul>
                 </li>
-                <li role="presentation" ng-class="{active: data.loading_slug === 'spelers'}"
+                <li role="presentation" ng-class="{active: data.loading_slug === 'spelers' || data.player_list}"
                     ng-if="data.match.player_stats_full_thuis.length > 0 || data.match.player_stats_full_uit.length > 0">
                     <a href="/wedstrijd/{{ data.loading_id }}/spelers" class="tab" scroll-to="top">
                         <span class="caret-right"></span><span class="caret"></span> Spelers
                     </a>
                     <ul class="nav nav-pills nav-stacked submenu">
-                        <li>
-                            <a href="" scroll-to="thuis">
-                                <!--<span class="caret-right"></span><span class="caret"></span>--> {{ data.matchshort.match_info.thuis }}
-                            </a>
-                            <!--<ul class="nav nav-pills nav-stacked submenu">
-                                <li ng-repeat="speler in data.match.spelersthuisteam">
-                                    <a href="">{{ speler.spelerNaam }}</a>
-                                </li>
-                            </ul>-->
+                        <li ng-hide="!data.loading_slug || data.loading_slug === '' || data.loading_slug === null"><a href="" scroll-to="thuis">{{ data.matchshort.match_info.thuis }}</a></li>
+                        <li ng-hide="!data.loading_slug || data.loading_slug === '' || data.loading_slug === null"><a href="" scroll-to="uit"> {{ data.matchshort.match_info.uit }}</a></li>
+                        <li ng-hide="!data.loading_slug || data.loading_slug === '' || data.loading_slug === null"><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
+                        <li ng-show="data.player_list && (!data.loading_slug || data.loading_slug === '' || data.loading_slug === null)" ng-repeat="speler in data.player_list">
+                            <a href="/wedstrijd/{{ data.loading_id }}/spelers/{{ speler.personID }}">{{ speler.spelerNaam }}</a>
                         </li>
-                        <li><a href="" scroll-to="uit"> {{ data.matchshort.match_info.uit }}</a></li>
-                        <li><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
                     </ul>
                 </li>
                 <li role="presentation" ng-class="{active: data.loading_slug === 'logboek'}"

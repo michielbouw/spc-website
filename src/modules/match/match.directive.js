@@ -235,7 +235,7 @@ angular.module('mainapp.match')
                                     });
                                     $('.navbar-sub').css({
                                         //'top': '140px',
-                                        'height': window.innerHeight - 250
+                                        'height': window.innerHeight - 185
                                     });
                                     $(".navbar-match .navbar.navbar-default.navbar-fixed-top").hide(500);
                                     $("#match-select").hide();
@@ -298,9 +298,9 @@ angular.module('mainapp.match')
                                 scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
-                                scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
-                                scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
-                                scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                                scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
                             }, 500);
 
                             if ($('#wrapper .page-top .content.content-top').hasClass('active')) {
@@ -318,10 +318,10 @@ angular.module('mainapp.match')
                             scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
                             scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                             scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
-                            scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
-                            scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
-                            scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
-                        }, 300);
+                            scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
+                            scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
+                            scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                        }, 500);
 
                         $('.content#duelmatrix div#choosehalfduelmatrix button').click(function (e) {
                             e.preventDefault();
@@ -340,11 +340,11 @@ angular.module('mainapp.match')
                                     scrollTop: $(offset).offset().top - 135
                                 }, 500);
                             }
-                            //$timeout(function() {
-                            //    scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
-                            //    scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
-                            //    scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
-                            //}, 500);
+                            $timeout(function() {
+                                scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                            }, 500);
                         });
                         $('#speler_accordion2').on('shown.bs.collapse', function (e) {
                             var offset = $('.panel > .panel-collapse.in').prev('#speler_accordion2 .panel-heading');
@@ -353,13 +353,54 @@ angular.module('mainapp.match')
                                     scrollTop: $(offset).offset().top - 135
                                 }, 500);
                             }
-                            //$timeout(function() {
-                            //    scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
-                            //    scope.location_duels_field_width = $('.content#players').find('.location_duels_field#location_duels_size').width();
-                            //    scope.location_duels_half_field_height = $('.content#players').find('.location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
-                            //}, 500);
+                            $timeout(function() {
+                                scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                            }, 500);
                         });
 
+                    });
+                }, 100);
+            }
+        };
+    })
+    .directive('matchsinglemodulescontentplayer', function ($timeout) {
+        return {
+            templateUrl: 'match/views/match-single-modules-content-player.html',
+            link: function(scope, element, attrs) {
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('body').css('background-color', '#E7EAF1');
+
+                        $('#nav-sub a.tab').click(function (e) {
+                            //e.preventDefault();
+                            //$(this).tab('show');
+                            $timeout(function() {
+                                scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
+                                scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
+                                scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
+                                scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
+                                scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
+                                scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                            }, 500);
+
+                            if ($('#wrapper .page-top .content.content-top').hasClass('active')) {
+                                $('#wrapper .page-top .content.content-top').removeClass('active');
+                                $('#wrapper .page-content .content.tab-pane').removeClass('menuopen');
+                                $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').show();
+                                $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').hide();
+                                $('.page-top .col-md-2.sidebar-offcanvas').hide();
+                            }
+                        });
+
+                        $timeout(function() {
+                            scope.location_duels_field_height = $('.content#players').find('.player_single .player_single_content .location_duels_field#location_duels_size').width() * 106 / 68;
+                            scope.location_duels_field_width = $('.content#players').find('.player_single .player_single_content .location_duels_field#location_duels_size').width();
+                            scope.location_duels_half_field_height = $('.content#players').find('.player_single .player_single_content .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                        }, 500);
                     });
                 }, 100);
             }

@@ -16,6 +16,13 @@ angular.module('mainapp.match', [])
             //        permission: 'speler'
             //    }
             //})
+            .when('/wedstrijd/:_id/spelers/:sub', {
+                templateUrl: 	'match/views/match-single-modules-player.html',
+                access: {
+                    requiredLogin: true,
+                    permission: 'speler'
+                }
+            })
             .when('/wedstrijd/:_id/:slug?', {
                 templateUrl: 	'match/views/match-single-modules.html',
                 access: {
