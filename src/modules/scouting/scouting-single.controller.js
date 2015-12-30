@@ -12,7 +12,7 @@ angular.module('mainapp.scouting')
 
         if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/scouting/' + $rootScope.currentClub.teams[0].team_slug);
-        } else if ((!$routeParams.team_slug || $routeParams.team_slug === '') && (!$rootScope.currentClub || !$rootScope.currentClub.teams[0].team_slug)) {
+        } else if ((!$routeParams.team_slug || $routeParams.team_slug === '') && (!$rootScope.currentClub || !$rootScope.currentClub.teams[0].team_slug) && $sessionStorage.role === 'admin') {
             //$location.path('/404');
             $location.path('/scouting/fceindhoven_1');
         } else {

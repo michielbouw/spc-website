@@ -95,20 +95,30 @@ angular.module('mainapp.memberAuth')
 
                                         $rootScope.currentUser = $sessionStorage.currentUser;
                                         $rootScope.currentClub = $sessionStorage.currentClub;
+
+                                        if (res.data.role == 'admin') {
+                                            $location.path("/admin");
+                                        } else if (res.data.role == 'club-beheer') {
+                                            $location.path("/user");
+                                        } else if (res.data.role == 'speler') {
+                                            $location.path("/user");
+                                        } else {
+                                            $location.path("/club");
+                                        }
                                     }, function() {
                                         $rootScope.currentUser = $sessionStorage.currentUser;
                                         $rootScope.currentClub = $sessionStorage.currentClub;
-                                    });
 
-                                    if (res.data.role == 'admin') {
-                                        $location.path("/admin");
-                                    } else if (res.data.role == 'club-beheer') {
-                                        $location.path("/user");
-                                    } else if (res.data.role == 'speler') {
-                                        $location.path("/user");
-                                    } else {
-                                        $location.path("/club");
-                                    }
+                                        if (res.data.role == 'admin') {
+                                            $location.path("/admin");
+                                        } else if (res.data.role == 'club-beheer') {
+                                            $location.path("/user");
+                                        } else if (res.data.role == 'speler') {
+                                            $location.path("/user");
+                                        } else {
+                                            $location.path("/club");
+                                        }
+                                    });
                                 }, function () {
                                     $rootScope.error = 'Failed to fetch details';
                                 });
