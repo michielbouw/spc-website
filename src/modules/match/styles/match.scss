@@ -224,22 +224,40 @@
 
     .actions {
       float: left;
-      height: 25px;
-      margin-top: 10px;
+      //height: 25px;
+      height: 11px;
+      margin-top: 12px;
       width: 100%;
-      border-bottom: 1px solid $middleblue;
+      //border-bottom: 1px solid $middleblue;
+      background-color: $middleblue;
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+
+      .action-dot {
+        color: $white;
+        float: left;
+        width: auto;
+        position: absolute;
+        margin-top: 1px;
+        padding-left: 2px;
+        font-size: 7px;
+        z-index: 10;
+      }
 
       .action {
         float: left;
         width: auto;
         position: absolute;
-        padding-left: -4px;
+        //padding-left: -4px;
+        margin-top: -22px;
         z-index: 10;
 
         span i span.info {
           display: none;
           position: absolute;
-          top: calc(115% + 6px);
+          top: calc(115% + 0px);
           right: 0;
           padding: 5px 10px;
           min-width: 125px;
@@ -557,9 +575,21 @@
     .position.uit {
       background-color: $blue;
     }
+    i.position_legenda {
+      color: $darkblue;
+    }
+    i.position_legenda.uit {
+      color: $blue;
+    }
     .position:hover > .position_info {
       display: block;
     }
+  }
+  .positions_field#positions_half_size:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    content: "\21ea";
   }
 
   .ball_contact_field:before {
@@ -1047,6 +1077,12 @@
         }
         .position.lost {
           background-color: $jl;
+        }
+        i.position_legenda {
+          color: $blue;
+        }
+        i.position_legenda.lost {
+          color: $jl;
         }
         .position:hover > .position_info {
           display: block;

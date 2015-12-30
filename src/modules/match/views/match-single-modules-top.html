@@ -44,7 +44,7 @@
                         <li ng-hide="!data.loading_slug || data.loading_slug === '' || data.loading_slug === null"><a href="" scroll-to="thuis">{{ data.matchshort.match_info.thuis }}</a></li>
                         <li ng-hide="!data.loading_slug || data.loading_slug === '' || data.loading_slug === null"><a href="" scroll-to="uit"> {{ data.matchshort.match_info.uit }}</a></li>
                         <li ng-hide="!data.loading_slug || data.loading_slug === '' || data.loading_slug === null"><a href="" scroll-to="vergelijk"><i class="fa fa-refresh"></i> Vergelijken</a></li>
-                        <li ng-show="data.player_list && (!data.loading_slug || data.loading_slug === '' || data.loading_slug === null)" ng-repeat="speler in data.player_list">
+                        <li ng-show="data.player_list && (!data.loading_slug || data.loading_slug === '' || data.loading_slug === null)" ng-repeat="speler in data.player_list | orderBy:data.orderSpelersNaam">
                             <a href="/wedstrijd/{{ data.loading_id }}/spelers/{{ speler.personID }}">{{ speler.spelerNaam }}</a>
                         </li>
                     </ul>

@@ -175,14 +175,14 @@
                     <div class="col-xs-12" ng-if="data.player.spelerType == 'veldspeler' && data.player.locatie_voorzetten.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_half_size">
                             <div ng-repeat="position in data.player.locatie_voorzetten">
-                                <span ng-if="position.doelpoging_na_3" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
+                                <span ng-if="position.doelpoging_na_3" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Leidt tot doelpoging
                                         </h4>
                                     </div>
                                 </span>
-                                <span ng-if="!position.doelpoging_na_3" class="position lost" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
+                                <span ng-if="!position.doelpoging_na_3" class="position lost" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.zend_lengte - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); margin-left: calc({{ position.zend_breedte }}% - ({{ position.zend_breedte }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Leidt niet tot doelpoging
@@ -194,10 +194,10 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Leidt tot doelpoging
+                                <i class="fa fa-circle position_legenda"></i> Leidt tot doelpoging
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Leidt niet tot doelpoging
+                                <i class="fa fa-circle position_legenda lost"></i> Leidt niet tot doelpoging
                             </p>
                         </div>
                         <br>
@@ -208,7 +208,7 @@
                     <div class="col-xs-12" ng-if="data.player.spelerType == 'veldspeler' && data.player.locatie_doelpogingen.length > 0">
                         <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 location_duels_field" id="location_duels_half_size">
                             <div ng-repeat="position in data.player.locatie_doelpogingen">
-                                <span ng-if="position.type == 'Doelpunt'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #008000;">
+                                <span ng-if="position.type == 'Doelpunt'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #008000;">
                                     <div class="position_info">
                                         <h4>
                                             Doelpunt<br>
@@ -217,7 +217,7 @@
                                         <p><i class="fa fa-clock-o"></i> {{ position.minuut_tot_string }}'</p>
                                     </div>
                                 </span>
-                                <span ng-if="position.type == 'Redding'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #18385F;">
+                                <span ng-if="position.type == 'Redding'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #18385F;">
                                     <div class="position_info">
                                         <h4>
                                             Redding<br>
@@ -226,7 +226,7 @@
                                         <p><i class="fa fa-clock-o"></i> {{ position.minuut_tot_string }}'</p>
                                     </div>
                                 </span>
-                                <span ng-if="position.type == 'Op het ijzer'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #979797;">
+                                <span ng-if="position.type == 'Op het ijzer'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px; background-color: #979797;">
                                     <div class="position_info">
                                         <h4>
                                             Op het ijzer<br>
@@ -235,7 +235,7 @@
                                         <p><i class="fa fa-clock-o"></i> {{ position.minuut_tot_string }}'</p>
                                     </div>
                                 </span>
-                                <span ng-if="position.type == 'Naast of over'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px;">
+                                <span ng-if="position.type == 'Naast of over'" class="position" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Naast of over<br>
@@ -244,7 +244,7 @@
                                         <p><i class="fa fa-clock-o"></i> {{ position.minuut_tot_string }}'</p>
                                     </div>
                                 </span>
-                                <span ng-if="position.type == 'Geblokkeerd'" class="position lost" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength }} / 150)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px;">
+                                <span ng-if="position.type == 'Geblokkeerd'" class="position lost" style="margin-top: -moz-calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-top: calc({{ location_duels_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ location_duels_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 12px; width: 12px;">
                                     <div class="position_info">
                                         <h4>
                                             Geblokkeerd<br>
@@ -258,19 +258,19 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((35 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((35 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #008000;"></span> Doelpunt
+                                <i class="fa fa-circle position_legenda" style="color: #008000;"></i> Doelpunt
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((45 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #979797;"></span> Op het ijzer
+                                <i class="fa fa-circle position_legenda" style="color: #979797;"></i> Op het ijzer
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((55 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Naast of over
+                                <i class="fa fa-circle position_legenda"></i> Naast of over
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((65 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((65 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #18385F;"></span> Redding
+                                <i class="fa fa-circle position_legenda" style="color: #18385F;"></i> Redding
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((75 / 100)* {{ location_duels_half_field_height }}px - 10px); margin-top: calc((75 / 100)* {{ location_duels_half_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Geblokkeerd
+                                <i class="fa fa-circle position_legenda lost"></i> Geblokkeerd
                             </p>
                         </div>
                         <br>
@@ -300,10 +300,10 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Gewonnen
+                                <i class="fa fa-circle position_legenda"></i> Gewonnen
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Verloren
+                                <i class="fa fa-circle position_legenda lost"></i> Verloren
                             </p>
                         </div>
                         <br>
@@ -333,10 +333,10 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Gewonnen
+                                <i class="fa fa-circle position_legenda"></i> Gewonnen
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Verloren
+                                <i class="fa fa-circle position_legenda lost"></i> Verloren
                             </p>
                         </div>
                         <br>
@@ -381,16 +381,16 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((44 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((44 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #18385F;"></span> Gestompt
+                                <i class="fa fa-circle position_legenda" style="color: #18385F;"></i> Gestompt
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px; background-color: #008000;"></span> Gevangen
+                                <i class="fa fa-circle position_legenda" style="color: #008000;"></i> Gevangen
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Doelpunt tegen
+                                <i class="fa fa-circle position_legenda lost"></i> Doelpunt tegen
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((56 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((56 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Onbekend
+                                <i class="fa fa-circle position_legenda"></i> Onbekend
                             </p>
                         </div>
                         <br>
@@ -422,10 +422,10 @@
                         </div>
                         <div class="col-xs-12 col-md-3 col-lg-3 location_duels_field">
                             <p style="position: absolute; margin-top: -moz-calc((48 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((48 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Geslaagd
+                                <i class="fa fa-circle position_legenda"></i> Geslaagd
                             </p>
                             <p style="position: absolute; margin-top: -moz-calc((52 / 100)* {{ location_duels_field_height }}px - 10px); margin-top: calc((52 / 100)* {{ location_duels_field_height }}px - 10px);">
-                                <span class="position lost" style="position: relative; font-size: 0px; vertical-align: middle; margin-right: 4px; height: 12px; width: 12px;"></span> Niet geslaagd
+                                <i class="fa fa-circle position_legenda lost"></i> Niet geslaagd
                             </p>
                         </div>
                         <br>

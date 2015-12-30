@@ -128,6 +128,7 @@ angular.module('mainapp.match')
     //                            scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
     //                            scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
     //                            scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
+    //                            scope.position_half_field_height = $('.content#team').find('.positions_field#positions_half_size').width() * 106 / 68 / 2;
     //                            scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
     //                            scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
     //                            scope.location_duels_field_height = $('.content#players').find('.location_duels_field#location_duels_size').width() * 106 / 68;
@@ -229,7 +230,7 @@ angular.module('mainapp.match')
                                         //'margin-top': '5px'
                                         'margin-top': '0px'
                                     });
-                                    //$('.page-content.page-content-match').css('margin-top', 240);
+                                    $('.page-content.page-content-match').css('margin-top', 170);
                                     $(".content-top").css({
                                         'border': 'none'
                                     });
@@ -296,8 +297,11 @@ angular.module('mainapp.match')
                                 scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
                                 scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
                                 scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
+                                scope.position_field_width = $('.content#team').find('.positions_field#positions_hor_size').width() * 68 / 106;
+                                scope.position_half_field_height = $('.content#team').find('.positions_field#positions_half_size').width() * 106 / 68 / 2;
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
+                                scope.overtredingen_field_height = $('.content#team').find('.overtredingen_field#overtredingen_size').width() * 106 / 68;
                                 scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
                                 scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
                                 scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
@@ -316,8 +320,11 @@ angular.module('mainapp.match')
                             scope.lineup_field_height = $('.content#home').find('.lineup_field#lineup_size').width() * 0.78;
                             scope.lineup_field_height2 = $('.content#players').find('.lineup_field#lineup_size').width() * 0.78;
                             scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
+                            scope.position_field_width = $('.content#team').find('.positions_field#positions_hor_size').width() * 68 / 106;
+                            scope.position_half_field_height = $('.content#team').find('.positions_field#positions_half_size').width() * 106 / 68 / 2;
                             scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                             scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
+                            scope.overtredingen_field_height = $('.content#team').find('.overtredingen_field#overtredingen_size').width() * 106 / 68;
                             scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
                             scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
                             scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
