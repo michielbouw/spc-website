@@ -31,6 +31,36 @@ angular.module('mainapp.pageUser')
             });
         };
 
+        self.changePassword = function () {
+            if (self.login.password !== undefined && self.login.password1 !== undefined && self.login.password2 !== undefined) {
+
+                if (self.login.password1 === self.login.password2) {
+                    if ( self.login.password1.length > 5 && self.login.password1.match(/[a-z]/) && self.login.password1.match(/[0-9]/) ) {
+                        Api.ChangePassword.post({
+                            password: self.login.password,
+                            password_new: self.login.password1,
+                            datetime: self.datetime
+                        }, function (res) {
+                            if (res.type === false) {
+                                alert(res.data);
+                            } else {
+                                $location.path("/");
+                            }
+                        }, function () {
+                            $rootScope.error = 'Er ging iets mis, account niet aangemaakt';
+                            alert('Er ging iets mis, account niet aangemaakt');
+                        });
+                    } else {
+                        $rootScope.error = 'Een wachtwoord moet tenminste 1 letter en 1 cijfer bevatten en minimaal 6 tekens lang zijn';
+                        alert('Een wachtwoord moet tenminste 1 letter en 1 cijfer bevatten en minimaal 6 tekens lang zijn');
+                    }
+                } else {
+                    $rootScope.error = 'Je hebt het wachtwoord niet (correct) bevestigd';
+                    alert('Je hebt het wachtwoord niet (correct) bevestigd');
+                }
+            }
+        };
+
         if ($sessionStorage.currentClub && $sessionStorage.currentClub.teams[0] && $sessionStorage.currentClub.teams[0].team_slug) {
             self.season_matches = [];
             self.orderMatches = 'ronde';

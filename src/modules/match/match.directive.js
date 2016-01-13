@@ -238,12 +238,12 @@ angular.module('mainapp.match')
                                         //'top': '140px',
                                         'height': window.innerHeight - 185
                                     });
-                                    $(".navbar-match .navbar.navbar-default.navbar-fixed-top").hide(500);
+                                    $(".navbar-match .navbar.navbar-default.navbar-fixed-top").css('top', -65);
                                     $("#match-select").hide();
                                     $("#match-info").hide();
                                     $("#match-info-short").show();
                                 } else {
-                                    $(".navbar-match .navbar.navbar-default.navbar-fixed-top").show(500);
+                                    $(".navbar-match .navbar.navbar-default.navbar-fixed-top").css('top', 0);
                                     $("#match-info").show();
                                     $("#match-info-short").hide();
                                     $("#match-select").show();

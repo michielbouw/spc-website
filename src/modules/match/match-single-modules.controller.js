@@ -1037,15 +1037,16 @@ angular.module('mainapp.match')
 
         // Team  !!! BELOW DOES NOT WORK PROPERLY !!!
         $scope.position_field_interval = '1e helft';
+
         $scope.$watch('position_field_interval', function () {
-            if ($scope.position_field_interval == '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
-            else if ($scope.position_field_interval == '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
-            else if ($scope.position_field_interval == '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
-            else if ($scope.position_field_interval == '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
-            else if ($scope.position_field_interval == '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
-            else if ($scope.position_field_interval == '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
-            else if ($scope.position_field_interval == '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
-            else if ($scope.position_field_interval == '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
+            if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
+            else if ($scope.position_field_interval === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
+            else if ($scope.position_field_interval === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
+            else if ($scope.position_field_interval === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
+            else if ($scope.position_field_interval === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
+            else if ($scope.position_field_interval === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
+            else if ($scope.position_field_interval === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
+            else if ($scope.position_field_interval === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
 
             selectpositions_uit = true;
             selectpositions_thuis = true;
@@ -1055,14 +1056,14 @@ angular.module('mainapp.match')
         var selectpositions_thuis = true;
         self.select_positions_uit = function () {
             if (!selectpositions_uit) {
-                if ($scope.position_field_interval == '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
-                else if ($scope.position_field_interval == '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
-                else if ($scope.position_field_interval == '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
-                else if ($scope.position_field_interval == '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
-                else if ($scope.position_field_interval == '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
-                else if ($scope.position_field_interval == '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
-                else if ($scope.position_field_interval == '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
-                else if ($scope.position_field_interval == '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
+                if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
+                else if ($scope.position_field_interval === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
+                else if ($scope.position_field_interval === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
+                else if ($scope.position_field_interval === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
+                else if ($scope.position_field_interval === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
+                else if ($scope.position_field_interval === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
+                else if ($scope.position_field_interval === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
+                else if ($scope.position_field_interval === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
 
                 if (!selectpositions_thuis) {
                     self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
@@ -1076,14 +1077,14 @@ angular.module('mainapp.match')
         };
         self.select_positions_thuis = function () {
             if (!selectpositions_thuis) {
-                if ($scope.position_field_interval == '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
-                else if ($scope.position_field_interval == '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
-                else if ($scope.position_field_interval == '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
-                else if ($scope.position_field_interval == '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
-                else if ($scope.position_field_interval == '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
-                else if ($scope.position_field_interval == '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
-                else if ($scope.position_field_interval == '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
-                else if ($scope.position_field_interval == '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
+                if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
+                else if ($scope.position_field_interval === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
+                else if ($scope.position_field_interval === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
+                else if ($scope.position_field_interval === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
+                else if ($scope.position_field_interval === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
+                else if ($scope.position_field_interval === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
+                else if ($scope.position_field_interval === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
+                else if ($scope.position_field_interval === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
 
                 if (!selectpositions_uit) {
                     self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));

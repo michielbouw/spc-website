@@ -1544,7 +1544,7 @@
         <div ng-if="data.match.locatie_doelpogingen_filter.thuisTeam.length <= 0 && data.match.locatie_doelpogingen_filter.uitTeam.length <= 0" class="col-xs-12">
             Niet beschikbaar.
         </div>
-        <div ng-if="data.match.locatie_doelpogingen_filter.thuisTeam.length > 0" class="col-xs-12">
+        <div ng-if="data.match.locatie_doelpogingen_filter.thuisTeam" class="col-xs-12">
             <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 positions_field" id="positions_half_size">
                 <div ng-repeat="position in data.match.locatie_doelpogingen_filter.thuisTeam">
                     <span ng-if="position.type == 'Doelpunt'" class="position" style="margin-top: -moz-calc({{ position_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ position_half_field_height }}px - 10px); margin-top: calc({{ position_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ position_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 15px; width: 15px; background-color: #008000;">
@@ -1596,7 +1596,7 @@
                 </p>
             </div>
         </div>
-        <div ng-if="data.match.locatie_doelpogingen_filter.uitTeam.length > 0" class="col-xs-12">
+        <div ng-if="data.match.locatie_doelpogingen_filter.uitTeam" class="col-xs-12">
             <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 positions_field" id="positions_half_size">
                 <div ng-repeat="position in data.match.locatie_doelpogingen_filter.uitTeam">
                     <span ng-if="position.type == 'Doelpunt'" class="position uit" style="margin-top: -moz-calc({{ position_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ position_half_field_height }}px - 10px); margin-top: calc({{ position_half_field_height }}px - ({{ position.locationInFieldLength - 50 }} / 50)*{{ position_half_field_height }}px - 10px); margin-left: -moz-calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); margin-left: calc({{ position.locationInFieldWidth }}% - ({{ position.locationInFieldWidth }})*0.42px); height: 15px; width: 15px; background-color: #008000;">

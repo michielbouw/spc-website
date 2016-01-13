@@ -14,12 +14,17 @@ MEAN working setup
 Install these programs for running the app, if not already installed. It is good to install them globally, so with `-g` in the install code.
 
 * Install MongoDB: Windows: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/ , Mac OS: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
-* Install node.js (for using npm): http://nodejs.org/download/
-* (Install Git: http://git-scm.com/downloads) if not used already to clone this repo off course.
+* Install node.js (for using npm): http://nodejs.org/download/ (node -v 0.12.x and npm -v 2.1.x)
+* (Install Git: http://git-scm.com/downloads) if not used already to clone this repo off course. (Setup: https://help.github.com/articles/set-up-git/) (Make sure PATH for git in windows is set: C:\Program Files (x86)\Git\bin;C:\Program Files (x86)\Git\cmd).
 * Install Bower: `npm install -g bower`
+* Install Grunt: `npm install -g grunt`
 * Install Gulp: `npm install -g gulp` (https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 * Install Mongoose: `npm install -g mongoose` (http://mongoosejs.com/docs/index.html)
 * Install Imagemagick: http://www.imagemagick.org/script/binary-releases.php (globally install on system to be able to work with it)
+* Install Sass: with ruby gems: `gem install sass` after installing ruby. (windows: http://rubyinstaller.org/) (Make sure PATH for gem in windows is set: C:\RubyXX\bin)
+* Install Node-sass: `npm install -g node-sass`
+* Install Python version 2.7.x
+* (node-gyp) could create an error when installing, this is due to the incorrect usage of python and mvs2013 (microsoft visual studio 2013 required!!!)
 
 ## Setup
 
@@ -145,6 +150,9 @@ After testing, you can safely delete a demo app with:
         dokku ps:destroy <app_name>
         ```
 		
+Editing the database for more options, use Robomongo: 'http://robomongo.org/'. Download and install this, than connect to the database via SSH tunnel to 5.200.7.242 with username beheer and password in the Safe.
+Than use for the connection: ip 172.17.0.19 and port 27017. As auth use: database: web3-production-production, username: web3, pass in the Safe.
+
 For the mongodb plugin you have te following commands:
         
         ```shell
@@ -165,6 +173,8 @@ Backing up a database
 
 `mongodb:dump` creates a backup of a whole database. The result can be optionally compressed in a gzipped tarball (tar.gz) by adding the `-tar` parameter after the database name. The dump is placed in the current directory and named `<databasename>-<date and time>`.  
 *Example: `dokku mongodb:dump api-production -tar`*
+
+NOT WORKING WELL, USE ROBOMONGO!
 
 Restoring a database
 

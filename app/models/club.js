@@ -23,7 +23,10 @@ module.exports = mongoose.model('Club', {
             season: { type: String }
         }],
         coach: { type: String },
-        divisie: { type: String }
+        divisie: { type: String },
+        contact: [{
+            email: { type: String }
+        }]
     }],
 
     editor: { type: String },

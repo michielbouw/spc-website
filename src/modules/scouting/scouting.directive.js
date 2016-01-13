@@ -51,7 +51,7 @@ angular.module('mainapp.scouting')
                             $('.content.content-page .content-players.choose-player').css({
                                 'margin-top': ($('.content.content-page .content-players-left').height() / 2) - 95
                             });
-                            $('.content.content-page .content-players.choose-player').effect('shake', {times:2, distance:10}, 4000);
+                            $('.content.content-page .content-players.choose-player').effect('shake', {times:1, distance:10}, 2000);
                         }, 1000);
 
                         $(function () {

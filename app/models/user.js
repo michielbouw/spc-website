@@ -27,6 +27,10 @@ module.exports = mongoose.model('User', {
     role: { type: String, default: "fan", lowercase: true },
     is_superadmin: { type: Boolean, default: false },
     token: { type: String },
+    activationToken: { type: String },
+    activationExpires: { type: Date },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
 
     last_login: { type: Date, required: true },
     number_of_logins: { type: Number, default: 0 },

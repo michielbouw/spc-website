@@ -32,6 +32,14 @@ angular.module('mainapp.pageAdmin')
 
             angular.forEach(_t.teams, function(value, key) {
                 value.team_slug = angular.copy(self.club._slug + '_' + value.team_name.trim().toLowerCase().replace(/\s+/g, ''));
+
+                if (value.contact && value.contact.length > 0) {
+                    angular.forEach(value.contact, function(value1, key1) {
+                        if (!value1.email || value1.email === '') {
+                            value.contact.splice(key1, 1);
+                        }
+                    });
+                }
             });
 
             Api.Club.put({
@@ -62,6 +70,14 @@ angular.module('mainapp.pageAdmin')
 
             angular.forEach(_t.teams, function(value, key) {
                 value.team_slug = _t._slug + '_' + value.team_name.trim().toLowerCase().replace(/\s+/g, '');
+
+                if (value.contact && value.contact.length > 0) {
+                    angular.forEach(value.contact, function(value1, key1) {
+                        if (!value1.email || value1.email === '') {
+                            value.contact.splice(key1, 1);
+                        }
+                    });
+                }
             });
 
             Api.Clubs.post({
@@ -97,6 +113,16 @@ angular.module('mainapp.pageAdmin')
                 self.club.teams[i].teamID.push(temp);
             } else {
                 self.club.teams[i].teamID.push(temp);
+            }
+        };
+
+        self.teamEmailAdd = function (i) {
+            var temp = { email: '' };
+            if (!self.club.teams[i].contact || self.club.teams[i].contact.length <= 0) {
+                self.club.teams[i].contact = [];
+                self.club.teams[i].contact.push(temp);
+            } else {
+                self.club.teams[i].contact.push(temp);
             }
         };
 

@@ -15,7 +15,6 @@ var multipart      = require('connect-multiparty');
 var mailer         = require('express-mailer');
 
 var morgan         = require("morgan");
-var formage        = require("formage");
 
 var app         = express();
 var api_router	= require('./app/routes/api');
@@ -53,25 +52,16 @@ app.use(multipart({
 
 // mailer for mails from server ============================
 mailer.extend(app, {
-    from: 'contact@mpbeta.nl',
-    host: 'smtp.mijnhostingpartner.nl', // hostname
-    secureConnection: false, // use SSL
-    port: 25, // port for secure SMTP
+    from: 'info@soccerpc.nl',
+    host: 'smtp.transip.email', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
     transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
     auth: {
-        user: 'contact@mpbeta.nl',
-        pass: 'MPBouw-94'
+        user: 'info@soccerpc.nl',
+        pass: 'S4bAYath'
     }
 });
-
-// Formage MongoDB admin panel =============================
-//formage.init(app, express, require('./app/models'), {
-//    title: 'MongoDB',
-//    root: '/moadmin',
-//    default_section: 'data tables',
-//    username: 'beheerdb',
-//    password: 'jemoeder'
-//});
 
 // routes ==================================================
 app.use('/api/v1', api_router);
@@ -95,6 +85,7 @@ app.use(function(err, req, res, next) {
             }
 
             console.log('Error email send to administrator\n\n' + err);
+            res.send('Email Sent');
         });
         res.render('errors/404');
     } else {
@@ -112,6 +103,7 @@ app.use(function(err, req, res, next) {
             }
 
             console.log('Error email send to administrator\n\n' + err);
+            res.send('Email Sent');
         });
         res.render('errors/500');
     }
@@ -135,7 +127,8 @@ app.listen(port, function(err) {
                 return console.log('Error sending error email\n\n' + err1 + '\n\n' + err);
             }
 
-            return console.log('Error email send to administrator\n\n' + err);
+            console.log('Error email send to administrator\n\n' + err);
+            return res.send('Email Sent');
         });
     }
 

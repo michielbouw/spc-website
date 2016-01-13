@@ -87,7 +87,7 @@ angular.module('mainapp.pageAdmin')
             if (files && files.length) {
                 var file = files[0];
                 Upload.upload({
-                    url: 'api/media/players',
+                    url: 'api/v1/media/players',
                     method: 'POST',
                     file: file
                 })

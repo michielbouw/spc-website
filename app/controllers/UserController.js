@@ -119,7 +119,27 @@ module.exports = UserController = {
                             userModel.save(function (err, user) {
                                 if (user) {
                                     user.token = jwt.sign(user, 'spc-extra-veilig-voetbalperformancecentre', {algorithm: 'HS256'});
+
+                                    var token2 = jwt.sign(user.email + Date.now(), 'activation-voetbalperformancecentre', {algorithm: 'HS256'});
+                                    user.activationToken = token2;
+                                    user.activationExpires = Date.now() + 24*3600000; // 24 hour
+
                                     user.save(function (err, user1) {
+                                        res.mailer.send('mailer/activate_account', {
+                                            to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                            subject: 'Activeer uw account voor soccerpc.nl', // REQUIRED.
+                                            // All additional properties are also passed to the template as local variables.
+                                            title: 'Activeer uw account voor soccerpc.nl',
+                                            token: token2
+                                        }, function (err1) {
+                                            if (err1) {
+                                                // handle error
+                                                console.log('Error sending password reset email\n\n' + err1 + '\n');
+                                            } else {
+                                                console.log('Email send to user');
+                                            }
+                                        });
+
                                         res.json({
                                             type: true,
                                             data: user1,
@@ -185,19 +205,39 @@ module.exports = UserController = {
                             userModel.save(function (err, user) {
                                 if (user) {
                                     user.token = jwt.sign(user, 'spc-extra-veilig-voetbalperformancecentre', {algorithm: 'HS256'});
+
+                                    var token2 = jwt.sign(user.email + Date.now(), 'activation-voetbalperformancecentre', {algorithm: 'HS256'});
+                                    user.activationToken = token2;
+                                    user.activationExpires = Date.now() + 24*3600000; // 24 hour
+
                                     user.save(function (err, user1) {
-                                        res.mailer.send('mailer/account_request', {
-                                            to: 'contact@mpbeta.nl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                            subject: 'Er is een account aangemaakt op soccerpc.nl/getaccount', // REQUIRED.
+                                        //res.mailer.send('mailer/account_request', {
+                                        //    to: 'contact@mpbeta.nl', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                        //    subject: 'Er is een account aangemaakt op soccerpc.nl/getaccount', // REQUIRED.
+                                        //    // All additional properties are also passed to the template as local variables.
+                                        //    title: 'Er is een account aangemaakt op soccerpc.nl/getaccount',
+                                        //    user: user1
+                                        //}, function (err1) {
+                                        //    if (err1) {
+                                        //        // handle error
+                                        //        console.log('Error sending error email\n\n' + err1 + '\n');
+                                        //    } else {
+                                        //        console.log('Email send to administrator');
+                                        //    }
+                                        //});
+
+                                        res.mailer.send('mailer/activate_account', {
+                                            to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                            subject: 'Activeer uw account voor soccerpc.nl', // REQUIRED.
                                             // All additional properties are also passed to the template as local variables.
-                                            title: 'Er is een account aangemaakt op soccerpc.nl/getaccount',
-                                            user: user1
+                                            title: 'Activeer uw account voor soccerpc.nl',
+                                            token: token2
                                         }, function (err1) {
                                             if (err1) {
                                                 // handle error
-                                                console.log('Error sending error email\n\n' + err1 + '\n');
+                                                console.log('Error sending password reset email\n\n' + err1 + '\n');
                                             } else {
-                                                console.log('Email send to administrator');
+                                                console.log('Email send to user');
                                             }
                                         });
 
@@ -217,6 +257,196 @@ module.exports = UserController = {
                         });
                     });
                 }
+            }
+        });
+    },
+
+    change_password: function(req, res) {
+        var email = req.body.email || '';
+        var password = req.body.password || '';
+        var password_new = req.body.password_new || '';
+
+        if (email == '' || password == '' || password_new == '') {
+            return res.send(401);
+        }
+        User.findOne({email: email}, function (err, user) {
+            if (err) {
+                res.json({
+                    type: false,
+                    data: "Error occured: " + err
+                });
+            } else {
+                if (user) {
+                    if (user.is_active) {
+                        bcrypt.compare(password, user.password, function (err1, res1) {
+                            if (err1) {
+                                res.json({
+                                    type: false,
+                                    data: "An error occured"
+                                });
+                            } else if (res1) {
+                                user.last_login = req.body.datetime;
+
+                                bcrypt.genSalt(10, function(err, salt) {
+                                    bcrypt.hash(password_new, salt, function(err, hash) {
+                                        user.password = hash;
+
+                                        user.save(function (err, user) {
+                                            if (user) {
+                                                user.token = jwt.sign(user, 'spc-extra-veilig-voetbalperformancecentre', {algorithm: 'HS256'});
+
+                                                user.save(function (err, user1) {
+                                                    res.json({
+                                                        type: true,
+                                                        data: user1,
+                                                        token: user1.token
+                                                    });
+                                                });
+                                            } else {
+                                                res.json({
+                                                    type: false,
+                                                    data: "User cannot be created"
+                                                });
+                                            }
+                                        })
+                                    });
+                                });
+                            } else {
+                                res.json({
+                                    type: false,
+                                    data: "Incorrect password"
+                                });
+                            }
+                        });
+                    } else {
+                        res.json({
+                            type: false,
+                            data: "Account not activated"
+                        });
+                    }
+                } else {
+                    res.json({
+                        type: false,
+                        data: "Incorrect email"
+                    });
+                }
+            }
+        });
+    },
+
+    activate: function(req, res)
+    {
+        User.findOne({activationToken: req.params.token, activationExpires: { $gt: Date.now() }}, function(err, user) {
+            if (!user) {
+                res.json({
+                    type: false,
+                    data: "Activatie link is niet (meer) geldig."
+                });
+            } else {
+                user.activationToken = undefined;
+                user.activationExpires = undefined;
+                user.is_active = true;
+
+                user.save(function(err1, user1) {
+                    res.json({
+                        type: true,
+                        data: user
+                    });
+                });
+            }
+        });
+    },
+
+    forgot: function(req, res)
+    {
+        User.findOne({email: req.body.email}, function(err, user) {
+            if (!user) {
+                res.json({
+                    type: false,
+                    data: "Er bestaat geen gebruiker met dit email adres."
+                });
+            } else {
+                var token = jwt.sign(user.email + Date.now(), 'passwordreset-voetbalperformancecentre', {algorithm: 'HS256'});
+
+                user.resetPasswordToken = token;
+                user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                user.save(function (err1, user1) {
+                    res.mailer.send('mailer/forgot_password', {
+                        to: req.body.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                        subject: 'Wachtwoord reset soccerpc.nl', // REQUIRED.
+                        // All additional properties are also passed to the template as local variables.
+                        title: 'Wachtwoord reset soccerpc.nl',
+                        token: token
+                    }, function (err1) {
+                        if (err1) {
+                            // handle error
+                            console.log('Error sending password reset email\n\n' + err1 + '\n');
+                        } else {
+                            console.log('Email send to user');
+                        }
+                    });
+
+                    res.json({
+                        type: true,
+                        data: user1,
+                        token: token
+                    });
+                });
+            }
+        });
+    },
+
+    reset: function(req, res) {
+        User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() }}, function(err, user) {
+            if (!user) {
+                res.json({
+                    type: false,
+                    data: "Wachtwoord reset link is niet (meer) geldig."
+                });
+            } else {
+                res.json({
+                    type: true,
+                    data: user.email
+                });
+            }
+        });
+    },
+
+    reset_password: function(req, res) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+            if (!user) {
+                res.json({
+                    type: false,
+                    data: "Wachtwoord reset link is niet (meer) geldig."
+                });
+            } else {
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpires = undefined;
+
+                bcrypt.genSalt(10, function (err, salt) {
+                    bcrypt.hash(req.body.password, salt, function (err, hash) {
+                        user.password = hash;
+
+                        user.save(function (err, user) {
+                            if (user) {
+                                user.token = jwt.sign(user, 'spc-extra-veilig-voetbalperformancecentre', {algorithm: 'HS256'});
+                                user.save(function (err, user1) {
+                                    res.json({
+                                        type: true,
+                                        data: user1,
+                                        token: user1.token
+                                    });
+                                });
+                            } else {
+                                res.json({
+                                    type: false,
+                                    data: "Wachtwoord kan niet aangemaakt worden."
+                                });
+                            }
+                        })
+                    });
+                });
             }
         });
     },

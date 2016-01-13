@@ -70,14 +70,19 @@ router.delete('/spelers/:_id',      UserController.ensureAuthorized, SpelersCont
 
 router.post('/media/:slug',         UserController.ensureAuthorized, multipartMiddleware, UploadController.uploadFile);
 
+router.post('/activate/:token',     UserController.activate);
 router.post('/login',               UserController.login);
 router.post('/signin',              UserController.signin);
 router.post('/getaccount',          UserController.get_account);
+router.post('/forgot',              UserController.forgot);
+router.get('/reset/:token',         UserController.reset);
+router.post('/reset/:token',        UserController.reset_password);
 router.get('/me',                   UserController.ensureAuthorized, UserController.me);
 router.get('/users',                UserController.ensureAuthorized, UserController.query);
 router.get('/users/:_id',           UserController.ensureAuthorized, UserController.get);
 router.put('/users/:_id',           UserController.ensureAuthorized, UserController.put);
 router.delete('/users/:_id',        UserController.ensureAuthorized, UserController.delete);
+router.post('/change_password/:_id',UserController.ensureAuthorized, UserController.change_password);
 
 // Global wildcard, catch-all address
 router.get('*', function(req,res){

@@ -130,6 +130,7 @@ angular.module('mainapp.memberAuth')
                     });
                 }
             };
+
             self.signIn = function () {
                 if (self.login.email !== undefined && self.login.password !== undefined && self.login.password2 !== undefined) {
 
@@ -177,6 +178,7 @@ angular.module('mainapp.memberAuth')
                     }
                 }
             };
+
             self.getAccount = function () {
                 if (self.login.email !== undefined && self.login.password !== undefined && self.login.password2 !== undefined) {
 
@@ -229,6 +231,22 @@ angular.module('mainapp.memberAuth')
                     }
                 }
             };
+
+            self.forgot = function () {
+                Api.Forgot.post({
+                    email: self.forgot.email
+                }, function (res) {
+                    if (res.type === false) {
+                        alert(res.data);
+                    } else {
+                        $location.path("/");
+                    }
+                }, function () {
+                    $rootScope.error = 'Er ging iets mis, kan wachtwoord niet resetten';
+                    alert('Er ging iets mis, kan wachtwoord niet resetten');
+                });
+            };
+
             self.logOut = function () {
                 if (AuthenticationService.isLogged) {
                     AuthenticationService.isLogged = false;

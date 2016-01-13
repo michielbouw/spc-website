@@ -383,14 +383,19 @@
                                             <tr>
                                                 <td valign="top">
                                                     <div>
-                                                        <h1 class="h1"><img src="http://soccerpc.nl/images/SPC_logo.png" style="max-width:20%;" /> An Error Occurred</h1>
+                                                        <h1 class="h1"><img src="http://soccerpc.nl/images/SPC_logo.png" style="max-width:20%;" /> Uw account</h1>
+                                                        <br>
                                                         <!--<h2 class="h2">Heading 2</h2>
-                                                        <h3 class="h3">Heading 3</h3>
-                                                        <h4 class="h4">Heading 4</h4>-->
-                                                        {{ error.message }}<br>
-                                                        {{ error.arguments }}<br>
-                                                        {{ error.type }}<br>
-                                                        {{ error.stack }}<br>
+                                                        <h3 class="h3">Heading 3</h3>-->
+                                                        <h4 class="h4">Activeer uw account voor Soccerpc.nl nu!</h4>
+                                                        U ontvangt deze mail omdat u (of iemand anders) voor dit email adres een account heeft aangemaakt voor Soccerpc.nl. Via de onderstaande tijdelijke link kunt u dit bevestigen en uw account activeren: <br>
+                                                        <br>
+                                                        <a href="http://soccerpc.nl/activate/user/{{ token }}">activatie link</a><br>
+                                                        <br>
+                                                        Deze link verloopt 24 uur na het aanmaken van dit account op onze website. Als de link niet werkt kopieer dan het volgende en plak het in de adresbalk van je browser:<br>
+                                                        <small><small>http://soccerpc.nl/activate/user/{{ token }}</small></small><br>
+                                                        <br>
+                                                        Als u dit niet zelf heeft gedaan of als dit een fout is, negeer dan deze mail, er zal niets gebeuren als u niets doet en als de link is verlopen.
                                                     </div>
                                                 </td>
                                             </tr>

@@ -24,9 +24,13 @@ angular.module('mainapp.api')
             SpelersClub:    $resource(url1 + 'spelersclub/:_id',  {_id:'@_id'},           { 'query': {method:'GET', isArray:true}, }),
             SpelersID:      $resource(url1 + 'spelersid/:_id',    {_id:'@_id'},           { 'query': {method:'GET', isArray:true}, }),
             Speler:         $resource(url1 + 'spelers/:_id',      {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
+            Activate:       $resource(url1 + 'activate/:token',   {token:'@token'},       { 'post': {method:'POST'} }),
             Login:          $resource(url1 + 'login',             {},                     { 'post': {method:'POST'} }),
             Signin:         $resource(url1 + 'signin',            {},                     { 'post': {method:'POST'} }),
             GetAccount:     $resource(url1 + 'getaccount',        {},                     { 'post': {method:'POST'} }),
+            ChangePassword: $resource(url1 + 'change_password/:_id',{_id:'@_id'},         { 'post': {method:'POST'} }),
+            Forgot:         $resource(url1 + 'forgot',            {},                     { 'post': {method:'POST'} }),
+            ResetPassword:  $resource(url1 + 'reset/:token',      {token:'@token'},       { 'get': {method:'GET'}, 'post': {method:'POST'} }),
             Me:             $resource(url1 + 'me',                {},                     { 'get': {method:'GET'} }),
             Users:          $resource(url1 + 'users',             {},                     { 'query': {method:'GET', isArray:true} }),
             User:           $resource(url1 + 'users/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} })
