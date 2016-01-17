@@ -3929,20 +3929,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -3953,20 +3954,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -3983,20 +3985,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -4007,27 +4010,28 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
                                             });
                                         });
                                     }
-                                });
+                                }.bind(res));
                             } else {
                                 MatchData.findOne({matchID: items.matchID}, function (err1, res12) {
                                     var matchdata = res12;
@@ -4044,20 +4048,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -4068,20 +4073,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -4098,20 +4104,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -4122,20 +4129,21 @@ module.exports = ImportController = {
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
-                                                            res.mailer.send('mailer/match_upload', {
-                                                                to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                                // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                                club: res22.name,
-                                                                match: match_short
-                                                            }, function (err1) {
-                                                                if (err1) {
-                                                                    // handle error
-                                                                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                                }
-                                                                console.log('New upload email send to club\n\n');
-                                                            });
+                                                            send_mail(value1.email, res22.name, match_short);
+                                                            //res.mailer.send('mailer/match_upload', {
+                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
+                                                            //    // All additional properties are also passed to the template as local variables.
+                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                            //    club: res22.name,
+                                                            //    match: match_short
+                                                            //}, function (err1) {
+                                                            //    if (err1) {
+                                                            //        // handle error
+                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                                                            //    }
+                                                            //    console.log('New upload email send to club\n\n');
+                                                            //});
                                                         });
                                                     }
                                                 });
@@ -4145,26 +4153,26 @@ module.exports = ImportController = {
                                 });
                             }
                         }
-                    }.bind(res), 4000);
-                }.bind(res));
-            }.bind(res));
-        }.bind(res));
+                    }, 4000);
+                });
+            });
+        });
 
-        //var send_mail = function(email_address1, club1, match_short1) {
-        //    res.mailer.send('mailer/match_upload', {
-        //        to: email_address1, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-        //        subject: 'Nieuwe wedstrijd ' + club1 + ' online op soccerpc.nl', // REQUIRED.
-        //        // All additional properties are also passed to the template as local variables.
-        //        title: 'Nieuwe wedstrijd ' + club1 + ' online op soccerpc.nl',
-        //        club: club1,
-        //        match: match_short1
-        //    }, function (err1) {
-        //        if (err1) {
-        //            // handle error
-        //            console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-        //        }
-        //        console.log('New upload email send to club\n\n');
-        //    });
-        //};
+        var send_mail = function(email_address1, club1, match_short1) {
+            res.mailer.send('mailer/match_upload', {
+                to: email_address1, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+                subject: 'Nieuwe wedstrijd ' + club1 + ' online op soccerpc.nl', // REQUIRED.
+                // All additional properties are also passed to the template as local variables.
+                title: 'Nieuwe wedstrijd ' + club1 + ' online op soccerpc.nl',
+                club: club1,
+                match: match_short1
+            }, function (err1) {
+                if (err1) {
+                    // handle error
+                    console.log('Error sending new upload email\n\n' + err1 + '\n\n');
+                }
+                console.log('New upload email send to club\n\n');
+            });
+        }.bind(res);
     }
 };
