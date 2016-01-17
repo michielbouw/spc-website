@@ -3944,10 +3944,10 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        }.bind(res));
+                                                        });
                                                     }
-                                                }.bind(res));
-                                            }.bind(res));
+                                                });
+                                            });
 
                                             Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
@@ -3969,69 +3969,41 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        }.bind(res));
+                                                        });
                                                     }
-                                                }.bind(res));
-                                            }.bind(res));
-                                        }.bind(res));
+                                                });
+                                            });
+                                        });
                                     } else {
                                         MatchData.update({
                                             _id: matchdata._id
                                         }, match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: club_slug}, function (err22, res22) {
-                                                if (err22) console.log(err22);
-                                                forEach(res22.teams, function (value, key) {
-                                                    if (value.divisie == match_short.divisie) {
-                                                        forEach(value.contact, function (value1, key1) {
-                                                            send_mail(value1.email, res22.name, match_short);
-                                                            //res.mailer.send('mailer/match_upload', {
-                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                            //    // All additional properties are also passed to the template as local variables.
-                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                            //    club: res22.name,
-                                                            //    match: match_short
-                                                            //}, function (err1) {
-                                                            //    if (err1) {
-                                                            //        // handle error
-                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                            //    }
-                                                            //    console.log('New upload email send to club\n\n');
-                                                            //});
-                                                        }.bind(res));
-                                                    }
-                                                }.bind(res));
-                                            }.bind(res));
+                                            //Club.findOne({_slug: club_slug}, function (err22, res22) {
+                                            //    if (err22) console.log(err22);
+                                            //    forEach(res22.teams, function (value, key) {
+                                            //        if (value.divisie == match_short.divisie) {
+                                            //            forEach(value.contact, function (value1, key1) {
+                                            //                send_mail(value1.email, res22.name, match_short);
+                                            //            });
+                                            //        }
+                                            //    });
+                                            //});
 
-                                            Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
-                                                if (err22) console.log(err22);
-                                                forEach(res22.teams, function (value, key) {
-                                                    if (value.divisie == match_short.divisie) {
-                                                        forEach(value.contact, function (value1, key1) {
-                                                            send_mail(value1.email, res22.name, match_short);
-                                                            //res.mailer.send('mailer/match_upload', {
-                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                            //    // All additional properties are also passed to the template as local variables.
-                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                            //    club: res22.name,
-                                                            //    match: match_short
-                                                            //}, function (err1) {
-                                                            //    if (err1) {
-                                                            //        // handle error
-                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                            //    }
-                                                            //    console.log('New upload email send to club\n\n');
-                                                            //});
-                                                        }.bind(res));
-                                                    }
-                                                }.bind(res));
-                                            }.bind(res));
-                                        }.bind(res));
+                                            //Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
+                                            //    if (err22) console.log(err22);
+                                            //    forEach(res22.teams, function (value, key) {
+                                            //        if (value.divisie == match_short.divisie) {
+                                            //            forEach(value.contact, function (value1, key1) {
+                                            //                send_mail(value1.email, res22.name, match_short);
+                                            //            });
+                                            //        }
+                                            //    });
+                                            //});
+                                        });
                                     }
-                                }.bind(res));
+                                });
                             } else {
                                 MatchData.findOne({matchID: items.matchID}, function (err1, res12) {
                                     var matchdata = res12;
@@ -4063,10 +4035,10 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        }.bind(res));
+                                                        });
                                                     }
-                                                }.bind(res));
-                                            }.bind(res));
+                                                });
+                                            });
 
                                             Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
@@ -4088,75 +4060,48 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        }.bind(res));
+                                                        });
                                                     }
-                                                }.bind(res));
-                                            }.bind(res));
-                                        }.bind(res));
+                                                });
+                                            });
+                                        });
                                     } else {
                                         MatchData.update({
                                             _id: matchdata._id
                                         }, match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: club_slug}, function (err22, res22) {
-                                                if (err22) console.log(err22);
-                                                forEach(res22.teams, function (value, key) {
-                                                    if (value.divisie == match_short.divisie) {
-                                                        forEach(value.contact, function (value1, key1) {
-                                                            send_mail(value1.email, res22.name, match_short);
-                                                            //res.mailer.send('mailer/match_upload', {
-                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                            //    // All additional properties are also passed to the template as local variables.
-                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                            //    club: res22.name,
-                                                            //    match: match_short
-                                                            //}, function (err1) {
-                                                            //    if (err1) {
-                                                            //        // handle error
-                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                            //    }
-                                                            //    console.log('New upload email send to club\n\n');
-                                                            //});
-                                                        }.bind(res));
-                                                    }
-                                                }.bind(res));
-                                            }.bind(res));
+                                            //Club.findOne({_slug: club_slug}, function (err22, res22) {
+                                            //    if (err22) console.log(err22);
+                                            //    forEach(res22.teams, function (value, key) {
+                                            //        if (value.divisie == match_short.divisie) {
+                                            //            forEach(value.contact, function (value1, key1) {
+                                            //                send_mail(value1.email, res22.name, match_short);
+                                            //                //res.mailer.send('mailer/match_upload', {
+                                            //            });
+                                            //        }
+                                            //    });
+                                            //});
 
-                                            Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
-                                                if (err22) console.log(err22);
-                                                forEach(res22.teams, function (value, key) {
-                                                    if (value.divisie == match_short.divisie) {
-                                                        forEach(value.contact, function (value1, key1) {
-                                                            send_mail(value1.email, res22.name, match_short);
-                                                            //res.mailer.send('mailer/match_upload', {
-                                                            //    to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                            //    subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
-                                                            //    // All additional properties are also passed to the template as local variables.
-                                                            //    title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
-                                                            //    club: res22.name,
-                                                            //    match: match_short
-                                                            //}, function (err1) {
-                                                            //    if (err1) {
-                                                            //        // handle error
-                                                            //        console.log('Error sending new upload email\n\n' + err1 + '\n\n');
-                                                            //    }
-                                                            //    console.log('New upload email send to club\n\n');
-                                                            //});
-                                                        }.bind(res));
-                                                    }
-                                                }.bind(res));
-                                            }.bind(res));
-                                        }.bind(res));
+                                            //Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
+                                            //    if (err22) console.log(err22);
+                                            //    forEach(res22.teams, function (value, key) {
+                                            //        if (value.divisie == match_short.divisie) {
+                                            //            forEach(value.contact, function (value1, key1) {
+                                            //                send_mail(value1.email, res22.name, match_short);
+                                            //            });
+                                            //        }
+                                            //    });
+                                            //});
+                                        });
                                     }
-                                }.bind(res));
+                                });
                             }
                         }
-                    }.bind(res), 4000);
-                }.bind(res));
-            }.bind(res));
-        }.bind(res));
+                    }, 4000);
+                });
+            });
+        });
 
         var send_mail = function(email_address1, club1, match_short1) {
             res.mailer.send('mailer/match_upload', {
