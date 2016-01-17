@@ -2802,7 +2802,7 @@ module.exports = ImportController = {
                             match_data = items;
                         }
                     }, 100);
-                    _.delay(function (res) {
+                    _.delay(function () {
                         var club_slug;
                         var club_slug_uit;
                         if (data && match_data && match_short && team_data) {
@@ -2812,8 +2812,8 @@ module.exports = ImportController = {
                                 var team_slug;
 
                                 // check if club exists, otherwise create one
-                                Club.findOne({_slug: club_slug}, function (err, res) {
-                                    var clubdata = res;
+                                Club.findOne({_slug: club_slug}, function (err, res01) {
+                                    var clubdata = res01;
 
                                     if (clubdata == null) {
                                         // create team and teamID with the season
@@ -2902,8 +2902,8 @@ module.exports = ImportController = {
                                         }
                                     }
 
-                                    TeamData.findOne({team_slug: team_slug}, function (err, res) {
-                                        var teamdata = res;
+                                    TeamData.findOne({team_slug: team_slug}, function (err, res02) {
+                                        var teamdata = res02;
 
                                         // if not working right why?
                                         if (teamdata == null) {
@@ -3348,8 +3348,8 @@ module.exports = ImportController = {
                                 var team_slug_uit;
 
                                 // check if club exists, otherwise create one
-                                Club.findOne({_slug: club_slug_uit}, function (err, res) {
-                                    var clubdata_uit = res;
+                                Club.findOne({_slug: club_slug_uit}, function (err, res01) {
+                                    var clubdata_uit = res01;
 
                                     if (clubdata_uit == null) {
                                         // create team and teamID with the season
@@ -3437,8 +3437,8 @@ module.exports = ImportController = {
                                         }
                                     }
 
-                                    TeamData.findOne({team_slug: team_slug_uit}, function (err, res) {
-                                        var teamdata_uit = res;
+                                    TeamData.findOne({team_slug: team_slug_uit}, function (err, res02) {
+                                        var teamdata_uit = res02;
 
                                         if (teamdata_uit == null) {
                                             // create teamdata_uit
@@ -3880,8 +3880,8 @@ module.exports = ImportController = {
 
                         if (data != null) {
                             if (match_data.matchID) {
-                                Matches.findOne({matchID: match_data.matchID}, function (err, res) {
-                                    var matchshort = res;
+                                Matches.findOne({matchID: match_data.matchID}, function (err, res11) {
+                                    var matchshort = res11;
 
                                     if (matchshort == null) {
                                         Matches.create(match_short, function (err, data) {
@@ -3896,8 +3896,8 @@ module.exports = ImportController = {
                                     }
                                 });
                             } else {
-                                Matches.findOne({matchID: items.matchID}, function (err, res) {
-                                    var matchshort = res;
+                                Matches.findOne({matchID: items.matchID}, function (err, res11) {
+                                    var matchshort = res11;
 
                                     if (matchshort == null) {
                                         Matches.create(match_short, function (err, data) {
@@ -3914,8 +3914,8 @@ module.exports = ImportController = {
                             }
 
                             if (match_data.matchID) {
-                                MatchData.findOne({matchID: match_data.matchID}, function (err, res1) {
-                                    var matchdata = res1;
+                                MatchData.findOne({matchID: match_data.matchID}, function (err, res12) {
+                                    var matchdata = res12;
 
                                     match_data = {};
                                     match_data = items;
@@ -4029,8 +4029,8 @@ module.exports = ImportController = {
                                     }
                                 });
                             } else {
-                                MatchData.findOne({matchID: items.matchID}, function (err1, res1) {
-                                    var matchdata = res1;
+                                MatchData.findOne({matchID: items.matchID}, function (err1, res12) {
+                                    var matchdata = res12;
 
                                     match_data = {};
                                     match_data = items;
@@ -4145,10 +4145,10 @@ module.exports = ImportController = {
                                 });
                             }
                         }
-                    }, 4000);
-                });
-            });
-        });
+                    }.bind(res), 4000);
+                }.bind(res));
+            }.bind(res));
+        }.bind(res));
 
         //var send_mail = function(email_address1, club1, match_short1) {
         //    res.mailer.send('mailer/match_upload', {
