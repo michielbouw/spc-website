@@ -202,7 +202,7 @@ UploadController.prototype.uploadFile = function(req, res) {
                         fs.unlink(tmp_path, function () {
                             if (err) { console.log(err); throw err; }
 
-                            ImportController.match(target_path);
+                            ImportController.match(target_path, res);
                             res.send(renamedFile);
                         });
                     });
@@ -232,7 +232,7 @@ UploadController.prototype.uploadFile = function(req, res) {
                         fs.unlink(tmp_path, function () {
                             if (err) { console.log(err); throw err; }
 
-                            ImportController.match(target_path);
+                            ImportController.match(target_path, res);
                             res.send(renamedFile);
                         });
                     });
