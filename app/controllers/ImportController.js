@@ -2803,10 +2803,12 @@ module.exports = ImportController = {
                         }
                     }, 100);
                     _.delay(function () {
+                        var club_slug;
+                        var club_slug_uit;
                         if (data && match_data && match_short && team_data) {
 
                             if (team_data.thuis) {
-                                var club_slug = match_short.thuisTeamSlug;
+                                club_slug = match_short.thuisTeamSlug;
                                 var team_slug;
 
                                 // check if club exists, otherwise create one
@@ -3342,7 +3344,7 @@ module.exports = ImportController = {
                                 });
                             }
                             if (team_data.uit) {
-                                var club_slug_uit = match_short.uitTeamSlug;
+                                club_slug_uit = match_short.uitTeamSlug;
                                 var team_slug_uit;
 
                                 // check if club exists, otherwise create one
@@ -3922,7 +3924,7 @@ module.exports = ImportController = {
                                         MatchData.create(match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -3946,7 +3948,7 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -3976,7 +3978,7 @@ module.exports = ImportController = {
                                         }, match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -4000,7 +4002,7 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -4037,7 +4039,7 @@ module.exports = ImportController = {
                                         MatchData.create(match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -4061,7 +4063,7 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -4091,7 +4093,7 @@ module.exports = ImportController = {
                                         }, match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
@@ -4115,7 +4117,7 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                            Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
                                                 forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
