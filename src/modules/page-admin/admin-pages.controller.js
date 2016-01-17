@@ -51,6 +51,7 @@ angular.module('mainapp.pageAdmin')
                 over: _t.over,
                 contact: _t.contact,
                 disclaimer: _t.disclaimer,
+                analyse: _t.analyse,
                 editor: editor_name,
                 date_edited: self.datetime
             }, function() {
@@ -66,6 +67,7 @@ angular.module('mainapp.pageAdmin')
                 over: {},
                 contact: {},
                 disclaimer: {},
+                analyse: {},
                 editor: editor_name,
                 date_edited: self.datetime
             }, function() {

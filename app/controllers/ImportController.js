@@ -3922,16 +3922,17 @@ module.exports = ImportController = {
                                         MatchData.create(match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -3945,16 +3946,17 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -3974,16 +3976,17 @@ module.exports = ImportController = {
                                         }, match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: 'fceindhoven'}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -3997,16 +4000,17 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -4033,16 +4037,17 @@ module.exports = ImportController = {
                                         MatchData.create(match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -4056,16 +4061,17 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -4085,16 +4091,17 @@ module.exports = ImportController = {
                                         }, match_data, function (err, data) {
                                             if (err) console.log(err);
 
-                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.thuisTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {
@@ -4108,16 +4115,17 @@ module.exports = ImportController = {
                                                 });
                                             });
 
-                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err2, res2) {
-                                                forEach(res2.teams, function (value, key) {
+                                            Club.findOne({_slug: match_short.uitTeamSlug}, function (err22, res22) {
+                                                if (err22) console.log(err22);
+                                                forEach(res22.teams, function (value, key) {
                                                     if (value.divisie == match_short.divisie) {
                                                         forEach(value.contact, function (value1, key1) {
                                                             res.mailer.send('mailer/match_upload', {
                                                                 to: value1.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-                                                                subject: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl', // REQUIRED.
+                                                                subject: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl', // REQUIRED.
                                                                 // All additional properties are also passed to the template as local variables.
-                                                                title: 'Nieuwe wedstrijd ' + res2.name + ' online op soccerpc.nl',
-                                                                club: res2.name,
+                                                                title: 'Nieuwe wedstrijd ' + res22.name + ' online op soccerpc.nl',
+                                                                club: res22.name,
                                                                 match: match_short
                                                             }, function (err1) {
                                                                 if (err1) {

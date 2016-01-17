@@ -1,7 +1,9 @@
-//angular.module('mainapp.pageAnalyse')
-//    .controller('mainapp.pageAnalyse.AnalyseController', ['Api', 'AuthenticationService', '$location', '$rootScope', '$timeout',
-//        function(Api, AuthenticationService, $location, $rootScope, $timeout)
-//    {
-//        var self = this;
-//
-//    }]);
+angular.module('mainapp.pageAnalyse')
+    .controller('mainapp.pageAnalyse.AnalyseController', ['Api',
+        function(Api)
+    {
+        var self = this;
+        Api.Pages.query(function(res) {
+            self.analyse_tekst = res[0].analyse;
+        });
+    }]);
