@@ -2802,7 +2802,7 @@ module.exports = ImportController = {
                             match_data = items;
                         }
                     }, 100);
-                    _.delay(function () {
+                    _.delay(function (res) {
                         var club_slug;
                         var club_slug_uit;
                         if (data && match_data && match_short && team_data) {
@@ -4145,7 +4145,7 @@ module.exports = ImportController = {
                                 });
                             }
                         }
-                    }, 4000, res);
+                    }, 4000);
                 });
             });
         });
