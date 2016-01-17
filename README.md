@@ -178,6 +178,8 @@ NOT WORKING WELL, USE ROBOMONGO!
 
 Restoring a database
 
+`path/to/dump` is `/home/soccerpc.com/mongodump`
+
 `mongodb:restore` can be used to restore dump created with `mongodb:dump` (or `mongodump` which it uses internally). It can be used with a gzipped dump.  
 *Example: `dokku mongodb:restore api-production /path/to/dump/api-production-2015-03-09-16h54-43s.tar.gz`*  
   

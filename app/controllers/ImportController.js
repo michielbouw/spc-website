@@ -3944,10 +3944,10 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
+                                                }.bind(res));
+                                            }.bind(res));
 
                                             Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
@@ -3969,11 +3969,11 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
-                                        });
+                                                }.bind(res));
+                                            }.bind(res));
+                                        }.bind(res));
                                     } else {
                                         MatchData.update({
                                             _id: matchdata._id
@@ -4000,10 +4000,10 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
+                                                }.bind(res));
+                                            }.bind(res));
 
                                             Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
@@ -4025,11 +4025,11 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
-                                        });
+                                                }.bind(res));
+                                            }.bind(res));
+                                        }.bind(res));
                                     }
                                 }.bind(res));
                             } else {
@@ -4063,10 +4063,10 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
+                                                }.bind(res));
+                                            }.bind(res));
 
                                             Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
@@ -4088,11 +4088,11 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
-                                        });
+                                                }.bind(res));
+                                            }.bind(res));
+                                        }.bind(res));
                                     } else {
                                         MatchData.update({
                                             _id: matchdata._id
@@ -4119,10 +4119,10 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
+                                                }.bind(res));
+                                            }.bind(res));
 
                                             Club.findOne({_slug: club_slug_uit}, function (err22, res22) {
                                                 if (err22) console.log(err22);
@@ -4144,19 +4144,19 @@ module.exports = ImportController = {
                                                             //    }
                                                             //    console.log('New upload email send to club\n\n');
                                                             //});
-                                                        });
+                                                        }.bind(res));
                                                     }
-                                                });
-                                            });
-                                        });
+                                                }.bind(res));
+                                            }.bind(res));
+                                        }.bind(res));
                                     }
-                                });
+                                }.bind(res));
                             }
                         }
-                    }, 4000);
-                });
-            });
-        });
+                    }.bind(res), 4000);
+                }.bind(res));
+            }.bind(res));
+        }.bind(res));
 
         var send_mail = function(email_address1, club1, match_short1) {
             res.mailer.send('mailer/match_upload', {
