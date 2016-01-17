@@ -4145,7 +4145,7 @@ module.exports = ImportController = {
                                 });
                             }
                         }
-                    }, 4000);
+                    }, 4000, res);
                 });
             });
         });
