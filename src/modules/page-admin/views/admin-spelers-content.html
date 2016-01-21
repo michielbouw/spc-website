@@ -152,7 +152,7 @@
                         <button class="btn btn-default btn-xs" ngf-select ngf-change="data.uploadPlayers($files, data.spelers.indexOf(speler))" ngf-accept="'image/*'" ngf-max-size="10485760"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="hidden-xs col-sm-1">
-                        <button class="btn btn-danger btn-xs" ng-click="data.openModalDel('sm', $index)"><i class="fa fa-close"></i></button>
+                        <button class="btn btn-danger btn-xs" ng-click="data.openModalDel('sm', data.spelers.indexOf(speler))"><i class="fa fa-close"></i></button>
                     </div>
                 </div>
             </div>

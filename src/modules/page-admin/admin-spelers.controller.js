@@ -85,6 +85,8 @@ angular.module('mainapp.pageAdmin')
 
             $rootScope.errorImport = '';
             if (files && files.length) {
+                self.loading = true;
+
                 var file = files[0];
                 Upload.upload({
                     url: 'api/v1/media/players',
@@ -107,6 +109,10 @@ angular.module('mainapp.pageAdmin')
                             editor: editor_name,
                             date_edited: self.datetime
                         }, function() {
+                            Api.Spelers.query(function(res) {
+                                self.spelers = res;
+                                self.loading = false;
+                            });
                         }, function() {
                         });
                     })
