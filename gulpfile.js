@@ -1,3 +1,4 @@
+require('newrelic');
 // Core
 var colors      = require('colors');
 var gulp        = require('gulp');

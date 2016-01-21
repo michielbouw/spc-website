@@ -25,21 +25,20 @@ module.exports = mongoose.model('Spelers', {
 
     // statistieken
     fullStats: [{
-        season: {type: String},
-        stats: {
-            laatste_ronde_sync: {type: Number},
-            wedstrijden: {type: Number},
-            hele_wedstrijd: {type: Number},
-            ingevallen: {type: Number},
-            vervangen: {type: Number},
-            doelpunten: {type: Number},
-            voorzetten: {type: Number},
-            penalties: {type: Number},
-            minuten: {type: Number},
-            geel: {type: Number},
-            rood: {type: Number},
-            tweede_geel: {type: Number}
-        }
+        ronde: { type: Number },
+        matchID: { type: Number },
+
+        hele_wedstrijd: {type: Boolean},
+        ingevallen: {type: Boolean},
+        vervangen: {type: Boolean},
+
+        minuten: {type: Number},
+        doelpunten: {type: Number},
+        voorzetten: {type: Number},
+        penalties: {type: Number},
+        geel: {type: Number},
+        rood: {type: Number},
+        tweede_geel: {type: Number}
     }],
     // OLD
     laatste_ronde_sync: {type: Number},
