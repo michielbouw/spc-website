@@ -1,6 +1,6 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminMatchesEditController', ['Api', '$scope', '$modal', '$routeParams', '$location', '$rootScope', 'Upload',
-        function(Api, $scope, $modal, $routeParams, $location, $rootScope, Upload) {
+    .controller('mainapp.pageAdmin.AdminMatchesEditController', ['Api', '$scope', '$uibModal', '$routeParams', '$location', '$rootScope', 'Upload',
+        function(Api, $scope, $uibModal, $routeParams, $location, $rootScope, Upload) {
 
         var self = this;
         self.datetime = new Date();
@@ -152,7 +152,7 @@ angular.module('mainapp.pageAdmin')
         };
 
         self.openModalDel = function (size) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel.html',
                 controller: 'ModalDelInstance',
                 size: size

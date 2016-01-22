@@ -1,6 +1,6 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminSpelersController', ['Api', 'Upload', '$scope', '$modal', '$rootScope', '$location',
-        function(Api, Upload, $scope, $modal, $rootScope, $location) {
+    .controller('mainapp.pageAdmin.AdminSpelersController', ['Api', 'Upload', '$scope', '$uibModal', '$rootScope', '$location',
+        function(Api, Upload, $scope, $uibModal, $rootScope, $location) {
 
         var self = this;
         self.datetime = new Date();
@@ -87,13 +87,13 @@ angular.module('mainapp.pageAdmin')
             if (files && files.length) {
                 self.loading = true;
 
+                /* jshint ignore:start */
                 var file = files[0];
                 Upload.upload({
                     url: 'api/v1/media/players',
                     method: 'POST',
                     file: file
                 })
-                /* jshint ignore:start */
                     .progress(function (evt) {
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log(' progress: ' + progressPercentage + '% ' + evt.config.file.name + '. file size (bytes): ' + evt.config.file.size);
@@ -135,7 +135,7 @@ angular.module('mainapp.pageAdmin')
         };
 
         self.openModalDel = function (size, i) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel.html',
                 controller: 'ModalDelInstance',
                 size: size,

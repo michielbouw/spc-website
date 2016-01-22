@@ -22,7 +22,7 @@
         <div class="col-xs-12 content-players-select">
             <div class="round0" ng-if="rounds[0] != rounds[1]">{{ rounds[0] }}</div>
             <div class="round1">{{ rounds[1] }}</div>
-            <span class="not-played" ng-repeat="round in data.rounds_not_played" style="left: calc((98%/{{ round.ronde_max - round.ronde_min }})*{{ round.ronde - 1 }} - 10px);"><i class="fa fa-close" tooltip-placement="right" tooltip="ronde niet gespeeld"></i></span>
+            <div class="round_not"><div class="round_not_div"><span class="not-played" ng-repeat="round in data.rounds_not_played" style="left: calc((100%/{{ round.ronde_max - round.ronde_min }})*{{ round.ronde - 1 }} - 8px);"><i class="fa fa-close" tooltip-placement="right" tooltip="ronde niet gespeeld"></i></span></div></div>
             <statssliderclub model="rounds"></statssliderclub>
         </div>
         <div class="col-xs-12 col-sm-2 content-players-left">
@@ -66,8 +66,8 @@
                 <h4>Seizoen / ronde</h4>
                 <select ng-model="data.vs_info" class="form-control input-md input-vs"
                         ng-change="data.vsInitFunc()">
-                    <option>Gemiddelde seizoen</option>
                     <option>Dit interval</option>
+                    <option>Gemiddelde seizoen</option>
                     <option>Deze ronde</option>
                 </select>
             </div>
@@ -81,9 +81,9 @@
             <div ng-if="data.player_stats.spelerType !== 'keeper'">
 
             <div class="col-xs-10 col-md-7 no-padding">
-                <div ng-if="(data.stats.doelpunten | number:0) == 0" class="value-top" style="left: 0;"><strong>{{ data.stats.doelpunten | number:0 }} doelpunt<span ng-if="data.stats.doelpunten.toFixed(0) != 1">en</span></strong></div>
-                <div ng-if="(data.stats_vs.doelpunten | number:0) > (data.stats.doelpunten | number:0)" class="value-top" ng-style="{ left: 'calc(100% * (' + data.stats.doelpunten.toFixed(0) + ' / ' + data.stats_vs.doelpunten.toFixed(0) + '))'}"><strong>{{ data.stats.doelpunten | number:0 }} doelpunt<span ng-if="data.stats.doelpunten.toFixed(0) != 1">en</span></strong></div>
-                <div ng-if="(data.stats.doelpunten | number:0) > 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="value-top" style="left: 80%;"><strong>{{ data.stats.doelpunten | number:0 }} doelpunt<span ng-if="data.stats.doelpunten.toFixed(0) != 1">en</span></strong></div>
+                <div ng-if="(data.stats.doelpunten | number:0) == 0" class="value-top" style="left: 0;"><strong>{{ data.stats.doelpunten | number:0 }} doelpunt<span ng-if="data.stats.doelpunten.toFixed(0) != 1">en</span> tot.</strong></div>
+                <div ng-if="(data.stats_vs.doelpunten | number:0) > (data.stats.doelpunten | number:0)" class="value-top" ng-style="{ left: 'calc(100% * (' + data.stats.doelpunten.toFixed(0) + ' / ' + data.stats_vs.doelpunten.toFixed(0) + '))'}"><strong>{{ data.stats.doelpunten | number:0 }} doelpunt<span ng-if="data.stats.doelpunten.toFixed(0) != 1">en</span> tot.</strong></div>
+                <div ng-if="(data.stats.doelpunten | number:0) > 0 && (data.stats_vs.doelpunten | number:0) <= (data.stats.doelpunten | number:0)" class="value-top" style="left: 80%;"><strong>{{ data.stats.doelpunten | number:0 }} doelpunt<span ng-if="data.stats.doelpunten.toFixed(0) != 1">en</span> tot.</strong></div>
                 <div class="slider1">
                     <div class="slider corner-all">
                         <div ng-if="(data.stats.doelpunten | number:0) == 0" class="slider-range corner-all" style="width: 0;"></div>
@@ -179,9 +179,9 @@
             </div>
 
             <div class="col-xs-10 col-md-7 no-padding">
-                <div ng-if="(data.stats.doelpunten_tegen | number:0) == 0" class="value-top" style="left: 0;"><strong>{{ data.stats.doelpunten_tegen | number:0 }} doelpunt<span ng-if="data.stats.doelpunten_tegen.toFixed(0) != 1">en</span> tegen</strong></div>
-                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) > (data.stats.doelpunten_tegen | number:0)" class="value-top" ng-style="{ left: 'calc(100% * (' + data.stats.doelpunten_tegen.toFixed(0) + ' / ' + data.stats_vs.doelpunten_tegen.toFixed(0) + '))'}"><strong>{{ data.stats.doelpunten_tegen | number:0 }} doelpunt<span ng-if="data.stats.doelpunten_tegen.toFixed(0) != 1">en</span> tegen</strong></div>
-                <div ng-if="(data.stats.doelpunten_tegen | number:0) > 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="value-top" style="left: 80%;"><strong>{{ data.stats.doelpunten_tegen | number:0 }} doelpunt<span ng-if="data.stats.doelpunten_tegen.toFixed(0) != 1">en</span> tegen</strong></div>
+                <div ng-if="(data.stats.doelpunten_tegen | number:0) == 0" class="value-top" style="left: 0;"><strong>{{ data.stats.doelpunten_tegen | number:0 }} doelpunt<span ng-if="data.stats.doelpunten_tegen.toFixed(0) != 1">en</span> tegen tot.</strong></div>
+                <div ng-if="(data.stats_vs.doelpunten_tegen | number:0) > (data.stats.doelpunten_tegen | number:0)" class="value-top" ng-style="{ left: 'calc(100% * (' + data.stats.doelpunten_tegen.toFixed(0) + ' / ' + data.stats_vs.doelpunten_tegen.toFixed(0) + '))'}"><strong>{{ data.stats.doelpunten_tegen | number:0 }} doelpunt<span ng-if="data.stats.doelpunten_tegen.toFixed(0) != 1">en</span> tegen tot.</strong></div>
+                <div ng-if="(data.stats.doelpunten_tegen | number:0) > 0 && (data.stats_vs.doelpunten_tegen | number:0) <= (data.stats.doelpunten_tegen | number:0)" class="value-top" style="left: 80%;"><strong>{{ data.stats.doelpunten_tegen | number:0 }} doelpunt<span ng-if="data.stats.doelpunten_tegen.toFixed(0) != 1">en</span> tegen tot.</strong></div>
                 <div class="slider1">
                     <div class="slider corner-all">
                         <div ng-if="(data.stats.doelpunten_tegen | number:0) == 0" class="slider-range corner-all" style="width: 0;"></div>
@@ -249,13 +249,13 @@
             </div>
 
             <div class="col-xs-12 no-padding">
-                <img src="/images/kaarten.png" width="5%">Kaarten
+                <img src="/images/kaarten.png" width="5%">Tot. Kaarten
                 &nbsp;&nbsp;
                 <span ng-repeat="n in [] | range: data.stats.rood" class="card"><i class="fa fa-file" style="color: #ED1C24;"></i>&nbsp;</span>
                 <span ng-repeat="n in [] | range: data.stats.geel" class="card"><i class="fa fa-file" style="color: #ffcc00;"></i>&nbsp;</span>
             </div>
             <!--<div class="col-xs-12 no-padding grey">
-                <img src="/images/kaarten.png" width="5%">Kaarten
+                <img src="/images/kaarten.png" width="5%">Tot. Kaarten
                 &nbsp;&nbsp;
                 <span ng-repeat="n in [] | range: data.stats_vs.rood" class="card"><i class="fa fa-file" style="color: #ED1C24;"></i>&nbsp;</span>
                 <span ng-repeat="n in [] | range: data.stats_vs.geel" class="card"><i class="fa fa-file" style="color: #ffcc00;"></i>&nbsp;</span>

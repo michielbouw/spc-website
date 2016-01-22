@@ -1,6 +1,6 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminClubsEditController', ['Api', '$scope', '$modal', '$routeParams', '$filter', '$timeout', '$rootScope', '$location',
-        function(Api, $scope, $modal, $routeParams, $filter, $timeout, $rootScope, $location) {
+    .controller('mainapp.pageAdmin.AdminClubsEditController', ['Api', '$scope', '$uibModal', '$routeParams', '$filter', '$timeout', '$rootScope', '$location',
+        function(Api, $scope, $uibModal, $routeParams, $filter, $timeout, $rootScope, $location) {
 
         var self = this;
         self.datetime = new Date();
@@ -140,7 +140,7 @@ angular.module('mainapp.pageAdmin')
         };
 
         self.openModalDel = function (size) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel.html',
                 controller: 'ModalDelInstance',
                 size: size

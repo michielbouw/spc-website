@@ -148,6 +148,7 @@ angular.module('mainapp.players')
 
         self.seasonInitFunc = function () {
             if (self.player_stats && self.season_index) {
+                self.rounds_not_played = [];
                 self.season_matches_init = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
                 self.season_matches = $filter('orderBy')(($filter('filter')( self.player_stats.matches, {season: self.season_index}, true)[0]).match, self.orderMatches);
 
@@ -826,10 +827,10 @@ angular.module('mainapp.players')
 
                     self.stats_vs.passzekerheid /= count1;
                     self.stats_vs.pass_lengte /= count1;
-                    self.stats_vs.geel /= count1;
-                    self.stats_vs.rood /= count1;
+                    //self.stats_vs.geel /= count1;
+                    //self.stats_vs.rood /= count1;
                     if (self.player_stats.spelerType == 'keeper') {
-                        self.stats_vs.doelpunten_tegen /= count1;
+                        //self.stats_vs.doelpunten_tegen /= count1;
                         self.stats_vs.reddingen /= count1;
                         self.stats_vs.gevangen_ballen /= count1;
                         self.stats_vs.weggestompte_ballen /= count1;
@@ -848,7 +849,7 @@ angular.module('mainapp.players')
                             self.chart_keeper.datasets[0].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
                         }, 800);
                     } else {
-                        self.stats_vs.doelpunten /= count1;
+                        //self.stats_vs.doelpunten /= count1;
                         self.stats_vs.doelpogingen /= count1;
                         self.stats_vs.doelpogingen_opdoel /= count1;
                         self.stats_vs.aantal_passes /= count1;
@@ -985,10 +986,10 @@ angular.module('mainapp.players')
 
                     self.stats_vs.passzekerheid /= count1;
                     self.stats_vs.pass_lengte /= count1;
-                    self.stats_vs.geel /= count1;
-                    self.stats_vs.rood /= count1;
+                    //self.stats_vs.geel /= count1;
+                    //self.stats_vs.rood /= count1;
                     if (self.player_stats.spelerType == 'keeper') {
-                        self.stats_vs.doelpunten_tegen /= count1;
+                        //self.stats_vs.doelpunten_tegen /= count1;
                         self.stats_vs.reddingen /= count1;
                         self.stats_vs.gevangen_ballen /= count1;
                         self.stats_vs.weggestompte_ballen /= count1;
@@ -1007,7 +1008,7 @@ angular.module('mainapp.players')
                             self.chart_keeper.datasets[0].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
                         }, 800);
                     } else {
-                        self.stats_vs.doelpunten /= count1;
+                        //self.stats_vs.doelpunten /= count1;
                         self.stats_vs.doelpogingen /= count1;
                         self.stats_vs.doelpogingen_opdoel /= count1;
                         self.stats_vs.aantal_passes /= count1;

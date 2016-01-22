@@ -13,13 +13,13 @@ angular.module('mainapp.pageAdmin')
             $rootScope.errorImport = '';
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
+                    /* jshint ignore:start */
                     var file = files[i];
                     Upload.upload({
                         url: 'api/v1/media/' + self.temp.matchID,
                         method: 'POST',
                         file: file
                     })
-                        /* jshint ignore:start */
                         .progress(function (evt) {
                             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                             console.log(' progress: ' + progressPercentage + '% ' + evt.config.file.name + '. file size (bytes): ' + evt.config.file.size);
@@ -37,7 +37,7 @@ angular.module('mainapp.pageAdmin')
                             console.log('Something went wrong, could be the file size.');
                             $rootScope.errorImport = 'Something went wrong, could be the file size.';
                         });
-                        /* jshint ignore:end */
+                    /* jshint ignore:end */
                 }
                 $rootScope.errorImport = '';
                 $location.path('/admin');
@@ -73,7 +73,8 @@ angular.module('mainapp.pageAdmin')
         };*/
 
         // function for processing the match data file (.json) and push it to the correct model in the database
-        self.processMatchDataFile = function (file_path) {
+        /*
+            self.processMatchDataFile = function (file_path) {
             var data;
 
             var ended1;
@@ -3106,4 +3107,5 @@ angular.module('mainapp.pageAdmin')
                     });
                 });
         };
+        */
     }]);

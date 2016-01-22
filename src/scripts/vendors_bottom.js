@@ -1,5 +1,5 @@
 //= include ../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
-//= include ../../node_modules/angular-bootstrap-npm/dist/angular-bootstrap.js
+//= include ../../node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js
 
 //= include ../../node_modules/tc-angular-chartjs/dist/tc-angular-chartjs.js
 //= include ../../node_modules/tc-angular-chartjs/node_modules/chart.js/Chart.js
@@ -12,8 +12,8 @@
 
 //= include ../../node_modules/rangy/lib/rangy-core.js
 //= include ../../node_modules/rangy/lib/rangy-selectionsaverestore.js
-//= include ../../node_modules/textangular/src/textAngular-sanitize.js
-//= include ../../node_modules/textangular/src/textAngularSetup.js
-//= include ../../node_modules/textangular/src/textAngular.js
+//= include ../../node_modules/textangular/dist/textAngular-sanitize.js
+//= include ../../node_modules/textangular/dist/textAngularSetup.js
+//= include ../../node_modules/textangular/dist/textAngular.js
 
 //= include vendors/*.js

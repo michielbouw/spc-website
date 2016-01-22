@@ -38,8 +38,8 @@ angular.module('mainapp', [
         $httpProvider.interceptors.push('TokenInterceptor');
     })
     .run(['$anchorScroll', function($anchorScroll) {
-        //$anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
-        $anchorScroll.yOffset = 250;   // always scroll by 50 extra pixels
+        $anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels
+        //$anchorScroll.yOffset = 250;   // always scroll by 50 extra pixels
     }])
     .run(function($location, $sessionStorage, $localStorage, Api, AuthenticationService, $rootScope, $filter) {
         //jQuery(document).ready(function() {

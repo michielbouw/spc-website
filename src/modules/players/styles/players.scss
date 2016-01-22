@@ -103,16 +103,30 @@
       margin-top: -4px;
       color: $middleblue;
     }
-    .not-played {
-      position: absolute;
-      font-size: 25px;
-      font-weight: bold;
-      float: left;
-      display: block;
-      text-align: left;
-      margin-top: 9px;
-      z-index: 10;
-      color: $red;
+    .round_not {
+      position: relative;
+      width: 99%;
+      height: 1em;
+      margin-top: -1em;
+      padding-top: 1em;
+
+      .round_not_div {
+        position: relative;
+        text-align: left;
+        height: 1em;
+
+        .not-played {
+          position: absolute;
+          font-size: 25px;
+          font-weight: bold;
+          float: left;
+          display: block;
+          text-align: left;
+          margin-top: 9px;
+          z-index: 10;
+          color: $red;
+        }
+      }
     }
 
     .slider-control {

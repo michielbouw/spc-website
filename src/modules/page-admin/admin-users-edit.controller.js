@@ -1,6 +1,6 @@
 angular.module('mainapp.pageAdmin')
-    .controller('mainapp.pageAdmin.AdminUsersEditController', ['Api', '$scope', '$modal', '$routeParams', '$location', '$rootScope',
-        function(Api, $scope, $modal, $routeParams, $location, $rootScope) {
+    .controller('mainapp.pageAdmin.AdminUsersEditController', ['Api', '$scope', '$uibModal', '$routeParams', '$location', '$rootScope',
+        function(Api, $scope, $uibModal, $routeParams, $location, $rootScope) {
 
         var self = this;
         self.datetime = new Date();
