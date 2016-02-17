@@ -325,6 +325,8 @@ Standard layout
   background-color: $darkblue;
   color: $white;
   z-index: 999999;
+  -webkit-transition: top 1s; /* Safari */
+  transition: top 1s;
 
   button {
     font-size: 14px;

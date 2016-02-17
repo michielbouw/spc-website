@@ -98,6 +98,9 @@
   .blue {
     color: $middleblue !important;
   }
+  .lightblue {
+    color: rgba(3,125,201,0.4) !important;
+  }
   .orange {
     color: $orange !important;
   }
@@ -361,10 +364,10 @@
       width: 100%;
       //border-bottom: 1px solid $middleblue;
       background-color: $middleblue;
-      border-bottom-right-radius: 4px;
-      border-bottom-left-radius: 4px;
-      border-top-right-radius: 4px;
-      border-top-left-radius: 4px;
+      //border-bottom-right-radius: 4px;
+      //border-bottom-left-radius: 4px;
+      //border-top-right-radius: 4px;
+      //border-top-left-radius: 4px;
 
       .action-dot {
         color: $white;
@@ -413,10 +416,32 @@
     }
     .time {
       font-size: 12px;
-      color: $darkblue;
+      color: $grey;
       float: left;
       height: 16px;
       width: 100%;
+      margin-top: 4px;
+    }
+    .time.time_main div:before {
+      content: "";
+      background-color: $grey;
+      opacity: 0.6;
+      position: absolute;
+      width: 1px;
+      height: 23px;
+      top: -100%;
+      left: 50%;
+      margin-top: -4px;
+    }
+    .time.time_main div:first-child:before {
+      top: -100%;
+      left: 0;
+      margin-top: -4px;
+    }
+    .time.time_main div:last-child:before {
+      top: -100%;
+      left: 100%;
+      margin-top: -4px;
     }
   }
   .wedstrijdverloop-verlenging {
@@ -611,14 +636,14 @@
 
     .lineup {
       position: absolute;
-      padding: 4px;
+      padding: 7px 6px;
       font-size: 11px;
-      height: 39px;
-      width: 26px;
+      height: 42px;
+      width: 25px;
       text-align: center;
       color: $white;
       font-weight: bold;
-      background-image: url('/images/opstelling_thuis_speler.png');
+      background-image: url('/images/graphics/opstelling_thuis_speler.png');
       background-position: center center;
       background-size: cover;
       //@include border-radius(30px);
@@ -627,8 +652,8 @@
         text-align: left;
         display: none;
         position: absolute;
-        top: 100%;
-        left: 0;
+        top: 0;
+        left: 100%;
         padding: 5px 15px;
         min-width: 150px;
         font-size: 14px;
@@ -645,7 +670,7 @@
       }
     }
     .lineup_uit {
-      background-image: url('/images/opstelling_uit_speler.png');
+      background-image: url('/images/graphics/opstelling_uit_speler.png');
       background-position: center center;
       background-size: cover;
     }
@@ -660,6 +685,142 @@
     }
     .orange {
       color: $orange !important;
+    }
+  }
+
+  .positions {
+
+    .select_club {
+      p {
+        text-transform: uppercase;
+        font-family: $font-title;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    .select_type {
+      margin-bottom: 5px;
+
+      span {
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    .positions_players {
+      p {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        cursor: pointer;
+      }
+      p.thuis {
+        color: rgba(3,125,201,0.6);
+      }
+      p.uit {
+        color: rgba(236,117,0,0.6);
+      }
+      p.thuis:hover {
+        color: $middleblue;
+      }
+      p.uit:hover {
+        color: $orange;
+      }
+    }
+
+    .timeline {
+      margin: 15px 0;
+
+      .actions {
+        float: left;
+        height: 11px;
+        margin-top: 12px;
+        width: 90%;
+        margin-left: 5%;
+        background-color: $lightgrey;
+
+        .interval {
+          height: 100%;
+        }
+        .interval-fill {
+          background-color: $middleblue;
+        }
+
+        .action-dot {
+          color: $white;
+          float: left;
+          width: auto;
+          position: absolute;
+          margin-top: 1px;
+          padding-left: 2px;
+          font-size: 7px;
+          z-index: 10;
+
+          i span.info {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            padding: 5px 10px;
+            min-width: 100px;
+            font-size: 12px;
+            color: $white;
+            background-color: $darkblue;
+            -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+          }
+          i:hover > span.info {
+            display: block;
+          }
+        }
+      }
+      .actions-fill {
+        background-color: $middleblue;
+      }
+      .time {
+        font-size: 12px;
+        color: $grey;
+        float: left;
+        height: 16px;
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 4px;
+      }
+      .time.time_main div:before {
+        content: "";
+        background-color: $grey;
+        opacity: 0.6;
+        position: absolute;
+        width: 1px;
+        height: 23px;
+        top: -100%;
+        left: 50%;
+        margin-top: -4px;
+      }
+      .time.time_main div:first-child:before {
+        top: -100%;
+        left: 0;
+        margin-top: -4px;
+      }
+      .time.time_main div:last-child:before {
+        top: -100%;
+        left: 100%;
+        margin-top: -4px;
+      }
+      .time-click {
+        position: absolute;
+        height: 40px;
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        div {
+          position: relative;
+          height: 100%;
+        }
+      }
     }
   }
 
@@ -792,6 +953,9 @@
           padding: 0 9px;
           position: relative;
         }
+        span.uit {
+          background-color: $orange;
+        }
         span:before {
           position: absolute;
           top: 0;
@@ -818,6 +982,12 @@
           font-size: 0;
           line-height: 0;
         }
+        span.uit:before {
+          border-right: 8px solid $orange;
+        }
+        span.uit:after {
+          border-left: 8px solid $orange;
+        }
       }
     }
 
@@ -841,6 +1011,10 @@
     }
     .boven-dot {
       border-top: $white 1px dashed;
+    }
+    .links.rechts {
+      background: url('../images/graphics/netdoel.png') no-repeat center bottom;
+      background-size: cover;
     }
     .arrow-down-after:before {
       content: "";

@@ -484,7 +484,25 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
+
                                         items.spelersthuisteam.push(value);
                                         k1++;
                                     } else {
@@ -527,6 +545,23 @@ module.exports = ImportController = {
                                             //        date_edited: datetime
                                             //    }, function (err, data) {
                                             //    });
+                                            }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
                                             }
                                         }
                                         items.spelersthuisteam.push(value);
@@ -572,6 +607,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersthuisteam.push(value);
                                         k1 += 3;
@@ -615,6 +667,23 @@ module.exports = ImportController = {
                                             //        date_edited: datetime
                                             //    }, function (err, data) {
                                             //    });
+                                            }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
                                             }
                                         }
                                         items.spelersthuisteam.push(value);
@@ -660,6 +729,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersthuisteam.push(value);
                                         k1 += 5;
@@ -704,6 +790,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersthuisteam.push(value);
                                         k1 += 6;
@@ -747,6 +850,23 @@ module.exports = ImportController = {
                                             //        date_edited: datetime
                                             //    }, function (err, data) {
                                             //    });
+                                            }
+
+                                            if (_.where(items.opstelling.thuis, {personID: value.personID})[0]) {
+                                                value.spelerPositieWedstrijd = (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID == 1) {
+                                                    value.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 1 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 8) {
+                                                    value.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 8 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 12) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 12 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 17) {
+                                                    value.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 17 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 22) {
+                                                    value.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID > 22 && (_.where(items.opstelling.thuis, {personID: value.personID})[0]).positieID <= 28) {
+                                                    value.spelerPositie = 'aanvaller';
+                                                }
                                             }
                                         }
                                         items.spelersthuisteam.push(value);
@@ -797,6 +917,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersuitteam.push(value_uit);
                                         k1++;
@@ -840,6 +977,23 @@ module.exports = ImportController = {
                                             //        date_edited: datetime
                                             //    }, function (err, data) {
                                             //    });
+                                            }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
                                             }
                                         }
                                         items.spelersuitteam.push(value_uit);
@@ -885,6 +1039,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersuitteam.push(value_uit);
                                         k1 += 3;
@@ -928,6 +1099,23 @@ module.exports = ImportController = {
                                             //        date_edited: datetime
                                             //    }, function (err, data) {
                                             //    });
+                                            }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
                                             }
                                         }
                                         items.spelersuitteam.push(value_uit);
@@ -973,6 +1161,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersuitteam.push(value_uit);
                                         k1 += 5;
@@ -1017,6 +1222,23 @@ module.exports = ImportController = {
                                             //    }, function (err, data) {
                                             //    });
                                             }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
+                                            }
                                         }
                                         items.spelersuitteam.push(value_uit);
                                         k1 += 6;
@@ -1060,6 +1282,23 @@ module.exports = ImportController = {
                                             //        date_edited: datetime
                                             //    }, function (err, data) {
                                             //    });
+                                            }
+
+                                            if (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]) {
+                                                value_uit.spelerPositieWedstrijd = (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieNaam;
+                                                if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID == 1) {
+                                                    value_uit.spelerPositie = 'keeper';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 1 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 8) {
+                                                    value_uit.spelerPositie = 'verdediger';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 8 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 12) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 12 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 17) {
+                                                    value_uit.spelerPositie = 'middenvelder';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 17 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 22) {
+                                                    value_uit.spelerPositie = 'middenvelder/aanvaller';
+                                                } else if ((_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID > 22 && (_.where(items.opstelling.uit, {personID: value_uit.personID})[0]).positieID <= 28) {
+                                                    value_uit.spelerPositie = 'aanvaller';
+                                                }
                                             }
                                         }
                                         items.spelersuitteam.push(value_uit);
@@ -1758,7 +1997,10 @@ module.exports = ImportController = {
                                                             value2.spelerRugnummer = Number_converter((value1.rugnummer));
                                                         }
                                                         if (!value2.spelerType) {
-                                                            value2.spelerType = temp.type;
+                                                            value2.spelerType = temp.spelerType;
+                                                        }
+                                                        if (!value2.spelerPositie || value2.spelerPositie === null || value2.spelerPositie === 'null') {
+                                                            value2.spelerPositie = value1.spelerPositie;
                                                         }
 
                                                         var ingevallen = false;
@@ -1778,69 +2020,28 @@ module.exports = ImportController = {
                                                         if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                         if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                        forEach(value2.fullStats, function (value3, key3) {
-                                                            if (items.ronde === value3.ronde) {
-                                                                value3.matchID = items.matchID;
+                                                        if (!value2.fullStats || value2.fullStats.length <= 0) {
+                                                            value2.fullStats = [];
+                                                        }
+                                                        if ( !value2.fullStats || !(_.where(value2.fullStats, {ronde: items.ronde})) || !(_.where(value2.fullStats, {ronde: items.ronde + 100})) ) {
+                                                            var tempfullStats = {};
+                                                            tempfullStats.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                            tempfullStats.matchID = items.matchID;
 
-                                                                value3.hele_wedstrijd = helewedstrijd;
-                                                                value3.ingevallen = ingevallen;
-                                                                value3.vervangen = vervangen;
+                                                            tempfullStats.hele_wedstrijd = helewedstrijd;
+                                                            tempfullStats.ingevallen = ingevallen;
+                                                            tempfullStats.vervangen = vervangen;
 
-                                                                value3.doelpunten = doelpunten || 0;
-                                                                value3.voorzetten = voorzetten || 0;
-                                                                value3.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
-                                                                value3.minuten = minuten || 0;
-                                                                value3.geel = geel || 0;
-                                                                value3.rood = rood || 0;
-                                                                value3.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+                                                            tempfullStats.doelpunten = doelpunten || 0;
+                                                            tempfullStats.voorzetten = voorzetten || 0;
+                                                            tempfullStats.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                            tempfullStats.minuten = minuten || 0;
+                                                            tempfullStats.geel = geel || 0;
+                                                            tempfullStats.rood = rood || 0;
+                                                            tempfullStats.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
 
-                                                                Spelers.update({
-                                                                    _id: value2._id
-                                                                }, {
-                                                                    spelerGeboorteland: value1.spelerNationaliteit,
-                                                                    spelerGeboortedatum: value1.spelerGeboortedatum,
-                                                                    spelerRugnummer: value2.spelerRugnummer,
-                                                                    spelerType: value2.spelerType,
-                                                                    date_edited: datetime,
-
-                                                                    //laatste_ronde_sync: items.ronde,
-                                                                    //wedstrijden: 1,
-                                                                    //hele_wedstrijd: 0,
-                                                                    //ingevallen: ingevallen || 0,
-                                                                    //vervangen: vervangen || 0,
-                                                                    //doelpunten: doelpunten || 0,
-                                                                    //voorzetten: voorzetten || 0,
-                                                                    //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                                    //minuten: minuten || 0,
-                                                                    //geel: geel || 0,
-                                                                    //rood: rood || 0,
-                                                                    //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
-
-                                                                    fullStats: value2.fullStats
-                                                                }, function (err, data) {
-                                                                    if (err) throw err;
-                                                                });
-                                                            }
-                                                        });
-                                                        if (!_.where(value2.fullStats, {ronde: items.ronde})) {
-                                                            value2.fullStats.push(
-                                                                {
-                                                                    ronde: items.ronde,
-                                                                    matchID: items.matchID,
-
-                                                                    hele_wedstrijd: helewedstrijd,
-                                                                    ingevallen: ingevallen,
-                                                                    vervangen: vervangen,
-
-                                                                    doelpunten: doelpunten || 0,
-                                                                    voorzetten: voorzetten || 0,
-                                                                    penalties: (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                                                    minuten: minuten || 0,
-                                                                    geel: geel || 0,
-                                                                    rood: rood || 0,
-                                                                    tweede_geel: (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0
-                                                                }
-                                                            );
+                                                            value2.fullStats.push(tempfullStats);
 
                                                             Spelers.update({
                                                                 _id: value2._id
@@ -1849,21 +2050,41 @@ module.exports = ImportController = {
                                                                 spelerGeboortedatum: value1.spelerGeboortedatum,
                                                                 spelerRugnummer: value2.spelerRugnummer,
                                                                 spelerType: value2.spelerType,
+                                                                spelerPositie: value2.spelerPositie,
                                                                 date_edited: datetime,
+                                                                fullStats: value2.fullStats
+                                                            }, function (err, data) {
+                                                                if (err) throw err;
+                                                            });
+                                                        } else {
+                                                            forEach(value2.fullStats, function (value3, key3) {
+                                                                if (items.ronde === value3.ronde || items.ronde === (value3.ronde - 100)) {
+                                                                    value3.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                                    value3.matchID = items.matchID;
 
-                                                                //laatste_ronde_sync: items.ronde,
-                                                                //wedstrijden: 1,
-                                                                //hele_wedstrijd: 0,
-                                                                //ingevallen: ingevallen || 0,
-                                                                //vervangen: vervangen || 0,
-                                                                //doelpunten: doelpunten || 0,
-                                                                //voorzetten: voorzetten || 0,
-                                                                //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                                //minuten: minuten || 0,
-                                                                //geel: geel || 0,
-                                                                //rood: rood || 0,
-                                                                //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
+                                                                    value3.hele_wedstrijd = helewedstrijd;
+                                                                    value3.ingevallen = ingevallen;
+                                                                    value3.vervangen = vervangen;
 
+                                                                    value3.doelpunten = doelpunten || 0;
+                                                                    value3.voorzetten = voorzetten || 0;
+                                                                    value3.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                                    value3.minuten = minuten || 0;
+                                                                    value3.geel = geel || 0;
+                                                                    value3.rood = rood || 0;
+                                                                    value3.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+                                                                }
+                                                            });
+
+                                                            Spelers.update({
+                                                                _id: value2._id
+                                                            }, {
+                                                                spelerGeboorteland: value1.spelerNationaliteit,
+                                                                spelerGeboortedatum: value1.spelerGeboortedatum,
+                                                                spelerRugnummer: value2.spelerRugnummer,
+                                                                spelerType: value2.spelerType,
+                                                                spelerPositie: value2.spelerPositie,
+                                                                date_edited: datetime,
                                                                 fullStats: value2.fullStats
                                                             }, function (err, data) {
                                                                 if (err) throw err;
@@ -1871,7 +2092,7 @@ module.exports = ImportController = {
                                                         }
                                                     }
                                                 });
-                                                if (!_.where(_.where(speler_profiel_thuis, {spelerID: value1.personID}), {seizoen: 'Seizoen ' + matchseizoen})) {
+                                                if ( !(_.where(_.where(speler_profiel_thuis, {spelerID: value1.personID}), {seizoen: 'Seizoen ' + matchseizoen})) ) {
                                                     var ingevallen = false;
                                                     var vervangen = false;
                                                     var helewedstrijd = false;
@@ -1889,25 +2110,25 @@ module.exports = ImportController = {
                                                     if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                     if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                    var fullstats_temp = [];
-                                                    fullstats_temp.push(
-                                                        {
-                                                            ronde: items.ronde,
-                                                            matchID: items.matchID,
+                                                    var fullstats_temp1 = [];
+                                                    var fullstats_temp_temp1 = {};
+                                                    fullstats_temp_temp1.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                    fullstats_temp_temp1.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                    fullstats_temp_temp1.matchID = items.matchID;
 
-                                                            hele_wedstrijd: helewedstrijd,
-                                                            ingevallen: ingevallen,
-                                                            vervangen: vervangen,
+                                                    fullstats_temp_temp1.hele_wedstrijd = helewedstrijd;
+                                                    fullstats_temp_temp1.ingevallen = ingevallen;
+                                                    fullstats_temp_temp1.vervangen = vervangen;
 
-                                                            doelpunten: doelpunten || 0,
-                                                            voorzetten: voorzetten || 0,
-                                                            penalties: (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                                            minuten: minuten || 0,
-                                                            geel: geel || 0,
-                                                            rood: rood || 0,
-                                                            tweede_geel: (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0
-                                                        }
-                                                    );
+                                                    fullstats_temp_temp1.doelpunten = doelpunten || 0;
+                                                    fullstats_temp_temp1.voorzetten = voorzetten || 0;
+                                                    fullstats_temp_temp1.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                    fullstats_temp_temp1.minuten = minuten || 0;
+                                                    fullstats_temp_temp1.geel = geel || 0;
+                                                    fullstats_temp_temp1.rood = rood || 0;
+                                                    fullstats_temp_temp1.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+
+                                                    fullstats_temp1.fullStats.push(fullstats_temp_temp1);
 
                                                     Spelers.create({
                                                         spelerID: Number_converter(value1.personID),
@@ -1915,25 +2136,13 @@ module.exports = ImportController = {
                                                         spelerGeboorteland: value1.spelerNationaliteit,
                                                         spelerGeboortedatum: value1.spelerGeboortedatum,
                                                         spelerRugnummer: Number_converter(value1.rugnummer),
+                                                        spelerType: temp.spelerType,
+                                                        spelerPositie: value1.spelerPositie,
                                                         seizoen: 'Seizoen ' + matchseizoen,
                                                         clubNaam: match_short.match_info.thuis,
                                                         clubID: items.thuisTeamID,
                                                         date_edited: datetime,
-
-                                                        //laatste_ronde_sync: items.ronde,
-                                                        //wedstrijden: 1,
-                                                        //hele_wedstrijd: 0,
-                                                        //ingevallen: ingevallen || 0,
-                                                        //vervangen: vervangen || 0,
-                                                        //doelpunten: doelpunten || 0,
-                                                        //voorzetten: voorzetten || 0,
-                                                        //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                        //minuten: minuten || 0,
-                                                        //geel: geel || 0,
-                                                        //rood: rood || 0,
-                                                        //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
-
-                                                        fullStats: fullstats_temp
+                                                        fullStats: fullstats_temp1
                                                     }, function (err, data) {
                                                     });
                                                 }
@@ -1955,25 +2164,25 @@ module.exports = ImportController = {
                                                 if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                 if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                var fullstats_temp = [];
-                                                fullstats_temp.push(
-                                                    {
-                                                        ronde: items.ronde,
-                                                        matchID: items.matchID,
+                                                var fullstats_temp2 = [];
+                                                var fullstats_temp_temp2 = {};
+                                                fullstats_temp_temp2.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                fullstats_temp_temp2.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                fullstats_temp_temp2.matchID = items.matchID;
 
-                                                        hele_wedstrijd: helewedstrijd,
-                                                        ingevallen: ingevallen,
-                                                        vervangen: vervangen,
+                                                fullstats_temp_temp2.hele_wedstrijd = helewedstrijd;
+                                                fullstats_temp_temp2.ingevallen = ingevallen;
+                                                fullstats_temp_temp2.vervangen = vervangen;
 
-                                                        doelpunten: doelpunten || 0,
-                                                        voorzetten: voorzetten || 0,
-                                                        penalties: (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                                        minuten: minuten || 0,
-                                                        geel: geel || 0,
-                                                        rood: rood || 0,
-                                                        tweede_geel: (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0
-                                                    }
-                                                );
+                                                fullstats_temp_temp2.doelpunten = doelpunten || 0;
+                                                fullstats_temp_temp2.voorzetten = voorzetten || 0;
+                                                fullstats_temp_temp2.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                fullstats_temp_temp2.minuten = minuten || 0;
+                                                fullstats_temp_temp2.geel = geel || 0;
+                                                fullstats_temp_temp2.rood = rood || 0;
+                                                fullstats_temp_temp2.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+
+                                                fullstats_temp2.fullStats.push(fullstats_temp_temp2);
 
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
@@ -1981,11 +2190,13 @@ module.exports = ImportController = {
                                                     spelerGeboorteland: value1.spelerNationaliteit,
                                                     spelerGeboortedatum: value1.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value1.rugnummer),
+                                                    spelerType: temp.spelerType,
+                                                    spelerPositie: value1.spelerPositie,
                                                     seizoen: 'Seizoen ' + matchseizoen,
                                                     clubNaam: match_short.match_info.thuis,
                                                     clubID: items.thuisTeamID,
                                                     date_edited: datetime,
-                                                    fullStats: fullstats_temp
+                                                    fullStats: fullstats_temp2
                                                 }, function (err, data) {
                                                     if (err) console.log(err);
                                                 });
@@ -2318,7 +2529,10 @@ module.exports = ImportController = {
                                                             value2.spelerRugnummer = Number_converter((value1.rugnummer));
                                                         }
                                                         if (!value2.spelerType) {
-                                                            value2.spelerType = temp.type;
+                                                            value2.spelerType = temp.spelerType;
+                                                        }
+                                                        if (!value2.spelerPositie || value2.spelerPositie === null || value2.spelerPositie === 'null') {
+                                                            value2.spelerPositie = value1.spelerPositie;
                                                         }
 
                                                         var ingevallen = false;
@@ -2338,69 +2552,28 @@ module.exports = ImportController = {
                                                         if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                         if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                        forEach(value2.fullStats, function (value3, key3) {
-                                                            if (items.ronde === value3.ronde) {
-                                                                value3.matchID = items.matchID;
+                                                        if (!value2.fullStats || value2.fullStats.length <= 0) {
+                                                            value2.fullStats = [];
+                                                        }
+                                                        if (!value2.fullStats || !(_.where(value2.fullStats, {ronde: items.ronde})) || !(_.where(value2.fullStats, {ronde: items.ronde + 100})) ) {
+                                                            var tempfullStats = {};
+                                                            tempfullStats.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                            tempfullStats.matchID = items.matchID;
 
-                                                                value3.hele_wedstrijd = helewedstrijd;
-                                                                value3.ingevallen = ingevallen;
-                                                                value3.vervangen = vervangen;
+                                                            tempfullStats.hele_wedstrijd = helewedstrijd;
+                                                            tempfullStats.ingevallen = ingevallen;
+                                                            tempfullStats.vervangen = vervangen;
 
-                                                                value3.doelpunten = doelpunten || 0;
-                                                                value3.voorzetten = voorzetten || 0;
-                                                                value3.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
-                                                                value3.minuten = minuten || 0;
-                                                                value3.geel = geel || 0;
-                                                                value3.rood = rood || 0;
-                                                                value3.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+                                                            tempfullStats.doelpunten = doelpunten || 0;
+                                                            tempfullStats.voorzetten = voorzetten || 0;
+                                                            tempfullStats.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                            tempfullStats.minuten = minuten || 0;
+                                                            tempfullStats.geel = geel || 0;
+                                                            tempfullStats.rood = rood || 0;
+                                                            tempfullStats.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
 
-                                                                Spelers.update({
-                                                                    _id: value2._id
-                                                                }, {
-                                                                    spelerGeboorteland: value1.spelerNationaliteit,
-                                                                    spelerGeboortedatum: value1.spelerGeboortedatum,
-                                                                    spelerRugnummer: value2.spelerRugnummer,
-                                                                    spelerType: value2.spelerType,
-                                                                    date_edited: datetime,
-
-                                                                    //laatste_ronde_sync: items.ronde,
-                                                                    //wedstrijden: 1,
-                                                                    //hele_wedstrijd: 0,
-                                                                    //ingevallen: ingevallen || 0,
-                                                                    //vervangen: vervangen || 0,
-                                                                    //doelpunten: doelpunten || 0,
-                                                                    //voorzetten: voorzetten || 0,
-                                                                    //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                                    //minuten: minuten || 0,
-                                                                    //geel: geel || 0,
-                                                                    //rood: rood || 0,
-                                                                    //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
-
-                                                                    fullStats: value2.fullStats
-                                                                }, function (err, data) {
-                                                                    if (err) throw err;
-                                                                });
-                                                            }
-                                                        });
-                                                        if (!_.where(value2.fullStats, {ronde: items.ronde})) {
-                                                            value2.fullStats.push(
-                                                                {
-                                                                    ronde: items.ronde,
-                                                                    matchID: items.matchID,
-
-                                                                    hele_wedstrijd: helewedstrijd,
-                                                                    ingevallen: ingevallen,
-                                                                    vervangen: vervangen,
-
-                                                                    doelpunten: doelpunten || 0,
-                                                                    voorzetten: voorzetten || 0,
-                                                                    penalties: (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                                                    minuten: minuten || 0,
-                                                                    geel: geel || 0,
-                                                                    rood: rood || 0,
-                                                                    tweede_geel: (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0
-                                                                }
-                                                            );
+                                                            value2.fullStats.push(tempfullStats);
 
                                                             Spelers.update({
                                                                 _id: value2._id
@@ -2409,21 +2582,41 @@ module.exports = ImportController = {
                                                                 spelerGeboortedatum: value1.spelerGeboortedatum,
                                                                 spelerRugnummer: value2.spelerRugnummer,
                                                                 spelerType: value2.spelerType,
+                                                                spelerPositie: value2.spelerPositie,
                                                                 date_edited: datetime,
+                                                                fullStats: value2.fullStats
+                                                            }, function (err, data) {
+                                                                if (err) throw err;
+                                                            });
+                                                        } else {
+                                                            forEach(value2.fullStats, function (value3, key3) {
+                                                                if (items.ronde === value3.ronde || items.ronde === (value3.ronde - 100)) {
+                                                                    value3.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                                    value3.matchID = items.matchID;
 
-                                                                //laatste_ronde_sync: items.ronde,
-                                                                //wedstrijden: 1,
-                                                                //hele_wedstrijd: 0,
-                                                                //ingevallen: ingevallen || 0,
-                                                                //vervangen: vervangen || 0,
-                                                                //doelpunten: doelpunten || 0,
-                                                                //voorzetten: voorzetten || 0,
-                                                                //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                                //minuten: minuten || 0,
-                                                                //geel: geel || 0,
-                                                                //rood: rood || 0,
-                                                                //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
+                                                                    value3.hele_wedstrijd = helewedstrijd;
+                                                                    value3.ingevallen = ingevallen;
+                                                                    value3.vervangen = vervangen;
 
+                                                                    value3.doelpunten = doelpunten || 0;
+                                                                    value3.voorzetten = voorzetten || 0;
+                                                                    value3.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                                    value3.minuten = minuten || 0;
+                                                                    value3.geel = geel || 0;
+                                                                    value3.rood = rood || 0;
+                                                                    value3.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+                                                                }
+                                                            });
+
+                                                            Spelers.update({
+                                                                _id: value2._id
+                                                            }, {
+                                                                spelerGeboorteland: value1.spelerNationaliteit,
+                                                                spelerGeboortedatum: value1.spelerGeboortedatum,
+                                                                spelerRugnummer: value2.spelerRugnummer,
+                                                                spelerType: value2.spelerType,
+                                                                spelerPositie: value2.spelerPositie,
+                                                                date_edited: datetime,
                                                                 fullStats: value2.fullStats
                                                             }, function (err, data) {
                                                                 if (err) throw err;
@@ -2431,7 +2624,7 @@ module.exports = ImportController = {
                                                         }
                                                     }
                                                 });
-                                                if (!_.where(_.where(speler_profiel_uit, {spelerID: value1.personID}), {seizoen: 'Seizoen ' + matchseizoen})) {
+                                                if ( !(_.where(_.where(speler_profiel_uit, {spelerID: value1.personID}), {seizoen: 'Seizoen ' + matchseizoen})) ) {
                                                     var ingevallen = false;
                                                     var vervangen = false;
                                                     var helewedstrijd = false;
@@ -2449,25 +2642,25 @@ module.exports = ImportController = {
                                                     if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                     if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                    var fullstats_temp = [];
-                                                    fullstats_temp.push(
-                                                        {
-                                                            ronde: items.ronde,
-                                                            matchID: items.matchID,
+                                                    var fullstats_temp3 = [];
+                                                    var fullstats_temp_temp3 = {};
+                                                    fullstats_temp_temp3.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                    fullstats_temp_temp3.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                    fullstats_temp_temp3.matchID = items.matchID;
 
-                                                            hele_wedstrijd: helewedstrijd,
-                                                            ingevallen: ingevallen,
-                                                            vervangen: vervangen,
+                                                    fullstats_temp_temp3.hele_wedstrijd = helewedstrijd;
+                                                    fullstats_temp_temp3.ingevallen = ingevallen;
+                                                    fullstats_temp_temp3.vervangen = vervangen;
 
-                                                            doelpunten: doelpunten || 0,
-                                                            voorzetten: voorzetten || 0,
-                                                            penalties: (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                                            minuten: minuten || 0,
-                                                            geel: geel || 0,
-                                                            rood: rood || 0,
-                                                            tweede_geel: (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0
-                                                        }
-                                                    );
+                                                    fullstats_temp_temp3.doelpunten = doelpunten || 0;
+                                                    fullstats_temp_temp3.voorzetten = voorzetten || 0;
+                                                    fullstats_temp_temp3.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                    fullstats_temp_temp3.minuten = minuten || 0;
+                                                    fullstats_temp_temp3.geel = geel || 0;
+                                                    fullstats_temp_temp3.rood = rood || 0;
+                                                    fullstats_temp_temp3.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+
+                                                    fullstats_temp3.fullStats.push(fullstats_temp_temp3);
 
                                                     Spelers.create({
                                                         spelerID: Number_converter(value1.personID),
@@ -2475,25 +2668,13 @@ module.exports = ImportController = {
                                                         spelerGeboorteland: value1.spelerNationaliteit,
                                                         spelerGeboortedatum: value1.spelerGeboortedatum,
                                                         spelerRugnummer: Number_converter(value1.rugnummer),
+                                                        spelerType: temp.spelerType,
+                                                        spelerPositie: value1.spelerPositie,
                                                         seizoen: 'Seizoen ' + matchseizoen,
                                                         clubNaam: match_short.match_info.uit,
                                                         clubID: items.uitTeamID,
                                                         date_edited: datetime,
-
-                                                        //laatste_ronde_sync: items.ronde,
-                                                        //wedstrijden: 1,
-                                                        //hele_wedstrijd: 0,
-                                                        //ingevallen: ingevallen || 0,
-                                                        //vervangen: vervangen || 0,
-                                                        //doelpunten: doelpunten || 0,
-                                                        //voorzetten: voorzetten || 0,
-                                                        //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                        //minuten: minuten || 0,
-                                                        //geel: geel || 0,
-                                                        //rood: rood || 0,
-                                                        //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
-
-                                                        fullStats: fullstats_temp
+                                                        fullStats: fullstats_temp3
                                                     }, function (err, data) {
                                                     });
                                                 }
@@ -2515,25 +2696,25 @@ module.exports = ImportController = {
                                                 if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                 if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                var fullstats_temp = [];
-                                                fullstats_temp.push(
-                                                    {
-                                                        ronde: items.ronde,
-                                                        matchID: items.matchID,
+                                                var fullstats_temp4 = [];
+                                                var fullstats_temp_temp4 = {};
+                                                fullstats_temp_temp4.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                fullstats_temp_temp4.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                fullstats_temp_temp4.matchID = items.matchID;
 
-                                                        hele_wedstrijd: helewedstrijd,
-                                                        ingevallen: ingevallen,
-                                                        vervangen: vervangen,
+                                                fullstats_temp_temp4.hele_wedstrijd = helewedstrijd;
+                                                fullstats_temp_temp4.ingevallen = ingevallen;
+                                                fullstats_temp_temp4.vervangen = vervangen;
 
-                                                        doelpunten: doelpunten || 0,
-                                                        voorzetten: voorzetten || 0,
-                                                        penalties: (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                                        minuten: minuten || 0,
-                                                        geel: geel || 0,
-                                                        rood: rood || 0,
-                                                        tweede_geel: (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0
-                                                    }
-                                                );
+                                                fullstats_temp_temp4.doelpunten = doelpunten || 0;
+                                                fullstats_temp_temp4.voorzetten = voorzetten || 0;
+                                                fullstats_temp_temp4.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                fullstats_temp_temp4.minuten = minuten || 0;
+                                                fullstats_temp_temp4.geel = geel || 0;
+                                                fullstats_temp_temp4.rood = rood || 0;
+                                                fullstats_temp_temp4.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+
+                                                fullstats_temp4.fullStats.push(fullstats_temp_temp4);
 
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
@@ -2541,201 +2722,18 @@ module.exports = ImportController = {
                                                     spelerGeboorteland: value1.spelerNationaliteit,
                                                     spelerGeboortedatum: value1.spelerGeboortedatum,
                                                     spelerRugnummer: Number_converter(value1.rugnummer),
+                                                    spelerType: temp.spelerType,
+                                                    spelerPositie: value1.spelerPositie,
                                                     seizoen: 'Seizoen ' + matchseizoen,
                                                     clubNaam: match_short.match_info.uit,
                                                     clubID: items.uitTeamID,
                                                     date_edited: datetime,
-
-                                                    //laatste_ronde_sync: items.ronde,
-                                                    //wedstrijden: 1,
-                                                    //hele_wedstrijd: 0,
-                                                    //ingevallen: ingevallen || 0,
-                                                    //vervangen: vervangen || 0,
-                                                    //doelpunten: doelpunten || 0,
-                                                    //voorzetten: voorzetten || 0,
-                                                    //penalties: Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                                    //minuten: minuten || 0,
-                                                    //geel: geel || 0,
-                                                    //rood: rood || 0,
-                                                    //tweede_geel: Number_converter((value.algemene_stats[15][0][0]))
-
-                                                    fullStats: fullstats_temp
+                                                    fullStats: fullstats_temp4
                                                 }, function (err, data) {
                                                 });
                                             }
                                         }
                                     });
-                                    //forEach(items.spelersuitteam, function (value1, key1) {
-                                    //    if (value1.personID == temp.personID) {
-                                    //        temp.spelerNaam = (value1.spelerNaam);
-                                    //        temp.spelerRugnummer = Number_converter((value1.rugnummer));
-                                    //        temp.spelerPhoto = (value1.spelerPhoto);
-                                    //        temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
-                                    //    }
-                                    //
-                                    //    if (_.where(speler_profiel_uit, {spelerID: value1.personID})) {
-                                    //        forEach(_.where(speler_profiel_uit, {spelerID: value1.personID}), function (value2, key2) {
-                                    //            if (value2.seizoen === 'Seizoen ' + items.seizoen) {
-                                    //                if (!value2.spelerRugnummer) {
-                                    //                    value2.spelerRugnummer = Number_converter((value1.rugnummer));
-                                    //                }
-                                    //                if (!value2.spelerType) {
-                                    //                    value2.spelerType = temp.type;
-                                    //                }
-                                    //
-                                    //                var ingevallen = 0;
-                                    //                var vervangen = 0;
-                                    //                if (value1.ingevallen) ingevallen = 1;
-                                    //                if (value1.vervangen) vervangen = 1;
-                                    //                var doelpunten = 0;
-                                    //                var voorzetten = 0;
-                                    //                var minuten = 0;
-                                    //                var geel = 0;
-                                    //                var rood = 0;
-                                    //                if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                    //                if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                    //                if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                    //                if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                    //                if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
-                                    //
-                                    //                if (!value2.laatste_ronde_sync || value2.laatste_ronde_sync == null || value2.laatste_ronde_sync === "null" || value2.laatste_ronde_sync === undefined) {
-                                    //                    Spelers.update({
-                                    //                        _id: value2._id
-                                    //                    }, {
-                                    //                        spelerGeboorteland: value1.spelerNationaliteit,
-                                    //                        spelerGeboortedatum: value1.spelerGeboortedatum,
-                                    //                        spelerRugnummer: value2.spelerRugnummer,
-                                    //                        spelerType: value2.spelerType,
-                                    //                        date_edited: datetime,
-                                    //
-                                    //                        laatste_ronde_sync: items.ronde,
-                                    //                        wedstrijden: 1,
-                                    //                        hele_wedstrijd: 0,
-                                    //                        ingevallen: ingevallen || 0,
-                                    //                        vervangen: vervangen || 0,
-                                    //                        doelpunten: doelpunten || 0,
-                                    //                        voorzetten: voorzetten || 0,
-                                    //                        penalties: (Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                    //                        minuten: minuten || 0,
-                                    //                        geel: geel || 0,
-                                    //                        rood: rood || 0,
-                                    //                        tweede_geel: Number_converter((value.algemene_stats[15][0][0])) || 0
-                                    //                    }, function (err, data) {
-                                    //                        if (err) throw err;
-                                    //                    });
-                                    //                } else if (value2.laatste_ronde_sync != items.ronde && value2.laatste_ronde_sync < items.ronde) {
-                                    //                    Spelers.update({
-                                    //                        _id: value2._id
-                                    //                    }, {
-                                    //                        spelerGeboorteland: value1.spelerNationaliteit,
-                                    //                        spelerGeboortedatum: value1.spelerGeboortedatum,
-                                    //                        spelerRugnummer: value2.spelerRugnummer,
-                                    //                        spelerType: value2.spelerType,
-                                    //                        date_edited: datetime,
-                                    //
-                                    //                        laatste_ronde_sync: items.ronde,
-                                    //                        wedstrijden: value2.wedstrijden + 1,
-                                    //                        hele_wedstrijd: value2.hele_wedstrijd,
-                                    //                        ingevallen: value2.ingevallen + ingevallen,
-                                    //                        vervangen: value2.vervangen + vervangen,
-                                    //                        doelpunten: value2.doelpunten + doelpunten,
-                                    //                        voorzetten: value2.voorzetten + voorzetten,
-                                    //                        penalties: value2.penalties + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0])),
-                                    //                        minuten: value2.minuten + minuten,
-                                    //                        geel: value2.geel + geel,
-                                    //                        rood: value2.rood + rood,
-                                    //                        tweede_geel: value2.tweede_geel + Number_converter((value.algemene_stats[15][0][0]))
-                                    //                    }, function (err, data) {
-                                    //                        if (err) throw err;
-                                    //                    });
-                                    //                }
-                                    //            }
-                                    //        });
-                                    //        if (!_.where(_.where(speler_profiel_uit, {spelerID: value1.personID}), {seizoen: 'Seizoen ' + items.seizoen})) {
-                                    //            var ingevallen = 0;
-                                    //            var vervangen = 0;
-                                    //            if (value1.ingevallen) ingevallen = 1;
-                                    //            if (value1.vervangen) vervangen = 1;
-                                    //            var doelpunten = 0;
-                                    //            var voorzetten = 0;
-                                    //            var minuten = 0;
-                                    //            var geel = 0;
-                                    //            var rood = 0;
-                                    //            if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                    //            if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                    //            if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                    //            if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                    //            if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
-                                    //
-                                    //            Spelers.create({
-                                    //                spelerID: Number_converter(value1.personID),
-                                    //                spelerNaam: value1.spelerNaam,
-                                    //                spelerGeboorteland: value1.spelerNationaliteit,
-                                    //                spelerGeboortedatum: value1.spelerGeboortedatum,
-                                    //                spelerRugnummer: Number_converter(value1.rugnummer),
-                                    //                seizoen: 'Seizoen ' + items.seizoen,
-                                    //                clubNaam: match_short.match_info.uit,
-                                    //                clubID: items.uitTeamID,
-                                    //                date_edited: datetime,
-                                    //
-                                    //                laatste_ronde_sync: items.ronde,
-                                    //                wedstrijden: 1,
-                                    //                hele_wedstrijd: 0,
-                                    //                ingevallen: ingevallen || 0,
-                                    //                vervangen: vervangen || 0,
-                                    //                doelpunten: doelpunten || 0,
-                                    //                voorzetten: voorzetten || 0,
-                                    //                penalties: (Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                    //                minuten: minuten || 0,
-                                    //                geel: geel || 0,
-                                    //                rood: rood || 0,
-                                    //                tweede_geel: Number_converter((value.algemene_stats[15][0][0])) || 0
-                                    //            }, function (err, data) {
-                                    //            });
-                                    //        }
-                                    //    } else {
-                                    //        var ingevallen = 0;
-                                    //        var vervangen = 0;
-                                    //        if (value1.ingevallen) ingevallen = 1;
-                                    //        if (value1.vervangen) vervangen = 1;
-                                    //        var doelpunten = 0;
-                                    //        var voorzetten = 0;
-                                    //        var minuten = 0;
-                                    //        var geel = 0;
-                                    //        var rood = 0;
-                                    //        if (_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0]) doelpunten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Doelpunten'})[0][temp.personID]);
-                                    //        if (_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0]) voorzetten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Voorzetten'})[0][temp.personID]);
-                                    //        if (_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0]) minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
-                                    //        if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
-                                    //        if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
-                                    //
-                                    //        Spelers.create({
-                                    //            spelerID: Number_converter(value1.personID),
-                                    //            spelerNaam: value1.spelerNaam,
-                                    //            spelerGeboorteland: value1.spelerNationaliteit,
-                                    //            spelerGeboortedatum: value1.spelerGeboortedatum,
-                                    //            spelerRugnummer: Number_converter(value1.rugnummer),
-                                    //            seizoen: 'Seizoen ' + items.seizoen,
-                                    //            clubNaam: match_short.match_info.thuis,
-                                    //            clubID: items.thuisTeamID,
-                                    //            date_edited: datetime,
-                                    //
-                                    //            laatste_ronde_sync: items.ronde,
-                                    //            wedstrijden: 1,
-                                    //            hele_wedstrijd: 0,
-                                    //            ingevallen: ingevallen || 0,
-                                    //            vervangen: vervangen || 0,
-                                    //            doelpunten: doelpunten || 0,
-                                    //            voorzetten: voorzetten || 0,
-                                    //            penalties: (Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0,
-                                    //            minuten: minuten || 0,
-                                    //            geel: geel || 0,
-                                    //            rood: rood || 0,
-                                    //            tweede_geel: Number_converter((value.algemene_stats[15][0][0])) || 0
-                                    //        }, function (err, data) {
-                                    //        });
-                                    //    }
-                                    //});
                                     if (temp.spelerType == 'keeper') {
                                         temp.minuten = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Minuten'})[0][temp.personID]);
                                         temp.reddingen = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Reddingen'})[0][temp.personID]);

@@ -37,6 +37,8 @@ module.exports = mongoose.model('MatchData', {
         spelerPhoto: { type: String },
         spelerGeboortedatum: { type: String },
         spelerNationaliteit: { type: String },
+        spelerPositieWedstrijd: { type: String },
+        spelerPositie: { type: String },
         vervangen: { type: Boolean },
         ingevallen: { type: Boolean }
     }],
@@ -47,6 +49,8 @@ module.exports = mongoose.model('MatchData', {
         spelerPhoto: { type: String },
         spelerGeboortedatum: { type: String },
         spelerNationaliteit: { type: String },
+        spelerPositieWedstrijd: { type: String },
+        spelerPositie: { type: String },
         vervangen: { type: Boolean },
         ingevallen: { type: Boolean }
     }],

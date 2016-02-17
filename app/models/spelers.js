@@ -25,6 +25,7 @@ module.exports = mongoose.model('Spelers', {
 
     // statistieken
     fullStats: [{
+        spelerPositieWedstrijd: { type: String },
         ronde: { type: Number },
         matchID: { type: Number },
 

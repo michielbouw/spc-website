@@ -89,7 +89,7 @@ angular.module('mainapp.scouting')
                     _id: self.playerID
                 },function(res1) {
                     angular.forEach(res1, function(value, key) {
-                        if (value.spelerPhoto && !self.player_stats.spelerPhoto && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
+                        if (value.spelerPhoto && !self.player_stats.spelerPhoto && self.club_name == value.clubNaam && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
                             self.player_stats.spelerPhoto = value.spelerPhoto;
                         }
                     });
@@ -862,7 +862,7 @@ angular.module('mainapp.scouting')
                         _id: self.playerID
                     }, function (res1) {
                         angular.forEach(res1, function (value, key) {
-                            if (value.spelerPhoto && !self.player_stats_vs.spelerPhoto && self.vs_season_index.indexOf(value.seizoen.substring(8, 9)) >= 0) {
+                            if (value.spelerPhoto && !self.player_stats_vs.spelerPhoto && self.player_stats_vs.club_name == value.clubNaam && self.vs_season_index.indexOf(value.seizoen.substring(8, 9)) >= 0) {
                                 self.player_stats_vs.spelerPhoto = value.spelerPhoto;
                             }
                         });
@@ -887,7 +887,7 @@ angular.module('mainapp.scouting')
                         _id: player_id
                     }, function (res1) {
                         angular.forEach(res1, function (value, key) {
-                            if (value.spelerPhoto && !self.player_stats_vs.spelerPhoto && self.vs_season_index.indexOf(value.seizoen.substring(8, 9)) >= 0) {
+                            if (value.spelerPhoto && !self.player_stats_vs.spelerPhoto && self.player_stats_vs.club_name == value.clubNaam && self.vs_season_index.indexOf(value.seizoen.substring(8, 9)) >= 0) {
                                 self.player_stats_vs.spelerPhoto = value.spelerPhoto;
                             }
                         });

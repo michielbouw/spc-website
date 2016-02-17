@@ -251,13 +251,10 @@ angular.module('mainapp.memberAuth')
                 if (AuthenticationService.isLogged) {
                     AuthenticationService.isLogged = false;
                     $rootScope.isLogged = false;
-                    delete $sessionStorage.remember;
-                    delete $sessionStorage.token;
-                    delete $sessionStorage.role;
-                    $localStorage.$reset();
-                    $sessionStorage.$reset();
-                    $location.path("/");
                 }
+                $localStorage.$reset();
+                $sessionStorage.$reset();
+                $location.path("/");
             };
         }
     ]);

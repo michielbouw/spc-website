@@ -24,6 +24,8 @@ angular.module('mainapp.memberAuth')
                 if (self.login.password === self.login.password2) {
                     if (self.login.password.length > 5 && self.login.password.match(/[a-z]/) && self.login.password.match(/[0-9]/)) {
                         Api.ResetPassword.post({
+                            token: $routeParams.token
+                        },{
                             password: self.login.password
                         }, function (res) {
                             if (res.type === false) {

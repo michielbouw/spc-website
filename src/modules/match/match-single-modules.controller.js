@@ -1,7 +1,7 @@
 angular.module('mainapp.match')
     .controller('mainapp.match.MatchSingleModulesController', ['$scope', '$filter', 'Api', 'AuthenticationService', '$location',
-        '$rootScope', '$routeParams', '$sessionStorage',
-        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $routeParams, $sessionStorage)
+        '$rootScope', '$routeParams', '$sessionStorage', '$timeout',
+        function($scope, $filter, Api, AuthenticationService, $location, $rootScope, $routeParams, $sessionStorage, $timeout)
     {
         var self = this;
         self.datetime = new Date();
@@ -153,7 +153,40 @@ angular.module('mainapp.match')
             if (self.loading_slug === 'team') {
                 self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
                 self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                self.match.locatie_doelpogingen_thuisTeam = [];
+                self.match.locatie_doelpogingen_uitTeam = [];
+                angular.forEach(self.match.locatie_doelpogingen.thuisTeam, function (value, key) {
+                    if (self.match.locatie_doelpogingen_thuisTeam.length <= 0) {
+                        self.match.locatie_doelpogingen_thuisTeam.push(value);
+                    } else if (($filter('filter')(self.match.locatie_doelpogingen_thuisTeam, { personID: value.personID }, true)).length <= 0) {
+                        self.match.locatie_doelpogingen_thuisTeam.push(value);
+                    }
+                });
+                angular.forEach(self.match.locatie_doelpogingen.uitTeam, function (value, key) {
+                    if (self.match.locatie_doelpogingen_uitTeam.length <= 0) {
+                        self.match.locatie_doelpogingen_uitTeam.push(value);
+                    } else if (($filter('filter')(self.match.locatie_doelpogingen_uitTeam, { personID: value.personID }, true)).length <= 0) {
+                        self.match.locatie_doelpogingen_uitTeam.push(value);
+                    }
+                });
+
                 self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
+                self.match.locatie_overtredingen_thuisTeam = [];
+                self.match.locatie_overtredingen_uitTeam = [];
+                angular.forEach(self.match.locatie_overtredingen.thuisTeam, function (value, key) {
+                    if (self.match.locatie_overtredingen_thuisTeam.length <= 0) {
+                        self.match.locatie_overtredingen_thuisTeam.push(value);
+                    } else if (($filter('filter')(self.match.locatie_overtredingen_thuisTeam, { personID: value.personID }, true)).length <= 0) {
+                        self.match.locatie_overtredingen_thuisTeam.push(value);
+                    }
+                });
+                angular.forEach(self.match.locatie_overtredingen.uitTeam, function (value, key) {
+                    if (self.match.locatie_overtredingen_uitTeam.length <= 0) {
+                        self.match.locatie_overtredingen_uitTeam.push(value);
+                    } else if (($filter('filter')(self.match.locatie_overtredingen_uitTeam, { personID: value.personID }, true)).length <= 0) {
+                        self.match.locatie_overtredingen_uitTeam.push(value);
+                    }
+                });
             }
 
             if (self.loading_slug === 'team' && self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
@@ -593,7 +626,40 @@ angular.module('mainapp.match')
                 if (self.loading_slug === 'team') {
                     self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1);
                     self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_thuisTeam = [];
+                    self.match.locatie_doelpogingen_uitTeam = [];
+                    angular.forEach(self.match.locatie_doelpogingen.thuisTeam, function (value, key) {
+                        if (self.match.locatie_doelpogingen_thuisTeam.length <= 0) {
+                            self.match.locatie_doelpogingen_thuisTeam.push(value);
+                        } else if (($filter('filter')(self.match.locatie_doelpogingen_thuisTeam, { personID: value.personID }, true)).length <= 0) {
+                            self.match.locatie_doelpogingen_thuisTeam.push(value);
+                        }
+                    });
+                    angular.forEach(self.match.locatie_doelpogingen.uitTeam, function (value, key) {
+                        if (self.match.locatie_doelpogingen_uitTeam.length <= 0) {
+                            self.match.locatie_doelpogingen_uitTeam.push(value);
+                        } else if (($filter('filter')(self.match.locatie_doelpogingen_uitTeam, { personID: value.personID }, true)).length <= 0) {
+                            self.match.locatie_doelpogingen_uitTeam.push(value);
+                        }
+                    });
+
                     self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
+                    self.match.locatie_overtredingen_thuisTeam = [];
+                    self.match.locatie_overtredingen_uitTeam = [];
+                    angular.forEach(self.match.locatie_overtredingen.thuisTeam, function (value, key) {
+                        if (self.match.locatie_overtredingen_thuisTeam.length <= 0) {
+                            self.match.locatie_overtredingen_thuisTeam.push(value);
+                        } else if (($filter('filter')(self.match.locatie_overtredingen_thuisTeam, { personID: value.personID }, true)).length <= 0) {
+                            self.match.locatie_overtredingen_thuisTeam.push(value);
+                        }
+                    });
+                    angular.forEach(self.match.locatie_overtredingen.uitTeam, function (value, key) {
+                        if (self.match.locatie_overtredingen_uitTeam.length <= 0) {
+                            self.match.locatie_overtredingen_uitTeam.push(value);
+                        } else if (($filter('filter')(self.match.locatie_overtredingen_uitTeam, { personID: value.personID }, true)).length <= 0) {
+                            self.match.locatie_overtredingen_uitTeam.push(value);
+                        }
+                    });
                 }
 
                 if (self.loading_slug === 'team' && self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
@@ -1025,7 +1091,7 @@ angular.module('mainapp.match')
         }
 
 
-        // Wedstrijd
+        // WEDSTRIJD
         self.splitTime = function(string) {
             if ( !isNaN( Number(string.split("'")[0]) ) ) {
                 return Number(string.split("'")[0]);
@@ -1035,8 +1101,499 @@ angular.module('mainapp.match')
         };
 
 
-        // Team  !!! BELOW DOES NOT WORK PROPERLY !!!
-        $scope.position_field_interval = '1e helft';
+        // TEAM
+
+        // Avg positions
+        var positions_uit = true;
+        var positions_thuis = true;
+
+        self.avg_positions_field_build = function () {
+            if (self.loading_slug === 'team') {
+                $timeout(function () {
+                    if (self.loading === false) {
+                        $timeout(function () {
+                            $('.content#team').find('.avg_positions_field#avg_positions_field_hor_size #avg_positions_field').css({
+                                'height': (($('.content#team').find('.avg_positions_field#avg_positions_field_hor_size').width() - 2) * 68 / 106).toFixed(0),
+                                'width': ($('.content#team').find('.avg_positions_field#avg_positions_field_hor_size').width() - 2).toFixed(0)
+                            });
+
+                            var c = document.getElementById('avg_positions_field');
+                            c.width = ($('.content#team').find('.avg_positions_field#avg_positions_field_hor_size').width() - 2).toFixed(0);
+                            c.height = (($('.content#team').find('.avg_positions_field#avg_positions_field_hor_size').width() - 2) * 68 / 106).toFixed(0);
+                            //var ctx = c.getContext("2d");
+
+                            self.avg_positions_field_draw();
+                            self.avg_positions_field_fill();
+                        }, 500);
+                    } else {
+                        self.avg_positions_field_build();
+                    }
+                }, 2000);
+            }
+        };
+
+        // Draws the soccer field
+        self.avg_positions_field_draw = function () {
+            var c = document.getElementById('avg_positions_field');
+            var ctx = c.getContext("2d");
+            ctx.clearRect(0,0,c.width,c.height);
+            var x = c.width;
+            var y = c.height;
+
+            // How all the lines and circles are styled
+            ctx.lineWidth = 1;
+            //ctx.strokeStyle = "#848484";
+            ctx.strokeStyle = "rgba(132,132,132, 0.5)";
+
+            // Drawing middle white circles
+            ctx.beginPath();
+            ctx.arc(x / 2, y / 2, y*0.15, 0, 2 * Math.PI, false);
+            ctx.moveTo(x / 2, y / 2);
+            ctx.arc(x / 2, y / 2, 1, 0, 2 * Math.PI, false);
+
+            // Drawing all outside lines
+            ctx.moveTo(y*0.01, 0);
+            ctx.lineTo(x - y*0.01, 0);
+            ctx.moveTo(y*0.01, 0);
+            ctx.lineTo(y*0.01, y);
+
+            ctx.moveTo(x - y*0.01, y);
+            ctx.lineTo(x - y*0.01, 0);
+            ctx.moveTo(x - y*0.01, y);
+            ctx.lineTo(y*0.01, y);
+
+            // Drawing all other lines
+            ctx.moveTo(x / 2, 0);
+            ctx.lineTo(x / 2, y);
+
+            ctx.moveTo(x - y*0.175, y / 2);
+            ctx.arc(x - y*0.175, y / 2, 1, 0, 2 * Math.PI, false);
+            ctx.moveTo(y*0.175, y / 2);
+            ctx.arc(y*0.175, y / 2, 1, 0, 2 * Math.PI, false);
+            ctx.moveTo(x - y*0.25, y / 2 + Math.sqrt(Math.pow(y*0.15, 2) - Math.pow(y*0.075, 2)));
+            ctx.arc(x - y*0.175, y / 2, y*0.15, 0.33 * 0.5 * Math.PI + 0.5 * Math.PI, 1.5 * Math.PI - 0.33 * 0.5 * Math.PI, false);
+            ctx.moveTo(y*0.25, y / 2 - Math.sqrt(Math.pow(y*0.15, 2) - Math.pow(y*0.075, 2)) );
+            ctx.arc(y*0.175, y / 2, y*0.15, 0.33 * 0.5 * Math.PI + 1.5 * Math.PI, 2.5 * Math.PI - 0.33 * 0.5 * Math.PI, false);
+
+            ctx.moveTo(y*0.01, 0);
+            ctx.arc(y*0.01, 0, y*0.015, 2 * Math.PI, 2.5 * Math.PI, false);
+            ctx.moveTo(x - y*0.01, 0);
+            ctx.arc(x - y*0.01, 0, y*0.015, 0.5 * Math.PI, Math.PI, false);
+            ctx.moveTo(y*0.01, y);
+            ctx.arc(y*0.01, y, y*0.015, 1.5 * Math.PI, 2 * Math.PI, false);
+            ctx.moveTo(x - y*0.01, y);
+            ctx.arc(x - y*0.01, y, y*0.015, Math.PI, 1.5 * Math.PI, false);
+
+            ctx.moveTo(x - y*0.01, y*0.45);
+            ctx.lineTo(x, y*0.45);
+            ctx.lineTo(x, y*0.55);
+            ctx.lineTo(x - y*0.01, y*0.55);
+            ctx.moveTo(y*0.01, y*0.45);
+            ctx.lineTo(0, y*0.45);
+            ctx.lineTo(0, y*0.55);
+            ctx.lineTo(y*0.01, y*0.55);
+
+            ctx.moveTo(x - y*0.01, y*0.4);
+            ctx.lineTo(x - y*0.08, y*0.4);
+            ctx.lineTo(x - y*0.08, y*0.6);
+            ctx.lineTo(x - y*0.01, y*0.6);
+            ctx.moveTo(y*0.01, y*0.4);
+            ctx.lineTo(y*0.08, y*0.4);
+            ctx.lineTo(y*0.08, y*0.6);
+            ctx.lineTo(y*0.01, y*0.6);
+
+            ctx.moveTo(x - y*0.01, y*0.25);
+            ctx.lineTo(x - y*0.25, y*0.25);
+            ctx.lineTo(x - y*0.25, y*0.75);
+            ctx.lineTo(x - y*0.01, y*0.75);
+            ctx.moveTo(y*0.01, y*0.25);
+            ctx.lineTo(y*0.25, y*0.25);
+            ctx.lineTo(y*0.25, y*0.75);
+            ctx.lineTo(y*0.01, y*0.75);
+
+            ctx.stroke();
+            ctx.closePath();
+        };
+
+        self.avg_positions_field_fill = function () {
+            var c = document.getElementById('avg_positions_field');
+            var ctx = c.getContext("2d");
+
+            var polygon = function (ctx, x, y, radius, sides, startAngle, anticlockwise) {
+                if (sides < 3) return;
+                var a = (Math.PI * 2)/sides;
+                a = anticlockwise?-a:a;
+                ctx.save();
+                ctx.translate(x,y);
+                ctx.rotate(startAngle);
+                ctx.moveTo(radius,0);
+                for (var i = 1; i < sides; i++) {
+                    ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+                }
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //var clear = function () {
+            //    ctx.clearRect(0,0,c.width,c.height);
+            //};
+
+            c.onmousemove = function(e) {
+                self.avg_positions_field_draw();
+
+                // important: correct mouse position:
+                var x = e.clientX,
+                    y = e.clientY,
+                    r;
+
+                angular.forEach(self.match.gemiddelde_posities, function (value, key) {
+                    drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+
+                    //r = angular.copy(value);
+                    //r.breedte /= 100;
+                    //r.lengte /= 100;
+                    //
+                    //if (r.teamNaam === self.matchshort.match_info.thuis_kort) {
+                    //    r.breedte = c.height * r.breedte;
+                    //    r.lengte = c.width * r.lengte;
+                    //
+                    //    ctx.beginPath();
+                    //    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+                    //
+                    //    // check if we hover it, fill other
+                    //    if (ctx.isPointInPath(x, y)) {
+                    //        ctx.fillStyle = "rgba(3,125,201,1)";
+                    //        ctx.strokeStyle = "rgba(3,125,201,1)";
+                    //        ctx.fill();
+                    //        ctx.stroke();
+                    //    } else {
+                    //        ctx.fillStyle = "rgba(3,125,201,0.4)";
+                    //        ctx.strokeStyle = "rgba(3,125,201,0.4)";
+                    //        ctx.fill();
+                    //        ctx.stroke();
+                    //    }
+                    //
+                    //    ctx.closePath();
+                    //} else if (r.teamNaam === self.matchshort.match_info.uit_kort) {
+                    //    r.breedte = c.height * (1 - r.breedte);
+                    //    r.lengte = c.width * (1 - r.lengte);
+                    //
+                    //    ctx.beginPath();
+                    //    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+                    //
+                    //    // check if we hover it, fill other
+                    //    if (ctx.isPointInPath(x, y)) {
+                    //        ctx.fillStyle = "rgba(236,117,0,1)";
+                    //        ctx.strokeStyle = "rgba(236,117,0,1)";
+                    //        ctx.fill();
+                    //        ctx.stroke();
+                    //    } else {
+                    //        ctx.fillStyle = "rgba(236,117,0,0.4)";
+                    //        ctx.strokeStyle = "rgba(236,117,0,0.4)";
+                    //        ctx.fill();
+                    //        ctx.stroke();
+                    //    }
+                    //
+                    //    ctx.closePath();
+                    //}
+                });
+            };
+
+            // Draws the soccer field
+            var drawPosition = function (bre, len, id, naam, nummer, team) {
+                // change x and y from percentage to value of heigth and width of canvas
+                bre /= 100;
+                len /= 100;
+
+                if (team === self.matchshort.match_info.thuis_kort) {
+                    bre = c.height * bre;
+                    len = c.width * len;
+
+                    ctx.fillStyle = "rgba(3,125,201,0.4)"; // blue thuis
+                    ctx.strokeStyle = "rgba(3,125,201,0.4)"; // blue thuis
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 6, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto;
+                    //}
+
+                    ctx.closePath();
+                } else if (team === self.matchshort.match_info.uit_kort) {
+                    bre = c.height * (1 - bre);
+                    len = c.width * (1 - len);
+
+                    ctx.fillStyle = "rgba(236,117,0,0.4)"; // orange uit
+                    ctx.strokeStyle = "rgba(236,117,0,0.4)"; // orange uit
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 6, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_uit, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto
+                    //}
+
+                    ctx.closePath();
+                }
+            };
+
+            angular.forEach(self.match.gemiddelde_posities, function (value, key) {
+                drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+            });
+        };
+
+        self.positions_field_interval = function (interval) {
+            self.positions_field_interval_play = false;
+            if (interval === '00 - 15 min') { self.positions_field_interval_var = '00 - 15 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
+            else if (interval === '15 - 30 min') { self.positions_field_interval_var = '15 - 30 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
+            else if (interval === '30 - 45 min') { self.positions_field_interval_var = '30 - 45 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
+            else if (interval === '45 - 60 min') { self.positions_field_interval_var = '45 - 60 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
+            else if (interval === '60 - 75 min') { self.positions_field_interval_var = '60 - 75 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
+            else if (interval === '75 - 90 min') { self.positions_field_interval_var = '75 - 90 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
+            else if (interval === '1e helft') { self.positions_field_interval_var = '1e helft'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
+            else if (interval === '2e helft') { self.positions_field_interval_var = '2e helft'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
+            else if (interval === 'play') {
+                self.positions_field_interval_play = true;
+                self.positions_field_interval_var = '00 - 15 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1);
+                if (document.getElementById('avg_positions_field')) {
+                    if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
+                    } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+
+                    self.avg_positions_field_draw();
+                    self.avg_positions_field_fill();
+
+                    $timeout(function () {
+                        self.positions_field_interval_var = '15 - 30 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2);
+                        if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
+                        } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+
+                        self.avg_positions_field_draw();
+                        self.avg_positions_field_fill();
+
+                        $timeout(function () {
+                            self.positions_field_interval_var = '30 - 45 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3);
+                            if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
+                            } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+
+                            self.avg_positions_field_draw();
+                            self.avg_positions_field_fill();
+
+                            $timeout(function () {
+                                self.positions_field_interval_var = '45 - 60 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4);
+                                if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
+                                } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+
+                                self.avg_positions_field_draw();
+                                self.avg_positions_field_fill();
+
+                                $timeout(function () {
+                                    self.positions_field_interval_var = '60 - 75 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5);
+                                    if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
+                                    } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+
+                                    self.avg_positions_field_draw();
+                                    self.avg_positions_field_fill();
+
+                                    $timeout(function () {
+                                        self.positions_field_interval_var = '75 - 90 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6);
+                                        if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
+                                        } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+
+                                        self.avg_positions_field_draw();
+                                        self.avg_positions_field_fill();
+
+                                        $timeout(function () {
+                                            self.positions_field_interval_var = '00 - 15 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1);
+                                            self.positions_field_interval_play = false;
+                                        }, 1000);
+                                    }, 1000);
+                                }, 1000);
+                            }, 1000);
+                        }, 1000);
+                    }, 1000);
+                } else {
+                    self.positions_field_interval_play = false;
+                }
+            }
+
+            if (!positions_thuis) {
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
+                positions_uit = true;
+            } else if (!positions_uit) {
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
+                positions_thuis = true;
+            } else {
+                positions_uit = true;
+                positions_thuis = true;
+            }
+
+            if (document.getElementById('avg_positions_field')) {
+                self.avg_positions_field_draw();
+                self.avg_positions_field_fill();
+            }
+        };
+        self.positions_field_interval('1e helft');
+        self.positions_field_interval_var = '1e helft';
+
+        self.selectpositions_player = function (id) {
+            var c = document.getElementById('avg_positions_field');
+            var ctx = c.getContext("2d");
+
+            var polygon = function (ctx, x, y, radius, sides, startAngle, anticlockwise) {
+                if (sides < 3) return;
+                var a = (Math.PI * 2)/sides;
+                a = anticlockwise?-a:a;
+                ctx.save();
+                ctx.translate(x,y);
+                ctx.rotate(startAngle);
+                ctx.moveTo(radius,0);
+                for (var i = 1; i < sides; i++) {
+                    ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+                }
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //var clear = function () {
+            //    ctx.clearRect(0,0,c.width,c.height);
+            //};
+
+            self.avg_positions_field_draw();
+
+            var r;
+
+            angular.forEach(self.match.gemiddelde_posities, function (value, key) {
+                r = angular.copy(value);
+                r.breedte /= 100;
+                r.lengte /= 100;
+
+                if (r.teamNaam === self.matchshort.match_info.thuis_kort) {
+                    r.breedte = c.height * r.breedte;
+                    r.lengte = c.width * r.lengte;
+
+                    ctx.beginPath();
+                    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+
+                    // check if we hover it, fill other
+                    if (r.personID == id) {
+                        ctx.fillStyle = "rgba(3,125,201,1)";
+                        ctx.strokeStyle = "rgba(3,125,201,1)";
+                        ctx.fill();
+                        ctx.stroke();
+
+                        $('.content#team').find('#positionsveld .positions_players p.thuis#' + r.personID).css({
+                            'color': 'rgba(3,125,201,1)'
+                        });
+                    } else {
+                        ctx.fillStyle = "rgba(3,125,201,0.4)";
+                        ctx.strokeStyle = "rgba(3,125,201,0.4)";
+                        ctx.fill();
+                        ctx.stroke();
+                    }
+
+                    ctx.closePath();
+                } else if (r.teamNaam === self.matchshort.match_info.uit_kort) {
+                    r.breedte = c.height * (1 - r.breedte);
+                    r.lengte = c.width * (1 - r.lengte);
+
+                    ctx.beginPath();
+                    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+
+                    // check if we hover it, fill other
+                    if (r.personID == id) {
+                        ctx.fillStyle = "rgba(236,117,0,1)";
+                        ctx.strokeStyle = "rgba(236,117,0,1)";
+                        ctx.fill();
+                        ctx.stroke();
+
+                        $('.content#team').find('#positionsveld .positions_players p.uit#' + r.personID).css({
+                            'color': 'rgba(236,117,0,1)'
+                        });
+                    } else {
+                        ctx.fillStyle = "rgba(236,117,0,0.4)";
+                        ctx.strokeStyle = "rgba(236,117,0,0.4)";
+                        ctx.fill();
+                        ctx.stroke();
+                    }
+
+                    ctx.closePath();
+                }
+            });
+        };
+
+        self.resetpositions_player = function () {
+            $('.content#team').find('#positionsveld .positions_players p.thuis').css({
+                'color': 'rgba(3,125,201,0.4)'
+            });
+            $('.content#team').find('#positionsveld .positions_players p.uit').css({
+                'color': 'rgba(236,117,0,0.4)'
+            });
+        };
+
+        self.selectpositions_uit = function () {
+            if (!positions_uit) {
+                if (self.positions_field_interval_var === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
+                else if (self.positions_field_interval_var === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
+                else if (self.positions_field_interval_var === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
+                else if (self.positions_field_interval_var === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
+                else if (self.positions_field_interval_var === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
+                else if (self.positions_field_interval_var === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
+                else if (self.positions_field_interval_var === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
+                else if (self.positions_field_interval_var === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
+
+                if (!positions_thuis) {
+                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
+                }
+
+                positions_uit = true;
+            } else {
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
+                positions_thuis = false;
+            }
+            self.avg_positions_field_draw();
+            self.avg_positions_field_fill();
+        };
+        self.selectpositions_thuis = function () {
+            if (!positions_thuis) {
+                if (self.positions_field_interval_var === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
+                else if (self.positions_field_interval_var === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
+                else if (self.positions_field_interval_var === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
+                else if (self.positions_field_interval_var === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
+                else if (self.positions_field_interval_var === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
+                else if (self.positions_field_interval_var === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
+                else if (self.positions_field_interval_var === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
+                else if (self.positions_field_interval_var === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
+
+                if (!positions_uit) {
+                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
+                }
+
+                positions_thuis = true;
+            } else {
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
+                positions_uit = false;
+            }
+            self.avg_positions_field_draw();
+            self.avg_positions_field_fill();
+        };
+        self.avg_positions_field_build();
+
+        /*$scope.position_field_interval = '1e helft';
 
         $scope.$watch('position_field_interval', function () {
             if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
@@ -1095,8 +1652,624 @@ angular.module('mainapp.match')
                 self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
                 selectpositions_uit = false;
             }
+        };*/
+
+        // Doelpogingen
+        var doelpogingen_uit = true;
+        var doelpogingen_thuis = true;
+        var doelpogingen_doelpunt = true;
+        var doelpogingen_opdoel = true;
+        var doelpogingen_nietdoel = true;
+        self.doelpogingen_doelpunt = true;
+        self.doelpogingen_opdoel = true;
+        self.doelpogingen_nietdoel = true;
+
+        self.doelpogingen_field_build = function () {
+            if (self.loading_slug === 'team') {
+                $timeout(function () {
+                    if (self.loading === false) {
+                        $timeout(function () {
+                            $('.content#team').find('.doelpogingen_field#doelpogingen_field_hor_size #doelpogingen_field').css({
+                                'height': (($('.content#team').find('.doelpogingen_field#doelpogingen_field_hor_size').width() - 2) * 68 / 106).toFixed(0),
+                                'width': ($('.content#team').find('.doelpogingen_field#doelpogingen_field_hor_size').width() - 2).toFixed(0)
+                            });
+
+                            var c = document.getElementById('doelpogingen_field');
+                            c.width = ($('.content#team').find('.doelpogingen_field#doelpogingen_field_hor_size').width() - 2).toFixed(0);
+                            c.height = (($('.content#team').find('.doelpogingen_field#doelpogingen_field_hor_size').width() - 2) * 68 / 106).toFixed(0);
+                            //var ctx = c.getContext("2d");
+
+                            self.doelpogingen_field_draw();
+                            self.doelpogingen_field_fill();
+                        }, 500);
+                    } else {
+                        self.doelpogingen_field_build();
+                    }
+                }, 2000);
+            }
         };
 
+        // Draws the soccer field
+        self.doelpogingen_field_draw = function () {
+            var c = document.getElementById('doelpogingen_field');
+            var ctx = c.getContext("2d");
+            ctx.clearRect(0,0,c.width,c.height);
+            var x = c.width;
+            var y = c.height;
+
+            // How all the lines and circles are styled
+            ctx.lineWidth = 1;
+            //ctx.strokeStyle = "#848484";
+            ctx.strokeStyle = "rgba(132,132,132, 0.5)";
+
+            // Drawing middle white circles
+            ctx.beginPath();
+            ctx.arc(x / 2, y / 2, y*0.15, 0, 2 * Math.PI, false);
+            ctx.moveTo(x / 2, y / 2);
+            ctx.arc(x / 2, y / 2, 1, 0, 2 * Math.PI, false);
+
+            // Drawing all outside lines
+            ctx.moveTo(y*0.01, 0);
+            ctx.lineTo(x - y*0.01, 0);
+            ctx.moveTo(y*0.01, 0);
+            ctx.lineTo(y*0.01, y);
+
+            ctx.moveTo(x - y*0.01, y);
+            ctx.lineTo(x - y*0.01, 0);
+            ctx.moveTo(x - y*0.01, y);
+            ctx.lineTo(y*0.01, y);
+
+            // Drawing all other lines
+            ctx.moveTo(x / 2, 0);
+            ctx.lineTo(x / 2, y);
+
+            ctx.moveTo(x - y*0.175, y / 2);
+            ctx.arc(x - y*0.175, y / 2, 1, 0, 2 * Math.PI, false);
+            ctx.moveTo(y*0.175, y / 2);
+            ctx.arc(y*0.175, y / 2, 1, 0, 2 * Math.PI, false);
+            ctx.moveTo(x - y*0.25, y / 2 + Math.sqrt(Math.pow(y*0.15, 2) - Math.pow(y*0.075, 2)));
+            ctx.arc(x - y*0.175, y / 2, y*0.15, 0.33 * 0.5 * Math.PI + 0.5 * Math.PI, 1.5 * Math.PI - 0.33 * 0.5 * Math.PI, false);
+            ctx.moveTo(y*0.25, y / 2 - Math.sqrt(Math.pow(y*0.15, 2) - Math.pow(y*0.075, 2)) );
+            ctx.arc(y*0.175, y / 2, y*0.15, 0.33 * 0.5 * Math.PI + 1.5 * Math.PI, 2.5 * Math.PI - 0.33 * 0.5 * Math.PI, false);
+
+            ctx.moveTo(y*0.01, 0);
+            ctx.arc(y*0.01, 0, y*0.015, 2 * Math.PI, 2.5 * Math.PI, false);
+            ctx.moveTo(x - y*0.01, 0);
+            ctx.arc(x - y*0.01, 0, y*0.015, 0.5 * Math.PI, Math.PI, false);
+            ctx.moveTo(y*0.01, y);
+            ctx.arc(y*0.01, y, y*0.015, 1.5 * Math.PI, 2 * Math.PI, false);
+            ctx.moveTo(x - y*0.01, y);
+            ctx.arc(x - y*0.01, y, y*0.015, Math.PI, 1.5 * Math.PI, false);
+
+            ctx.moveTo(x - y*0.01, y*0.45);
+            ctx.lineTo(x, y*0.45);
+            ctx.lineTo(x, y*0.55);
+            ctx.lineTo(x - y*0.01, y*0.55);
+            ctx.moveTo(y*0.01, y*0.45);
+            ctx.lineTo(0, y*0.45);
+            ctx.lineTo(0, y*0.55);
+            ctx.lineTo(y*0.01, y*0.55);
+
+            ctx.moveTo(x - y*0.01, y*0.4);
+            ctx.lineTo(x - y*0.08, y*0.4);
+            ctx.lineTo(x - y*0.08, y*0.6);
+            ctx.lineTo(x - y*0.01, y*0.6);
+            ctx.moveTo(y*0.01, y*0.4);
+            ctx.lineTo(y*0.08, y*0.4);
+            ctx.lineTo(y*0.08, y*0.6);
+            ctx.lineTo(y*0.01, y*0.6);
+
+            ctx.moveTo(x - y*0.01, y*0.25);
+            ctx.lineTo(x - y*0.25, y*0.25);
+            ctx.lineTo(x - y*0.25, y*0.75);
+            ctx.lineTo(x - y*0.01, y*0.75);
+            ctx.moveTo(y*0.01, y*0.25);
+            ctx.lineTo(y*0.25, y*0.25);
+            ctx.lineTo(y*0.25, y*0.75);
+            ctx.lineTo(y*0.01, y*0.75);
+
+            ctx.stroke();
+            ctx.closePath();
+        };
+
+        self.doelpogingen_field_fill = function () {
+            var c = document.getElementById('doelpogingen_field');
+            var ctx = c.getContext("2d");
+
+            var polygon = function (ctx, x, y, radius, sides, startAngle, anticlockwise) {
+                if (sides < 3) return;
+                var a = (Math.PI * 2)/sides;
+                a = anticlockwise?-a:a;
+                ctx.save();
+                ctx.translate(x,y);
+                ctx.rotate(startAngle);
+                ctx.moveTo(radius,0);
+                for (var i = 1; i < sides; i++) {
+                    ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+                }
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //var clear = function () {
+            //    ctx.clearRect(0,0,c.width,c.height);
+            //};
+
+            c.onmousemove = function(e) {
+                self.doelpogingen_field_draw();
+
+                // important: correct mouse position:
+                //var x = e.clientX,
+                //    y = e.clientY,
+                //    r;
+                //
+                //angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //
+                //    r = angular.copy(value);
+                //    r.breedte = r.locationInFieldWidth / 100;
+                //    r.lengte = r.locationInFieldLength / 100;
+                //
+                //    r.breedte = c.height * (1 - r.breedte);
+                //    r.lengte = c.width * (1 - r.lengte);
+                //
+                //    ctx.beginPath();
+                //    polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+                //
+                //    // check if we hover it, fill other
+                //    if (ctx.isPointInPath(x, y)) {
+                //        ctx.fillStyle = "rgba(3,125,201,1)";
+                //        ctx.strokeStyle = "rgba(3,125,201,1)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    } else {
+                //        ctx.fillStyle = "rgba(3,125,201,0.5)";
+                //        ctx.strokeStyle = "rgba(3,125,201,0.5)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    }
+                //
+                //    ctx.closePath();
+                //});
+                //angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //
+                //    r = angular.copy(value);
+                //    r.breedte = r.locationInFieldWidth / 100;
+                //    r.lengte = r.locationInFieldLength / 100;
+                //
+                //    r.breedte = c.height * r.breedte;
+                //    r.lengte = c.width * r.lengte;
+                //
+                //    ctx.beginPath();
+                //    polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+                //
+                //    // check if we hover it, fill other
+                //    if (ctx.isPointInPath(x, y)) {
+                //        ctx.fillStyle = "rgba(236,117,0,1)";
+                //        ctx.strokeStyle = "rgba(236,117,0,1)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    } else {
+                //        ctx.fillStyle = "rgba(236,117,0,0.5)";
+                //        ctx.strokeStyle = "rgba(236,117,0,0.5)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    }
+                //
+                //    ctx.closePath();
+                //});
+                angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, true);
+                });
+                angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, false);
+                });
+            };
+
+            // Draws the soccer field
+            var drawPosition = function (bre, len, id, naam, nummer, lich, min, type, thuisteam) {
+                // change x and y from percentage to value of heigth and width of canvas
+                bre /= 100;
+                len /= 100;
+
+                if (thuisteam) {
+                    bre = c.height * (1 - bre);
+                    len = c.width * (1 - len);
+
+                    ctx.fillStyle = "rgba(3,125,201,0.4)"; // blue thuis
+                    ctx.strokeStyle = "rgba(3,125,201,0.4)"; // blue thuis
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 5, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto;
+                    //}
+
+                    ctx.closePath();
+                } else if (!thuisteam) {
+                    bre = c.height * bre;
+                    len = c.width * len;
+
+                    ctx.fillStyle = "rgba(236,117,0,0.4)"; // orange uit
+                    ctx.strokeStyle = "rgba(236,117,0,0.4)"; // orange uit
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 5, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_uit, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto
+                    //}
+
+                    ctx.closePath();
+                }
+            };
+
+            angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, true);
+            });
+            angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, false);
+            });
+        };
+
+        self.selectdoelpogingen_player = function (id, min) {
+            var c = document.getElementById('doelpogingen_field');
+            var ctx = c.getContext("2d");
+
+            var polygon = function (ctx, x, y, radius, sides, startAngle, anticlockwise) {
+                if (sides < 3) return;
+                var a = (Math.PI * 2)/sides;
+                a = anticlockwise?-a:a;
+                ctx.save();
+                ctx.translate(x,y);
+                ctx.rotate(startAngle);
+                ctx.moveTo(radius,0);
+                for (var i = 1; i < sides; i++) {
+                    ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+                }
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //var clear = function () {
+            //    ctx.clearRect(0,0,c.width,c.height);
+            //};
+
+            self.doelpogingen_field_draw();
+
+            var r;
+
+            angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
+                r = angular.copy(value);
+                r.breedte = r.locationInFieldWidth / 100;
+                r.lengte = r.locationInFieldLength / 100;
+
+                r.breedte = c.height * (1 - r.breedte);
+                r.lengte = c.width * (1 - r.lengte);
+
+                ctx.beginPath();
+                polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+
+                // check if we hover it, fill other
+                if (min && r.minuut_tot_string === min && r.personID == id) {
+                    ctx.fillStyle = "rgba(3,125,201,1)";
+                    ctx.strokeStyle = "rgba(3,125,201,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatiedoelpogingen .positions_players p.thuis#' + r.personID).css({
+                        'color': 'rgba(3,125,201,1)'
+                    });
+                } else if (!min && r.personID == id) {
+                    ctx.fillStyle = "rgba(3,125,201,1)";
+                    ctx.strokeStyle = "rgba(3,125,201,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatiedoelpogingen .positions_players p.thuis#' + r.personID).css({
+                        'color': 'rgba(3,125,201,1)'
+                    });
+                } else {
+                    ctx.fillStyle = "rgba(3,125,201,0.4)";
+                    ctx.strokeStyle = "rgba(3,125,201,0.4)";
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                ctx.closePath();
+            });
+            angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
+                r = angular.copy(value);
+                r.breedte = r.locationInFieldWidth / 100;
+                r.lengte = r.locationInFieldLength / 100;
+
+                r.breedte = c.height * r.breedte;
+                r.lengte = c.width * r.lengte;
+
+                ctx.beginPath();
+                polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+
+                // check if we hover it, fill other
+                if (min && r.minuut_tot_string === min && r.personID == id) {
+                    ctx.fillStyle = "rgba(236,117,0,1)";
+                    ctx.strokeStyle = "rgba(236,117,0,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatiedoelpogingen .positions_players p.uit#' + r.personID).css({
+                        'color': 'rgba(236,117,0,1)'
+                    });
+                } else if (!min && r.personID == id) {
+                    ctx.fillStyle = "rgba(236,117,0,1)";
+                    ctx.strokeStyle = "rgba(236,117,0,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatiedoelpogingen .positions_players p.uit#' + r.personID).css({
+                        'color': 'rgba(236,117,0,1)'
+                    });
+                } else {
+                    ctx.fillStyle = "rgba(236,117,0,0.4)";
+                    ctx.strokeStyle = "rgba(236,117,0,0.4)";
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                ctx.closePath();
+            });
+        };
+
+        self.resetdoelpogingen_player = function () {
+            $('.content#team').find('#locatiedoelpogingen .positions_players p.thuis').css({
+                'color': 'rgba(3,125,201,0.4)'
+            });
+            $('.content#team').find('#locatiedoelpogingen .positions_players p.uit').css({
+                'color': 'rgba(236,117,0,0.4)'
+            });
+        };
+
+        self.selectdoelpogingen_uit = function () {
+            if (!doelpogingen_uit) {
+                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                doelpogingen_uit = true;
+            } else {
+                self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                doelpogingen_thuis = false;
+            }
+            self.doelpogingen_field_draw();
+            self.doelpogingen_field_fill();
+        };
+        self.selectdoelpogingen_thuis = function () {
+            if (!doelpogingen_thuis) {
+                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                doelpogingen_thuis = true;
+            } else {
+                self.match.locatie_doelpogingen_filter.uitTeam = [];
+                doelpogingen_uit = false;
+            }
+            self.doelpogingen_field_draw();
+            self.doelpogingen_field_fill();
+        };
+        self.selectdoelpogingen_doelpunt = function () {
+            if (!doelpogingen_thuis) {
+                if (!doelpogingen_doelpunt) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Doelpunt'}));
+                    self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                    doelpogingen_doelpunt = false;
+                    self.doelpogingen_doelpunt = false;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                }
+            } else if (!doelpogingen_uit) {
+                if (!doelpogingen_doelpunt) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.uitTeam = [];
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Doelpunt'}));
+                    self.match.locatie_doelpogingen_filter.uitTeam = [];
+                    doelpogingen_doelpunt = false;
+                    self.doelpogingen_doelpunt = false;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                }
+            } else {
+                if (!doelpogingen_doelpunt) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Doelpunt'}));
+                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Doelpunt'}));
+                    doelpogingen_doelpunt = false;
+                    self.doelpogingen_doelpunt = false;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                }
+            }
+            self.doelpogingen_field_draw();
+            self.doelpogingen_field_fill();
+        };
+        self.selectdoelpogingen_opdoel = function () {
+            if (!doelpogingen_thuis) {
+                if (!doelpogingen_opdoel) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Redding'}));
+                    self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                    doelpogingen_opdoel = false;
+                    self.doelpogingen_opdoel = false;
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_nietdoel = true;
+                }
+            } else if (!doelpogingen_uit) {
+                if (!doelpogingen_opdoel) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.uitTeam = [];
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Redding'}));
+                    self.match.locatie_doelpogingen_filter.uitTeam = [];
+                    doelpogingen_opdoel = false;
+                    self.doelpogingen_opdoel = false;
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_nietdoel = true;
+                }
+            } else {
+                if (!doelpogingen_opdoel) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Redding'}));
+                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Redding'}));
+                    doelpogingen_opdoel = false;
+                    self.doelpogingen_opdoel = false;
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_nietdoel = true;
+                }
+            }
+            self.doelpogingen_field_draw();
+            self.doelpogingen_field_fill();
+        };
+        self.selectdoelpogingen_nietdoel = function () {
+            if (!doelpogingen_thuis) {
+                if (!doelpogingen_nietdoel) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Naast of over'}));
+                    self.match.locatie_doelpogingen_filter.thuisTeam = [];
+                    doelpogingen_nietdoel = false;
+                    self.doelpogingen_nietdoel = false;
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                }
+            } else if (!doelpogingen_uit) {
+                if (!doelpogingen_nietdoel) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.uitTeam = [];
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Naast of over'}));
+                    self.match.locatie_doelpogingen_filter.uitTeam = [];
+                    doelpogingen_nietdoel = false;
+                    self.doelpogingen_nietdoel = false;
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                }
+            } else {
+                if (!doelpogingen_nietdoel) {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    doelpogingen_nietdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                    self.doelpogingen_nietdoel = true;
+                } else {
+                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
+                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Naast of over'}));
+                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Naast of over'}));
+                    doelpogingen_nietdoel = false;
+                    self.doelpogingen_nietdoel = false;
+                    doelpogingen_doelpunt = true;
+                    doelpogingen_opdoel = true;
+                    self.doelpogingen_doelpunt = true;
+                    self.doelpogingen_opdoel = true;
+                }
+            }
+            self.doelpogingen_field_draw();
+            self.doelpogingen_field_fill();
+        };
+        self.doelpogingen_field_build();
+
+        /*
         //var selectpogingen_uit = true;
         //var selectpogingen_thuis = true;
         var selectpogingen_thuis_doel = true;
@@ -1180,9 +2353,417 @@ angular.module('mainapp.match')
                 }
                 selectpogingen_uit_target = false;
             }
+        };*/
+
+        // Overtredingen
+        var overtredingen_uit = true;
+        var overtredingen_thuis = true;
+
+        self.overtredingen_field_build = function () {
+            if (self.loading_slug === 'team') {
+                $timeout(function () {
+                    if (self.loading === false) {
+                        $timeout(function () {
+                            $('.content#team').find('.overtredingen_field#overtredingen_field_hor_size #overtredingen_field').css({
+                                'height': (($('.content#team').find('.overtredingen_field#overtredingen_field_hor_size').width() - 2) * 68 / 106).toFixed(0),
+                                'width': ($('.content#team').find('.overtredingen_field#overtredingen_field_hor_size').width() - 2).toFixed(0)
+                            });
+
+                            var c = document.getElementById('overtredingen_field');
+                            c.width = ($('.content#team').find('.overtredingen_field#overtredingen_field_hor_size').width() - 2).toFixed(0);
+                            c.height = (($('.content#team').find('.overtredingen_field#overtredingen_field_hor_size').width() - 2) * 68 / 106).toFixed(0);
+                            //var ctx = c.getContext("2d");
+
+                            self.overtredingen_field_draw();
+                            self.overtredingen_field_fill();
+                        }, 500);
+                    } else {
+                        self.overtredingen_field_build();
+                    }
+                }, 2000);
+            }
         };
 
-        var selectovertredingen_uit = true;
+        // Draws the soccer field
+        self.overtredingen_field_draw = function () {
+            var c = document.getElementById('overtredingen_field');
+            var ctx = c.getContext("2d");
+            ctx.clearRect(0,0,c.width,c.height);
+            var x = c.width;
+            var y = c.height;
+
+            // How all the lines and circles are styled
+            ctx.lineWidth = 1;
+            //ctx.strokeStyle = "#848484";
+            ctx.strokeStyle = "rgba(132,132,132, 0.5)";
+
+            // Drawing middle white circles
+            ctx.beginPath();
+            ctx.arc(x / 2, y / 2, y*0.15, 0, 2 * Math.PI, false);
+            ctx.moveTo(x / 2, y / 2);
+            ctx.arc(x / 2, y / 2, 1, 0, 2 * Math.PI, false);
+
+            // Drawing all outside lines
+            ctx.moveTo(y*0.01, 0);
+            ctx.lineTo(x - y*0.01, 0);
+            ctx.moveTo(y*0.01, 0);
+            ctx.lineTo(y*0.01, y);
+
+            ctx.moveTo(x - y*0.01, y);
+            ctx.lineTo(x - y*0.01, 0);
+            ctx.moveTo(x - y*0.01, y);
+            ctx.lineTo(y*0.01, y);
+
+            // Drawing all other lines
+            ctx.moveTo(x / 2, 0);
+            ctx.lineTo(x / 2, y);
+
+            ctx.moveTo(x - y*0.175, y / 2);
+            ctx.arc(x - y*0.175, y / 2, 1, 0, 2 * Math.PI, false);
+            ctx.moveTo(y*0.175, y / 2);
+            ctx.arc(y*0.175, y / 2, 1, 0, 2 * Math.PI, false);
+            ctx.moveTo(x - y*0.25, y / 2 + Math.sqrt(Math.pow(y*0.15, 2) - Math.pow(y*0.075, 2)));
+            ctx.arc(x - y*0.175, y / 2, y*0.15, 0.33 * 0.5 * Math.PI + 0.5 * Math.PI, 1.5 * Math.PI - 0.33 * 0.5 * Math.PI, false);
+            ctx.moveTo(y*0.25, y / 2 - Math.sqrt(Math.pow(y*0.15, 2) - Math.pow(y*0.075, 2)) );
+            ctx.arc(y*0.175, y / 2, y*0.15, 0.33 * 0.5 * Math.PI + 1.5 * Math.PI, 2.5 * Math.PI - 0.33 * 0.5 * Math.PI, false);
+
+            ctx.moveTo(y*0.01, 0);
+            ctx.arc(y*0.01, 0, y*0.015, 2 * Math.PI, 2.5 * Math.PI, false);
+            ctx.moveTo(x - y*0.01, 0);
+            ctx.arc(x - y*0.01, 0, y*0.015, 0.5 * Math.PI, Math.PI, false);
+            ctx.moveTo(y*0.01, y);
+            ctx.arc(y*0.01, y, y*0.015, 1.5 * Math.PI, 2 * Math.PI, false);
+            ctx.moveTo(x - y*0.01, y);
+            ctx.arc(x - y*0.01, y, y*0.015, Math.PI, 1.5 * Math.PI, false);
+
+            ctx.moveTo(x - y*0.01, y*0.45);
+            ctx.lineTo(x, y*0.45);
+            ctx.lineTo(x, y*0.55);
+            ctx.lineTo(x - y*0.01, y*0.55);
+            ctx.moveTo(y*0.01, y*0.45);
+            ctx.lineTo(0, y*0.45);
+            ctx.lineTo(0, y*0.55);
+            ctx.lineTo(y*0.01, y*0.55);
+
+            ctx.moveTo(x - y*0.01, y*0.4);
+            ctx.lineTo(x - y*0.08, y*0.4);
+            ctx.lineTo(x - y*0.08, y*0.6);
+            ctx.lineTo(x - y*0.01, y*0.6);
+            ctx.moveTo(y*0.01, y*0.4);
+            ctx.lineTo(y*0.08, y*0.4);
+            ctx.lineTo(y*0.08, y*0.6);
+            ctx.lineTo(y*0.01, y*0.6);
+
+            ctx.moveTo(x - y*0.01, y*0.25);
+            ctx.lineTo(x - y*0.25, y*0.25);
+            ctx.lineTo(x - y*0.25, y*0.75);
+            ctx.lineTo(x - y*0.01, y*0.75);
+            ctx.moveTo(y*0.01, y*0.25);
+            ctx.lineTo(y*0.25, y*0.25);
+            ctx.lineTo(y*0.25, y*0.75);
+            ctx.lineTo(y*0.01, y*0.75);
+
+            ctx.stroke();
+            ctx.closePath();
+        };
+
+        self.overtredingen_field_fill = function () {
+            var c = document.getElementById('overtredingen_field');
+            var ctx = c.getContext("2d");
+
+            var polygon = function (ctx, x, y, radius, sides, startAngle, anticlockwise) {
+                if (sides < 3) return;
+                var a = (Math.PI * 2)/sides;
+                a = anticlockwise?-a:a;
+                ctx.save();
+                ctx.translate(x,y);
+                ctx.rotate(startAngle);
+                ctx.moveTo(radius,0);
+                for (var i = 1; i < sides; i++) {
+                    ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+                }
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //var clear = function () {
+            //    ctx.clearRect(0,0,c.width,c.height);
+            //};
+
+            c.onmousemove = function(e) {
+                self.overtredingen_field_draw();
+
+                // important: correct mouse position:
+                //var x = e.clientX,
+                //    y = e.clientY,
+                //    r;
+                //
+                //angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //
+                //    r = angular.copy(value);
+                //    r.breedte = r.locationInFieldWidth / 100;
+                //    r.lengte = r.locationInFieldLength / 100;
+                //
+                //    r.breedte = c.height * (1 - r.breedte);
+                //    r.lengte = c.width * (1 - r.lengte);
+                //
+                //    ctx.beginPath();
+                //    polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+                //
+                //    // check if we hover it, fill other
+                //    if (ctx.isPointInPath(x, y)) {
+                //        ctx.fillStyle = "rgba(3,125,201,1)";
+                //        ctx.strokeStyle = "rgba(3,125,201,1)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    } else {
+                //        ctx.fillStyle = "rgba(3,125,201,0.5)";
+                //        ctx.strokeStyle = "rgba(3,125,201,0.5)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    }
+                //
+                //    ctx.closePath();
+                //});
+                //angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //
+                //    r = angular.copy(value);
+                //    r.breedte = r.locationInFieldWidth / 100;
+                //    r.lengte = r.locationInFieldLength / 100;
+                //
+                //    r.breedte = c.height * r.breedte;
+                //    r.lengte = c.width * r.lengte;
+                //
+                //    ctx.beginPath();
+                //    polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+                //
+                //    // check if we hover it, fill other
+                //    if (ctx.isPointInPath(x, y)) {
+                //        ctx.fillStyle = "rgba(236,117,0,1)";
+                //        ctx.strokeStyle = "rgba(236,117,0,1)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    } else {
+                //        ctx.fillStyle = "rgba(236,117,0,0.5)";
+                //        ctx.strokeStyle = "rgba(236,117,0,0.5)";
+                //        ctx.fill();
+                //        ctx.stroke();
+                //    }
+                //
+                //    ctx.closePath();
+                //});
+                angular.forEach(self.match.locatie_overtredingen_filter.thuisTeam, function (value, key) {
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, true);
+                });
+                angular.forEach(self.match.locatie_overtredingen_filter.uitTeam, function (value, key) {
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, false);
+                });
+            };
+
+            // Draws the soccer field
+            var drawPosition = function (bre, len, id, naam, nummer, min, thuisteam) {
+                // change x and y from percentage to value of heigth and width of canvas
+                bre /= 100;
+                len /= 100;
+
+                if (thuisteam) {
+                    bre = c.height * bre;
+                    len = c.width * len;
+
+                    ctx.fillStyle = "rgba(3,125,201,0.4)"; // blue thuis
+                    ctx.strokeStyle = "rgba(3,125,201,0.4)"; // blue thuis
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 5, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto;
+                    //}
+
+                    ctx.closePath();
+                } else if (!thuisteam) {
+                    bre = c.height * (1 - bre);
+                    len = c.width * (1 - len);
+
+                    ctx.fillStyle = "rgba(236,117,0,0.4)"; // orange uit
+                    ctx.strokeStyle = "rgba(236,117,0,0.4)"; // orange uit
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 5, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_uit, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto
+                    //}
+
+                    ctx.closePath();
+                }
+            };
+
+            angular.forEach(self.match.locatie_overtredingen_filter.thuisTeam, function (value, key) {
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, true);
+            });
+            angular.forEach(self.match.locatie_overtredingen_filter.uitTeam, function (value, key) {
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, false);
+            });
+        };
+
+        self.selectovertredingen_player = function (id, min) {
+            var c = document.getElementById('overtredingen_field');
+            var ctx = c.getContext("2d");
+
+            var polygon = function (ctx, x, y, radius, sides, startAngle, anticlockwise) {
+                if (sides < 3) return;
+                var a = (Math.PI * 2)/sides;
+                a = anticlockwise?-a:a;
+                ctx.save();
+                ctx.translate(x,y);
+                ctx.rotate(startAngle);
+                ctx.moveTo(radius,0);
+                for (var i = 1; i < sides; i++) {
+                    ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+                }
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //var clear = function () {
+            //    ctx.clearRect(0,0,c.width,c.height);
+            //};
+
+            self.overtredingen_field_draw();
+
+            var r;
+
+            angular.forEach(self.match.locatie_overtredingen_filter.thuisTeam, function (value, key) {
+                r = angular.copy(value);
+                r.breedte = r.locationInFieldWidth / 100;
+                r.lengte = r.locationInFieldLength / 100;
+
+                r.breedte = c.height * r.breedte;
+                r.lengte = c.width * r.lengte;
+
+                ctx.beginPath();
+                polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+
+                // check if we hover it, fill other
+                if (min && r.minuut === min && r.personID == id) {
+                    ctx.fillStyle = "rgba(3,125,201,1)";
+                    ctx.strokeStyle = "rgba(3,125,201,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatieovertredingen .positions_players p.thuis#' + r.personID).css({
+                        'color': 'rgba(3,125,201,1)'
+                    });
+                } else if (!min && r.personID == id) {
+                    ctx.fillStyle = "rgba(3,125,201,1)";
+                    ctx.strokeStyle = "rgba(3,125,201,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatieovertredingen .positions_players p.thuis#' + r.personID).css({
+                        'color': 'rgba(3,125,201,1)'
+                    });
+                } else {
+                    ctx.fillStyle = "rgba(3,125,201,0.4)";
+                    ctx.strokeStyle = "rgba(3,125,201,0.4)";
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                ctx.closePath();
+            });
+            angular.forEach(self.match.locatie_overtredingen_filter.uitTeam, function (value, key) {
+                r = angular.copy(value);
+                r.breedte = r.locationInFieldWidth / 100;
+                r.lengte = r.locationInFieldLength / 100;
+
+                r.breedte = c.height * (1 - r.breedte);
+                r.lengte = c.width * (1 - r.lengte);
+
+                ctx.beginPath();
+                polygon(ctx, r.lengte, r.breedte, 5, 6, -Math.PI/2);
+
+                // check if we hover it, fill other
+                if (min && r.minuut === min && r.personID == id) {
+                    ctx.fillStyle = "rgba(236,117,0,1)";
+                    ctx.strokeStyle = "rgba(236,117,0,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatieovertredingen .positions_players p.uit#' + r.personID).css({
+                        'color': 'rgba(236,117,0,1)'
+                    });
+                } else if (!min && r.personID == id) {
+                    ctx.fillStyle = "rgba(236,117,0,1)";
+                    ctx.strokeStyle = "rgba(236,117,0,1)";
+                    ctx.fill();
+                    ctx.stroke();
+
+                    $('.content#team').find('#locatieovertredingen .positions_players p.uit#' + r.personID).css({
+                        'color': 'rgba(236,117,0,1)'
+                    });
+                } else {
+                    ctx.fillStyle = "rgba(236,117,0,0.4)";
+                    ctx.strokeStyle = "rgba(236,117,0,0.4)";
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                ctx.closePath();
+            });
+        };
+
+        self.resetovertredingen_player = function () {
+            $('.content#team').find('#locatieovertredingen .positions_players p.thuis').css({
+                'color': 'rgba(3,125,201,0.4)'
+            });
+            $('.content#team').find('#locatieovertredingen .positions_players p.uit').css({
+                'color': 'rgba(236,117,0,0.4)'
+            });
+        };
+
+        self.selectovertredingen_uit = function () {
+            if (!overtredingen_uit) {
+                self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
+                overtredingen_uit = true;
+            } else {
+                self.match.locatie_overtredingen_filter.thuisTeam = [];
+                overtredingen_thuis = false;
+            }
+            self.overtredingen_field_draw();
+            self.overtredingen_field_fill();
+        };
+        self.selectovertredingen_thuis = function () {
+            if (!overtredingen_thuis) {
+                self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
+                overtredingen_thuis = true;
+            } else {
+                self.match.locatie_overtredingen_filter.uitTeam = [];
+                overtredingen_uit = false;
+            }
+            self.overtredingen_field_draw();
+            self.overtredingen_field_fill();
+        };
+        self.overtredingen_field_build();
+
+        /*var selectovertredingen_uit = true;
         var selectovertredingen_thuis = true;
         self.select_overtredingen_uit = function () {
             if (!selectovertredingen_uit) {
@@ -1205,10 +2786,11 @@ angular.module('mainapp.match')
                 selectovertredingen_thuis = true;
                 selectovertredingen_uit = false;
             }
-        };
+        };*/
 
 
-        // Spelers
+        // SPELERS
+
         //self.orderSpelers = 'personID';
         self.orderSpelersNaam = 'spelerNaam';
         //self.orderSpelersNaamType = ['-type', 'spelerNaam'];

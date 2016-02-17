@@ -44,7 +44,7 @@ angular.module('mainapp.players')
                     _id: self.playerID
                 },function(res1) {
                     angular.forEach(res1, function(value, key) {
-                        if (value.spelerPhoto && !self.player_stats.spelerPhoto && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
+                        if (value.spelerPhoto && !self.player_stats.spelerPhoto && self.club_name == value.clubNaam && self.season_index.indexOf(value.seizoen.substring(8,9)) >= 0){
                             self.player_stats.spelerPhoto = value.spelerPhoto;
                         }
                     });
@@ -317,9 +317,9 @@ angular.module('mainapp.players')
                                 self.stats_vs.korte_passes += stats_vs_temp[i].korte_passes;
                                 self.stats_vs.middellange_passes += stats_vs_temp[i].middellange_passes;
                                 self.stats_vs.lange_passes += stats_vs_temp[i].lange_passes;
-                                self.stats_vs.perc_korte_passes += 100 * (stats_vs_temp[i].korte_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes));
-                                self.stats_vs.perc_middellange_passes += 100 * (stats_vs_temp[i].middellange_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes));
-                                self.stats_vs.perc_lange_passes += 100 * (stats_vs_temp[i].lange_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes));
+                                self.stats_vs.perc_korte_passes += 100 * (isNaN(Number(stats_vs_temp[i].korte_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes))) ? 0 : Number(stats_vs_temp[i].korte_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes)));
+                                self.stats_vs.perc_middellange_passes += 100 * (isNaN(Number(stats_vs_temp[i].middellange_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes))) ? 0 : Number(stats_vs_temp[i].middellange_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes)));
+                                self.stats_vs.perc_lange_passes += 100 * (isNaN(Number(stats_vs_temp[i].lange_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes))) ? 0 : Number(stats_vs_temp[i].lange_passes / (stats_vs_temp[i].korte_passes + stats_vs_temp[i].middellange_passes + stats_vs_temp[i].lange_passes)));
 
                                 if (isNaN(stats_vs_temp[i].succesvolle_uittrappen)) {
                                     self.stats_vs.succesvolle_uittrappen += 0;
@@ -339,8 +339,8 @@ angular.module('mainapp.players')
                                 self.stats_vs.aantal_passes += stats_vs_temp[i].aantal_passes;
                                 self.stats_vs.verdedigende_duels += stats_vs_temp[i].verdedigende_duels;
                                 self.stats_vs.aanvallende_duels += stats_vs_temp[i].aanvallende_duels;
-                                self.stats_vs.perc_verdedigende_duels += 100 * (stats_vs_temp[i].verdedigende_duels / (stats_vs_temp[i].verdedigende_duels + stats_vs_temp[i].aanvallende_duels));
-                                self.stats_vs.perc_aanvallende_duels += 100 * (stats_vs_temp[i].aanvallende_duels / (stats_vs_temp[i].verdedigende_duels + stats_vs_temp[i].aanvallende_duels));
+                                self.stats_vs.perc_verdedigende_duels += 100 * (isNaN(Number(stats_vs_temp[i].verdedigende_duels / (stats_vs_temp[i].verdedigende_duels + stats_vs_temp[i].aanvallende_duels))) ? 0 : Number(stats_vs_temp[i].verdedigende_duels / (stats_vs_temp[i].verdedigende_duels + stats_vs_temp[i].aanvallende_duels)));
+                                self.stats_vs.perc_aanvallende_duels += 100 * (isNaN(Number(stats_vs_temp[i].aanvallende_duels / (stats_vs_temp[i].verdedigende_duels + stats_vs_temp[i].aanvallende_duels))) ? 0 : Number(stats_vs_temp[i].aanvallende_duels / (stats_vs_temp[i].verdedigende_duels + stats_vs_temp[i].aanvallende_duels)));
                                 self.stats_vs.intercepties += stats_vs_temp[i].intercepties;
                                 self.stats_vs.overtredingen += stats_vs_temp[i].overtredingen;
 
@@ -507,9 +507,9 @@ angular.module('mainapp.players')
                                 self.stats_vs.korte_passes += season_matches_temp0[i].korte_passes;
                                 self.stats_vs.middellange_passes += season_matches_temp0[i].middellange_passes;
                                 self.stats_vs.lange_passes += season_matches_temp0[i].lange_passes;
-                                self.stats_vs.perc_korte_passes += 100 * (season_matches_temp0[i].korte_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes));
-                                self.stats_vs.perc_middellange_passes += 100 * (season_matches_temp0[i].middellange_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes));
-                                self.stats_vs.perc_lange_passes += 100 * (season_matches_temp0[i].lange_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes));
+                                self.stats_vs.perc_korte_passes += 100 * (isNaN(Number(season_matches_temp0[i].korte_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes))) ? 0 : Number(season_matches_temp0[i].korte_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes)));
+                                self.stats_vs.perc_middellange_passes += 100 * (isNaN(Number(season_matches_temp0[i].middellange_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes))) ? 0 : Number(season_matches_temp0[i].middellange_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes)));
+                                self.stats_vs.perc_lange_passes += 100 * (isNaN(Number(season_matches_temp0[i].lange_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes))) ? 0 : Number(season_matches_temp0[i].lange_passes / (season_matches_temp0[i].korte_passes + season_matches_temp0[i].middellange_passes + season_matches_temp0[i].lange_passes)));
 
                                 if (isNaN(season_matches_temp0[i].succesvolle_uittrappen)) {
                                     self.stats_vs.succesvolle_uittrappen += 0;
@@ -529,8 +529,8 @@ angular.module('mainapp.players')
                                 self.stats_vs.aantal_passes += season_matches_temp0[i].aantal_passes;
                                 self.stats_vs.verdedigende_duels += season_matches_temp0[i].verdedigende_duels;
                                 self.stats_vs.aanvallende_duels += season_matches_temp0[i].aanvallende_duels;
-                                self.stats_vs.perc_verdedigende_duels += 100 * (season_matches_temp0[i].verdedigende_duels / (season_matches_temp0[i].verdedigende_duels + season_matches_temp0[i].aanvallende_duels));
-                                self.stats_vs.perc_aanvallende_duels += 100 * (season_matches_temp0[i].aanvallende_duels / (season_matches_temp0[i].verdedigende_duels + season_matches_temp0[i].aanvallende_duels));
+                                self.stats_vs.perc_verdedigende_duels += 100 * (isNaN(Number(season_matches_temp0[i].verdedigende_duels / (season_matches_temp0[i].verdedigende_duels + season_matches_temp0[i].aanvallende_duels))) ? 0 : Number(season_matches_temp0[i].verdedigende_duels / (season_matches_temp0[i].verdedigende_duels + season_matches_temp0[i].aanvallende_duels)));
+                                self.stats_vs.perc_aanvallende_duels += 100 * (isNaN(Number(season_matches_temp0[i].aanvallende_duels / (season_matches_temp0[i].verdedigende_duels + season_matches_temp0[i].aanvallende_duels))) ? 0 : Number(season_matches_temp0[i].aanvallende_duels / (season_matches_temp0[i].verdedigende_duels + season_matches_temp0[i].aanvallende_duels)));
                                 self.stats_vs.intercepties += season_matches_temp0[i].intercepties;
                                 self.stats_vs.overtredingen += season_matches_temp0[i].overtredingen;
 
@@ -657,9 +657,9 @@ angular.module('mainapp.players')
                             self.stats_vs.korte_passes = season_matches_temp[self.roundfilter() - 1].korte_passes;
                             self.stats_vs.middellange_passes = season_matches_temp[self.roundfilter() - 1].middellange_passes;
                             self.stats_vs.lange_passes = season_matches_temp[self.roundfilter() - 1].lange_passes;
-                            self.stats_vs.perc_korte_passes = 100 * (season_matches_temp[self.roundfilter() - 1].korte_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes));
-                            self.stats_vs.perc_middellange_passes = 100 * (season_matches_temp[self.roundfilter() - 1].middellange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes));
-                            self.stats_vs.perc_lange_passes = 100 * (season_matches_temp[self.roundfilter() - 1].lange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes));
+                            self.stats_vs.perc_korte_passes = 100 * (isNaN(Number(season_matches_temp[self.roundfilter() - 1].korte_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes))) ? 0 : Number(season_matches_temp[self.roundfilter() - 1].korte_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes)));
+                            self.stats_vs.perc_middellange_passes = 100 * (isNaN(Number(season_matches_temp[self.roundfilter() - 1].middellange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes))) ? 0 : Number(season_matches_temp[self.roundfilter() - 1].middellange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes)));
+                            self.stats_vs.perc_lange_passes = 100 * (isNaN(Number(season_matches_temp[self.roundfilter() - 1].lange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes))) ? 0 : Number(season_matches_temp[self.roundfilter() - 1].lange_passes / (season_matches_temp[self.roundfilter() - 1].korte_passes + season_matches_temp[self.roundfilter() - 1].middellange_passes + season_matches_temp[self.roundfilter() - 1].lange_passes)));
 
                             if (isNaN(season_matches_temp[self.roundfilter() - 1].succesvolle_uittrappen)) {
                                 self.stats_vs.succesvolle_uittrappen = 0;
@@ -687,8 +687,8 @@ angular.module('mainapp.players')
 
                             self.stats_vs.verdedigende_duels = season_matches_temp[self.roundfilter() - 1].verdedigende_duels;
                             self.stats_vs.aanvallende_duels = season_matches_temp[self.roundfilter() - 1].aanvallende_duels;
-                            self.stats_vs.perc_verdedigende_duels = 100 * (season_matches_temp[self.roundfilter() - 1].verdedigende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels));
-                            self.stats_vs.perc_aanvallende_duels = 100 * (season_matches_temp[self.roundfilter() - 1].aanvallende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels));
+                            self.stats_vs.perc_verdedigende_duels = 100 * (isNaN(Number(season_matches_temp[self.roundfilter() - 1].verdedigende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels))) ? 0 : Number(season_matches_temp[self.roundfilter() - 1].verdedigende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels)));
+                            self.stats_vs.perc_aanvallende_duels = 100 * (isNaN(Number(season_matches_temp[self.roundfilter() - 1].aanvallende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels))) ? 0 : Number(season_matches_temp[self.roundfilter() - 1].aanvallende_duels / (season_matches_temp[self.roundfilter() - 1].verdedigende_duels + season_matches_temp[self.roundfilter() - 1].aanvallende_duels)));
 
                             self.stats_vs.intercepties = season_matches_temp[self.roundfilter() - 1].intercepties;
 
@@ -787,9 +787,9 @@ angular.module('mainapp.players')
                                 self.stats_vs.korte_passes += season_matches_temp1[i].korte_passes;
                                 self.stats_vs.middellange_passes += season_matches_temp1[i].middellange_passes;
                                 self.stats_vs.lange_passes += season_matches_temp1[i].lange_passes;
-                                self.stats_vs.perc_korte_passes += 100 * (season_matches_temp1[i].korte_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes));
-                                self.stats_vs.perc_middellange_passes += 100 * (season_matches_temp1[i].middellange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes));
-                                self.stats_vs.perc_lange_passes += 100 * (season_matches_temp1[i].lange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes));
+                                self.stats_vs.perc_korte_passes += 100 * (isNaN(Number(season_matches_temp1[i].korte_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes))) ? 0 : Number(season_matches_temp1[i].korte_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes)));
+                                self.stats_vs.perc_middellange_passes += 100 * (isNaN(Number(season_matches_temp1[i].middellange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes))) ? 0 : Number(season_matches_temp1[i].middellange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes)));
+                                self.stats_vs.perc_lange_passes += 100 * (isNaN(Number(season_matches_temp1[i].lange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes))) ? 0 : Number(season_matches_temp1[i].lange_passes / (season_matches_temp1[i].korte_passes + season_matches_temp1[i].middellange_passes + season_matches_temp1[i].lange_passes)));
 
                                 if (isNaN(season_matches_temp1[i].succesvolle_uittrappen)) {
                                     self.stats_vs.succesvolle_uittrappen += 0;
@@ -809,8 +809,8 @@ angular.module('mainapp.players')
                                 self.stats_vs.aantal_passes += season_matches_temp1[i].aantal_passes;
                                 self.stats_vs.verdedigende_duels += season_matches_temp1[i].verdedigende_duels;
                                 self.stats_vs.aanvallende_duels += season_matches_temp1[i].aanvallende_duels;
-                                self.stats_vs.perc_verdedigende_duels += 100 * (season_matches_temp1[i].verdedigende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels));
-                                self.stats_vs.perc_aanvallende_duels += 100 * (season_matches_temp1[i].aanvallende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels));
+                                self.stats_vs.perc_verdedigende_duels += 100 * (isNaN(Number(season_matches_temp1[i].verdedigende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels))) ? 0 : Number(season_matches_temp1[i].verdedigende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels)));
+                                self.stats_vs.perc_aanvallende_duels += 100 * (isNaN(Number(season_matches_temp1[i].aanvallende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels))) ? 0 : Number(season_matches_temp1[i].aanvallende_duels / (season_matches_temp1[i].verdedigende_duels + season_matches_temp1[i].aanvallende_duels)));
                                 self.stats_vs.intercepties += season_matches_temp1[i].intercepties;
                                 self.stats_vs.overtredingen += season_matches_temp1[i].overtredingen;
 
@@ -946,9 +946,9 @@ angular.module('mainapp.players')
                                 self.stats_vs.korte_passes += season_matches_temp2[i].korte_passes;
                                 self.stats_vs.middellange_passes += season_matches_temp2[i].middellange_passes;
                                 self.stats_vs.lange_passes += season_matches_temp2[i].lange_passes;
-                                self.stats_vs.perc_korte_passes += 100 * (season_matches_temp2[i].korte_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes));
-                                self.stats_vs.perc_middellange_passes += 100 * (season_matches_temp2[i].middellange_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes));
-                                self.stats_vs.perc_lange_passes += 100 * (season_matches_temp2[i].lange_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes));
+                                self.stats_vs.perc_korte_passes += 100 * (isNaN(Number(season_matches_temp2[i].korte_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes))) ? 0 : Number(season_matches_temp2[i].korte_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes)));
+                                self.stats_vs.perc_middellange_passes += 100 * (isNaN(Number(season_matches_temp2[i].middellange_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes))) ? 0 : Number(season_matches_temp2[i].middellange_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes)));
+                                self.stats_vs.perc_lange_passes += 100 * (isNaN(Number(season_matches_temp2[i].lange_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes))) ? 0 : Number(season_matches_temp2[i].lange_passes / (season_matches_temp2[i].korte_passes + season_matches_temp2[i].middellange_passes + season_matches_temp2[i].lange_passes)));
 
                                 if (isNaN(season_matches_temp2[i].succesvolle_uittrappen)) {
                                     self.stats_vs.succesvolle_uittrappen += 0;
@@ -968,8 +968,8 @@ angular.module('mainapp.players')
                                 self.stats_vs.aantal_passes += season_matches_temp2[i].aantal_passes;
                                 self.stats_vs.verdedigende_duels += season_matches_temp2[i].verdedigende_duels;
                                 self.stats_vs.aanvallende_duels += season_matches_temp2[i].aanvallende_duels;
-                                self.stats_vs.perc_verdedigende_duels += 100 * (season_matches_temp2[i].verdedigende_duels / (season_matches_temp2[i].verdedigende_duels + season_matches_temp2[i].aanvallende_duels));
-                                self.stats_vs.perc_aanvallende_duels += 100 * (season_matches_temp2[i].aanvallende_duels / (season_matches_temp2[i].verdedigende_duels + season_matches_temp2[i].aanvallende_duels));
+                                self.stats_vs.perc_verdedigende_duels += 100 * (isNaN(Number(season_matches_temp2[i].verdedigende_duels / (season_matches_temp2[i].verdedigende_duels + season_matches_temp2[i].aanvallende_duels))) ? 0 : Number(season_matches_temp2[i].verdedigende_duels / (season_matches_temp2[i].verdedigende_duels + season_matches_temp2[i].aanvallende_duels)));
+                                self.stats_vs.perc_aanvallende_duels += 100 * (isNaN(Number(season_matches_temp2[i].aanvallende_duels / (season_matches_temp2[i].verdedigende_duels + season_matches_temp2[i].aanvallende_duels))) ? 0 : Number(season_matches_temp2[i].aanvallende_duels / (season_matches_temp2[i].verdedigende_duels + season_matches_temp2[i].aanvallende_duels)));
                                 self.stats_vs.intercepties += season_matches_temp2[i].intercepties;
                                 self.stats_vs.overtredingen += season_matches_temp2[i].overtredingen;
 
@@ -1121,9 +1121,9 @@ angular.module('mainapp.players')
                             self.stats.korte_passes = self.season_matches[self.roundfilter() - 1].korte_passes;
                             self.stats.middellange_passes = self.season_matches[self.roundfilter() - 1].middellange_passes;
                             self.stats.lange_passes = self.season_matches[self.roundfilter() - 1].lange_passes;
-                            self.stats.perc_korte_passes = 100 * (self.season_matches[self.roundfilter() - 1].korte_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes));
-                            self.stats.perc_middellange_passes = 100 * (self.season_matches[self.roundfilter() - 1].middellange_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes));
-                            self.stats.perc_lange_passes = 100 * (self.season_matches[self.roundfilter() - 1].lange_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes));
+                            self.stats.perc_korte_passes = 100 * (isNaN(Number(self.season_matches[self.roundfilter() - 1].korte_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes))) ? 0 : Number(self.season_matches[self.roundfilter() - 1].korte_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes)));
+                            self.stats.perc_middellange_passes = 100 * (isNaN(Number(self.season_matches[self.roundfilter() - 1].middellange_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes))) ? 0 : Number(self.season_matches[self.roundfilter() - 1].middellange_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes)));
+                            self.stats.perc_lange_passes = 100 * (isNaN(Number(self.season_matches[self.roundfilter() - 1].lange_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes))) ? 0 : Number(self.season_matches[self.roundfilter() - 1].lange_passes / (self.season_matches[self.roundfilter() - 1].korte_passes + self.season_matches[self.roundfilter() - 1].middellange_passes + self.season_matches[self.roundfilter() - 1].lange_passes)));
 
                             if (isNaN(self.season_matches[self.roundfilter() - 1].succesvolle_uittrappen)) {
                                 self.stats.succesvolle_uittrappen = 0;
@@ -1149,8 +1149,8 @@ angular.module('mainapp.players')
 
                             self.stats.verdedigende_duels = self.season_matches[self.roundfilter() - 1].verdedigende_duels;
                             self.stats.aanvallende_duels = self.season_matches[self.roundfilter() - 1].aanvallende_duels;
-                            self.stats.perc_verdedigende_duels = 100 * (self.season_matches[self.roundfilter() - 1].verdedigende_duels / (self.season_matches[self.roundfilter() - 1].verdedigende_duels + self.season_matches[self.roundfilter() - 1].aanvallende_duels));
-                            self.stats.perc_aanvallende_duels = 100 * (self.season_matches[self.roundfilter() - 1].aanvallende_duels / (self.season_matches[self.roundfilter() - 1].verdedigende_duels + self.season_matches[self.roundfilter() - 1].aanvallende_duels));
+                            self.stats.perc_verdedigende_duels = 100 * (isNaN(Number(self.season_matches[self.roundfilter() - 1].verdedigende_duels / (self.season_matches[self.roundfilter() - 1].verdedigende_duels + self.season_matches[self.roundfilter() - 1].aanvallende_duels))) ? 0 : Number(self.season_matches[self.roundfilter() - 1].verdedigende_duels / (self.season_matches[self.roundfilter() - 1].verdedigende_duels + self.season_matches[self.roundfilter() - 1].aanvallende_duels)));
+                            self.stats.perc_aanvallende_duels = 100 * (isNaN(Number(self.season_matches[self.roundfilter() - 1].aanvallende_duels / (self.season_matches[self.roundfilter() - 1].verdedigende_duels + self.season_matches[self.roundfilter() - 1].aanvallende_duels))) ? 0 : Number(self.season_matches[self.roundfilter() - 1].aanvallende_duels / (self.season_matches[self.roundfilter() - 1].verdedigende_duels + self.season_matches[self.roundfilter() - 1].aanvallende_duels)));
 
                             self.stats.intercepties = self.season_matches[self.roundfilter() - 1].intercepties;
 
@@ -1232,9 +1232,9 @@ angular.module('mainapp.players')
                                     self.stats.korte_passes += self.season_matches[i].korte_passes;
                                     self.stats.middellange_passes += self.season_matches[i].middellange_passes;
                                     self.stats.lange_passes += self.season_matches[i].lange_passes;
-                                    self.stats.perc_korte_passes += 100 * (self.season_matches[i].korte_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes));
-                                    self.stats.perc_middellange_passes += 100 * (self.season_matches[i].middellange_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes));
-                                    self.stats.perc_lange_passes += 100 * (self.season_matches[i].lange_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes));
+                                    self.stats.perc_korte_passes += 100 * (isNaN(Number(self.season_matches[i].korte_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes))) ? 0 : Number(self.season_matches[i].korte_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes)));
+                                    self.stats.perc_middellange_passes += 100 * (isNaN(Number(self.season_matches[i].middellange_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes))) ? 0 : Number(self.season_matches[i].middellange_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes)));
+                                    self.stats.perc_lange_passes += 100 * (isNaN(Number(self.season_matches[i].lange_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes))) ? 0 : Number(self.season_matches[i].lange_passes / (self.season_matches[i].korte_passes + self.season_matches[i].middellange_passes + self.season_matches[i].lange_passes)));
 
                                     if (isNaN(self.season_matches[i].succesvolle_uittrappen)) {
                                         self.stats.succesvolle_uittrappen += 0;
@@ -1254,8 +1254,8 @@ angular.module('mainapp.players')
                                     self.stats.aantal_passes += self.season_matches[i].aantal_passes;
                                     self.stats.verdedigende_duels += self.season_matches[i].verdedigende_duels;
                                     self.stats.aanvallende_duels += self.season_matches[i].aanvallende_duels;
-                                    self.stats.perc_verdedigende_duels += 100 * (self.season_matches[i].verdedigende_duels / (self.season_matches[i].verdedigende_duels + self.season_matches[i].aanvallende_duels));
-                                    self.stats.perc_aanvallende_duels += 100 * (self.season_matches[i].aanvallende_duels / (self.season_matches[i].verdedigende_duels + self.season_matches[i].aanvallende_duels));
+                                    self.stats.perc_verdedigende_duels += 100 * (isNaN(Number(self.season_matches[i].verdedigende_duels / (self.season_matches[i].verdedigende_duels + self.season_matches[i].aanvallende_duels))) ? 0 : Number(self.season_matches[i].verdedigende_duels / (self.season_matches[i].verdedigende_duels + self.season_matches[i].aanvallende_duels)));
+                                    self.stats.perc_aanvallende_duels += 100 * (isNaN(Number(self.season_matches[i].aanvallende_duels / (self.season_matches[i].verdedigende_duels + self.season_matches[i].aanvallende_duels))) ? 0 : Number(self.season_matches[i].aanvallende_duels / (self.season_matches[i].verdedigende_duels + self.season_matches[i].aanvallende_duels)));
                                     self.stats.intercepties += self.season_matches[i].intercepties;
                                     self.stats.overtredingen += self.season_matches[i].overtredingen;
 
@@ -1346,7 +1346,7 @@ angular.module('mainapp.players')
                 $timeout(function () {
                     self.chart_player.datasets[1].data = [self.stats.doelpogingen_opdoel.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.gewonnen_duels.toFixed(1), self.stats.perc_verdedigende_duels.toFixed(1), self.stats.perc_aanvallende_duels.toFixed(1)];
                     self.chart_player.datasets[0].data = [self.stats_vs.doelpogingen_opdoel.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.gewonnen_duels.toFixed(1), self.stats_vs.perc_verdedigende_duels.toFixed(1), self.stats_vs.perc_aanvallende_duels.toFixed(1)];
-                }, 600);
+                }, 800);
             }
             if (self.player_stats.spelerType == 'keeper') {
                 self.chart_keeper = {
@@ -1379,13 +1379,13 @@ angular.module('mainapp.players')
                 $timeout(function () {
                     self.chart_keeper.datasets[1].data = [self.stats.geslaagde_reddingen.toFixed(1), self.stats.passzekerheid.toFixed(1), self.stats.succesvolle_uittrappen.toFixed(1), self.stats.perc_korte_passes.toFixed(1), self.stats.perc_middellange_passes.toFixed(1), self.stats.perc_lange_passes.toFixed(1)];
                     self.chart_keeper.datasets[0].data = [self.stats_vs.geslaagde_reddingen.toFixed(1), self.stats_vs.passzekerheid.toFixed(1), self.stats_vs.succesvolle_uittrappen.toFixed(1), self.stats_vs.perc_korte_passes.toFixed(1), self.stats_vs.perc_middellange_passes.toFixed(1), self.stats_vs.perc_lange_passes.toFixed(1)];
-                }, 600);
+                }, 800);
             }
 
             self.legend_player = '';
             self.legend_keeper = '';
             // Chart.js Options
-            self.options = {
+            self.chart_options = {
                 // Sets the chart to be responsive
                 responsive: true,
 
