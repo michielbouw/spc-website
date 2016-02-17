@@ -54,16 +54,16 @@ module.exports = ImportController = {
             var player_data;
             var items = {};
 
-            var speler_profiel_thuis;
-            var speler_profiel_uit;
+            var thuisTeamID = data.wedstrijd_data.thuisTeamID[0];
+            var uitTeamID = data.wedstrijd_data.uitTeamID[0];
 
-            Spelers.find({clubID: data.wedstrijd_data.thuisTeamID[0]}, function (err, res0) {
+            Spelers.find({clubID: thuisTeamID}, function (err, res0) {
                 if (err) { console.log(err); throw err; }
-                speler_profiel_thuis = res0;
+                var speler_profiel_thuis = res0;
 
-                Spelers.find({clubID: data.wedstrijd_data.uitTeamID[0]}, function (err1, res1) {
-                    if (err) { console.log(err); throw err; }
-                    speler_profiel_uit = res1;
+                Spelers.find({clubID: uitTeamID}, function (err1, res1) {
+                    if (err1) { console.log(err1); throw err1; }
+                    var speler_profiel_uit = res1;
 
                     _.delay(function () {
                         if (data != null) {
@@ -1908,6 +1908,7 @@ module.exports = ImportController = {
                             }
 
                             player_data = {};
+                            var matchseizoen = items.seizoen.split(" Play-offs")[0];
                             if (data.thuisSpelers_data) {
                                 player_data.player_stats_thuis = [];
                                 _.each(data.thuisSpelers_data, function (value, key) {
@@ -1971,7 +1972,6 @@ module.exports = ImportController = {
                                 });
 
                                 items.player_stats_full_thuis = [];
-                                var matchseizoen = items.seizoen.split(" Play-offs")[0];
                                 _.each(data.thuisSpelers_data, function (value, key) {
                                     var temp = {};
                                     temp.spelerType = (value.stat_matrix.type[0]);
@@ -1990,7 +1990,8 @@ module.exports = ImportController = {
                                             temp.spelerPhoto = (value1.spelerPhoto);
                                             temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
 
-                                            if (speler_profiel_thuis && _.where(speler_profiel_thuis, {spelerID: value1.personID})) {
+                                            if (speler_profiel_thuis && speler_profiel_thuis.length > 0 && _.where(speler_profiel_thuis, {spelerID: value1.personID})) {
+
                                                 forEach(_.where(speler_profiel_thuis, {spelerID: value1.personID}), function (value2, key2) {
                                                     if (value2.seizoen === 'Seizoen ' + matchseizoen) {
                                                         if (!value2.spelerRugnummer) {
@@ -2020,13 +2021,44 @@ module.exports = ImportController = {
                                                         if (_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0]) geel = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Gele kaarten'})[0][temp.personID]);
                                                         if (_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0]) rood = Number_converter(_.where(value.stat_matrix.speler_mat, {_row: 'Rode kaart'})[0][temp.personID]);
 
-                                                        if (!value2.fullStats || value2.fullStats.length <= 0) {
+                                                        if (value2.fullStats.length <= 0) {
                                                             value2.fullStats = [];
-                                                        }
-                                                        if ( !value2.fullStats || !(_.where(value2.fullStats, {ronde: items.ronde})) || !(_.where(value2.fullStats, {ronde: items.ronde + 100})) ) {
                                                             var tempfullStats = {};
                                                             tempfullStats.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
-                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
+                                                            tempfullStats.matchID = items.matchID;
+
+                                                            tempfullStats.hele_wedstrijd = helewedstrijd;
+                                                            tempfullStats.ingevallen = ingevallen;
+                                                            tempfullStats.vervangen = vervangen;
+
+                                                            tempfullStats.doelpunten = doelpunten || 0;
+                                                            tempfullStats.voorzetten = voorzetten || 0;
+                                                            tempfullStats.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                            tempfullStats.minuten = minuten || 0;
+                                                            tempfullStats.geel = geel || 0;
+                                                            tempfullStats.rood = rood || 0;
+                                                            tempfullStats.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+
+                                                            value2.fullStats.push(tempfullStats);
+
+                                                            Spelers.update({
+                                                                _id: value2._id
+                                                            }, {
+                                                                spelerGeboorteland: value1.spelerNationaliteit,
+                                                                spelerGeboortedatum: value1.spelerGeboortedatum,
+                                                                spelerRugnummer: value2.spelerRugnummer,
+                                                                spelerType: value2.spelerType,
+                                                                spelerPositie: value2.spelerPositie,
+                                                                date_edited: datetime,
+                                                                fullStats: value2.fullStats
+                                                            }, function (err, data) {
+                                                                if (err) throw err;
+                                                            });
+                                                        } else if ( value2.fullStats.length > 0 && (_.where(value2.fullStats, {ronde: items.ronde})).length <= 0 && (_.where(value2.fullStats, {ronde: items.ronde + 100})).length <= 0 ) {
+                                                            var tempfullStats = {};
+                                                            tempfullStats.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                             tempfullStats.matchID = items.matchID;
 
                                                             tempfullStats.hele_wedstrijd = helewedstrijd;
@@ -2060,6 +2092,7 @@ module.exports = ImportController = {
                                                             forEach(value2.fullStats, function (value3, key3) {
                                                                 if (items.ronde === value3.ronde || items.ronde === (value3.ronde - 100)) {
                                                                     value3.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                                    value3.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                                     value3.matchID = items.matchID;
 
                                                                     value3.hele_wedstrijd = helewedstrijd;
@@ -2113,7 +2146,7 @@ module.exports = ImportController = {
                                                     var fullstats_temp1 = [];
                                                     var fullstats_temp_temp1 = {};
                                                     fullstats_temp_temp1.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
-                                                    fullstats_temp_temp1.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                    fullstats_temp_temp1.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                     fullstats_temp_temp1.matchID = items.matchID;
 
                                                     fullstats_temp_temp1.hele_wedstrijd = helewedstrijd;
@@ -2128,7 +2161,7 @@ module.exports = ImportController = {
                                                     fullstats_temp_temp1.rood = rood || 0;
                                                     fullstats_temp_temp1.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
 
-                                                    fullstats_temp1.fullStats.push(fullstats_temp_temp1);
+                                                    fullstats_temp1.push(fullstats_temp_temp1);
 
                                                     Spelers.create({
                                                         spelerID: Number_converter(value1.personID),
@@ -2167,7 +2200,7 @@ module.exports = ImportController = {
                                                 var fullstats_temp2 = [];
                                                 var fullstats_temp_temp2 = {};
                                                 fullstats_temp_temp2.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
-                                                fullstats_temp_temp2.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                fullstats_temp_temp2.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                 fullstats_temp_temp2.matchID = items.matchID;
 
                                                 fullstats_temp_temp2.hele_wedstrijd = helewedstrijd;
@@ -2182,7 +2215,7 @@ module.exports = ImportController = {
                                                 fullstats_temp_temp2.rood = rood || 0;
                                                 fullstats_temp_temp2.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
 
-                                                fullstats_temp2.fullStats.push(fullstats_temp_temp2);
+                                                fullstats_temp2.push(fullstats_temp_temp2);
 
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
@@ -2522,7 +2555,7 @@ module.exports = ImportController = {
                                             temp.spelerPhoto = (value1.spelerPhoto);
                                             temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
 
-                                            if (speler_profiel_uit && _.where(speler_profiel_uit, {spelerID: value1.personID})) {
+                                            if (speler_profiel_uit && speler_profiel_uit.length > 0 && _.where(speler_profiel_uit, {spelerID: value1.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value1.personID}), function (value2, key2) {
                                                     if (value2.seizoen === 'Seizoen ' + matchseizoen) {
                                                         if (!value2.spelerRugnummer) {
@@ -2554,11 +2587,42 @@ module.exports = ImportController = {
 
                                                         if (!value2.fullStats || value2.fullStats.length <= 0) {
                                                             value2.fullStats = [];
-                                                        }
-                                                        if (!value2.fullStats || !(_.where(value2.fullStats, {ronde: items.ronde})) || !(_.where(value2.fullStats, {ronde: items.ronde + 100})) ) {
                                                             var tempfullStats = {};
                                                             tempfullStats.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
-                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
+                                                            tempfullStats.matchID = items.matchID;
+
+                                                            tempfullStats.hele_wedstrijd = helewedstrijd;
+                                                            tempfullStats.ingevallen = ingevallen;
+                                                            tempfullStats.vervangen = vervangen;
+
+                                                            tempfullStats.doelpunten = doelpunten || 0;
+                                                            tempfullStats.voorzetten = voorzetten || 0;
+                                                            tempfullStats.penalties = (0 + Number_converter((value.algemene_stats[9][0][0])) + Number_converter((value.algemene_stats[10][0][0]))) || 0;
+                                                            tempfullStats.minuten = minuten || 0;
+                                                            tempfullStats.geel = geel || 0;
+                                                            tempfullStats.rood = rood || 0;
+                                                            tempfullStats.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
+
+                                                            value2.fullStats.push(tempfullStats);
+
+                                                            Spelers.update({
+                                                                _id: value2._id
+                                                            }, {
+                                                                spelerGeboorteland: value1.spelerNationaliteit,
+                                                                spelerGeboortedatum: value1.spelerGeboortedatum,
+                                                                spelerRugnummer: value2.spelerRugnummer,
+                                                                spelerType: value2.spelerType,
+                                                                spelerPositie: value2.spelerPositie,
+                                                                date_edited: datetime,
+                                                                fullStats: value2.fullStats
+                                                            }, function (err, data) {
+                                                                if (err) throw err;
+                                                            });
+                                                        } else if ( value2.fullStats.length > 0 && (_.where(value2.fullStats, {ronde: items.ronde})).length <= 0 && (_.where(value2.fullStats, {ronde: items.ronde + 100})).length <= 0 ) {
+                                                            var tempfullStats = {};
+                                                            tempfullStats.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                            tempfullStats.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                             tempfullStats.matchID = items.matchID;
 
                                                             tempfullStats.hele_wedstrijd = helewedstrijd;
@@ -2592,6 +2656,7 @@ module.exports = ImportController = {
                                                             forEach(value2.fullStats, function (value3, key3) {
                                                                 if (items.ronde === value3.ronde || items.ronde === (value3.ronde - 100)) {
                                                                     value3.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
+                                                                    value3.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                                     value3.matchID = items.matchID;
 
                                                                     value3.hele_wedstrijd = helewedstrijd;
@@ -2645,7 +2710,7 @@ module.exports = ImportController = {
                                                     var fullstats_temp3 = [];
                                                     var fullstats_temp_temp3 = {};
                                                     fullstats_temp_temp3.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
-                                                    fullstats_temp_temp3.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                    fullstats_temp_temp3.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                     fullstats_temp_temp3.matchID = items.matchID;
 
                                                     fullstats_temp_temp3.hele_wedstrijd = helewedstrijd;
@@ -2660,7 +2725,7 @@ module.exports = ImportController = {
                                                     fullstats_temp_temp3.rood = rood || 0;
                                                     fullstats_temp_temp3.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
 
-                                                    fullstats_temp3.fullStats.push(fullstats_temp_temp3);
+                                                    fullstats_temp3.push(fullstats_temp_temp3);
 
                                                     Spelers.create({
                                                         spelerID: Number_converter(value1.personID),
@@ -2699,7 +2764,7 @@ module.exports = ImportController = {
                                                 var fullstats_temp4 = [];
                                                 var fullstats_temp_temp4 = {};
                                                 fullstats_temp_temp4.spelerPositieWedstrijd = value1.spelerPositieWedstrijd;
-                                                fullstats_temp_temp4.ronde = items.seizoen.indexOf('Play-offs') ? (items.ronde + 100) : items.ronde;
+                                                fullstats_temp_temp4.ronde = items.seizoen.indexOf('Play-offs') > 0 ? (items.ronde + 100) : items.ronde;
                                                 fullstats_temp_temp4.matchID = items.matchID;
 
                                                 fullstats_temp_temp4.hele_wedstrijd = helewedstrijd;
@@ -2714,7 +2779,7 @@ module.exports = ImportController = {
                                                 fullstats_temp_temp4.rood = rood || 0;
                                                 fullstats_temp_temp4.tweede_geel = (0 + Number_converter((value.algemene_stats[15][0][0]))) || 0;
 
-                                                fullstats_temp4.fullStats.push(fullstats_temp_temp4);
+                                                fullstats_temp4.push(fullstats_temp_temp4);
 
                                                 Spelers.create({
                                                     spelerID: Number_converter(value1.personID),
@@ -3027,7 +3092,7 @@ module.exports = ImportController = {
                             match_data = {};
                             match_data = items;
                         }
-                    }, 100);
+                    }, 4000);
                     _.delay(function () {
                         var club_slug;
                         var club_slug_uit;
@@ -4296,7 +4361,7 @@ module.exports = ImportController = {
                                 });
                             }
                         }
-                    }, 4000);
+                    }, 8000);
                 });
             });
         });

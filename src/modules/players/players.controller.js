@@ -1,11 +1,11 @@
 angular.module('mainapp.players')
-    .controller('mainapp.players.PlayersController', ['Api', '$location', '$rootScope', '$routeParams', '$sessionStorage', '$filter',
-        function(Api, $location, $rootScope, $routeParams, $sessionStorage, $filter)
+    .controller('mainapp.players.PlayersController', ['Api', '$location', '$rootScope', '$routeParams', '$sessionStorage',
+        function(Api, $location, $rootScope, $routeParams, $sessionStorage)
     {
         var self = this;
 
         self.player_data = [];
-        self.orderplayers = 'spelerNaam rugnummer';
+        self.orderplayers = ['spelerRugnummer', '-spelerPositie', 'spelerNaam'];
 
         if ((!$routeParams.team_slug || $routeParams.team_slug === '') && $rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             $location.path('/spelers/' + $rootScope.currentClub.teams[0].team_slug);
