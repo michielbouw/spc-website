@@ -590,8 +590,8 @@ angular.module('mainapp.club')
 
                         //self.stats.punten /= count;
                         self.stats.doelpogingen /= count;
-                        //self.stats.goals /= count;
-                        //self.stats.goalstegen /= count;
+                        self.stats.goals /= count;
+                        self.stats.goalstegen /= count;
                         self.stats.balbezit /= count;
                         self.stats.gewonnen_duels /= count;
                         self.stats.passzekerheid /= count;
