@@ -589,7 +589,7 @@ angular.module('mainapp.club')
                         }
 
                         //self.stats.punten /= count;
-                        //self.stats.doelpogingen /= count;
+                        self.stats.doelpogingen /= count;
                         //self.stats.goals /= count;
                         //self.stats.goalstegen /= count;
                         self.stats.balbezit /= count;
@@ -597,8 +597,8 @@ angular.module('mainapp.club')
                         self.stats.passzekerheid /= count;
                         self.stats.lengte_passes /= count;
                         self.stats.tot_passes /= count;
-                        //self.stats.geel /= count;
-                        //self.stats.rood /= count;
+                        self.stats.geel /= count;
+                        self.stats.rood /= count;
                     }
                 }
             }, 200);
