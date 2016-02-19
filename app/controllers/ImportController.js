@@ -1933,6 +1933,7 @@ module.exports = ImportController = {
                                             temp.spelerRugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = value1.spelerPhoto;
                                             temp.spelerGeboortedatum = value1.spelerGeboortedatum;
+                                            temp.spelerPositie = value1.spelerPositie;
                                         }
                                     });
                                     if (temp.type == 'keeper') {
@@ -1989,6 +1990,7 @@ module.exports = ImportController = {
                                             temp.spelerRugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = (value1.spelerPhoto);
                                             temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
+                                            temp.spelerPositie = value1.spelerPositie;
 
                                             if (speler_profiel_thuis && speler_profiel_thuis.length > 0 && _.where(speler_profiel_thuis, {spelerID: value1.personID})) {
 
@@ -2499,6 +2501,7 @@ module.exports = ImportController = {
                                             temp.spelerRugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = (value1.spelerPhoto);
                                             temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
+                                            temp.spelerPositie = value1.spelerPositie;
                                         }
                                     });
                                     if (temp.type == 'keeper') {
@@ -2554,6 +2557,7 @@ module.exports = ImportController = {
                                             temp.spelerRugnummer = Number_converter((value1.rugnummer));
                                             temp.spelerPhoto = (value1.spelerPhoto);
                                             temp.spelerGeboortedatum = (value1.spelerGeboortedatum);
+                                            temp.spelerPositie = value1.spelerPositie;
 
                                             if (speler_profiel_uit && speler_profiel_uit.length > 0 && _.where(speler_profiel_uit, {spelerID: value1.personID})) {
                                                 forEach(_.where(speler_profiel_uit, {spelerID: value1.personID}), function (value2, key2) {
@@ -3224,6 +3228,7 @@ module.exports = ImportController = {
                                                 temp.spelerPhoto = value.spelerPhoto;
                                                 temp.spelerNationaliteit = value.spelerNationaliteit;
                                                 temp.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                temp.spelerPositie = value.spelerPositie;
                                                 temp.matches = [];
                                                 var temp1 = {};
                                                 temp1.season = match_short.seizoen;
@@ -3331,6 +3336,7 @@ module.exports = ImportController = {
                                                         temp.spelerPhoto = value.spelerPhoto;
                                                         temp.spelerNationaliteit = value.spelerNationaliteit;
                                                         temp.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                        temp.spelerPositie = value.spelerPositie;
                                                         temp.matches = [];
 
                                                         var temp1 = {};
@@ -3383,6 +3389,7 @@ module.exports = ImportController = {
                                                                 value1.spelerPhoto = value.spelerPhoto;
                                                                 value1.spelerNationaliteit = value.spelerNationaliteit;
                                                                 value1.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                                value1.spelerPositie = value.spelerPositie;
 
                                                                 if (value1.matches) {
                                                                     if (_.where(value1.matches, {season: match_short.seizoen})[0]) {
@@ -3574,6 +3581,7 @@ module.exports = ImportController = {
                                                     temp.spelerPhoto = value.spelerPhoto;
                                                     temp.spelerNationaliteit = value.spelerNationaliteit;
                                                     temp.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                    temp.spelerPositie = value.spelerPositie;
                                                     temp.matches = [];
 
                                                     var temp1 = {};
@@ -3758,6 +3766,7 @@ module.exports = ImportController = {
                                                 temp.spelerPhoto = value.spelerPhoto;
                                                 temp.spelerNationaliteit = value.spelerNationaliteit;
                                                 temp.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                temp.spelerPositie = value.spelerPositie;
                                                 temp.matches = [];
                                                 var temp1 = {};
                                                 temp1.season = match_short.seizoen;
@@ -3864,6 +3873,7 @@ module.exports = ImportController = {
                                                         temp.spelerPhoto = value.spelerPhoto;
                                                         temp.spelerNationaliteit = value.spelerNationaliteit;
                                                         temp.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                        temp.spelerPositie = value.spelerPositie;
                                                         temp.matches = [];
 
                                                         var temp1 = {};
@@ -3916,6 +3926,7 @@ module.exports = ImportController = {
                                                                 value1.spelerPhoto = value.spelerPhoto;
                                                                 value1.spelerNationaliteit = value.spelerNationaliteit;
                                                                 value1.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                                value1.spelerPositie = value.spelerPositie;
 
                                                                 if (value1.matches) {
                                                                     if (_.where(value1.matches, {season: match_short.seizoen})[0]) {
@@ -4107,6 +4118,7 @@ module.exports = ImportController = {
                                                     temp.spelerPhoto = value.spelerPhoto;
                                                     temp.spelerNationaliteit = value.spelerNationaliteit;
                                                     temp.spelerGeboortedatum = value.spelerGeboortedatum;
+                                                    temp.spelerPositie = value.spelerPositie;
                                                     temp.matches = [];
 
                                                     var temp1 = {};

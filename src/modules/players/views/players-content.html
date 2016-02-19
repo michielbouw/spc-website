@@ -19,7 +19,52 @@
                 </h4>
             </div>
         </div>
-        <div ng-repeat="speler in data.player_data | orderBy:data.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+        <div ng-repeat="speler in data.player_data | filter:{ spelerPositie: 'keeper'} | orderBy:data.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+            <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
+                <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
+                <div class="col-xs-12 image">
+                    <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
+                    <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                </div>
+                <div class="col-xs-12 spelernaam"><br>{{ speler.spelerNaam }}</div>
+                <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ speler.spelerRugnummer }}</span></div>
+            </div>
+        </a></div>
+        <div ng-repeat="speler in data.player_data | filter:{ spelerPositie: 'verdediger'} | orderBy:data.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+            <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
+                <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
+                <div class="col-xs-12 image">
+                    <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
+                    <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                </div>
+                <div class="col-xs-12 spelernaam"><br>{{ speler.spelerNaam }}</div>
+                <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ speler.spelerRugnummer }}</span></div>
+            </div>
+        </a></div>
+        <div ng-repeat="speler in data.player_data | filter:{ spelerPositie: 'middenvelder'} | orderBy:data.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+            <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
+                <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
+                <div class="col-xs-12 image">
+                    <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
+                    <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                </div>
+                <div class="col-xs-12 spelernaam"><br>{{ speler.spelerNaam }}</div>
+                <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ speler.spelerRugnummer }}</span></div>
+            </div>
+        </a></div>
+        <div ng-repeat="speler in data.player_data | filter:{ spelerPositie: 'aanvaller'} | orderBy:data.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
+            <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
+                <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
+                <div class="col-xs-12 image">
+                    <img ng-if="!speler.spelerPhoto" src="images/blank-avatar.png">
+                    <img ng-if="speler.spelerPhoto" ng-src="{{ speler.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                </div>
+                <div class="col-xs-12 spelernaam"><br>{{ speler.spelerNaam }}</div>
+                <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ speler.spelerRugnummer }}</span></div>
+            </div>
+        </a></div>
+
+        <div ng-repeat="speler in data.player_data | filter:{ spelerPositie: '!keeper'} | filter:{ spelerPositie: '!verdediger'} | filter:{ spelerPositie: '!middenvelder'} | filter:{ spelerPositie: '!aanvaller' } | orderBy:data.orderplayers"><a ng-href="/spelers/{{ data.team_slug }}/{{ speler.playerID }}">
             <div class="col-xs-6 col-sm-3 col-md-2 content-players-left content-players-left-overview">
                 <span class="tag" ng-if="speler.spelerType == 'keeper'">Keeper</span>
                 <div class="col-xs-12 image">
