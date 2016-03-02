@@ -31,6 +31,7 @@
                 <img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png">
             </div>
             <div ng-if="data.speler" class="col-xs-12"><br><strong>{{ data.player_stats.spelerNaam }}</strong></div>
+            <div ng-if="data.speler && data.player_stats.spelerPositie" class="col-xs-12"><br>{{ data.player_stats.spelerPositie }}</div>
             <div ng-if="data.speler" class="col-xs-12"><br><strong>{{ data.club_name }}</strong></div>
             <div ng-if="data.speler" class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ data.player_stats.spelerRugnummer }}</span></div>
 
@@ -73,6 +74,7 @@
                 <span ng-if="data.vs == data.playerID"><strong>{{ data.player_stats.spelerNaam }}<br>{{ data.vs_naam }}</strong></span>
                 <span ng-if="data.vs !== data.playerID"><strong>{{ data.player_stats_vs.spelerNaam }}<br>{{ data.vs_info }}</strong></span>
             </div>
+            <div ng-if="data.player_stats_vs.spelerPositie" class="col-xs-12"><br>{{ data.player_stats_vs.spelerPositie }}</div>
             <div ng-if="data.vs == data.playerID" class="col-xs-12 grey"><br><strong>{{ data.club_name }}</strong></div>
             <div ng-if="data.vs !== data.playerID" class="col-xs-12 grey"><br><strong>{{ data.player_stats_vs.club_name }}</strong></div>
             <div ng-if="data.vs" class="col-xs-12"><br>

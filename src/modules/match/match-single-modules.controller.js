@@ -1247,7 +1247,7 @@ angular.module('mainapp.match')
                     r;
 
                 angular.forEach(self.match.gemiddelde_posities, function (value, key) {
-                    drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                    drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnummer, value.teamNaam);
 
                     //r = angular.copy(value);
                     //r.breedte /= 100;
@@ -1258,19 +1258,37 @@ angular.module('mainapp.match')
                     //    r.lengte = c.width * r.lengte;
                     //
                     //    ctx.beginPath();
-                    //    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+                    //    polygon(ctx, r.lengte, r.breedte, 8, 6, -Math.PI/2);
                     //
                     //    // check if we hover it, fill other
-                    //    if (ctx.isPointInPath(x, y)) {
+                    //    if (r.personID == id) {
                     //        ctx.fillStyle = "rgba(3,125,201,1)";
                     //        ctx.strokeStyle = "rgba(3,125,201,1)";
                     //        ctx.fill();
                     //        ctx.stroke();
+                    //
+                    //        // Drawing number
+                    //        ctx.fillStyle    = '#fff';
+                    //        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    //        ctx.textAlign    = 'center';
+                    //        ctx.textBaseline = 'middle';
+                    //        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
+                    //
+                    //        $('.content#team').find('#positionsveld .positions_players p.thuis#' + r.personID).css({
+                    //            'color': 'rgba(3,125,201,1)'
+                    //        });
                     //    } else {
                     //        ctx.fillStyle = "rgba(3,125,201,0.4)";
                     //        ctx.strokeStyle = "rgba(3,125,201,0.4)";
                     //        ctx.fill();
                     //        ctx.stroke();
+                    //
+                    //        // Drawing number
+                    //        ctx.fillStyle    = 'rgba(3,125,201,1)';
+                    //        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    //        ctx.textAlign    = 'center';
+                    //        ctx.textBaseline = 'middle';
+                    //        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
                     //    }
                     //
                     //    ctx.closePath();
@@ -1279,19 +1297,37 @@ angular.module('mainapp.match')
                     //    r.lengte = c.width * (1 - r.lengte);
                     //
                     //    ctx.beginPath();
-                    //    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+                    //    polygon(ctx, r.lengte, r.breedte, 8, 6, -Math.PI/2);
                     //
                     //    // check if we hover it, fill other
-                    //    if (ctx.isPointInPath(x, y)) {
+                    //    if (r.personID == id) {
                     //        ctx.fillStyle = "rgba(236,117,0,1)";
                     //        ctx.strokeStyle = "rgba(236,117,0,1)";
                     //        ctx.fill();
                     //        ctx.stroke();
+                    //
+                    //        // Drawing number
+                    //        ctx.fillStyle    = '#fff';
+                    //        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    //        ctx.textAlign    = 'center';
+                    //        ctx.textBaseline = 'middle';
+                    //        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
+                    //
+                    //        $('.content#team').find('#positionsveld .positions_players p.uit#' + r.personID).css({
+                    //            'color': 'rgba(236,117,0,1)'
+                    //        });
                     //    } else {
                     //        ctx.fillStyle = "rgba(236,117,0,0.4)";
                     //        ctx.strokeStyle = "rgba(236,117,0,0.4)";
                     //        ctx.fill();
                     //        ctx.stroke();
+                    //
+                    //        // Drawing number
+                    //        ctx.fillStyle    = 'rgba(236,117,0,1)';
+                    //        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    //        ctx.textAlign    = 'center';
+                    //        ctx.textBaseline = 'middle';
+                    //        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
                     //    }
                     //
                     //    ctx.closePath();
@@ -1314,12 +1350,16 @@ angular.module('mainapp.match')
 
                     // Drawing circle
                     ctx.beginPath();
-                    polygon(ctx, len, bre, 6, 6, -Math.PI/2);
+                    polygon(ctx, len, bre, 8, 6, -Math.PI/2);
                     ctx.fill();
                     ctx.stroke();
 
                     // Drawing number
-
+                    ctx.fillStyle    = 'rgba(3,125,201,1)';
+                    ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    ctx.textAlign    = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(nummer, len, bre);
 
                     //URL of spelerfoto
                     //if ($filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto) {
@@ -1336,12 +1376,16 @@ angular.module('mainapp.match')
 
                     // Drawing circle
                     ctx.beginPath();
-                    polygon(ctx, len, bre, 6, 6, -Math.PI/2);
+                    polygon(ctx, len, bre, 8, 6, -Math.PI/2);
                     ctx.fill();
                     ctx.stroke();
 
                     // Drawing number
-
+                    ctx.fillStyle    = 'rgba(236,117,0,1)';
+                    ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    ctx.textAlign    = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(nummer, len, bre);
 
                     //URL of spelerfoto
                     //if ($filter('filter')(self.speler_profiel_uit, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto) {
@@ -1353,7 +1397,7 @@ angular.module('mainapp.match')
             };
 
             angular.forEach(self.match.gemiddelde_posities, function (value, key) {
-                drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnummer, value.teamNaam);
             });
         };
 
@@ -1487,7 +1531,7 @@ angular.module('mainapp.match')
                     r.lengte = c.width * r.lengte;
 
                     ctx.beginPath();
-                    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+                    polygon(ctx, r.lengte, r.breedte, 8, 6, -Math.PI/2);
 
                     // check if we hover it, fill other
                     if (r.personID == id) {
@@ -1495,6 +1539,13 @@ angular.module('mainapp.match')
                         ctx.strokeStyle = "rgba(3,125,201,1)";
                         ctx.fill();
                         ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = '#fff';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
 
                         $('.content#team').find('#positionsveld .positions_players p.thuis#' + r.personID).css({
                             'color': 'rgba(3,125,201,1)'
@@ -1504,6 +1555,13 @@ angular.module('mainapp.match')
                         ctx.strokeStyle = "rgba(3,125,201,0.4)";
                         ctx.fill();
                         ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = 'rgba(3,125,201,1)';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
                     }
 
                     ctx.closePath();
@@ -1512,7 +1570,7 @@ angular.module('mainapp.match')
                     r.lengte = c.width * (1 - r.lengte);
 
                     ctx.beginPath();
-                    polygon(ctx, r.lengte, r.breedte, 6, 6, -Math.PI/2);
+                    polygon(ctx, r.lengte, r.breedte, 8, 6, -Math.PI/2);
 
                     // check if we hover it, fill other
                     if (r.personID == id) {
@@ -1520,6 +1578,13 @@ angular.module('mainapp.match')
                         ctx.strokeStyle = "rgba(236,117,0,1)";
                         ctx.fill();
                         ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = '#fff';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
 
                         $('.content#team').find('#positionsveld .positions_players p.uit#' + r.personID).css({
                             'color': 'rgba(236,117,0,1)'
@@ -1529,6 +1594,13 @@ angular.module('mainapp.match')
                         ctx.strokeStyle = "rgba(236,117,0,0.4)";
                         ctx.fill();
                         ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = 'rgba(236,117,0,1)';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
                     }
 
                     ctx.closePath();
@@ -1804,7 +1876,7 @@ angular.module('mainapp.match')
                 //    r;
                 //
                 //angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
-                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnummer, value.teamNaam);
                 //
                 //    r = angular.copy(value);
                 //    r.breedte = r.locationInFieldWidth / 100;
@@ -1832,7 +1904,7 @@ angular.module('mainapp.match')
                 //    ctx.closePath();
                 //});
                 //angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
-                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnummer, value.teamNaam);
                 //
                 //    r = angular.copy(value);
                 //    r.breedte = r.locationInFieldWidth / 100;
@@ -1860,10 +1932,10 @@ angular.module('mainapp.match')
                 //    ctx.closePath();
                 //});
                 angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
-                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, true);
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.lichaamsdeel, value.minuut_tot_string, value.type, true);
                 });
                 angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
-                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, false);
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.lichaamsdeel, value.minuut_tot_string, value.type, false);
                 });
             };
 
@@ -1921,10 +1993,10 @@ angular.module('mainapp.match')
             };
 
             angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
-                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, true);
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.lichaamsdeel, value.minuut_tot_string, value.type, true);
             });
             angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
-                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.lichaamsdeel, value.minuut_tot_string, value.type, false);
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.lichaamsdeel, value.minuut_tot_string, value.type, false);
             });
         };
 
@@ -2499,7 +2571,7 @@ angular.module('mainapp.match')
                 //    r;
                 //
                 //angular.forEach(self.match.locatie_doelpogingen_filter.thuisTeam, function (value, key) {
-                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnummer, value.teamNaam);
                 //
                 //    r = angular.copy(value);
                 //    r.breedte = r.locationInFieldWidth / 100;
@@ -2527,7 +2599,7 @@ angular.module('mainapp.match')
                 //    ctx.closePath();
                 //});
                 //angular.forEach(self.match.locatie_doelpogingen_filter.uitTeam, function (value, key) {
-                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnumer, value.teamNaam);
+                //    //drawPosition(value.breedte, value.lengte, value.personID, value.spelerNaam, value.rugnummer, value.teamNaam);
                 //
                 //    r = angular.copy(value);
                 //    r.breedte = r.locationInFieldWidth / 100;
@@ -2555,10 +2627,10 @@ angular.module('mainapp.match')
                 //    ctx.closePath();
                 //});
                 angular.forEach(self.match.locatie_overtredingen_filter.thuisTeam, function (value, key) {
-                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, true);
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.minuut, true);
                 });
                 angular.forEach(self.match.locatie_overtredingen_filter.uitTeam, function (value, key) {
-                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, false);
+                    drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.minuut, false);
                 });
             };
 
@@ -2616,10 +2688,10 @@ angular.module('mainapp.match')
             };
 
             angular.forEach(self.match.locatie_overtredingen_filter.thuisTeam, function (value, key) {
-                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, true);
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.minuut, true);
             });
             angular.forEach(self.match.locatie_overtredingen_filter.uitTeam, function (value, key) {
-                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnumer, value.minuut, false);
+                drawPosition(value.locationInFieldWidth, value.locationInFieldLength, value.personID, value.spelerNaam, value.rugnummer, value.minuut, false);
             });
         };
 

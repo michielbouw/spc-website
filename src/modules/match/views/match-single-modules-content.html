@@ -1374,7 +1374,10 @@
                 </div>
             </div>
             <div class="col-xs-12 stat-table-row" ng-repeat="row in data.match.spelhervattingen" ng-if="$index < 14" ng-class="{ 'stat-table-row-divider': row.V1 == ' ' && row.V2 == ' ' && row.V3 == ' ' }">
-                <div ng-if="row.V1 !== ' ' && $index !== 1 && $index !== 5 && $index !== 13" class="col-xs-4 text-right blue">
+                <div ng-if="row.V1 !== ' ' && $index !== 1 && $index !== 5 && $index !== 6 && $index !== 7 && $index !== 8 && $index !== 13" class="col-xs-4 text-right blue">
+                    {{ row.V1 }}
+                </div>
+                <div ng-if="row.V1 !== ' ' && ($index == 6 || $index == 7 || $index == 8)" class="col-xs-4 text-right blue" style="position: absolute; bottom: 0; left: 5px;">
                     {{ row.V1 }}
                 </div>
                 <div ng-if="row.V1 !== ' ' && ($index == 1 || $index == 5 || $index == 13)" class="col-xs-4 text-right blue">
@@ -1383,14 +1386,16 @@
                 <div ng-if="row.V1 == ' '" class="col-xs-4 text-right" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V2 !== ' ' && row.V2 !== 'VRIJE TRAPPEN' && row.V2 !== 'HOEKSCHOPPEN' && row.V2 !== 'INWORPEN'" class="col-xs-4 text-center grey">
+                <div ng-if="row.V2 !== ' ' && row.V2 !== 'VRIJE TRAPPEN' && row.V2 !== 'HOEKSCHOPPEN' && row.V2 !== 'INWORPEN' && $index !== 6 && $index !== 7 && $index !== 8" class="col-xs-4 text-center grey">
                     <span ng-if="$index == 1"><img src="/images/graphics/doelpogingen_grey.png" width="20%" style="padding: 10px 0;"></span>
                     <span ng-if="$index == 5"><img src="/images/graphics/hoekschoppen_grey.png" width="20%" style="padding: 10px 0;"><br>{{ row.V2 }}</span>
+                    <span ng-if="$index == 13"><br><br>{{ row.V2 }}</span>
+                    <span ng-if="$index !== 1 && $index !== 5 && $index !== 13">{{ row.V2 }}</span>
+                </div>
+                <div ng-if="row.V2 !== ' ' && row.V2 !== 'VRIJE TRAPPEN' && row.V2 !== 'HOEKSCHOPPEN' && row.V2 !== 'INWORPEN' && ($index == 6 || $index == 7 || $index == 8)" class="col-xs-4 col-xs-offset-4 text-center grey">
                     <span ng-if="$index == 6"><img src="/images/graphics/vanlinks_grey.png" width="20%" style="padding: 10px 0;"><br>{{ row.V2 }}</span>
                     <span ng-if="$index == 7"><img src="/images/graphics/vanrechts_grey.png" width="20%" style="padding: 10px 0;"><br>{{ row.V2 }}</span>
                     <span ng-if="$index == 8"><img src="/images/graphics/inuitdraaiend_grey.png" width="20%" style="padding: 10px 0;"><br>{{ row.V2 }}</span>
-                    <span ng-if="$index == 13"><br><br>{{ row.V2 }}</span>
-                    <span ng-if="$index !== 1 && $index !== 5 && $index !== 6 && $index !== 7 && $index !== 8 && $index !== 13">{{ row.V2 }}</span>
                 </div>
                 <div ng-if="row.V2 == 'VRIJE TRAPPEN' || row.V2 == 'HOEKSCHOPPEN' || row.V2 == 'INWORPEN'" class="col-xs-4 text-center grey">
                     <strong style="font-family: 'Open Sans Condensed', 'Open Sans', Helvetica, Verdana, sans-serif;font-weight: bold;">{{ row.V2 }}</strong>
@@ -1398,7 +1403,10 @@
                 <div ng-if="row.V2 == ' '" class="col-xs-4 text-center" style="line-height: 6px;">
                     &nbsp;
                 </div>
-                <div ng-if="row.V3 !== ' ' && $index !== 1 && $index !== 5 && $index !== 13" class="col-xs-4 orange">
+                <div ng-if="row.V3 !== ' ' && $index !== 1 && $index !== 5 && $index !== 6 && $index !== 7 && $index !== 8 && $index !== 13" class="col-xs-4 orange">
+                    {{ row.V3 }}
+                </div>
+                <div ng-if="row.V3 !== ' ' && ($index == 6 || $index == 7 || $index == 8)" class="col-xs-4 orange" style="position: absolute; bottom: 0; right: 5px;">
                     {{ row.V3 }}
                 </div>
                 <div ng-if="row.V3 !== ' ' && ($index == 1 || $index == 5 || $index == 13)" class="col-xs-4 orange">
@@ -1660,7 +1668,7 @@
             Niet beschikbaar.
         </div>
         <div id="positionsveld" ng-if="data.match.gemiddelde_posities.length > 0" class="col-xs-12 positions">
-            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 select_club">
+            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 select_club">
                 <p ng-click="data.selectpositions_thuis();" class="pull-left blue">
                     {{ data.matchshort.match_info.thuis }} <i class="fa fa-long-arrow-right"></i>
                 </p>
@@ -1671,7 +1679,7 @@
 
             <br class="clear">
 
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 positions_players">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 positions_players">
                 <p ng-repeat="row in data.match.gemiddelde_posities" class="thuis" id="{{ row.personID }}"
                    ng-if="row.teamNaam == data.matchshort.match_info.thuis_kort"
                    ng-mouseover="data.selectpositions_player(row.personID);" ng-mouseleave="data.resetpositions_player(); data.avg_positions_field_draw(); data.avg_positions_field_fill();">
@@ -1685,10 +1693,10 @@
                     {{ row.spelerNaam }} <span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span>{{ row.rugnummer }}
                 </p>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-6 no-padding avg_positions_field" id="avg_positions_field_hor_size">
+            <div class="col-xs-12 col-md-6 col-lg-8 no-padding avg_positions_field" id="avg_positions_field_hor_size">
                 <canvas id="avg_positions_field" width="106" height="68"></canvas>
             </div>
-            <div class="hidden-xs hidden-sm col-md-3 col-lg-3 text-right positions_players">
+            <div class="hidden-xs hidden-sm col-md-3 col-lg-2 text-right positions_players">
                 <p ng-repeat="row in data.match.gemiddelde_posities" class="uit" id="{{ row.personID }}"
                    ng-if="row.teamNaam == data.matchshort.match_info.uit_kort"
                    ng-mouseover="data.selectpositions_player(row.personID);" ng-mouseleave="data.resetpositions_player(); data.avg_positions_field_draw(); data.avg_positions_field_fill();">
@@ -1851,7 +1859,7 @@
             Niet beschikbaar.
         </div>
         <div id="locatiedoelpogingen" ng-if="data.match.locatie_doelpogingen_filter.thuisTeam.length > 0 || data.match.locatie_doelpogingen_filter.uitTeam.length > 0" class="col-xs-12 positions">
-            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 select_club">
+            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 select_club">
                 <p ng-click="data.selectdoelpogingen_thuis();" class="pull-left blue">
                     <i class="fa fa-long-arrow-left"></i> {{ data.matchshort.match_info.thuis }}
                 </p>
@@ -1859,7 +1867,7 @@
                     {{ data.matchshort.match_info.uit }} <i class="fa fa-long-arrow-right"></i>
                 </p>
             </div>
-            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 text-center select_type">
+            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 text-center select_type">
                 <span ng-click="data.selectdoelpogingen_doelpunt();" class="blue" ng-class="{ lightblue: data.doelpogingen_doelpunt }">
                     doelpunt
                 </span>&nbsp;
@@ -1873,7 +1881,7 @@
 
             <br class="clear">
 
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 positions_players">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 positions_players">
                 <p ng-repeat="row in data.match.locatie_doelpogingen_thuisTeam" class="thuis" id="{{ row.personID }}"
                    ng-mouseover="data.selectdoelpogingen_player(row.personID);" ng-mouseleave="data.resetdoelpogingen_player(); data.doelpogingen_field_draw(); data.doelpogingen_field_fill();">
                     {{ row.rugnummer }}<span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span> {{ row.spelerNaam }}
@@ -1885,10 +1893,10 @@
                     {{ row.spelerNaam }} <span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span>{{ row.rugnummer }}
                 </p>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-6 no-padding doelpogingen_field" id="doelpogingen_field_hor_size">
+            <div class="col-xs-12 col-md-6 col-lg-8 no-padding doelpogingen_field" id="doelpogingen_field_hor_size">
                 <canvas id="doelpogingen_field" width="106" height="68"></canvas>
             </div>
-            <div class="hidden-xs hidden-sm col-md-3 col-lg-3 text-right positions_players">
+            <div class="hidden-xs hidden-sm col-md-3 col-lg-2 text-right positions_players">
                 <p ng-repeat="row in data.match.locatie_doelpogingen_uitTeam" class="uit" id="{{ row.personID }}"
                    ng-mouseover="data.selectdoelpogingen_player(row.personID); $event.preventDefault(); $event.stopPropagation();" ng-mouseleave="data.resetdoelpogingen_player(); data.doelpogingen_field_draw(); data.doelpogingen_field_fill();">
                     {{ row.spelerNaam }} <span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span>{{ row.rugnummer }}
@@ -3274,7 +3282,7 @@
             Niet beschikbaar.
         </div>
         <div id="locatieovertredingen" ng-if="data.match.locatie_overtredingen_filter.thuisTeam.length > 0 || data.match.locatie_overtredingen_filter.uitTeam.length > 0" class="col-xs-12 positions">
-            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 select_club">
+            <div class="col-xs-12 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 select_club">
                 <p ng-click="data.selectovertredingen_thuis();" class="pull-left blue">
                     {{ data.matchshort.match_info.thuis }} <i class="fa fa-long-arrow-right"></i>
                 </p>
@@ -3285,7 +3293,7 @@
 
             <br class="clear">
 
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 positions_players">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 positions_players">
                 <p ng-repeat="row in data.match.locatie_overtredingen_thuisTeam" class="thuis" id="{{ row.personID }}"
                    ng-mouseover="data.selectovertredingen_player(row.personID);" ng-mouseleave="data.resetovertredingen_player(); data.overtredingen_field_draw(); data.overtredingen_field_fill();">
                     {{ row.rugnummer }}<span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span> {{ row.spelerNaam }}
@@ -3297,10 +3305,10 @@
                     {{ row.spelerNaam }} <span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span>{{ row.rugnummer }}
                 </p>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-6 no-padding overtredingen_field" id="overtredingen_field_hor_size">
+            <div class="col-xs-12 col-md-6 col-lg-8 no-padding overtredingen_field" id="overtredingen_field_hor_size">
                 <canvas id="overtredingen_field" width="106" height="68"></canvas>
             </div>
-            <div class="hidden-xs hidden-sm col-md-3 col-lg-3 text-right positions_players">
+            <div class="hidden-xs hidden-sm col-md-3 col-lg-2 text-right positions_players">
                 <p ng-repeat="row in data.match.locatie_overtredingen_uitTeam" class="uit" id="{{ row.personID }}"
                    ng-mouseover="data.selectovertredingen_player(row.personID);" ng-mouseleave="data.resetovertredingen_player(); data.overtredingen_field_draw(); data.overtredingen_field_fill();">
                     {{ row.spelerNaam }} <span ng-if="row.rugnummer < 10">&nbsp;&nbsp;</span>{{ row.rugnummer }}
