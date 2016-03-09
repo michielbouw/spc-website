@@ -5771,10 +5771,10 @@
             </select>
             <hr>
         </div>
-        <div class="col-xs-12" ng-show="data.spelerlog == -1">
+        <div class="col-xs-12" ng-if="data.spelerlog == -1">
             Logboek speler niet beschikbaar.
         </div>
-        <div class="col-xs-12" ng-show="data.spelerlog && data.spelerlog != -1">
+        <div class="col-xs-12" ng-if="data.spelerlog && data.spelerlog != -1">
             <h4>{{ data.spelerlogspelernaam }}</h4>
             <p><strong>Scores speler</strong> <small>door speler zelf ingevuld (0-10)</small></p>
             <p>EMI: {{ data.spelercijfers.emi }}<br>

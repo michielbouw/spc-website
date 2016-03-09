@@ -1,33 +1,35 @@
 angular.module('mainapp.scouting')
-    //.directive('scoutingcontent', function ($timeout) {
-    //    return {
-    //        templateUrl: 'scouting/views/scouting-content.html',
-    //        link: function(scope, element, attrs) {
-    //            $timeout(function () {
-    //                angular.element(document).ready(function () {
-    //                    $('.navbar-sub').css({
-    //                        'height': window.innerHeight - 75 - 100
-    //                    });
-    //                    $('.navbar-sub').each(function () {
-    //                        $(this).css('width', $(this).parents('.container').find('.col-md-2').width());
-    //                    });
-    //                    $('body').css('background-color', '#E7EAF1');
-    //
-    //                    $('.content-players-left-overview .image').each(function () {
-    //                        $(this).css('height', $(this).width() * 1.5 + 30);
-    //                    });
-    //
-    //                    $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
-    //                        $('#wrapper .page-content .content.content-page').toggleClass('active');
-    //                        $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();
-    //                        $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').toggle();
-    //                        $('.page-top .col-md-2.sidebar-offcanvas').toggle();
-    //                    });
-    //                });
-    //            }, 0);
-    //        }
-    //    };
-    //})
+    .directive('scoutingcontent', function ($timeout) {
+        return {
+            templateUrl: 'scouting/views/scouting-content.html',
+            link: function(scope, element, attrs) {
+                $timeout(function () {
+                    angular.element(document).ready(function () {
+                        $('.navbar-sub').css({
+                            'height': window.innerHeight - 75 - 100
+                        });
+                        $('.navbar-sub').each(function () {
+                            $(this).css('width', $(this).parents('.container').find('.col-md-2').width());
+                        });
+                        $('body').css('background-color', '#E7EAF1');
+
+                        $('#nav-scouting a').click(function (e) {
+                            e.preventDefault();
+                            $(this).tab('show');
+
+                            if ($('#wrapper .page-content .content.content-page').hasClass('active')) {
+                                $('#wrapper .page-content .content.content-page').removeClass('active');
+                                $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').show();
+                                $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').hide();
+                                $('.page-top .col-md-2.sidebar-offcanvas').hide();
+                            }
+                        });
+                        $('#nav-scouting a[href="#status"]').tab('show');
+                    });
+                }, 0);
+            }
+        };
+    })
     .directive('scoutingsinglecontent', function ($rootScope, $timeout) {
         return {
             templateUrl: 'scouting/views/scouting-single-content.html',

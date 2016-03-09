@@ -92,7 +92,7 @@ angular.module('mainapp.pageAdmin')
         };
 
         self.openModalDel = function (size) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel.html',
                 controller: 'ModalDelInstance',
                 size: size

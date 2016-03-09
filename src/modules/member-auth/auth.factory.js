@@ -192,6 +192,8 @@ angular.module('mainapp.memberAuth')
 
                 } else if (nextRoute.access.permission == "club-beheer" && user.role == "club-beheer") {
 
+                } else if (nextRoute.access.permission == "technische-staff+" && user.role == "technische-staff+") {
+
                 } else if (nextRoute.access.permission == "technische-staff" && user.role == "technische-staff") {
 
                 } else if (nextRoute.access.permission == "externe-staff" && (user.role == "technische-staff" || user.role == "externe-staff")) {

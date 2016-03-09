@@ -16,13 +16,6 @@ angular.module('mainapp.players')
                         $('.content-players-left-overview .image').each(function () {
                             $(this).css('height', $(this).width() * 1.5 + 30);
                         });
-
-                        $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
-                            $('#wrapper .page-content .content.content-page').toggleClass('active');
-                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();
-                            $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').toggle();
-                            $('.page-top .col-md-2.sidebar-offcanvas').toggle();
-                        });
                     });
                 }, 0);
             }

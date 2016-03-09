@@ -8,6 +8,7 @@ var ClubController = require('../controllers/ClubController');
 var MatchDataController = require('../controllers/MatchDataController');
 var MatchesController = require('../controllers/MatchesController');
 var PageController = require('../controllers/PageController');
+var ScoutingDataController = require('../controllers/ScoutingDataController');
 var SpelersController = require('../controllers/SpelersController');
 var TeamDataController = require('../controllers/TeamDataController');
 var UploadController = require('../controllers/UploadController');
@@ -53,6 +54,12 @@ router.post('/matchdata',           UserController.ensureAuthorized, MatchDataCo
 router.put('/matchdata/:_id',       UserController.ensureAuthorized, MatchDataController.put);
 router.delete('/matchdata/:_id',    UserController.ensureAuthorized, MatchDataController.delete);
 router.delete('/matchdataid/:_id',  UserController.ensureAuthorized, MatchDataController.delete_byid);
+
+router.get('/scoutingdata',         UserController.ensureAuthorized, ScoutingDataController.query);
+router.get('/scoutingdata/:_slug',  UserController.ensureAuthorized, ScoutingDataController.get);
+router.post('/scoutingdata',        UserController.ensureAuthorized, ScoutingDataController.post);
+router.put('/scoutingdata/:_slug',  UserController.ensureAuthorized, ScoutingDataController.put);
+router.delete('/scoutingdata/:_slug',UserController.ensureAuthorized, ScoutingDataController.delete);
 
 router.get('/pages',                PageController.query);
 router.get('/pages/:_id',           PageController.get);

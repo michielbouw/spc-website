@@ -1,5 +1,5 @@
 //= include ../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js
-//= include ../../node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js
+//= include ../../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js
 
 //= include ../../node_modules/tc-angular-chartjs/dist/tc-angular-chartjs.js
 //= include ../../node_modules/tc-angular-chartjs/node_modules/chart.js/Chart.js
