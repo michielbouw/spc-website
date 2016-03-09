@@ -1,7 +1,7 @@
 angular.module('mainapp.pageClubadmin')
-    .controller('mainapp.pageClubadmin.ClubadminController', ['Api', '$rootScope', '$scope', '$modal', '$sessionStorage',
+    .controller('mainapp.pageClubadmin.ClubadminController', ['Api', '$rootScope', '$scope', '$uibModal', '$sessionStorage',
         '$location',
-        function(Api, $rootScope, $scope, $modal, $sessionStorage, $location) {
+        function(Api, $rootScope, $scope, $uibModal, $sessionStorage, $location) {
 
         var self = this;
         self.datetime = new Date();
@@ -125,7 +125,7 @@ angular.module('mainapp.pageClubadmin')
         };
 
         self.userModalDel = function (size, i) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel.html',
                 controller: 'ModalDelInstance',
                 size: size,
@@ -143,7 +143,7 @@ angular.module('mainapp.pageClubadmin')
         };
 
         self.teamModalDel = function (size, i) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel1.html',
                 controller: 'ModalDelInstance',
                 size: size,

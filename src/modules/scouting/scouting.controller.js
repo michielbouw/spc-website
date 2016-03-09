@@ -45,6 +45,13 @@ angular.module('mainapp.scouting')
             }
         }
 
+        var editor_name;
+        if ($rootScope.currentUser.middle_name) {
+            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
+        } else {
+            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
+        }
+
         Api.ScoutingData.query(function (res) {
             self.scouting_data = res;
         });
@@ -96,6 +103,7 @@ angular.module('mainapp.scouting')
             }, {
                 team_data: self.scouting_data_club.team_data,
                 player_data: self.scouting_data_club.player_data,
+                editor: editor_name,
                 date_edited: self.datetime
             }, function () {
                 Api.ScoutingDataItem.get({
@@ -305,6 +313,7 @@ angular.module('mainapp.scouting')
                 }, {
                     team_data: self.scouting_data_club.team_data,
                     player_data: self.scouting_data_club.player_data,
+                    editor: editor_name,
                     date_edited: self.datetime
                 }, function () {
                     Api.ScoutingDataItem.get({
@@ -334,7 +343,8 @@ angular.module('mainapp.scouting')
                 club_slug: club_slug,
                 club_name: self.club_temp.club_name,
                 team_data: [],
-                player_data: []
+                player_data: [],
+                editor: editor_name
             }, function (res) {
                 self.club_temp.club_name = '';
                 self.club_temp.divisie = '';
@@ -366,6 +376,7 @@ angular.module('mainapp.scouting')
                 _slug: self.scouting_data_club._id
             }, {
                 player_data: self.scouting_data_club.player_data,
+                editor: editor_name,
                 date_edited: self.datetime
             }, function () {
                 self.player_temp = {};

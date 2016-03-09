@@ -1,7 +1,7 @@
 angular.module('mainapp.pageClubadmin')
-    .controller('mainapp.pageClubadmin.UsereditController', ['Api', '$rootScope', '$scope', '$modal', '$sessionStorage',
+    .controller('mainapp.pageClubadmin.UsereditController', ['Api', '$rootScope', '$scope', '$uibModal', '$sessionStorage',
         '$location', '$routeParams',
-        function(Api, $rootScope, $scope, $modal, $sessionStorage, $location, $routeParams) {
+        function(Api, $rootScope, $scope, $uibModal, $sessionStorage, $location, $routeParams) {
 
         var self = this;
         self.datetime = new Date();
@@ -123,7 +123,7 @@ angular.module('mainapp.pageClubadmin')
         };
 
         self.openModalDel = function (size) {
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'modalDel.html',
                 controller: 'ModalDelInstance',
                 size: size

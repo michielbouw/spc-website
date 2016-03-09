@@ -85,5 +85,6 @@ module.exports = mongoose.model('ScoutingData', {
         }]
     }],
 
+    editor : {type : String},
     date_edited: { type: Date, default: Date.now, required: true }
 });
