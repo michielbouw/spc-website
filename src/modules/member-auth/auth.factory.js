@@ -194,11 +194,11 @@ angular.module('mainapp.memberAuth')
 
                 } else if (nextRoute.access.permission == "technische-staff+" && user.role == "technische-staff+") {
 
-                } else if (nextRoute.access.permission == "technische-staff" && user.role == "technische-staff") {
+                } else if (nextRoute.access.permission == "technische-staff" && (user.role == "technische-staff+" || user.role == "technische-staff")) {
 
-                } else if (nextRoute.access.permission == "externe-staff" && (user.role == "technische-staff" || user.role == "externe-staff")) {
+                } else if (nextRoute.access.permission == "externe-staff" && (user.role == "technische-staff+" || user.role == "technische-staff" || user.role == "externe-staff")) {
 
-                } else if (nextRoute.access.permission == "speler" && (user.role == "technische-staff" || user.role == "externe-staff" || user.role == "speler")) {
+                } else if (nextRoute.access.permission == "speler" && (user.role == "technische-staff+" || user.role == "technische-staff" || user.role == "externe-staff" || user.role == "speler")) {
 
                 } else if (nextRoute.access.permission == "fan" && (user.role == "fan")) {
 

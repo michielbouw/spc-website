@@ -10,6 +10,10 @@ angular.module('mainapp.scouting')
         self.club_slug_select = '';
         self.player_slug_select = '';
         self.season_select = '';
+        self.archive_season_select = '';
+        self.archive_match_select = '';
+        self.player_slug_select = '';
+        self.player_season_select = '';
         self.scouting_data = [];
         self.team_data = [];
         self.player_data = [];
@@ -21,6 +25,8 @@ angular.module('mainapp.scouting')
         self.player_temp.spelerNaam = '';
         self.player_temp.error = false;
 
+        // if user role == 'technische-staff+' or 'admin' load: '/scouting'
+        // else load: '/scouting/{{ currentclub.teams.team_slug }}'
         if ($rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
             if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
                 $location.path('/scouting/' + $rootScope.currentClub.teams[0].team_slug);
@@ -46,17 +52,18 @@ angular.module('mainapp.scouting')
         }
 
         var editor_name;
-        if ($rootScope.currentUser.middle_name) {
-            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
-        } else {
-            editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
-        }
-
         Api.ScoutingData.query(function (res) {
             self.scouting_data = res;
+
+            if ($rootScope.currentUser.middle_name) {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.middle_name + ' ' + $rootScope.currentUser.last_name;
+            } else {
+                editor_name = $rootScope.currentUser.first_name + ' ' + $rootScope.currentUser.last_name;
+            }
         });
 
         self.selectClub = function () {
+            // select club from list and get data
             Api.ScoutingDataItem.get({
                 _slug: self.club_slug_select
             }, function (res) {
@@ -65,39 +72,104 @@ angular.module('mainapp.scouting')
                 self.divisie = res.divisie;
                 self.team_data = res.team_data;
                 self.player_data = res.player_data;
+
+                self.season_select = '';
+                self.archive_season_select = '';
+                self.player_slug_select = '';
             });
         };
 
         self.selectPlayer = function () {
-            self.player_stats = angular.copy($filter('filter')(self.player_data, {spelerNaam_slug: self.player_slug_select}, true)[0]);
+            // select data from player_data for current player slug
+            self.player_stats = $filter('filter')(self.player_data, {spelerNaam_slug: self.player_slug_select}, true)[0];
+            self.player_season_select = '';
+            self.player_season_stats = '';
         };
         self.selectPlayerSeason = function () {
-            self.player_season_stats = angular.copy(($filter('filter')(self.player_stats.matches, {season: self.player_season_select}, true)[0]).match);
+            // if current player has current season select this seasons matches.match
+            if ($filter('filter')(self.player_stats.matches, {season: self.player_season_select}, true) && $filter('filter')(self.player_stats.matches, {season: self.player_season_select}, true)[0]) {
+                self.player_season_stats = ($filter('filter')(self.player_stats.matches, {season: self.player_season_select}, true)[0]).match;
+            }
+            self.playererror = '';
+        };
+        self.savePlayer = function () {
+            // save all player_data from current player from current club
+            // edited content automatically changed because of (unsafe) relations
+
+            //console.log(JSON.stringify(self.scouting_data_club.player_data));
+
+            Api.ScoutingDataItem.put({
+                _slug: self.scouting_data_club._id
+            }, {
+                player_data: self.player_data,
+                editor: editor_name,
+                date_edited: self.datetime
+            }, function () {
+                Api.ScoutingDataItem.get({
+                    _slug: self.club_slug_select
+                }, function (res) {
+                    self.scouting_data_club = res;
+                    self.team_data = res.team_data;
+                    self.player_data = res.player_data;
+                    // refresh view
+                    self.selectPlayer();
+                });
+
+                self.playererror = 'Opgeslagen';
+            }, function () {
+                self.playererror = 'Er ging iets mis, excuus voor het ongemak.';
+            });
         };
 
         self.selectArchiveSeason = function () {
-            self.archive_season = ($filter('filter')(self.team_data, {season: self.archive_season_select}, true)[0]).matches;
+            // if team_data has current season select this seasons team_data.matches
+            if ($filter('filter')(self.team_data, {season: self.archive_season_select}, true) && $filter('filter')(self.team_data, {season: self.archive_season_select}, true)[0]) {
+                self.archive_season = ($filter('filter')(self.team_data, {season: self.archive_season_select}, true)[0]).matches;
+            }
+            self.archive_match_select = '';
         };
         self.selectArchiveMatch = function () {
             self.archive_stats = [];
-            angular.forEach(self.player_data, function (value, key) {
-                var temp_season = ($filter('filter')(value.matches, {season: self.archive_season_select}, true)[0]).match;
-                var temp = $filter('filter')(temp_season, {wedstrijd_slug: self.archive_match_select}, true)[0];
-                temp.spelerNaam_slug = angular.copy(value.spelerNaam_slug);
-                temp.spelerNaam = angular.copy(value.spelerNaam);
+            self.archive_stats_temp = [];
 
-                self.archive_stats.push(temp);
+            // select match data from player_data for current season
+            angular.forEach(self.player_data, function (value, key) {
+                if ($filter('filter')(value.matches, {season: self.archive_season_select}, true) && $filter('filter')(value.matches, {season: self.archive_season_select}, true)[0]) {
+                    if (($filter('filter')(value.matches, {season: self.archive_season_select}, true)[0]).match) {
+                        var temp_season = ($filter('filter')(value.matches, {season: self.archive_season_select}, true)[0]).match;
+
+                        // if match exists:
+                        if ($filter('filter')(temp_season, {wedstrijd_slug: self.archive_match_select}, true) && $filter('filter')(temp_season, {wedstrijd_slug: self.archive_match_select}, true)[0]) {
+                            var temp = $filter('filter')(temp_season, {wedstrijd_slug: self.archive_match_select}, true)[0];
+                            temp.spelerNaam_slug = angular.copy(value.spelerNaam_slug);
+                            temp.spelerNaam = angular.copy(value.spelerNaam);
+
+                            self.archive_stats.push(temp);
+                        }
+                    }
+                }
             });
 
+            // select match data from team_data for current season
             self.archive_match = $filter('filter')(self.archive_season, {wedstrijd_slug: self.archive_match_select}, true)[0];
+
+            // if opstellingThuis/Uit is empty then create array to make it editable
             if (!self.archive_match.opstellingThuis) {
                 self.archive_match.opstellingThuis = {};
             }
             if (!self.archive_match.opstellingUit) {
                 self.archive_match.opstellingUit = {};
             }
+
+            self.archiveerror = '';
         };
-        self.selectArchiveSave = function () {
+        self.saveArchive = function () {
+            // save all team_data and player_data from current club
+            // edited content automatically changed because of (unsafe) relations
+
+            //console.log(JSON.stringify(self.scouting_data_club.team_data));
+            //console.log(JSON.stringify(self.scouting_data_club.player_data));
+
             Api.ScoutingDataItem.put({
                 _slug: self.scouting_data_club._id
             }, {
@@ -112,9 +184,8 @@ angular.module('mainapp.scouting')
                     self.scouting_data_club = res;
                     self.team_data = res.team_data;
                     self.player_data = res.player_data;
-
+                    // refresh view
                     self.selectArchiveSeason();
-                    self.selectArchiveMatch();
                 });
 
                 self.archiveerror = 'Opgeslagen';
@@ -122,14 +193,59 @@ angular.module('mainapp.scouting')
                 self.archiveerror = 'Er ging iets mis, excuus voor het ongemak.';
             });
         };
+        self.addArchiveField = function () {
+            // add field for player_data in extra table with current match info
+            if (self.archive_match_select !== '') {
+                var temp = {};
+                temp.wedstrijd_slug = self.archive_match.wedstrijd_slug;
+                temp.datum = self.archive_match.datum;
+                temp.thuis = self.archive_match.thuis;
+                temp.uit = self.archive_match.uit;
+                temp.eindstand = self.archive_match.eindstand;
+                self.archive_stats_temp.push(temp);
+            }
+        };
+        self.changeArchiveField = function (i, player) {
+            // convert data from extra table to player_data with correct player
+
+            // temp = archive_stats_temp data with $index i
+            // select player from self.player_data with player (= spelerNaam_slug)
+            var temp = self.archive_stats_temp[i];
+            var tempplayer = $filter('filter')(self.player_data, {spelerNaam_slug: player}, true)[0];
+
+            // if current season is in matches select this season
+            if ($filter('filter')(tempplayer.matches, {season: self.archive_season_select}, true) && $filter('filter')(tempplayer.matches, {season: self.archive_season_select}, true)[0]) {
+                var tempplayerseason = $filter('filter')(tempplayer.matches, {season: self.archive_season_select}, true)[0];
+                // if match array exists:
+                if (tempplayerseason.match) {
+                    tempplayerseason.match.push(temp);
+                } else {
+                    // create match array
+                    tempplayerseason.match = [];
+                    tempplayerseason.match.push(temp);
+                }
+            } else {
+                // create new season from self.archive_season_select
+                var temp1season = {};
+                temp1season.season = self.archive_season_select;
+                temp1season.match = [];
+                temp1season.match.push(temp);
+                tempplayer.matches.push(temp1season);
+            }
+            // refresh view
+            self.selectArchiveMatch();
+        };
 
         self.selectSeason = function () {
+            // if self.season_select is not empty:
             if (self.season_select !== '') {
+                // create match team_data for current season (empty offcourse)
                 self.team_stats_temp = {};
                 self.team_stats_temp.season = self.season_select;
                 self.team_stats_temp.opstellingThuis = {};
                 self.team_stats_temp.opstellinguit = {};
 
+                // create match player_data for current season (empty offcourse)
                 self.player_stats_temp = [];
                 var temp = {};
                 temp.spelerNaam_slug = '';
@@ -137,9 +253,10 @@ angular.module('mainapp.scouting')
                 temp.match = {};
                 self.player_stats_temp.push(temp);
             }
+            self.error = '';
         };
-
         self.addField = function () {
+            // add field for player_data in extra array
             if (self.season_select !== '') {
                 var temp = {};
                 temp.spelerNaam_slug = '';
@@ -149,18 +266,28 @@ angular.module('mainapp.scouting')
             }
         };
         self.changeField = function (i, player) {
+            // convert data from extra array to player_stats_temp with correct player
             self.player_stats_temp[i].spelerNaam_slug = player;
         };
-
         self.save = function () {
+            // save all team_data and player_data from current club
+            // edited content will not be changed automatically changed because of safe relations
+
+            // if all required fields are filled in:
             if (self.season_select !== '' && self.team_stats_temp.thuis && self.team_stats_temp.uit && self.team_stats_temp.datum) {
+                // create match info
                 self.team_stats_temp.wedstrijd = self.team_stats_temp.thuis + ' - ' + self.team_stats_temp.uit;
                 self.team_stats_temp.wedstrijd_slug = self.team_stats_temp.wedstrijd.trim().toLowerCase().replace(/\s+/g, '');
                 self.team_stats_temp.wedstrijd_slug += self.team_stats_temp.datum.trim().toLowerCase().replace(/\s+/g, '');
 
+                // if season exists:
                 if ($filter('filter')(self.scouting_data_club.team_data, {season: self.season_select}, true) && $filter('filter')(self.scouting_data_club.team_data, {season: self.season_select}, true)[0]) {
+                    // select season_matches
                     var season_matches = ($filter('filter')(self.scouting_data_club.team_data, {season: self.season_select}, true)[0]).matches;
+
+                    // if match exists:
                     if ($filter('filter')(season_matches, {wedstrijd_slug: self.team_stats_temp.wedstrijd_slug}, true) && $filter('filter')(season_matches, {wedstrijd_slug: self.team_stats_temp.wedstrijd_slug}, true)[0]) {
+                        // edit this match data
                         angular.forEach(season_matches, function (value, key) {
                             if (value.wedstrijd_slug === self.team_stats_temp.wedstrijd_slug) {
                                 value.datum = self.team_stats_temp.datum;
@@ -178,6 +305,7 @@ angular.module('mainapp.scouting')
                             }
                         });
                     } else {
+                        // create new match
                         var temp21 = {};
                         temp21.wedstrijd_slug = self.team_stats_temp.wedstrijd_slug;
                         temp21.datum = self.team_stats_temp.datum;
@@ -195,6 +323,7 @@ angular.module('mainapp.scouting')
                         season_matches.push(temp21);
                     }
                 } else {
+                    // create new season and match
                     var temp1 = {};
                     temp1.season = self.season_select;
                     temp1.matches = [];
@@ -217,15 +346,22 @@ angular.module('mainapp.scouting')
                     self.scouting_data_club.team_data.push(temp1);
                 }
 
+                // for each added player
                 angular.forEach(self.player_stats_temp, function (value, key) {
+                    // if player exists:
                     if ($filter('filter')(self.scouting_data_club.player_data, {spelerNaam_slug: value.spelerNaam_temp}, true) && $filter('filter')(self.scouting_data_club.player_data, {spelerNaam_slug: value.spelerNaam_temp}, true)[0]) {
+                        // select player and player matches
                         var player = $filter('filter')(self.scouting_data_club.player_data, {spelerNaam_slug: value.spelerNaam_slug}, true)[0];
                         var player_matches = ($filter('filter')(self.scouting_data_club.player_data, {spelerNaam_slug: value.spelerNaam_slug}, true)[0]).matches;
 
+                        // if season exists:
                         if ($filter('filter')(player_matches, {season: self.season_select}, true) && $filter('filter')(player_matches, {season: self.season_select}, true)[0]) {
+                            // select season match(es)
                             var player_season_matches = ($filter('filter')(player_matches, {season: self.season_select}, true)[0]).match;
 
+                            // if match exists:
                             if ($filter('filter')(player_season_matches, {wedstrijd_slug: self.team_stats_temp.wedstrijd_slug}, true) && $filter('filter')(player_season_matches, {wedstrijd_slug: self.team_stats_temp.wedstrijd_slug}, true)[0]) {
+                                // edit this match data
                                 angular.forEach(player_season_matches, function (value1, key1) {
                                     if (value1.wedstrijd_slug === self.team_stats_temp.wedstrijd_slug) {
                                         value1.datum = self.team_stats_temp.datum;
@@ -244,12 +380,14 @@ angular.module('mainapp.scouting')
                                         value1.duelkracht = value.match.duelkracht;
                                         value1.passing = value.match.passing;
                                         value1.afronding = value.match.afronding;
+                                        value1.tweebenigheid = value.match.tweebenigheid;
 
                                         value1.opmerking = value.match.opmerking;
                                         value1.date_added = self.datetime;
                                     }
                                 });
                             } else {
+                                // create new match
                                 var temp21 = {};
                                 temp21.wedstrijd_slug = self.team_stats_temp.wedstrijd_slug;
                                 temp21.datum = self.team_stats_temp.datum;
@@ -268,12 +406,14 @@ angular.module('mainapp.scouting')
                                 temp21.duelkracht = value.match.duelkracht;
                                 temp21.passing = value.match.passing;
                                 temp21.afronding = value.match.afronding;
+                                temp21.tweebenigheid = value.match.tweebenigheid;
 
                                 temp21.opmerking = value.match.opmerking;
                                 temp21.date_added = self.datetime;
                                 player_season_matches.push(temp21);
                             }
                         } else {
+                            // create season and match
                             var temp1 = {};
                             temp1.season = self.season_select;
                             temp1.match = [];
@@ -295,6 +435,7 @@ angular.module('mainapp.scouting')
                             temp2.duelkracht = value.match.duelkracht;
                             temp2.passing = value.match.passing;
                             temp2.afronding = value.match.afronding;
+                            temp2.tweebenigheid = value.match.tweebenigheid;
 
                             temp2.opmerking = value.match.opmerking;
                             temp2.date_added = self.datetime;
@@ -305,8 +446,8 @@ angular.module('mainapp.scouting')
                     }
                 });
 
-                console.log(JSON.stringify(self.scouting_data_club.team_data));
-                console.log(JSON.stringify(self.scouting_data_club.player_data));
+                //console.log(JSON.stringify(self.scouting_data_club.team_data));
+                //console.log(JSON.stringify(self.scouting_data_club.player_data));
 
                 Api.ScoutingDataItem.put({
                     _slug: self.scouting_data_club._id
@@ -322,6 +463,8 @@ angular.module('mainapp.scouting')
                         self.scouting_data_club = res;
                         self.team_data = res.team_data;
                         self.player_data = res.player_data;
+                        // refresh view
+                        self.selectSeason();
                     });
 
                     self.error = 'Opgeslagen';
@@ -334,6 +477,7 @@ angular.module('mainapp.scouting')
         };
 
         self.addClub = function (club_temp) {
+            // add new club
             self.club_temp = club_temp;
             var club_slug = self.club_temp.club_name.trim().toLowerCase().replace(/\s+/g, '');
             club_slug += self.club_temp.divisie.trim().toLowerCase().replace(/\s+/g, '');
@@ -360,6 +504,7 @@ angular.module('mainapp.scouting')
         };
 
         self.addPlayer = function (player_temp) {
+            // add new player for current club
             self.player_temp = player_temp;
             var spelerNaam_slug = self.player_temp.spelerNaam.trim().toLowerCase().replace(/\s+/g, '');
 

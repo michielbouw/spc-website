@@ -2,64 +2,85 @@
 
 .content.content-page {
   .content-scouting-home {
-    table#scoutingdata {
-      font-size: 10px;
-      //width: 91%;
+    .nav-pills > li > a {
+      border-radius: 15px;
+      font-size: 13px;
+      position: relative;
+      display: block;
+      padding: 3px 10px;
+    }
 
-      td:first-child {
-        width: 25%;
+    .content-scouting {
+      h4 {
+        text-transform: uppercase;
+        color: $middleblue;
       }
-      td:last-child {
-        width: 15%;
+      h4.small {
+        text-transform: none;
+        margin-top: -5px;
+        font-size: 12px;
+        color: #000000;
       }
-      th {
-        padding: 3px 6px;
-      }
-      th:last-child {
-        text-align: right;
-      }
-      thead tr {
-        th.rotate {
-          white-space: nowrap;
-          height: 100px;
-          width: 30px;
-          min-width: 30px;
-          max-width: 30px;
-          position: relative;
-          vertical-align: bottom;
-          padding: 0;
-          font-size: 12px;
-          line-height: 0.8;
+
+      table#scoutingdata {
+        font-size: 10px;
+        //width: 91%;
+
+        td:first-child {
+          width: 25%;
+        }
+        td:last-child {
+          width: 15%;
+        }
+        th {
+          padding: 3px 6px;
         }
         th:last-child {
-          //overflow: hidden;
+          text-align: right;
         }
-        th.rotate > div {
-          position: relative;
-          top: 0px;
-          left: 48px;
-          height: 100%;
-          -ms-transform: skew(-45deg, 0deg);
-          -moz-transform: skew(-45deg, 0deg);
-          -webkit-transform: skew(-45deg, 0deg);
-          -o-transform: skew(-45deg, 0deg);
-          transform: skew(-45deg, 0deg);
-          border-left: 1px solid $lightgrey;
-          overflow: hidden;
-        }
-        th.rotate > div > span {
-          -ms-transform: skew(45deg, 0deg) rotate(315deg);
-          -moz-transform: skew(45deg, 0deg) rotate(315deg);
-          -webkit-transform: skew(45deg, 0deg) rotate(315deg);
-          -o-transform: skew(45deg, 0deg) rotate(315deg);
-          transform: skew(45deg, 0deg) rotate(315deg);
-          position: absolute;
-          bottom: 53px;
-          left: -43px;
-          display: inline-block;
-          width: 134px; /* 110 / cos(45) - 30 cos (45) */
-          text-align: left;
-          white-space: nowrap; /* whether to display in one line or not */
+        thead tr {
+          th.rotate {
+            white-space: nowrap;
+            height: 100px;
+            width: 30px;
+            min-width: 30px;
+            max-width: 30px;
+            position: relative;
+            vertical-align: bottom;
+            padding: 0;
+            font-size: 12px;
+            line-height: 0.8;
+          }
+          th:last-child {
+            //overflow: hidden;
+          }
+          th.rotate > div {
+            position: relative;
+            top: 0px;
+            left: 48px;
+            height: 100%;
+            -ms-transform: skew(-45deg, 0deg);
+            -moz-transform: skew(-45deg, 0deg);
+            -webkit-transform: skew(-45deg, 0deg);
+            -o-transform: skew(-45deg, 0deg);
+            transform: skew(-45deg, 0deg);
+            border-left: 1px solid $lightgrey;
+            overflow: hidden;
+          }
+          th.rotate > div > span {
+            -ms-transform: skew(45deg, 0deg) rotate(315deg);
+            -moz-transform: skew(45deg, 0deg) rotate(315deg);
+            -webkit-transform: skew(45deg, 0deg) rotate(315deg);
+            -o-transform: skew(45deg, 0deg) rotate(315deg);
+            transform: skew(45deg, 0deg) rotate(315deg);
+            position: absolute;
+            bottom: 53px;
+            left: -43px;
+            display: inline-block;
+            width: 134px; /* 110 / cos(45) - 30 cos (45) */
+            text-align: left;
+            white-space: nowrap; /* whether to display in one line or not */
+          }
         }
       }
     }

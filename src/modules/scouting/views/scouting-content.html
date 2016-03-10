@@ -42,16 +42,22 @@
                 </li>
             </ul>
             <hr>
-            <p>Hier kunt u scoutingverslagen opstellen. Voor een club/team kan je een wedstrijd aanmaken voor een bepaald seizoen
-                en voor spelers van die club kunnen dan gegevens worden opgeslagen. Als een club waarvan spelersdata moet
-                worden opgeslagen niet bestaat kan deze aangemaakt worden. Als een speler niet bestaat (sowieso na aanmaken van
-                nieuwe club) kan ook een speler worden aangemaakt. Daarna kan een speler worden geselecteerd als nieuwe
-                wedstrijd is gemaakt. Er is een archief van eerdere analyses.
-            </p>
-            <hr>
+            <div class="col-xs-12 no-padding content-scouting">
+                <h4 class="small">
+                    Dit is een pagina voor scoutingverslagen. Er is een archief van eerdere analyses waar deze evt. later
+                    wijzigbaar zijn.
+                </h4>
+                <hr>
+            </div>
 
-            <div class="col-xs-12 no-padding tab-pane fade in active" role="tabpanel" id="nieuw">
-                <p><strong>Verslag</strong></p>
+            <div class="col-xs-12 no-padding content-scouting tab-pane fade in active" role="tabpanel" id="nieuw">
+                <h4>Verslag</h4>
+                <h4 class="small">
+                    Hier kunt u scoutingverslagen opstellen. Voor een club/team kan je een wedstrijd aanmaken voor een bepaald
+                    seizoen en voor spelers van die club kunnen dan gegevens worden opgeslagen. Als een club waarvan spelersdata
+                    moet worden opgeslagen niet bestaat kan deze club aangemaakt worden via de knop hierboven naast
+                    'Archief per speler'. Als een speler niet bestaat (sowieso na aanmaken van een nieuwe club) kan ook een speler
+                    worden aangemaakt via de knop (rechts) ernaast.</h4>
                 <br>
                 <div class="form-group">
                     <label for="inputclub" class="col-sm-3 control-label">Kies club</label>
@@ -125,6 +131,7 @@
                             <th class="rotate"><div><span><small style="font-weight: normal;">Duelkracht</small></span></div></th>
                             <th class="rotate"><div><span><small style="font-weight: normal;">Passing</small></span></div></th>
                             <th class="rotate"><div><span><small style="font-weight: normal;">Afronding</small></span></div></th>
+                            <th class="rotate"><div><span><small style="font-weight: normal;">Tweebenigheid</small></span></div></th>
                             <th><div><span><small style="font-weight: normal;">Opmerking</small></span></div></th>
                         </tr>
                         </thead>
@@ -169,6 +176,9 @@
                                 <input type="text" class="form-control input-sm" ng-model="player.match.afronding">
                             </td>
                             <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.match.tweebenigheid">
+                            </td>
+                            <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.match.opmerking">
                             </td>
                         </tr>
@@ -184,7 +194,9 @@
 
                     <div class="col-xs-12 no-padding" ng-if="data.season_select !== ''">
                         <hr>
-                        <p><strong>Opstelling</strong></p>
+                        <div class="col-xs-12">
+                            <p><strong>Opstelling</strong></p>
+                        </div>
                         <br>
                         <div class="col-md-6 col-xs-12">
                             <p>Thuis: </p>
@@ -203,41 +215,41 @@
                             </div>
                             <br class="clear">
                             <div>
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['26']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['28']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['27']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['26']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['28']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['27']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['21']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['22']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['23']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['24']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['25']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['21']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['22']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['23']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['24']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['25']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['18']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['19']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['20']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['18']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['19']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['20']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['13']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['14']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['15']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['16']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['17']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['13']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['14']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['15']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['16']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['17']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['10']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['11']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['12']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['10']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['11']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['12']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['5']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['6']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['7']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['8']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['9']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['5']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['6']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['7']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['8']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['9']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['2']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['3']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['4']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['2']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['3']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingThuis['4']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.team_stats_temp.opstellingThuis['1']"></div>
+                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.team_stats_temp.opstellingThuis['1']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12">
@@ -257,41 +269,41 @@
                             </div>
                             <br class="clear">
                             <div>
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['26']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['28']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['27']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['26']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['28']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['27']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['21']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['22']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['23']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['24']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['25']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['21']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['22']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['23']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['24']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['25']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['18']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['19']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['20']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['18']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['19']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['20']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['13']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['14']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['15']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['16']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['17']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['13']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['14']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['15']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['16']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['17']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['10']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['11']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['12']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['10']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['11']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['12']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['5']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['6']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['7']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['8']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['9']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['5']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['6']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['7']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['8']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['9']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['2']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['3']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['4']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['2']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['3']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.team_stats_temp.opstellingUit['4']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.team_stats_temp.opstellingUit['1']"></div>
+                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.team_stats_temp.opstellingUit['1']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                             </div>
                         </div>
                     </div>
@@ -311,8 +323,11 @@
                 <br class="clear">
             </div>
 
-            <div class="col-xs-12 no-padding tab-pane fade" role="tabpanel" id="archive">
-                <p><strong>Archief</strong></p>
+            <div class="col-xs-12 content-scouting no-padding tab-pane fade" role="tabpanel" id="archive">
+                <h4>Archief</h4>
+                <h4 class="small">
+                    Dit archief bied archief op wedstrijd basis per club. Eerdere analyses kunnen hier evt. gewijzigd worden.
+                </h4>
                 <br>
                 <div class="form-group">
                     <label for="inputclub" class="col-sm-3 control-label">Kies club</label>
@@ -325,23 +340,21 @@
                 <br>
 
                 <div ng-if="data.scouting_data_club">
-                    <div class="col-xs-12">
-                        <button class="btn btn-primary btn-xs" ng-click="data.selectArchiveSave();">Opslaan</button> <span ng-if="data.archiveerror">{{ data.archiveerror }}</span>
+                    <div ng-if="data.archive_match_select !== ''" class="col-xs-12">
+                        <button class="btn btn-primary btn-xs" ng-click="data.saveArchive();">Opslaan</button> <span ng-if="data.archiveerror">{{ data.archiveerror }}</span>
                         <br><br>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="inputseason" class="col-sm-3 control-label">Kies seizoen *</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="inputseason" ng-model="data.archive_season_select" ng-change="data.selectArchiveSeason();">
-                                <option>2015-2016</option>
-                                <option>2016-2017</option>
-                                <option>2017-2018</option>
+                            <select class="form-control" id="inputseason" ng-model="data.archive_season_select" ng-change="data.selectArchiveSeason();"
+                                    ng-options="team.season as team.season for team in data.team_data">
                             </select>
                         </div>
                     </div>
                     <br>
-                    <div class="form-group">
+                    <div class="form-group" ng-if="data.archive_season_select !== ''">
                         <label for="inputdate" class="col-sm-3 control-label">Kies wedstrijd *</label>
                         <div class="col-sm-9">
                             <select class="form-control" id="inputdate" ng-model="data.archive_match_select" ng-change="data.selectArchiveMatch();"
@@ -352,7 +365,7 @@
                     <div class="col-xs-12">
                         <hr>
                     </div>
-                    <div class="col-xs-12 table-responsive" ng-if="data.archive_match_select">
+                    <div class="col-xs-12 table-responsive" ng-if="data.archive_match_select !== ''">
                     <table id="scoutingdata" class="table table-condensed">
                         <thead>
                         <tr>
@@ -368,11 +381,12 @@
                             <th class="rotate"><div><span><small style="font-weight: normal;">Duelkracht</small></span></div></th>
                             <th class="rotate"><div><span><small style="font-weight: normal;">Passing</small></span></div></th>
                             <th class="rotate"><div><span><small style="font-weight: normal;">Afronding</small></span></div></th>
+                            <th class="rotate"><div><span><small style="font-weight: normal;">Tweebenigheid</small></span></div></th>
                             <th><div><span><small style="font-weight: normal;">Opmerking</small></span></div></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="player in data.archive_stats | orderBy:'date_added':-1">
+                        <tr ng-repeat="player in data.archive_stats | orderBy:'date_added'">
                             <td>
                                 {{ player.spelerNaam }}
                             </td>
@@ -410,6 +424,55 @@
                                 <input type="text" class="form-control input-sm" ng-model="player.afronding">
                             </td>
                             <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.tweebenigheid">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.opmerking">
+                            </td>
+                        </tr>
+                        <tr ng-repeat="player in data.archive_stats_temp">
+                            <td>
+                                <select class="form-control input-sm" ng-model="temp_speler_slug1" ng-change="data.changeArchiveField($index, temp_speler_slug1);"
+                                        ng-options="player1.spelerNaam_slug as player1.spelerNaam for player1 in data.player_data | orderBy:'spelerNaam'">
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.positie1">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.positie2">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.lengte">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.snelheid">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.explosiviteit">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.handelingssnelheid">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.atletischVermogen">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.wendbaarheid">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.duelkracht">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.passing">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.afronding">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-sm" ng-model="player.tweebenigheid">
+                            </td>
+                            <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.opmerking">
                             </td>
                         </tr>
@@ -417,15 +480,17 @@
                     </table>
                     </div>
                     <br class="clear">
-                    <!--<div class="col-xs-12 text-center" ng-if="data.archive_season_select">
+                    <div class="col-xs-12 text-center" ng-if="data.archive_match_select !== ''">
                         <br>
                         <button class="btn btn-primary btn-xs" ng-click="data.addArchiveField();">Regel toevoegen</button>
                         <br><br>
-                    </div>-->
+                    </div>
 
-                    <div class="col-xs-12 no-padding" ng-if="data.archive_match_select">
+                    <div class="col-xs-12 no-padding" ng-if="data.archive_match_select !== ''">
                         <hr>
-                        <p><strong>Opstelling</strong></p>
+                        <div class="col-xs-12">
+                            <p><strong>Opstelling</strong></p>
+                        </div>
                         <br>
                         <div class="col-md-6 col-xs-12">
                             <p>Thuis: </p>
@@ -444,41 +509,41 @@
                             </div>
                             <br class="clear">
                             <div>
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['26']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['28']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['27']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['26']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['28']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['27']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['21']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['22']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['23']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['24']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['25']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['21']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['22']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['23']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['24']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['25']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['18']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['19']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['20']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['18']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['19']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['20']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['13']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['14']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['15']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['16']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['17']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['13']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['14']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['15']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['16']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['17']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['10']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['11']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['12']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['10']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['11']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['12']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['5']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['6']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['7']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['8']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['9']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['5']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['6']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['7']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['8']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['9']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['2']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['3']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['4']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['2']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['3']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingThuis['4']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.archive_match.opstellingThuis['1']"></div>
+                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.archive_match.opstellingThuis['1']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12">
@@ -498,50 +563,50 @@
                             </div>
                             <br class="clear">
                             <div>
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['26']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['28']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['27']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['26']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['28']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['27']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['21']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['22']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['23']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['24']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['25']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['21']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['22']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['23']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['24']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['25']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['18']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['19']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['20']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['18']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['19']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['20']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['13']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['14']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['15']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['16']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['17']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['13']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['14']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['15']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['16']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['17']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['10']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['11']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['12']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['10']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['11']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['12']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['5']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['6']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['7']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['8']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['9']"></div>
+                                <div class="col-xs-2 col-xs-offset-1 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['5']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['6']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['7']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['8']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['9']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['2']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['3']"></div>
-                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['4']"></div>
+                                <div class="col-xs-2 col-xs-offset-3 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['2']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['3']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
+                                <div class="col-xs-2 no-padding"><input type="text" class="form-control input-sm" ng-model="data.archive_match.opstellingUit['4']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                                 <br class="clear">
-                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.archive_match.opstellingUit['1']"></div>
+                                <div class="col-xs-2 col-xs-offset-5 no-padding"><input type="text" class="form-control input-sm" placeholder="keeper" ng-model="data.archive_match.opstellingUit['1']" uib-typeahead="player1.spelerNaam for player1 in data.player_data | filter:$viewValue | limitTo:8" typeahead-show-hint="true"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12" ng-if="data.archive_match_select">
+                    <div class="col-xs-12" ng-if="data.archive_match_select !== ''">
                         <hr>
                     </div>
 
                     <br>
-                    <div class="form-group" ng-if="data.archive_match_select">
+                    <div class="form-group" ng-if="data.archive_match_select !== ''">
                         <label for="inputopm" class="col-sm-3 control-label">Opmerking</label>
                         <div class="col-sm-9">
                             <textarea rows="2" class="form-control" id="inputopm" placeholder="Opmerking plaatsen" ng-model="data.archive_match.opmerking"></textarea>
@@ -553,8 +618,11 @@
                 <br class="clear">
             </div>
 
-            <div class="col-xs-12 no-padding tab-pane fade" role="tabpanel" id="archiveplayer">
-                <p><strong>Archief per speler</strong></p>
+            <div class="col-xs-12 content-scouting no-padding tab-pane fade" role="tabpanel" id="archiveplayer">
+                <h4>Archief per speler</h4>
+                <h4 class="small">
+                    Dit archief bied archief op speler basis per club. Eerdere analyses kunnen hier evt. gewijzigd worden.
+                </h4>
                 <br>
                 <div class="form-group">
                     <label for="inputclub" class="col-sm-3 control-label">Kies club</label>
@@ -569,10 +637,10 @@
                     <p>Deze club heeft (nog) geen data.</p>
                 </div>
                 <br>
-                <!--<div class="col-xs-12">
-                        <button class="btn btn-primary btn-xs" ng-click="data.save();">Opslaan</button> <span ng-if="data.error">{{ data.error }}</span>
-                        <br><br>
-                    </div>-->
+                <div ng-if="data.player_season_stats" class="col-xs-12">
+                    <button class="btn btn-primary btn-xs" ng-click="data.savePlayer();">Opslaan</button> <span ng-if="data.playererror">{{ data.playererror }}</span>
+                    <br><br>
+                </div>
                 <br>
                 <div ng-if="data.team_data.length > 0" class="form-group">
                     <label for="inputclub" class="col-sm-3 control-label">Kies speler</label>
@@ -586,10 +654,8 @@
                 <div ng-if="data.player_stats" class="form-group">
                     <label for="inputseason" class="col-sm-3 control-label">Kies seizoen *</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="inputseason" ng-model="data.player_season_select" ng-change="data.selectPlayerSeason();">
-                            <option>2015-2016</option>
-                            <option>2016-2017</option>
-                            <option>2017-2018</option>
+                        <select class="form-control" id="inputseason" ng-model="data.player_season_select" ng-change="data.selectPlayerSeason();"
+                                ng-options="matches.season as matches.season for matches in data.player_stats.matches">
                         </select>
                     </div>
                 </div>
@@ -615,6 +681,7 @@
                                 <th class="rotate"><div><span><small style="font-weight: normal;">Duelkracht</small></span></div></th>
                                 <th class="rotate"><div><span><small style="font-weight: normal;">Passing</small></span></div></th>
                                 <th class="rotate"><div><span><small style="font-weight: normal;">Afronding</small></span></div></th>
+                                <th class="rotate"><div><span><small style="font-weight: normal;">Tweebenigheid</small></span></div></th>
                                 <th><div><span><small style="font-weight: normal;">Opmerking</small></span></div></th>
                             </tr>
                             </thead>
@@ -657,6 +724,9 @@
                                     <input type="text" class="form-control input-sm" ng-model="match.afronding">
                                 </td>
                                 <td>
+                                    <input type="text" class="form-control input-sm" ng-model="match.tweebenigheid">
+                                </td>
+                                <td>
                                     <input type="text" class="form-control input-sm" ng-model="match.opmerking">
                                 </td>
                             </tr>
@@ -670,9 +740,10 @@
 
             <script type="text/ng-template" id="modalAdd.html">
                 <div class="modal-header">
-                    <h3 class="modal-title">Club toevoegen</h3>
+                    <h4 class="modal-title">Club toevoegen</h4>
                 </div>
                 <div class="modal-body">
+                    <p>Via dit formulier kan een club toegevoegd worden om van deze club data te kunnen opslaan.</p>
                     <p ng-if="data.club_temp.error"><strong>{{ data.club_temp.error }}</strong></p>
                     <div class="form-group">
                         <label for="inputTeam" class="col-sm-3 control-label">Clubnaam *</label>
@@ -697,9 +768,10 @@
 
             <script type="text/ng-template" id="modalAddPlayer.html">
                 <div class="modal-header">
-                    <h3 class="modal-title">Speler toevoegen</h3>
+                    <h4 class="modal-title">Speler toevoegen</h4>
                 </div>
                 <div class="modal-body">
+                    <p>Via dit formulier kan een speler van een club toegevoegd worden om van deze speler data te kunnen opslaan.</p>
                     <p ng-if="data.player_temp.error"><strong>{{ data.player_temp.error }}</strong></p>
                     <div class="form-group">
                         <label for="inputPlayer" class="col-sm-3 control-label">Spelernaam *</label>

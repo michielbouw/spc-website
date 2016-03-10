@@ -66,6 +66,7 @@ module.exports = mongoose.model('ScoutingData', {
                 uit: { type: String },
                 eindstand: { type: String },
 
+                // 12 data types:
                 positie1: { type: String },
                 positie2: { type: String },
                 lengte: { type: String },
@@ -77,6 +78,7 @@ module.exports = mongoose.model('ScoutingData', {
                 duelkracht: { type: String },
                 passing: { type: String },
                 afronding: { type: String },
+                tweebenigheid: { type: String },
 
                 opmerking: { type: String },
 

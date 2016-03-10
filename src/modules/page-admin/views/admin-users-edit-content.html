@@ -124,7 +124,7 @@
                         <label for="inputClub" class="col-sm-2 control-label">Club</label>
                         <div class="col-sm-10 nullable">
                             <select class="form-control" id="inputClub" ng-model="data.user.club"
-                                    ng-options="club.name as club.name for club in data.clubs track by club.name">
+                                    ng-options="club.name as club.name for club in data.clubs">
                                 <option value="">-- kies club --</option>
                             </select>
                         </div>
@@ -133,7 +133,7 @@
                         <label for="inputTeam" class="col-sm-2 control-label">Team</label>
                         <div class="col-sm-10 nullable">
                             <select class="form-control" id="inputTeam" ng-model="team.team_name"
-                                    ng-options="team.team_name as team.team_name for team in (data.clubs | filter:{ name: data.user.club })[0].teams track by team.team_name">
+                                    ng-options="team.team_name as team.team_name for team in (data.clubs | filter:{ name: data.user.club })[0].teams">
                                 <option value="">-- kies team --</option>
                             </select>
                         </div>
@@ -142,7 +142,7 @@
                         <label for="inputTeam2" class="col-sm-2 control-label">Team</label>
                         <div class="col-sm-10 nullable">
                             <select class="form-control" id="inputTeam2" ng-model="data.user.teams[data.user.teams.length].team_name"
-                                    ng-options="team.team_name as team.team_name for team in (data.clubs | filter:{ name: data.user.club })[0].teams track by team.team_name">
+                                    ng-options="team.team_name as team.team_name for team in (data.clubs | filter:{ name: data.user.club })[0].teams">
                                 <option value="">-- kies team --</option>
                             </select>
                         </div>
