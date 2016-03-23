@@ -7,3 +7,4 @@ bower_components/
 node_modules/
 build/
 media/
+newrelic_agent.log

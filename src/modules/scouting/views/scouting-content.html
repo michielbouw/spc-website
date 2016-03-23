@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li ng-if="data.scouting_data_club">
-                    <a href="" ng-click="data.openModalAddPlayer('md');">
+                    <a href="" ng-click="data.openModalAddPlayer('md', data.club_name + ' | ' + data.divisie);">
                         Speler toevoegen (popup)
                     </a>
                 </li>
@@ -143,37 +143,37 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.positie1">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.positie1">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.positie2">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.positie2">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.lengte">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.lengte">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.snelheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.snelheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.explosiviteit">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.explosiviteit">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.handelingssnelheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.handelingssnelheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.atletischVermogen">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.atletischVermogen">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.wendbaarheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.wendbaarheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.duelkracht">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.duelkracht">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.passing">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.passing">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.match.afronding">
+                                <input type="text" class="form-control input-sm" ng-model="player.match.afronding">
                             </td>
                             <td>
                                 <select class="form-control input-sm" ng-model="player.match.tweebenigheid">
@@ -395,37 +395,37 @@
                                 {{ player.spelerNaam }}
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.positie1">
+                                <input type="text" class="form-control input-sm" ng-model="player.positie1">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.positie2">
+                                <input type="text" class="form-control input-sm" ng-model="player.positie2">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.lengte">
+                                <input type="text" class="form-control input-sm" ng-model="player.lengte">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.snelheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.snelheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.explosiviteit">
+                                <input type="text" class="form-control input-sm" ng-model="player.explosiviteit">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.handelingssnelheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.handelingssnelheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.atletischVermogen">
+                                <input type="text" class="form-control input-sm" ng-model="player.atletischVermogen">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.wendbaarheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.wendbaarheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.duelkracht">
+                                <input type="text" class="form-control input-sm" ng-model="player.duelkracht">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.passing">
+                                <input type="text" class="form-control input-sm" ng-model="player.passing">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.afronding">
+                                <input type="text" class="form-control input-sm" ng-model="player.afronding">
                             </td>
                             <td>
                                 <select class="form-control input-sm" ng-model="player.tweebenigheid">
@@ -445,37 +445,37 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.positie1">
+                                <input type="text" class="form-control input-sm" ng-model="player.positie1">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.positie2">
+                                <input type="text" class="form-control input-sm" ng-model="player.positie2">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.lengte">
+                                <input type="text" class="form-control input-sm" ng-model="player.lengte">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.snelheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.snelheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.explosiviteit">
+                                <input type="text" class="form-control input-sm" ng-model="player.explosiviteit">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.handelingssnelheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.handelingssnelheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.atletischVermogen">
+                                <input type="text" class="form-control input-sm" ng-model="player.atletischVermogen">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.wendbaarheid">
+                                <input type="text" class="form-control input-sm" ng-model="player.wendbaarheid">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.duelkracht">
+                                <input type="text" class="form-control input-sm" ng-model="player.duelkracht">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.passing">
+                                <input type="text" class="form-control input-sm" ng-model="player.passing">
                             </td>
                             <td>
-                                <input type="number" class="form-control input-sm" ng-model="player.afronding">
+                                <input type="text" class="form-control input-sm" ng-model="player.afronding">
                             </td>
                             <td>
                                 <select class="form-control input-sm" ng-model="player.tweebenigheid">
@@ -703,37 +703,37 @@
                                     {{ match.datum }}: {{ match.thuis }} - {{ match.uit }} ({{ match.eindstand }})
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.positie1">
+                                    <input type="text" class="form-control input-sm" ng-model="match.positie1">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.positie2">
+                                    <input type="text" class="form-control input-sm" ng-model="match.positie2">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.lengte">
+                                    <input type="text" class="form-control input-sm" ng-model="match.lengte">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.snelheid">
+                                    <input type="text" class="form-control input-sm" ng-model="match.snelheid">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.explosiviteit">
+                                    <input type="text" class="form-control input-sm" ng-model="match.explosiviteit">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.handelingssnelheid">
+                                    <input type="text" class="form-control input-sm" ng-model="match.handelingssnelheid">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.atletischVermogen">
+                                    <input type="text" class="form-control input-sm" ng-model="match.atletischVermogen">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.wendbaarheid">
+                                    <input type="text" class="form-control input-sm" ng-model="match.wendbaarheid">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.duelkracht">
+                                    <input type="text" class="form-control input-sm" ng-model="match.duelkracht">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.passing">
+                                    <input type="text" class="form-control input-sm" ng-model="match.passing">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" ng-model="match.afronding">
+                                    <input type="text" class="form-control input-sm" ng-model="match.afronding">
                                 </td>
                                 <td>
                                     <select class="form-control input-sm" ng-model="match.tweebenigheid">
@@ -790,13 +790,15 @@
                     <p>Via dit formulier kan een speler van een club toegevoegd worden om van deze speler data te kunnen opslaan.</p>
                     <p ng-if="data.player_temp.error"><strong>{{ data.player_temp.error }}</strong></p>
                     <div class="form-group">
-                        <label for="inputclub" class="col-sm-3 control-label">Kies club</label>
+                        <label for="inputclub" class="col-sm-3 control-label">Club</label>
                         <div class="col-sm-9">
-                            <select class="form-control" id="inputclub" ng-model="data.club_slug_select" ng-change="data.selectClub();"
+                            <!--<select class="form-control" id="inputclub" ng-model="club_slug_select" ng-change="data.selectClub();"
                                     ng-options="team.club_slug as team.club_name + ' | ' + team.divisie for team in data.scouting_data | orderBy:'club_name'">
-                            </select>
+                            </select>-->
+                            <p>{{ club_select }}</p>
                         </div>
                     </div>
+                    <br class="clear">
                     <div class="form-group">
                         <label for="inputPlayer" class="col-sm-3 control-label">Spelernaam *</label>
                         <div class="col-sm-9">
@@ -827,7 +829,6 @@
                             <input type="text" class="form-control" id="inputPlayerdate" placeholder="Speler geboortedatum" ng-model="data.player_temp.spelerGeboortedatum">
                         </div>
                     </div>
-
 
                     <br class="clear">
                 </div>

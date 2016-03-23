@@ -551,11 +551,16 @@ angular.module('mainapp.scouting')
                 //
             });
         };
-        self.openModalAddPlayer = function (size) {
+        self.openModalAddPlayer = function (size, club_name) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'modalAddPlayer.html',
-                controller: 'ModalAddInstance',
-                size: size
+                controller: 'ModalAddPlayerInstance',
+                size: size,
+                resolve: {
+                    club_select: function () {
+                        return club_name;
+                    }
+                }
             });
             modalInstance.result.then(function (player_temp) {
                 self.addPlayer(player_temp);
@@ -572,9 +577,11 @@ angular.module('mainapp.scouting')
             $uibModalInstance.dismiss('cancel');
         };
     })
-    .controller('ModalAddPlayerInstance', function ($scope, $uibModalInstance) {
-        $scope.ok = function (club_temp) {
-            $uibModalInstance.close(club_temp);
+    .controller('ModalAddPlayerInstance', function ($scope, $uibModalInstance, club_select) {
+        $scope.club_select = club_select;
+
+        $scope.ok = function (player_temp) {
+            $uibModalInstance.close(player_temp);
         };
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
