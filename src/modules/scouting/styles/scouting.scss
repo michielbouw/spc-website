@@ -27,10 +27,13 @@
         //width: 91%;
 
         td:first-child {
-          width: 25%;
+          width: 16%;
+        }
+        td:nth-last-child(2) {
+          width: 15%;
         }
         td:last-child {
-          width: 15%;
+          width: 24px;
         }
         th {
           padding: 3px 6px;

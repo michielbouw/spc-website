@@ -16,10 +16,10 @@ var mailer         = require('express-mailer');
 
 var morgan         = require("morgan");
 
-var app         = express();
-var api_router	= require('./app/routes/api');
-var db          = require('./app/config/db');
-var port        = process.env.PORT || 8000;
+var app            = express();
+var api_router	   = require('./app/routes/api');
+var db             = require('./app/config/db');
+var port           = process.env.PORT || 8000;
 
 // connect to db ===========================================
 mongoose.connect(db.url);
@@ -63,8 +63,20 @@ mailer.extend(app, {
     }
 });
 
+// prerender node plugin ===================================
+app.use(require('prerender-node'));
+
 // routes ==================================================
 app.use('/api/v1', api_router);
+
+app.get('/*', function (req, res, next) {
+    if (req.url.indexOf("/images/") === 0 || req.url.indexOf("/scripts/") === 0 || req.url.indexOf("/styles/") === 0 || req.url.indexOf("/media/") === 0) {
+        res.setHeader("Cache-Control", "public, max-age=2592000");
+        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+    }
+    next();
+});
+
 app.get('*', function(req, res) {
     res.render('index');
 });
@@ -108,9 +120,6 @@ app.use(function(err, req, res, next) {
         res.render('errors/500');
     }
 });
-
-// add fixtures data =======================================
-//require('./app/fixtures/fixtures')();
 
 // start localhost =========================================
 app.listen(port, function(err) {

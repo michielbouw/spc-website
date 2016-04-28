@@ -25,9 +25,11 @@ var watch       = require('gulp-watch');
 var sourcemaps  = require('gulp-sourcemaps');
 
 // Gulp Production plugins
-//var uglify      = require('gulp-uglify');
-//var htmlmin     = require('gulp-htmlmin');
-//var autoprefixer = require('gulp-autoprefixer');
+var uglify      = require('gulp-uglify');
+var uglifycss   = require('gulp-uglifycss');
+var htmlmin     = require('gulp-htmlmin');
+var autoprefixer = require('gulp-autoprefixer');
+var del         = require('del');
 
 // Modules path
 var path_modules = 'src/modules/';
@@ -38,31 +40,7 @@ gulp.task('default', ['build'], function()
     gulp.start.apply(gulp, ['server:watch', 'server:start']);
 });
 
-// production
 gulp.task('heroku', ['build:prod']);
-
-gulp.task('build:resources:prod', function()
-{
-    var views = gulp.src('src/*.html')
-        .pipe(gulp.dest('build/'));
-
-    var errors = gulp.src('src/errors/*.html')
-        .pipe(gulp.dest('build/errors/'));
-
-    var mailer = gulp.src('src/mailer/*.html')
-        .pipe(gulp.dest('build/mailer/'));
-
-    var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
-        .pipe(gulp.dest('build/styles/fonts/'));
-
-    var text = gulp.src('node_modules/textAngular/src/textAngular.css')
-        .pipe(gulp.dest('build/styles/vendors/textAngular.css'));
-
-    var images = gulp.src('src/images/**/*')
-        .pipe(gulp.dest('build/images/'));
-
-    return es.concat(views, errors, mailer, fonts, text, images);
-});
 
 // Tasks
 gulp.task('server:start', function()
@@ -90,6 +68,8 @@ gulp.task('server:watch', function()
     });
 });
 
+
+// Default scripts
 gulp.task('build', [
     'build:resources',
     'build:styles',
@@ -97,21 +77,21 @@ gulp.task('build', [
     'build:modules'
 ], function(){
     livereload.reload();
-});
 
-gulp.task('build:prod', [
-    'build:resources:prod',
-    'build:styles',
-    'build:scripts',
-    'build:modules'
-]);
+    return del([
+        'build/modules/**/*',
+        'build/modules'
+    ]);
+});
 
 gulp.task('build:resources', function()
 {
     var views = gulp.src('src/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('build/'));
 
     var errors = gulp.src('src/errors/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('build/errors/'));
 
     var mailer = gulp.src('src/mailer/*.html')
@@ -120,7 +100,14 @@ gulp.task('build:resources', function()
     var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
         .pipe(gulp.dest('build/styles/fonts/'));
 
-    var text = gulp.src('node_modules/textAngular/src/*.css')
+    var fonts2 = gulp.src('node_modules/bootstrap-sass/assets/fonts/bootstrap/**/*')
+        .pipe(gulp.dest('build/styles/fonts/bootstrap/'));
+
+    var text = gulp.src('node_modules/textangular/dist/*.css')
+        .pipe(uglifycss({
+            "maxLineLen": 10000,
+            "uglyComments": true
+        }))
         .pipe(gulp.dest('build/styles/vendors/'));
 
     var uploads = gulp.src('src/images/blank-avatar.png')
@@ -138,7 +125,7 @@ gulp.task('build:resources', function()
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, mailer, fonts, text, uploads, uploads2, uploads3, uploads4, images);
+    return es.concat(views, errors, mailer, fonts, fonts2, text, uploads, uploads2, uploads3, uploads4, images);
 });
 
 gulp.task('build:styles', function()
@@ -152,7 +139,7 @@ gulp.task('build:styles', function()
         .pipe(sass({
             includePaths: ['src']
         }))
-        .pipe(concat('app.css'))
+        .pipe(concat('app.min.css'))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/styles/'));
 
@@ -200,7 +187,113 @@ gulp.task('build:modules', ['build:jshint'], folders(path_modules, function(modu
         .pipe(gulp.dest('build/modules'));
 }));
 
-// TODO: Production scripts
+
+// Production scripts
+gulp.task('build:prod', [
+    'build:resources:prod',
+    'build:styles:prod',
+    'build:scripts:prod',
+    'build:modules:prod'
+], function() {
+    // remove modules folder
+    return del([
+        'build/modules/**/*',
+        'build/modules'
+    ]);
+});
+
+gulp.task('build:resources:prod', function()
+{
+    var views = gulp.src('src/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('build/'));
+
+    var errors = gulp.src('src/errors/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('build/errors/'));
+
+    var mailer = gulp.src('src/mailer/*.html')
+        .pipe(gulp.dest('build/mailer/'));
+
+    var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
+        .pipe(gulp.dest('build/styles/fonts/'));
+
+    var fonts2 = gulp.src('node_modules/bootstrap-sass/assets/fonts/bootstrap/**/*')
+        .pipe(gulp.dest('build/styles/fonts/bootstrap/'));
+
+    var text = gulp.src('node_modules/textangular/dist/*.css')
+        .pipe(uglifycss({
+            "maxLineLen": 10000,
+            "uglyComments": true
+        }))
+        .pipe(gulp.dest('build/styles/vendors/'));
+
+    var images = gulp.src('src/images/**/*')
+        .pipe(gulp.dest('build/images/'));
+
+    return es.concat(views, errors, mailer, fonts, fonts2, text, images);
+});
+
+gulp.task('build:styles:prod', function()
+{
+    var vendors = gulp.src('src/styles/*.scss')
+        .pipe(sass().on('error', errorHandler))
+        .pipe(autoprefixer())
+        .pipe(uglifycss({
+            "maxLineLen": 10000,
+            "uglyComments": true
+        }))
+        .pipe(gulp.dest('build/styles/'));
+
+    var styles = gulp.src(['src/modules/**/styles/*.scss', '!src/modules/**/styles/_*.scss'])
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            includePaths: ['src']
+        }))
+        .pipe(autoprefixer())
+        .pipe(uglifycss({
+            "maxLineLen": 10000,
+            "uglyComments": true
+        }))
+        .pipe(concat('app.min.css'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('build/styles/'));
+
+    return es.concat(vendors, styles);
+});
+
+gulp.task('build:scripts:prod', ['build:modules:prod', 'build:jshint'], function()
+{
+    return gulp.src([
+        'src/scripts/*.js',
+        '!src/scripts/_*.js'
+    ]).pipe(include())
+        .pipe(uglify())
+        .pipe(gulp.dest('build/scripts/'));
+});
+
+gulp.task('build:modules:prod', ['build:jshint'], folders(path_modules, function(module)
+{
+    var views = gulp.src(path.join(path_modules, module, '**/*.html'))
+        .pipe(templates({
+            module: 'mainapp',
+            standalone: false,
+            path: function(path, base){
+                return path.replace(base, module + '/');
+            }
+        }));
+
+    var scripts = gulp.src([
+        path.join(path_modules, module, module + '.module.js'),
+        path.join(path_modules, module, '**/*.js')
+    ]).pipe(annotate());
+
+    return es.concat(views, scripts)
+        .pipe(uglify())
+        .pipe(concat( module == 'app' ? '_app.js': module + '.js'))
+        .pipe(gulp.dest('build/modules'));
+}));
+
 
 // Error handling
 var stdoutFormat = function(data)

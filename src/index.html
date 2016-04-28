@@ -7,10 +7,10 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="application/json; charset=utf-8" />
-    <meta name="author" content="Michiel Bouw">
-    <meta name="description" content="Soccer Performance Centre">
+    <meta name="author" content="Soccerpc | M.P. Bouw">
+    <meta name="description" content="Het Soccer Performance Centre is er voor iedereen: een overzicht voor fans en uitgebreide professionele statistieken en analyses voor de coaches van de voetbalclubs en hun spelers zelf.">
     <meta name="keywords" content="soccer, performance, centre, soccer performance, data, analyse, analyses, voetbal, eredivisie, jupiler league, jupiler, KNVB">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
 
     <link rel="icon" href="images/icons/favicon.ico" type="image/x-icon" />
     <!--[if IE]><link rel="shortcut icon" href="images/icons/favicon.ico" type="image/x-icon" /><![endif]-->
@@ -33,10 +33,21 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" type="text/css" href="styles/vendors.css">
-    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <link rel="stylesheet" type="text/css" href="styles/app.min.css">
 
-    <script type="text/javascript" src="scripts/vendors.js"></script>
-    <script type="text/javascript" src="scripts/app.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="scripts/vendors.min.js"></script>
+    <script type="text/javascript" src="scripts/app.min.js"></script>
+
+    <meta name="fragment" content="!">
+
+    <meta property="og:title" content="Soccer Performance Centre">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://soccerpc.nl">
+    <meta property="og:image" content="http://soccerpc.nl/images/SPC_logo.png">
+    <meta property="og:description" content="Het Soccer Performance Centre is er voor iedereen: een overzicht voor fans en uitgebreide professionele statistieken en analyses voor de coaches van de voetbalclubs en hun spelers zelf.">
 </head>
 
 <body ng-app="mainapp">
@@ -47,7 +58,23 @@
 
 <div class="container-fluid footer" footer></div>
 
-<script type="text/javascript" src="scripts/vendors_bottom.js"></script>
+<h1 class="hidden">Soccer Performance Centre</h1>
+<h2 class="hidden">Het Soccer Performance Centre is er voor iedereen: een overzicht voor fans en uitgebreide professionele statistieken en analyses voor de coaches van de voetbalclubs en hun spelers zelf.</h2>
+
+<div itemscope="" itemtype="http://soccerpc.nl/Organization" class="hidden">
+    <span itemprop="legalName">Soccer Performance Centre</span>
+    <span itemprop="address">Eindhoven</span>
+    <a itemprop="email" href="mailto:info@soccerpc.nl">info@soccerpc.nl</a>
+</div>
+<script type="application/ld+json">
+{ "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "Soccer Performance Centre",
+  "url" : "http://soccerpc.nl/",
+  "logo" : "http://soccerpc.nl/images/SPC_logo.png" }
+</script>
+
+<script type="text/javascript" src="scripts/vendors_bottom.min.js"></script>
 
 </body>
 </html>

@@ -205,6 +205,10 @@ angular.module('mainapp.scouting')
                 self.archive_stats_temp.push(temp);
             }
         };
+        self.delArchiveTempField = function (i) {
+            // remove field for player_data
+            self.archive_stats_temp.splice(i, 1);
+        };
         self.changeArchiveField = function (i, player) {
             // convert data from extra table to player_data with correct player
 
@@ -264,6 +268,10 @@ angular.module('mainapp.scouting')
                 temp.match = {};
                 self.player_stats_temp.push(temp);
             }
+        };
+        self.delField = function (i) {
+            // remove field for player_data
+            self.player_stats_temp.splice(i, 1);
         };
         self.changeField = function (i, player) {
             // convert data from extra array to player_stats_temp with correct player

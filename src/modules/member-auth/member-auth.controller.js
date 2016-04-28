@@ -96,7 +96,9 @@ angular.module('mainapp.memberAuth')
                                         $rootScope.currentUser = $sessionStorage.currentUser;
                                         $rootScope.currentClub = $sessionStorage.currentClub;
 
-                                        if (res.data.role == 'admin') {
+                                        if ($sessionStorage.lastRoute && $sessionStorage.lastRoute !== '/login') {
+                                            $location.path($sessionStorage.lastRoute);
+                                        } else if (res.data.role == 'admin') {
                                             $location.path("/admin");
                                         } else if (res.data.role == 'club-beheer') {
                                             $location.path("/user");
@@ -109,7 +111,9 @@ angular.module('mainapp.memberAuth')
                                         $rootScope.currentUser = $sessionStorage.currentUser;
                                         $rootScope.currentClub = $sessionStorage.currentClub;
 
-                                        if (res.data.role == 'admin') {
+                                        if ($sessionStorage.lastRoute && $sessionStorage.lastRoute !== '/login') {
+                                            $location.path($sessionStorage.lastRoute);
+                                        } else if (res.data.role == 'admin') {
                                             $location.path("/admin");
                                         } else if (res.data.role == 'club-beheer') {
                                             $location.path("/user");

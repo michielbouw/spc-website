@@ -164,6 +164,7 @@ angular.module('mainapp.memberAuth')
             }
 
             if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged && nextRoute !== "/login") {
+                $sessionStorage.lastRoute = $location.path();
                 $location.path("/login");
             }
             else if (nextRoute.access.requiredLogin && AuthenticationService.isLogged && nextRoute !== "/login") {

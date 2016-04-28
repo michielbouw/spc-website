@@ -133,6 +133,7 @@
                             <th class="rotate"><div><span><small style="font-weight: normal;">Afronding</small></span></div></th>
                             <th class="rotate"><div><span><small style="font-weight: normal;">Tweebenigheid</small></span></div></th>
                             <th><div><span><small style="font-weight: normal;">Opmerking</small></span></div></th>
+                            <th><div><span><small style="font-weight: normal;"></small></span></div></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -148,34 +149,61 @@
                             <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.match.positie2">
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.lengte">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.lengte">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.snelheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.snelheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.explosiviteit">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.explosiviteit">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.handelingssnelheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.handelingssnelheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.atletischVermogen">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.atletischVermogen">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.wendbaarheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.wendbaarheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.duelkracht">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.duelkracht">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.passing">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.passing">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.match.afronding">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.match.afronding">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
+                            <td style="min-width: 54px;">
                                 <select class="form-control input-sm" ng-model="player.match.tweebenigheid">
                                     <option>RVT</option>
                                     <option>LVT</option>
@@ -184,6 +212,9 @@
                             </td>
                             <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.match.opmerking">
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs" ng-click="data.delField($index);"><i class="fa fa-close"></i></button>
                             </td>
                         </tr>
                         </tbody>
@@ -387,6 +418,7 @@
                             <th class="rotate"><div><span><small style="font-weight: normal;">Afronding</small></span></div></th>
                             <th class="rotate"><div><span><small style="font-weight: normal;">Tweebenigheid</small></span></div></th>
                             <th><div><span><small style="font-weight: normal;">Opmerking</small></span></div></th>
+                            <th><div><span><small style="font-weight: normal;"></small></span></div></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -400,34 +432,61 @@
                             <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.positie2">
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.lengte">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.lengte">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.snelheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.snelheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.explosiviteit">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.explosiviteit">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.handelingssnelheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.handelingssnelheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.atletischVermogen">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.atletischVermogen">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.wendbaarheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.wendbaarheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.duelkracht">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.duelkracht">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.passing">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.passing">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.afronding">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.afronding">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
+                            <td style="min-width: 54px;">
                                 <select class="form-control input-sm" ng-model="player.tweebenigheid">
                                     <option>RVT</option>
                                     <option>LVT</option>
@@ -436,6 +495,9 @@
                             </td>
                             <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.opmerking">
+                            </td>
+                            <td>
+                                <!--<button class="btn btn-danger btn-xs" ng-click="data.delArchiveField($index);"><i class="fa fa-close"></i></button>-->
                             </td>
                         </tr>
                         <tr ng-repeat="player in data.archive_stats_temp">
@@ -450,34 +512,61 @@
                             <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.positie2">
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.lengte">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.lengte">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.snelheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.snelheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.explosiviteit">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.explosiviteit">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.handelingssnelheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.handelingssnelheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.atletischVermogen">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.atletischVermogen">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.wendbaarheid">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.wendbaarheid">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.duelkracht">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.duelkracht">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.passing">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.passing">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
-                                <input type="text" class="form-control input-sm" ng-model="player.afronding">
+                            <td style="min-width: 49px;">
+                                <select class="form-control input-sm" ng-model="player.afronding">
+                                    <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                    <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                </select>
                             </td>
-                            <td>
+                            <td style="min-width: 54px;">
                                 <select class="form-control input-sm" ng-model="player.tweebenigheid">
                                     <option>RVT</option>
                                     <option>LVT</option>
@@ -486,6 +575,9 @@
                             </td>
                             <td>
                                 <input type="text" class="form-control input-sm" ng-model="player.opmerking">
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs" ng-click="data.delArchiveTempField($index);"><i class="fa fa-close"></i></button>
                             </td>
                         </tr>
                         </tbody>
@@ -695,6 +787,7 @@
                                 <th class="rotate"><div><span><small style="font-weight: normal;">Afronding</small></span></div></th>
                                 <th class="rotate"><div><span><small style="font-weight: normal;">Tweebenigheid</small></span></div></th>
                                 <th><div><span><small style="font-weight: normal;">Opmerking</small></span></div></th>
+                                <th><div><span><small style="font-weight: normal;"></small></span></div></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -708,34 +801,61 @@
                                 <td>
                                     <input type="text" class="form-control input-sm" ng-model="match.positie2">
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.lengte">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.lengte">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.snelheid">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.snelheid">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.explosiviteit">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.explosiviteit">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.handelingssnelheid">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.handelingssnelheid">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.atletischVermogen">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.atletischVermogen">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.wendbaarheid">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.wendbaarheid">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.duelkracht">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.duelkracht">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.passing">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.passing">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-sm" ng-model="match.afronding">
+                                <td style="min-width: 49px;">
+                                    <select class="form-control input-sm" ng-model="match.afronding">
+                                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                                    </select>
                                 </td>
-                                <td>
+                                <td style="min-width: 54px;">
                                     <select class="form-control input-sm" ng-model="match.tweebenigheid">
                                         <option>RVT</option>
                                         <option>LVT</option>
@@ -745,6 +865,7 @@
                                 <td>
                                     <input type="text" class="form-control input-sm" ng-model="match.opmerking">
                                 </td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
