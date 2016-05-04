@@ -79,9 +79,9 @@ Steps:
 4. Install plugins on server.
 
         ```shell
-        git clone https://github.com/pauldub/dokku-multi-buildpack.git /var/lib/dokku/plugins/dokku-multi-buildpack
-        git clone https://github.com/jeffutter/dokku-mongodb-plugin.git /var/lib/dokku/plugins/mongodb
-        dokku plugins-install
+        sudo dokku plugin:install https://github.com/jeffutter/dokku-mongodb-plugin.git
+
+        sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
         ```
 
 5. Create database. (on server) In below code, `app_name` can be anything. Choose root_domain here when you want to deploy to root domain. It should be used when configure the database.
@@ -172,7 +172,7 @@ For the mongodb plugin you have te following commands:
 Backing up a database
 
 `mongodb:dump` creates a backup of a whole database. The result can be optionally compressed in a gzipped tarball (tar.gz) by adding the `-tar` parameter after the database name. The dump is placed in the current directory and named `<databasename>-<date and time>`.  
-*Example: `dokku mongodb:dump api-production -tar`*
+*Example: `dokku mongodb:dump soccerpc_com-production -tar`*
 
 NOT WORKING WELL, USE ROBOMONGO!
 
@@ -181,10 +181,10 @@ Restoring a database
 `path/to/dump` is `/home/soccerpc.com/mongodump`
 
 `mongodb:restore` can be used to restore dump created with `mongodb:dump` (or `mongodump` which it uses internally). It can be used with a gzipped dump.  
-*Example: `dokku mongodb:restore api-production /path/to/dump/api-production-2015-03-09-16h54-43s.tar.gz`*  
+*Example: `dokku mongodb:restore api-production /path/to/dump/soccerpc_com-production-2015-03-09-16h54-43s.tar.gz`*
   
 It can also be used with a database dumped to a folder (`mongodb:dump` without the `-tar`argument)  
-*Example: `dokku mongodb:restore api-production /path/to/dump/api-production-2015-03-09-16h54-43s/api-production/`*  
+*Example: `dokku mongodb:restore api-production /path/to/dump/soccerpc_com-production-2015-03-09-16h54-43s/api-production/`*
   
 This will drop the database and re-create it completely from the dump.
 
@@ -206,9 +206,3 @@ You can use the mongodb console for:
 ##Ready!
 
 END SERVER DEPLOYMENT
-
-
-## Enable TLS (https://)
-To enable TLS for the app, copy or symlink the .crt and .key files into the /home/dokku/app_name/tls folder (create this folder if it doesn't exist) as server.crt and server.key respectively. 
-
-The nginx configuration will need to be reloaded in order for the updated TLS configuration to be applied. This can be done either via the init system or by re-deploying the application. Once TLS is enabled, the application will be accessible by https:// (redirection from http:// is applied as well).

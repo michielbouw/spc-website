@@ -207,17 +207,17 @@ module.exports = ImportController = {
                             } else if (items.matchID >= 17009 && items.matchID <= 17350) {
                                 items.seizoen = "2015-2016";
                                 match_short.seizoen = "2015-2016";
-                            } else if ((items.matchID >= 24817 && items.matchID <= 24820) || (items.matchID >= 24869 && items.matchID <= 24876) || (items.matchID >= 24891 && items.matchID <= 24894)) {
+                            } else if ((items.matchID >= 24817 && items.matchID <= 24820) || (items.matchID >= 24821 && items.matchID <= 24828) || (items.matchID >= 24829 && items.matchID <= 24832)) {
                                 items.seizoen = "2015-2016 Play-offs";
                                 match_short.seizoen = "2015-2016 Play-offs";
 
-                                if (items.matchID >= 24869 && items.matchID <= 24876) {
+                                if (items.matchID >= 24821 && items.matchID <= 24828) {
                                     match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 2;
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
                                 }
-                                if (items.matchID >= 24891 && items.matchID <= 24894) {
+                                if (items.matchID >= 24829 && items.matchID <= 24832) {
                                     match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 4;
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
