@@ -50,9 +50,9 @@ angular.module('mainapp.scouting')
                         });
 
                         $timeout(function() {
-                            $('.content.content-page .content-players.choose-player').css({
-                                'margin-top': ($('.content.content-page .content-players-left').height() / 2) - 95
-                            });
+                            //$('.content.content-page .content-players.choose-player').css({
+                            //    'margin-top': ($('.content.content-page .content-players-left').height() / 2) - 95
+                            //});
                             $('.content.content-page .content-players.choose-player').effect('shake', {times:1, distance:10}, 2000);
                         }, 1000);
 

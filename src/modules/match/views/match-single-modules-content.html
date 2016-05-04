@@ -3468,17 +3468,17 @@
             </div>
         </div>
 
-        <div class="col-xs-12 content-title-top-match">
+        <div ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" class="col-xs-12 content-title-top-match">
             <h4>Spelers</h4>
             <h4 class="small">Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
                 het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
                 in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</h4>
         </div>
 
-        <div ng-if="data.match.player_stats_full_thuis.length > 0" id="thuis" class="col-lg-12 content-title-match content-title-match-first text-center">
+        <div ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" id="thuis" class="col-lg-12 content-title-match content-title-match-first text-center">
             <h4>Spelers {{ data.matchshort.match_info.thuis }}</h4>
         </div>
-        <div ng-if="data.match.player_stats_full_thuis.length > 0" class="col-xs-12 col-sm-6">
+        <div ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" class="col-xs-12 col-sm-6">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 no-padding lineup_field" id="lineup_size">
                 <!--<div>
                     <span style="color: #ffffff; position: absolute; margin-top: -moz-calc({{ lineup_field_height2 }}px - (90 / 100)*{{ lineup_field_height2 }}px - 13px); margin-top: calc({{ lineup_field_height2 }}px - (90 / 100)*{{ lineup_field_height2 }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.52px);">
@@ -4059,7 +4059,7 @@
                 <div class="text-center blue" style="margin-top: -8px;"><small>{{ data.match.opstelling.thuis_formatie }}</small></div>
             </div>
         </div>-->
-        <div ng-if="data.match.player_stats_full_thuis.length > 0" class="stat-table col-xs-12 col-sm-6">
+        <div ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" class="stat-table col-xs-12 col-sm-6">
             <div class="col-xs-12 stat-table-row"><strong>Wissels</strong></div>
             <div class="col-xs-12 stat-table-row" ng-repeat="speler in data.match.spelersthuisteam" ng-if="$index > 10">
                 <a href="/wedstrijd/{{ data.loading_id }}/spelers/{{ speler.personID }}"><!--data-toggle="collapse" data-parent="#speler_accordion" data-target="#collapse{{ speler.personID }}" aria-controls="collapse{{ speler.personID }}"-->{{ speler.spelerNaam }} - {{ speler.rugnummer }}</a>
@@ -4485,16 +4485,16 @@
             </div>
         </div>-->
 
-        <div ng-if="data.match.player_stats_full_uit.length > 0" id="uit" class="col-xs-12 content-title-top-match">
+        <div ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" id="uit" class="col-xs-12 content-title-top-match">
             <h4>Spelers</h4>
             <h4 class="small">Analyse per speler. Klik op de naam of het nummer van de gewenste speler voor het uitgebreide rapport, deze vouwt open onder
                 het blokje met de naam, het scherm scrollt dan automatisch naar de juiste speler. Voor het sluiten van het blok, klik op een andere speler of klik op de link terug
                 in een van de subtitels bij deze speler en sluit het blok door nogmaals op de naam van de speler te klikken.</h4>
         </div>
-        <div ng-if="data.match.player_stats_full_uit.length > 0" id="thuis" class="col-lg-12 content-title-match content-title-match-first text-center">
+        <div ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" id="uit" class="col-lg-12 content-title-match content-title-match-first text-center">
             <h4>Spelers {{ data.matchshort.match_info.uit }}</h4>
         </div>
-        <div ng-if="data.match.player_stats_full_uit.length > 0" class="col-xs-12 col-sm-6">
+        <div ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" class="col-xs-12 col-sm-6">
             <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 no-padding lineup_field" id="lineup_size">
                 <div ng-repeat="lineup in data.match.opstelling.uit">
                     <a ng-if="lineup.positieID == 1" class="lineup lineup_uit" href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}"
@@ -5070,7 +5070,7 @@
                 <div class="text-center orange" style="margin-top: -8px;"><small>{{ data.match.opstelling.uit_formatie }}</small></div>
             </div>
         </div>-->
-        <div ng-if="data.match.player_stats_full_uit.length > 0" class="stat-table col-xs-12 col-sm-6">
+        <div ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')" class="stat-table col-xs-12 col-sm-6">
             <div class="col-xs-12 stat-table-row"><strong>Wissels</strong></div>
             <div class="col-xs-12 stat-table-row" ng-repeat="speler in data.match.spelersuitteam" ng-if="$index > 10">
                 <a href="/wedstrijd/{{ data.loading_id }}/spelers/{{ speler.personID }}"><!--data-toggle="collapse" data-parent="#speler_accordion" data-target="#collapse{{ speler.personID }}" aria-controls="collapse{{ speler.personID }}"-->{{ speler.spelerNaam }} - {{ speler.rugnummer }}</a>
@@ -5500,7 +5500,7 @@
             <h4>Spelers vergelijken</h4>
             <h4 class="small">Kies twee spelers uit</h4>
         </div>
-        <div class="col-xs-12" ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin')">
+        <div class="col-xs-12" ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')">
             <div class="col-xs-12">{{ data.matchshort.match_info.thuis }}</div>
             <div class="col-xs-12 col-md-6">
                 Speler 1:
@@ -5511,7 +5511,7 @@
                 </select>
             </div>
             <div class="col-xs-12 col-md-6">
-                Spelers 2:
+                Speler 2:
                 <select ng-model="player_index2" class="form-control input-sm"
                         ng-change="data.player2InitFunc(player_index2)"
                         ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_thuis | orderBy:data.orderSpelersNaam">
@@ -5520,7 +5520,7 @@
                 <br>
             </div>
         </div>
-        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin')">
+        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')">
             <br>
             <div class="col-xs-12">
                 <h4>{{ data.speler1.spelerNaam }}</h4>
@@ -5559,7 +5559,7 @@
             </div>
             <br>
         </div>
-        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentUser.role == 'admin')">
+        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name == data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')">
             <br>
             <div class="col-xs-12 text-right">
                 <h4>{{ data.speler2.spelerNaam }}</h4>
@@ -5598,7 +5598,7 @@
             </div>
             <br>
         </div>
-        <div class="col-xs-12" ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin')">
+        <div class="col-xs-12" ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')">
             <hr>
             <div class="col-xs-12">{{ data.matchshort.match_info.uit }}</div>
             <div class="col-xs-12 col-md-6">
@@ -5610,7 +5610,7 @@
                 </select>
             </div>
             <div class="col-xs-12 col-md-6">
-                Spelers 2:
+                Speler 2:
                 <select ng-model="player_index4" class="form-control input-sm"
                         ng-change="data.player4InitFunc(player_index4)"
                         ng-options="player.personID as player.spelerNaam for player in data.match.player_stats_full_uit | orderBy:data.orderSpelersNaam">
@@ -5619,7 +5619,7 @@
                 <br>
             </div>
         </div>
-        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin')">
+        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')">
             <br>
             <div class="col-xs-12">
                 <h4>{{ data.speler3.spelerNaam }}</h4>
@@ -5658,7 +5658,7 @@
             </div>
             <br>
         </div>
-        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentUser.role == 'admin')">
+        <div class="col-xs-12 col-md-6" ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name == data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role == 'admin')">
             <br>
             <div class="col-xs-12 text-right">
                 <h4>{{ data.speler4.spelerNaam }}</h4>

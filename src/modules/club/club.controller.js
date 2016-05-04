@@ -99,7 +99,11 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde JL';
+                if ($sessionStorage.currentClub.spc_package === 'extra' || $sessionStorage.currentClub.spc_package === 'league') {
+                    self.vs = 'Gemiddelde JL';
+                } else {
+                    self.vs = 'Gemiddelde';
+                }
                 self.vsInitFunc();
             }, function() {
                 $location.path('/404');
@@ -183,7 +187,11 @@ angular.module('mainapp.club')
                     $scope.rounds = [1, 1];
                 }
 
-                self.vs = 'Gemiddelde JL';
+                if ($sessionStorage.currentClub.spc_package === 'extra' || $sessionStorage.currentClub.spc_package === 'league') {
+                    self.vs = 'Gemiddelde JL';
+                } else {
+                    self.vs = 'Gemiddelde';
+                }
                 self.vsInitFunc();
             }
         };
@@ -252,7 +260,7 @@ angular.module('mainapp.club')
                         $location.path('/club');
                     });
                 }
-            } else if (self.vs == 'Gemiddelde team') {
+            } else if (self.vs == 'Gemiddelde') {
                 if (self.team_data && self.season_index) {
                     var stats_vs_temp = $filter('orderBy')(($filter('filter')(self.team_data, {season: self.season_index}, true)[0]).matches, self.orderMatches);
 
@@ -499,7 +507,11 @@ angular.module('mainapp.club')
                 }
             }
         };
-        self.vs = 'Gemiddeld JL';
+        if ($sessionStorage.currentClub.spc_package === 'extra' || $sessionStorage.currentClub.spc_package === 'league') {
+            self.vs = 'Gemiddelde JL';
+        } else {
+            self.vs = 'Gemiddelde';
+        }
         self.vsInitFunc();
 
         self.roundfilterfrom = function () {

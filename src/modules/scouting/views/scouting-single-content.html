@@ -27,8 +27,8 @@
         <div class="col-xs-12 col-sm-2 content-players-left">
             <span class="tag" ng-if="data.player_stats.spelerType == 'keeper'"><strong>Keeper</strong></span>
             <div class="col-xs-12">
-                <img ng-if="!data.player_stats.spelerPhoto" src="images/blank-avatar.png">
-                <img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png">
+                <img ng-if="data.speler && !data.player_stats.spelerPhoto" src="images/blank-avatar.png">
+                <img ng-if="data.speler && data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png">
             </div>
             <div ng-if="data.speler" class="col-xs-12"><br><strong>{{ data.player_stats.spelerNaam }}</strong></div>
             <div ng-if="data.speler && data.player_stats.spelerPositie" class="col-xs-12"><br>{{ data.player_stats.spelerPositie }}</div>
@@ -66,17 +66,17 @@
             <div class="col-xs-12 text-center player-vs"><h4>VS</h4></div>
 
             <div class="col-xs-12 grey">
-                <span ng-if="data.vs == data.playerID"><img ng-if="!data.player_stats.spelerPhoto" src="images/blank-avatar.png"><img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png"></span>
-                <span ng-if="data.vs !== data.playerID"><img ng-if="!data.player_stats_vs.spelerPhoto" src="images/blank-avatar.png"><img ng-if="data.player_stats_vs.spelerPhoto" ng-src="{{ data.player_stats_vs.spelerPhoto }}" on-error-src="images/blank-avatar.png"></span>
+                <span ng-if="data.vs && data.vs == data.playerID"><img ng-if="!data.player_stats.spelerPhoto" src="images/blank-avatar.png"><img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png"></span>
+                <span ng-if="data.vs && data.vs !== data.playerID"><img ng-if="!data.player_stats_vs.spelerPhoto" src="images/blank-avatar.png"><img ng-if="data.player_stats_vs.spelerPhoto" ng-src="{{ data.player_stats_vs.spelerPhoto }}" on-error-src="images/blank-avatar.png"></span>
             </div>
             <div ng-if="data.vs" class="col-xs-12 grey">
                 <br>
                 <span ng-if="data.vs == data.playerID"><strong>{{ data.player_stats.spelerNaam }}<br>{{ data.vs_naam }}</strong></span>
                 <span ng-if="data.vs !== data.playerID"><strong>{{ data.player_stats_vs.spelerNaam }}<br>{{ data.vs_info }}</strong></span>
             </div>
-            <div ng-if="data.player_stats_vs.spelerPositie" class="col-xs-12"><br>{{ data.player_stats_vs.spelerPositie }}</div>
-            <div ng-if="data.vs == data.playerID" class="col-xs-12 grey"><br><strong>{{ data.club_name }}</strong></div>
-            <div ng-if="data.vs !== data.playerID" class="col-xs-12 grey"><br><strong>{{ data.player_stats_vs.club_name }}</strong></div>
+            <div ng-if="data.vs && data.player_stats_vs.spelerPositie" class="col-xs-12"><br>{{ data.player_stats_vs.spelerPositie }}</div>
+            <div ng-if="data.vs && data.vs == data.playerID" class="col-xs-12 grey"><br><strong>{{ data.club_name }}</strong></div>
+            <div ng-if="data.vs && data.vs !== data.playerID" class="col-xs-12 grey"><br><strong>{{ data.player_stats_vs.club_name }}</strong></div>
             <div ng-if="data.vs" class="col-xs-12"><br>
                 <img ng-src="images/shirt-grey.png">
                 <span class="text-center rugnummer">
@@ -85,7 +85,7 @@
                 </span>
             </div>
 
-            <div class="col-xs-12 orange">
+            <div ng-if="data.speler" class="col-xs-12 orange">
                 <br><h4>Kies VS speler</h4>
                 <!--<select ng-model="data.vs" class="form-control input-md input-vs"
                         ng-change="data.vsInitFunc()"
@@ -114,6 +114,12 @@
                         ng-model="data.vs_round_index" class="form-control input-sm input-vs"
                         ng-change="data.vsEditFunc()"
                         ng-options="match.ronde as match.ronde for match in data.vs_season_matches | orderBy:'ronde'">
+                </select>
+            </div>
+            <div ng-if="!data.speler" class="col-xs-12 orange">
+                <br><h4>Kies VS speler</h4>
+                <select ng-model="'.. kies speler ..'" class="form-control input-md input-vs" disabled>
+                    <option>.. kies speler ..</option>
                 </select>
             </div>
         </div>

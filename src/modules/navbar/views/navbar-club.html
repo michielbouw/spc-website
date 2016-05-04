@@ -29,7 +29,7 @@
                     <li><a href="/club">Club</a></li>
                     <li><a href="/spelers">Spelers</a></li>
                     <li><a href="/analyse">Analyse</a></li>
-                    <li><a href="/scouting">Scouting</a></li>
+                    <li ng-if="currentClub.spc_package === 'extra' || currentClub.spc_package === 'league'"><a href="/scouting">Scouting</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/">SPC home</a></li>

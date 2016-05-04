@@ -25,22 +25,29 @@ angular.module('mainapp.scouting')
         self.player_temp.spelerNaam = '';
         self.player_temp.error = false;
 
+        // if not $sessionStorage.currentClub.spc_package == 'extra', not permitted, go to club
         // if user role == 'technische-staff+' or 'admin' load: '/scouting'
         // else load: '/scouting/{{ currentclub.teams.team_slug }}'
         if ($rootScope.currentClub && $rootScope.currentClub.teams[0].team_slug) {
-            if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
+            if ($sessionStorage.currentClub.spc_package !== 'extra') {
+                $location.path('/club');
+            } else if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
                 $location.path('/scouting/' + $rootScope.currentClub.teams[0].team_slug);
             } else {
                 self.club_url = '/scouting/' + $rootScope.currentClub.teams[0].team_slug;
             }
         } else if (!$rootScope.currentClub || !$rootScope.currentClub.teams[0].team_slug) {
-            if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
+            if ($sessionStorage.currentClub.spc_package !== 'extra') {
+                $location.path('/club');
+            } else if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
                 $location.path('/scouting/fceindhoven_1');
             } else {
                 self.club_url = '/scouting/fceindhoven_1';
             }
         } else {
-            if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
+            if ($sessionStorage.currentClub.spc_package !== 'extra') {
+                $location.path('/club');
+            } else if ($sessionStorage.currentUser.role !== 'technische-staff+' && $sessionStorage.currentUser.role !== 'admin') {
                 if (($rootScope.currentClub && $rootScope.currentClub.teams[0] && $rootScope.currentClub.teams[0].team_slug !== $routeParams.team_slug) && ($rootScope.currentClub && $rootScope.currentClub.teams[1] && $rootScope.currentClub.teams[1].team_slug !== $routeParams.team_slug) && $sessionStorage.role !== 'admin') {
                     self.club_url = '/404';
                 }

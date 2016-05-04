@@ -14,7 +14,6 @@
             <div class="item-title">Analyse</div>
             <ul id="nav-sub" class="nav nav-pills nav-stacked">
                 <li role="presentation" class="active"><a href="/wedstrijd" scroll-to="top"><i class="fa fa-soccer-ball-o"></i> Wedstrijd</a></li>
-                <!--<li role="presentation"><a href="/spelers" scroll-to="top"><i class="fa fa-user"></i> Spelers</a></li>-->
                 <!--<li role="presentation"><a href="/extra" scroll-to="top"><i class="fa fa-plus"></i> Extra analyse</a></li>-->
                 <!--<li role="presentation"><a href="/training" scroll-to="top"><i class="fa fa-steam"></i> Training</a></li>-->
             </ul>
@@ -30,12 +29,8 @@
         <div id="season-select" class="col-xs-12">
             <br>
             <select ng-model="data.season_index" class="form-control input-sm"
-                    ng-change="data.seasonInitFunc()">
-                <option>2015-2016</option>
-                <option>2014-2015 Play-offs</option>
-                <option>2014-2015</option>
-                <option>2013-2014 Play-offs</option>
-                <option>2013-2014</option>
+                    ng-change="data.seasonInitFunc()"
+                    ng-options="season.season as season.season for season in data.seasons_list | orderBy:'season':-1">
             </select>
             <br>
         </div>

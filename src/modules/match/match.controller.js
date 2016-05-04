@@ -13,10 +13,14 @@ angular.module('mainapp.match')
             if ($rootScope.currentUser.role == 'admin') {
                 Api.Matches.query(function (res) {
                     self.matches = res;
+
+                    self.seasons_list_init();
                 });
             } else if ($rootScope.currentClub.spc_package == 'league' || $rootScope.currentClub.spc_package == 'extra') {
                 Api.Matches.query(function (res) {
                     self.matches = res;
+
+                    self.seasons_list_init();
                 });
             } else {
                 teamslug = $rootScope.currentClub.teams[0].team_slug;
@@ -25,16 +29,22 @@ angular.module('mainapp.match')
                     _id: teamslug
                 }, function (res) {
                     self.matches = res;
+
+                    self.seasons_list_init();
                 });
             }
         } else if ($sessionStorage.currentUser && $sessionStorage.currentClub) {
             if ($sessionStorage.currentUser.role == 'admin') {
                 Api.Matches.query(function (res) {
                     self.matches = res;
+
+                    self.seasons_list_init();
                 });
             } else if ($sessionStorage.currentClub.spc_package == 'league' || $sessionStorage.currentClub.spc_package == 'extra') {
                 Api.Matches.query(function (res) {
                     self.matches = res;
+
+                    self.seasons_list_init();
                 });
             } else {
                 teamslug = $sessionStorage.currentClub.teams[0].team_slug;
@@ -43,6 +53,8 @@ angular.module('mainapp.match')
                     _id: teamslug
                 }, function (res) {
                     self.matches = res;
+
+                    self.seasons_list_init();
                 });
             }
         } else {
@@ -69,10 +81,14 @@ angular.module('mainapp.match')
                     if ($rootScope.currentUser.role == 'admin') {
                         Api.Matches.query(function (res2) {
                             self.matches = res2;
+
+                            self.seasons_list_init();
                         });
                     } else if ($rootScope.currentClub.spc_package == 'league' || $rootScope.currentClub.spc_package == 'extra') {
                         Api.Matches.query(function (res2) {
                             self.matches = res2;
+
+                            self.seasons_list_init();
                         });
                     } else {
                         teamslug = $rootScope.currentClub.teams[0].team_slug;
@@ -81,12 +97,38 @@ angular.module('mainapp.match')
                             _id: teamslug
                         }, function (res2) {
                             self.matches = res2;
+
+                            self.seasons_list_init();
                         });
                     }
                 }, function () {
                 });
             }
         }
+
+        self.seasons_list_init = function () {
+            self.seasons_list = [];
+            var season_start = self.matches[self.matches.length-1].seizoen;
+            var season_end = self.matches[0].seizoen;
+            var temp = {};
+            temp.season = season_start;
+            self.seasons_list.push(temp);
+
+            var i = season_start;
+            while (i.indexOf(String(String(new Date().getFullYear()) + '-')) < 0 && i.indexOf(String(season_end.substring(5, 9) + '-')) < 0) {
+                var temp11 = {};
+
+                if (i.indexOf(' Play-offs') > 0) {
+                    temp11.season = i.substring(5, 9) + '-' + String(Number(i.substring(5, 9)) + 1);
+                    i = i.substring(5, 9) + '-' + String(Number(i.substring(5, 9)) + 1);
+                } else {
+                    temp11.season = i + ' Play-offs';
+                    i = i + ' Play-offs';
+                }
+
+                self.seasons_list.push(temp11);
+            }
+        };
 
         self.seasonInitFunc = function () {
             self.season_matches = [];

@@ -207,6 +207,23 @@ module.exports = ImportController = {
                             } else if (items.matchID >= 17009 && items.matchID <= 17350) {
                                 items.seizoen = "2015-2016";
                                 match_short.seizoen = "2015-2016";
+                            } else if ((items.matchID >= 24817 && items.matchID <= 24820) || (items.matchID >= 24869 && items.matchID <= 24876) || (items.matchID >= 24891 && items.matchID <= 24894)) {
+                                items.seizoen = "2015-2016 Play-offs";
+                                match_short.seizoen = "2015-2016 Play-offs";
+
+                                if (items.matchID >= 24869 && items.matchID <= 24876) {
+                                    match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 2;
+                                    items.ronde = match_short.match_info.ronde;
+                                    team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
+                                    team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
+                                }
+                                if (items.matchID >= 24891 && items.matchID <= 24894) {
+                                    match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 4;
+                                    items.ronde = match_short.match_info.ronde;
+                                    team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
+                                    team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
+
+                                }
                             } else {
                                 items.seizoen = "2015-2016 Play-offs";
                                 match_short.seizoen = "2015-2016 Play-offs";
@@ -218,6 +235,8 @@ module.exports = ImportController = {
                             // seizoen 1415: 7288-7667
                             // seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
                             // seizoen 1516: 17009-17350
+                            // seizoen 1516 PO: 24817-24820, 24869-24876, 24891-24894
+                            // seizoen 1617: ??
                             // Alle intervallen zijn inclusief de linker- en rechterwaarde.
 
                             // for now this is correct later maybe need a if statement to choose correct division
