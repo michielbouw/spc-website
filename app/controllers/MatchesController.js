@@ -14,6 +14,11 @@ module.exports = MatchesController = {
         Matches.find().or([{ thuisTeamSlug: req.params._id }, { uitTeamSlug: req.params._id }]).exec(function(err, data) { if (err) res.send(err); res.json(data); });
     },
 
+    query_season : function(req, res)
+    {
+        Matches.find({ seizoen: req.params._season }, function(err, data) { if (err) res.send(err); res.json(data); });
+    },
+
     get: function(req, res)
     {
         Matches.findOne({matchID: req.params._id}, function(err, data){

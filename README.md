@@ -79,7 +79,7 @@ Steps:
 4. Install plugins on server.
 
         ```shell
-        sudo dokku plugin:install https://github.com/jeffutter/dokku-mongodb-plugin.git
+        dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
 
         sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
         ```
@@ -87,8 +87,7 @@ Steps:
 5. Create database. (on server) In below code, `app_name` can be anything. Choose root_domain here when you want to deploy to root domain. It should be used when configure the database.
 
         ```shell
-        dokku mongodb:start
-        dokku mongodb:create <app_name OR root_domain>
+        mongo:create <name>
         ```
 
 6. Add dokku remote to your source code (from your development machine).
@@ -132,6 +131,8 @@ Tip: when debugging it can be useful to start a shell inside the docker containe
         dokku docker-options:add <app name> deploy "-v /home/<app name>/media/extra:/app/media/extra"
 
         dokku deploy <app name>
+
+        mongo:link <name> <app>
         ```
 
 8. Some usefull commands:
@@ -156,23 +157,29 @@ Than use for the connection: ip 172.17.0.19 and port 27017. As auth use: databas
 For the mongodb plugin you have te following commands:
         
         ```shell
-		mongodb:console                 		        Launch an admin mongodb console
-		mongodb:create <app> <database> 		        Create a Mongo database and optional params for app
-		mongodb:delete <app> <database> 		        Delete specified Mongo database
-		mongodb:dump <database> [-tar]                  Creates a binary export of the contents of database (-tar tarball dump)
-		mongodb:link <app> <database>	       	        Set ENV variables for app if database exists
-		mongodb:list                    		        List all databases
-		mongodb:logs                    		        Show logs from MongoDB program
-		mongodb:restore <database> <file-or dirname>    Restores the state of a database of a database exported with mongodb:dump
-		mongodb:start                   		        Start the MongoDB docker container if it isn't running
-		mongodb:status                  		        Shows status of MongoDB
-		mongodb:stop                    		        Stop the MongoDB docker container
+		mongo:clone <name> <new-name>  Create container <new-name> then copy data from <name> into <new-name>
+        mongo:connect <name>           Connect via telnet to a mongo service
+        mongo:create <name>            Create a mongo service with environment variables
+        mongo:destroy <name>           Delete the service and stop its container if there are no links left
+        mongo:export <name> > <file>   Export a dump of the mongo service database
+        mongo:expose <name> [port]     Expose a mongo service on custom port if provided (random port otherwise)
+        mongo:import <name> < <file>   Import a dump into the mongo service database
+        mongo:info <name>              Print the connection information
+        mongo:link <name> <app>        Link the mongo service to the app
+        mongo:list                     List all mongo services
+        mongo:logs <name> [-t]         Print the most recent log(s) for this service
+        mongo:promote <name> <app>     Promote service <name> as MONGO_URL in <app>
+        mongo:restart <name>           Graceful shutdown and restart of the mongo service container
+        mongo:start <name>             Start a previously stopped mongo service
+        mongo:stop <name>              Stop a running mongo service
+        mongo:unexpose <name>          Unexpose a previously exposed mongo service
+        mongo:unlink <name> <app>      Unlink the mongo service from the app
 		```
 		
 Backing up a database
 
-`mongodb:dump` creates a backup of a whole database. The result can be optionally compressed in a gzipped tarball (tar.gz) by adding the `-tar` parameter after the database name. The dump is placed in the current directory and named `<databasename>-<date and time>`.  
-*Example: `dokku mongodb:dump soccerpc_com-production -tar`*
+`mongo:export <name> > <file>` creates a backup of a whole database. The result can be optionally compressed in a gzipped tarball (tar.gz) by adding the `-tar` parameter after the database name. The dump is placed in the current directory and named `<databasename>-<date and time>`.
+*Example: `mongo:export <name> > <file>`*
 
 NOT WORKING WELL, USE ROBOMONGO!
 
@@ -180,11 +187,8 @@ Restoring a database
 
 `path/to/dump` is `/home/soccerpc.com/mongodump`
 
-`mongodb:restore` can be used to restore dump created with `mongodb:dump` (or `mongodump` which it uses internally). It can be used with a gzipped dump.  
-*Example: `dokku mongodb:restore api-production /path/to/dump/soccerpc_com-production-2015-03-09-16h54-43s.tar.gz`*
-  
-It can also be used with a database dumped to a folder (`mongodb:dump` without the `-tar`argument)  
-*Example: `dokku mongodb:restore api-production /path/to/dump/soccerpc_com-production-2015-03-09-16h54-43s/api-production/`*
+`mongo:import <name> < <file>` can be used to restore dump created with `mongo:export <name> > <file>` (or `mongodump` which it uses internally). It can be used with a gzipped dump.
+*Example: `mongo:import <name> < <file>`*
   
 This will drop the database and re-create it completely from the dump.
 

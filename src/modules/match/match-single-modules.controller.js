@@ -2889,7 +2889,8 @@ angular.module('mainapp.match')
         };
 
 
-        // Logboek
+        // LOGBOEK
+
         self.playerlog1InitFunc = function (i) {
             var temp = $filter('filter')(self.playerdata, {playerID: i}, true)[0];
             self.spelerlogspelernaam = temp.spelerNaam;
@@ -3014,4 +3015,18 @@ angular.module('mainapp.match')
                 }
             }
         };
+
+
+        // MEER DEZE RONDE
+        if (self.loading_slug === 'ronde') {
+            $timeout(function() {
+                var season = $sessionStorage.matchshort.seizoen;
+                var round = $sessionStorage.matchshort.match_info.ronde;
+                Api.MatchesSeason.query({
+                    _season: season
+                }, function (res) {
+                    self.round_matches = $filter('orderBy')($filter('filter')(res, { match_info: { ronde: round } }, true), 'matchID');
+                });
+            }, 1000);
+        }
     }]);

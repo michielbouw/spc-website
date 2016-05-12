@@ -1569,11 +1569,11 @@
                 </div>
                 <div class="col-xs-12 no-padding blue">
                     <div class="col-xs-4 col-sm-4 text-right">{{ data.matchshort.match_info.thuis }}</div>
-                    <div class="col-xs-8 col-sm-6 no-padding"><span style="width:{{ data.match.passes[14].V1.split('m')[0] | number:0 }}%;" id="arrow"></span> {{ data.match.passes[14].V1 }}</div>
+                    <div class="col-xs-8 col-sm-6 no-padding"><span style="width:{{ data.match.passes[14].V1.split('m')[0] - 10 | number:0 }}%;" id="arrow"></span> {{ data.match.passes[14].V1 }}</div>
                 </div>
                 <div class="col-xs-12 no-padding orange">
                     <div class="col-xs-4 col-sm-4 text-right">{{ data.matchshort.match_info.uit }}</div>
-                    <div class="col-xs-8 col-sm-6 no-padding"><span style="width:{{ data.match.passes[14].V3.split('m')[0] | number:0 }}%;" id="arrow-vs"></span> {{ data.match.passes[14].V3 }}</div>
+                    <div class="col-xs-8 col-sm-6 no-padding"><span style="width:{{ data.match.passes[14].V3.split('m')[0] - 10 | number:0 }}%;" id="arrow-vs"></span> {{ data.match.passes[14].V3 }}</div>
                     <div class="col-xs-12">&nbsp;</div>
                 </div>
             </div>
@@ -5788,6 +5788,35 @@
             <p ng-repeat="log in data.spelerlog | orderBy:'-pub_date'">
                 {{ log.text }} <small class="pull-right" style="margin: 6px 0;">door {{ log.author }} op {{ log.pub_date | date:'d MMM yyyy HH:mm' }}</small>
             </p>
+        </div>
+
+        <div class="col-xs-12 content-title-bottom-match text-center">
+            <a href="" scroll-to="top">Terug naar boven <i class="fa fa-arrow-up"></i></a>
+        </div>
+        <br class="clear">
+
+    </div>
+
+    <div class="col-xs-12 col-md-10 col-md-offset-2 content" id="ronde"
+         ng-if="data.loading_slug === 'ronde'">
+
+        <div ng-hide="!data.loading" class="loading">
+            <div class="spinner text-center">
+                <h1><i class="fa fa-spinner fa-pulse"></i></h1>
+                <h4>LOADING</h4>
+            </div>
+        </div>
+
+        <div class="col-xs-12 content-title-top-match">
+            <h4>Meer wedstrijden ronde {{ data.matchshort.match_info.ronde }}</h4>
+            <h4 class="small">Lijst van wedstrijden deze ronde</h4>
+        </div>
+        <div class="col-xs-12">
+            <div class="col-xs-12 no-padding" ng-repeat="match in data.round_matches">
+                <div class="col-sm-4 col-xs-6 no-padding"><a ng-href="/wedstrijd/{{ match.matchID }}/wedstrijd">{{ match.match_info.wedstrijd }}</a></div>
+                <div class="col-sm-2 col-xs-4 no-padding">{{ match.match_info.eindstand }}</div>
+                <div class="col-sm-4 hidden-xs no-padding">({{ match.match_info.datum }})</div>
+            </div>
         </div>
 
         <div class="col-xs-12 content-title-bottom-match text-center">

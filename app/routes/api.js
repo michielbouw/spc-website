@@ -34,6 +34,7 @@ router.delete('/clubs/:_slug',      UserController.ensureAuthorized, ClubControl
 
 router.get('/matches',              UserController.ensureAuthorized, MatchesController.query);
 router.get('/matches/:_id',         UserController.ensureAuthorized, MatchesController.query_team);
+router.get('/matchesse/:_season',   UserController.ensureAuthorized, MatchesController.query_season);
 router.get('/match/:_id',           UserController.ensureAuthorized, MatchesController.get);
 router.get('/toeschouwers/:_id',    MatchesController.toeschouwers_get);
 router.put('/toeschouwers/:_id',    MatchesController.toeschouwers_put);

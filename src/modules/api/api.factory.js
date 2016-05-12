@@ -11,6 +11,7 @@ angular.module('mainapp.api')
             Club:               $resource(url1 + 'clubs/:_slug',      {_slug:'@_slug'},       { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
             Matches:            $resource(url1 + 'matches',           {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),
             MatchesTeam:        $resource(url1 + 'matches/:_id',      {_id:'@_id'},           { 'query': {method:'GET', isArray:true} }),
+            MatchesSeason:      $resource(url1 + 'matchesse/:_season',{_season:'@_season'},   { 'query': {method:'GET', isArray:true} }),
             Match:              $resource(url1 + 'match/:_id',        {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'}, 'delete': {method:'DELETE'} }),
             Toeschouwers:       $resource(url1 + 'toeschouwers/:_id', {_id:'@_id'},           { 'get': {method:'GET'}, 'put': {method:'PUT'} }),
             TeamData:           $resource(url1 + 'teamdata',          {},                     { 'query': {method:'GET', isArray:true}, 'post': {method:'POST'} }),

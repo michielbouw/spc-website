@@ -65,6 +65,13 @@
                         <i class="fa fa-download"></i> Download PDF
                     </a>
                 </li>-->
+                <li role="presentation" ng-class="{active: data.loading_slug === 'ronde'}"
+                    ng-show="(currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
+                    <a href="/wedstrijd/{{ data.loading_id }}/ronde" class="tab" scroll-to="top">
+                        <!--<span class="caret-right"></span><span class="caret"></span> Meer deze ronde-->
+                        Meer ronde {{ data.matchshort.match_info.ronde }}
+                    </a>
+                </li>
             </ul>
             <div class="item-title"><a href="" scroll-to="top">Terug naar boven</a></div>
         </div>
