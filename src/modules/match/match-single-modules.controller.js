@@ -187,6 +187,10 @@ angular.module('mainapp.match')
                         self.match.locatie_overtredingen_uitTeam.push(value);
                     }
                 });
+
+                $timeout(function () {
+                    self.showGraph0();
+                }, 500);
             }
 
             if (self.loading_slug === 'team' && self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
@@ -660,6 +664,10 @@ angular.module('mainapp.match')
                             self.match.locatie_overtredingen_uitTeam.push(value);
                         }
                     });
+
+                    $timeout(function () {
+                        self.showGraph0();
+                    }, 500);
                 }
 
                 if (self.loading_slug === 'team' && self.match.penalty_visualisatie.length > 0 && self.match.penalty_visualisatie[0] !== -999) {
@@ -1619,6 +1627,8 @@ angular.module('mainapp.match')
 
         self.selectpositions_uit = function () {
             if (!positions_uit) {
+                self.chartbalbezit.show('data2');
+
                 if (self.positions_field_interval_var === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
                 else if (self.positions_field_interval_var === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
                 else if (self.positions_field_interval_var === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
@@ -1634,6 +1644,8 @@ angular.module('mainapp.match')
 
                 positions_uit = true;
             } else {
+                self.chartbalbezit.hide('data1');
+
                 self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
                 positions_thuis = false;
             }
@@ -1642,6 +1654,8 @@ angular.module('mainapp.match')
         };
         self.selectpositions_thuis = function () {
             if (!positions_thuis) {
+                self.chartbalbezit.show('data1');
+
                 if (self.positions_field_interval_var === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
                 else if (self.positions_field_interval_var === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
                 else if (self.positions_field_interval_var === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
@@ -1657,6 +1671,8 @@ angular.module('mainapp.match')
 
                 positions_thuis = true;
             } else {
+                self.chartbalbezit.hide('data2');
+
                 self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
                 positions_uit = false;
             }
@@ -1725,6 +1741,72 @@ angular.module('mainapp.match')
                 selectpositions_uit = false;
             }
         };*/
+
+        // Balbezit chart
+        self.chartbalbezit = null;
+        self.showGraph0 = function() {
+            if (self.loading_slug === 'team') {
+                self.chartbalbezit = c3.generate({
+                    bindto: '#chart_balbezit',
+                    size: { height: 160 },
+                    //padding: { right: 15, left: 15 },
+                    data: {
+                        xs: { 'data1': 'x', 'data2': 'x' },
+                        columns: [
+                            ['x', '0', '15', '30', '45', '60', '75', '90'],
+                            //['data1', 50, 50, 51, 40, 41, 56, 60],
+                            //['data2', 50, 50, 49, 60, 59, 44, 40]
+                            ['data1', '50', self.match.balbezit.thuis.kwartier_1, self.match.balbezit.thuis.kwartier_2, self.match.balbezit.thuis.kwartier_3, self.match.balbezit.thuis.kwartier_4, self.match.balbezit.thuis.kwartier_5, self.match.balbezit.thuis.kwartier_6],
+                            ['data2', '50', self.match.balbezit.uit.kwartier_1, self.match.balbezit.uit.kwartier_2, self.match.balbezit.uit.kwartier_3, self.match.balbezit.uit.kwartier_4, self.match.balbezit.uit.kwartier_5, self.match.balbezit.uit.kwartier_6]
+                        ],
+                        axes: { data1: 'y', data2: 'y' },
+                        names: {
+                            data1: 'Balbezit ' + self.matchshort.match_info.thuis,
+                            data2: 'Balbezit ' + self.matchshort.match_info.uit
+                        },
+                        types: { data1: 'area', data2: 'area' }
+                    },
+                    color: { pattern: ['#037dc9', '#ec7500'] },
+                    point: { show: false },
+                    axis: {
+                        y: {
+                            padding: {top: 10, bottom: 0},
+                            min: 20,
+                            max: 80,
+                            show: false
+                        },
+                        x: {
+                            min: -2,
+                            max: 92,
+                            //tick: {
+                            //    format: function (d) { return d + '\''; }
+                            //},
+                            show: false
+                        }
+                    },
+                    grid: {
+                        x: {
+                            lines: [{value: 0, text: '0\''}, {value: 15, text: '15\''}, {value: 30, text: '30\''}, {value: 45, text: '45\''}, {value: 60, text: '60\''}, {value: 75, text: '75\''}, {value: 90, text: '90\''}]
+                        },
+                        y: {
+                            lines: [{value: 50, text: '50%', position: 'start'}]
+                        }
+                    },
+                    tooltip: {
+                        format: {
+                            title: function (d) { return d + '\''; },
+                            value: function (value) {
+                                var format = function (d) { return d + '%'; };
+                                return format(value);
+                            }
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+                });
+            }
+        };
 
         // Doelpogingen
         var doelpogingen_uit = true;
@@ -2427,7 +2509,19 @@ angular.module('mainapp.match')
             }
         };*/
 
+        // Heatmaps
+        self.heatmap_thuis_show = true;
+        self.heatmap_uit_show = true;
+        self.heatmap_1e_helft_show = true;
+        self.heatmap_2e_helft_show = false;
+
+        // Heatmaps
+        self.passes_per_zone_kort_show = true;
+        self.passes_per_zone_middellang_show = false;
+        self.passes_per_zone_lang_show = false;
+
         // Overtredingen
+        self.overtredingen_table_show = false;
         var overtredingen_uit = true;
         var overtredingen_thuis = true;
 

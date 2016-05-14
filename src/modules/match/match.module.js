@@ -1,4 +1,4 @@
-angular.module('mainapp.match', [])
+angular.module('mainapp.match', ['tc.chartjs'])
     .config(function($routeProvider)
     {
         $routeProvider

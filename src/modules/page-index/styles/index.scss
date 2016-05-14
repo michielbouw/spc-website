@@ -208,7 +208,15 @@
   }
 
   .home-intro-2x {
-    padding-top: 15vh;
+    padding-top: 10vh;
+
+    h1 {
+      font-size: 60px;
+
+      i {
+        font-size: 100px;
+      }
+    }
 
     a {
       color: $white;
@@ -228,6 +236,32 @@ Responsive setup
 @media screen and (max-width:991px) {
 }
 @media screen and (max-width:767px) {
+  .block-error {
+    .home-intro-2x {
+      padding-top: 5vh;
+
+      h1 {
+        font-size: 50px;
+
+        i {
+          font-size: 80px;
+        }
+      }
+    }
+  }
 }
 @media screen and (max-width:320px) {
+  .block-error {
+    .home-intro-2x {
+      padding-top: 4vh;
+
+      h1 {
+        font-size: 30px;
+
+        i {
+          font-size: 50px;
+        }
+      }
+    }
+  }
 }

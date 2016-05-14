@@ -46,6 +46,10 @@ body {
   clear: both;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 [data-toggle="tooltip"], [rel="tooltip"] {
   cursor: pointer;
 }

@@ -32,7 +32,11 @@
                 <img ng-if="data.player_stats.spelerPhoto" ng-src="{{ data.player_stats.spelerPhoto }}" on-error-src="images/blank-avatar.png">
             </div>
             <div class="col-xs-12"><br><strong>{{ data.player_stats.spelerNaam }}</strong></div>
-            <div ng-if="data.player_stats.spelerPositie" class="col-xs-12"><br>{{ data.player_stats.spelerPositie }}</div>
+            <div ng-if="data.player_stats.spelerPositie || data.player_stats.spelerNationaliteit || data.player_stats.spelerGeboortedatum" class="col-xs-12">
+                <span ng-if="data.player_stats.spelerPositie"><br>{{ data.player_stats.spelerPositie }}</span>
+                <span ng-if="data.player_stats.spelerNationaliteit"><br>{{ data.player_stats.spelerNationaliteit }}</span>
+                <span ng-if="data.player_stats.spelerGeboortedatum"><br>{{ data.player_stats.spelerGeboortedatum | date:'dd-MM-yyyy' }}</span>
+            </div>
             <div class="col-xs-12"><br><strong>{{ data.club_name }}</strong></div>
             <div class="col-xs-12"><br><img ng-src="images/shirt-blue.png"><span class="text-center rugnummer">{{ data.player_stats.spelerRugnummer }}</span></div>
             <div class="col-xs-12 text-center"><a ng-href="/spelers/{{ data.team_slug }}" class="orange"><strong><i class="fa fa-refresh"></i> andere speler</strong></a></div>
@@ -267,13 +271,13 @@
             <div class="col-xs-12 no-padding"><h4>SKILLS</h4></div>
 
             <div class="col-xs-12" ng-if="data.player_stats.spelerType !== 'keeper' && data.chart_options && data.chart_player && data.chart_player.datasets">
-                <canvas tc-chartjs-radar chart-options="data.chart_options" chart-data="data.chart_player" chart-legend="data.legend_player"></canvas>
-                <div tc-chartjs-legend chart-legend="data.legend_player"></div>
+                <canvas tc-chartjsnew-radar chart-options="data.chart_options" chart-data="data.chart_player" chart-legend="data.legend_player"></canvas>
+                <div tc-chartjsnew-legend chart-legend="data.legend_player"></div>
             </div>
 
             <div class="col-xs-12" ng-if="data.player_stats.spelerType == 'keeper' && data.chart_options && data.chart_keeper && data.chart_keeper.datasets">
-                <canvas tc-chartjs-radar chart-options="data.chart_options" chart-data="data.chart_keeper" chart-legend="data.legend_keeper"></canvas>
-                <div tc-chartjs-legend chart-legend="data.legend_keeper"></div>
+                <canvas tc-chartjsnew-radar chart-options="data.chart_options" chart-data="data.chart_keeper" chart-legend="data.legend_keeper"></canvas>
+                <div tc-chartjsnew-legend chart-legend="data.legend_keeper"></div>
             </div>
         </div>
         </div>

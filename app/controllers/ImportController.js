@@ -164,7 +164,7 @@ module.exports = ImportController = {
                                 team_data.uit.rood = Number_converter(data.wedstrijd_data.overzicht_wedstrijdstatistieken[7][' .2']);
                             }
 
-                            // here we need an if statement for the correct season chosing
+                            // here we need an if statement for the correct season choice
                             if (items.matchID >= 1203 && items.matchID <= 1582) {
                                 items.seizoen = "2013-2014";
                                 match_short.seizoen = "2013-2014";
@@ -202,27 +202,25 @@ module.exports = ImportController = {
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
-
                                 }
                             } else if (items.matchID >= 17009 && items.matchID <= 17350) {
                                 items.seizoen = "2015-2016";
                                 match_short.seizoen = "2015-2016";
-                            } else if ((items.matchID >= 24817 && items.matchID <= 24820) || (items.matchID >= 24821 && items.matchID <= 24828) || (items.matchID >= 24829 && items.matchID <= 24832)) {
+                            } else if ((items.matchID >= 24817 && items.matchID <= 24824) || (items.matchID >= 24839 && items.matchID <= 24842) || (items.matchID >= 24843 && items.matchID <= 24846)) {
                                 items.seizoen = "2015-2016 Play-offs";
                                 match_short.seizoen = "2015-2016 Play-offs";
 
-                                if (items.matchID >= 24821 && items.matchID <= 24828) {
+                                if ((items.matchID >= 24821 && items.matchID <= 24824) || (items.matchID >= 24839 && items.matchID <= 24842)) {
                                     match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 2;
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
                                 }
-                                if (items.matchID >= 24829 && items.matchID <= 24832) {
+                                if (items.matchID >= 24843 && items.matchID <= 24846) {
                                     match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 4;
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
-
                                 }
                             } else {
                                 items.seizoen = "2015-2016 Play-offs";
@@ -235,7 +233,7 @@ module.exports = ImportController = {
                             // seizoen 1415: 7288-7667
                             // seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
                             // seizoen 1516: 17009-17350
-                            // seizoen 1516 PO: 24817-24820, 24869-24876, 24891-24894
+                            // seizoen 1516 PO: 24817-24824, 24839-24842, 24843-24846??
                             // seizoen 1617: ??
                             // Alle intervallen zijn inclusief de linker- en rechterwaarde.
 

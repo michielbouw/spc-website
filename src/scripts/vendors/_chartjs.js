@@ -10,36 +10,36 @@
 
 (function () {
     'use strict';
-    angular.module("tc.chartjs.new", []).directive("tcChartjs", TcChartjs).directive("tcChartjsLine", TcChartjsLine).directive("tcChartjsBar", TcChartjsBar).directive("tcChartjsRadar", TcChartjsRadar).directive("tcChartjsPolararea", TcChartjsPolararea).directive("tcChartjsPie", TcChartjsPie).directive("tcChartjsDoughnut", TcChartjsDoughnut).directive("tcChartjsLegend", TcChartjsLegend).factory("TcChartjsFactory", TcChartjsFactory);
-    function TcChartjs(TcChartjsFactory) {
-        return new TcChartjsFactory();
+    angular.module("tc.chartjs.new", []).directive("tcChartjsnew", TcChartjsnew).directive("tcChartjsnewLine", TcChartjsnewLine).directive("tcChartjsnewBar", TcChartjsnewBar).directive("tcChartjsnewRadar", TcChartjsnewRadar).directive("tcChartjsnewPolararea", TcChartjsnewPolararea).directive("tcChartjsnewPie", TcChartjsnewPie).directive("tcChartjsnewDoughnut", TcChartjsnewDoughnut).directive("tcChartjsnewLegend", TcChartjsnewLegend).factory("TcChartjsnewFactory", TcChartjsnewFactory);
+    function TcChartjsnew(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory();
     }
-    TcChartjs.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsLine(TcChartjsFactory) {
-        return new TcChartjsFactory("line");
+    TcChartjsnew.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewLine(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory("line");
     }
-    TcChartjsLine.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsBar(TcChartjsFactory) {
-        return new TcChartjsFactory("bar");
+    TcChartjsnewLine.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewBar(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory("bar");
     }
-    TcChartjsBar.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsRadar(TcChartjsFactory) {
-        return new TcChartjsFactory("radar");
+    TcChartjsnewBar.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewRadar(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory("radar");
     }
-    TcChartjsRadar.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsPolararea(TcChartjsFactory) {
-        return new TcChartjsFactory("polararea");
+    TcChartjsnewRadar.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewPolararea(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory("polararea");
     }
-    TcChartjsPolararea.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsPie(TcChartjsFactory) {
-        return new TcChartjsFactory("pie");
+    TcChartjsnewPolararea.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewPie(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory("pie");
     }
-    TcChartjsPie.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsDoughnut(TcChartjsFactory) {
-        return new TcChartjsFactory("doughnut");
+    TcChartjsnewPie.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewDoughnut(TcChartjsnewFactory) {
+        return new TcChartjsnewFactory("doughnut");
     }
-    TcChartjsDoughnut.$inject = [ "TcChartjsFactory" ];
-    function TcChartjsFactory() {
+    TcChartjsnewDoughnut.$inject = [ "TcChartjsnewFactory" ];
+    function TcChartjsnewFactory() {
         return function(chartType) {
             return {
                 restrict: "A",
@@ -147,7 +147,7 @@
             }
         };
     }
-    function TcChartjsLegend() {
+    function TcChartjsnewLegend() {
         return {
             restrict: "A",
             scope: {
@@ -169,7 +169,7 @@
  * renewed Chart.js library
  *
  * From:
- * http://chartjs.org/
+ * http://Chartjsnew.org/
  * Version: 1.0.2
  *
  * Copyright 2015 Nick Downie
