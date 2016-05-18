@@ -189,7 +189,8 @@ angular.module('mainapp.match')
                 });
 
                 $timeout(function () {
-                    self.showGraph0();
+                    self.showGraph1();
+                    self.showGraph2();
                 }, 500);
             }
 
@@ -666,7 +667,8 @@ angular.module('mainapp.match')
                     });
 
                     $timeout(function () {
-                        self.showGraph0();
+                        self.showGraph1();
+                        self.showGraph2();
                     }, 500);
                 }
 
@@ -1743,45 +1745,56 @@ angular.module('mainapp.match')
         };*/
 
         // Balbezit chart
-        self.chartbalbezit = null;
-        self.showGraph0 = function() {
+        //self.balbezit1_show = true;
+        //self.balbezit2_show = false;
+        self.chartbalbezit1 = null;
+        self.showGraph1 = function() {
             if (self.loading_slug === 'team') {
-                self.chartbalbezit = c3.generate({
-                    bindto: '#chart_balbezit',
+                self.chartbalbezit1 = c3.generate({
+                    bindto: '#chart_balbezit1',
                     size: { height: 160 },
                     //padding: { right: 15, left: 15 },
                     data: {
                         xs: { 'data1': 'x', 'data2': 'x' },
                         columns: [
-                            ['x', '0', '15', '30', '45', '60', '75', '90'],
-                            //['data1', 50, 50, 51, 40, 41, 56, 60],
-                            //['data2', 50, 50, 49, 60, 59, 44, 40]
-                            ['data1', '50', self.match.balbezit.thuis.kwartier_1, self.match.balbezit.thuis.kwartier_2, self.match.balbezit.thuis.kwartier_3, self.match.balbezit.thuis.kwartier_4, self.match.balbezit.thuis.kwartier_5, self.match.balbezit.thuis.kwartier_6],
-                            ['data2', '50', self.match.balbezit.uit.kwartier_1, self.match.balbezit.uit.kwartier_2, self.match.balbezit.uit.kwartier_3, self.match.balbezit.uit.kwartier_4, self.match.balbezit.uit.kwartier_5, self.match.balbezit.uit.kwartier_6]
+                            ['x', '7.5', '22.5', '37.5', '52.5', '67.5', '82.5', '90'],
+                            ['data1', self.match.balbezit.thuis.kwartier_1, self.match.balbezit.thuis.kwartier_2, self.match.balbezit.thuis.kwartier_3, self.match.balbezit.thuis.kwartier_4, self.match.balbezit.thuis.kwartier_5, self.match.balbezit.thuis.kwartier_6],
+                            ['data2', self.match.balbezit.uit.kwartier_1, self.match.balbezit.uit.kwartier_2, self.match.balbezit.uit.kwartier_3, self.match.balbezit.uit.kwartier_4, self.match.balbezit.uit.kwartier_5, self.match.balbezit.uit.kwartier_6]
                         ],
                         axes: { data1: 'y', data2: 'y' },
                         names: {
                             data1: 'Balbezit ' + self.matchshort.match_info.thuis,
                             data2: 'Balbezit ' + self.matchshort.match_info.uit
                         },
-                        types: { data1: 'area', data2: 'area' }
+                        types: { data1: 'bar', data2: 'bar' },
+                        groups: [
+                            ['data1', 'data2']
+                        ]
                     },
                     color: { pattern: ['#037dc9', '#ec7500'] },
                     point: { show: false },
                     axis: {
                         y: {
-                            padding: {top: 10, bottom: 0},
-                            min: 20,
-                            max: 80,
+                            padding: {top: 1, bottom: 1},
+                            min: 2,
+                            max: 98,
                             show: false
                         },
                         x: {
-                            min: -2,
-                            max: 92,
+                            //min: 0,
+                            //max: 90,
                             //tick: {
                             //    format: function (d) { return d + '\''; }
                             //},
+                            tick: {
+                                count: 6
+                            },
                             show: false
+                        }
+                    },
+                    bar: {
+                        width: {
+                            ratio: 1 // this makes bar width 100% of length between ticks
                         }
                     },
                     grid: {
@@ -1794,7 +1807,7 @@ angular.module('mainapp.match')
                     },
                     tooltip: {
                         format: {
-                            title: function (d) { return d + '\''; },
+                            title: function (d) { return (d - 7.5) + '\' - ' + (d + 7.5) + '\''; },
                             value: function (value) {
                                 var format = function (d) { return d + '%'; };
                                 return format(value);
@@ -1807,6 +1820,69 @@ angular.module('mainapp.match')
                 });
             }
         };
+        //self.chartbalbezit2 = null;
+        //self.showGraph2 = function() {
+        //    if (self.loading_slug === 'team') {
+        //        self.chartbalbezit2 = c3.generate({
+        //            bindto: '#chart_balbezit2',
+        //            size: { height: 160 },
+        //            //padding: { right: 15, left: 15 },
+        //            data: {
+        //                xs: { 'data1': 'x', 'data2': 'x' },
+        //                columns: [
+        //                    ['x', '0', '15', '30', '45', '60', '75', '90'],
+        //                    ['data1', '50', self.match.balbezit.thuis.kwartier_1, self.match.balbezit.thuis.kwartier_2, self.match.balbezit.thuis.kwartier_3, self.match.balbezit.thuis.kwartier_4, self.match.balbezit.thuis.kwartier_5, self.match.balbezit.thuis.kwartier_6],
+        //                    ['data2', '50', self.match.balbezit.uit.kwartier_1, self.match.balbezit.uit.kwartier_2, self.match.balbezit.uit.kwartier_3, self.match.balbezit.uit.kwartier_4, self.match.balbezit.uit.kwartier_5, self.match.balbezit.uit.kwartier_6]
+        //                ],
+        //                axes: { data1: 'y', data2: 'y' },
+        //                names: {
+        //                    data1: 'Balbezit ' + self.matchshort.match_info.thuis,
+        //                    data2: 'Balbezit ' + self.matchshort.match_info.uit
+        //                },
+        //                types: { data1: 'area', data2: 'area' }
+        //            },
+        //            color: { pattern: ['#037dc9', '#ec7500'] },
+        //            point: { show: false },
+        //            axis: {
+        //                y: {
+        //                    padding: {top: 0, bottom: 0},
+        //                    min: 0,
+        //                    max: 100,
+        //                    show: false
+        //                },
+        //                x: {
+        //                    min: -2,
+        //                    max: 92,
+        //                    //tick: {
+        //                    //    format: function (d) { return d + '\''; }
+        //                    //},
+        //                    show: false
+        //                }
+        //            },
+        //            grid: {
+        //                x: {
+        //                    lines: [{value: 0, text: '0\''}, {value: 15, text: '15\''}, {value: 30, text: '30\''}, {value: 45, text: '45\''}, {value: 60, text: '60\''}, {value: 75, text: '75\''}, {value: 90, text: '90\''}]
+        //                },
+        //                y: {
+        //                    lines: [{value: 50, text: '50%', position: 'start'}]
+        //                }
+        //            },
+        //            tooltip: {
+        //                format: {
+        //                    title: function (d) { return d + '\''; },
+        //                    value: function (value) {
+        //                        var format = function (d) { return d + '%'; };
+        //                        return format(value);
+        //                    }
+        //                }
+        //            },
+        //            legend: {
+        //                show: false
+        //            }
+        //        });
+        //    }
+        //};
+
 
         // Doelpogingen
         var doelpogingen_uit = true;

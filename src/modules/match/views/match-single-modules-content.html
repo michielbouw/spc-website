@@ -1675,12 +1675,22 @@
                 </div>-->
             </div>
 
-            <div class="col-xs-12 balbezit text-center" ng-init="data.showGraph1()">
+            <div class="col-xs-12 balbezit text-center">
                 <h4 class="small">Balbezit</h4>
-
-                <div class="chart">
-                    <div id="chart_balbezit"></div>
+                <!--<div class="text-center select_type">
+                <span ng-click="data.balbezit1_show = true; data.balbezit2_show = false;" class="blue" ng-class="{ lightblue: !data.balbezit1_show }">
+                    bar
+                </span>&nbsp;
+                <span ng-click="data.balbezit2_show = true; data.balbezit1_show = false;" class="blue" ng-class="{ lightblue: !data.balbezit2_show }">
+                    lijn
+                </span>
+                </div>-->
+                <div class="chart" ng-init="data.showGraph1();">
+                    <div id="chart_balbezit1"></div>
                 </div>
+                <!--<div ng-if="data.balbezit2_show" class="chart" ng-init="data.showGraph2();">
+                    <div id="chart_balbezit2"></div>
+                </div>-->
             </div>
         </div>
 
@@ -2052,116 +2062,113 @@
                 </span>
             </div>
 
-            <div ng-show="data.passes_per_zone_kort_show" class="col-xs-4 col-sm-4 col-sm-offset-1 passes_zone_field blue" id="passes_zone_size">
-                <!--<span class="text-center" style="width: 100%;float: left;"><em>Korte passes (<10m)</em></span><br>-->
+            <div ng-show="data.passes_per_zone_kort_show" class="col-xs-4 col-xs-offset-1 col-sm-4 col-sm-offset-1 passes_zone_field blue" id="passes_zone_size">
                 <div ng-repeat="row in data.match.passes_per_zone.thuis.kort" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == '1'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == '2'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == '3'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld.svg" style="width: 100%;" />
+                <img src="images/speelveld_empty.jpg" style="width: 100%;" />
             </div>
-            <div ng-show="data.passes_per_zone_kort_show" class="col-xs-4 col-sm-2 passes_zone_field blue">
+            <div ng-show="data.passes_per_zone_kort_show" class="col-xs-2 col-sm-2 passes_zone_field passes_zone_field_line blue">
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">aanval</span></h1>
+                        <h1><span class="line">verdediging</span></h1>
                     </span>
                 </div>
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">middenveld</span></h1>
+                        <h1><span class="line">middenveld</span></h1>
                     </span>
                 </div>
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">verdediging</span></h1>
+                        <h1><span class="line">aanval</span></h1>
                     </span>
                 </div>
             </div>
             <div ng-show="data.passes_per_zone_kort_show" class="col-xs-4 col-sm-4 passes_zone_field orange" id="passes_zone_size">
-                <!--<span class="text-center" style="width: 100%;float: left;"><em>Korte passes (<10m)</em></span><br>-->
                 <div ng-repeat="row in data.match.passes_per_zone.uit.kort" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == 2"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == 3"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld.svg" style="width: 100%;" />
+                <img src="images/speelveld_empty.jpg" style="width: 100%;" />
             </div>
 
             <div ng-show="data.passes_per_zone_middellang_show" class="col-xs-4 col-sm-4 col-sm-offset-1 passes_zone_field blue" id="passes_zone_size">
-                <!--<span class="text-center" style="width: 100%;float: left;"><em>Middellange passes (10-25m)</em></span><br>-->
                 <div ng-repeat="row in data.match.passes_per_zone.thuis.middellang" class="pass_zone">
-                    <span class="pass_zone_item" ng-if="row.zend_zone == 1"
+                    <span class="pass_zone_item" ng-if="row.zend_zone == '1'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
-                    <span class="pass_zone_item" ng-if="row.zend_zone == 2"
+                    <span class="pass_zone_item" ng-if="row.zend_zone == '2'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
-                    <span class="pass_zone_item" ng-if="row.zend_zone == 3"
+                    <span class="pass_zone_item" ng-if="row.zend_zone == '3'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld.svg" style="width: 100%;" />
+                <img src="images/speelveld_empty.jpg" style="width: 100%;" />
             </div>
             <div ng-show="data.passes_per_zone_middellang_show" class="col-xs-4 col-sm-2 passes_zone_field blue">
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15}}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">aanval</span></h1>
+                        <h1><span style="font-size: calc(30% * 1.2);">verdediging</span></h1>
                     </span>
                 </div>
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
@@ -2169,74 +2176,72 @@
                     </span>
                 </div>
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">verdediging</span></h1>
+                        <h1><span style="font-size: calc(30% * 1.2);">aanval</span></h1>
                     </span>
                 </div>
             </div>
             <div ng-show="data.passes_per_zone_middellang_show" class="col-xs-4 col-sm-4 passes_zone_field orange" id="passes_zone_size">
-                <!--<span class="text-center" style="width: 100%;float: left;"><em>Middellange passes (10-25m)</em></span><br>-->
                 <div ng-repeat="row in data.match.passes_per_zone.uit.middellang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == 2"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == 3"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld.svg" style="width: 100%;" />
+                <img src="images/speelveld_empty.jpg" style="width: 100%;" />
             </div>
 
             <div ng-show="data.passes_per_zone_lang_show" class="col-xs-4 col-sm-4 col-sm-offset-1 passes_zone_field blue" id="passes_zone_size">
-                <!--<span class="text-center" style="width: 100%;float: left;"><em>Lange passes (>25m)</em></span><br>-->
                 <div ng-repeat="row in data.match.passes_per_zone.thuis.lang" class="pass_zone">
-                    <span class="pass_zone_item" ng-if="row.zend_zone == 1"
+                    <span class="pass_zone_item" ng-if="row.zend_zone == '1'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
-                    <span class="pass_zone_item" ng-if="row.zend_zone == 2"
+                    <span class="pass_zone_item" ng-if="row.zend_zone == '2'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
-                    <span class="pass_zone_item" ng-if="row.zend_zone == 3"
+                    <span class="pass_zone_item" ng-if="row.zend_zone == '3'"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld.svg" style="width: 100%;" />
+                <img src="images/speelveld_empty.jpg" style="width: 100%;" />
             </div>
             <div ng-show="data.passes_per_zone_lang_show" class="col-xs-4 col-sm-2 passes_zone_field blue">
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">aanval</span></h1>
+                        <h1><span style="font-size: calc(30% * 1.2);">verdediging</span></h1>
                     </span>
                 </div>
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
@@ -2244,37 +2249,36 @@
                     </span>
                 </div>
                 <div class="pass_zone">
-                    <span class="pass_zone_item"
+                    <span class="pass_zone_item pass_zone_line"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width / 2 - 15 }}px;">
-                        <h1><span style="font-size: calc(30% * 1.2);">verdediging</span></h1>
+                        <h1><span style="font-size: calc(30% * 1.2);">aanval</span></h1>
                     </span>
                 </div>
             </div>
             <div ng-show="data.passes_per_zone_lang_show" class="col-xs-4 col-sm-4 passes_zone_field orange" id="passes_zone_size">
-                <!--<span class="text-center" style="width: 100%;float: left;"><em>Lange passes (>25m)</em></span><br>-->
                 <div ng-repeat="row in data.match.passes_per_zone.uit.lang" class="pass_zone">
                     <span class="pass_zone_item" ng-if="row.zend_zone == 1"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (16.67 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == 2"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (50 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                     <span class="pass_zone_item" ng-if="row.zend_zone == 3"
                           style="margin-top: -moz-calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           margin-top: calc({{ passes_zone_field_height }}px - (83.33 / 100)*{{ passes_zone_field_height }}px - 10px);
                           width: {{ passes_zone_field_width }}px;">
-                        <h1><span style="font-size: calc({{ row.perc }} * 1.2);">{{ row.TOTAAL }} ({{ row.perc }})</span></h1>
+                        <h1><span class="total pull-left">{{ row.TOTAAL }} <span class="pass">passes</span></span><span class="perc pull-right">{{ row.perc }}<span class="succ">succesvol</span></span></h1>
                     </span>
                 </div>
-                <img src="images/background_speelveld.svg" style="width: 100%;" />
+                <img src="images/speelveld_empty.jpg" style="width: 100%;" />
             </div>
         </div>
 
