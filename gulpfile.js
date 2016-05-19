@@ -23,6 +23,7 @@ var sass        = require('gulp-sass');
 var templates   = require('gulp-ng-templates');
 var watch       = require('gulp-watch');
 var sourcemaps  = require('gulp-sourcemaps');
+var googleWF    = require('gulp-google-webfonts');
 
 // Gulp Production plugins
 var uglify      = require('gulp-uglify');
@@ -71,7 +72,7 @@ gulp.task('server:watch', function()
 
 // Default scripts
 gulp.task('build', [
-    'build:resources',
+    //'build:resources',
     'build:styles',
     'build:scripts',
     'build:modules'
@@ -80,7 +81,9 @@ gulp.task('build', [
 
     return del([
         'build/modules/**/*',
-        'build/modules'
+        'build/modules',
+        'src/styles/vendors/**/*',
+        'src/styles/vendors'
     ]);
 });
 
@@ -97,18 +100,24 @@ gulp.task('build:resources', function()
     var mailer = gulp.src('src/mailer/*.html')
         .pipe(gulp.dest('build/mailer/'));
 
+    var options = {
+        fontsDir: 'fonts/',
+        cssDir: '../../src/styles/vendors',
+        cssFilename: '_fonts.scss'
+    };
+    var font = gulp.src('src/styles/fonts.list')
+        .pipe(googleWF(options))
+        .pipe(gulp.dest('build/styles/'));
+
     var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
         .pipe(gulp.dest('build/styles/fonts/'));
 
     var fonts2 = gulp.src('node_modules/bootstrap-sass/assets/fonts/bootstrap/**/*')
         .pipe(gulp.dest('build/styles/fonts/bootstrap/'));
 
-    var text = gulp.src('node_modules/textangular/dist/*.css')
-        .pipe(uglifycss({
-            "maxLineLen": 10000,
-            "uglyComments": true
-        }))
-        .pipe(gulp.dest('build/styles/vendors/'));
+    var text = gulp.src('node_modules/textangular/dist/textAngular.css')
+        .pipe(concat('_textAngular.scss'))
+        .pipe(gulp.dest('src/styles/vendors/'));
 
     var uploads = gulp.src('src/images/blank-avatar.png')
         .pipe(gulp.dest('media/data/'));
@@ -125,13 +134,16 @@ gulp.task('build:resources', function()
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, mailer, fonts, fonts2, text, uploads, uploads2, uploads3, uploads4, images);
+    return es.concat(views, errors, mailer, font, fonts, fonts2, text, uploads, uploads2, uploads3, uploads4, images);
 });
 
-gulp.task('build:styles', function()
+gulp.task('build:styles', ['build:resources'], function()
 {
-    var vendors = gulp.src('src/styles/*.scss')
+    var vendors = gulp.src(['src/styles/*.scss', '!src/styles/_*.scss'])
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', errorHandler))
+        .pipe(concat('vendors.min.css'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/styles/'));
 
     var styles = gulp.src(['src/modules/**/styles/*.scss', '!src/modules/**/styles/_*.scss'])
@@ -190,7 +202,7 @@ gulp.task('build:modules', ['build:jshint'], folders(path_modules, function(modu
 
 // Production scripts
 gulp.task('build:prod', [
-    'build:resources:prod',
+    //'build:resources:prod',
     'build:styles:prod',
     'build:scripts:prod',
     'build:modules:prod'
@@ -198,7 +210,9 @@ gulp.task('build:prod', [
     // remove modules folder
     return del([
         'build/modules/**/*',
-        'build/modules'
+        'build/modules',
+        'src/styles/vendors/**/*',
+        'src/styles/vendors'
     ]);
 });
 
@@ -215,34 +229,43 @@ gulp.task('build:resources:prod', function()
     var mailer = gulp.src('src/mailer/*.html')
         .pipe(gulp.dest('build/mailer/'));
 
+    var options = {
+        fontsDir: 'fonts/',
+        cssDir: '../../src/styles/vendors',
+        cssFilename: '_fonts.scss'
+    };
+    var font = gulp.src('src/styles/fonts.list')
+        .pipe(googleWF(options))
+        .pipe(gulp.dest('build/styles/'));
+
     var fonts = gulp.src('node_modules/font-awesome/fonts/**/*')
         .pipe(gulp.dest('build/styles/fonts/'));
 
     var fonts2 = gulp.src('node_modules/bootstrap-sass/assets/fonts/bootstrap/**/*')
         .pipe(gulp.dest('build/styles/fonts/bootstrap/'));
 
-    var text = gulp.src('node_modules/textangular/dist/*.css')
-        .pipe(uglifycss({
-            "maxLineLen": 10000,
-            "uglyComments": true
-        }))
-        .pipe(gulp.dest('build/styles/vendors/'));
+    var text = gulp.src('node_modules/textangular/dist/textAngular.css')
+        .pipe(concat('_textAngular.scss'))
+        .pipe(gulp.dest('src/styles/vendors/'));
 
     var images = gulp.src('src/images/**/*')
         .pipe(gulp.dest('build/images/'));
 
-    return es.concat(views, errors, mailer, fonts, fonts2, text, images);
+    return es.concat(views, errors, mailer, font, fonts, fonts2, text, images);
 });
 
-gulp.task('build:styles:prod', function()
+gulp.task('build:styles:prod', ['build:resources:prod'], function()
 {
-    var vendors = gulp.src('src/styles/*.scss')
+    var vendors = gulp.src(['src/styles/*.scss', '!src/styles/_*.scss'])
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', errorHandler))
         .pipe(autoprefixer())
         .pipe(uglifycss({
             "maxLineLen": 10000,
             "uglyComments": true
         }))
+        .pipe(concat('vendors.min.css'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/styles/'));
 
     var styles = gulp.src(['src/modules/**/styles/*.scss', '!src/modules/**/styles/_*.scss'])

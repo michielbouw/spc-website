@@ -3,10 +3,12 @@ $icon-font-path: "fonts/bootstrap/";
 
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '../../node_modules/font-awesome/scss/font-awesome.scss';
-@import 'vendors/textAngular.css';
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
+@import 'vendors/_textAngular.scss';
+@import 'vendors/_fonts.scss';
+
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
 
 /*
 C3

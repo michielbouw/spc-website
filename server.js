@@ -2,16 +2,13 @@
 var express        = require('express');
 var mongoose       = require('mongoose');
 var livereload     = require('connect-livereload');
-
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var compression    = require('compression');
-
 var consolidate    = require('consolidate');
 var swig           = require('swig');
 
 var multipart      = require('connect-multiparty');
-
 var mailer         = require('express-mailer');
 
 var morgan         = require("morgan");
@@ -33,6 +30,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 app.use(methodOverride('X-HTTP-Method-Override'));
 
+app.use(compression()); // use compression
 app.use(express.static(__dirname + '/build'));
 app.use('/media', express.static(__dirname + '/media'));
 

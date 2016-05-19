@@ -17,7 +17,7 @@ angular.module('mainapp', [
     'mainapp.players',
     'mainapp.scouting'
 ])
-    .config(function($locationProvider, $routeProvider, $httpProvider) {
+    .config(function($locationProvider, $routeProvider, $httpProvider, $compileProvider) {
         $locationProvider.html5Mode(true);
 
         $routeProvider
@@ -36,6 +36,8 @@ angular.module('mainapp', [
             .otherwise('/404');
 
         $httpProvider.interceptors.push('TokenInterceptor');
+
+        $compileProvider.debugInfoEnabled(false);
     })
     .run(['$anchorScroll', function($anchorScroll) {
         $anchorScroll.yOffset = 155;   // always scroll by 50 extra pixels

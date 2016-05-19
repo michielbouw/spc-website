@@ -207,7 +207,7 @@ angular.module('mainapp.match')
 
                         $('.menu-left-button button[data-toggle="offcanvas"]').click(function() {
                             $('#wrapper .page-top .content.content-top').toggleClass('active');
-                            $('#wrapper .page-content .content.tab-pane').toggleClass('menuopen');
+                            $('#wrapper .page-content .content').toggleClass('menuopen');
                             $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').toggle();
                             $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').toggle();
                             $('.page-top .col-md-2.sidebar-offcanvas').toggle();
@@ -311,7 +311,7 @@ angular.module('mainapp.match')
 
                             if ($('#wrapper .page-top .content.content-top').hasClass('active')) {
                                 $('#wrapper .page-top .content.content-top').removeClass('active');
-                                $('#wrapper .page-content .content.tab-pane').removeClass('menuopen');
+                                $('#wrapper .page-content .content').removeClass('menuopen');
                                 $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-right').show();
                                 $('.menu-left-button button[data-toggle="offcanvas"] .fa-chevron-left').hide();
                                 $('.page-top .col-md-2.sidebar-offcanvas').hide();

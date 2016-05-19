@@ -18,6 +18,10 @@ angular.module('mainapp.match')
 
         self.loading_id = $routeParams._id;
 
+        self.go = function (path) {
+            $location.path(path);
+        };
+
         if ($sessionStorage.matchshort && $sessionStorage.matchshort.matchID == $routeParams._id) {
             if ($sessionStorage.currentClub) {
                 if ($sessionStorage.currentUser.role == 'admin' || $sessionStorage.currentClub.spc_package == 'extra' || $sessionStorage.currentClub.spc_package == 'league') {

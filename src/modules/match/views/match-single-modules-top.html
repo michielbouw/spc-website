@@ -67,7 +67,6 @@
                 <li role="presentation" ng-class="{active: data.loading_slug === 'ronde'}"
                     ng-show="(currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.thuis) || (currentUser.role == 'technische-staff' && data.team_data && currentClub.spc_package == 'extra' && currentClub.name == data.matchshort.match_info.uit) || currentUser.role == 'admin'">
                     <a href="/wedstrijd/{{ data.loading_id }}/ronde" class="tab" scroll-to="top">
-                        <!--<span class="caret-right"></span><span class="caret"></span> Meer deze ronde-->
                         Meer ronde {{ data.matchshort.match_info.ronde }}
                     </a>
                 </li>
@@ -104,22 +103,13 @@
                 <div class="row extra-info">
                     <div class="col-xs-12">
                         <h4>
-                            {{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}
+                            {{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum | date:'d MMM yyyy' }} {{ data.matchshort.match_info.tijd }}
                             &nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;ronde {{ data.matchshort.match_info.ronde }}
                             &nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;<img src="images/referee.svg" height="22px"> {{ data.matchshort.match_info.scheids }}
                             <span ng-if="data.matchshort.match_info.toeschouwers || data.matchshort.match_info.locatie">&nbsp;&nbsp;<span class="hidden-sm hidden-md">&#183;</span>&#183;&nbsp;&nbsp;<i class="fa fa-group"></i> {{ data.matchshort.match_info.locatie }} ({{ data.matchshort.match_info.toeschouwers }})</span>
                         </h4>
                     </div>
                 </div>
-                <!--<div class="row extra-info">
-                <div class="col-xs-12 text-left">
-                    <p style="text-transform: capitalize;">{{ data.matchshort.match_info.speeldag }} {{ data.matchshort.match_info.datum }} {{ data.matchshort.match_info.tijd }}<br>
-                        <small>(ronde {{ data.matchshort.match_info.ronde }})</small><p>
-                    <small><img src="images/referee.svg" height="16px"> {{ data.matchshort.match_info.scheids }}</small><br ng-if="data.matchshort.match_info.toeschouwers">
-                    <small ng-if="data.matchshort.match_info.toeschouwers"><i class="fa fa-group"></i> {{ data.matchshort.match_info.toeschouwers }}</small><br ng-if="data.matchshort.match_info.locatie">
-                    <small ng-if="data.matchshort.match_info.locatie"><img src="images/stadium.png" height="16px"> {{ data.matchshort.match_info.locatie }}</small>
-                </div>
-                </div>-->
             </div>
             <div id="match-info-short">
                 <div class="col-md-1 col-sm-2 col-xs-4 no-padding text-center">

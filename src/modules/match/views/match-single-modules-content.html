@@ -23,6 +23,7 @@
             <h4>Wedstrijd</h4>
             <h4 class="small">Voor extra informatie per onderdeel klik op de <button style="font-size: 11px; padding: 0 6px; -webkit-border-radius: 24px; -moz-border-radius: 24px; -ms-border-radius: 24px; border-radius: 24px;" type="button" class="btn btn-primary btn-xs info"><i class="fa fa-info"></i></button> button bij het onderdeel.</h4>
             <h4 ng-if="data.matchshort.opmerkingen" class="small">Opmerking: {{ data.matchshort.opmerkingen }}</h4>
+            <h4 ng-if="currentUser.role == 'admin'" class="small"><span class="pull-left pointer" ng-click="data.go('/wedstrijd/' + (data.loading_id - 1))"><i class="fa fa-arrow-left"></i> vorige wedstrijd</span><span class="pull-right pointer" ng-click="data.go('/wedstrijd/' + (data.loading_id - 2 + 3))">volgende wedstrijd <i class="fa fa-arrow-right"></i></span></h4>
         </div>
 
         <div id="opstelling" class="col-xs-12 content-title-match content-title-match-first text-center">
