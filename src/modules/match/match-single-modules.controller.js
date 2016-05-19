@@ -194,7 +194,6 @@ angular.module('mainapp.match')
 
                 $timeout(function () {
                     self.showGraph1();
-                    self.showGraph2();
                 }, 500);
             }
 
@@ -672,7 +671,6 @@ angular.module('mainapp.match')
 
                     $timeout(function () {
                         self.showGraph1();
-                        self.showGraph2();
                     }, 500);
                 }
 
@@ -1687,67 +1685,6 @@ angular.module('mainapp.match')
         };
         self.avg_positions_field_build();
 
-        /*$scope.position_field_interval = '1e helft';
-
-        $scope.$watch('position_field_interval', function () {
-            if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
-            else if ($scope.position_field_interval === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
-            else if ($scope.position_field_interval === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
-            else if ($scope.position_field_interval === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
-            else if ($scope.position_field_interval === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
-            else if ($scope.position_field_interval === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
-            else if ($scope.position_field_interval === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
-            else if ($scope.position_field_interval === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
-
-            selectpositions_uit = true;
-            selectpositions_thuis = true;
-        });
-
-        var selectpositions_uit = true;
-        var selectpositions_thuis = true;
-        self.select_positions_uit = function () {
-            if (!selectpositions_uit) {
-                if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
-                else if ($scope.position_field_interval === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
-                else if ($scope.position_field_interval === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
-                else if ($scope.position_field_interval === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
-                else if ($scope.position_field_interval === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
-                else if ($scope.position_field_interval === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
-                else if ($scope.position_field_interval === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
-                else if ($scope.position_field_interval === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
-
-                if (!selectpositions_thuis) {
-                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
-                }
-
-                selectpositions_uit = true;
-            } else {
-                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
-                selectpositions_thuis = false;
-            }
-        };
-        self.select_positions_thuis = function () {
-            if (!selectpositions_thuis) {
-                if ($scope.position_field_interval === '00 - 15 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1); }
-                else if ($scope.position_field_interval === '15 - 30 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2); }
-                else if ($scope.position_field_interval === '30 - 45 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3); }
-                else if ($scope.position_field_interval === '45 - 60 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4); }
-                else if ($scope.position_field_interval === '60 - 75 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5); }
-                else if ($scope.position_field_interval === '75 - 90 min') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6); }
-                else if ($scope.position_field_interval === '1e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft1); }
-                else if ($scope.position_field_interval === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
-
-                if (!selectpositions_uit) {
-                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
-                }
-
-                selectpositions_thuis = true;
-            } else {
-                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
-                selectpositions_uit = false;
-            }
-        };*/
-
         // Balbezit chart
         //self.balbezit1_show = true;
         //self.balbezit2_show = false;
@@ -2503,92 +2440,6 @@ angular.module('mainapp.match')
         };
         self.doelpogingen_field_build();
 
-        /*
-        //var selectpogingen_uit = true;
-        //var selectpogingen_thuis = true;
-        var selectpogingen_thuis_doel = true;
-        var selectpogingen_uit_doel = true;
-        var selectpogingen_thuis_target = true;
-        var selectpogingen_uit_target = true;
-        //self.select_pogingen_uit = function () {
-        //    if (!selectpogingen_uit) {
-        //        self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-        //        selectpogingen_uit = true;
-        //    } else {
-        //        self.match.locatie_doelpogingen_filter.thuisTeam = [];
-        //        selectpogingen_thuis = false;
-        //    }
-        //};
-        //self.select_pogingen_thuis = function () {
-        //    if (!selectpogingen_thuis) {
-        //        self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-        //        selectpogingen_thuis = true;
-        //    } else {
-        //        self.match.locatie_doelpogingen_filter.uitTeam = [];
-        //        selectpogingen_uit = false;
-        //    }
-        //};
-        self.select_pogingen_thuis_doel = function () {
-            if (!selectpogingen_thuis_doel) {
-                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-
-                selectpogingen_thuis_doel = true;
-            } else {
-                if (!selectpogingen_thuis_target) {
-                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Doelpunt'}));
-                } else {
-                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Doelpunt'}));
-                }
-                selectpogingen_thuis_doel = false;
-            }
-        };
-        self.select_pogingen_thuis_target = function () {
-            if (!selectpogingen_thuis_target) {
-                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-
-                selectpogingen_thuis_target = true;
-            } else {
-                if (!selectpogingen_thuis_doel) {
-                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Redding'}));
-                } else {
-                    self.match.locatie_doelpogingen_filter.thuisTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.thuisTeam, {type: 'Redding'}));
-                }
-                selectpogingen_thuis_target = false;
-            }
-        };
-        self.select_pogingen_uit_doel = function () {
-            if (!selectpogingen_uit_doel) {
-                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-
-                selectpogingen_uit_doel = true;
-            } else {
-                if (!selectpogingen_uit_target) {
-                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Doelpunt'}));
-                } else {
-                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Doelpunt'}));
-                }
-                selectpogingen_uit_doel = false;
-            }
-        };
-        self.select_pogingen_uit_target = function () {
-            if (!selectpogingen_uit_target) {
-                self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-
-                selectpogingen_uit_target = true;
-            } else {
-                if (!selectpogingen_uit_doel) {
-                    self.match.locatie_doelpogingen_filter = angular.copy(self.match.locatie_doelpogingen);
-                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Redding'}));
-                } else {
-                    self.match.locatie_doelpogingen_filter.uitTeam = angular.copy($filter('filter')(self.match.locatie_doelpogingen_filter.uitTeam, {type: 'Redding'}));
-                }
-                selectpogingen_uit_target = false;
-            }
-        };*/
-
         // Heatmaps
         self.heatmap_thuis_show = true;
         self.heatmap_uit_show = true;
@@ -3009,45 +2860,12 @@ angular.module('mainapp.match')
         };
         self.overtredingen_field_build();
 
-        /*var selectovertredingen_uit = true;
-        var selectovertredingen_thuis = true;
-        self.select_overtredingen_uit = function () {
-            if (!selectovertredingen_uit) {
-                self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
-                selectovertredingen_thuis = true;
-                selectovertredingen_uit = true;
-            } else {
-                self.match.locatie_overtredingen_filter.thuisTeam = [];
-                selectovertredingen_thuis = false;
-                selectovertredingen_uit = true;
-            }
-        };
-        self.select_overtredingen_thuis = function () {
-            if (!selectovertredingen_thuis) {
-                self.match.locatie_overtredingen_filter = angular.copy(self.match.locatie_overtredingen);
-                selectovertredingen_thuis = true;
-                selectovertredingen_uit = true;
-            } else {
-                self.match.locatie_overtredingen_filter.uitTeam = [];
-                selectovertredingen_thuis = true;
-                selectovertredingen_uit = false;
-            }
-        };*/
-
 
         // SPELERS
 
         //self.orderSpelers = 'personID';
         self.orderSpelersNaam = 'spelerNaam';
         //self.orderSpelersNaamType = ['-type', 'spelerNaam'];
-        //
-        //self.createLineTransform = function (x1,y1,x2,y2) {
-        //    var angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-        //    return 'rotate(' + angle + 'deg)';
-        //};
-        //self.createLineLength = function (x1,y1,x2,y2) {
-        //    return Math.sqrt(Math.abs(x1 - x2) * Math.abs(x1 - x2) + Math.abs(y1 - y2) * Math.abs(y1 - y2));
-        //};
 
         self.player1InitFunc = function (i) {
             self.speler1 = $filter('filter')(self.match.player_stats_full_thuis, {personID: i}, true)[0];
