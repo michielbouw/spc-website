@@ -64,7 +64,7 @@ gulp.task('server:watch', function()
         util.log('[' + 'server.js'.gray + ']', 'Reload');
         gulp.start.apply(gulp, ['server:start']);
     });
-    watch(['src/*.html', 'src/**/*'], function(){
+    watch(['src/*.html', 'src/**/*', '!src/styles/vendors', '!src/styles/vendors/**/*'], function(){
         gulp.start.apply(gulp, ['build']);
     });
 });

@@ -956,6 +956,13 @@
       margin: -75px -70px -70px -50px;
       width: calc(100% + 50px);
     }
+    h4.small {
+      margin-top: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $lightblue;
+      position: relative;
+    }
   }
 
   .ball_contact_field:before {
@@ -972,6 +979,9 @@
     top: 50%;
     content: "\21ea";
     color: $orange;
+  }
+  .ball_contact_field_uit_blue:before {
+    color: $middleblue;
   }
 
   .passes_zone_field {
@@ -1407,150 +1417,133 @@
   }
   // END old
 
-  .player_single {
-    margin-top: 5px;
+  .player_single_content {
+    background-color: transparent;
+    border: none;
+    //border-bottom: 1px solid $lightgrey;
+    -webkit-box-shadow: 0;
+    -moz-box-shadow: 0;
+    box-shadow: 0;
+    @include border-radius(0);
 
-    .player_single_content {
-      background-color: transparent;
-      border: none;
-      //border-bottom: 1px solid $lightgrey;
-      -webkit-box-shadow: 0;
-      -moz-box-shadow: 0;
-      box-shadow: 0;
-      @include border-radius(0);
+    .summary {
+      margin-bottom: 15px;
+      color: $darkblue;
 
-      .summary {
-        margin-bottom: 15px;
+      h1 {
         color: $darkblue;
-
-        h1 {
+        small {
           color: $darkblue;
-          small {
-            color: $darkblue;
+        }
+      }
+    }
+
+    .item_title {
+      color: $primary-color;
+      border-bottom: 1px solid $lightgrey;
+      border-top: 1px solid $lightgrey;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    .player-table {
+      margin-bottom: 10px;
+
+      .player-table-row:hover {
+        background-color: #F6F8F9;
+        color: #18385F;
+        font-weight: bold;
+      }
+    }
+
+    .location_duels_field {
+      margin-top: 5px;
+      margin-bottom: 10px;
+
+      p {
+        cursor: pointer;
+      }
+      .position {
+        position: absolute;
+        padding: 3px;
+        font-size: 10px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        color: $white;
+        background-color: $blue;
+        @include border-radius(20px);
+
+        .position_info {
+          text-align: left;
+          display: none;
+          position: absolute;
+          bottom: 100%;
+          left: 0;
+          padding: 5px 15px;
+          min-width: 150px;
+          font-size: 14px;
+          color: $black;
+          background-color: $backgroundlight;
+          -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+          -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+          z-index: 100;
+
+          img {
+            width: 60%;
           }
         }
-      }
-
-      .item_title {
-        color: $primary-color;
-        border-bottom: 1px solid $lightgrey;
-        border-top: 1px solid $lightgrey;
-        padding-top: 0px;
-        padding-bottom: 0px;
-        margin-top: 0;
-        margin-bottom: 5px;
-      }
-
-      .player-table {
-        margin-bottom: 10px;
-
-        .player-table-row:hover {
-          background-color: #F6F8F9;
-          color: #18385F;
-          font-weight: bold;
+        .position_info_uit {
+          top: 100%;
+          bottom: initial;
         }
       }
-
-      .heatmap_balactie_field:before {
+      .position.lost {
+        background-color: $jl;
+      }
+      i.position_legenda {
+        color: $blue;
+      }
+      i.position_legenda.lost {
+        color: $jl;
+      }
+      .position:hover > .position_info {
+        display: block;
+      }
+      .line {
         position: absolute;
-        left: 0;
-        top: 50%;
-        content: "\21ea";
+        transform-origin: 0 0;
+        height: 1px; /* Line width of 1 */
+        background: #000; /* Black fill */
       }
-      .heatmap_passes_field:before {
+      .line_out {
         position: absolute;
-        left: 0;
-        top: 50%;
-        content: "\21ea";
+        transform-origin: 0 0;
+        height: 1px; /* Line width of 1 */
+        background: #000; /* Black fill */
       }
-
-      .location_duels_field {
-        margin-top: 5px;
-        margin-bottom: 10px;
-
-        p {
-          cursor: pointer;
-        }
-        .position {
-          position: absolute;
-          padding: 3px;
-          font-size: 10px;
-          height: 20px;
-          width: 20px;
-          text-align: center;
-          color: $white;
-          background-color: $blue;
-          @include border-radius(20px);
-
-          .position_info {
-            text-align: left;
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            padding: 5px 15px;
-            min-width: 150px;
-            font-size: 14px;
-            color: $black;
-            background-color: $backgroundlight;
-            -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
-            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-
-            img {
-              width: 60%;
-            }
-          }
-          .position_info_uit {
-            top: 100%;
-            bottom: initial;
-          }
-        }
-        .position.lost {
-          background-color: $jl;
-        }
-        i.position_legenda {
-          color: $blue;
-        }
-        i.position_legenda.lost {
-          color: $jl;
-        }
-        .position:hover > .position_info {
-          display: block;
-        }
-        .line {
-          position: absolute;
-          transform-origin: 0 0;
-          height: 1px; /* Line width of 1 */
-          background: #000; /* Black fill */
-        }
-        .line_out {
-          position: absolute;
-          transform-origin: 0 0;
-          height: 1px; /* Line width of 1 */
-          background: #000; /* Black fill */
-        }
-      }
-      .location_duels_field#location_duels_half_size:before {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        content: "\21ea";
-      }
-      .location_duels_field#location_duels_size:before {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        content: "\21ea";
-      }
-      .location_duels_field_180#location_duels_size:before {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        content: "\21ea";
-        transform: rotate(180deg);
-      }
+    }
+    .location_duels_field#location_duels_half_size:before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      content: "\21ea";
+    }
+    .location_duels_field#location_duels_size:before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      content: "\21ea";
+    }
+    .location_duels_field_180#location_duels_size:before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      content: "\21ea";
+      transform: rotate(180deg);
     }
   }
 

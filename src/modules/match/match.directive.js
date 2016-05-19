@@ -404,9 +404,9 @@ angular.module('mainapp.match')
                                 scope.position_field_height = $('.content#team').find('.positions_field#positions_size').width() * 106 / 68;
                                 scope.passes_zone_field_height = $('.content#team').find('.passes_zone_field#passes_zone_size').width() * 106 / 68 - 20 - 75;
                                 scope.passes_zone_field_width = $('.content#team').find('.passes_zone_field#passes_zone_size').width();
-                                scope.location_duels_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width() * 106 / 68;
-                                scope.location_duels_field_width = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_size').width();
-                                scope.location_duels_half_field_height = $('.content#players').find('div.collapse.in .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                                scope.location_duels_field_height = $('.content#players').find('.player_single_content .location_duels_field#location_duels_size').width() * 106 / 68;
+                                scope.location_duels_field_width = $('.content#players').find('.player_single_content .location_duels_field#location_duels_size').width();
+                                scope.location_duels_half_field_height = $('.content#players').find('.player_single_content .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
                             }, 500);
 
                             if ($('#wrapper .page-top .content.content-top').hasClass('active')) {
@@ -419,9 +419,9 @@ angular.module('mainapp.match')
                         });
 
                         $timeout(function() {
-                            scope.location_duels_field_height = $('.content#players').find('.player_single .player_single_content .location_duels_field#location_duels_size').width() * 106 / 68;
-                            scope.location_duels_field_width = $('.content#players').find('.player_single .player_single_content .location_duels_field#location_duels_size').width();
-                            scope.location_duels_half_field_height = $('.content#players').find('.player_single .player_single_content .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
+                            scope.location_duels_field_height = $('.content#players').find('.player_single_content .location_duels_field#location_duels_size').width() * 106 / 68;
+                            scope.location_duels_field_width = $('.content#players').find('.player_single_content .location_duels_field#location_duels_size').width();
+                            scope.location_duels_half_field_height = $('.content#players').find('.player_single_content .location_duels_field#location_duels_half_size').width() * 106 / 68 / 2;
                         }, 500);
                     });
                 }, 100);
