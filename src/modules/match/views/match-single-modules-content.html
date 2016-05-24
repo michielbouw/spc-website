@@ -63,7 +63,8 @@
                     <span ng-if="lineup.positieID == 1" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -72,7 +73,8 @@
                     <span ng-if="lineup.positieID == 2" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -81,7 +83,8 @@
                     <span ng-if="lineup.positieID == 3" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.52px); margin-left: calc(15% - (15)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -90,7 +93,8 @@
                     <span ng-if="lineup.positieID == 4" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.52px); margin-left: calc(35% - (35)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -99,7 +103,8 @@
                     <span ng-if="lineup.positieID == 5" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -108,7 +113,8 @@
                     <span ng-if="lineup.positieID == 6" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.52px); margin-left: calc(65% - (65)*0.20px*0.2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -117,7 +123,8 @@
                     <span ng-if="lineup.positieID == 7" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(85% - (85)*0.52px); margin-left: calc(85% - (85)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -126,7 +133,8 @@
                     <span ng-if="lineup.positieID == 8" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -135,7 +143,8 @@
                     <span ng-if="lineup.positieID == 9" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -144,7 +153,8 @@
                     <span ng-if="lineup.positieID == 10" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -153,7 +163,8 @@
                     <span ng-if="lineup.positieID == 11" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -162,7 +173,8 @@
                     <span ng-if="lineup.positieID == 12" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -171,7 +183,8 @@
                     <span ng-if="lineup.positieID == 13" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.52px); margin-left: calc(30% - (30)*0.20px*-3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -180,7 +193,8 @@
                     <span ng-if="lineup.positieID == 14" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(40% - (40)*0.52px); margin-left: calc(40% - (40)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -189,7 +203,8 @@
                     <span ng-if="lineup.positieID == 15" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px*-1);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -198,7 +213,8 @@
                     <span ng-if="lineup.positieID == 16" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(60% - (60)*0.52px); margin-left: calc(60% - (60)*0.20px*-0.5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -207,7 +223,8 @@
                     <span ng-if="lineup.positieID == 17" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.52px); margin-left: calc(70% - (70)*0.20px*-0.1);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -216,7 +233,8 @@
                     <span ng-if="lineup.positieID == 18" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.20px*-3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -225,7 +243,8 @@
                     <span ng-if="lineup.positieID == 19" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.52px); margin-left: calc(35% - (35)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -234,7 +253,8 @@
                     <span ng-if="lineup.positieID == 20" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px*-1);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -243,7 +263,8 @@
                     <span ng-if="lineup.positieID == 21" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.52px); margin-left: calc(65% - (65)*0.20px*-0.5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -252,7 +273,8 @@
                     <span ng-if="lineup.positieID == 22" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.20px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -261,7 +283,8 @@
                     <span ng-if="lineup.positieID == 23" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.20px*-3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -270,7 +293,8 @@
                     <span ng-if="lineup.positieID == 24" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -279,7 +303,8 @@
                     <span ng-if="lineup.positieID == 25" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.20px*-1);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -288,7 +313,8 @@
                     <span ng-if="lineup.positieID == 26" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.52px); margin-left: calc(25% - (25)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -297,7 +323,8 @@
                     <span ng-if="lineup.positieID == 27" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.52px); margin-left: calc(50% - (50)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -306,7 +333,8 @@
                     <span ng-if="lineup.positieID == 28" class="lineup" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.52px); margin-left: calc(75% - (75)*0.20px*-2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_thuis.length > 0 && (currentClub.name === data.matchshort.match_info.thuis || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_thuis.length <= 0 && currentClub.name !== data.matchshort.match_info.thuis && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -326,7 +354,8 @@
                     <span ng-if="lineup.positieID == 1" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (8 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px); margin-left: calc(50% - (50)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -335,7 +364,8 @@
                     <span ng-if="lineup.positieID == 2" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.30px); margin-left: calc(30% - (30)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -344,7 +374,8 @@
                     <span ng-if="lineup.positieID == 3" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(15% - (15)*0.30px*3); margin-left: calc(15% - (15)*0.30px*3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -353,7 +384,8 @@
                     <span ng-if="lineup.positieID == 4" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.30px*2); margin-left: calc(35% - (35)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -362,7 +394,8 @@
                     <span ng-if="lineup.positieID == 5" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (25 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px); margin-left: calc(50% - (50)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -371,7 +404,8 @@
                     <span ng-if="lineup.positieID == 6" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (30 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.30px); margin-left: calc(65% - (65)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -380,7 +414,8 @@
                     <span ng-if="lineup.positieID == 7" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (35 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(85% - (85)*0.30px); margin-left: calc(85% - (85)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -389,7 +424,8 @@
                     <span ng-if="lineup.positieID == 8" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (20 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.30px); margin-left: calc(70% - (70)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -398,7 +434,8 @@
                     <span ng-if="lineup.positieID == 9" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (40 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px); margin-left: calc(50% - (50)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -407,7 +444,8 @@
                     <span ng-if="lineup.positieID == 10" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.30px*2); margin-left: calc(30% - (30)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -416,7 +454,8 @@
                     <span ng-if="lineup.positieID == 11" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (42 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px); margin-left: calc(50% - (50)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -425,7 +464,8 @@
                     <span ng-if="lineup.positieID == 12" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.30px); margin-left: calc(70% - (70)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -434,7 +474,8 @@
                     <span ng-if="lineup.positieID == 13" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(30% - (30)*0.30px*3); margin-left: calc(30% - (30)*0.30px*3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -443,7 +484,8 @@
                     <span ng-if="lineup.positieID == 14" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(40% - (40)*0.30px*2.5); margin-left: calc(40% - (40)*0.30px*2.5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -452,7 +494,8 @@
                     <span ng-if="lineup.positieID == 15" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (50 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px*2); margin-left: calc(50% - (50)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -461,7 +504,8 @@
                     <span ng-if="lineup.positieID == 16" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (52 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(60% - (60)*0.30px*2); margin-left: calc(60% - (60)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -470,7 +514,8 @@
                     <span ng-if="lineup.positieID == 17" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (55 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(70% - (70)*0.30px*2); margin-left: calc(70% - (70)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -479,7 +524,8 @@
                     <span ng-if="lineup.positieID == 18" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.30px*3); margin-left: calc(25% - (25)*0.30px*3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -488,7 +534,8 @@
                     <span ng-if="lineup.positieID == 19" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(35% - (35)*0.30px*2.5); margin-left: calc(35% - (35)*0.30px*2.5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -497,7 +544,8 @@
                     <span ng-if="lineup.positieID == 20" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px*2); margin-left: calc(50% - (50)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -506,7 +554,8 @@
                     <span ng-if="lineup.positieID == 21" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (65 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(65% - (65)*0.30px*1.5); margin-left: calc(65% - (65)*0.30px*1.5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -515,7 +564,8 @@
                     <span ng-if="lineup.positieID == 22" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (70 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.30px); margin-left: calc(75% - (75)*0.30px);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -524,7 +574,8 @@
                     <span ng-if="lineup.positieID == 23" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.30px*5); margin-left: calc(25% - (25)*0.30px*5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -533,7 +584,8 @@
                     <span ng-if="lineup.positieID == 24" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px*3.5); margin-left: calc(50% - (50)*0.30px*3.5);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -542,7 +594,8 @@
                     <span ng-if="lineup.positieID == 25" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (75 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.30px*2); margin-left: calc(75% - (75)*0.30px*2);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -551,7 +604,8 @@
                     <span ng-if="lineup.positieID == 26" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(25% - (25)*0.30px*3); margin-left: calc(25% - (25)*0.30px*3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -560,7 +614,8 @@
                     <span ng-if="lineup.positieID == 27" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (85 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(50% - (50)*0.30px*3); margin-left: calc(50% - (50)*0.30px*3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
@@ -569,7 +624,8 @@
                     <span ng-if="lineup.positieID == 28" class="lineup lineup_uit" style="margin-top: -moz-calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-top: calc({{ lineup_field_height }}px - (80 / 100)*{{ lineup_field_height }}px - 13px); margin-left: -moz-calc(75% - (75)*0.30px*3); margin-left: calc(75% - (75)*0.30px*3);">
                         {{ lineup.shirtNummer }}
                         <div class="lineup_info">
-                            <h4>{{ lineup.spelerNaam }}<br>
+                            <h4><a ng-if="data.match.player_stats_full_uit.length > 0 && (currentClub.name === data.matchshort.match_info.uit || currentClub.spc_package === 'extra' || currentClub.spc_package === 'league' || currentUser.role === 'admin')" ng-href="/wedstrijd/{{ data.loading_id }}/spelers/{{ lineup.personID }}">{{ lineup.spelerNaam }}</a>
+                                <span ng-if="data.match.player_stats_full_uit.length <= 0 && currentClub.name !== data.matchshort.match_info.uit && currentClub.spc_package !== 'extra' && currentClub.spc_package !== 'league' && currentUser.role !== 'admin')"></span><br>
                                 <small>{{ lineup.positieNaam }}</small>
                             </h4>
                             <img ng-if="lineup.spelerPhoto" ng-src="{{ lineup.spelerPhoto }}" on-error-src="images/blank-avatar.png">
