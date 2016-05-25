@@ -206,7 +206,7 @@ module.exports = ImportController = {
                             } else if (items.matchID >= 17009 && items.matchID <= 17350) {
                                 items.seizoen = "2015-2016";
                                 match_short.seizoen = "2015-2016";
-                            } else if ((items.matchID >= 24817 && items.matchID <= 24824) || (items.matchID >= 24839 && items.matchID <= 24842) || (items.matchID >= 24843 && items.matchID <= 24846)) {
+                            } else if ((items.matchID >= 24817 && items.matchID <= 24824) || (items.matchID >= 24839 && items.matchID <= 24842) || (items.matchID >= 24872 && items.matchID <= 24875)) {
                                 items.seizoen = "2015-2016 Play-offs";
                                 match_short.seizoen = "2015-2016 Play-offs";
 
@@ -216,15 +216,15 @@ module.exports = ImportController = {
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
                                 }
-                                if (items.matchID >= 24843 && items.matchID <= 24846) {
+                                if (items.matchID >= 24872 && items.matchID <= 24875) {
                                     match_short.match_info.ronde = Number_converter(match_short.match_info.ronde) + 4;
                                     items.ronde = match_short.match_info.ronde;
                                     team_data.thuis.ronde = Number_converter(match_short.match_info.ronde);
                                     team_data.uit.ronde = Number_converter(match_short.match_info.ronde);
                                 }
                             } else {
-                                items.seizoen = "2015-2016 Play-offs";
-                                match_short.seizoen = "2015-2016 Play-offs";
+                                items.seizoen = "2016-2017";
+                                match_short.seizoen = "2016-2017";
                             }
 
                             // INFO:
@@ -233,7 +233,7 @@ module.exports = ImportController = {
                             // seizoen 1415: 7288-7667
                             // seizoen 1415 PO: 16377-16380, 16429-16436, 16451-16454
                             // seizoen 1516: 17009-17350
-                            // seizoen 1516 PO: 24817-24824, 24839-24842, 24843-24846??
+                            // seizoen 1516 PO: 24817-24824, 24839-24842, 24872-24875
                             // seizoen 1617: ??
                             // Alle intervallen zijn inclusief de linker- en rechterwaarde.
 
