@@ -1712,7 +1712,7 @@ angular.module('mainapp.match')
                             ['data1', 'data2']
                         ]
                     },
-                    color: { pattern: ['rgba(3, 125, 201, 0.5)', 'rgba(236, 117, 0, 0.5)'] },
+                    color: { pattern: ['rgba(3, 125, 201, 0.9)', 'rgba(236, 117, 0, 0.4)'] },
                     point: { show: false },
                     axis: {
                         y: {

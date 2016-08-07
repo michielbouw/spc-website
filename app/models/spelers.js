@@ -41,6 +41,7 @@ module.exports = mongoose.model('Spelers', {
         rood: {type: Number},
         tweede_geel: {type: Number}
     }],
+
     // OLD
     laatste_ronde_sync: {type: Number},
     wedstrijden: {type: Number},
