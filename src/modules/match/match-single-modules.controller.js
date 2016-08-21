@@ -1405,6 +1405,58 @@ angular.module('mainapp.match')
                     //}
 
                     ctx.closePath();
+                } else if (team === self.matchshort.match_info.thuis) {
+                    bre = c.height * bre;
+                    len = c.width * len;
+
+                    ctx.fillStyle = "rgba(3,125,201,0.4)"; // blue thuis
+                    ctx.strokeStyle = "rgba(3,125,201,0.4)"; // blue thuis
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 8, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+                    ctx.fillStyle    = 'rgba(3,125,201,1)';
+                    ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    ctx.textAlign    = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(nummer, len, bre);
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_thuis, {spelerID: id}, true)[0].spelerPhoto;
+                    //}
+
+                    ctx.closePath();
+                } else if (team === self.matchshort.match_info.uit) {
+                    bre = c.height * (1 - bre);
+                    len = c.width * (1 - len);
+
+                    ctx.fillStyle = "rgba(236,117,0,0.4)"; // orange uit
+                    ctx.strokeStyle = "rgba(236,117,0,0.4)"; // orange uit
+
+                    // Drawing circle
+                    ctx.beginPath();
+                    polygon(ctx, len, bre, 8, 6, -Math.PI/2);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Drawing number
+                    ctx.fillStyle    = 'rgba(236,117,0,1)';
+                    ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                    ctx.textAlign    = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(nummer, len, bre);
+
+                    //URL of spelerfoto
+                    //if ($filter('filter')(self.speler_profiel_uit, {spelerID: id}, true) && $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto) {
+                    //    var photo = $filter('filter')(self.speler_profiel_uit, {spelerID: id}, true)[0].spelerPhoto
+                    //}
+
+                    ctx.closePath();
                 }
             };
 
@@ -1427,48 +1479,48 @@ angular.module('mainapp.match')
                 self.positions_field_interval_play = true;
                 self.positions_field_interval_var = '00 - 15 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier1);
                 if (document.getElementById('avg_positions_field')) {
-                    if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
-                    } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+                    if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit})); positions_uit = true;
+                    } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis})); positions_thuis = true; }
 
                     self.avg_positions_field_draw();
                     self.avg_positions_field_fill();
 
                     $timeout(function () {
                         self.positions_field_interval_var = '15 - 30 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier2);
-                        if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
-                        } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+                        if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit})); positions_uit = true;
+                        } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis})); positions_thuis = true; }
 
                         self.avg_positions_field_draw();
                         self.avg_positions_field_fill();
 
                         $timeout(function () {
                             self.positions_field_interval_var = '30 - 45 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier3);
-                            if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
-                            } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+                            if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit})); positions_uit = true;
+                            } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis})); positions_thuis = true; }
 
                             self.avg_positions_field_draw();
                             self.avg_positions_field_fill();
 
                             $timeout(function () {
                                 self.positions_field_interval_var = '45 - 60 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier4);
-                                if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
-                                } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+                                if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit})); positions_uit = true;
+                                } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis})); positions_thuis = true; }
 
                                 self.avg_positions_field_draw();
                                 self.avg_positions_field_fill();
 
                                 $timeout(function () {
                                     self.positions_field_interval_var = '60 - 75 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier5);
-                                    if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
-                                    } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+                                    if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit})); positions_uit = true;
+                                    } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis})); positions_thuis = true; }
 
                                     self.avg_positions_field_draw();
                                     self.avg_positions_field_fill();
 
                                     $timeout(function () {
                                         self.positions_field_interval_var = '75 - 90 min'; self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_kwartier6);
-                                        if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort})); positions_uit = true;
-                                        } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort})); positions_thuis = true; }
+                                        if (!positions_thuis) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit})); positions_uit = true;
+                                        } else if (!positions_uit) { self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis})); positions_thuis = true; }
 
                                         self.avg_positions_field_draw();
                                         self.avg_positions_field_fill();
@@ -1488,10 +1540,10 @@ angular.module('mainapp.match')
             }
 
             if (!positions_thuis) {
-                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit}));
                 positions_uit = true;
             } else if (!positions_uit) {
-                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis}));
                 positions_thuis = true;
             } else {
                 positions_uit = true;
@@ -1616,6 +1668,84 @@ angular.module('mainapp.match')
                     }
 
                     ctx.closePath();
+                } else if (r.teamNaam === self.matchshort.match_info.thuis) {
+                    r.breedte = c.height * r.breedte;
+                    r.lengte = c.width * r.lengte;
+
+                    ctx.beginPath();
+                    polygon(ctx, r.lengte, r.breedte, 8, 6, -Math.PI/2);
+
+                    // check if we hover it, fill other
+                    if (r.personID == id) {
+                        ctx.fillStyle = "rgba(3,125,201,1)";
+                        ctx.strokeStyle = "rgba(3,125,201,1)";
+                        ctx.fill();
+                        ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = '#fff';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
+
+                        $('.content#team').find('#positionsveld .positions_players p.thuis#' + r.personID).css({
+                            'color': 'rgba(3,125,201,1)'
+                        });
+                    } else {
+                        ctx.fillStyle = "rgba(3,125,201,0.4)";
+                        ctx.strokeStyle = "rgba(3,125,201,0.4)";
+                        ctx.fill();
+                        ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = 'rgba(3,125,201,1)';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
+                    }
+
+                    ctx.closePath();
+                } else if (r.teamNaam === self.matchshort.match_info.uit) {
+                    r.breedte = c.height * (1 - r.breedte);
+                    r.lengte = c.width * (1 - r.lengte);
+
+                    ctx.beginPath();
+                    polygon(ctx, r.lengte, r.breedte, 8, 6, -Math.PI/2);
+
+                    // check if we hover it, fill other
+                    if (r.personID == id) {
+                        ctx.fillStyle = "rgba(236,117,0,1)";
+                        ctx.strokeStyle = "rgba(236,117,0,1)";
+                        ctx.fill();
+                        ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = '#fff';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
+
+                        $('.content#team').find('#positionsveld .positions_players p.uit#' + r.personID).css({
+                            'color': 'rgba(236,117,0,1)'
+                        });
+                    } else {
+                        ctx.fillStyle = "rgba(236,117,0,0.4)";
+                        ctx.strokeStyle = "rgba(236,117,0,0.4)";
+                        ctx.fill();
+                        ctx.stroke();
+
+                        // Drawing number
+                        ctx.fillStyle    = 'rgba(236,117,0,1)';
+                        ctx.font         = 'Bold 9px "Open Sans", Helvetica, Verdana, sans-serif';
+                        ctx.textAlign    = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(r.rugnummer, r.lengte, r.breedte);
+                    }
+
+                    ctx.closePath();
                 }
             });
         };
@@ -1643,14 +1773,14 @@ angular.module('mainapp.match')
                 else if (self.positions_field_interval_var === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
 
                 if (!positions_thuis) {
-                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
+                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit}));
                 }
 
                 positions_uit = true;
             } else {
                 self.chartbalbezit.hide('data1');
 
-                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}));
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.uit}));
                 positions_thuis = false;
             }
             self.avg_positions_field_draw();
@@ -1670,14 +1800,14 @@ angular.module('mainapp.match')
                 else if (self.positions_field_interval_var === '2e helft') { self.match.gemiddelde_posities = angular.copy(self.match.gemiddelde_posities_helft2); }
 
                 if (!positions_uit) {
-                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
+                    self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis}));
                 }
 
                 positions_thuis = true;
             } else {
                 self.chartbalbezit.hide('data2');
 
-                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}));
+                self.match.gemiddelde_posities = angular.copy($filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis_kort}) || $filter('filter')(self.match.gemiddelde_posities, {teamNaam: self.matchshort.match_info.thuis}));
                 positions_uit = false;
             }
             self.avg_positions_field_draw();

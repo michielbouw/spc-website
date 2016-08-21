@@ -47,7 +47,7 @@
     "gulp-include": "^2.1.0",
     "gulp-jshint": "^2.0.1",
     "gulp-folders": "^1.0.0",
-    "gulp-google-webfonts": "~0.0.12",
+    "gulp-google-webfonts": "~0.0.13",
     "gulp-livereload": "^3.8.1",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-ng-templates": "0.0.6",
